@@ -1,0 +1,138 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{b7f717bc-5309-415e-b0d8-9bc70fb34b17}</ProjectGuid>
+    <MainSource>Destra.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>Destra.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1046</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Destra.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Destra.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="Estrutura.pas" />
+    <DCCReference Include="frmSplash.pas">
+      <Form>t_Splash</Form>
+    </DCCReference>
+    <DCCReference Include="frm_AcoesPMC.pas">
+      <Form>t_AcoesPMC</Form>
+    </DCCReference>
+    <DCCReference Include="frm_AnaliseAcoes.pas">
+      <Form>t_CadAcoesAnalise</Form>
+    </DCCReference>
+    <DCCReference Include="frm_AnaliseCritica.pas">
+      <Form>t_Analise</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Aprovacao.pas">
+      <Form>t_AprovaDocs</Form>
+    </DCCReference>
+    <DCCReference Include="frm_CadEmpresa.pas">
+      <Form>t_CadEmpresa</Form>
+    </DCCReference>
+    <DCCReference Include="frm_CadInfra.pas">
+      <Form>t_Infra</Form>
+    </DCCReference>
+    <DCCReference Include="frm_CadUsuario.pas">
+      <Form>t_CadUsuario</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Classificacoes.pas">
+      <Form>t_Classificacoes</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Colaboradores.pas">
+      <Form>t_Colaboradores</Form>
+    </DCCReference>
+    <DCCReference Include="frm_dm.pas">
+      <Form>dm</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Educacao.pas">
+      <Form>t_Educacao</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Experiencias.pas">
+      <Form>t_Experiencias</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Formularios.pas">
+      <Form>t_Formularios</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Funcoes.pas">
+      <Form>t_Funcoes</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Habilidades.pas">
+      <Form>t_Habilidades</Form>
+    </DCCReference>
+    <DCCReference Include="frm_HistProfissional.pas">
+      <Form>t_HistProf</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Indicadores.pas">
+      <Form>t_Indicadores</Form>
+    </DCCReference>
+    <DCCReference Include="frm_ListaMestra.pas">
+      <Form>t_ListaMestra</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Login.pas">
+      <Form>t_Login</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Manutencao.pas">
+      <Form>t_Manutencao</Form>
+    </DCCReference>
+    <DCCReference Include="frm_MenuOpcoes.pas">
+      <Form>t_MenuOpcoes</Form>
+    </DCCReference>
+    <DCCReference Include="frm_NovoProcesso.pas">
+      <Form>t_NovoProcesso</Form>
+    </DCCReference>
+    <DCCReference Include="frm_PMC.pas">
+      <Form>t_PMC</Form>
+    </DCCReference>
+    <DCCReference Include="frm_PMCFecha.pas">
+      <Form>t_PMCFecha</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Principal.pas">
+      <Form>t_Principal</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Setores.pas">
+      <Form>t_Setores</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Tartaruga.pas">
+      <Form>t_Tartaruga</Form>
+    </DCCReference>
+    <DCCReference Include="frm_Treinamentos.pas">
+      <Form>t_Treinamentos</Form>
+    </DCCReference>
+    <DCCReference Include="frm_ValoresIndicador.pas">
+      <Form>t_ValorIndicadores</Form>
+    </DCCReference>
+    <DCCReference Include="frm_VisualizaDocumentos.pas">
+      <Form>t_VisualizaDocumentos</Form>
+    </DCCReference>
+    <DCCReference Include="frm_VisualizaFormularios.pas">
+      <Form>t_VisualizaFormularios</Form>
+    </DCCReference>
+    <DCCReference Include="frm_VisualizaInfra.pas">
+      <Form>t_VisualizaInfra</Form>
+    </DCCReference>
+    <DCCReference Include="frm_VisualizaPMC.pas">
+      <Form>t_VisualizaPMC</Form>
+    </DCCReference>
+    <DCCReference Include="Funcoes.pas" />
+    <None Include="ModelSupport_Destra\default.txaPackage" />
+  </ItemGroup>
+</Project>

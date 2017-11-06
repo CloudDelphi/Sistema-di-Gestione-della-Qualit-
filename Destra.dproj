@@ -1,0 +1,433 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{b7f717bc-5309-415e-b0d8-9bc70fb34b17}</ProjectGuid>
+			<MainSource>Destra.dpr</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>Destra.exe</DCC_DependencyCheckOutputName>
+			<ProjectVersion>12.2</ProjectVersion>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclimg;vcl;vclx;dbrtl;Rave90VCL;bdertl;VclSmp;rtl;svnui;svn;TeeUI;TeeDB;Tee;vclactnband;vcldb;vcldbx;vcltouch;xmlrtl;dsnap;dsnapcon;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_110_150;Intraweb_110_150;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapClient;dbxcds;DataSnapServer;AzureCloud;DBXInterBaseDriver;DBXMySQLDriver;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;CodeSiteExpressVcl;rxbde;rxctl;rxdb;JclDeveloperTools;Jcl;JclVcl;JclContainers;JvCore;JvSystem;JvStdCtrls;JvAppFrm;JvBands;JvDB;JvDlgs;JvBDE;JvControls;JvCmp;JvCrypt;JvCustom;JvDocking;JvDotNetCtrls;JvGlobus;JvHMI;JvJans;JvManagedThreads;JvMM;JvNet;JvPageComps;JvPascalInterpreter;JvPluginSystem;JvPrintPreview;JvRuntimeDesign;JvTimeFramework;JvWizards;JvXPCtrls;fs15;fsADO15;fsBDE15;fsDB15;fsIBX15;fsTee15;dxCoreD15;cxLibraryD15;cxEditorsD15;cxExtEditorsD15;dxBarD15;dxBarDBNavD15;dxBarExtDBItemsD15;dxBarExtItemsD15;dxRibbonD15;cxBarEditItemD15;dxdbtrD15;dxtrmdD15;dxmdsD15;dxDockingD15;dxFlowChartD15;cxPageControlD15;dxLayoutControlD15;dxNavBarD15;dxorgcD15;dxdborD15;cxGridD15;cxPivotGridD15;cxPivotGridChartD15;cxPivotGridOLAPD15;cxTreeListD15;cxTreeListdxBarPopupMenuD15;cxSchedulerD15;cxSchedulerGridD15;dxComnD15;dxsbD15;dcldxSkinsCoreD15;dxSkinsCoreD15;dxSkinscxPCPainterD15;dxSkinscxScheduler3PainterD15;dxSkinsdxDLPainterD15;dxSkinsdxBarPainterD15;dxSkinsdxNavBar2PainterD15;dxSpellCheckerD15;cxSpreadSheetD15;cxVerticalGridD15;dxPSCoreD15;dxPSLnksD15;dxPScxCommonD15;dxPScxExtCommonD15;dxPScxGrid6LnkD15;dxPScxPivotGrid2LnkD15;dxPScxScheduler3LnkD15;dxPScxSSLnkD15;dxPScxTL5LnkD15;dxPScxVGridLnkD15;dxPSTeeChartD15;dxPSDBTeeChartD15;dxPSdxOCLnkD15;dxPSdxDBOCLnkD15;dxPSdxDBTVLnkD15;dxPSdxFCLnkD15;dxPSdxLC2LnkD15;dxPScxPCProdD15;dxPsPrVwAdvD15;dxPSPrVwRibbonD15;dxSkinsdxRibbonPainterD15;ZComponent;ZDbc;ZPlain;ZCore;ZParseSql;frx15;frxADO15;frxBDE15;frxcs15;frxDB15;frxDBX15;frxe15;frxIBX15;frxTee15;lmdrtl10rt_150;lmdplugin10rt_150;lmdrtlx10rt_150;lmdcore10rt_150;DelPrintDXE</DCC_UsePackage>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Version>7.0</Version>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters/>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">2</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">8</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Destra Consultoria</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">2.0.8.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName">Destra Manager</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">2.08</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">Destra.dpr</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>False</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<ItemGroup>
+			<DelphiCompile Include="Destra.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="frm_dm.pas">
+				<Form>dm</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Funcoes.pas"/>
+			<DCCReference Include="frm_CadEmpresa.pas">
+				<Form>FormCadEmpresa</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Tartaruga.pas">
+				<Form>FormTartaruga</Form>
+			</DCCReference>
+			<DCCReference Include="frmSplash.pas">
+				<Form>t_Splash</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaPMC.pas">
+				<Form>FormVisualizaPMC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaInfra.pas">
+				<Form>FormVisualizaInfra</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaFormularios.pas">
+				<Form>FormVisualizaFormularios</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Login.pas">
+				<Form>FormLogin</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaAnaliseCritica.pas">
+				<Form>FormVisualizaAnalise</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaMatriz.pas">
+				<Form>FormVisualizaMatriz</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaInterna.pas">
+				<Form>FormAuditoriaInterna</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaRelatorio.pas">
+				<Form>FormRelatorioAuditoria</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ValoresIndicador.pas">
+				<Form>FormValorIndicadores</Form>
+			</DCCReference>
+			<DCCReference Include="frm_PlanoAcaoMatriz.pas">
+				<Form>t_PlanoAcaoMatriz</Form>
+			</DCCReference>
+			<DCCReference Include="frm_pesqPrgAudit.pas">
+				<Form>FormPesqPrgAudit</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ResumoIndicadores.pas">
+				<Form>FormResumoInd</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Log.pas">
+				<Form>FormLog</Form>
+			</DCCReference>
+			<DCCReference Include="uAncestral.pas">
+				<Form>frmAncestral</Form>
+			</DCCReference>
+			<DCCReference Include="uAtivaSistema.pas">
+				<Form>FormAtivaSistema</Form>
+			</DCCReference>
+			<DCCReference Include="Validacao.pas"/>
+			<DCCReference Include="frm_PesqManutencao.pas">
+				<Form>FormPesqManutencao</Form>
+			</DCCReference>
+			<DCCReference Include="..\..\Lib\Enter.pas"/>
+			<DCCReference Include="frm_cartaAtualizacao.pas">
+				<Form>FormCarta</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadAspectosAmb.pas">
+				<Form>FormCadAspectos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Laaia.pas">
+				<Form>FormLaaia</Form>
+			</DCCReference>
+			<DCCReference Include="frm_MsgErro.pas">
+				<Form>FormMsgErro</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Lira.pas">
+				<Form>FormLira</Form>
+			</DCCReference>
+			<DCCReference Include="frm_pesqLira.pas">
+				<Form>FormPesqLira</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadProcessos.pas">
+				<Form>FormCadProcessos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_DefCadClasse.pas">
+				<Form>FormCadDefClasse</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadHabilidades.pas">
+				<Form>FormCadHabilidades</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadFuncoes.pas">
+				<Form>FormCadFuncoes</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadListaMestra.pas">
+				<Form>FormCadListaMestra</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ColabProcedimentos.pas">
+				<Form>FormColabProcedimentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Aprovacao.pas">
+				<Form>FormAprovacao</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRegistros.pas">
+				<Form>FormCadRegistros</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPMCAbre.pas">
+				<Form>FormCadPMCAbre</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPMCConsulta.pas">
+				<Form>FormCadPMCConsulta</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPMCFecha.pas">
+				<Form>FormCadPMCFecha</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadImpactosAmb.pas">
+				<Form>FormCadImpactos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadAnaliseCritica.pas">
+				<Form>FormCadAnaliseCritica</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadIndicadores.pas">
+				<Form>FormCadIndicadores</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadInfraestrutura.pas">
+				<Form>FormCadInfraestrutura</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadManutPreventiva.pas">
+				<Form>FormCadManutPreventiva</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadFornecedores.pas">
+				<Form>FormCadFornecedores</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadUsuarios.pas">
+				<Form>FormCadUsuarios</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadTipoProduto.pas">
+				<Form>FormCadTipoProduto</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Processos.pas">
+				<Form>FormProcessos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadIQF.pas">
+				<Form>FormCadIQF</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadCalibracao.pas">
+				<Form>FormCadCalibracao</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Sobre.pas">
+				<Form>FormSobre</Form>
+			</DCCReference>
+			<DCCReference Include="frm_configEmail.pas">
+				<Form>FormConfigEmail</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadClientes.pas">
+				<Form>FormCadClientes</Form>
+			</DCCReference>
+			<DCCReference Include="AtualizaBanco.pas"/>
+			<DCCReference Include="frm_CadColaborador.pas">
+				<Form>FormCadColaboradores</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaDocumentos.pas">
+				<Form>FormVisualizaDocumentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_Inicial.pas">
+				<Form>FormInicial</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoVarExternas.pas">
+				<Form>FormCadRiscoVarExternas</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoVarInternas.pas">
+				<Form>FormCadRiscoVarInternas</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoAnaliseInterna.pas">
+				<Form>FormCadRiscoAnaliseInterna</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoAnaliseRisco.pas">
+				<Form>FormAnaliseRisco</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoMacroAmbiente.pas">
+				<Form>FormCadRiscoMacroAmbiente</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadNotasHabilidade.pas">
+				<Form>FormCadNotasHabilidade</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadColaboradorAval.pas">
+				<Form>FormCadAvaliador</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoGrafico2DTeste.pas">
+				<Form>FormRiscoGrafico2DTeste</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ValoresIndicadorGrafico.pas">
+				<Form>FormValoresIndicadoresGrafico</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaAgenda.pas">
+				<Form>FormAuditoriaAgenda</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadModoRecuperacao.pas">
+				<Form>FormCadModoRecuperacao</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadTreinamentos.pas">
+				<Form>FormCadTreinamentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_DefCadDefeitos.pas">
+				<Form>FormCadDefDefeitos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_DefCadOrigem.pas">
+				<Form>FormCadDefOrigem</Form>
+			</DCCReference>
+			<DCCReference Include="frm_DefLancamentos.pas">
+				<Form>FormDefLancamentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadProdutos.pas">
+				<Form>FormCadProdutos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_PDCA.pas">
+				<Form>FormPDCA</Form>
+			</DCCReference>
+			<DCCReference Include="WebBrowser.pas">
+				<Form>FormWebBrowser</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadContexto.pas">
+				<Form>FormCadContexto</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPartesInteressadas.pas">
+				<Form>FormCadPartesInteressadas</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadContextoAnalise.pas">
+				<Form>FormContextoAnalise</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadParametros.pas">
+				<Form>FormCadParametros</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaPDCA.pas">
+				<Form>FormVisualizaPDCA</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPMCVinculo.pas">
+				<Form>FormCadPMCVinculo</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRiscoVisualizacao.pas">
+				<Form>FormCadRiscoVisualizacao</Form>
+			</DCCReference>
+			<DCCReference Include="frm_PrevEficacia.pas">
+				<Form>FormPrevEficacia</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaInterna2015.pas">
+				<Form>FormAuditoriaInterna2015</Form>
+			</DCCReference>
+			<DCCReference Include="frm_pesqPrgAudit2015.pas">
+				<Form>FormPesqPrgAudit2015</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaAgenda2015.pas">
+				<Form>FormAuditoriaAgenda2015</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaRelatorio2015.pas">
+				<Form>FormRelatorioAuditoria2015</Form>
+			</DCCReference>
+			<DCCReference Include="frm_dmPendencias.pas">
+				<Form>dmPendencias</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="frm_Perigos.pas">
+				<Form>FormPerigos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadDanos.pas">
+				<Form>FormCadDanos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AlteraSenha.pas">
+				<Form>FormAlteraSenha</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRNCAbre.pas">
+				<Form>FormCadRNCAbre</Form>
+			</DCCReference>
+			<DCCReference Include="frm_PesqPDCA.pas">
+				<Form>FormPesqPDCA</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadMotivoRNC.pas">
+				<Form>FormCadMotivoRNC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadOrigemRNC.pas">
+				<Form>FormCadOrigemRNC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRNCFecha.pas">
+				<Form>FormCadRNCFecha</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadRNCConsulta.pas">
+				<Form>FormCadRNCConsulta</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPlanMudanca.pas">
+				<Form>FormCadPlanMudanca</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ObsColaborador.pas">
+				<Form>FormObsColaborador</Form>
+			</DCCReference>
+			<DCCReference Include="frm_EmailAuto.pas">
+				<Form>FormEmailAuto</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaRNC.pas">
+				<Form>FormVisualizaRNC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_PesqTreinamentos.pas">
+				<Form>FormPesqTreinamentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_GraficoPMC.pas">
+				<Form>FormGraficoPMC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadPMCAcoesConsulta.pas">
+				<Form>FormCadPMCAcoesConsulta</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadManutModelo.pas">
+				<Form>FormCadManutModelo</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadManutencao.pas">
+				<Form>FormCadManutencao</Form>
+			</DCCReference>
+			<DCCReference Include="frmRelatorioGeral.pas">
+				<Form>FormRelatorioGeral</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadCronograma.pas">
+				<Form>FormCadCronograma</Form>
+			</DCCReference>
+			<DCCReference Include="frm_AuditoriaAuto.pas">
+				<Form>FormAuditoriaAuto</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+	</Project>

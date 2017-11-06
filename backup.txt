@@ -1,0 +1,17 @@
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>set PGUSER=postgres 
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>set PGPASSWORD=12345 
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>for /F "tokens=1,2,3,4 delims=/ " %a in ('date /T') do set Date=%c-%b-%a 
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>set Date=2015-09-18 
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>for /F "tokens=1-3 delims=: " %a in ('time /T') do set time=%c%a%b  
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>set time=0944  
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>C:\"Program Files"\PostgreSQL\9.3\bin\pg_dump.exe -i -h 192.168.0.205 -p 5432 -Fc -b -o -v -f "D:\DestraManager\Backup\Ciamarro 2015-09-18-0944 .backup" destra 
+
+D:\Empresa\ClientesXE\Destra\Projeto ISO 2.07>pause
+Pressione qualquer tecla para continuar. . . 

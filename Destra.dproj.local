@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/01/20 14:47:37.000.247,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/01/20 14:48:05.000.119,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_Excel.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+    <Transaction>2017/01/20 14:48:05.000.119,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_Excel.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/01/20 14:50:52.000.159,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_Excel.pas=</Transaction>
+    <Transaction>2017/03/08 14:41:26.000.165,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/03/08 15:12:28.000.680,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_AlteraSenha.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/03/08 15:12:28.000.680,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_AlteraSenha.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+    <Transaction>2017/03/21 14:32:12.000.976,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadRNCAbre.pas</Transaction>
+    <Transaction>2017/03/24 14:34:56.000.903,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_PesqPDCA.pas</Transaction>
+    <Transaction>2017/04/11 15:13:22.000.566,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadMotivoRNC.pas</Transaction>
+    <Transaction>2017/04/11 16:05:00.000.908,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadOrigemRNC.pas</Transaction>
+    <Transaction>2017/04/13 10:02:49.000.716,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadRNCFecha.pas</Transaction>
+    <Transaction>2017/04/25 11:02:28.000.452,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_RNCConsulta.pas</Transaction>
+    <Transaction>2017/04/25 11:02:42.000.974,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_RNCConsulta.pas=</Transaction>
+    <Transaction>2017/04/25 11:17:28.000.289,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadRNCConsulta.pas</Transaction>
+    <Transaction>2017/05/03 15:47:56.000.537,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadPlanMudanca.pas</Transaction>
+    <Transaction>2017/06/19 20:23:13.000.568,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/06/19 20:23:54.000.110,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_ObsColaborador.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+    <Transaction>2017/06/19 20:23:54.000.110,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_ObsColaborador.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/06/22 10:11:52.000.010,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/06/22 10:12:19.000.461,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_EmailAuto.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/06/22 10:12:19.000.461,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_EmailAuto.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+    <Transaction>2017/07/07 10:35:25.000.174,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_VisualizaRNC.pas</Transaction>
+    <Transaction>2017/07/10 09:37:11.000.968,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_PesqTreinamentos.pas</Transaction>
+    <Transaction>2017/07/19 09:21:23.000.124,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_GraficoPMC.pas</Transaction>
+    <Transaction>2017/07/28 10:18:00.000.098,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadPMCAcoesConsulta.pas</Transaction>
+    <Transaction>2017/08/16 14:57:44.000.371,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadManutModelo.pas</Transaction>
+    <Transaction>2017/08/17 10:39:03.000.262,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadManutencao.pas</Transaction>
+    <Transaction>2017/09/11 09:39:59.000.485,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/09/11 09:40:28.000.198,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frmRelatorioGeral.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+    <Transaction>2017/09/11 09:40:28.000.198,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frmRelatorioGeral.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/09/15 10:14:22.000.787,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_CadCronograma.pas</Transaction>
+    <Transaction>2017/10/13 13:43:55.000.237,=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/10/13 13:44:36.000.745,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_AuditoriaAuto.pas=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.pas</Transaction>
+    <Transaction>2017/10/13 13:44:36.000.745,C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\frm_AuditoriaAuto.dfm=C:\Público\Empresa\ClientesXE\Destra\Projeto ISO 2.09\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
