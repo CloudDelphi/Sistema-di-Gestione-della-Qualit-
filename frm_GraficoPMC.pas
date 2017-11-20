@@ -144,6 +144,12 @@ type
     cdsRNCProcessoprocesso: TWideStringField;
     cdsRNCProcessoqtde: TLargeintField;
     cdsImpRNCAbertoemissor: TWideStringField;
+    btnExcel: TBitBtn;
+    zqryExcel: TZQuery;
+    dspExcel: TDataSetProvider;
+    cdsExcel: TClientDataSet;
+    dsExcel: TDataSource;
+    dbgExcel: TDBGrid;
     procedure Inicializar();
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
@@ -159,6 +165,7 @@ type
     procedure chkTodosDataClick(Sender: TObject);
     procedure pctGraficosChange(Sender: TObject);
     procedure rgTipoGraficoClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
     sWhere: string;
@@ -449,6 +456,134 @@ begin
 
    AtualizarDados();
    Inicializar();
+end;
+
+procedure TFormGraficoPMC.btnExcelClick(Sender: TObject);
+var
+   sTituloExcel: string;
+   sWhereAcoes:  string;
+begin
+   case pctGraficos.TabIndex of
+      0: begin
+         sTituloExcel:= 'PMC sem análise de causa';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= ' SELECT nume_pmc as "PMC", data_pmc as "Data", ' +
+                          ' P.pro_nome_abreviado as "Processo", C.nome_col as "Responsável",' +
+                          ' TC.valo_com as "Origem", TC1.valo_com as "Tipo"' +
+                          ' FROM pmc' +
+                          ' LEFT JOIN processos P ON P.codi_pro = prcs_pmc' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = resp_pmc' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com = orig_pmc' +
+                          ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_com = tipo_pmc' +
+                          ' WHERE (caus_pmc isnull OR caus_pmc = ' + QuotedStr('') + ')' +
+                          sWhere +
+                          ' ORDER BY nume_pmc';
+            Active:= True;
+         end;
+      end;
+      1: begin
+         sTituloExcel:= 'PMC sem Plano de Ação';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= ' SELECT nume_pmc as "PMC", data_pmc as "Date", ' +
+                          ' P.pro_nome_abreviado as "Processo", C.nome_col as "Responsável",' +
+                          ' TC.valo_com as "Origem", TC1.valo_com as "Tipo"' +
+                          ' FROM pmc PM' +
+                          ' LEFT JOIN processos P ON P.codi_pro = prcs_pmc' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = resp_pmc' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com = orig_pmc' +
+                          ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_com = tipo_pmc' +
+                          ' WHERE (SELECT COUNT(*) FROM pmc_acoes WHERE codi_pmc = PM.codi_pmc) = 0' +
+                          sWhere +
+                          ' ORDER BY nume_pmc';
+            Active:= True;
+         end;
+      end;
+      2: begin // PMC sem análise de causa
+         case rgOpcoes.ItemIndex of
+            0: begin
+               sTituloExcel:= 'Ações de PMC Vencidas';
+               sWhereAcoes:= ' PA.aco_prazo <= ' + ArrumaDataSQL(Date()) + ' AND '; // Vencidas
+            end;
+            1: begin
+               sTituloExcel:= 'Ações de PMC a Vencer';
+               sWhereAcoes:= ' PA.aco_prazo > ' + ArrumaDataSQL(Date()) + ' AND '; // A vencer
+            end;
+            2: begin
+               sTituloExcel:= 'Ações de PMC (TODAS)';
+               sWhereAcoes:= '';
+            end;
+         end;
+
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= ' SELECT P.nume_pmc as "PMC", P.data_pmc as "Data", ' +
+                          ' PC.nome_pro as "Processo", TC.valo_com as "Tipo", ' +
+                          ' TC1.valo_com as "Origem", C1.nome_col as "Responsável",' +
+                          ' PA.desc_aco as "Descrição da Ação", C.nome_col as "Responsável", ' +
+                          ' PA.aco_prazo as "Prazo de Ação"' +
+                          ' FROM pmc P' +
+                          ' INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = PA.resp_aco' +
+                          ' LEFT JOIN processos PC ON PC.codi_pro = P.prcs_pmc' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 4 and TC.codi_com = P.tipo_pmc' +
+                          ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 5 AND TC1.codi_com = orig_pmc' +
+                          ' INNER JOIN colaboradores C1 ON C1.codi_col = resp_pmc' +
+                          ' WHERE ' + sWhereAcoes + ' PA.vimp_aco = ' + QuotedStr('') +
+                          sWhere +
+                          ' ORDER BY nume_pmc';
+            Active:= True;
+         end;
+      end;
+      3: begin // PMC sem análise de causa
+         sTituloExcel:= '';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= '';
+            Active:= True;
+         end;
+      end;
+      4: begin // PMC sem análise de causa
+         sTituloExcel:= '';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= '';
+            Active:= True;
+         end;
+      end;
+      5: begin // PMC sem análise de causa
+         sTituloExcel:= '';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= '';
+            Active:= True;
+         end;
+      end;
+      6: begin // PMC sem análise de causa
+         sTituloExcel:= '';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= '';
+            Active:= True;
+         end;
+      end;
+      7: begin // PMC sem análise de causa
+         sTituloExcel:= '';
+         with cdsExcel do begin
+            Active:= False;
+            CommandText:= '';
+            Active:= True;
+         end;
+      end;
+   end;
+
+   if cdsExcel.RecordCount <= 0 then begin
+      Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
+   end
+   else begin
+      ExpExcel(dbgExcel, cdsExcel, sTituloExcel);
+   end;
 end;
 
 procedure TFormGraficoPMC.btnSairClick(Sender: TObject);

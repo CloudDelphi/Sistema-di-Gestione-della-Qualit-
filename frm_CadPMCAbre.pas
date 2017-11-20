@@ -653,14 +653,14 @@ end;
 procedure TFormCadPMCAbre.dbgRegistrosCellClick(Column: TColumn);
 begin
    PreencherCampos();
-   sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
+//   sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
 end;
 
 procedure TFormCadPMCAbre.dbgRegistrosDblClick(Sender: TObject);
 begin
    PreencherCampos;
    pctAbrePMC.TabIndex:= 0;
-   sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
+//   sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
    ControlarAbas;
 end;
 
@@ -840,6 +840,8 @@ begin
          dblCEA.KeyValue:= FieldByName('pmc_cea').AsString;
       end;
    end;
+
+   sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
 
    ControlarBotaoVisualiza(Self);
 end;

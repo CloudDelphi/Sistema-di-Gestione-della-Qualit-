@@ -272,7 +272,7 @@ begin
       sCodProcesso:= dm.cdsAuxiliar.FieldByName('codi_pro').AsString;
       sCodGestor  := dm.cdsAuxiliar.FieldByName('gest_pro').AsString;
 
-      // Verificar Análise Crítica
+      // ***** Verificar Análise Crítica
       // Verificar se há algo lançado, se sim e não houver nada em atraso apenas relatar que não há pendencias.
       with dm.cdsAux do begin
          Active:= False;
@@ -311,7 +311,7 @@ begin
          cdsAuditoria.Post;
       end;
 
-      // Verifica se tem Indicadores desatualizados de cada processo
+      // ***** Verifica se tem Indicadores desatualizados de cada processo
       sConformidade:= '';
       sNaoConformidade:= '';
       with dm.cdsAux do begin
@@ -332,7 +332,7 @@ begin
 
          nCont:= 0;
          // Verifica se a última atualização do indicador está cadastrado conforme a periodicidade
-         while not Eof do begin
+         while not dm.cdsAux.Eof do begin
             sNomeIndicador:= dm.cdsAux.FieldByName('desc_ind').AsString;
 
             DecodeDate(date,wAno, wMes, wDia);
@@ -369,19 +369,66 @@ begin
                Active:= True;
 
                if RecordCount > 0 then begin
-                  sConformidade:= 'Sem pendencias de indicadores.';
+//                  sConformidade:= 'Sem pendencias de indicadores.';
                end
                else begin
                   nCont:= nCont + 1;
                   if nCont = 1 then begin
                      sNaoConformidade:= 'Evidenciado indicadores desatualizados:' + #13;
                   end;
-                  sNaoConformidade:= sNaoConformidade + sNomeIndicador + #13;
+                  sNaoConformidade:= sNaoConformidade + sNomeIndicador + #13#13;
                end;
             end;
 
             Next;
          end;
+
+         // Busca o último valor dos indicadores para criar as Conformidades
+//         dm.cdsAux.First;
+//         while not dm.cdsAux.Eof do begin
+            with dm.cdsAux4 do begin
+               Active:= False;
+               CommandText:= ' SELECT V.codi_ind, MAX(V.peri_vin) AS anomes' +
+                             ' FROM valor_indicador V' +
+                             ' WHERE V.proc_vin = ' + QuotedStr(sCodProcesso) +
+                             ' GROUP BY V.codi_ind';
+               Active:= True;
+               First;
+
+               while not dm.cdsAux4.Eof do begin
+                  with dm.cdsAux5 do begin
+                     Active:= False;
+                     CommandText:= ' SELECT V.codi_ind, V.codi_vin, V.peri_vin, I.desc_ind,' +
+                                   ' V.proc_vin, V.valo_vin, M.met_anomes, M.met_unidade,' +
+                                   ' TC.valo_com || ' + QuotedStr(' ')  + ' || CAST(m.met_valor as numeric(18,2)) || ' +
+                                   QuotedStr(' ') + ' || M.met_unidade AS meta,' +
+                                   ' SUBSTRING(M.met_anomes, 5, 2) || ' + QuotedStr('/') + ' || SUBSTRING(M.met_anomes, 1, 4) as Anomes,' +
+                                   ' P.gest_pro, C.nome_col as gestor, C.col_email as email_gestor' +
+                                   ' FROM valor_indicador V' +
+                                   ' INNER JOIN indicadores I ON I.codi_ind = V.codi_ind' +
+                                   ' LEFT JOIN indicadores_metas M ON m.met_codindicador = V.codi_ind' +
+                                   '           and M.met_anomes = cast(v.peri_vin as character varying)' +
+                                   ' INNER JOIN processos P ON P.codi_pro = V.proc_vin' +
+                                   ' LEFT JOIN colaboradores C ON C.codi_col = P.gest_pro' +
+                                   ' INNER JOIN tabela_combos TC ON TC.tipo_com = 17 AND TC.codi_com = M.met_tipo' +
+                                   ' WHERE v.codi_ind = ' + dm.cdsAux4.FieldByName('codi_ind').AsString +
+                                   ' AND peri_vin = ' + dm.cdsAux4.FieldByName('anomes').AsString;
+                     Active:= True;
+
+                     sConformidade:= sConformidade + dm.cdsAux5.FieldByName('desc_ind').AsString + ' Meta:' +
+                                     dm.cdsAux5.FieldByName('meta').AsString + ' Resultado: ' +
+                                     dm.cdsAux5.FieldByName('Anomes').AsString + ': ' +
+                                     dm.cdsAux5.FieldByName('valo_vin').AsString + ' ' +
+                                     dm.cdsAux5.FieldByName('met_unidade').AsString + #13#13;
+                  end;
+
+                  Next;
+               end;
+            end;
+
+//            dm.cdsAux.Next;
+//         end;
+
          // Grava os dados na tabela em memória
          cdsAuditoria.Append;
 
@@ -395,6 +442,10 @@ begin
 
          cdsAuditoria.Post;
       end;
+
+      // ***** Verifica Análise de Riscos
+
+
 
       dm.cdsAuxiliar.Next;
    end;

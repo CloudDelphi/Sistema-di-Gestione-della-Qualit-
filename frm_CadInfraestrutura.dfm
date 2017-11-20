@@ -184,6 +184,13 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
         ParentFont = False
         Transparent = True
       end
+      object lbl14: TLabel
+        Left = 551
+        Top = 108
+        Width = 31
+        Height = 13
+        Caption = 'Status'
+      end
       object dblProcesso: TDBLookupComboBox
         Left = 252
         Top = 76
@@ -231,8 +238,8 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
         TabOrder = 5
       end
       object pnlImprimir: TPanel
-        Left = 133
-        Top = 195
+        Left = 381
+        Top = 179
         Width = 365
         Height = 188
         TabOrder = 6
@@ -793,6 +800,22 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
         MaxLength = 30
         ParentFont = False
         TabOrder = 10
+      end
+      object dblStatus: TDBLookupComboBox
+        Left = 551
+        Top = 124
+        Width = 88
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_com'
+        ListField = 'valo_com'
+        ListSource = dsStatus
+        ParentFont = False
+        TabOrder = 11
       end
     end
     object tsPesquisa: TTabSheet
@@ -2528,7 +2551,7 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
       
         'SELECT codi_inf, desc_inf, iden_inf, proc_inf, qtde_inf, seto_in' +
         'f, tipo_inf, manu_inf, inf_diasaviso,'
-      'inf_capacidade, inf_resolucao, inf_unidade'
+      'inf_capacidade, inf_resolucao, inf_unidade, inf_status'
       'FROM infraestrutura'
       'ORDER BY desc_inf')
     Params = <>
@@ -2599,6 +2622,9 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
     object cdsInfrainf_unidade: TWideStringField
       FieldName = 'inf_unidade'
       Size = 14
+    end
+    object cdsInfrainf_status: TIntegerField
+      FieldName = 'inf_status'
     end
   end
   object dsInfra: TDataSource
@@ -3327,5 +3353,40 @@ object FormCadInfraestrutura: TFormCadInfraestrutura
     DataSet = cdsTipo
     Left = 712
     Top = 320
+  end
+  object zqryStatus: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT codi_com, valo_com FROM tabela_combos')
+    Params = <>
+    Left = 48
+    Top = 272
+  end
+  object dspStatus: TDataSetProvider
+    DataSet = zqryStatus
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 88
+    Top = 272
+  end
+  object cdsStatus: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspStatus'
+    Left = 128
+    Top = 272
+    object cds1: TLargeintField
+      FieldName = 'codi_com'
+      Required = True
+    end
+    object cds2: TWideStringField
+      FieldName = 'valo_com'
+      Size = 50
+    end
+  end
+  object dsStatus: TDataSource
+    DataSet = cdsStatus
+    Left = 168
+    Top = 272
   end
 end

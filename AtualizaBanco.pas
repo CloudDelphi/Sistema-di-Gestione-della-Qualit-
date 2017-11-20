@@ -109,12 +109,13 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 451;
+   iUltimo:= 452;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         452: CriarCampo('inf_status', 'infraestrutura', 'integer', '1', 'I'); // Valor padrão - Ativo
          451: GravarNovaFuncao(62, 'RELATÓRIO DE ANÁLISE DE RISCO', 62);
          450: sComando:= ' CREATE TABLE auditoria_auto' +
                          '(' +

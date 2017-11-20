@@ -115,6 +115,15 @@ type
     cdsInfrainf_capacidade: TWideStringField;
     cdsInfrainf_resolucao: TWideStringField;
     cdsInfrainf_unidade: TWideStringField;
+    lbl14: TLabel;
+    dblStatus: TDBLookupComboBox;
+    zqryStatus: TZQuery;
+    dspStatus: TDataSetProvider;
+    cdsStatus: TClientDataSet;
+    cds1: TLargeintField;
+    cds2: TWideStringField;
+    dsStatus: TDataSource;
+    cdsInfrainf_status: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -168,6 +177,14 @@ begin
       Active:= False;
       CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
                     ' WHERE tipo_com = 14' +
+                    ' ORDER BY orde_com';
+      Active:= True;
+   end;
+
+   with cdsStatus do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
+                    ' WHERE tipo_com = 15' +
                     ' ORDER BY orde_com';
       Active:= True;
    end;
@@ -268,7 +285,7 @@ begin
                CommandText:= ' INSERT INTO infraestrutura' +
                              ' (codi_inf, tipo_inf, qtde_inf, desc_inf, iden_inf, ' +
                              ' proc_inf, manu_inf, inf_diasaviso, inf_capacidade, ' +
-                             ' inf_resolucao, inf_unidade' + ')' +
+                             ' inf_resolucao, inf_unidade, inf_status' + ')' +
                              ' VALUES(' +
                              QuotedStr(sNovoCodigo) + ',' +
                              IntToStr(dblTipo.KeyValue) + ',' +
@@ -280,7 +297,8 @@ begin
                              VirgulaParaPonto(spnDiasAviso.Value, 0) + ',' +
                              QuotedStr(edtCapacidade.Text) + ',' +
                              QuotedStr(edtResolucao.Text) + ',' +
-                             QuotedStr(edtUnidade.Text) +
+                             QuotedStr(edtUnidade.Text) + ',' +
+                             QuotedStr(dblStatus.KeyValue) +
                              ')';
                Execute;
             end
@@ -294,7 +312,8 @@ begin
                              ' inf_diasaviso = ' + VirgulaParaPonto(spnDiasAviso.Value, 0) + ',' +
                              ' inf_capacidade = ' + QuotedStr(edtCapacidade.Text) + ',' +
                              ' inf_resolucao = ' + QuotedStr(edtResolucao.Text) + ',' +
-                             ' inf_unidade = ' + QuotedStr(edtUnidade.Text) +
+                             ' inf_unidade = ' + QuotedStr(edtUnidade.Text) + ',' +
+                             ' inf_status = ' + QuotedStr(dblStatus.KeyValue) +
                              ' WHERE codi_inf = ' + cdsInfracodi_inf.AsString;
                Execute;
             end;
@@ -471,6 +490,7 @@ begin
    edtUnidade.Enabled   := Flag;
    edtResolucao.Enabled := Flag;
    edtCapacidade.Enabled:= Flag;
+   dblStatus.Enabled    := Flag;
 
    pctInfra.Pages[1].TabVisible:= not Flag;
 end;
@@ -516,6 +536,10 @@ begin
 
       if FieldByName('proc_inf').AsString <> EmptyStr then begin
          dblProcesso.KeyValue:= FieldByName('proc_inf').AsString;
+      end;
+
+      if FieldByName('inf_status').AsString <> EmptyStr then begin
+         dblStatus.KeyValue:= FieldByName('inf_status').AsString;
       end;
    end;
 end;

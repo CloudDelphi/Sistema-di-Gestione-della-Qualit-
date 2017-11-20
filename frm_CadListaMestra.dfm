@@ -2869,8 +2869,8 @@ object FormCadListaMestra: TFormCadListaMestra
     end
   end
   object pnlImprimir: TPanel
-    Left = 445
-    Top = 180
+    Left = 540
+    Top = 220
     Width = 365
     Height = 247
     TabOrder = 2

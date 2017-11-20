@@ -62,10 +62,6 @@ object FormCadPMCAbre: TFormCadPMCAbre
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro PMC'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl2: TLabel
         Left = 161
         Top = 12
@@ -1417,10 +1413,6 @@ object FormCadPMCAbre: TFormCadPMCAbre
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13

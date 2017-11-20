@@ -337,6 +337,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       ShowHint = True
       TabOrder = 0
       OnClick = btnGerarAuditoriaClick
+      ExplicitLeft = -5
+      ExplicitTop = 5
     end
     object btnImpCalibracao: TBitBtn
       Left = 220
@@ -1699,7 +1701,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     Top = 120
   end
   object cdsImprimir: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'

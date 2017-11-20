@@ -2565,7 +2565,7 @@ begin
                        ' FROM calibracao' +
                        // Usado Inner Join para que os equipamentos excluídos não7
                        // apareçam nas pendência(s) de calibração
-                       ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip' +
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip AND I.inf_status = 1' + // Ativos
                        ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
                        ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date());
          Active:= True;
@@ -2759,7 +2759,7 @@ begin
                        ' M.quan_man, TC.valo_com as Periodicidade ' +
                        ' FROM manutencao_fecha F' +
                        ' INNER JOIN manutencao M ON M.codi_man = F.man_codigo' +
-                       ' INNER JOIN infraestrutura I ON I.codi_inf = M.codi_inf ' +
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = M.codi_inf AND I.inf_status = 1' + // Ativos
                        ' INNER JOIN tabela_combos TC ON TC.tipo_com = 19 AND TC.codi_com = cast(M.quan_man as integer)' +
    //                    ' WHERE M.proc_man = ' + QuotedStr(lblCodigo.Caption) +
                        ' GROUP BY F.man_codigo, M.quan_man, I.desc_inf, I.iden_inf, M.oque_man, TC.valo_com' +
@@ -2786,8 +2786,8 @@ begin
          CommandText:= ' SELECT *' +
                        ' FROM pdca P' +
                        ' LEFT JOIN pdca_lanc L ON L.pdca_codigo = P.pdca_codigo' +
-                       ' WHERE ((lan_quando < CURRENT_DATE AND lan_datarealizada is null) OR ' +
-                       ' (lan_dtprevista is null OR (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null)))';
+                       ' WHERE ((lan_quando < CURRENT_DATE AND lan_dtprevista isnull AND lan_datarealizada is null) OR' +
+                       ' (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
          Active:= True;
 
          if RecordCount > 0 then begin

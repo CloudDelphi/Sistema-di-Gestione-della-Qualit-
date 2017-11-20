@@ -752,6 +752,7 @@ object FormInicial: TFormInicial
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
+      Visible = False
       OnClick = sbAuditoriaClick
       ExplicitLeft = 263
       ExplicitTop = -2
@@ -991,13 +992,13 @@ object FormInicial: TFormInicial
             item
               Expanded = False
               FieldName = 'lan_dtprevista'
-              Title.Caption = 'Data Prevista'
+              Title.Caption = 'Data Prevista Check'
               Title.Font.Charset = DEFAULT_CHARSET
               Title.Font.Color = clWindowText
               Title.Font.Height = -11
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 80
+              Width = 120
               Visible = True
             end
             item
@@ -2318,8 +2319,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlAvalHab: TPanel
-    Left = 246
-    Top = 102
+    Left = 258
+    Top = 88
     Width = 498
     Height = 381
     TabOrder = 2
@@ -2926,8 +2927,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlPendenciasHab: TPanel
-    Left = 379
-    Top = 295
+    Left = 227
+    Top = 394
     Width = 365
     Height = 255
     ParentBackground = False
@@ -5415,7 +5416,7 @@ object FormInicial: TFormInicial
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800BC0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800D80210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
