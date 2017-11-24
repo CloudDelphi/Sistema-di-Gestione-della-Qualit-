@@ -394,6 +394,7 @@ type
     RelatriodeManutenoPreventiva1: TMenuItem;
     N17: TMenuItem;
     sbAuditoria: TSpeedButton;
+    btn1: TButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -519,6 +520,7 @@ type
     procedure RelatriodeManutenoPreventiva1Click(Sender: TObject);
     procedure Cronograma1Click(Sender: TObject);
     procedure sbAuditoriaClick(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -769,6 +771,154 @@ procedure TFormInicial.btnVideoCalibracaoClick(Sender: TObject);
 begin
    ImprimirCalibracao('V');
 end;
+
+procedure TFormInicial.btn1Click(Sender: TObject);
+begin
+//   Executar(' CREATE TABLE IF NOT EXISTS pdca_docs(' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' pdca_coddoc integer NOT NULL,' +
+//                         ' pdca_descricao character varying(250),' +
+//                         ' pdca_caminho text,' +
+//                         ' CONSTRAINT pdca_doc PRIMARY KEY (pdca_codigo, pdca_coddoc)' +
+//                         ' )');
+//
+//   Executar(' CREATE TABLE IF NOT EXISTS pdca_lanc(' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' lan_oque text  ,' +
+//                         ' lan_onde text,' +
+//                         ' lan_porque text,' +
+//                         ' lan_quando timestamp without time zone,' +
+//                         ' lan_como text,' +
+//                         ' lan_quem integer,' +
+//                         ' lan_recursos text,' +
+//                         ' lan_quanto double precision,' +
+//                         ' lan_datarealizada timestamp without time zone,' +
+//                         ' lan_verimplantacao text,' +
+//                         ' lan_status integer,' +
+//                         ' lan_dtprevista timestamp without time zone,' +
+//                         ' lan_dtfinalizado timestamp without time zone,' +
+//                         ' lan_chkobs text,' +
+//                         ' CONSTRAINT PK_pdca_lanc PRIMARY KEY (lan_codigo)' +
+//                         ' )');
+//
+//   Executar(' CREATE TABLE IF NOT EXISTS pdca(' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' pdca_identificacao character varying(8),' +
+//                         ' pdca_data timestamp without time zone,' +
+//                         ' pdca_descricao character varying(50),' +
+//                         ' pdca_origem integer,' +
+//                         ' pdca_processo integer,' +
+//                         ' pdca_emitido integer,' +
+//                         ' CONSTRAINT PK_pdca PRIMARY KEY (pdca_codigo)' +
+//                         ' )');
+//
+//   Executar(' ALTER TABLE pdca' +
+//                         ' ALTER COLUMN pdca_descricao TYPE character varying(150);');
+
+//   Executar(' CREATE TABLE IF NOT EXISTS partes(' +
+//                         ' par_codigo integer NOT NULL,' +
+//                         ' par_nome character varying(200),' +
+//                         ' par_descricao text,' +
+//                         ' CONSTRAINT PK_partes PRIMARY KEY (par_codigo)' +
+//                         ' )');
+//
+//   Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (5, ' + QuotedStr('SOCIEDADE') + ',' + QuotedStr('') + ');');
+//         Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (4, ' + QuotedStr('FORNECEDOR') + ',' + QuotedStr('') + ');');
+//         Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (3, ' + QuotedStr('FUNCIONÁRIO') + ',' + QuotedStr('') + ');');
+//         Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (2, ' + QuotedStr('ACIONISTA') + ',' + QuotedStr('') + ');');
+//         Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                        ' VALUES (1, ' + QuotedStr('CLIENTE') + ',' + QuotedStr('') + ');');
+
+//   Executar(' CREATE TABLE IF NOT EXISTS contexto_analise(' +
+//                         ' ana_codigo integer NOT NULL,' +
+//                         ' ana_contexto integer,' +
+//                         ' ana_parte integer,' +
+//                         ' ana_requisito text,' +
+//                         ' ana_monitoramento text,' +
+//                         ' CONSTRAINT PK_contexto_analise PRIMARY KEY (ana_codigo)' +
+//                         ' )');
+
+//   Executar(' CREATE TABLE IF NOT EXISTS contextos(' +
+//                         ' con_codigo integer NOT NULL,' +
+//                         ' con_nome character varying(200),' +
+//                         ' con_descricao text,' +
+//                         ' CONSTRAINT PK_contextos PRIMARY KEY (con_codigo)' +
+//                         ' )');
+
+//         Executar(' CREATE TABLE IF NOT EXISTS produtos(' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' pro_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_produtos PRIMARY KEY (pro_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS defeitos_lanc_itens(' +
+//                         ' ite_codigo integer NOT NULL,' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' lan_defeito integer NOT NULL, ' +
+//                         ' lan_qtd numeric(18,6) NOT NULL,' +
+//                         ' CONSTRAINT PK_defeitos_lanc_itens PRIMARY KEY (ite_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS defeitos_lanc(' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' lan_data timestamp without time zone, ' +
+//                         ' lan_origem integer NOT NULL, ' +
+//                         ' lan_produto integer NOT NULL, ' +
+//                         ' lan_rastreabilidade character varying(200),' +
+//                         ' lan_qtd numeric(18,6) NOT NULL,' +
+//                         ' lan_status integer NOT NULL, ' +
+//                         ' CONSTRAINT PK_defeitos_lanc PRIMARY KEY (lan_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS defeitos_origem(' +
+//                         ' ori_codigo integer NOT NULL,' +
+//                         ' ori_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_defeitos_origem PRIMARY KEY (ori_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS defeitos(' +
+//                         ' def_codigo integer NOT NULL,' +
+//                         ' def_descricao character varying(200),' +
+//                         ' def_classe integer NOT NULL,' +
+//                         ' CONSTRAINT PK_defeitos PRIMARY KEY (def_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS defeitos_classe(' +
+//                         ' cla_codigo integer NOT NULL,' +
+//                         ' cla_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_defeitos_classe PRIMARY KEY (cla_codigo)' +
+//                         ' )');
+
+//   CriarCampo('casasindicador', 'parametros', 'integer', '2', 'I');
+
+//   CriarCampo('risco_severo', 'parametros', 'integer', '1', 'I');
+//         CriarCampo('risco_alto', 'parametros', 'integer', '1', 'I');
+//         CriarCampo('risco_medio', 'parametros', 'integer', '1', 'I');
+//         CriarCampo('risco_baixo', 'parametros', 'integer', '1', 'I');
+//
+//   Executar(' ALTER TABLE parametros' +
+//                         ' RENAME risco_severo TO risco_severo_pfo;');
+//         Executar(' ALTER TABLE parametros' +
+//                         ' RENAME risco_alto TO risco_alto_pfo;');
+//         Executar(' ALTER TABLE parametros' +
+//                         ' RENAME risco_medio TO risco_medio_pfo;');
+//         Executar(' ALTER TABLE parametros' +
+//                         ' RENAME risco_baixo TO risco_baixo_pfo;');
+
+//   CriarCampo('email_risco', 'parametros', 'integer');
+
+//      Executar(' CREATE TABLE IF NOT EXISTS processos_subsequentes(' +
+//                         ' sub_codigo integer NOT NULL,' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' CONSTRAINT PK_processos_subsequentes PRIMARY KEY (sub_codigo, pro_codigo)' +
+//                         ' )');
+//         Executar(' CREATE TABLE IF NOT EXISTS processos_antecedentes(' +
+//                         ' ant_codigo integer NOT NULL,' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' CONSTRAINT PK_processos_antecedentes PRIMARY KEY (ant_codigo, pro_codigo)' +
+//                         ' )');
+end;
+
 
 procedure TFormInicial.btnImpCalibracaoClick(Sender: TObject);
 begin

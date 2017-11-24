@@ -2162,7 +2162,7 @@ object FormCadContexto: TFormCadContexto
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 0
     end
@@ -2300,7 +2300,7 @@ object FormCadContexto: TFormCadContexto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42408.449879560200000000
+    ReportOptions.LastChange = 43060.410554247680000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -2372,12 +2372,14 @@ object FormCadContexto: TFormCadContexto
         DataSet = frxDBDSContextos
         DataSetName = 'frxDBDSContextos'
         RowCount = 0
+        Stretched = True
         object frxControleDATA: TfrxMemoView
           Left = 20.377952760000000000
           Top = 19.000000000000000000
           Width = 82.771653540000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataField = 'con_codigo'
           DataSet = frxDBDSContextos
           DataSetName = 'frxDBDSContextos'
@@ -2399,6 +2401,7 @@ object FormCadContexto: TFormCadContexto
           Width = 589.606623860000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataField = 'con_nome'
           DataSet = frxDBDSContextos
           DataSetName = 'frxDBDSContextos'
@@ -2419,6 +2422,7 @@ object FormCadContexto: TFormCadContexto
           Width = 672.000000000000000000
           Height = 98.267780000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataField = 'con_descricao'
           DataSet = frxDBDSContextos
           DataSetName = 'frxDBDSContextos'
@@ -2438,6 +2442,7 @@ object FormCadContexto: TFormCadContexto
           Width = 672.000000000000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           Color = clScrollBar
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -2457,6 +2462,7 @@ object FormCadContexto: TFormCadContexto
           Width = 83.149606300000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           Color = clScrollBar
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -2477,6 +2483,7 @@ object FormCadContexto: TFormCadContexto
           Width = 589.606680000000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           Color = clScrollBar
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET

@@ -9,7 +9,7 @@ uses
   frxDBSet;
 
 type
-  TFormAuditoriaAuto = class(TForm)
+   TFormAuditoriaAuto = class(TForm)
     pnlEsquerda: TPanel;
     pnl8: TPanel;
     btnSairImp: TBitBtn;
@@ -193,6 +193,9 @@ begin
    end;
 
    cdsAuditoria.Close;
+
+   Botoes(True);
+   AtualizarDados();
 end;
 
 procedure TFormAuditoriaAuto.btnImpCalibracaoClick(Sender: TObject);
@@ -443,7 +446,217 @@ begin
          cdsAuditoria.Post;
       end;
 
-      // ***** Verifica Análise de Riscos
+      // ***** Verifica procedimentos documentados
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Busca procedimentos não aprovados do processo
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_lis, iden_lis, desc_lis, revi_lis, tipo_lis, atua_lis, arqu_lis,' +
+                       '        proc_lis, resp_lis, data_lis, apro_lis, dtap_lis, quem_lis, qtde_lis,' +
+                       '        arma_lis, lis_treinamento' +
+                       ' FROM lista_mestra L' +
+                       ' INNER JOIN lista_mestra_proc P on P.lis_codiDocumento = L.codi_lis' +
+                       ' WHERE lis_codiProcesso = ' + QuotedStr(sCodProcesso) +
+                       ' AND apro_lis = ' + QuotedStr('N');
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= 'Evidenciado procedimentos não aprovados:' + #13;
+            while not dm.cdsAux.Eof do begin
+               sNaoConformidade:= sNaoConformidade + FieldByName('iden_lis').AsString + ' - ' +
+                                  FieldByName('desc_lis').AsString + ' Revisão: ' +
+                                  FieldByName('revi_lis').AsString + #13 + #13;
+
+               dm.cdsAux.Next;
+            end;
+         end;
+      end;
+
+      // Busca procedimentos aprovados do processo
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_lis, iden_lis, desc_lis, revi_lis, tipo_lis, atua_lis, arqu_lis,' +
+                       '        proc_lis, resp_lis, data_lis, apro_lis, dtap_lis, quem_lis, qtde_lis,' +
+                       '        arma_lis, lis_treinamento' +
+                       ' FROM lista_mestra L' +
+                       ' INNER JOIN lista_mestra_proc P on P.lis_codiDocumento = L.codi_lis' +
+                       ' WHERE lis_codiProcesso = ' + QuotedStr(sCodProcesso) +
+                       ' AND apro_lis = ' + QuotedStr('S') +
+                       ' LIMIT 3';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sConformidade:= 'Evidenciado procedimentos:' + #13;
+            while not dm.cdsAux.Eof do begin
+               sConformidade:= sConformidade + FieldByName('iden_lis').AsString + ' - ' +
+                                  FieldByName('desc_lis').AsString + ' Revisão: ' +
+                                  FieldByName('revi_lis').AsString + #13 + #13;
+
+               dm.cdsAux.Next;
+            end;
+         end;
+      end;
+
+      // Grava os dados na tabela em memória
+         cdsAuditoria.Append;
+
+         cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+         cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+         cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.5';
+         cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+         cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Procedimentos Documentados';
+         cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+         cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+
+         cdsAuditoria.Post;
+
+      // ***** Verifica registros da qualidade
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Busca 3 formulários aleatórios
+      with dm.cdsAux do begin
+         Active:= False;
+         Active:= False;
+         CommandText:= ' SELECT DISTINCT nume_for, revi_for, iden_for, arqu_for,' +
+                       ' TC.valo_com as tipo_protecao' +
+                       ' FROM formularios F' +
+                       ' INNER JOIN formularios_locais FL ON FL.for_codForm = F.codi_for' +
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 1 AND TC.codi_com = FL.for_tipo_protecao' +
+                       ' WHERE for_codProcesso = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nume_for' +
+                       ' LIMIT 3';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sConformidade:= 'Evidenciado registros da qualidade:' + #13;
+            while not dm.cdsAux.Eof do begin
+               sConformidade:= sConformidade + FieldByName('nume_for').AsString + ' - ' +
+                               FieldByName('iden_for').AsString + ' Revisão: ' +
+                               FieldByName('revi_for').AsString + #13 + #13;
+
+               dm.cdsAux.Next;
+            end;
+         end;
+      end;
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.5';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Registros da Qualidade';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+
+      cdsAuditoria.Post;
+
+      // ***** Verifica PMC
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Verifica se tem ações do PMC com prazo vencido
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT DISTINCT P.nume_pmc' +
+                       ' FROM pmc P' +
+                       ' INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = PA.resp_aco' +
+                       ' WHERE PA.aco_prazo <= ' + ArrumaDataSQL(Date()) + ' AND PA.vimp_aco = ' + QuotedStr('') +
+                       ' AND prcs_pmc = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nume_pmc';
+         Active:= True;
+
+         if dm.cdsAux.RecordCount > 0 then begin
+            sNaoConformidade:= 'Evidenciadas Ações de PMC com prazo vencido:' + #13;
+            while not dm.cdsAux.Eof do begin
+               sNaoConformidade:= sNaoConformidade + FieldByName('nume_pmc').AsString + #13;
+
+               dm.cdsAux.Next;
+            end;
+         end;
+      end;
+
+      // Verifica se tem PMC com previsão de eficácia vencida
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT nume_pmc' +
+                       ' FROM pmc P' +
+//                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 4 and TC.codi_com = P.tipo_pmc' +
+//                       ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 21 and TC1.codi_com = P.efic_pmc' +
+//                       ' INNER JOIN colaboradores C ON C.codi_col = P.resp_pmc' +
+                       ' WHERE pmc_preveficacia <= ' + ArrumaDataSQL(Date()) +
+                       ' AND efic_pmc = 2' + // Em Espera
+                       ' AND prcs_pmc = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nume_pmc';
+         Active:= True;
+
+         if dm.cdsAux.RecordCount > 0 then begin
+            if sNaoConformidade = '' then begin
+               sNaoConformidade:= 'Evidenciado PMC com previsão de eficácia vencido:' + #13;
+            end
+            else begin
+               sNaoConformidade:= sNaoConformidade + #13 + 'Evidenciado PMC com previsão de eficácia vencido:' + #13;
+            end;
+
+            while not dm.cdsAux.Eof do begin
+               sNaoConformidade:= sNaoConformidade + FieldByName('nume_pmc').AsString + #13;
+
+               dm.cdsAux.Next;
+            end;
+         end;
+      end;
+
+      // Verifica se tem PMC sem preenchimento (considerar se não tiver ações cadastradas)
+      nCont:= 0;
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT nume_pmc,' +
+                       ' (SELECT COUNT(*) FROM pmc_acoes A WHERE A.codi_pmc = P.codi_pmc) as QtdAcoes' +
+                       ' FROM pmc P' +
+                       ' WHERE prcs_pmc = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nume_pmc';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            if dm.cdsAux.FieldByName('QtdAcoes').AsInteger <= 0 then begin
+               nCont:= nCont + 1;
+               if nCont = 1 then begin
+                  if sNaoConformidade = '' then begin
+                     sNaoConformidade:= 'Evidenciado PMC sem ações cadastradas:' + #13;
+                  end
+                  else begin
+                     sNaoConformidade:= sNaoConformidade + #13 + 'Evidenciado PMC sem ações cadastradas:' + #13;
+                  end;
+               end;
+
+               sNaoConformidade:= sNaoConformidade + FieldByName('nume_pmc').AsString + #13;
+            end;
+
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      if sNaoConformidade = '' then begin
+         sConformidade:= 'Sem Pendências';
+      end;
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '10';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Ação Corretiva/Preventiva';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+
+      cdsAuditoria.Post;
 
 
 

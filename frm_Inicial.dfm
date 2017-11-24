@@ -752,10 +752,19 @@ object FormInicial: TFormInicial
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      Visible = False
       OnClick = sbAuditoriaClick
       ExplicitLeft = 263
       ExplicitTop = -2
+    end
+    object btn1: TButton
+      Left = 408
+      Top = 22
+      Width = 75
+      Height = 25
+      Caption = 'btn1'
+      TabOrder = 0
+      Visible = False
+      OnClick = btn1Click
     end
   end
   object pnlGeral: TPanel
@@ -5416,7 +5425,7 @@ object FormInicial: TFormInicial
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800D80210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800E80210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
