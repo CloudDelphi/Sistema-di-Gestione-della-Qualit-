@@ -11,12 +11,7 @@ uses
 type
    TFormAuditoriaAuto = class(TForm)
     pnlEsquerda: TPanel;
-    pnl8: TPanel;
-    btnSairImp: TBitBtn;
-    btnGerarAuditoria: TBitBtn;
-    btnImpCalibracao: TBitBtn;
     pnlRelatorio: TPanel;
-    btnGravar: TBitBtn;
     dbgAspectos: TDBGrid;
     zqryAuditoria: TZQuery;
     dspAuditoria: TDataSetProvider;
@@ -70,20 +65,37 @@ type
     cdsColaboradorescodi_col: TLargeintField;
     cdsColaboradoresnome_col: TWideStringField;
     cdsAuditoriaGestor: TStringField;
+    zqryProcessoImp: TZQuery;
+    dspProcessoImp: TDataSetProvider;
+    cdsProcessoImp: TClientDataSet;
+    cds2: TLargeintField;
+    cds3: TWideStringField;
+    dsProcessoImp: TDataSource;
+    zqryFuncoes: TZQuery;
+    dspFuncoes: TDataSetProvider;
+    pnl1: TPanel;
+    btn1: TBitBtn;
+    btnGerarAuditoria: TBitBtn;
+    btnImprimir: TBitBtn;
+    btnGravar: TBitBtn;
     btnCancelar: TBitBtn;
+    cdsFuncoes: TClientDataSet;
+    dsFuncoes: TDataSource;
+    cdsFuncoescodi_fun: TLargeintField;
+    cdsFuncoesdesc_fun: TWideStringField;
+    cdsAuditoriaFuncaoGestor: TStringField;
     procedure btn1Click(Sender: TObject);
     procedure btnSairImpClick(Sender: TObject);
-    procedure btnGerarAuditoriaClick(Sender: TObject);
     procedure GerarAuditoria();
     procedure frxReport1Preview(Sender: TObject);
-    procedure btnImpCalibracaoClick(Sender: TObject);
-    procedure btnGravarClick(Sender: TObject);
     procedure AtualizarDados();
     procedure FormShow(Sender: TObject);
     procedure dbgAspectosCellClick(Column: TColumn);
     procedure Impressao();
-    procedure btnCancelarClick(Sender: TObject);
     procedure Botoes(lFlag: Boolean);
+    procedure btnGerarAuditoriaClick(Sender: TObject);
+    procedure btnGravarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -107,6 +119,14 @@ begin
       CommandText:= ' SELECT codi_pro, nome_pro ' +
                     ' FROM processos' +
                     ' WHERE pro_exibelista = ' + QuotedStr('S') +
+                    ' ORDER BY nome_pro';
+      Active:= True;
+   end;
+
+   with cdsProcessoImp do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro, nome_pro ' +
+                    ' FROM processos' +
                     ' ORDER BY nome_pro';
       Active:= True;
    end;
@@ -144,6 +164,21 @@ procedure TFormAuditoriaAuto.btnCancelarClick(Sender: TObject);
 begin
    Botoes(True);
    cdsAuditoria.Active:= False;
+end;
+
+procedure TFormAuditoriaAuto.btnGerarAuditoriaClick(Sender: TObject);
+begin
+   cdsAuditoria.CreateDataSet;
+   cdsAuditoria.Open;
+   cdsAuditoria.EmptyDataSet;
+   GerarAuditoria();
+//   cdsAuditoria.Close;
+   Botoes(False);
+
+   with frxReport1 do begin
+      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaAutoSemGravar.fr3');
+      ShowReport;
+   end;
 end;
 
 procedure TFormAuditoriaAuto.btnGravarClick(Sender: TObject);
@@ -198,29 +233,9 @@ begin
    AtualizarDados();
 end;
 
-procedure TFormAuditoriaAuto.btnImpCalibracaoClick(Sender: TObject);
-begin
-//   Impressao();
-end;
-
 procedure TFormAuditoriaAuto.btnSairImpClick(Sender: TObject);
 begin
    Self.Close;
-end;
-
-procedure TFormAuditoriaAuto.btnGerarAuditoriaClick(Sender: TObject);
-begin
-   cdsAuditoria.CreateDataSet;
-   cdsAuditoria.Open;
-   cdsAuditoria.EmptyDataSet;
-   GerarAuditoria();
-//   cdsAuditoria.Close;
-   Botoes(False);
-
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaAutoSemGravar.fr3');
-      ShowReport;
-   end;
 end;
 
 procedure TFormAuditoriaAuto.dbgAspectosCellClick(Column: TColumn);
@@ -262,18 +277,23 @@ var
    iMesAnterior: Integer;
    sNomeIndicador: string;
    nCont: Integer;
+   sFuncaoGestor: string;
 begin
    // Seleciona os processos para verificação dos itens da Auditoria Automática
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT codi_pro, gest_pro FROM processos' +
+      CommandText:= ' SELECT codi_pro, gest_pro, f.desc_fun' +
+                    ' FROM processos' +
+                    ' LEFT JOIN colaboradores C ON C.codi_col = gest_pro' +
+                    ' LEFT JOIN funcoes F ON F.codi_fun = C.func_col' +
                     ' WHERE pro_exibelista = ' + QuotedStr('S');
       Active:= True;
    end;
 
    while not dm.cdsAuxiliar.Eof do begin
-      sCodProcesso:= dm.cdsAuxiliar.FieldByName('codi_pro').AsString;
-      sCodGestor  := dm.cdsAuxiliar.FieldByName('gest_pro').AsString;
+      sCodProcesso := dm.cdsAuxiliar.FieldByName('codi_pro').AsString;
+      sCodGestor   := dm.cdsAuxiliar.FieldByName('gest_pro').AsString;
+      sFuncaoGestor:= dm.cdsAuxiliar.FieldByName('desc_fun').AsString;
 
       // ***** Verificar Análise Crítica
       // Verificar se há algo lançado, se sim e não houver nada em atraso apenas relatar que não há pendencias.
@@ -310,6 +330,7 @@ begin
          cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Análise Crítica';
          cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
          cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+         cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
          cdsAuditoria.Post;
       end;
@@ -442,6 +463,7 @@ begin
          cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Indicadores de Desempenho';
          cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
          cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+         cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
          cdsAuditoria.Post;
       end;
@@ -509,6 +531,7 @@ begin
          cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Procedimentos Documentados';
          cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
          cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+         cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
          cdsAuditoria.Post;
 
@@ -552,6 +575,7 @@ begin
       cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Registros da Qualidade';
       cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
       cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
       cdsAuditoria.Post;
 
@@ -586,9 +610,6 @@ begin
          Active:= False;
          CommandText:= ' SELECT nume_pmc' +
                        ' FROM pmc P' +
-//                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 4 and TC.codi_com = P.tipo_pmc' +
-//                       ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 21 and TC1.codi_com = P.efic_pmc' +
-//                       ' INNER JOIN colaboradores C ON C.codi_col = P.resp_pmc' +
                        ' WHERE pmc_preveficacia <= ' + ArrumaDataSQL(Date()) +
                        ' AND efic_pmc = 2' + // Em Espera
                        ' AND prcs_pmc = ' + QuotedStr(sCodProcesso) +
@@ -655,13 +676,128 @@ begin
       cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Ação Corretiva/Preventiva';
       cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
       cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
+
+      cdsAuditoria.Post;
+
+      // ***** Infraestrutura
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Verifica se tem PMC com previsão de eficácia vencida
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT iden_inf || ' + QuotedStr('-') + ' || desc_inf as Equipamento' +
+                       ' FROM infraestrutura' +
+                       ' WHERE proc_inf = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + FieldByName('Equipamento').AsString + #13;
+
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      if sConformidade = '' then begin
+         sConformidade:= 'Sem Pendências';
+      end;
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.1.3';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Infraestrutura';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
       cdsAuditoria.Post;
 
 
-
+      // Muda o processo
       dm.cdsAuxiliar.Next;
    end;
+
+   // ***** Manutenção Preventiva antiga
+
+
+   // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.1.3';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Infraestrutura';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
+
+      cdsAuditoria.Post;
+
+   // ***** Provedores Externos (Fornecedores)
+   sConformidade:= '';
+   sNaoConformidade:= '';
+
+   // Busca 3 fornecedores aleatórios
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT forn_nome, forn_validade, forn_avaliacao' +
+                    ' FROM fornecedores' +
+                    ' WHERE forn_validade > ' + ArrumaDataSQL(Date()) +
+                    ' ORDER BY RANDOM() LIMIT 3';
+      Active:= True;
+
+      while not dm.cdsAux.Eof do begin
+         sConformidade:= sConformidade + FieldByName('forn_nome').AsString + ' - Validade: ' +
+                         FieldByName('forn_validade').AsString + ' - Nota: ' +
+                         FieldByName('forn_avaliacao').AsString + #13 + #13;
+
+         dm.cdsAux.Next;
+      end;
+   end;
+
+   // Busca fornecedores com a avaliação vencida
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT forn_nome, forn_validade, forn_avaliacao' +
+                    ' FROM fornecedores' +
+                    ' WHERE forn_validade <= ' + ArrumaDataSQL(Date()) +
+                    ' ORDER BY forn_nome';
+      Active:= True;
+
+      sNaoConformidade:= 'Evidenciado homologação vencida:' + #13;
+
+      while not dm.cdsAux.Eof do begin
+         sNaoConformidade:= sNaoConformidade + FieldByName('forn_nome').AsString + ' - Validade: ' +
+                            FieldByName('forn_validade').AsString + #13 + #13;
+
+         dm.cdsAux.Next;
+      end;
+   end;
+
+   if (AllTrim(sConformidade) = '') and (dm.cdsAux.RecordCount = 0) then begin
+      sConformidade:= 'Sem fornecedores cadastrados';
+   end;
+
+   // Grava os dados na tabela em memória
+   cdsAuditoria.Append;
+
+   cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+   cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+   cdsAuditoria.FieldByName('aud_requisito').AsString      := '8.4';
+   cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+   cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Provedores Externos';
+   cdsAuditoria.FieldByName('aud_processo').AsString       := '99';
+   cdsAuditoria.FieldByName('aud_gestor').AsString         := '';
+   cdsAuditoria.FieldByName('FuncaoGestor').AsString       := '';
+
+   cdsAuditoria.Post;
 end;
 
 procedure TFormAuditoriaAuto.Impressao;

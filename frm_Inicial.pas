@@ -774,6 +774,24 @@ end;
 
 procedure TFormInicial.btn1Click(Sender: TObject);
 begin
+// Copia as habilidades cadastradas na função
+//   if Application.MessageBox('Deseja copiar as habilidades que estão cadastradas no cadastro da função para o colaborador ?', 'Confirmação', MB_YESNO + MB_ICONWARNING) = IDYES then begin
+//      with dm.cdsGravar do begin
+//         Active:= False;
+//         CommandText:= ' SELECT codi_col, func_col FROM colaboradores';
+//         Active:= True;
+//
+//         First;
+//
+//      // Grava as habilidades e treinamentos da função no colaborador
+//         while not Eof do begin
+//            GravaAtributos(FieldByName('codi_col').AsInteger , FieldByName('func_col').AsInteger, 'H');
+//
+//            Next;
+//         end;
+//      end;
+//   endd;
+
 //   Executar(' CREATE TABLE IF NOT EXISTS pdca_docs(' +
 //                         ' pdca_codigo integer NOT NULL,' +
 //                         ' pdca_coddoc integer NOT NULL,' +
@@ -1403,7 +1421,7 @@ begin
       end;;
    end;
 
-   versao     := '2.09';
+   versao     := '2.10';
    nomeSistema:= 'Destra Manager';
 end;
 
@@ -2800,7 +2818,7 @@ begin
                        ' FROM colab_treinamentos CT' +
                        ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col AND C.col_status = 1' +
                        ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
-                       ' WHERE codi_pla = 0 OR codi_pla isnull' +
+                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
                        ' ORDER BY C.nome_col, T.desc_tre';
          Active:= True;
 

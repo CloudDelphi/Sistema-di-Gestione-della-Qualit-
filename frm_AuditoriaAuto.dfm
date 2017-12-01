@@ -63,14 +63,59 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         end>
     end
   end
-  object pnl8: TPanel
+  object pnlRelatorio: TPanel
+    Left = 169
+    Top = 0
+    Width = 853
+    Height = 395
+    Align = alRight
+    TabOrder = 1
+    object frxPreview1: TfrxPreview
+      Left = 1
+      Top = 1
+      Width = 851
+      Height = 393
+      Align = alClient
+      OutlineVisible = False
+      OutlineWidth = 121
+      ThumbnailVisible = False
+      UseReportHints = True
+    end
+    object dbg1: TDBGrid
+      Left = 86
+      Top = 2
+      Width = 589
+      Height = 393
+      Hint = 'Selecione o registro para alterar'
+      DataSource = dsAuditoria
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Visible = False
+    end
+  end
+  object pnl1: TPanel
     Left = 0
     Top = 395
     Width = 1022
     Height = 72
     Align = alBottom
-    TabOrder = 1
-    object btnSairImp: TBitBtn
+    TabOrder = 2
+    ExplicitLeft = -1
+    ExplicitTop = 400
+    object btn1: TBitBtn
       Left = 948
       Top = 1
       Width = 73
@@ -337,10 +382,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       ShowHint = True
       TabOrder = 0
       OnClick = btnGerarAuditoriaClick
-      ExplicitLeft = -5
-      ExplicitTop = 5
     end
-    object btnImpCalibracao: TBitBtn
+    object btnImprimir: TBitBtn
       Left = 220
       Top = 1
       Width = 73
@@ -473,7 +516,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       ShowHint = True
       TabOrder = 1
       Visible = False
-      OnClick = btnImpCalibracaoClick
     end
     object btnGravar: TBitBtn
       Left = 74
@@ -744,49 +786,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       OnClick = btnCancelarClick
     end
   end
-  object pnlRelatorio: TPanel
-    Left = 169
-    Top = 0
-    Width = 853
-    Height = 395
-    Align = alRight
-    TabOrder = 2
-    object frxPreview1: TfrxPreview
-      Left = 1
-      Top = 1
-      Width = 851
-      Height = 393
-      Align = alClient
-      OutlineVisible = False
-      OutlineWidth = 121
-      ThumbnailVisible = False
-      UseReportHints = True
-    end
-    object dbg1: TDBGrid
-      Left = 86
-      Top = 2
-      Width = 589
-      Height = 393
-      Hint = 'Selecione o registro para alterar'
-      DataSource = dsAux2
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      Visible = False
-    end
-  end
   object zqryAuditoria: TZQuery
     Connection = dm.Conexao
     Params = <>
@@ -834,7 +833,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     object cdsAuditoriaProcesso: TStringField
       FieldKind = fkLookup
       FieldName = 'Processo'
-      LookupDataSet = cdsProcessos
+      LookupDataSet = cdsProcessoImp
       LookupKeyFields = 'codi_pro'
       LookupResultField = 'nome_pro'
       KeyFields = 'aud_processo'
@@ -851,6 +850,10 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       Size = 80
       Lookup = True
     end
+    object cdsAuditoriaFuncaoGestor: TStringField
+      FieldName = 'FuncaoGestor'
+      Size = 80
+    end
   end
   object dsAuditoria: TDataSource
     DataSet = cdsAuditoria
@@ -866,7 +869,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43042.584490324070000000
+    ReportOptions.LastChange = 43066.490339803240000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -1008,7 +1011,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8W = (
             '[frxDBDSSemGravar."aud_naoconformidade"]')
           ParentFont = False
@@ -1601,7 +1603,9 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            'Gestor: [frxDBDSSemGravar."Gestor"]')
+            
+              'Gestor: [frxDBDSSemGravar."Gestor"] - [frxDBDSSemGravar."FuncaoG' +
+              'estor"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -1770,11 +1774,12 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       'aud_processo=aud_processo'
       'aud_gestor=aud_gestor'
       'Processo=Processo'
-      'Gestor=Gestor')
+      'Gestor=Gestor'
+      'FuncaoGestor=FuncaoGestor')
     DataSource = dsAuditoria
     BCDToCurrency = False
     Left = 624
-    Top = 64
+    Top = 48
   end
   object zqryProcessos: TZQuery
     Connection = dm.Conexao
@@ -1849,6 +1854,79 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   object dsColaboradores: TDataSource
     DataSet = cdsColaboradores
     Left = 664
+    Top = 408
+  end
+  object zqryProcessoImp: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT codi_pro, nome_pro '
+      'FROM processos'
+      'ORDER BY nome_pro')
+    Params = <>
+    Left = 328
+    Top = 360
+  end
+  object dspProcessoImp: TDataSetProvider
+    DataSet = zqryProcessoImp
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 368
+    Top = 360
+  end
+  object cdsProcessoImp: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProcessoImp'
+    Left = 408
+    Top = 360
+    object cds2: TLargeintField
+      FieldName = 'codi_pro'
+      Required = True
+    end
+    object cds3: TWideStringField
+      FieldName = 'nome_pro'
+      Size = 45
+    end
+  end
+  object dsProcessoImp: TDataSource
+    DataSet = cdsProcessoImp
+    Left = 448
+    Top = 360
+  end
+  object zqryFuncoes: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT codi_fun, desc_fun'
+      'FROM funcoes')
+    Params = <>
+    Left = 776
+    Top = 408
+  end
+  object dspFuncoes: TDataSetProvider
+    DataSet = zqryFuncoes
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 816
+    Top = 408
+  end
+  object cdsFuncoes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspFuncoes'
+    Left = 856
+    Top = 408
+    object cdsFuncoescodi_fun: TLargeintField
+      FieldName = 'codi_fun'
+      Required = True
+    end
+    object cdsFuncoesdesc_fun: TWideStringField
+      FieldName = 'desc_fun'
+      Size = 50
+    end
+  end
+  object dsFuncoes: TDataSource
+    DataSet = cdsFuncoes
+    Left = 896
     Top = 408
   end
 end
