@@ -22,7 +22,7 @@ object FormCadFornecedores: TFormCadFornecedores
     Top = 0
     Width = 866
     Height = 460
-    ActivePage = tsCadastro
+    ActivePage = tsDocumentos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

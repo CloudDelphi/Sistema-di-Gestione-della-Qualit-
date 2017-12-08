@@ -190,11 +190,31 @@ type
     btnProximo: TBitBtn;
     btnAnterior: TBitBtn;
     rgOrdem: TRadioGroup;
+    tsDocs: TTabSheet;
+    lbl40: TLabel;
+    sbAbrirDoc: TSpeedButton;
+    sbVisualizarDoc: TSpeedButton;
+    lbl41: TLabel;
+    dbgDoc: TDBGrid;
+    edtDescricaoDoc: TEdit;
+    edtCaminhoDoc: TEdit;
+    lbl18: TLabel;
+    lbl19: TLabel;
+    lbl20: TLabel;
+    lbl21: TLabel;
+    dtDataDoc: TDateEdit;
+    dblRazaoDoc: TDBLookupComboBox;
+    edtCodigoDoc: TEdit;
+    dblFantasiaDoc: TDBLookupComboBox;
+    zqryDoc: TZQuery;
+    dspDoc: TDataSetProvider;
+    cdsDoc: TClientDataSet;
+    dsDoc: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados(CodFornecedor: string = '');
+    procedure AtualizarDadosAcessorios();
     procedure PreencherCampos;
     procedure Botoes(flag: Boolean);
-    procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -231,6 +251,9 @@ type
     procedure dblFornImpCloseUp(Sender: TObject);
     procedure dblFantasiaImpCloseUp(Sender: TObject);
     procedure rgOrdemClick(Sender: TObject);
+    procedure sbAbrirDocClick(Sender: TObject);
+    procedure sbVisualizarDocClick(Sender: TObject);
+    procedure dbgDocCellClick(Column: TColumn);
   private
     { Private declarations }
     cOperacao: Char;
@@ -350,6 +373,25 @@ begin
    AtualizarGrid(dbgIQF);
 end;
 
+procedure TFormCadIQF.AtualizarDadosAcessorios;
+begin
+   edtCodigoDoc.Text      := edtCodigo.Text;
+   dtDataDoc.Text         := dtData.Text;
+   dblRazaoDoc.KeyValue   := dblFornecedor.KeyValue;
+   dblFantasiaDoc.KeyValue:= dblFantasia.KeyValue;
+
+   if edtCodigo.Text <> '' then begin
+      with cdsDoc do begin
+         Active:= False;
+         CommandText:= ' SELECT doc_codigo, doc_cod_iqf, doc_descricao, doc_caminho' +
+                       ' FROM iqf_doc' +
+                       ' WHERE doc_cod_iqf = ' + AllTrim(edtCodigo.Text) +
+                       ' ORDER BY doc_descricao';
+         Active:= True;
+      end;
+   end;
+end;
+
 procedure TFormCadIQF.Botoes(flag: Boolean);
 begin
    btnNovo.Enabled    := Flag;
@@ -369,8 +411,17 @@ procedure TFormCadIQF.btnAlterarClick(Sender: TObject);
 begin
    if (Acesso(cUsuario, 22, 'alteracao') = 1) then begin
       cOperacao:= 'A';
-      HabilitarCampos(True, False);
-      TryFocus(dtData);
+
+      if pctIQF.TabIndex = 0 then begin // Cadastro
+         HabilitarCampos(True, False, Self, 1, 2);
+         TryFocus(dtData);
+      end;
+
+      if pctIQF.TabIndex = 1 then begin // Documentos
+         HabilitarCampos(True, False, Self, -1);
+         TryFocus(edtDescricaoDoc);
+      end;
+
       Botoes(False);
    end;
 end;
@@ -380,7 +431,7 @@ begin
    LimparCampos;
    PreencherCampos;
    Botoes(True);
-   HabilitarCampos(False, False);
+   HabilitarCampos(False, False, Self, 1, 2);
 end;
 
 procedure TFormCadIQF.btnExcluirClick(Sender: TObject);
@@ -415,44 +466,77 @@ procedure TFormCadIQF.btnGravarClick(Sender: TObject);
 begin
    if ValidarDados() then begin
       try
-         with cdsGravar do begin
-            Active:= False;
-            if cOperacao = 'I' then begin
-               CommandText:= ' INSERT INTO iqf_remessa (' +
-                             ' iqf_codigo, iqf_data, iqf_CodFornecedor, iqf_pontual, iqf_conforme, ' +
-                             ' iqf_NF, iqf_responsavel, iqf_obs)' +
-                             ' VALUES(' +
-                             BuscarNovoCodigo('iqf_remessa', 'iqf_codigo') + ',' +
-                             ArrumaDataSQL(dtData.Date) + ',' +
-                             QuotedStr(dblFornecedor.KeyValue) + ',' +
-                             IntToStr(dblPontual.KeyValue) + ',' +
-                             IntToStr(dblConforme.KeyValue) + ',' +
-                             QuotedStr(edtLote.Text) + ',' +
-                             IntToStr(dblResponsavel.KeyValue) + ',' +
-                             QuotedStr(mmoObs.Text) +
-                             ')';
-               Execute;
-            end
-            else begin
-               CommandText:= ' UPDATE iqf_remessa SET' +
-                             ' iqf_data = ' + ArrumaDataSQL(dtData.Date) + ',' +
-                             ' iqf_CodFornecedor = ' + QuotedStr(dblFornecedor.KeyValue) + ',' +
-                             ' iqf_pontual = ' + IntToStr(dblPontual.KeyValue) + ',' +
-                             ' iqf_conforme = ' + IntToStr(dblConforme.KeyValue) + ',' +
-                             ' iqf_NF = ' + QuotedStr(edtLote.Text) + ',' +
-                             ' iqf_responsavel = ' + IntToStr(dblResponsavel.KeyValue) + ',' +
-                             ' iqf_obs = ' + QuotedStr(mmoObs.Text) +
-                             ' WHERE iqf_codigo = ' + edtCodigo.Text;
-               Execute;
+         if pctIQF.TabIndex = 0 then begin // Cadastro
+            with cdsGravar do begin
+               Active:= False;
+               if cOperacao = 'I' then begin
+                  CommandText:= ' INSERT INTO iqf_remessa (' +
+                                ' iqf_codigo, iqf_data, iqf_CodFornecedor, iqf_pontual, iqf_conforme, ' +
+                                ' iqf_NF, iqf_responsavel, iqf_obs)' +
+                                ' VALUES(' +
+                                BuscarNovoCodigo('iqf_remessa', 'iqf_codigo') + ',' +
+                                ArrumaDataSQL(dtData.Date) + ',' +
+                                QuotedStr(dblFornecedor.KeyValue) + ',' +
+                                IntToStr(dblPontual.KeyValue) + ',' +
+                                IntToStr(dblConforme.KeyValue) + ',' +
+                                QuotedStr(edtLote.Text) + ',' +
+                                IntToStr(dblResponsavel.KeyValue) + ',' +
+                                QuotedStr(mmoObs.Text) +
+                                   ')';
+                  Execute;
+               end
+               else begin
+                  CommandText:= ' UPDATE iqf_remessa SET' +
+                                ' iqf_data = ' + ArrumaDataSQL(dtData.Date) + ',' +
+                                ' iqf_CodFornecedor = ' + QuotedStr(dblFornecedor.KeyValue) + ',' +
+                                ' iqf_pontual = ' + IntToStr(dblPontual.KeyValue) + ',' +
+                                ' iqf_conforme = ' + IntToStr(dblConforme.KeyValue) + ',' +
+                                ' iqf_NF = ' + QuotedStr(edtLote.Text) + ',' +
+                                ' iqf_responsavel = ' + IntToStr(dblResponsavel.KeyValue) + ',' +
+                                ' iqf_obs = ' + QuotedStr(mmoObs.Text) +
+                                ' WHERE iqf_codigo = ' + edtCodigo.Text;
+                  Execute;
+               end;
             end;
+
+            Auditoria('IQF', dtData.Text + '-' + dblFornecedor.Text, cOperacao,'');
+            AtualizarDados();
+
+            HabilitarCampos(False, False, Self, 1, 2);
+            Botoes(True);
+            Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
          end;
 
-         Auditoria('IQF', dtData.Text + '-' + dblFornecedor.Text, cOperacao,'');
-         AtualizarDados();
+         if pctIQF.TabIndex = 1 then begin // Documentos
+            with cdsGravar do begin
+               Active:= False;
+               if cOperacao = 'I' then begin
+                  CommandText:= ' INSERT INTO iqf_doc(' +
+                                ' doc_codigo, doc_cod_iqf, doc_descricao, doc_caminho)' +
+                                ' VALUES(' +
+                                BuscarNovoCodigo('iqf_doc', 'doc_codigo') + ',' +
+                                QuotedStr(edtCodigo.Text) + ',' +
+                                QuotedStr(edtDescricaoDoc.Text) + ',' +
+                                QuotedStr(edtCaminhoDoc.Text) +
+                                ')';
+                  Execute;
+               end
+               else begin
+                  CommandText:= ' UPDATE iqf_doc SET' +
+                                ' doc_descricao = ' + QuotedStr(edtDescricaoDoc.Text) + ',' +
+                                ' doc_caminho = ' + QuotedStr(edtCaminhoDoc.Text) +
+                                ' WHERE doc_codigo = ' + cdsDoc.FieldByName('doc_codigo').AsString;
+                  Execute;
+               end;
+            end;
 
-         HabilitarCampos(False, False);
-         Botoes(True);
-         Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
+            Auditoria('IQF - Doc', edtDescricaoDoc.Text + '-' + edtCaminhoDoc.Text, cOperacao,'');
+            AtualizarDadosAcessorios();
+
+            HabilitarCampos(False, False, Self, -1);
+            Botoes(True);
+            Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
+         end;
       except
          on E:Exception do begin
             Application.MessageBox(PChar('Erro ao gravar dados. Verifique' + #13 + E.Message),'Erro',MB_OK + MB_ICONERROR);
@@ -483,40 +567,56 @@ end;
 
 procedure TFormCadIQF.btnNovoClick(Sender: TObject);
 begin
-   if (Acesso(cUsuario, 22, 'cadastro') = 1) then begin
-      cOperacao:= 'I';
-      LimparCampos;
-      HabilitarCampos(True, True);
-      Botoes(False);
-      btnExcluir.Enabled := False;
-      btnAlterar.Enabled := False;
-      edtCodigo.Text:= BuscarNovoCodigo('iqf_remessa', 'iqf_codigo');
-      dtData.Date:= Date();
-      TryFocus(dtData);
+   cOperacao:= 'I';
+   LimparCampos();
+
+   case pctIQF.TabIndex of
+      0: begin // Cadastro
+         if (Acesso(cUsuario, 22, 'cadastro') = 1) then begin
+
+            HabilitarCampos(True, True, Self, 1, 2);
+
+            edtCodigo.Text:= BuscarNovoCodigo('iqf_remessa', 'iqf_codigo');
+            dtData.Date:= Date();
+            TryFocus(dtData);
+         end;
+      end;
+      1: begin // Documentos
+         HabilitarCampos(True, False, Self, -1);
+         TryFocus(edtDescricaoDoc);
+      end;
    end;
+
+   Botoes(False);
+   btnExcluir.Enabled := False;
+   btnAlterar.Enabled := False;
 end;
 
 procedure TFormCadIQF.btnPrimeiroClick(Sender: TObject);
 begin
    cdsIQF.First;
+   AtualizarDadosAcessorios();
    PreencherCampos();
 end;
 
 procedure TFormCadIQF.btnAnteriorClick(Sender: TObject);
 begin
    cdsIQF.Prior;
+   AtualizarDadosAcessorios();
    PreencherCampos();
 end;
 
 procedure TFormCadIQF.btnProximoClick(Sender: TObject);
 begin
    cdsIQF.Next;
+   AtualizarDadosAcessorios();
    PreencherCampos();
 end;
 
 procedure TFormCadIQF.btnUltimoClick(Sender: TObject);
 begin
    cdsIQF.Last;
+   AtualizarDadosAcessorios();
    PreencherCampos();
 end;
 
@@ -586,8 +686,20 @@ begin
       if sCodigo <> EmptyStr then begin
          cdsIQF.Locate('iqf_codigo', sCodigo, []);
       end;
-   end
-   else begin // Pesquisa
+   end;
+
+   if pctIQF.TabIndex = 1 then begin // Documentos
+      if edtCodigo.Text <> '' then begin
+         AtualizarDadosAcessorios();
+         PreencherCampos();
+         if cdsDoc.RecordCount <= 0 then begin
+            btnExcluir.Enabled := False;
+            btnAlterar.Enabled := False;
+         end;
+      end;
+   end;
+
+   if pctIQF.TabIndex = 2 then begin // Pesquisa
       btnNovo.Enabled    := False;
       btnGravar.Enabled  := False;
       btnExcluir.Enabled := False;
@@ -607,6 +719,11 @@ begin
          TryFocus(edtValor);
 //      end;
    end;
+end;
+
+procedure TFormCadIQF.dbgDocCellClick(Column: TColumn);
+begin
+   PreencherCampos();
 end;
 
 procedure TFormCadIQF.dbgIQFCellClick(Column: TColumn);
@@ -690,34 +807,27 @@ begin
    AtualizarDados();
    PreencherCampos;
    Botoes(True);
-   HabilitarCampos(False, False);
+   HabilitarCampos(False, False, Self, 1, 2);
    pnlImprimir.Visible:= False;
-end;
-
-procedure TFormCadIQF.HabilitarCampos(Flag, Codigo: Boolean);
-begin
-   dtData.Enabled        := Flag;
-   dblFornecedor.Enabled := Flag;
-   dblFantasia.Enabled   := Flag;
-   dblPontual.Enabled    := Flag;
-   dblConforme.Enabled   := Flag;
-   edtLote.Enabled       := Flag;
-   dblResponsavel.Enabled:= Flag;
-   mmoObs.Enabled        := Flag;
-
-   pctIQF.Pages[1].TabVisible:= not Flag;
 end;
 
 procedure TFormCadIQF.LimparCampos;
 begin
-   dtData.Clear;
-   dblFornecedor.KeyValue:= -1;
-   dblFantasia.KeyValue:= -1;
-   dblPontual.KeyValue:= -1;
-   dblConforme.KeyValue:= -1;
-   edtLote.Clear;
-   dblResponsavel.KeyValue:= -1;
-   mmoObs.Clear;
+   if pctIQF.TabIndex = 0 then begin
+      dtData.Clear;
+      dblFornecedor.KeyValue:= -1;
+      dblFantasia.KeyValue:= -1;
+      dblPontual.KeyValue:= -1;
+      dblConforme.KeyValue:= -1;
+      edtLote.Clear;
+      dblResponsavel.KeyValue:= -1;
+      mmoObs.Clear;
+   end;
+
+   if pctIQF.TabIndex = 0 then begin
+      edtDescricaoDoc.Clear;
+      edtCaminhoDoc.Clear;
+   end;
 end;
 
 procedure TFormCadIQF.mmoObsKeyPress(Sender: TObject;
@@ -733,28 +843,36 @@ end;
 
 procedure TFormCadIQF.PreencherCampos;
 begin
-   with cdsIQF do begin
-      edtCodigo.Text:= FieldByName('iqf_codigo').AsString;
-      dtData.Date   := FieldByName('iqf_data').AsDateTime;
-      edtLote.Text  := FieldByName('iqf_NF').AsString;
-      mmoObs.Text   := FieldByName('iqf_obs').AsString;
+   if pctIQF.TabIndex = 0 then begin // Cadastro
+      with cdsIQF do begin
+         edtCodigo.Text:= FieldByName('iqf_codigo').AsString;
+         dtData.Date   := FieldByName('iqf_data').AsDateTime;
+         edtLote.Text  := FieldByName('iqf_NF').AsString;
+         mmoObs.Text   := FieldByName('iqf_obs').AsString;
 
-      if FieldByName('iqf_CodFornecedor').AsString <> EmptyStr then begin
-         dblFornecedor.KeyValue:= FieldByName('iqf_CodFornecedor').AsString;
-         dblFantasia.KeyValue  := dblFornecedor.KeyValue;
-         dblFornecedorCloseUp(Self);
+         if FieldByName('iqf_CodFornecedor').AsString <> EmptyStr then begin
+            dblFornecedor.KeyValue:= FieldByName('iqf_CodFornecedor').AsString;
+            dblFantasia.KeyValue  := dblFornecedor.KeyValue;
+            dblFornecedorCloseUp(Self);
+         end;
+
+         if FieldByName('iqf_pontual').AsString <> EmptyStr then begin
+            dblPontual.KeyValue:= FieldByName('iqf_pontual').AsString;
+         end;
+
+         if FieldByName('iqf_conforme').AsString <> EmptyStr then begin
+            dblConforme.KeyValue:= FieldByName('iqf_conforme').AsString;
+         end;
+
+         if FieldByName('iqf_responsavel').AsString <> EmptyStr then begin
+            dblResponsavel.KeyValue:= FieldByName('iqf_responsavel').AsString;
+         end;
       end;
-
-      if FieldByName('iqf_pontual').AsString <> EmptyStr then begin
-         dblPontual.KeyValue:= FieldByName('iqf_pontual').AsString;
-      end;
-
-      if FieldByName('iqf_conforme').AsString <> EmptyStr then begin
-         dblConforme.KeyValue:= FieldByName('iqf_conforme').AsString;
-      end;
-
-      if FieldByName('iqf_responsavel').AsString <> EmptyStr then begin
-         dblResponsavel.KeyValue:= FieldByName('iqf_responsavel').AsString;
+   end;
+   if pctIQF.TabIndex = 1 then begin // Documentos
+      with cdsDoc do begin
+         edtDescricaoDoc.Text:= FieldByName('doc_descricao').AsString;
+         edtCaminhoDoc.Text  := FieldByName('doc_caminho').AsString;
       end;
    end;
 end;
@@ -785,48 +903,77 @@ begin
    chkObs.Enabled:= (rgTipoRel.ItemIndex = 0);
 end;
 
+procedure TFormCadIQF.sbAbrirDocClick(Sender: TObject);
+begin
+   OPD1.Execute;
+   edtCaminhoDoc.Text:= OPD1.FileName;
+end;
+
+procedure TFormCadIQF.sbVisualizarDocClick(Sender: TObject);
+begin
+   AbrirArquivo(edtCaminhoDoc.Text, Self.Name);
+end;
+
 function TFormCadIQF.ValidarDados(): Boolean;
 begin
-   if AllTrim(dtData.Text) = EmptyStr then begin
-      Application.MessageBox('Campo Data é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dtData);
-      Result:= False;
-      Exit;
+   if pctIQF.TabIndex = 0 then begin // Cadastro
+      if AllTrim(dtData.Text) = EmptyStr then begin
+         Application.MessageBox('Campo Data é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dtData);
+         Result:= False;
+         Exit;
+      end;
+
+      if dblFornecedor.KeyValue = -1 then begin
+         Application.MessageBox('Campo Nome do Fornecedor é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dblFornecedor);
+         Result:= False;
+         Exit;
+      end;
+
+      if dblPontual.KeyValue = -1 then begin
+         Application.MessageBox('Campo Pontual é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dblPontual);
+         Result:= False;
+         Exit;
+      end;
+
+      if dblConforme.KeyValue = -1 then begin
+         Application.MessageBox('Campo Conforme obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dblConforme);
+         Result:= False;
+         Exit;
+      end;
+
+      if AllTrim(edtLote.Text) = EmptyStr then begin
+         Application.MessageBox('Campo N.F/Lote é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(edtLote);
+         Result:= False;
+         Exit;
+      end;
+
+      if dblResponsavel.KeyValue = -1 then begin
+         Application.MessageBox('Campo Responsável é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dblResponsavel);
+         Result:= False;
+         Exit;
+      end;
    end;
 
-   if dblFornecedor.KeyValue = -1 then begin
-      Application.MessageBox('Campo Nome do Fornecedor é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblFornecedor);
-      Result:= False;
-      Exit;
-   end;
+   if pctIQF.TabIndex = 1 then begin
+      if AllTrim(edtDescricaoDoc.Text) = EmptyStr then begin
+         Application.MessageBox('Campo Descrição do Documento é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(edtDescricaoDoc);
+         Result:= False;
+         Exit;
+      end;
 
-   if dblPontual.KeyValue = -1 then begin
-      Application.MessageBox('Campo Pontual é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblPontual);
-      Result:= False;
-      Exit;
-   end;
-
-   if dblConforme.KeyValue = -1 then begin
-      Application.MessageBox('Campo Conforme obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblConforme);
-      Result:= False;
-      Exit;
-   end;
-
-   if AllTrim(edtLote.Text) = EmptyStr then begin
-      Application.MessageBox('Campo N.F/Lote é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(edtLote);
-      Result:= False;
-      Exit;
-   end;
-
-   if dblResponsavel.KeyValue = -1 then begin
-      Application.MessageBox('Campo Responsável é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblResponsavel);
-      Result:= False;
-      Exit;
+      if AllTrim(edtCaminhoDoc.Text) = EmptyStr then begin
+         Application.MessageBox('Campo Caminho do Documento é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(edtCaminhoDoc);
+         Result:= False;
+         Exit;
+      end;
    end;
 
    Result:= True;

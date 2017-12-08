@@ -57,7 +57,7 @@ end;
 
 procedure TFormCarta.FormCreate(Sender: TObject);
 begin
-   wbAtualizacao.Navigate(ExtractFilePath(Application.ExeName) + 'carta_2.09.html');
+   wbAtualizacao.Navigate(ExtractFilePath(Application.ExeName) + 'carta_2.10.html');
 end;
 
 procedure TFormCarta.FormShow(Sender: TObject);
