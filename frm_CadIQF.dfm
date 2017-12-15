@@ -1507,7 +1507,7 @@ object FormCadIQF: TFormCadIQF
     Top = 0
     Width = 1022
     Height = 412
-    ActivePage = tsDocs
+    ActivePage = tsPesquisa
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -2387,6 +2387,7 @@ object FormCadIQF: TFormCadIQF
           Caption = 'Nome Fantasia'
         end
         object chkFiltroForn: TCheckBox
+          Tag = 30
           Left = 942
           Top = 21
           Width = 57
@@ -2453,6 +2454,7 @@ object FormCadIQF: TFormCadIQF
         end
       end
       object rgOrdem: TRadioGroup
+        Tag = 30
         Left = 526
         Top = 53
         Width = 476
@@ -2470,8 +2472,8 @@ object FormCadIQF: TFormCadIQF
     end
   end
   object pnlImprimir: TPanel
-    Left = 259
-    Top = 24
+    Left = 739
+    Top = 150
     Width = 409
     Height = 417
     TabOrder = 2

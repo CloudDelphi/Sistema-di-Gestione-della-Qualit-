@@ -718,27 +718,98 @@ begin
 
       cdsAuditoria.Post;
 
+      // ***** Manutenção Preventiva antiga
+      sConformidade:= '';
+      sNaoConformidade:= '';
 
-      // Muda o processo
-      dm.cdsAuxiliar.Next;
-   end;
+      // Verifica se tem manutenção precentiva vencida (Modelo antigo)
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT current_date - cast(M.quan_man as integer) * INTERVAL ' + QuotedStr('1 day') + ' as DataLimite, ' +
+                       ' MAX(fec_data_realizado) as UltimaData, F.man_codigo, I.iden_inf || ' + QuotedStr('-') + ' || I.desc_inf as iden_inf,  M.oque_man, ' +
+                       ' M.quan_man, TC.valo_com as Periodicidade ' +
+                       ' FROM manutencao_fecha F' +
+                       ' INNER JOIN manutencao M ON M.codi_man = F.man_codigo' +
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = M.codi_inf AND I.inf_status = 1' + // Ativos
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 19 AND TC.codi_com = cast(M.quan_man as integer)' +
+                       ' WHERE M.proc_man = ' + QuotedStr(sCodProcesso) +
+                       ' GROUP BY F.man_codigo, M.quan_man, I.desc_inf, I.iden_inf, M.oque_man, TC.valo_com' +
+                       ' HAVING current_date - cast(M.quan_man as integer) * INTERVAL ' + QuotedStr('1 day') + ' > MAX(fec_data_realizado)';
+         Active:= True;
 
-   // ***** Manutenção Preventiva antiga
+         if RecordCount > 0 then begin
+            sNaoConformidade:= 'Verificadas manutenções preventivas vencidas:' + #13;
+         end;
 
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('iden_inf').AsString + #13 +
+                               'Última data realizada: ' + FieldByName('UltimaData').AsString + #13 +
+                               'Prazo limite: ' + FieldByName('DataLimite').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
 
-   // Grava os dados na tabela em memória
+      // Mostra as manutenções dentro do prazo (3 aleatórias)
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT current_date - cast(M.quan_man as integer) * INTERVAL ' + QuotedStr('1 day') + ' as DataLimite, ' +
+                       ' MAX(fec_data_realizado) as UltimaData, F.man_codigo, I.iden_inf || ' + QuotedStr('-') + ' || I.desc_inf as iden_inf,  M.oque_man, ' +
+                       ' M.quan_man, TC.valo_com as Periodicidade ' +
+                       ' FROM manutencao_fecha F' +
+                       ' INNER JOIN manutencao M ON M.codi_man = F.man_codigo' +
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = M.codi_inf AND I.inf_status = 1' + // Ativos
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 19 AND TC.codi_com = cast(M.quan_man as integer)' +
+                       ' WHERE M.proc_man = ' + QuotedStr(sCodProcesso) +
+                       ' GROUP BY F.man_codigo, M.quan_man, I.desc_inf, I.iden_inf, M.oque_man, TC.valo_com' +
+                       ' HAVING current_date - cast(M.quan_man as integer) * INTERVAL ' + QuotedStr('1 day') + ' <= MAX(fec_data_realizado)' +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + FieldByName('iden_inf').AsString + #13 +
+                         'Última data realizada: ' + FieldByName('UltimaData').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      if sConformidade = '' then begin
+         sConformidade:= 'Sem Pendências';
+      end;
+
+      // Grava os dados na tabela em memória
       cdsAuditoria.Append;
 
       cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
       cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
       cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.1.3';
       cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
-      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Infraestrutura';
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Manutenção Preventiva (Antiga)';
       cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
       cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
       cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
       cdsAuditoria.Post;
+
+      // ***** Matriz de Competências
+
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.2';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Matriz de Competências';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
+
+      cdsAuditoria.Post;
+
+      // Muda o processo
+      dm.cdsAuxiliar.Next;
+   end;
 
    // ***** Provedores Externos (Fornecedores)
    sConformidade:= '';

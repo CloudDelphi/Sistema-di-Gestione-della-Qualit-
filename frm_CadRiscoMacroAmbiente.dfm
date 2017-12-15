@@ -22,7 +22,7 @@ object FormCadRiscoMacroAmbiente: TFormCadRiscoMacroAmbiente
     Top = 0
     Width = 630
     Height = 475
-    ActivePage = tsHistorico
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

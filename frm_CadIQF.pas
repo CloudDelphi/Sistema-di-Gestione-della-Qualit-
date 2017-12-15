@@ -214,7 +214,7 @@ type
     procedure AtualizarDados(CodFornecedor: string = '');
     procedure AtualizarDadosAcessorios();
     procedure PreencherCampos;
-    procedure Botoes(flag: Boolean);
+    procedure Botoes(Flag: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -365,6 +365,8 @@ begin
       Active:= True;
    end;
 
+//   sCodigo:= cdsIQF.FieldByName('iqf_codigo').AsString;
+
    if AllTrim(edtCodigo.Text) <> EmptyStr then begin
       cdsIQF.Locate('iqf_codigo', edtCodigo.Text,[])
    end;
@@ -390,9 +392,16 @@ begin
          Active:= True;
       end;
    end;
+
+   if cdsDoc.RecordCount = 0 then begin
+      sbVisualizarDoc.Enabled:= False;
+   end
+   else begin
+      sbVisualizarDoc.Enabled:= True;
+   end;
 end;
 
-procedure TFormCadIQF.Botoes(flag: Boolean);
+procedure TFormCadIQF.Botoes(Flag: Boolean);
 begin
    btnNovo.Enabled    := Flag;
    btnAlterar.Enabled := Flag;
@@ -439,24 +448,54 @@ var
    sCodIQF: string;
    sData  : string;
    sForn  : string;
+   sDoc   : string;
 begin
    if (Acesso(cUsuario, 22, 'exclusao') = 1) then begin
-      if Application.MessageBox('Confirma a exclusão do registro ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
-         sCodIQF:= cdsIQF.FieldByName('iqf_codigo').AsString;
-         sData  := dtData.Text;
-         sForn  := dblFornecedor.Text;
+      if pctIQF.TabIndex = 0 then begin // Cadastro
+         if Application.MessageBox('Confirma a exclusão do registro ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+            sCodIQF:= cdsIQF.FieldByName('iqf_codigo').AsString;
+            sData  := dtData.Text;
+            sForn  := dblFornecedor.Text;
 
-         with cdsGravar do begin
-            Active:= False;
-            CommandText:= ' DELETE FROM iqf_remessa' +
-                          ' WHERE iqf_codigo = ' + sCodIQF;
-            Execute;
+            // Apaga documentos do registro de IQF
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' DELETE FROM iqf_doc' +
+                             ' WHERE iqf_codigo = ' + sCodIQF;
+               Execute;
+            end;
+
+            // Apaga IQF
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' DELETE FROM iqf_remessa' +
+                             ' WHERE iqf_codigo = ' + sCodIQF;
+               Execute;
+            end;
+
+            Auditoria('IQF', sData + '-' + sForn, 'E', '');
+            LimparCampos();
+            AtualizarDados();
+            PreencherCampos();
          end;
+      end;
+      if pctIQF.TabIndex = 1 then begin // Documentos
+         if Application.MessageBox('Confirma a exclusão do documento ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+            sDoc:= 'Cod. IQF: ' + cdsIQF.FieldByName('iqf_codigo').AsString + '-' + cdsDoc.FieldByName('doc_descricao').AsString;
 
-         Auditoria('IQF', sData + '-' + sForn, 'E', '');
-         LimparCampos();
-         AtualizarDados();
-         PreencherCampos();
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' DELETE FROM iqf_doc' +
+                             ' WHERE doc_codigo = ' + cdsDoc.FieldByName('doc_codigo').AsString;
+               Execute;
+            end;
+
+            Auditoria('IQF - DOCUMENTOS', sDoc, 'E', '');
+            LimparCampos();
+            AtualizarDadosAcessorios();
+            PreencherCampos();
+
+         end;
       end;
       Botoes(True);
    end;
@@ -530,7 +569,7 @@ begin
                end;
             end;
 
-            Auditoria('IQF - Doc', edtDescricaoDoc.Text + '-' + edtCaminhoDoc.Text, cOperacao,'');
+            Auditoria('IQF - DOCUMENTOS', 'Cod. IQF: ' + edtCodigo.Text + edtDescricaoDoc.Text + '-' + edtCaminhoDoc.Text, cOperacao,'');
             AtualizarDadosAcessorios();
 
             HabilitarCampos(False, False, Self, -1);
@@ -595,6 +634,7 @@ end;
 procedure TFormCadIQF.btnPrimeiroClick(Sender: TObject);
 begin
    cdsIQF.First;
+   PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
 end;
@@ -602,6 +642,7 @@ end;
 procedure TFormCadIQF.btnAnteriorClick(Sender: TObject);
 begin
    cdsIQF.Prior;
+   PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
 end;
@@ -609,6 +650,7 @@ end;
 procedure TFormCadIQF.btnProximoClick(Sender: TObject);
 begin
    cdsIQF.Next;
+   PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
 end;
@@ -616,6 +658,7 @@ end;
 procedure TFormCadIQF.btnUltimoClick(Sender: TObject);
 begin
    cdsIQF.Last;
+   PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
 end;
@@ -683,6 +726,7 @@ begin
       cdsIQF.Filtered:= False;
       AjustaBarraGrid(dbgIQF);
       AtualizarDados();
+      PreencherCampos();
       if sCodigo <> EmptyStr then begin
          cdsIQF.Locate('iqf_codigo', sCodigo, []);
       end;
@@ -707,17 +751,15 @@ begin
       btnImprimir.Enabled:= False;
       btnAlterar.Enabled := False;
 
-//      if pctIQF.TabIndex = 1 then begin
-         edtValor.Enabled:= True;
-         edtValor.Clear;
-         chkFiltroForn.Checked    := True;
-         dblFiltroForn.Enabled    := False;
-         dblFiltroFantasia.Enabled:= False;
-         rbRazao.Enabled          := False;
-         rbFantasia.Enabled       := False;
-         rbFantasia.Checked       := True;
-         TryFocus(edtValor);
-//      end;
+      edtValor.Enabled:= True;
+      edtValor.Clear;
+      chkFiltroForn.Checked    := True;
+      dblFiltroForn.Enabled    := False;
+      dblFiltroFantasia.Enabled:= False;
+      rbRazao.Enabled          := False;
+      rbFantasia.Enabled       := False;
+      rbFantasia.Checked       := True;
+      TryFocus(edtValor);
    end;
 end;
 
@@ -790,10 +832,6 @@ end;
 
 procedure TFormCadIQF.edtValorChange(Sender: TObject);
 begin
-//   case cbCampo.ItemIndex of
-//      0: cdsIQF.Locate('iqf_NF', edtValor.Text, [loPartialKey]);
-//   end;
-
    case cbCampo.ItemIndex of
       0: cdsIQF.Filter:= 'iqf_NF LIKE ' + QuotedStr('%' + edtValor.Text + '%');
    end;
@@ -805,7 +843,7 @@ procedure TFormCadIQF.FormShow(Sender: TObject);
 begin
    pctIQF.TabIndex:= 0;
    AtualizarDados();
-   PreencherCampos;
+   PreencherCampos();
    Botoes(True);
    HabilitarCampos(False, False, Self, 1, 2);
    pnlImprimir.Visible:= False;
@@ -824,7 +862,7 @@ begin
       mmoObs.Clear;
    end;
 
-   if pctIQF.TabIndex = 0 then begin
+   if pctIQF.TabIndex = 1 then begin
       edtDescricaoDoc.Clear;
       edtCaminhoDoc.Clear;
    end;
@@ -843,32 +881,31 @@ end;
 
 procedure TFormCadIQF.PreencherCampos;
 begin
-   if pctIQF.TabIndex = 0 then begin // Cadastro
-      with cdsIQF do begin
-         edtCodigo.Text:= FieldByName('iqf_codigo').AsString;
-         dtData.Date   := FieldByName('iqf_data').AsDateTime;
-         edtLote.Text  := FieldByName('iqf_NF').AsString;
-         mmoObs.Text   := FieldByName('iqf_obs').AsString;
+   with cdsIQF do begin
+      edtCodigo.Text:= FieldByName('iqf_codigo').AsString;
+      dtData.Date   := FieldByName('iqf_data').AsDateTime;
+      edtLote.Text  := FieldByName('iqf_NF').AsString;
+      mmoObs.Text   := FieldByName('iqf_obs').AsString;
 
-         if FieldByName('iqf_CodFornecedor').AsString <> EmptyStr then begin
-            dblFornecedor.KeyValue:= FieldByName('iqf_CodFornecedor').AsString;
-            dblFantasia.KeyValue  := dblFornecedor.KeyValue;
-            dblFornecedorCloseUp(Self);
-         end;
+      if FieldByName('iqf_CodFornecedor').AsString <> EmptyStr then begin
+         dblFornecedor.KeyValue:= FieldByName('iqf_CodFornecedor').AsString;
+         dblFantasia.KeyValue  := dblFornecedor.KeyValue;
+         dblFornecedorCloseUp(Self);
+      end;
 
-         if FieldByName('iqf_pontual').AsString <> EmptyStr then begin
-            dblPontual.KeyValue:= FieldByName('iqf_pontual').AsString;
-         end;
+      if FieldByName('iqf_pontual').AsString <> EmptyStr then begin
+         dblPontual.KeyValue:= FieldByName('iqf_pontual').AsString;
+      end;
 
-         if FieldByName('iqf_conforme').AsString <> EmptyStr then begin
-            dblConforme.KeyValue:= FieldByName('iqf_conforme').AsString;
-         end;
+      if FieldByName('iqf_conforme').AsString <> EmptyStr then begin
+         dblConforme.KeyValue:= FieldByName('iqf_conforme').AsString;
+      end;
 
-         if FieldByName('iqf_responsavel').AsString <> EmptyStr then begin
-            dblResponsavel.KeyValue:= FieldByName('iqf_responsavel').AsString;
-         end;
+      if FieldByName('iqf_responsavel').AsString <> EmptyStr then begin
+         dblResponsavel.KeyValue:= FieldByName('iqf_responsavel').AsString;
       end;
    end;
+
    if pctIQF.TabIndex = 1 then begin // Documentos
       with cdsDoc do begin
          edtDescricaoDoc.Text:= FieldByName('doc_descricao').AsString;
