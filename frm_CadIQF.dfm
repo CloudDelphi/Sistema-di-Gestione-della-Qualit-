@@ -1507,7 +1507,7 @@ object FormCadIQF: TFormCadIQF
     Top = 0
     Width = 1022
     Height = 412
-    ActivePage = tsPesquisa
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1704,6 +1704,7 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 5
       end
       object edtAvaliacao: TCurrencyEdit
+        Tag = 20
         Left = 780
         Top = 27
         Width = 59
@@ -1756,6 +1757,7 @@ object FormCadIQF: TFormCadIQF
         OnKeyPress = mmoObsKeyPress
       end
       object edtCodigo: TEdit
+        Tag = 30
         Left = 11
         Top = 27
         Width = 68
@@ -1785,6 +1787,447 @@ object FormCadIQF: TFormCadIQF
         ListSource = dsFantasia
         ParentFont = False
         TabOrder = 9
+        OnCloseUp = dblFantasiaCloseUp
+      end
+    end
+    object tsDocs: TTabSheet
+      Caption = 'Documentos'
+      ImageIndex = 2
+      object lbl40: TLabel
+        Left = 11
+        Top = 57
+        Width = 118
+        Height = 13
+        Caption = 'Descri'#231#227'o do Documento'
+      end
+      object sbAbrirDoc: TSpeedButton
+        Left = 938
+        Top = 109
+        Width = 32
+        Height = 31
+        Hint = 'Clique para escolher o arquivo do documento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Glyph.Data = {
+          B60D0000424DB60D000000000000360000002800000030000000180000000100
+          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFA4C1F7256AEB2369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB3F7CEEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF42369EB
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBABC6F7FFFFFFFFFFFFFF
+          FFFFFFFFFFC5C3C3726F6E716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8381
+          80F9F9F9FFFFFFFFFFFFCADBFA2369EB2369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB588DF0FFFFFFFFFFFFFFFFFFFFFFFFB2B0AF716E6D716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6DC9C8C7FFFFFFFFFFFFFBFCFF3777ED
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBDFE9FCFFFFFFFF
+          FFFFFFFFFFDDDCDC716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D939190FFFFFFFFFFFFC5D8FA7CA6F32369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB8BB0F4FFFFFFFFFFFFFFFFFFFCFCFC7E7B7A716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6DEAEAEAFFFFFF7FA8F3C3D6FA
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3978EDFCFDFFFF
+          FFFFFFFFFFDAD9D9AAA9A8716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6DB4B3B2FFFFFF3978EDF9FBFE3273EC2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB2369EBC0D4F9FFFFFFFFFFFFADABAAD9D8D7716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6D7F7D7CFDFDFD2369EBCFDEFB
+          74A0F22369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB6B9AF2FF
+          FFFFFFFFFF7F7C7BFBFBFB7A7877716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6D716E6DD6D5D52369EB85ACF4BDD2F92369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB2369EB286DEBFFFFFFFFFFFF716E6DE0DFDFA5A3A3716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D9F9D9D2369EB3B79ED
+          F4F7FE76A1F3598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598E
+          F0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF08DB1F5FF
+          FFFFFFFFFF716E6DB0AFAED4D3D3716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6D716E6D7471702369EB2369EB6093F1CCDCFAE3ECFCE3ECFCF7FAFEFF
+          FFFFE6EEFDE3ECFCE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          F0F5FEE3ECFCF0F5FEFFFFFFFFFFFFFFFFFFFFFFFF716E6D817E7DF8F8F8A6A5
+          A494929194929194929194929194929194929194929194929194929194929194
+          9291949291949291949291949291949291949291949291B5B4B32369EB2369EB
+          2369EB2369EB2369EB81A9F4F1F6FE75A1F22369EB3C7AEDCADBFAFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC2C6FEC3F7CEEF0F5FEFFFFFFFF
+          FFFFFFFFFF716E6D716E6D999696DEDDDDEDEDEDEDEDEDFAFAFAFFFFFFEFEFEE
+          EDEDEDEFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F5EDED
+          EDF6F5F5FFFFFFFFFFFF2369EB2369EB2369EB2369EB417EEEFDFEFF5B8FF023
+          69EB6B9AF2F0F5FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFAFC8F82369EB729FF2FFFFFFFFFFFFFFFFFF716E6D716E6D716E6D716E
+          6D716E6DAEACABF6F6F6A6A4A3716E6D817E7EDDDCDCFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFE9E8E877747383807FF6F5F5FFFFFF246AEB2369EB
+          2369EB2369EB6596F1FFFFFF246AEB5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAFE3F7CEE3475EDFFFFFFFF
+          FFFFFFFFFF716E6D716E6D716E6D716E6D848281FEFEFE959392716E6DA09E9D
+          F6F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCBCA
+          CA716E6DA4A2A2FFFFFFA6C2F775A1F275A1F275A1F286ADF4FFFFFF729FF223
+          69EBACC7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          D7E4FB4681EE2369EB83AAF4FFFFFFFFFFFFFFFFFF726F6E716E6D716E6D716E
+          6D9C9A99FFFFFF726F6E8F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA8381807C7978FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFF2F6FE407DEE2C6FECDAE6FCFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFEFEFFA1BFF6296DEC296DECA2BFF7FEFEFFFFFFFFFF
+          FFFFFFFFFFC6C4C4A6A4A3A6A4A3A6A4A3B1AFAFFFFFFFA4A2A1716E6DCAC8C8
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E58885
+          84716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
+          E1FB276CEB4782EEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFEEF3FD6495F12369EB
+          4681EED7E4FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFF7F6F6848180777473E7E7E6FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFEFEFEC2C1C1757271757271C3C2C1FEFEFEFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9EBDF62369EB77A2F3FFFFFFFFFF
+          FFFFFFFFC4D7FA3978ED2369EB7CA6F3F7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2747170
+          888685F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFF4F4F49B9998716E6D888584E5E5
+          E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFEFEFF6898F12369EBB0C9F8FBFCFF89AEF4246AEB3273ECB9CFF9FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFC1BFBF716E6DA7A5A5FFFFFFFFFFFFFFFFFFD9
+          D8D87F7C7B716E6DAAA9A8FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F5FE3F7CEE2C6FEC4C85
+          EF2369EB598EF0E7EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE
+          9E9B9B716E6DCCCBCAFCFCFCB3B1B1726F6E7A7877D2D1D1FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFD4E2FB3E7BED2C6FEC97B8F6FCFDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F583807F7774738C8988716E6D94
+          9291EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFE3E3E282807F777473BCBABAFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 2
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = sbAbrirDocClick
+      end
+      object sbVisualizarDoc: TSpeedButton
+        Left = 973
+        Top = 109
+        Width = 32
+        Height = 31
+        Hint = 'Clique para visualizar o arquivo'
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Glyph.Data = {
+          B60D0000424DB60D000000000000360000002800000030000000180000000100
+          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF73A0F2286DEB3E7BEDC8
+          D9FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCA5A3
+          A274717082807FDBDBDAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FAFBFF6596F12369EB2369EB2369EB3E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D82807FFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB28
+          6DEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E
+          6D716E6D716E6D747170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F1
+          2369EB2369EB2369EB2369EB2369EB73A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFCFCFC9C9A99716E6D716E6D716E6D716E6D716E6DA5A3A2FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB2369EB6596F1FA
+          FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D716E
+          6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB
+          2369EB2369EB2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C
+          9A99716E6D716E6D716E6D716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFDFEFFB9CFF9719EF23978ED2369EB2369EB3978ED719EF2B9CF
+          F9FDFEFFE6EEFD4C85EF2369EB2369EB2369EB2369EB6596F1FAFBFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFED2D1D1A3A1A17F7C7B716E6D716E6D
+          7F7C7BA3A1A1D2D1D1FEFEFEEFEFEE8C8988716E6D716E6D716E6D716E6D9C9A
+          99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB4B84EF2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB4B84EFD3E1FBF6F9FE5F92F02369EB
+          2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E28B88
+          87716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8B8887E3E2E2F9
+          F9F9979595716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          BCD1F92A6EEC2369EB2369EB4D86EF94B6F5B4CCF8B4CCF894B6F54D86EF2369
+          EB2369EB2A6EECBCD1F9F6F9FE4C85EF6596F1FAFBFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFD4D3D2757372716E6D716E6D8C8A89BAB8B8CFCECDCFCECD
+          BAB8B88C8A89716E6D716E6D757372D4D3D2F9F9F98C89889C9A99FCFCFCFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB2A6EEC2369EB3374ECB9CFF9FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF93374EC2369EB2A6EECD3E1FBE6EEFD
+          FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2757372716E6D7B78
+          77D2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D17B7877716E6D75
+          7372E3E2E2EFEFEEFCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF
+          2369EB3374ECDEE9FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFDEE9FC3374EC2369EB4B84EFFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFEFEFE8B8887716E6D7B7877EAE9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFEAE9E97B7877716E6D8B8887FEFEFEFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D171
+          6E6D716E6DD2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF719EF22369EB
+          4D86EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFF4D86EF2369EB719EF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFA3A1A1716E6D8C8A89FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C8A89716E6DA3A1A1FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF3978ED2369EB94B6F5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF94B6F52369EB3978ED
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7C7B716E6DBAB8B8FFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBA
+          B8B8716E6D7F7C7BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2369EB2369EB
+          B4CCF8FBFCFFF1F6FEFBFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB4CCF82369EB2369EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF716E6D716E6DCFCECDFCFCFCF6F6F6FCFCFCFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCECD716E6D716E6DFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF2369EB2369EBB4CCF8CCDCFA2369EBB2CBF8FFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4CCF82369EB2369EB
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF716E6D716E6DCFCECDDEDDDD716E
+          6DCDCCCCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCF
+          CECD716E6D716E6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3978ED2369EB
+          94B6F5F0F5FE266BEB729FF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFF94B6F52369EB3978EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFF7F7C7B716E6DBAB8B8F6F5F573706FA4A2A2FFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBAB8B8716E6D7F7C7BFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFF719EF22369EB4D86EFFFFFFF729FF2256AEBB8CFF9FF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D86EF2369EB719EF2
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA3A1A1716E6D8C8A89FFFFFFA4A2
+          A2726F6ED1D0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C
+          8A89716E6DA3A1A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB
+          2369EBB9CFF9EFF4FE437FEE256AEB729FF2B2CBF8FBFCFFFFFFFFFFFFFFFFFF
+          FFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFD2D1D1716E6D716E6DD2D1D1F4F4F4868382726F6EA4A2A2CDCCCCFCFCFC
+          FFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF2369EB3374ECDEE9FCEFF4FE729FF226
+          6BEB2369EBF1F6FEFFFFFFFFFFFFFFFFFFDEE9FC3374EC2369EB4B84EFFDFEFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE8B8887716E6D7B7877EAE9
+          E9F4F4F4A4A2A273706F716E6DF6F6F6FFFFFFFFFFFFFFFFFFEAE9E97B787771
+          6E6D8B8887FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB
+          2A6EEC2369EB3374ECB9CFF9FFFFFFF0F5FECDDDFAFBFCFFFFFFFFFFFFFFB9CF
+          F93374EC2369EB2A6EECD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFE3E2E2757372716E6D7B7877D2D1D1FFFFFFF6F5F5DFDEDEFCFCFC
+          FFFFFFFFFFFFD2D1D17B7877716E6D757372E3E2E2FFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBCD1F92A6EEC2369EB2369EB4D86EF94
+          B6F5B4CCF8B4CCF894B6F54D86EF2369EB2369EB2A6EECBCD1F9FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4D3D2757372716E
+          6D716E6D8C8A89BAB8B8CFCECDCFCECDBAB8B88C8A89716E6D716E6D757372D4
+          D3D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFD3E1FB4B84EF2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB4B84EFD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFE3E2E28B8887716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D8B8887E3E2E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFFB9CFF9719EF239
+          78ED2369EB2369EB3978ED719EF2B9CFF9FDFEFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFE
+          FED2D1D1A3A1A17F7C7B716E6D716E6D7F7C7BA3A1A1D2D1D1FEFEFEFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 2
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = sbVisualizarDocClick
+      end
+      object lbl41: TLabel
+        Left = 11
+        Top = 99
+        Width = 113
+        Height = 13
+        Caption = 'Caminho do Documento'
+      end
+      object lbl18: TLabel
+        Left = 84
+        Top = 12
+        Width = 23
+        Height = 13
+        Caption = 'Data'
+      end
+      object lbl19: TLabel
+        Left = 195
+        Top = 12
+        Width = 60
+        Height = 13
+        Caption = 'Raz'#227'o Social'
+      end
+      object lbl20: TLabel
+        Left = 11
+        Top = 12
+        Width = 33
+        Height = 13
+        Caption = 'C'#243'digo'
+      end
+      object lbl21: TLabel
+        Left = 515
+        Top = 12
+        Width = 71
+        Height = 13
+        Caption = 'Nome Fantasia'
+      end
+      object dbgDoc: TDBGrid
+        Left = 11
+        Top = 146
+        Width = 994
+        Height = 236
+        Hint = 'Selecione o registro para excluir ou alterar'
+        TabStop = False
+        DataSource = dsDoc
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnCellClick = dbgDocCellClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'doc_descricao'
+            Title.Caption = 'Descri'#231#227'o do Documento'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 900
+            Visible = True
+          end>
+      end
+      object edtDescricaoDoc: TEdit
+        Left = 11
+        Top = 72
+        Width = 994
+        Height = 26
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object edtCaminhoDoc: TEdit
+        Left = 11
+        Top = 114
+        Width = 914
+        Height = 26
+        Hint = 'Digite o local do documento ou o link'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+      end
+      object dtDataDoc: TDateEdit
+        Tag = 30
+        Left = 84
+        Top = 27
+        Width = 105
+        Height = 26
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        NumGlyphs = 2
+        ParentFont = False
+        TabOrder = 3
+      end
+      object dblRazaoDoc: TDBLookupComboBox
+        Tag = 30
+        Left = 195
+        Top = 27
+        Width = 318
+        Height = 26
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'forn_codigo'
+        ListField = 'forn_nome'
+        ListSource = dsForn
+        ParentFont = False
+        TabOrder = 4
+        OnCloseUp = dblFornecedorCloseUp
+      end
+      object edtCodigoDoc: TEdit
+        Tag = 30
+        Left = 11
+        Top = 27
+        Width = 68
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+      end
+      object dblFantasiaDoc: TDBLookupComboBox
+        Tag = 30
+        Left = 515
+        Top = 27
+        Width = 259
+        Height = 26
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'forn_codigo'
+        ListField = 'forn_fantasia'
+        ListSource = dsFantasia
+        ParentFont = False
+        TabOrder = 6
         OnCloseUp = dblFantasiaCloseUp
       end
     end
@@ -1953,6 +2396,7 @@ object FormCadIQF: TFormCadIQF
           Caption = 'Nome Fantasia'
         end
         object chkFiltroForn: TCheckBox
+          Tag = 30
           Left = 942
           Top = 21
           Width = 57
@@ -2019,6 +2463,7 @@ object FormCadIQF: TFormCadIQF
         end
       end
       object rgOrdem: TRadioGroup
+        Tag = 30
         Left = 526
         Top = 53
         Width = 476
@@ -2036,8 +2481,8 @@ object FormCadIQF: TFormCadIQF
     end
   end
   object pnlImprimir: TPanel
-    Left = 275
-    Top = 158
+    Left = 562
+    Top = 170
     Width = 409
     Height = 417
     TabOrder = 2
@@ -2469,6 +2914,7 @@ object FormCadIQF: TFormCadIQF
       TabOrder = 0
     end
     object rgOrdemImpressao: TRadioGroup
+      Tag = 30
       Left = 12
       Top = 283
       Width = 389
@@ -2482,6 +2928,7 @@ object FormCadIQF: TFormCadIQF
       TabOrder = 1
     end
     object rgTipoRel: TRadioGroup
+      Tag = 30
       Left = 12
       Top = 36
       Width = 389
@@ -2533,6 +2980,7 @@ object FormCadIQF: TFormCadIQF
         Transparent = True
       end
       object dtDataFinal: TDateEdit
+        Tag = 30
         Left = 119
         Top = 19
         Width = 105
@@ -2547,6 +2995,7 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 0
       end
       object dtDataInicial: TDateEdit
+        Tag = 30
         Left = 8
         Top = 19
         Width = 105
@@ -2568,6 +3017,7 @@ object FormCadIQF: TFormCadIQF
       Height = 51
       TabOrder = 5
       object chkTipoProd: TCheckBox
+        Tag = 30
         Left = 16
         Top = 12
         Width = 97
@@ -2584,6 +3034,7 @@ object FormCadIQF: TFormCadIQF
       Height = 34
       TabOrder = 6
       object chkObs: TCheckBox
+        Tag = 30
         Left = 12
         Top = 4
         Width = 124
@@ -2614,6 +3065,7 @@ object FormCadIQF: TFormCadIQF
         Caption = 'Nome Fantasia'
       end
       object chkTodosForn: TCheckBox
+        Tag = 30
         Left = 331
         Top = 60
         Width = 55
@@ -2623,6 +3075,7 @@ object FormCadIQF: TFormCadIQF
         OnClick = chkTodosFornClick
       end
       object dblFornImp: TDBLookupComboBox
+        Tag = 30
         Left = 11
         Top = 13
         Width = 318
@@ -2640,6 +3093,7 @@ object FormCadIQF: TFormCadIQF
         OnCloseUp = dblFornImpCloseUp
       end
       object dblFantasiaImp: TDBLookupComboBox
+        Tag = 30
         Left = 11
         Top = 55
         Width = 318
@@ -2780,7 +3234,7 @@ object FormCadIQF: TFormCadIQF
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42275.613644224500000000
+    ReportOptions.LastChange = 43118.455824814820000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -2850,7 +3304,7 @@ object FormCadIQF: TFormCadIQF
         object Memo11: TfrxMemoView
           Left = 5.000000000000000000
           Top = 71.692950000000000000
-          Width = 699.213050000000000000
+          Width = 540.472790000000000000
           Height = 18.897650000000000000
           ShowHint = False
           AutoWidth = True
@@ -2867,12 +3321,13 @@ object FormCadIQF: TFormCadIQF
         end
       end
       object Detalhe: TfrxMasterData
-        Height = 151.181200000000000000
-        Top = 306.141930000000000000
+        Height = 139.842610000000000000
+        Top = 264.567100000000000000
         Width = 718.110700000000000000
         DataSet = frxDBImpRelacao
         DataSetName = 'frxDBImpRelacao'
         RowCount = 0
+        Stretched = True
         object frxControleDESCRICAO: TfrxMemoView
           Width = 120.566929130000000000
           Height = 18.897650000000000000
@@ -3005,11 +3460,12 @@ object FormCadIQF: TFormCadIQF
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo30: TfrxMemoView
+        object Memo29: TfrxMemoView
           Top = 18.897650000000000000
-          Width = 716.976377952756000000
-          Height = 132.283550000000000000
+          Width = 716.976377950000000000
+          Height = 120.944960000000000000
           ShowHint = False
+          StretchMode = smMaxHeight
           DataField = 'iqf_obs'
           DataSet = frxDBImpRelacao
           DataSetName = 'frxDBImpRelacao'
@@ -3029,7 +3485,7 @@ object FormCadIQF: TFormCadIQF
       end
       object PageFooter1: TfrxPageFooter
         Height = 56.692950000000000000
-        Top = 725.669760000000000000
+        Top = 672.756340000000000000
         Width = 718.110700000000000000
         object Picture1: TfrxPictureView
           Left = 655.197280000000000000
@@ -3690,7 +4146,7 @@ object FormCadIQF: TFormCadIQF
       end
       object GroupHeader1: TfrxGroupHeader
         Height = 37.881880000000000000
-        Top = 245.669450000000000000
+        Top = 204.094620000000000000
         Width = 718.110700000000000000
         Condition = 'frxDBImpRelacao."forn_nome"'
         object frxControleDATA: TfrxMemoView
@@ -3732,9 +4188,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo5: TfrxMemoView
           Left = 120.566929130000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 120.566948660000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -3751,9 +4207,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo10: TfrxMemoView
           Left = 241.133858270000000000
-          Top = 18.897650000000030000
-          Width = 60.094468660000000000
-          Height = 19.275590551181100000
+          Top = 18.897650000000000000
+          Width = 60.094468660000100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -3770,9 +4226,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo12: TfrxMemoView
           Left = 301.322834650000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 60.094468660000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -3789,9 +4245,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo21: TfrxMemoView
           Left = 360.779840000000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 257.763794170000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -3851,9 +4307,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo25: TfrxMemoView
           Left = 617.842920000000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 99.023534170000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -3869,244 +4325,11 @@ object FormCadIQF: TFormCadIQF
           VAlign = vaBottom
         end
       end
-      object ReportSummary1: TfrxReportSummary
-        Height = 139.842610000000000000
-        Top = 563.149970000000100000
-        Width = 718.110700000000000000
-        object Memo1: TfrxMemoView
-          Top = 3.779530000000136000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas pontuais:')
-          ParentFont = False
-        end
-        object Memo2: TfrxMemoView
-          Top = 22.677180000000250000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas n'#227'o pontuais:')
-          ParentFont = False
-        end
-        object Memo3: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 3.779530000000136000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotSimP]')
-          ParentFont = False
-        end
-        object Memo7: TfrxMemoView
-          Left = 387.307360000000000000
-          Top = 3.779530000000136000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas conformes:')
-          ParentFont = False
-        end
-        object Memo8: TfrxMemoView
-          Left = 387.307360000000000000
-          Top = 22.677180000000250000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas n'#227'o conformes:')
-          ParentFont = False
-        end
-        object Memo16: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 22.677180000000250000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotNaoP]')
-          ParentFont = False
-        end
-        object Memo17: TfrxMemoView
-          Left = 568.724800000000000000
-          Top = 3.779530000000136000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotSimC]')
-          ParentFont = False
-        end
-        object Memo18: TfrxMemoView
-          Left = 568.724800000000000000
-          Top = 22.677180000000250000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotNaoC]')
-          ParentFont = False
-        end
-        object Memo19: TfrxMemoView
-          Top = 51.692950000000220000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Total de remessas:')
-          ParentFont = False
-        end
-        object Memo20: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 51.692950000000220000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[Total]')
-          ParentFont = False
-        end
-        object Line3: TfrxLineView
-          Top = 74.929190000000180000
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line4: TfrxLineView
-          Top = 49.133890000000180000
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line5: TfrxLineView
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line6: TfrxLineView
-          Left = 361.322834650000000000
-          Height = 49.133890000000000000
-          ShowHint = False
-          Diagonal = True
-        end
-      end
-      object GroupHeader2: TfrxGroupHeader
-        Height = 18.897650000000000000
-        Top = 204.094620000000000000
-        Width = 718.110700000000000000
-        Condition = 'frxDBImpRelacao."tipo_nomeTipo"'
-        StartNewPage = True
-        object Memo27: TfrxMemoView
-          Width = 716.976168030000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
-          DataSet = frxDBIQF
-          DataSetName = 'frxDBIQF'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2f'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'TIPO DE PRODUTO:  [frxDBImpRelacao."tipo_nomeTipo"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-      end
       object GroupFooter1: TfrxGroupFooter
         Height = 22.677180000000000000
-        Top = 480.000310000000000000
+        Top = 427.086890000000000000
         Width = 718.110700000000000000
-        object Memo28: TfrxMemoView
+        object Memo27: TfrxMemoView
           Left = 617.952755910000000000
           Width = 99.023622050000000000
           Height = 18.897650000000000000
@@ -4129,7 +4352,7 @@ object FormCadIQF: TFormCadIQF
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo29: TfrxMemoView
+        object Memo28: TfrxMemoView
           Left = 561.370440000000000000
           Width = 52.913420000000000000
           Height = 18.897650000000000000
@@ -4145,6 +4368,211 @@ object FormCadIQF: TFormCadIQF
           Memo.UTF8W = (
             'M'#233'dia:')
           ParentFont = False
+        end
+      end
+      object ReportSummary1: TfrxReportSummary
+        Height = 139.842610000000000000
+        Top = 510.236550000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Top = 3.779530000000079000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas pontuais:')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Top = 22.677180000000190000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas n'#227'o pontuais:')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 3.779530000000079000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotSimP]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 387.307360000000000000
+          Top = 3.779530000000079000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas conformes:')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 387.307360000000000000
+          Top = 22.677180000000190000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas n'#227'o conformes:')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 22.677180000000190000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotNaoP]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 568.724800000000000000
+          Top = 3.779530000000079000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotSimC]')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 568.724800000000000000
+          Top = 22.677180000000190000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotNaoC]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Top = 51.692950000000170000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Total de remessas:')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 51.692950000000170000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Total]')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Top = 74.929190000000120000
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line4: TfrxLineView
+          Top = 49.133890000000120000
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line5: TfrxLineView
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line6: TfrxLineView
+          Left = 361.322834650000000000
+          Height = 49.133890000000000000
+          ShowHint = False
+          Diagonal = True
         end
       end
     end
@@ -4679,5 +5107,30 @@ object FormCadIQF: TFormCadIQF
     DataSet = cdsFantasiaImp
     Left = 888
     Top = 280
+  end
+  object zqryDoc: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 816
+    Top = 48
+  end
+  object dspDoc: TDataSetProvider
+    DataSet = zqryDoc
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 856
+    Top = 48
+  end
+  object cdsDoc: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspDoc'
+    Left = 896
+    Top = 48
+  end
+  object dsDoc: TDataSource
+    DataSet = cdsDoc
+    Left = 936
+    Top = 48
   end
 end

@@ -2818,7 +2818,8 @@ begin
                        ' FROM colab_treinamentos CT' +
                        ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col AND C.col_status = 1' +
                        ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
-                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
+                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtre_tre notnull)' +
+//                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
                        ' ORDER BY C.nome_col, T.desc_tre';
          Active:= True;
 

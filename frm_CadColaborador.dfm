@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsHabilidades
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -62,10 +62,6 @@ object FormCadColaboradores: TFormCadColaboradores
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl4: TLabel
         Left = 519
         Top = 12
@@ -612,10 +608,6 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsDadosPessoais: TTabSheet
       Caption = 'Dados Pessoais'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl44: TLabel
         Left = 7
         Top = 12
@@ -949,10 +941,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Curr'#237'culo'
       ImageIndex = 2
       OnShow = tsCurriculoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl1: TLabel
         Left = 7
         Top = 12
@@ -1173,10 +1161,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Educa'#231#227'o'
       ImageIndex = 4
       OnShow = tsCurriculoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl20: TLabel
         Left = 7
         Top = 12
@@ -1707,10 +1691,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Documentos Diversos'
       ImageIndex = 6
       OnShow = tsDocShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl38: TLabel
         Left = 7
         Top = 12
@@ -3829,10 +3809,6 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsFuncao: TTabSheet
       Caption = 'Aut./Resp. da Fun'#231#227'o'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl59: TLabel
         Left = 7
         Top = 12
