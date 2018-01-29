@@ -109,12 +109,36 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 453;
+   iUltimo:= 460;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         460: sComando:= ' CREATE TABLE auditoria_auto_cabec' +
+                         '(' +
+                         ' aud_data timestamp without time zone NOT NULL,' +
+                         ' aud_auditor character varying(50),' +
+                         ' aud_periodo_ini timestamp without time zone,' +
+                         ' aud_periodo_fim timestamp without time zone,' +
+                         ' aud_data_programa timestamp without time zone,' +
+                         ' CONSTRAINT pk_auditoria_auto_cabec PRIMARY KEY (aud_data)' +
+                         ')';
+         459: GravarNovaFuncao(63, 'AUDITORIA AUTOMÁTICA', 63);
+         458: GravarRetencaoFormularios();
+         457: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 6, 'DESCARTAR', 6);
+         456: sComando:= ' UPDATE cronograma SET cro_atividade = ' +
+                          QuotedStr('DETERMINAR RISCOS A SEREM ABORDADOS POR MEIO DE PMC / PDCA.') +
+                          ' WHERE cro_codigo = 25';
+         455: sComando:= ' CREATE TABLE IF NOT EXISTS iqf_doc(' +
+                         ' doc_codigo integer NOT NULL,' +
+                         ' doc_cod_iqf integer NOT NULL,' +
+                         ' doc_descricao character varying(200),' +
+                         ' doc_caminho text,' +
+                         ' CONSTRAINT PK_iqf_doc PRIMARY KEY (doc_codigo)' +
+                         ' )';
+         454: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
+         // 2.10 Acima
          453: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 3, 'DEVOLUÇÃO', 3);
          452: CriarCampo('inf_status', 'infraestrutura', 'integer', '1', 'I'); // Valor padrão - Ativo
          451: GravarNovaFuncao(62, 'RELATÓRIO DE ANÁLISE DE RISCO', 62);
@@ -663,220 +687,220 @@ begin
          271: GravarTabelaCombos(27, 'ORIGEM PDCA', 6, 'PMC', 6);
          270: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
          // 2.09 Acima
-         269: sComando:= ' ALTER TABLE pdca' +
-                         ' ALTER COLUMN pdca_descricao TYPE character varying(150);';
-         268: sComando:= ' ALTER TABLE risco_analiseint' +
-                         ' ALTER COLUMN int_texto TYPE text;';
-         267: sComando:= ' ALTER TABLE risco_macro' +
-                         ' ALTER COLUMN mac_texto TYPE text;';
-         266: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 1, 'NENHUMA', 1);
-         265: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 2, '1 ANO', 4);
-         264: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 3, '2 ANOS', 5);
-         263: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 4, '3 ANOS', 6);
-         262: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 5, 'ACIMA DE 3 ANOS', 7);
-         261: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 6, '6 MESES', 3);
-         260: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 7, '3 MESES', 2);
-         259: sComando:= ' DELETE FROM tabela_combos WHERE tipo_com = 7';
-         258: sComando:= ' UPDATE estados SET codi_est = 26 WHERE codi_est = 0';
-         257: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
-                         ' VALUES (99, ' + QuotedStr('FORNECEDORES') + ',' + QuotedStr('N') + ');';
-         256: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
-                         ' VALUES (98, ' + QuotedStr('CLIENTES') + ',' + QuotedStr('N') + ');';
-         255: CriarCampo('pro_exibelista', 'processos', 'character(1)', 'S', 'S');
-         254: CriarCampo('man_datacadastro', 'manutencao', 'timestamp without time zone');
-         253: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
-         252: GravarTabelaCombos(29, 'TIPO ANÁLISE DE RISCO', 1, 'INTERNA', 1);
-         251: GravarTabelaCombos(29, 'TIPO ANÁLISE DE RISCO', 2, 'EXTERNA', 2);
-         250: CriarCampo('pmc_tiporisco', 'pmc', 'integer');
-         249: GravarNovaFuncao(48, 'VINCULAR RISCO AO PMC', 48);
-         248: CriarCampo('pmc_codrisco', 'pmc', 'integer');
-         247: CriarCampo('notamaxhab', 'parametros', 'double precision', '5', 'I');
-         246: GravarNovaFuncao(47, 'RELATÓRIO DE CALIBRAÇÃO', 47);
-         245: GravarNovaFuncao(46, 'LISTA DE TREINAMENTOS REALIZADOS/NÃO REALIZADOS', 46);
-         244: GravarNovaFuncao(45, 'LISTA DE HABILIDADES COM PENDÊNCIA', 45);
-         243: sComando:= ' CREATE TABLE IF NOT EXISTS pdca_docs(' +
-                         ' pdca_codigo integer NOT NULL,' +
-                         ' pdca_coddoc integer NOT NULL,' +
-                         ' pdca_descricao character varying(250),' +
-                         ' pdca_caminho text,' +
-                         ' CONSTRAINT pdca_doc PRIMARY KEY (pdca_codigo, pdca_coddoc)' +
-                         ' )';
-         242: CriarCampo('email_risco', 'parametros', 'integer');
-         241: CriarCampo('email_pmc', 'parametros', 'integer');
-         240: sComando:= 'UPDATE usuarios SET risco = 1, pdca = 1 WHERE nome_usu = ' + QuotedStr('DESTRA');
-         239: CriarCampo('risco', 'usuarios', 'character(1)');
-         238: CriarCampo('col_celular', 'colaboradores', 'character varying(20)');
-         237: CriarCampo('col_telefone', 'colaboradores', 'character varying(20)');
-         236: CriarCampo('col_cep', 'colaboradores', 'character varying(9)');
-         235: CriarCampo('col_estado', 'colaboradores', 'character(2)');
-         234: CriarCampo('col_cidade', 'colaboradores', 'character varying(80)');
-         233: CriarCampo('col_bairro', 'colaboradores', 'character varying(50)');
-         232: CriarCampo('col_numero', 'colaboradores', 'character varying(6)');
-         231: CriarCampo('col_endereco', 'colaboradores', 'character varying(80)');
-         230: sComando:= ' CREATE TABLE IF NOT EXISTS processos_subsequentes(' +
-                         ' sub_codigo integer NOT NULL,' +
-                         ' pro_codigo integer NOT NULL,' +
-                         ' CONSTRAINT PK_processos_subsequentes PRIMARY KEY (sub_codigo, pro_codigo)' +
-                         ' )';
-         229: sComando:= ' CREATE TABLE IF NOT EXISTS processos_antecedentes(' +
-                         ' ant_codigo integer NOT NULL,' +
-                         ' pro_codigo integer NOT NULL,' +
-                         ' CONSTRAINT PK_processos_antecedentes PRIMARY KEY (ant_codigo, pro_codigo)' +
-                         ' )';
-         228: CriarCampo('pdca', 'usuarios', 'character(1)');
-         227: GravarNovaFuncao(44, 'PDCA', 44);
-         226: CriarCampo('fun_cbo', 'funcoes', 'character varying(10)');
-         225: CriarCampo('risco_severo', 'parametros', 'integer', '1', 'I');
-         224: CriarCampo('risco_alto', 'parametros', 'integer', '1', 'I');
-         223: CriarCampo('risco_medio', 'parametros', 'integer', '1', 'I');
-         222: CriarCampo('risco_baixo', 'parametros', 'integer', '1', 'I');
-         221: CriarCampo('col_cpf', 'colaboradores', 'character varying(14)');
-         220: CriarCampo('col_rg', 'colaboradores', 'character varying(13)');
-         219: CriarCampo('casasindicador', 'parametros', 'integer', '2', 'I');
-         218: GravarTabelaCombos(27, 'ORIGEM PDCA', 5, 'ANÁLISE DE CONTEXTO', 5);
-         217: CriarCampo('edu_curso', 'colab_educacao', 'character varying(50)');
-         216: GravarTabelaCombos(28, 'FASE PMC', 6, 'FINALIZADO', 6);
-         215: GravarTabelaCombos(28, 'FASE PMC', 5, 'VERIFICAÇÃO DE EFICÁCIA', 5);
-         214: GravarTabelaCombos(28, 'FASE PMC', 4, 'IMPLANTAÇÃO DE AÇÕES', 4);
-         213: GravarTabelaCombos(28, 'FASE PMC', 3, 'DEFINIÇÃO DE AÇÕES', 3);
-         212: GravarTabelaCombos(28, 'FASE PMC', 2, 'IDENTIFICAÇÃO DA CAUSA', 2);
-         211: GravarTabelaCombos(28, 'FASE PMC', 1, 'AÇÃO DE CONTENCÃO IMEDIATA', 1);
-         210: CriarCampo('pmc_preveficacia', 'pmc', 'timestamp without time zone');
-         209: PreencherDataAcaoPMC();
-         208: CriarCampo('fec_quemforn', 'manutencao_fecha', 'integer', '0', 'I');
-         207: sComando:= ' CREATE TABLE IF NOT EXISTS pdca_lanc(' +
-                         ' lan_codigo integer NOT NULL,' +
-                         ' pdca_codigo integer NOT NULL,' +
-                         ' lan_oque text  ,' +
-                         ' lan_onde text,' +
-                         ' lan_porque text,' +
-                         ' lan_quando timestamp without time zone,' +
-                         ' lan_como text,' +
-                         ' lan_quem integer,' +
-                         ' lan_recursos text,' +
-                         ' lan_quanto double precision,' +
-                         ' lan_datarealizada timestamp without time zone,' +
-                         ' lan_verimplantacao text,' +
-                         ' lan_status integer,' +
-                         ' lan_dtprevista timestamp without time zone,' +
-                         ' lan_dtfinalizado timestamp without time zone,' +
-                         ' lan_chkobs text,' +
-                         ' CONSTRAINT PK_pdca_lanc PRIMARY KEY (lan_codigo)' +
-                         ' )';
-         206: GravarNovaFuncao(43, 'PARÂMETROS DO SISTEMA', 43);
-         205: CriarCampo('pesoiqfavaliacao', 'parametros', 'double precision', '20', 'I');
-         204: CriarCampo('pesoiqfpontualidade', 'parametros', 'double precision', '30', 'I');
-         203: CriarCampo('pesoiqfconformidade', 'parametros', 'double precision', '50', 'I');
-         202: GravarTabelaCombos(27, 'ORIGEM PDCA', 4, 'PARTE INTERESSADA', 4);
-         201: GravarTabelaCombos(27, 'ORIGEM PDCA', 3, 'PLANEJAMENTO ESTRATÉGICO', 3);
-         200: GravarTabelaCombos(27, 'ORIGEM PDCA', 2, 'OBJETIVOS', 2);
-         199: GravarTabelaCombos(27, 'ORIGEM PDCA', 1, 'INDICADOR', 1);
-         198: sComando:= ' CREATE TABLE IF NOT EXISTS pdca(' +
-                         ' pdca_codigo integer NOT NULL,' +
-                         ' pdca_identificacao character varying(8),' +
-                         ' pdca_data timestamp without time zone,' +
-                         ' pdca_descricao character varying(50),' +
-                         ' pdca_origem integer,' +
-                         ' pdca_processo integer,' +
-                         ' pdca_emitido integer,' +
-                         ' CONSTRAINT PK_pdca PRIMARY KEY (pdca_codigo)' +
-                         ' )';
-         197: CriarCampo('tre_conteudo', 'treinamentos', 'text');
-         196: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1, 'DIÁRIO', 1);
-         195: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 7, 'SEMANAL', 2);
-         194: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 15, 'QUINZENAL', 3);
-         193: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 30, 'MENSAL', 4);
-         192: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 60, 'BIMESTRAL', 5);
-         191: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 90, 'TRIMESTRAL', 6);
-         190: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 180, 'SEMESTRAL', 7);
-         189: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 365, 'ANUAL', 8);
-         188: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 730, 'BIENAL', 9);
-         187: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1095, 'TRIENAL', 10);
-         186: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1460, 'QUADRIENAL', 11);
-         185: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1825, 'QUINQUENAL', 12);
-         184: sComando:= ' DELETE FROM tabela_combos' +
-                         ' WHERE tipo_com = 19';
-         183: GravarNovaFuncao(42, 'ANÁLISE DE CONTEXTO', 42);
-         182: GravaUsuarios('42');
-         181: sComando:= ' CREATE TABLE IF NOT EXISTS contexto_analise(' +
-                         ' ana_codigo integer NOT NULL,' +
-                         ' ana_contexto integer,' +
-                         ' ana_parte integer,' +
-                         ' ana_requisito text,' +
-                         ' ana_monitoramento text,' +
-                         ' CONSTRAINT PK_contexto_analise PRIMARY KEY (ana_codigo)' +
-                         ' )';
-         180: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
-                         ' VALUES (5, ' + QuotedStr('SOCIEDADE') + ',' + QuotedStr('') + ');';
-         179: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
-                         ' VALUES (4, ' + QuotedStr('FORNECEDOR') + ',' + QuotedStr('') + ');';
-         178: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
-                         ' VALUES (3, ' + QuotedStr('FUNCIONÁRIO') + ',' + QuotedStr('') + ');';
-         177: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
-                         ' VALUES (2, ' + QuotedStr('ACIONISTA') + ',' + QuotedStr('') + ');';
-         176: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
-                         ' VALUES (1, ' + QuotedStr('CLIENTE') + ',' + QuotedStr('') + ');';
-         175: GravarNovaFuncao(41, 'CADASTRO DE PARTES INTERESSADAS', 41);
-         174: GravaUsuarios('41');
-         173: sComando:= ' CREATE TABLE IF NOT EXISTS partes(' +
-                         ' par_codigo integer NOT NULL,' +
-                         ' par_nome character varying(200),' +
-                         ' par_descricao text,' +
-                         ' CONSTRAINT PK_partes PRIMARY KEY (par_codigo)' +
-                         ' )';
-         172: GravarNovaFuncao(40, 'CADASTRO DE CONTEXTOS', 40);
-         171: GravaUsuarios('40');
-         170: sComando:= ' CREATE TABLE IF NOT EXISTS contextos(' +
-                         ' con_codigo integer NOT NULL,' +
-                         ' con_nome character varying(200),' +
-                         ' con_descricao text,' +
-                         ' CONSTRAINT PK_contextos PRIMARY KEY (con_codigo)' +
-                         ' )';
-         169: CriarCampo('hab_especificacao', 'habilidades', 'text');
-         168: CriarCampo('emp_Valores', 'empresa', 'text');
-         167: CriarCampo('emp_Visao', 'empresa', 'text');
-         166: CriarCampo('emp_Missao', 'empresa', 'text');
-         165: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 1, 'NÃO APLICÁVEL', 1);
-         164: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 2, 'APROVADO', 2);
-         163: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 3, 'REPROVADO', 3);
-         162: sComando:= ' CREATE TABLE IF NOT EXISTS produtos(' +
-                         ' pro_codigo integer NOT NULL,' +
-                         ' pro_descricao character varying(200),' +
-                         ' CONSTRAINT PK_produtos PRIMARY KEY (pro_codigo)' +
-                         ' )';
-         161: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_lanc_itens(' +
-                         ' ite_codigo integer NOT NULL,' +
-                         ' lan_codigo integer NOT NULL,' +
-                         ' lan_defeito integer NOT NULL, ' +
-                         ' lan_qtd numeric(18,6) NOT NULL,' +
-                         ' CONSTRAINT PK_defeitos_lanc_itens PRIMARY KEY (ite_codigo)' +
-                         ' )';
-         160: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_lanc(' +
-                         ' lan_codigo integer NOT NULL,' +
-                         ' lan_data timestamp without time zone, ' +
-                         ' lan_origem integer NOT NULL, ' +
-                         ' lan_produto integer NOT NULL, ' +
-                         ' lan_rastreabilidade character varying(200),' +
-                         ' lan_qtd numeric(18,6) NOT NULL,' +
-                         ' lan_status integer NOT NULL, ' +
-                         ' CONSTRAINT PK_defeitos_lanc PRIMARY KEY (lan_codigo)' +
-                         ' )';
-         159: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_origem(' +
-                         ' ori_codigo integer NOT NULL,' +
-                         ' ori_descricao character varying(200),' +
-                         ' CONSTRAINT PK_defeitos_origem PRIMARY KEY (ori_codigo)' +
-                         ' )';
-         158: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos(' +
-                         ' def_codigo integer NOT NULL,' +
-                         ' def_descricao character varying(200),' +
-                         ' def_classe integer NOT NULL,' +
-                         ' CONSTRAINT PK_defeitos PRIMARY KEY (def_codigo)' +
-                         ' )';
-         157: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_classe(' +
-                         ' cla_codigo integer NOT NULL,' +
-                         ' cla_descricao character varying(200),' +
-                         ' CONSTRAINT PK_defeitos_classe PRIMARY KEY (cla_codigo)' +
-                         ' )';
+//         269: sComando:= ' ALTER TABLE pdca' +
+//                         ' ALTER COLUMN pdca_descricao TYPE character varying(150);';
+//         268: sComando:= ' ALTER TABLE risco_analiseint' +
+//                         ' ALTER COLUMN int_texto TYPE text;';
+//         267: sComando:= ' ALTER TABLE risco_macro' +
+//                         ' ALTER COLUMN mac_texto TYPE text;';
+//         266: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 1, 'NENHUMA', 1);
+//         265: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 2, '1 ANO', 4);
+//         264: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 3, '2 ANOS', 5);
+//         263: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 4, '3 ANOS', 6);
+//         262: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 5, 'ACIMA DE 3 ANOS', 7);
+//         261: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 6, '6 MESES', 3);
+//         260: GravarTabelaCombos(7, 'EXPERIÊNCIA - FUNÇÕES', 7, '3 MESES', 2);
+//         259: sComando:= ' DELETE FROM tabela_combos WHERE tipo_com = 7';
+//         258: sComando:= ' UPDATE estados SET codi_est = 26 WHERE codi_est = 0';
+//         257: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
+//                         ' VALUES (99, ' + QuotedStr('FORNECEDORES') + ',' + QuotedStr('N') + ');';
+//         256: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
+//                         ' VALUES (98, ' + QuotedStr('CLIENTES') + ',' + QuotedStr('N') + ');';
+//         255: CriarCampo('pro_exibelista', 'processos', 'character(1)', 'S', 'S');
+//         254: CriarCampo('man_datacadastro', 'manutencao', 'timestamp without time zone');
+//         253: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
+//         252: GravarTabelaCombos(29, 'TIPO ANÁLISE DE RISCO', 1, 'INTERNA', 1);
+//         251: GravarTabelaCombos(29, 'TIPO ANÁLISE DE RISCO', 2, 'EXTERNA', 2);
+//         250: CriarCampo('pmc_tiporisco', 'pmc', 'integer');
+//         249: GravarNovaFuncao(48, 'VINCULAR RISCO AO PMC', 48);
+//         248: CriarCampo('pmc_codrisco', 'pmc', 'integer');
+//         247: CriarCampo('notamaxhab', 'parametros', 'double precision', '5', 'I');
+//         246: GravarNovaFuncao(47, 'RELATÓRIO DE CALIBRAÇÃO', 47);
+//         245: GravarNovaFuncao(46, 'LISTA DE TREINAMENTOS REALIZADOS/NÃO REALIZADOS', 46);
+//         244: GravarNovaFuncao(45, 'LISTA DE HABILIDADES COM PENDÊNCIA', 45);
+//         243: sComando:= ' CREATE TABLE IF NOT EXISTS pdca_docs(' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' pdca_coddoc integer NOT NULL,' +
+//                         ' pdca_descricao character varying(250),' +
+//                         ' pdca_caminho text,' +
+//                         ' CONSTRAINT pdca_doc PRIMARY KEY (pdca_codigo, pdca_coddoc)' +
+//                         ' )';
+//         242: CriarCampo('email_risco', 'parametros', 'integer');
+//         241: CriarCampo('email_pmc', 'parametros', 'integer');
+//         240: sComando:= 'UPDATE usuarios SET risco = 1, pdca = 1 WHERE nome_usu = ' + QuotedStr('DESTRA');
+//         239: CriarCampo('risco', 'usuarios', 'character(1)');
+//         238: CriarCampo('col_celular', 'colaboradores', 'character varying(20)');
+//         237: CriarCampo('col_telefone', 'colaboradores', 'character varying(20)');
+//         236: CriarCampo('col_cep', 'colaboradores', 'character varying(9)');
+//         235: CriarCampo('col_estado', 'colaboradores', 'character(2)');
+//         234: CriarCampo('col_cidade', 'colaboradores', 'character varying(80)');
+//         233: CriarCampo('col_bairro', 'colaboradores', 'character varying(50)');
+//         232: CriarCampo('col_numero', 'colaboradores', 'character varying(6)');
+//         231: CriarCampo('col_endereco', 'colaboradores', 'character varying(80)');
+//         230: sComando:= ' CREATE TABLE IF NOT EXISTS processos_subsequentes(' +
+//                         ' sub_codigo integer NOT NULL,' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' CONSTRAINT PK_processos_subsequentes PRIMARY KEY (sub_codigo, pro_codigo)' +
+//                         ' )';
+//         229: sComando:= ' CREATE TABLE IF NOT EXISTS processos_antecedentes(' +
+//                         ' ant_codigo integer NOT NULL,' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' CONSTRAINT PK_processos_antecedentes PRIMARY KEY (ant_codigo, pro_codigo)' +
+//                         ' )';
+//         228: CriarCampo('pdca', 'usuarios', 'character(1)');
+//         227: GravarNovaFuncao(44, 'PDCA', 44);
+//         226: CriarCampo('fun_cbo', 'funcoes', 'character varying(10)');
+//         225: CriarCampo('risco_severo', 'parametros', 'integer', '1', 'I');
+//         224: CriarCampo('risco_alto', 'parametros', 'integer', '1', 'I');
+//         223: CriarCampo('risco_medio', 'parametros', 'integer', '1', 'I');
+//         222: CriarCampo('risco_baixo', 'parametros', 'integer', '1', 'I');
+//         221: CriarCampo('col_cpf', 'colaboradores', 'character varying(14)');
+//         220: CriarCampo('col_rg', 'colaboradores', 'character varying(13)');
+//         219: CriarCampo('casasindicador', 'parametros', 'integer', '2', 'I');
+//         218: GravarTabelaCombos(27, 'ORIGEM PDCA', 5, 'ANÁLISE DE CONTEXTO', 5);
+//         217: CriarCampo('edu_curso', 'colab_educacao', 'character varying(50)');
+//         216: GravarTabelaCombos(28, 'FASE PMC', 6, 'FINALIZADO', 6);
+//         215: GravarTabelaCombos(28, 'FASE PMC', 5, 'VERIFICAÇÃO DE EFICÁCIA', 5);
+//         214: GravarTabelaCombos(28, 'FASE PMC', 4, 'IMPLANTAÇÃO DE AÇÕES', 4);
+//         213: GravarTabelaCombos(28, 'FASE PMC', 3, 'DEFINIÇÃO DE AÇÕES', 3);
+//         212: GravarTabelaCombos(28, 'FASE PMC', 2, 'IDENTIFICAÇÃO DA CAUSA', 2);
+//         211: GravarTabelaCombos(28, 'FASE PMC', 1, 'AÇÃO DE CONTENCÃO IMEDIATA', 1);
+//         210: CriarCampo('pmc_preveficacia', 'pmc', 'timestamp without time zone');
+//         209: PreencherDataAcaoPMC();
+//         208: CriarCampo('fec_quemforn', 'manutencao_fecha', 'integer', '0', 'I');
+//         207: sComando:= ' CREATE TABLE IF NOT EXISTS pdca_lanc(' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' lan_oque text  ,' +
+//                         ' lan_onde text,' +
+//                         ' lan_porque text,' +
+//                         ' lan_quando timestamp without time zone,' +
+//                         ' lan_como text,' +
+//                         ' lan_quem integer,' +
+//                         ' lan_recursos text,' +
+//                         ' lan_quanto double precision,' +
+//                         ' lan_datarealizada timestamp without time zone,' +
+//                         ' lan_verimplantacao text,' +
+//                         ' lan_status integer,' +
+//                         ' lan_dtprevista timestamp without time zone,' +
+//                         ' lan_dtfinalizado timestamp without time zone,' +
+//                         ' lan_chkobs text,' +
+//                         ' CONSTRAINT PK_pdca_lanc PRIMARY KEY (lan_codigo)' +
+//                         ' )';
+//         206: GravarNovaFuncao(43, 'PARÂMETROS DO SISTEMA', 43);
+//         205: CriarCampo('pesoiqfavaliacao', 'parametros', 'double precision', '20', 'I');
+//         204: CriarCampo('pesoiqfpontualidade', 'parametros', 'double precision', '30', 'I');
+//         203: CriarCampo('pesoiqfconformidade', 'parametros', 'double precision', '50', 'I');
+//         202: GravarTabelaCombos(27, 'ORIGEM PDCA', 4, 'PARTE INTERESSADA', 4);
+//         201: GravarTabelaCombos(27, 'ORIGEM PDCA', 3, 'PLANEJAMENTO ESTRATÉGICO', 3);
+//         200: GravarTabelaCombos(27, 'ORIGEM PDCA', 2, 'OBJETIVOS', 2);
+//         199: GravarTabelaCombos(27, 'ORIGEM PDCA', 1, 'INDICADOR', 1);
+//         198: sComando:= ' CREATE TABLE IF NOT EXISTS pdca(' +
+//                         ' pdca_codigo integer NOT NULL,' +
+//                         ' pdca_identificacao character varying(8),' +
+//                         ' pdca_data timestamp without time zone,' +
+//                         ' pdca_descricao character varying(50),' +
+//                         ' pdca_origem integer,' +
+//                         ' pdca_processo integer,' +
+//                         ' pdca_emitido integer,' +
+//                         ' CONSTRAINT PK_pdca PRIMARY KEY (pdca_codigo)' +
+//                         ' )';
+//         197: CriarCampo('tre_conteudo', 'treinamentos', 'text');
+//         196: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1, 'DIÁRIO', 1);
+//         195: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 7, 'SEMANAL', 2);
+//         194: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 15, 'QUINZENAL', 3);
+//         193: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 30, 'MENSAL', 4);
+//         192: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 60, 'BIMESTRAL', 5);
+//         191: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 90, 'TRIMESTRAL', 6);
+//         190: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 180, 'SEMESTRAL', 7);
+//         189: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 365, 'ANUAL', 8);
+//         188: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 730, 'BIENAL', 9);
+//         187: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1095, 'TRIENAL', 10);
+//         186: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1460, 'QUADRIENAL', 11);
+//         185: GravarTabelaCombos(19, 'PERIODICIDADE - DIAS', 1825, 'QUINQUENAL', 12);
+//         184: sComando:= ' DELETE FROM tabela_combos' +
+//                         ' WHERE tipo_com = 19';
+//         183: GravarNovaFuncao(42, 'ANÁLISE DE CONTEXTO', 42);
+//         182: GravaUsuarios('42');
+//         181: sComando:= ' CREATE TABLE IF NOT EXISTS contexto_analise(' +
+//                         ' ana_codigo integer NOT NULL,' +
+//                         ' ana_contexto integer,' +
+//                         ' ana_parte integer,' +
+//                         ' ana_requisito text,' +
+//                         ' ana_monitoramento text,' +
+//                         ' CONSTRAINT PK_contexto_analise PRIMARY KEY (ana_codigo)' +
+//                         ' )';
+//         180: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (5, ' + QuotedStr('SOCIEDADE') + ',' + QuotedStr('') + ');';
+//         179: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (4, ' + QuotedStr('FORNECEDOR') + ',' + QuotedStr('') + ');';
+//         178: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (3, ' + QuotedStr('FUNCIONÁRIO') + ',' + QuotedStr('') + ');';
+//         177: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (2, ' + QuotedStr('ACIONISTA') + ',' + QuotedStr('') + ');';
+//         176: sComando:= ' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
+//                         ' VALUES (1, ' + QuotedStr('CLIENTE') + ',' + QuotedStr('') + ');';
+//         175: GravarNovaFuncao(41, 'CADASTRO DE PARTES INTERESSADAS', 41);
+//         174: GravaUsuarios('41');
+//         173: sComando:= ' CREATE TABLE IF NOT EXISTS partes(' +
+//                         ' par_codigo integer NOT NULL,' +
+//                         ' par_nome character varying(200),' +
+//                         ' par_descricao text,' +
+//                         ' CONSTRAINT PK_partes PRIMARY KEY (par_codigo)' +
+//                         ' )';
+//         172: GravarNovaFuncao(40, 'CADASTRO DE CONTEXTOS', 40);
+//         171: GravaUsuarios('40');
+//         170: sComando:= ' CREATE TABLE IF NOT EXISTS contextos(' +
+//                         ' con_codigo integer NOT NULL,' +
+//                         ' con_nome character varying(200),' +
+//                         ' con_descricao text,' +
+//                         ' CONSTRAINT PK_contextos PRIMARY KEY (con_codigo)' +
+//                         ' )';
+//         169: CriarCampo('hab_especificacao', 'habilidades', 'text');
+//         168: CriarCampo('emp_Valores', 'empresa', 'text');
+//         167: CriarCampo('emp_Visao', 'empresa', 'text');
+//         166: CriarCampo('emp_Missao', 'empresa', 'text');
+//         165: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 1, 'NÃO APLICÁVEL', 1);
+//         164: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 2, 'APROVADO', 2);
+//         163: GravarTabelaCombos(26, 'DEFEITOS - STATUS', 3, 'REPROVADO', 3);
+//         162: sComando:= ' CREATE TABLE IF NOT EXISTS produtos(' +
+//                         ' pro_codigo integer NOT NULL,' +
+//                         ' pro_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_produtos PRIMARY KEY (pro_codigo)' +
+//                         ' )';
+//         161: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_lanc_itens(' +
+//                         ' ite_codigo integer NOT NULL,' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' lan_defeito integer NOT NULL, ' +
+//                         ' lan_qtd numeric(18,6) NOT NULL,' +
+//                         ' CONSTRAINT PK_defeitos_lanc_itens PRIMARY KEY (ite_codigo)' +
+//                         ' )';
+//         160: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_lanc(' +
+//                         ' lan_codigo integer NOT NULL,' +
+//                         ' lan_data timestamp without time zone, ' +
+//                         ' lan_origem integer NOT NULL, ' +
+//                         ' lan_produto integer NOT NULL, ' +
+//                         ' lan_rastreabilidade character varying(200),' +
+//                         ' lan_qtd numeric(18,6) NOT NULL,' +
+//                         ' lan_status integer NOT NULL, ' +
+//                         ' CONSTRAINT PK_defeitos_lanc PRIMARY KEY (lan_codigo)' +
+//                         ' )';
+//         159: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_origem(' +
+//                         ' ori_codigo integer NOT NULL,' +
+//                         ' ori_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_defeitos_origem PRIMARY KEY (ori_codigo)' +
+//                         ' )';
+//         158: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos(' +
+//                         ' def_codigo integer NOT NULL,' +
+//                         ' def_descricao character varying(200),' +
+//                         ' def_classe integer NOT NULL,' +
+//                         ' CONSTRAINT PK_defeitos PRIMARY KEY (def_codigo)' +
+//                         ' )';
+//         157: sComando:= ' CREATE TABLE IF NOT EXISTS defeitos_classe(' +
+//                         ' cla_codigo integer NOT NULL,' +
+//                         ' cla_descricao character varying(200),' +
+//                         ' CONSTRAINT PK_defeitos_classe PRIMARY KEY (cla_codigo)' +
+//                         ' )';
          // 2.08 Acima
 //         156: sComando:= ' ALTER TABLE manutencao' +
 //                         ' ALTER COLUMN anom_man TYPE text;';
@@ -1777,9 +1801,11 @@ begin
    GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 4, '3 ANOS', 11);
    GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 17, '4 ANOS', 12);
    GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 5, '5 ANOS', 13);
-   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 13, '20 ANOS', 14);
-   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 10, '25 ANOS', 15);
-   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 11, 'PERMANENTE', 16);
+   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 18, '6 ANOS', 14);
+   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 13, '20 ANOS', 15);
+   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 10, '25 ANOS', 16);
+   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 11, 'PERMANENTE', 17);
+   GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 19, 'INDETERMINADO', 18);
 end;
 
 procedure AcertarRetencaoFormularios;

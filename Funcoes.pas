@@ -145,8 +145,8 @@ procedure EnviarEmail(sTexto: string; sAssunto: string; sPara: string; sTipo: st
 function VerificarConfigEmail(): Boolean;
 // Verifica se está conectado à internet
 function VerificarConexaoInternet(ExibeMsg: Boolean): Boolean;
-// Busca o nome da empresa
-function BuscarNomeEmpresa(): string;
+// Busca dados da empresa
+function BuscarNomeEmpresa(): TStringList;
 // Copia o processo de armazenamento dos registros da qualidade para a nova tabela formularios_locais
 procedure CopiarArmazenamento();
 // Habilita ou desabilita os campos de um formulário
@@ -3378,19 +3378,18 @@ begin
 end;
 
 procedure MostrarErro(Mensagem: string; MensagemDelphi: string; Formulario: string);
+var
+   aDadosEmpresa: TStringList;
 begin
-//   with dm.cdsAux do begin
-//      Active:= False;
-//      CommandText:= ' SELECT nome_emp FROM Empresa';
-//      Active:= True;
-//   end;
-//
+   aDadosEmpresa:= TStringList.Create;
+
    FormMsgErro:= TFormMsgErro.Create(nil);
    FormMsgErro.sErro       := Mensagem;
    FormMsgErro.sErroDelphi := MensagemDelphi;
    FormMsgErro.sFormulario := Formulario;
 //   FormMsgErro.sNomeEmpresa:= dm.cdsAux.FieldByName('nome_emp').AsString;
-   FormMsgErro.sNomeEmpresa:= BuscarNomeEmpresa();
+   aDadosEmpresa:= BuscarNomeEmpresa();
+   FormMsgErro.sNomeEmpresa:= aDadosEmpresa[0]; // Nome da Empresa
    FormMsgErro.ShowModal;
    FormMsgErro.Release;
 end;
@@ -3690,14 +3689,22 @@ begin
 //   end;
 end;
 
-function BuscarNomeEmpresa(): string;
+function BuscarNomeEmpresa(): TStringList;
+var
+   aDadosEmpresa: TStringList;
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT nome_emp FROM empresa ';
+      CommandText:= ' SELECT nome_emp, emp_escopo ' +
+                    ' FROM empresa ';
       Active:= True;
 
-      Result:= FieldByName('nome_emp').AsString;
+      aDadosEmpresa:= TStringList.Create;
+
+      aDadosEmpresa.Add(FieldByName('nome_emp').AsString);
+      aDadosEmpresa.Add(FieldByName('emp_escopo').AsString);
+
+      Result:= aDadosEmpresa;
    end;
 end;
 

@@ -226,7 +226,7 @@ begin
 
          HabilitarCampos(False, False, Self, -1);
          Botoes(True);
-         FormInicial.StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + BuscarNomeEmpresa();
+         FormInicial.StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + edtNomeEmp.Text;
          Application.MessageBox('Empresa cadastrada corretamente','Informação',MB_OK+MB_ICONINFORMATION);
       except
          on E: Exception do begin

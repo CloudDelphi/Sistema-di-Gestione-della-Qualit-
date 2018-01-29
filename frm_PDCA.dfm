@@ -22,7 +22,7 @@ object FormPDCA: TFormPDCA
     Top = 0
     Width = 933
     Height = 531
-    ActivePage = tsLancamentos
+    ActivePage = tsPesqLanc
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

@@ -1507,7 +1507,7 @@ object FormCadIQF: TFormCadIQF
     Top = 0
     Width = 1022
     Height = 412
-    ActivePage = tsPesquisa
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1704,6 +1704,7 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 5
       end
       object edtAvaliacao: TCurrencyEdit
+        Tag = 20
         Left = 780
         Top = 27
         Width = 59
@@ -1756,6 +1757,7 @@ object FormCadIQF: TFormCadIQF
         OnKeyPress = mmoObsKeyPress
       end
       object edtCodigo: TEdit
+        Tag = 30
         Left = 11
         Top = 27
         Width = 68
@@ -2159,10 +2161,12 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 2
       end
       object dtDataDoc: TDateEdit
+        Tag = 30
         Left = 84
         Top = 27
         Width = 105
         Height = 26
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -2173,10 +2177,12 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 3
       end
       object dblRazaoDoc: TDBLookupComboBox
+        Tag = 30
         Left = 195
         Top = 27
         Width = 318
         Height = 26
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -2190,6 +2196,7 @@ object FormCadIQF: TFormCadIQF
         OnCloseUp = dblFornecedorCloseUp
       end
       object edtCodigoDoc: TEdit
+        Tag = 30
         Left = 11
         Top = 27
         Width = 68
@@ -2205,10 +2212,12 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 5
       end
       object dblFantasiaDoc: TDBLookupComboBox
+        Tag = 30
         Left = 515
         Top = 27
         Width = 259
         Height = 26
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -2472,8 +2481,8 @@ object FormCadIQF: TFormCadIQF
     end
   end
   object pnlImprimir: TPanel
-    Left = 739
-    Top = 150
+    Left = 562
+    Top = 170
     Width = 409
     Height = 417
     TabOrder = 2
@@ -2905,6 +2914,7 @@ object FormCadIQF: TFormCadIQF
       TabOrder = 0
     end
     object rgOrdemImpressao: TRadioGroup
+      Tag = 30
       Left = 12
       Top = 283
       Width = 389
@@ -2918,6 +2928,7 @@ object FormCadIQF: TFormCadIQF
       TabOrder = 1
     end
     object rgTipoRel: TRadioGroup
+      Tag = 30
       Left = 12
       Top = 36
       Width = 389
@@ -2969,6 +2980,7 @@ object FormCadIQF: TFormCadIQF
         Transparent = True
       end
       object dtDataFinal: TDateEdit
+        Tag = 30
         Left = 119
         Top = 19
         Width = 105
@@ -2983,6 +2995,7 @@ object FormCadIQF: TFormCadIQF
         TabOrder = 0
       end
       object dtDataInicial: TDateEdit
+        Tag = 30
         Left = 8
         Top = 19
         Width = 105
@@ -3004,6 +3017,7 @@ object FormCadIQF: TFormCadIQF
       Height = 51
       TabOrder = 5
       object chkTipoProd: TCheckBox
+        Tag = 30
         Left = 16
         Top = 12
         Width = 97
@@ -3020,6 +3034,7 @@ object FormCadIQF: TFormCadIQF
       Height = 34
       TabOrder = 6
       object chkObs: TCheckBox
+        Tag = 30
         Left = 12
         Top = 4
         Width = 124
@@ -3050,6 +3065,7 @@ object FormCadIQF: TFormCadIQF
         Caption = 'Nome Fantasia'
       end
       object chkTodosForn: TCheckBox
+        Tag = 30
         Left = 331
         Top = 60
         Width = 55
@@ -3059,6 +3075,7 @@ object FormCadIQF: TFormCadIQF
         OnClick = chkTodosFornClick
       end
       object dblFornImp: TDBLookupComboBox
+        Tag = 30
         Left = 11
         Top = 13
         Width = 318
@@ -3076,6 +3093,7 @@ object FormCadIQF: TFormCadIQF
         OnCloseUp = dblFornImpCloseUp
       end
       object dblFantasiaImp: TDBLookupComboBox
+        Tag = 30
         Left = 11
         Top = 55
         Width = 318
@@ -3216,7 +3234,7 @@ object FormCadIQF: TFormCadIQF
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42275.613644224500000000
+    ReportOptions.LastChange = 43118.455824814820000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -3286,7 +3304,7 @@ object FormCadIQF: TFormCadIQF
         object Memo11: TfrxMemoView
           Left = 5.000000000000000000
           Top = 71.692950000000000000
-          Width = 699.213050000000000000
+          Width = 540.472790000000000000
           Height = 18.897650000000000000
           ShowHint = False
           AutoWidth = True
@@ -3303,12 +3321,13 @@ object FormCadIQF: TFormCadIQF
         end
       end
       object Detalhe: TfrxMasterData
-        Height = 151.181200000000000000
-        Top = 306.141930000000000000
+        Height = 139.842610000000000000
+        Top = 264.567100000000000000
         Width = 718.110700000000000000
         DataSet = frxDBImpRelacao
         DataSetName = 'frxDBImpRelacao'
         RowCount = 0
+        Stretched = True
         object frxControleDESCRICAO: TfrxMemoView
           Width = 120.566929130000000000
           Height = 18.897650000000000000
@@ -3441,11 +3460,12 @@ object FormCadIQF: TFormCadIQF
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo30: TfrxMemoView
+        object Memo29: TfrxMemoView
           Top = 18.897650000000000000
-          Width = 716.976377952756000000
-          Height = 132.283550000000000000
+          Width = 716.976377950000000000
+          Height = 120.944960000000000000
           ShowHint = False
+          StretchMode = smMaxHeight
           DataField = 'iqf_obs'
           DataSet = frxDBImpRelacao
           DataSetName = 'frxDBImpRelacao'
@@ -3465,7 +3485,7 @@ object FormCadIQF: TFormCadIQF
       end
       object PageFooter1: TfrxPageFooter
         Height = 56.692950000000000000
-        Top = 725.669760000000000000
+        Top = 672.756340000000000000
         Width = 718.110700000000000000
         object Picture1: TfrxPictureView
           Left = 655.197280000000000000
@@ -4126,7 +4146,7 @@ object FormCadIQF: TFormCadIQF
       end
       object GroupHeader1: TfrxGroupHeader
         Height = 37.881880000000000000
-        Top = 245.669450000000000000
+        Top = 204.094620000000000000
         Width = 718.110700000000000000
         Condition = 'frxDBImpRelacao."forn_nome"'
         object frxControleDATA: TfrxMemoView
@@ -4168,9 +4188,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo5: TfrxMemoView
           Left = 120.566929130000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 120.566948660000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4187,9 +4207,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo10: TfrxMemoView
           Left = 241.133858270000000000
-          Top = 18.897650000000030000
-          Width = 60.094468660000000000
-          Height = 19.275590551181100000
+          Top = 18.897650000000000000
+          Width = 60.094468660000100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4206,9 +4226,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo12: TfrxMemoView
           Left = 301.322834650000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 60.094468660000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4225,9 +4245,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo21: TfrxMemoView
           Left = 360.779840000000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 257.763794170000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4287,9 +4307,9 @@ object FormCadIQF: TFormCadIQF
         end
         object Memo25: TfrxMemoView
           Left = 617.842920000000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 99.023534170000000000
-          Height = 19.275590551181100000
+          Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4305,244 +4325,11 @@ object FormCadIQF: TFormCadIQF
           VAlign = vaBottom
         end
       end
-      object ReportSummary1: TfrxReportSummary
-        Height = 139.842610000000000000
-        Top = 563.149970000000100000
-        Width = 718.110700000000000000
-        object Memo1: TfrxMemoView
-          Top = 3.779530000000136000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas pontuais:')
-          ParentFont = False
-        end
-        object Memo2: TfrxMemoView
-          Top = 22.677180000000250000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas n'#227'o pontuais:')
-          ParentFont = False
-        end
-        object Memo3: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 3.779530000000136000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotSimP]')
-          ParentFont = False
-        end
-        object Memo7: TfrxMemoView
-          Left = 387.307360000000000000
-          Top = 3.779530000000136000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas conformes:')
-          ParentFont = False
-        end
-        object Memo8: TfrxMemoView
-          Left = 387.307360000000000000
-          Top = 22.677180000000250000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Remessas n'#227'o conformes:')
-          ParentFont = False
-        end
-        object Memo16: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 22.677180000000250000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotNaoP]')
-          ParentFont = False
-        end
-        object Memo17: TfrxMemoView
-          Left = 568.724800000000000000
-          Top = 3.779530000000136000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotSimC]')
-          ParentFont = False
-        end
-        object Memo18: TfrxMemoView
-          Left = 568.724800000000000000
-          Top = 22.677180000000250000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[TotNaoC]')
-          ParentFont = False
-        end
-        object Memo19: TfrxMemoView
-          Top = 51.692950000000220000
-          Width = 181.417440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            'Total de remessas:')
-          ParentFont = False
-        end
-        object Memo20: TfrxMemoView
-          Left = 181.417440000000000000
-          Top = 51.692950000000220000
-          Width = 75.590600000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[Total]')
-          ParentFont = False
-        end
-        object Line3: TfrxLineView
-          Top = 74.929190000000180000
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line4: TfrxLineView
-          Top = 49.133890000000180000
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line5: TfrxLineView
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Line6: TfrxLineView
-          Left = 361.322834650000000000
-          Height = 49.133890000000000000
-          ShowHint = False
-          Diagonal = True
-        end
-      end
-      object GroupHeader2: TfrxGroupHeader
-        Height = 18.897650000000000000
-        Top = 204.094620000000000000
-        Width = 718.110700000000000000
-        Condition = 'frxDBImpRelacao."tipo_nomeTipo"'
-        StartNewPage = True
-        object Memo27: TfrxMemoView
-          Width = 716.976168030000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
-          DataSet = frxDBIQF
-          DataSetName = 'frxDBIQF'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2f'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'TIPO DE PRODUTO:  [frxDBImpRelacao."tipo_nomeTipo"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-      end
       object GroupFooter1: TfrxGroupFooter
         Height = 22.677180000000000000
-        Top = 480.000310000000000000
+        Top = 427.086890000000000000
         Width = 718.110700000000000000
-        object Memo28: TfrxMemoView
+        object Memo27: TfrxMemoView
           Left = 617.952755910000000000
           Width = 99.023622050000000000
           Height = 18.897650000000000000
@@ -4565,7 +4352,7 @@ object FormCadIQF: TFormCadIQF
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo29: TfrxMemoView
+        object Memo28: TfrxMemoView
           Left = 561.370440000000000000
           Width = 52.913420000000000000
           Height = 18.897650000000000000
@@ -4581,6 +4368,211 @@ object FormCadIQF: TFormCadIQF
           Memo.UTF8W = (
             'M'#233'dia:')
           ParentFont = False
+        end
+      end
+      object ReportSummary1: TfrxReportSummary
+        Height = 139.842610000000000000
+        Top = 510.236550000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Top = 3.779530000000079000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas pontuais:')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Top = 22.677180000000190000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas n'#227'o pontuais:')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 3.779530000000079000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotSimP]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 387.307360000000000000
+          Top = 3.779530000000079000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas conformes:')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 387.307360000000000000
+          Top = 22.677180000000190000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Remessas n'#227'o conformes:')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 22.677180000000190000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotNaoP]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 568.724800000000000000
+          Top = 3.779530000000079000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotSimC]')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 568.724800000000000000
+          Top = 22.677180000000190000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[TotNaoC]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Top = 51.692950000000170000
+          Width = 181.417440000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            'Total de remessas:')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 181.417440000000000000
+          Top = 51.692950000000170000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Total]')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Top = 74.929190000000120000
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line4: TfrxLineView
+          Top = 49.133890000000120000
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line5: TfrxLineView
+          Width = 718.110700000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Line6: TfrxLineView
+          Left = 361.322834650000000000
+          Height = 49.133890000000000000
+          ShowHint = False
+          Diagonal = True
         end
       end
     end

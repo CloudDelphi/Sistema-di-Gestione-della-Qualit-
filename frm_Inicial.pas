@@ -1426,7 +1426,8 @@ begin
 end;
 
 procedure TFormInicial.FormShow(Sender: TObject);
-//var
+var
+   aDadosEmpresa: TStringList;
 //   Reg, cExpira: String;
 //   DataVenc: TDateTime;
 begin
@@ -1448,10 +1449,13 @@ begin
       Self.Close;
    end;
 
+   aDadosEmpresa:= TStringList.Create;
+   aDadosEmpresa:= BuscarNomeEmpresa();
+
    StatPrincipal.Panels[0].Text:= 'DATA: ' + DateToStr(DATE());
    StatPrincipal.Panels[1].Text:= 'USUÁRIO: ' + cUsuario;
    StatPrincipal.Panels[2].Text:= 'SERVIDOR: ' + dm.Conexao.HostName;
-   StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + BuscarNomeEmpresa();
+   StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + aDadosEmpresa[0];
 
 //   with cdsEmpresa do begin
 //      Active:= False;
@@ -2386,8 +2390,11 @@ end;
 
 procedure TFormInicial.sbAuditoriaClick(Sender: TObject);
 begin
-    if Acesso(cUsuario, 61, 'acesso') = 1 then begin
-      AbrirForm(TFormAuditoriaAuto, FormAuditoriaAuto);
+   if Acesso(cUsuario, 63, 'acesso') = 1 then begin
+//      AbrirForm(TFormAuditoriaAuto, FormAuditoriaAuto);
+      FormAuditoriaAuto:= TFormAuditoriaAuto.Create(nil);
+      FormAuditoriaAuto.ShowModal;
+      FormAuditoriaAuto.Release;
    end;
 end;
 
@@ -2818,7 +2825,8 @@ begin
                        ' FROM colab_treinamentos CT' +
                        ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col AND C.col_status = 1' +
                        ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
-                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
+                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtre_tre notnull)' +
+//                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
                        ' ORDER BY C.nome_col, T.desc_tre';
          Active:= True;
 

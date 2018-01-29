@@ -846,6 +846,7 @@ object FormInicial: TFormInicial
           't'#243'rio'
         Collapsed = True
         TabOrder = 0
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgAnaliseCritica: TDBGrid
           Left = 8
@@ -926,6 +927,7 @@ object FormInicial: TFormInicial
         Caption = 'A'#231#245'es de PDCA vencidas'
         Collapsed = True
         TabOrder = 1
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgPDCA: TDBGrid
           Left = 8
@@ -1030,6 +1032,7 @@ object FormInicial: TFormInicial
         Caption = 'Manuten'#231#245'es Preventivas pendentes'
         Collapsed = True
         TabOrder = 2
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgManutencao: TDBGrid
           Left = 8
@@ -1109,6 +1112,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com experi'#234'ncia abaixo do exigido'
         Collapsed = True
         TabOrder = 3
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgExperiencia: TDBGrid
           Left = 8
@@ -1177,6 +1181,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com n'#237'vel de educa'#231#227'o abaixo do exigido'
         Collapsed = True
         TabOrder = 4
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgEducacao: TDBGrid
           Left = 8
@@ -1245,6 +1250,7 @@ object FormInicial: TFormInicial
         Caption = 'Treinamentos sem verifica'#231#227'o de efic'#225'cia'
         Collapsed = True
         TabOrder = 5
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgEficacia: TDBGrid
           Left = 8
@@ -1325,6 +1331,7 @@ object FormInicial: TFormInicial
         Caption = 'Treinamentos com previs'#227'o vencida ou sem data de previs'#227'o'
         Collapsed = True
         TabOrder = 6
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgTreinamentos: TDBGrid
           Left = 8
@@ -1405,6 +1412,7 @@ object FormInicial: TFormInicial
         Caption = 'Habilidades com nota menor igual a'
         Collapsed = True
         TabOrder = 7
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgHabilidades: TDBGrid
           Left = 8
@@ -1485,6 +1493,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com avalia'#231#227'o de habilidades vencida'
         Collapsed = True
         TabOrder = 8
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbg1: TDBGrid
           Left = 11
@@ -1541,6 +1550,7 @@ object FormInicial: TFormInicial
         Caption = 'Procedimentos n'#227'o aprovados'
         Collapsed = True
         TabOrder = 9
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgProcedimentos: TDBGrid
           Left = 8
@@ -1609,6 +1619,7 @@ object FormInicial: TFormInicial
         Caption = 'Fornecedores com homologa'#231#227'o vencida'
         Collapsed = True
         TabOrder = 10
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgFornecedores: TDBGrid
           Left = 8
@@ -1695,6 +1706,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 11
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCAcoes: TDBGrid
           Left = 11
@@ -1781,6 +1793,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 12
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMC: TDBGrid
           Left = 11
@@ -1891,6 +1904,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 13
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCSemCausa: TDBGrid
           Left = 11
@@ -2001,6 +2015,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 14
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCsemAcaoImediata: TDBGrid
           Left = 11
@@ -2105,6 +2120,7 @@ object FormInicial: TFormInicial
         Caption = 'Tabela de Calibra'#231#227'o'
         Collapsed = True
         TabOrder = 15
+        ExplicitWidth = 908
         ExpandedHeight = 218
         object dbgCalibracao: TDBGrid
           Left = 11
@@ -2209,6 +2225,7 @@ object FormInicial: TFormInicial
         Caption = 'Indicadores'
         Collapsed = True
         TabOrder = 16
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object stgIndicadores: TStringGrid
           Left = 11
@@ -5425,7 +5442,7 @@ object FormInicial: TFormInicial
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800F80210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800040310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

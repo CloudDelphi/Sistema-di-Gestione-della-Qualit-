@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsDoc
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1691,7 +1691,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Documentos Diversos'
       ImageIndex = 6
       OnShow = tsDocShow
-      ExplicitTop = 23
       object lbl38: TLabel
         Left = 7
         Top = 12

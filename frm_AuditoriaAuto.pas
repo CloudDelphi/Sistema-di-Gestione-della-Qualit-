@@ -6,13 +6,13 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, DBGrids, DB, DBClient, Provider,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, frxClass, frxDCtrl, frxPreview,
-  frxDBSet;
+  frxDBSet, DBCtrls, Mask, rxToolEdit;
 
 type
    TFormAuditoriaAuto = class(TForm)
     pnlEsquerda: TPanel;
     pnlRelatorio: TPanel;
-    dbgAspectos: TDBGrid;
+    dbgAuditorias: TDBGrid;
     zqryAuditoria: TZQuery;
     dspAuditoria: TDataSetProvider;
     cdsAuditoria: TClientDataSet;
@@ -74,7 +74,7 @@ type
     zqryFuncoes: TZQuery;
     dspFuncoes: TDataSetProvider;
     pnl1: TPanel;
-    btn1: TBitBtn;
+    btnSair: TBitBtn;
     btnGerarAuditoria: TBitBtn;
     btnImprimir: TBitBtn;
     btnGravar: TBitBtn;
@@ -84,22 +84,60 @@ type
     cdsFuncoescodi_fun: TLargeintField;
     cdsFuncoesdesc_fun: TWideStringField;
     cdsAuditoriaFuncaoGestor: TStringField;
+    btnEvidencias: TBitBtn;
+    pnlEvidencias: TPanel;
+    pnl2: TPanel;
+    btnSairEvid: TBitBtn;
+    pnlTitulo: TPanel;
+    pnls: TPanel;
+    btnGravarEvid: TBitBtn;
+    lbl18: TLabel;
+    dblProcesso: TDBLookupComboBox;
+    lbl2: TLabel;
+    edtIdentificacao: TEdit;
+    lbl8: TLabel;
+    mmoConformidade: TMemo;
+    mmoNaoConformidade: TMemo;
+    lbl1: TLabel;
+    edtRequisito: TEdit;
+    lbl3: TLabel;
+    zqryProcessosEvid: TZQuery;
+    dspProcessosEvid: TDataSetProvider;
+    cdsProcessosEvid: TClientDataSet;
+    dsProcessosEvid: TDataSource;
+    btnExcluir: TBitBtn;
+    zqryCabec: TZQuery;
+    dspCabec: TDataSetProvider;
+    cdsCabec: TClientDataSet;
+    frxDBDSCabec: TfrxDBDataset;
+    cdsCabecnome_emp: TWideStringField;
+    cdsCabecemp_escopo: TWideMemoField;
+    cdsCabecaud_data: TDateTimeField;
+    cdsCabecaud_auditor: TWideStringField;
+    cdsCabecaud_periodo_ini: TDateTimeField;
+    cdsCabecaud_periodo_fim: TDateTimeField;
+    cdsCabecaud_data_programa: TDateTimeField;
     procedure btn1Click(Sender: TObject);
-    procedure btnSairImpClick(Sender: TObject);
+    procedure btnSairEvidClick(Sender: TObject);
     procedure GerarAuditoria();
     procedure frxReport1Preview(Sender: TObject);
     procedure AtualizarDados();
     procedure FormShow(Sender: TObject);
-    procedure dbgAspectosCellClick(Column: TColumn);
+    procedure dbgAuditoriasCellClick(Column: TColumn);
     procedure Impressao();
     procedure Botoes(lFlag: Boolean);
     procedure btnGerarAuditoriaClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure btnEvidenciasClick(Sender: TObject);
+    procedure btnGravarEvidClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    iContinua: Integer; // 0 - Não cria o relatório / 1 - Cria o relatório
   end;
 
 var
@@ -108,7 +146,7 @@ var
 implementation
 
 uses
-   frm_dm, Funcoes;
+   frm_dm, Funcoes, frm_Inicial, frm_CadAuditoriaAutoCabec;
 
 {$R *.dfm}
 
@@ -127,6 +165,15 @@ begin
       Active:= False;
       CommandText:= ' SELECT codi_pro, nome_pro ' +
                     ' FROM processos' +
+                    ' ORDER BY nome_pro';
+      Active:= True;
+   end;
+
+   with cdsProcessosEvid do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro, nome_pro ' +
+                    ' FROM processos' +
+                    ' WHERE pro_exibelista = ' + QuotedStr('S') +
                     ' ORDER BY nome_pro';
       Active:= True;
    end;
@@ -160,6 +207,27 @@ begin
    pnlRelatorio.Visible:= False;
 end;
 
+procedure TFormAuditoriaAuto.btnEvidenciasClick(Sender: TObject);
+begin
+   if Acesso(cUsuario, 63, 'cadastro') = 1 then begin
+      AbrePanel(pnlEvidencias, Self);
+      pnlTitulo.Caption:= ' Cadastro de Evidências - ' + cdsGravadas.FieldByName('aud_data').AsString;
+      TryFocus(dblProcesso);
+   end;
+end;
+
+procedure TFormAuditoriaAuto.btnExcluirClick(Sender: TObject);
+begin
+   if Acesso(cUsuario, 63, 'exclusao') = 1 then begin
+      if Application.MessageBox(PChar('Confirma a exclusão da auditoria de ' + cdsGravadas.FieldByName('aud_data').AsString + ' ?'), 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+         Executar(' DELETE FROM auditoria_auto' +
+                  ' WHERE aud_data = ' + ArrumaDataSQL(cdsGravadas.FieldByName('aud_data').AsDateTime));
+
+         AtualizarDados();
+      end;
+   end;
+end;
+
 procedure TFormAuditoriaAuto.btnCancelarClick(Sender: TObject);
 begin
    Botoes(True);
@@ -168,16 +236,33 @@ end;
 
 procedure TFormAuditoriaAuto.btnGerarAuditoriaClick(Sender: TObject);
 begin
-   cdsAuditoria.CreateDataSet;
-   cdsAuditoria.Open;
-   cdsAuditoria.EmptyDataSet;
-   GerarAuditoria();
-//   cdsAuditoria.Close;
-   Botoes(False);
+   if Acesso(cUsuario, 63, 'cadastro') = 1 then begin
+      FormCadAuditoriaAutoCabec:= TFormCadAuditoriaAutoCabec.Create(nil);
+//      if cdsGravadas.FieldByName('aud_data').AsString = '' then begin
+         FormCadAuditoriaAutoCabec.dDataAuditoria:= Date();
+//      end
+//      else begin
+//         FormCadAuditoriaAutoCabec.dDataAuditoria:= cdsGravadas.FieldByName('aud_data').AsDateTime;
+//      end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaAutoSemGravar.fr3');
-      ShowReport;
+      FormCadAuditoriaAutoCabec.ShowModal;
+      FormCadAuditoriaAutoCabec.Release;
+
+      if iContinua = 1 then begin
+         btnEvidencias.Enabled:= False;
+         btnExcluir.Enabled   := False;
+         cdsAuditoria.CreateDataSet;
+         cdsAuditoria.Open;
+         cdsAuditoria.EmptyDataSet;
+         GerarAuditoria();
+      //   cdsAuditoria.Close;
+         Botoes(False);
+
+         with frxReport1 do begin
+            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaAutoSemGravar.fr3');
+            ShowReport;
+         end;
+      end;
    end;
 end;
 
@@ -227,27 +312,67 @@ begin
       end;
    end;
 
+   Auditoria('RELATÓRIO DE AUDITORIA AUTOMÁTICA', DateToStr(Date()), 'I','');
+
    cdsAuditoria.Close;
 
    Botoes(True);
    AtualizarDados();
 end;
 
-procedure TFormAuditoriaAuto.btnSairImpClick(Sender: TObject);
+procedure TFormAuditoriaAuto.btnGravarEvidClick(Sender: TObject);
+begin
+   try
+      // Grava os dados em tabela
+      Executar(' INSERT INTO auditoria_auto(' +
+               ' aud_codigo, aud_data, aud_conformidade, aud_requisito, ' +
+               ' aud_naoconformidade, aud_tipo, aud_processo, aud_gestor) ' +
+               ' VALUES(' +
+               BuscarNovoCodigo('auditoria_auto', 'aud_codigo') + ',' +
+               ArrumaDataSQL(cdsGravadas.FieldByName('aud_data').AsDateTime) + ',' +
+               QuotedStr(mmoConformidade.Text) + ',' +
+               QuotedStr(edtRequisito.Text) + ',' +
+               QuotedStr(mmoNaoConformidade.Text) + ',' +
+               QuotedStr(edtIdentificacao.Text) + ',' +
+               QuotedStr(dblProcesso.KeyValue) + ',' +
+               '0' +
+   //            Nulo(FieldByName('aud_gestor').AsString, 'I') +
+               ')');
+
+      Application.MessageBox('Evidência gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
+   except
+      on E:Exception do begin
+         MostrarErro('Erro ao gravar evidência', E.Message, Self.Name);
+      end;
+   end;
+
+   Impressao();
+end;
+
+procedure TFormAuditoriaAuto.btnSairClick(Sender: TObject);
 begin
    Self.Close;
 end;
 
-procedure TFormAuditoriaAuto.dbgAspectosCellClick(Column: TColumn);
+procedure TFormAuditoriaAuto.btnSairEvidClick(Sender: TObject);
 begin
+   pnlEvidencias.Visible:= False;
+end;
+
+procedure TFormAuditoriaAuto.dbgAuditoriasCellClick(Column: TColumn);
+begin
+   btnExcluir.Enabled:= True;
    Impressao();
 end;
 
 procedure TFormAuditoriaAuto.FormShow(Sender: TObject);
 begin
    AtualizarDados();
-   btnGravar.Enabled  := False;
-   btnCancelar.Enabled:= False;
+   btnGravar.Enabled    := False;
+   btnCancelar.Enabled  := False;
+   btnExcluir.Enabled   := False;
+   btnEvidencias.Enabled:= False;
+   pnlEvidencias.Visible:= False;
 end;
 
 procedure TFormAuditoriaAuto.frxReport1Preview(Sender: TObject);
@@ -278,15 +403,22 @@ var
    sNomeIndicador: string;
    nCont: Integer;
    sFuncaoGestor: string;
+   sRequisito: string;
 begin
    // Seleciona os processos para verificação dos itens da Auditoria Automática
+   sRequisito:= '9.3';
+
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT codi_pro, gest_pro, f.desc_fun' +
+      CommandText:= ' SELECT codi_pro, gest_pro, F.desc_fun,' +
+                    ' entr_pro, said_pro, requ_pro,' +
+                    ' (SELECT COUNT(*) FROM processos_antecedentes WHERE pro_codigo = codi_pro) as ProcAntec,' +
+                    ' (SELECT COUNT(*) FROM processos_subsequentes WHERE pro_codigo = codi_pro) as ProcSub' +
                     ' FROM processos' +
                     ' LEFT JOIN colaboradores C ON C.codi_col = gest_pro' +
                     ' LEFT JOIN funcoes F ON F.codi_fun = C.func_col' +
-                    ' WHERE pro_exibelista = ' + QuotedStr('S');
+                    ' WHERE pro_exibelista = ' + QuotedStr('S') +
+                    ' ORDER BY nome_pro';
       Active:= True;
    end;
 
@@ -313,7 +445,8 @@ begin
          else begin
             sNaoConformidade:= 'Evidenciado ações de análise critica vencidas:' + #13;
             while not dm.cdsAux.Eof do begin
-               sNaoConformidade:= sNaoConformidade + FieldByName('said_aac').AsString + ' ' + 'Prazo: ' +
+               sNaoConformidade:= sNaoConformidade + 'Requisito: ' + sRequisito + ' - NC - ' +
+                                  FieldByName('said_aac').AsString + ' ' + 'Prazo: ' +
                                   FieldByName('praz_aac').AsString + #13 + #13;
 
                dm.cdsAux.Next;
@@ -325,7 +458,7 @@ begin
 
          cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
          cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
-         cdsAuditoria.FieldByName('aud_requisito').AsString      := '9.3';
+         cdsAuditoria.FieldByName('aud_requisito').AsString      := sRequisito;
          cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
          cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Análise Crítica';
          cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
@@ -722,7 +855,7 @@ begin
       sConformidade:= '';
       sNaoConformidade:= '';
 
-      // Verifica se tem manutenção precentiva vencida (Modelo antigo)
+      // Verifica se tem manutenção preventiva vencida (Modelo antigo)
       with dm.cdsAux do begin
          Active:= False;
          CommandText:= ' SELECT current_date - cast(M.quan_man as integer) * INTERVAL ' + QuotedStr('1 day') + ' as DataLimite, ' +
@@ -791,7 +924,171 @@ begin
       cdsAuditoria.Post;
 
       // ***** Matriz de Competências
+      sConformidade:= '';
+      sNaoConformidade:= '';
 
+      // Mostra os colaboradores que não atendem a Educação exigida na função
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_col, nome_col, educ_col, F.desc_fun as Funcao,' +
+                       ' TC1.orde_com as OrdemEduc, TC1.valo_com as educacaoCol,' +
+                       ' TC2.orde_com as OrdemEducFun, TC2.valo_com as educacaoFun' +
+                       ' FROM colaboradores C' +
+                       ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
+                       ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 6 AND TC1.codi_com = C.educ_col' +
+                       ' INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 6 AND TC2.codi_com = F.educ_fun' +
+                       ' WHERE TC1.orde_com > TC2.orde_com' +
+                       '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nome_col';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= 'Não evidenciado atendimento à educação prevista na matriz de competência para:' + #13;
+         end;
+
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('nome_col').AsString + #13 +
+                         'Função: ' + FieldByName('Funcao').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Mostra os colaboradores que não atendem a Experiência exigida na função
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_col, nome_col, expe_col, F.desc_fun as Funcao,' +
+                       ' TC1.orde_com as OrdemExp, TC1.valo_com as ExpCol,' +
+                       ' TC2.orde_com as OrdemExpFun, TC2.valo_com as ExpFun' +
+                       ' FROM colaboradores C' +
+                       ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
+                       ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 7 AND TC1.codi_com = C.expe_col' +
+                       ' INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 7 AND TC2.codi_com = F.expe_fun' +
+                       ' WHERE TC1.orde_com < TC2.orde_com' +
+                       '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nome_col';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= sNaoConformidade + 'Não evidenciado atendimento à experiência prevista na matriz de competência para:' + #13;
+         end;
+
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('nome_col').AsString + #13 +
+                         'Função: ' + FieldByName('Funcao').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Mostra os colaboradores que tem Treinamentos com previsão vencida ou sem data de previsão
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT C.codi_col, C.nome_col, T.desc_tre as Treinamento,' +
+                       ' CT.dtpr_tre, CT.dtre_tre' +
+                       ' FROM colab_treinamentos CT' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col' +
+                       ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
+                       ' WHERE (dtpr_tre is null OR (dtpr_tre < CURRENT_DATE AND dtre_tre is null))' +
+                       '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nome_col';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= sNaoConformidade + 'Evidenciados treinamentos com previsão vencida ou sem data de previsão:' + #13;
+         end;
+
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('nome_col').AsString + #13 +
+                         'Treinamento: ' + FieldByName('Treinamento').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Mostra os colaboradores que tem Treinamentos sem verificação de eficácia
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT C.nome_col, CT.codi_col, T.desc_tre as Treinamento, CT.codi_tre, ' +
+                       ' CT.dtpr_tre, CT.dtre_tre, CT.codi_pla, CT.tipo_tre, CT.tre_certificado' +
+                       ' FROM colab_treinamentos CT' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col AND C.col_status = 1' +
+                       ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
+                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtre_tre notnull)' +
+                       '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY nome_col';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= sNaoConformidade + 'Evidenciados treinamentos sem verificação de eficácia:' + #13;
+         end;
+
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('nome_col').AsString + #13 +
+                         'Treinamento: ' + FieldByName('Treinamento').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Busca 3 funções de colaboradores aleatórias
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT C.codi_col, C.nome_col, C.func_col,' +
+                       ' F.desc_fun as Funcao' +
+                       ' FROM colaboradores C' +
+                       ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
+                       ' WHERE C.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + FieldByName('nome_col').AsString + #13 +
+                         'Função: ' + FieldByName('Funcao').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Busca 3 treinamentos de colaboradores aleatórias
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT C.codi_col, C.codi_tre, C.dtpr_tre, C.dtre_tre,' +
+                       ' T.desc_tre as Treinamento, CL.nome_col as Colaborador' +
+                       ' FROM colab_treinamentos C' +
+                       ' INNER JOIN treinamentos T ON T.codi_tre = C.codi_tre' +
+                       ' INNER JOIN colaboradores CL ON CL.codi_col = C.codi_col' +
+                       ' WHERE dtre_tre notnull' +
+                       ' AND CL.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + FieldByName('Colaborador').AsString + #13 +
+                         'Treinamento: ' + FieldByName('Treinamento').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Busca 3 habilidades de colaboradores aleatórias
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT C.codi_col, C.codi_hab, MAX(C.hab_ano) as Ano, ' +
+                       ' H.desc_hab as Habilidade, CL.nome_col as Colaborador' +
+                       ' FROM colab_habilidades C' +
+                       ' INNER JOIN habilidades H ON H.codi_hab = C.codi_hab' +
+                       ' INNER JOIN colaboradores CL ON CL.codi_col = C.codi_col' +
+                       ' WHERE CL.proc_col = ' + QuotedStr(sCodProcesso) +
+                       ' GROUP BY C.codi_col, C.codi_hab, H.desc_hab, CL.nome_col ' +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + FieldByName('Colaborador').AsString + #13 +
+                         'Habilidade: ' + FieldByName('Habilidade').AsString + ' - ' +
+                         FieldByName('Ano').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      if sConformidade = '' then begin
+         sConformidade:= 'Sem Pendências';
+      end;
 
       // Grava os dados na tabela em memória
       cdsAuditoria.Append;
@@ -806,6 +1103,148 @@ begin
       cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
       cdsAuditoria.Post;
+
+      // ***** Processo
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Verifica se o processo tem Processos Antecedente, Processos Subsequentes,
+      // Entradas, Saídas, Requisitos e Gestor cadastrados
+      if Length(dm.cdsAuxiliar.FieldByName('entr_pro').AsString) < 5 then begin
+         sNaoConformidade:= sNaoConformidade + 'Entradas' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Entradas' + #13;
+      end;
+
+      if Length(dm.cdsAuxiliar.FieldByName('said_pro').AsString) < 5 then begin
+         sNaoConformidade:= sNaoConformidade + 'Saídas' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Saídas' + #13;
+      end;
+
+      if Length(dm.cdsAuxiliar.FieldByName('requ_pro').AsString) < 5 then begin
+         sNaoConformidade:= sNaoConformidade + 'Requisitos ' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Requisitos' + #13;
+      end;
+
+      if dm.cdsAuxiliar.FieldByName('gest_pro').AsString = '' then begin
+         sNaoConformidade:= sNaoConformidade + 'Gestor' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Gestor' + #13;
+      end;
+
+      if dm.cdsAuxiliar.FieldByName('ProcAntec').AsInteger <= 0 then begin
+         sNaoConformidade:= sNaoConformidade + 'Processos Antecedentes' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Processos Antecedentes' + #13;
+      end;
+
+      if dm.cdsAuxiliar.FieldByName('ProcSub').AsInteger <= 0 then begin
+         sNaoConformidade:= sNaoConformidade + 'Processos Subsequentes' + #13;
+      end
+      else begin
+         sConformidade:= sConformidade + 'Processos Subsequentes' + #13;
+      end;
+
+      if sNaoConformidade <> EmptyStr then begin
+         sNaoConformidade:= 'Não foi evidenciado:' + #13 + sNaoConformidade;
+      end;
+
+      if sConformidade <> EmptyStr then begin
+         sConformidade:= 'Foi evidenciado:' + #13 + sConformidade;
+      end;
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '4.4.1';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Processo';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
+
+      cdsAuditoria.Post;
+
+      // ***** Calibração
+      sConformidade:= '';
+      sNaoConformidade:= '';
+
+      // Mostra os equipamentos com calibração vencida
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT cali_codigo, cali_numero, I.desc_inf as Equipamento, cali_resolucao, cali_localizacao, ' +
+                       ' cali_frequencia, cali_faixa, cali_capacidade, cali_criterio,' +
+                       ' cali_certificado, cali_datacalibracao, cali_proxcalibracao, cali_padroes,' +
+                       ' cali_erro, cali_parecer, cali_processo, cali_arquivo, cali_incerteza,' +
+                       ' cali_errototal, cali_aprovado, cali_equip, cali_obs, P.nome_pro' +
+                       ' FROM calibracao' +
+                       // Usado Inner Join para que os equipamentos excluídos não
+                       // apareçam nas pendência(s) de calibração
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip AND I.inf_status = 1' + // Ativos
+                       ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+                       ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date()) +
+                       '       AND cali_processo = ' + QuotedStr(sCodProcesso);
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            sNaoConformidade:= 'Evidenciado calibração vencida:' + #13;
+         end;
+
+         while not dm.cdsAux.Eof do begin
+            sNaoConformidade:= sNaoConformidade + FieldByName('Equipamento').AsString + #13 +
+                         'Próx. Calibração: ' + FieldByName('cali_proxcalibracao').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Mostra 3 calibrações aleatórias não vencidas
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT cali_codigo, cali_numero, I.desc_inf as Equipamento,' +
+                       ' cali_datacalibracao, cali_proxcalibracao' +
+                       ' FROM calibracao' +
+                       // Usado Inner Join para que os equipamentos excluídos não
+                       // apareçam nas pendência(s) de calibração
+                       ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip AND I.inf_status = 1' + // Ativos
+                       ' WHERE cali_proxcalibracao > ' + ArrumaDataSQL(Date()) +
+                       '       AND cali_processo = ' + QuotedStr(sCodProcesso) +
+                       ' ORDER BY RANDOM() LIMIT 3';
+         Active:= True;
+
+//         if RecordCount > 0 then begin
+//            sConformidade:= 'Evidenciado calibração vencida:' + #13;
+//         end;
+
+         while not dm.cdsAux.Eof do begin
+            sConformidade:= sConformidade + 'Código: ' + FieldByName('cali_codigo').AsString + #13 +
+                         'Identificação: ' + FieldByName('cali_numero').AsString + #13 +
+                         'Equipamento: ' + FieldByName('Equipamento').AsString + #13 +
+                         'Última Calibração: ' + FieldByName('cali_datacalibracao').AsString + #13 +
+                         'Próx. Calibração: ' + FieldByName('cali_proxcalibracao').AsString + #13 + #13;
+            dm.cdsAux.Next;
+         end;
+      end;
+
+      // Grava os dados na tabela em memória
+      cdsAuditoria.Append;
+
+      cdsAuditoria.FieldByName('aud_data').AsDateTime         := Date();
+      cdsAuditoria.FieldByName('aud_conformidade').AsString   := sConformidade;
+      cdsAuditoria.FieldByName('aud_requisito').AsString      := '7.1.5';
+      cdsAuditoria.FieldByName('aud_naoconformidade').AsString:= sNaoConformidade;
+      cdsAuditoria.FieldByName('aud_tipo').AsString           := 'Calibração';
+      cdsAuditoria.FieldByName('aud_processo').AsString       := sCodProcesso;
+      cdsAuditoria.FieldByName('aud_gestor').AsString         := sCodGestor;
+      cdsAuditoria.FieldByName('FuncaoGestor').AsString       := sFuncaoGestor;
 
       // Muda o processo
       dm.cdsAuxiliar.Next;
@@ -883,9 +1322,14 @@ begin
                     ' LEFT JOIN colaboradores C ON C.codi_col = aud_gestor' +
                     ' LEFT JOIN funcoes F ON F.codi_fun = C.func_col' +
                     ' WHERE aud_data = ' + ArrumaDataSQL(cdsGravadas.FieldByName('aud_data').AsDateTime) +
-                    ' ORDER BY Processo';
+                    ' ORDER BY Processo, aud_codigo';
       Active:= True;
+
+      if RecordCount > 0 then begin
+         btnEvidencias.Enabled:= True;
+      end;
    end;
+
 
    with frxReport1 do begin
       LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaAuto.fr3');

@@ -2289,6 +2289,7 @@ object FormCadClientes: TFormCadClientes
       ShowHint = True
       TabOrder = 6
       OnClick = btnExcluirClick
+      ExplicitLeft = 141
     end
     object btnAlterar: TBitBtn
       Left = 74
