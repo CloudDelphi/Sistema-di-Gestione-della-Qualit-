@@ -10140,7 +10140,7 @@ object FormValorIndicadores: TFormValorIndicadores
     end
   end
   object pnlEmail: TPanel
-    Left = 4
+    Left = 20
     Top = 359
     Width = 438
     Height = 253
@@ -10463,7 +10463,7 @@ object FormValorIndicadores: TFormValorIndicadores
       Height = 29
       Align = alTop
       Alignment = taLeftJustify
-      Caption = ' Envio de E-mail ao respons'#225'vel do Processo'
+      Caption = ' Envio de E-mail ao gestor do Processo'
       Color = clGradientActiveCaption
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -10490,8 +10490,8 @@ object FormValorIndicadores: TFormValorIndicadores
     end
   end
   object pnlCadEmail: TPanel
-    Left = 719
-    Top = 358
+    Left = 121
+    Top = 199
     Width = 578
     Height = 223
     TabOrder = 21
@@ -10532,6 +10532,14 @@ object FormValorIndicadores: TFormValorIndicadores
       Width = 265
       Height = 13
       Caption = 'gestor para envio do aviso de atualiza'#231#227'o do indicador.'
+    end
+    object lblCodGestor: TLabel
+      Left = 478
+      Top = 82
+      Width = 68
+      Height = 13
+      Caption = 'C'#243'digo Gestor'
+      Visible = False
     end
     object pnl7: TPanel
       Left = 1

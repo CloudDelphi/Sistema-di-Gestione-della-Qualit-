@@ -155,8 +155,8 @@ procedure TFormCadAuditoriaAutoCabec.PreencherCampos;
 begin
    with cdsCabec do begin
       edtData.Text       := FieldByName('aud_data').AsString;
-      edtNomeEmpresa.Text:= FieldByName('nome_emp').AsString;
-      mmoEscopo.Text     := FieldByName('emp_escopo').AsString;
+//      edtNomeEmpresa.Text:= FieldByName('nome_emp').AsString;
+//      mmoEscopo.Text     := FieldByName('emp_escopo').AsString;
       edtAuditor.Text    := FieldByName('aud_auditor').AsString;
       dtPeriodoIni.Date  := FieldByName('aud_periodo_ini').AsDateTime;
       dtPeriodoFim.Date  := FieldByName('aud_periodo_fim').AsDateTime;

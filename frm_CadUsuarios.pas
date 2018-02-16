@@ -211,6 +211,7 @@ type
     cdsUsuariosrnc: TWideStringField;
     cdsUsuariosusu_pend_pmc_causa: TIntegerField;
     cdsUsuariosusu_pend_pmc_acaoimediata: TIntegerField;
+    chkPend_rnc_naopreenchido: TCheckBox;
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -665,7 +666,8 @@ begin
                     ' usu_pend_calibracao = ' + LogicoParaString(chkPend_calibracao.Checked) + ',' +
                     ' usu_pend_indicadores = ' + LogicoParaString(chkPend_indicadores.Checked) + ',' +
                     ' usu_pend_pmc_causa = ' + LogicoParaString(chkPend_pmc_causa.Checked) + ',' +
-                    ' usu_pend_pmc_acaoimediata = ' + LogicoParaString(chkPend_pmc_acaoimediata.Checked) +
+                    ' usu_pend_pmc_acaoimediata = ' + LogicoParaString(chkPend_pmc_acaoimediata.Checked) + ',' +
+                    ' usu_pend_rnc_naopreenchido = ' + LogicoParaString(chkPend_rnc_naopreenchido.Checked) +
                     ' WHERE nome_usu = ' + QuotedStr(edtUsuario.Text);
       Execute;
    end;

@@ -190,6 +190,8 @@ type
     cdsImprimircliente: TWideStringField;
     cdsImprimirfornecedor: TWideStringField;
     cdsImprimirprocede: TWideStringField;
+    lbl14: TLabel;
+    edtOrdemProd: TEdit;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -326,7 +328,8 @@ begin
                     ' rnc_processo, rnc_setor, rnc_origem, rnc_cliente, ' +
                     ' rnc_fornecedor, rnc_consumidor, rnc_nconformidade, ' +
                     ' rnc_procede, rnc_responsavel, rnc_status, rnc_disposicao,' +
-                    ' rnc_departamento, rnc_relacionamento, rnc_representante' +
+                    ' rnc_departamento, rnc_relacionamento, rnc_representante,' +
+                    ' rnc_ordemprod' +
                     ' FROM rnc R' +
                     ' WHERE rnc_codigo = ' + sCodigoRNC;
       Active:= True;
@@ -680,8 +683,12 @@ begin
 
             mmoNaoConformidade.Text   := FieldByName('rnc_nconformidade').AsString;
             mmoDisposicao.Text        := FieldByName('rnc_disposicao').AsString;
+            edtOrdemProd.Text         := FieldByName('rnc_ordemprod').AsString;
+
             btnAceitar.Enabled        := mmoDisposicao.Text <> EmptyStr;
             btnRecusar.Enabled        := mmoDisposicao.Text <> EmptyStr;
+
+
             if FieldByName('rnc_status').AsInteger >= 3 then begin // Aceito ou Recusado
                btnAceitar.Enabled:= False;
                btnRecusar.Enabled:= False;

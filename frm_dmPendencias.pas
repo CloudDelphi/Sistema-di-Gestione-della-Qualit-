@@ -120,6 +120,14 @@ type
     dspPMCsemAcaoImediata: TDataSetProvider;
     cdsPMCsemAcaoImediata: TClientDataSet;
     dsPMCsemAcaoImediata: TDataSource;
+    zqryRNCSemResposta: TZQuery;
+    dspRNCSemResposta: TDataSetProvider;
+    cdsRNCSemResposta: TClientDataSet;
+    dsRNCSemResposta: TDataSource;
+    cdsRNCSemRespostarnc_identificacao: TWideStringField;
+    cdsRNCSemRespostarnc_nconformidade: TWideMemoField;
+    cdsRNCSemRespostastatus: TWideStringField;
+    cdsRNCSemRespostarnc_codigo: TIntegerField;
     procedure cdsManutencaoiden_infGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure cdsManutencaooque_manGetText(Sender: TField; var Text: string;
@@ -133,6 +141,8 @@ type
     procedure cdsPDCAlan_oqueGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure cdsHabVencidaultimaavaliacaoGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
+    procedure cdsRNCSemRespostarnc_nconformidadeGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
   private
     { Private declarations }
@@ -187,6 +197,12 @@ procedure TdmPendencias.cdsPMCAcoesdesc_acoGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
 begin
    Text:= Copy(cdsPMCAcoes.FieldByName('desc_aco').AsString, 1,50);
+end;
+
+procedure TdmPendencias.cdsRNCSemRespostarnc_nconformidadeGetText(
+  Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+   Text:= Copy(cdsRNCSemResposta.FieldByName('rnc_nconformidade').AsString, 1,200);
 end;
 
 end.

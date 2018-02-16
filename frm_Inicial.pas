@@ -395,6 +395,15 @@ type
     N17: TMenuItem;
     sbAuditoria: TSpeedButton;
     btn1: TButton;
+    zqryAvaliadores: TZQuery;
+    dspAvaliadores: TDataSetProvider;
+    cdsAvaliadores: TClientDataSet;
+    dsAvaliadores: TDataSource;
+    lbl4: TLabel;
+    dblAvaliador: TDBLookupComboBox;
+    chkTodosAvaliadores: TCheckBox;
+    cpnlRNCNaoRespondida: TCategoryPanel;
+    dbgRNCNaoRespondida: TDBGrid;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -521,6 +530,8 @@ type
     procedure Cronograma1Click(Sender: TObject);
     procedure sbAuditoriaClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure chkTodosAvaliadoresClick(Sender: TObject);
+    procedure dbgRNCNaoRespondidaDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -557,7 +568,7 @@ uses Funcoes, frm_Login, Validacao, frm_dm, frm_cartaAtualizacao,
   frm_CadRiscoAnaliseRisco, frm_CadModoRecuperacao, frm_DefCadClasse,
   frm_DefCadDefeitos, frm_DefCadOrigem, frm_DefLancamentos, frm_CadProdutos,
   frm_PDCA, frm_CadContexto, frm_CadPartesInteressadas, frm_CadContextoAnalise,
-  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto;
+  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto, frm_CadRNCFecha;
 
 {$R *.dfm}
 
@@ -748,6 +759,16 @@ begin
       cdsColab.Active:= False;
       cdsColab.Active:= True;
 
+      with cdsAvaliadores do begin
+         Active:= False;
+         CommandText:= ' SELECT ava_codavaliador, C.nome_col ' +
+                       ' FROM colab_avaliador' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = ava_codavaliador' +
+                       ' WHERE col_status = 1' + // Ativos
+                       ' ORDER BY C.nome_col';
+         Active:= True;
+      end;
+
       with cdsProcessos do begin
          Active:= False;
          CommandText:= ' SELECT codi_pro, nome_pro ' +
@@ -773,7 +794,28 @@ begin
 end;
 
 procedure TFormInicial.btn1Click(Sender: TObject);
+var
+   planilha, sheet: OleVariant;
+   linha, coluna: Integer;
 begin
+     //Crio o objeto que gerencia o arquivo excel
+     planilha:= CreateOleObject('Excel.Application');
+
+     //Abro o arquivo
+     planilha.WorkBooks.open('C:\Users\Daniel\Desktop\FUNCIONARIOS DESTRA.xlsx');
+
+     //Pega a primeira planilha do arquivo
+     sheet:= planilha.WorkSheets[1];
+
+     //Aqui pego o texto de uma das células
+     linha:= 2;
+     coluna:= 2;
+     ShowMessage(sheet.cells[linha, coluna]);
+
+     //Fecho a planilha
+     planilha.WorkBooks.Close;
+
+
 // Copia as habilidades cadastradas na função
 //   if Application.MessageBox('Deseja copiar as habilidades que estão cadastradas no cadastro da função para o colaborador ?', 'Confirmação', MB_YESNO + MB_ICONWARNING) = IDYES then begin
 //      with dm.cdsGravar do begin
@@ -1075,6 +1117,11 @@ begin
    dblTreinamento.Enabled:= not chkTodosTreinamentoTre.Checked;
 end;
 
+procedure TFormInicial.chkTodosAvaliadoresClick(Sender: TObject);
+begin
+   dblAvaliador.Enabled:= not chkTodosAvaliadores.Checked;
+end;
+
 procedure TFormInicial.chkTodosColabClick(Sender: TObject);
 begin
    dblColaborador.Enabled:= not chkTodosColab.Checked;
@@ -1243,6 +1290,23 @@ begin
    FormCadPMCFecha.Release;
    FormCadPMCFecha.Free;
    FormCadPMCFecha:= nil;
+end;
+
+procedure TFormInicial.dbgRNCNaoRespondidaDblClick(Sender: TObject);
+begin
+   if dmPendencias.cdsRNCSemResposta.RecordCount = 0 then begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end
+   else begin
+      if AcessoTartaruga('RNC') then begin
+         FormCadRNCFecha:= TFormCadRNCFecha.Create(nil);
+         FormCadRNCFecha.sCodigoRNC:= dmPendencias.cdsRNCSemResposta.FieldByName('rnc_codigo').AsString;
+         FormCadRNCFecha.iTela:= 1;
+         FormCadRNCFecha.ShowModal;
+         FormCadRNCFecha.Release;
+         FreeAndNil(FormCadRNCFecha);
+      end;
+   end;
 end;
 
 procedure TFormInicial.Empresa1Click(Sender: TObject);
@@ -1564,6 +1628,11 @@ begin
       TryFocus(dblColaborador);
       Exit;
    end;
+   if (chkTodosAvaliadores.Checked = False) AND ((dblAvaliador.KeyValue = Null) OR (dblAvaliador.KeyValue = -1)) then begin
+      Application.MessageBox('Selecione um Avaliador ou marque TODOS !', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblAvaliador);
+      Exit;
+   end;
 
    // Busca a nota máxima nos parametros
    with dm.cdsAuxiliar do begin
@@ -1672,7 +1741,8 @@ begin
                           ' INNER JOIN habilidades H ON H.codi_hab = CH2.codi_hab ' +
                           '      WHERE CH2.codi_col = CH.codi_col AND CH2.hab_ano = ' + QuotedStr(spnAno.Text) + ') AS TotalHab, ' +
                           ' CH.codi_col, CH.codi_hab, CH.nota_hab, CH.hab_ano, H.desc_hab, ' +
-                          ' (SELECT nome_col FROM colaboradores WHERE codi_col = CA.ava_codavaliador) as Avaliador' +
+                          ' (SELECT nome_col FROM colaboradores WHERE codi_col = CA.ava_codavaliador) as Avaliador,' +
+                          ' CA.ava_codavaliador' +
                           ' FROM colab_habilidades CH' +
                           ' INNER JOIN colaboradores C ON C.codi_col = CH.codi_col' +
                           ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
@@ -1689,6 +1759,9 @@ begin
             end;
             if chkTodosFuncao.Checked = False then begin
                CommandText:= CommandText + ' AND C.func_col = ' + FloatToStr(dblFuncoes.KeyValue);
+            end;
+            if chkTodosAvaliadores.Checked = False then begin
+               CommandText:= CommandText + ' AND CA.ava_codavaliador = ' + FloatToStr(dblAvaliador.KeyValue);
             end;
             if chkNotaZerada.Checked = True then begin
                CommandText:= CommandText + ' AND CH.nota_hab > 0';
@@ -2513,7 +2586,7 @@ begin
                     ' usu_pend_coleducacao, usu_pend_treinprevisao, usu_pend_treineficacia,' +
                     ' usu_pend_avaliacao, usu_pend_procedimentos, usu_pend_forn, usu_pend_pmcacoes,' +
                     ' usu_pend_pmc, usu_pend_calibracao, usu_pend_indicadores, usu_pend_pmc_causa,' +
-                    ' usu_pend_pmc_acaoimediata' +
+                    ' usu_pend_pmc_acaoimediata, usu_pend_rnc_naopreenchido' +
                     ' FROM usuarios' +
                     ' WHERE nome_usu = ' + QuotedStr(cUsuario);
       Active:= True;
@@ -3069,6 +3142,31 @@ begin
    end
    else begin
       cpnlHabilidadeVencida.Visible:= False;
+   end;
+
+   // Verifica se tem RNC não respondidas e sem aceite ou recusa
+   if dm.cdsAuxiliar.FieldByName('usu_pend_rnc_naopreenchido').AsInteger = 1 then begin
+      with dmPendencias.cdsRNCSemResposta do begin
+         Active:= False;
+         CommandText:= ' SELECT rnc_codigo, rnc_identificacao, rnc_nconformidade, TC.valo_com as Status ' +
+                       ' FROM rnc' +
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 35 AND TC.codi_com = rnc_status ' +
+                       ' WHERE (rnc_status = 1 OR rnc_status = 2)' +
+                       ' ORDER BY rnc_identificacao';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            cpnlRNCNaoRespondida.Caption:= 'RNC sem resposta ou sem Aceite/Recusa - ' + IntToStr(RecordCount) + ' pendência(s)';
+            cpnlRNCNaoRespondida.Visible:= True;
+         end
+         else begin
+            cpnlRNCNaoRespondida.Caption:= 'RNC sem resposta ou sem Aceite/Recusa ';
+            cpnlRNCNaoRespondida.Visible:= False;
+         end;
+      end;
+   end
+   else begin
+      cpnlRNCNaoRespondida.Visible:= False;
    end;
 
    // Verifica se tem todos os PMC abertos para as análises de risco do processo

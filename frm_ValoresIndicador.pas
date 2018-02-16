@@ -165,6 +165,7 @@ type
     cdsValorIndicadoresmet_valor: TFloatField;
     cdsReportmetaconcatenada: TWideMemoField;
     chkMonitoramento: TCheckBox;
+    lblCodGestor: TLabel;
     procedure cdsValorIndicadoresAfterPost(DataSet: TDataSet);
     procedure cdsValorIndicadoresCalcFields(DataSet: TDataSet);
     procedure sbCalcClick(Sender: TObject);
@@ -298,7 +299,7 @@ procedure TFormValorIndicadores.btnGravarEmailClick(Sender: TObject);
 begin
    Executar(' UPDATE colaboradores' +
            ' SET col_email = ' + QuotedStr(edtEmail.Text) +
-           ' WHERE codi_col = ' + QuotedStr(cdsValorIndicadores.FieldByName('gest_pro').AsString)
+           ' WHERE codi_col = ' + QuotedStr(lblCodGestor.Caption)
            );
 
    sEmailGestor:= edtEmail.Text;
@@ -310,7 +311,7 @@ begin
    if (dblIndicadores.KeyValue <> -1) AND (dblIndicadores.KeyValue <> null) then begin
       Botoes(True);
    end;
-   edtPeriodo.Text    := 'INDICADOR ' + cdsIndicadores.FieldByName('Periodo').AsString;
+   edtPeriodo.Text:= 'INDICADOR ' + cdsIndicadores.FieldByName('Periodo').AsString;
 
    with cdsDadosIndicador do begin
       Active:= False;
@@ -343,9 +344,6 @@ begin
                     ' ORDER BY V.peri_vin';
       Active:= True;
       LimparCampos();
-
-      mmoTextoEmail.Text:= 'O INDICADOR ' + dblIndicadores.Text + ' FOI ATUALIZADO';
-      sEmailGestor:= FieldByName('email_gestor').AsString;
 
       if cdsValorIndicadores.IsEmpty then begin
          Image1.Picture.LoadFromFile(ExtractFilePath(Application.ExeName) +
@@ -949,6 +947,22 @@ begin
       Exit;
    end;
 
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT P.gest_pro, C.nome_col as Gestor, C.col_email as Email' +
+                    ' FROM processos P' +
+                    ' INNER JOIN colaboradores C ON C.codi_col = P.gest_pro' +
+                    ' WHERE codi_pro = ' + BuscarProcessoInd(dblIndicadores.KeyValue);
+      Active:= True;
+
+      lblGestor.Caption:= FieldByName('Gestor').AsString;
+      mmoTextoEmail.Text:= 'O INDICADOR ' + dblIndicadores.Text + ' FOI ATUALIZADO';
+      sEmailGestor:= FieldByName('Email').AsString;
+
+      lblNomeGestor.Caption:= FieldByName('Gestor').AsString;
+      lblCodGestor.Caption := FieldByName('gest_pro').AsString;
+   end;
+
    if AllTrim(sEmailGestor) = EmptyStr then begin
       pnlCadEmail.Top    := Self.Height div 2 - pnlCadEmail.Height div 2 - 20;
       pnlCadEmail.Left   := Self.Width div 2 - pnlCadEmail.Width div 2;
@@ -962,7 +976,6 @@ begin
       pnlEmail.Left   := Self.Width div 2 - pnlEmail.Width div 2;
       pnlEmail.Visible:= True;
 
-      lblGestor.Caption:= cdsValorIndicadores.FieldByName('gestor').AsString;
       mmoTextoEmail.Enabled:= True;
       TryFocus(mmoTextoEmail);
    end;

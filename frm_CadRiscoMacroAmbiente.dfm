@@ -22,7 +22,7 @@ object FormCadRiscoMacroAmbiente: TFormCadRiscoMacroAmbiente
     Top = 0
     Width = 630
     Height = 475
-    ActivePage = tsCadastro
+    ActivePage = tsHistorico
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -999,6 +999,10 @@ object FormCadRiscoMacroAmbiente: TFormCadRiscoMacroAmbiente
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 5
         Top = 55

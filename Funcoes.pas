@@ -240,10 +240,41 @@ procedure PrepararEmailAutoManut(sEmail: string);
 procedure PrepararEmailAutoCalib(sEmail: string);
 // Atualiza o grid para que a barra de rolagem apareça, pois as vezes ao atualizar dados ela some
 procedure AtualizarGrid(dbGrid: TDBGrid);
+// Busca o nome do gestor do processo especificado
+function BuscarGestorProcesso(sCodProcesso: string): string;
+// Busca o código do processo do indicador especificado
+function BuscarProcessoInd(sCodIndicador: string): string;
 
 implementation
 
 uses frm_dm, frm_Inicial, frm_MsgErro, WebBrowser;
+
+function BuscarProcessoInd(sCodIndicador: string): string;
+begin
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT proc_ind ' +
+                    ' FROM indicadores' +
+                    ' WHERE codi_ind = ' + sCodIndicador;
+      Active:= True;
+
+      Result:= FieldByName('proc_ind').AsString;
+   end;
+end;
+
+function BuscarGestorProcesso(sCodProcesso: string): string;
+begin
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT C.nome_col as Gestor ' +
+                    ' FROM processos P' +
+                    ' INNER JOIN colaboradores C ON C.codi_col = P.gest_pro' +
+                    ' WHERE codi_pro = ' + sCodProcesso;
+      Active:= True;
+
+      Result:= FieldByName('Gestor').AsString;
+   end;
+end;
 
 procedure AtualizarGrid(dbGrid: TDBGrid);
 begin
@@ -3212,7 +3243,7 @@ begin
       Result:= StringParaLogico(FieldByName(item).AsString);
 
       if StringParaLogico(FieldByName(item).AsString) = False then begin
-         Application.MessageBox(PChar('Usuário ' + cUsuario + ' não pode acessar este item no tartaruga'), 'Aviso', MB_OK + MB_ICONWARNING);
+         Application.MessageBox(PChar('Usuário ' + cUsuario + ' não pode acessar este item'), 'Aviso', MB_OK + MB_ICONWARNING);
       end;
    end;
 end;

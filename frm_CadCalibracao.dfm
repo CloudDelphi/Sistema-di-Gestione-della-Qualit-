@@ -5,7 +5,7 @@ object FormCadCalibracao: TFormCadCalibracao
   BorderStyle = bsSingle
   Caption = 'Tabela de Calibra'#231#227'o'
   ClientHeight = 484
-  ClientWidth = 723
+  ClientWidth = 750
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,9 @@ object FormCadCalibracao: TFormCadCalibracao
   object pctCalibracao: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 723
+    Width = 750
     Height = 412
-    ActivePage = tsCadastro
+    ActivePage = tsPesquisa
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -60,8 +60,10 @@ object FormCadCalibracao: TFormCadCalibracao
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitWidth = 723
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
+      ExplicitWidth = 715
       object lbl5: TLabel
         Left = 447
         Top = 76
@@ -791,10 +793,11 @@ object FormCadCalibracao: TFormCadCalibracao
       object pnl4: TPanel
         Left = 0
         Top = 0
-        Width = 715
+        Width = 742
         Height = 70
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 715
         object lbl15: TLabel
           Left = 21
           Top = 9
@@ -982,6 +985,7 @@ object FormCadCalibracao: TFormCadCalibracao
     object tsDocumentos: TTabSheet
       Caption = 'Documentos'
       ImageIndex = 2
+      ExplicitWidth = 715
       object lbl23: TLabel
         Left = 447
         Top = 76
@@ -1355,10 +1359,11 @@ object FormCadCalibracao: TFormCadCalibracao
       object pnl5: TPanel
         Left = 0
         Top = 0
-        Width = 715
+        Width = 742
         Height = 70
         Align = alTop
         TabOrder = 2
+        ExplicitWidth = 715
         object lbl26: TLabel
           Left = 21
           Top = 9
@@ -1507,25 +1512,58 @@ object FormCadCalibracao: TFormCadCalibracao
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitWidth = 715
       object lbl9: TLabel
-        Left = 3
-        Top = 13
+        Left = 21
+        Top = 57
         Width = 42
         Height = 13
         Caption = 'Pesquisa'
       end
       object lbl10: TLabel
-        Left = 327
-        Top = 13
+        Left = 345
+        Top = 57
         Width = 65
         Height = 13
         Caption = 'Pesquisar por'
       end
+      object lbl29: TLabel
+        Left = 21
+        Top = 9
+        Width = 43
+        Height = 13
+        Caption = 'Processo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+      object lbl30: TLabel
+        Left = 377
+        Top = 12
+        Width = 125
+        Height = 13
+        Caption = 'Equipamento/Instrumento'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
       object dbgCalibracao: TDBGrid
         Left = 3
-        Top = 64
-        Width = 714
-        Height = 314
+        Top = 108
+        Width = 728
+        Height = 270
         Hint = 'Selecione o registro para alterar'
         TabStop = False
         DataSource = dsCalibracao
@@ -1610,8 +1648,9 @@ object FormCadCalibracao: TFormCadCalibracao
           end>
       end
       object edtValor: TEdit
-        Left = 3
-        Top = 32
+        Tag = 30
+        Left = 21
+        Top = 76
         Width = 318
         Height = 26
         CharCase = ecUpperCase
@@ -1625,8 +1664,9 @@ object FormCadCalibracao: TFormCadCalibracao
         OnChange = edtValorChange
       end
       object cbCampo: TComboBox
-        Left = 327
-        Top = 32
+        Tag = 30
+        Left = 345
+        Top = 76
         Width = 186
         Height = 26
         Style = csDropDownList
@@ -1642,15 +1682,52 @@ object FormCadCalibracao: TFormCadCalibracao
         Items.Strings = (
           'N'#250'mero Equip./Instrum.')
       end
+      object dblProcessosPesq: TDBLookupComboBox
+        Tag = 30
+        Left = 21
+        Top = 26
+        Width = 354
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_pro'
+        ListField = 'nome_pro'
+        ListSource = dsProcessos
+        ParentFont = False
+        TabOrder = 3
+        OnCloseUp = dblProcessosCloseUp
+      end
+      object dblEquipamentosPesq: TDBLookupComboBox
+        Left = 381
+        Top = 25
+        Width = 354
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_inf'
+        ListField = 'iden_inf;desc_inf'
+        ListFieldIndex = 1
+        ListSource = dsEquip
+        ParentFont = False
+        TabOrder = 4
+        OnCloseUp = dblEquipamentosCloseUp
+      end
     end
   end
   object pnl1: TPanel
     Left = 0
     Top = 412
-    Width = 723
+    Width = 750
     Height = 72
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 723
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -2322,7 +2399,7 @@ object FormCadCalibracao: TFormCadCalibracao
       OnClick = btnImprimirClick
     end
     object btnSair: TBitBtn
-      Left = 649
+      Left = 676
       Top = 1
       Width = 73
       Height = 70
@@ -2454,6 +2531,7 @@ object FormCadCalibracao: TFormCadCalibracao
       ShowHint = True
       TabOrder = 6
       OnClick = btnSairClick
+      ExplicitLeft = 649
     end
     object btnAlterar: TBitBtn
       Left = 74
@@ -3130,8 +3208,8 @@ object FormCadCalibracao: TFormCadCalibracao
     end
   end
   object pnlImprimir: TPanel
-    Left = 662
-    Top = 241
+    Left = 676
+    Top = 296
     Width = 365
     Height = 188
     TabOrder = 2

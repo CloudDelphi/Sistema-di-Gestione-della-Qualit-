@@ -651,4 +651,56 @@ object dmPendencias: TdmPendencias
     Left = 160
     Top = 304
   end
+  object zqryRNCSemResposta: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      
+        'SELECT rnc_codigo, rnc_identificacao, rnc_nconformidade, TC.valo' +
+        '_com as Status '
+      'FROM rnc'
+      
+        'INNER JOIN tabela_combos TC ON TC.tipo_com = 35 AND TC.codi_com ' +
+        '= rnc_status ')
+    Params = <>
+    Left = 272
+    Top = 360
+  end
+  object dspRNCSemResposta: TDataSetProvider
+    DataSet = zqryRNCSemResposta
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 312
+    Top = 360
+  end
+  object cdsRNCSemResposta: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspRNCSemResposta'
+    Left = 352
+    Top = 360
+    object cdsRNCSemRespostarnc_codigo: TIntegerField
+      FieldName = 'rnc_codigo'
+      Required = True
+    end
+    object cdsRNCSemRespostarnc_identificacao: TWideStringField
+      FieldName = 'rnc_identificacao'
+      Required = True
+      Size = 7
+    end
+    object cdsRNCSemRespostarnc_nconformidade: TWideMemoField
+      FieldName = 'rnc_nconformidade'
+      OnGetText = cdsRNCSemRespostarnc_nconformidadeGetText
+      BlobType = ftWideMemo
+    end
+    object cdsRNCSemRespostastatus: TWideStringField
+      FieldName = 'status'
+      ReadOnly = True
+      Size = 50
+    end
+  end
+  object dsRNCSemResposta: TDataSource
+    DataSet = cdsRNCSemResposta
+    Left = 392
+    Top = 360
+  end
 end

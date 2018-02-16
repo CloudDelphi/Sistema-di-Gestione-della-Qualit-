@@ -447,6 +447,7 @@ type
     cdsTreinamentosColtre_tempo: TWideStringField;
     cdsImprimirTretre_custo: TFloatField;
     cdsImprimirTretre_tempo: TWideStringField;
+    chkCopiaTodos: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -786,10 +787,17 @@ var
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
-                    ' FROM colab_habilidades' +
-                    ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text) +
-                    ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+      if chkCopiaTodos.Checked = True then begin
+         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                       ' FROM colab_habilidades' +
+                       ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text);
+      end
+      else begin
+         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                       ' FROM colab_habilidades' +
+                       ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text) +
+                       ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+      end;
       Active:= True;
 
       if RecordCount <= 0 then begin
@@ -801,10 +809,17 @@ begin
       // Verifica se alguma habilidade do ano selecionado já está cadastrado e pede confirmação
       with dm.cdsAux do begin
          Active:= False;
-         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
-                       ' FROM colab_habilidades' +
-                       ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date())) +
-                       ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+         if chkCopiaTodos.Checked = True then begin
+            CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                          ' FROM colab_habilidades' +
+                          ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date()));
+         end
+         else begin
+            CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                          ' FROM colab_habilidades' +
+                          ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date())) +
+                          ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+         end;
          Active:= True;
       end;
 

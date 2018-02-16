@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsCadastro
+    ActivePage = tsHabilidades
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -2995,16 +2995,17 @@ object FormCadColaboradores: TFormCadColaboradores
         Left = 13
         Top = 146
         Width = 260
-        Height = 201
+        Height = 223
         TabOrder = 7
         Visible = False
         object pnl7: TPanel
           Left = 1
-          Top = 128
+          Top = 150
           Width = 258
           Height = 72
           Align = alBottom
           TabOrder = 2
+          ExplicitTop = 128
           object btnCopiarHab: TBitBtn
             Left = 1
             Top = 1
@@ -3295,7 +3296,7 @@ object FormCadColaboradores: TFormCadColaboradores
           Left = 7
           Top = 43
           Width = 247
-          Height = 78
+          Height = 102
           TabOrder = 1
           object lbl37: TLabel
             Left = 76
@@ -3323,8 +3324,16 @@ object FormCadColaboradores: TFormCadColaboradores
             Top = 51
             Width = 216
             Height = 17
-            Caption = 'Manter as notas do ano anterior'
+            Caption = 'Copiar as notas do ano anterior'
             TabOrder = 1
+          end
+          object chkCopiaTodos: TCheckBox
+            Left = 8
+            Top = 74
+            Width = 225
+            Height = 17
+            Caption = 'Copia para todos os Colaboradores'
+            TabOrder = 2
           end
         end
       end

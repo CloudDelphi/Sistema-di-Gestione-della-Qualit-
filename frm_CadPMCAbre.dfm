@@ -516,6 +516,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
         Top = 76
         Width = 180
         Height = 26
+        DropDownRows = 8
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15

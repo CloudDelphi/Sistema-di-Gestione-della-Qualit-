@@ -195,7 +195,7 @@ type
     procedure btnInserirExeClick(Sender: TObject);
     function ValidarExecutores(): Boolean;
     procedure btnExcluirExeClick(Sender: TObject);
-    procedure rgTipoImpressaoClick(Sender: TObject);
+    procedure rgTipoManutClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -225,6 +225,7 @@ begin
                     ' FROM manut M' +
                     ' INNER JOIN manut_modelo MM ON MM.man_codigo = M.man_modelo' +
                     ' INNER JOIN infraestrutura I ON I.codi_inf = M.man_equipamento' +
+                    ' WHERE man_tipo = ' + IntToStr(rgTipoManut.ItemIndex + 1) +
                     ' ORDER BY M.man_codigo DESC';
       Active:= True;
    end;
@@ -512,8 +513,6 @@ procedure TFormCadManutencao.btnImprimirClick(Sender: TObject);
 begin
    AbrePanel(pnlImprimir, Self);
    rgTipoImpressao.ItemIndex:= 0; // Ficha em Branco
-   rgTipoManut.ItemIndex    := 2; // Todas
-   rgTipoManut.Enabled:= False;
 end;
 
 procedure TFormCadManutencao.btnInserirItemClick(Sender: TObject);
@@ -621,6 +620,7 @@ begin
             AtualizarDadosAcessorios();
          end;
          3: begin
+            rgTipoManut.ItemIndex:= 0;
             btnImprimir.Enabled:= False;
             edtValor.Clear;
             TryFocus(edtValor);
@@ -729,6 +729,7 @@ end;
 
 procedure TFormCadManutencao.FormShow(Sender: TObject);
 begin
+   rgTipoManut.ItemIndex:= 0;
    pgcManut.TabIndex:= 0;
    AtualizarDados();
    PreencherCampos();
@@ -793,9 +794,9 @@ begin
    end;
 end;
 
-procedure TFormCadManutencao.rgTipoImpressaoClick(Sender: TObject);
+procedure TFormCadManutencao.rgTipoManutClick(Sender: TObject);
 begin
-   rgTipoManut.Enabled:= rgTipoImpressao.ItemIndex = 1;
+   AtualizarDados();
 end;
 
 function TFormCadManutencao.ValidarDados(): Boolean;
@@ -901,6 +902,10 @@ begin
          Next;
       end;
    end;
+   if sExecutores = '' then begin
+      sExecutores:= ' ';
+   end;
+
 
    if rgTipoImpressao.ItemIndex = 0 then begin
       Imprimir('rel_ManutExecucaoBranco', frxReport1, tipoImp);

@@ -203,6 +203,10 @@ type
     btnImpressora: TBitBtn;
     pnl3: TPanel;
     rgOrdemImpressao: TRadioGroup;
+    lbl29: TLabel;
+    dblProcessosPesq: TDBLookupComboBox;
+    lbl30: TLabel;
+    dblEquipamentosPesq: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;

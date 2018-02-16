@@ -22,7 +22,7 @@ object FormCadUsuarios: TFormCadUsuarios
     Top = 0
     Width = 771
     Height = 396
-    ActivePage = tsCadastro
+    ActivePage = tsPendencias
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4550,6 +4550,14 @@ object FormCadUsuarios: TFormCadUsuarios
           Height = 17
           Caption = 'PMC sem preencimento de A'#231#227'o de Conten'#231#227'o Imediata'
           TabOrder = 16
+        end
+        object chkPend_rnc_naopreenchido: TCheckBox
+          Left = 368
+          Top = 224
+          Width = 273
+          Height = 17
+          Caption = 'RNC n'#227'o respondida e sem aceite/recusa'
+          TabOrder = 17
         end
       end
       object pnl10: TPanel
@@ -9335,7 +9343,7 @@ object FormCadUsuarios: TFormCadUsuarios
     Left = 720
     Top = 64
     Bitmap = {
-      494C010103000400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -109,12 +109,17 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 460;
+   iUltimo:= 465;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         465: CriarCampo('usu_pend_rnc_naopreenchido', 'usuarios', 'integer', '0', 'I');
+         464: GravarTabelaCombos(5, 'ORIGEM - ABERTURA PMC', 8, 'PROGRAMA 6S', 8);
+         463: CriarCampo('aud_contOM', 'auditoria_auto', 'integer');
+         462: CriarCampo('aud_contNC', 'auditoria_auto', 'integer');
+         461: CriarCampo('aud_contOBS', 'auditoria_auto', 'integer');
          460: sComando:= ' CREATE TABLE auditoria_auto_cabec' +
                          '(' +
                          ' aud_data timestamp without time zone NOT NULL,' +
