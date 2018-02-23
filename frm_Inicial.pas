@@ -798,22 +798,24 @@ var
    planilha, sheet: OleVariant;
    linha, coluna: Integer;
 begin
-     //Crio o objeto que gerencia o arquivo excel
-     planilha:= CreateOleObject('Excel.Application');
+//   GravaUsuarios(QuotedStr('47'));
 
-     //Abro o arquivo
-     planilha.WorkBooks.open('C:\Users\Daniel\Desktop\FUNCIONARIOS DESTRA.xlsx');
-
-     //Pega a primeira planilha do arquivo
-     sheet:= planilha.WorkSheets[1];
-
-     //Aqui pego o texto de uma das células
-     linha:= 2;
-     coluna:= 2;
-     ShowMessage(sheet.cells[linha, coluna]);
-
-     //Fecho a planilha
-     planilha.WorkBooks.Close;
+//     //Crio o objeto que gerencia o arquivo excel
+//     planilha:= CreateOleObject('Excel.Application');
+//
+//     //Abro o arquivo
+//     planilha.WorkBooks.open('C:\Users\Daniel\Desktop\FUNCIONARIOS DESTRA.xlsx');
+//
+//     //Pega a primeira planilha do arquivo
+//     sheet:= planilha.WorkSheets[1];
+//
+//     //Aqui pego o texto de uma das células
+//     linha:= 2;
+//     coluna:= 2;
+//     ShowMessage(sheet.cells[linha, coluna]);
+//
+//     //Fecho a planilha
+//     planilha.WorkBooks.Close;
 
 
 // Copia as habilidades cadastradas na função

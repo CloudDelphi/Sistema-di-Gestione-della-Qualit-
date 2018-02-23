@@ -5534,7 +5534,7 @@ object FormInicial: TFormInicial
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800140310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110018001C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6538,7 +6538,7 @@ object FormInicial: TFormInicial
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42929.458687881900000000
+    ReportOptions.LastChange = 43153.455901342600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -6647,7 +6647,7 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
-          Width = 71.810996770000000000
+          Width = 94.866141732283500000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'cali_numero'
@@ -6666,8 +6666,8 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo10: TfrxMemoView
-          Left = 72.385826770000000000
-          Width = 442.960471260000000000
+          Left = 95.063006770000000000
+          Width = 420.283291260000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'DescEquip'
@@ -7145,7 +7145,7 @@ object FormInicial: TFormInicial
         end
         object Memo11: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 34.015769999999970000
+          Top = 34.015769999999980000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -7192,9 +7192,9 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo9: TfrxMemoView
-          Left = 72.385826770000000000
+          Left = 95.063006770000000000
           Top = 23.433070869999990000
-          Width = 442.960471260000000000
+          Width = 420.283291260000000000
           Height = 19.275590550000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -7211,8 +7211,8 @@ object FormInicial: TFormInicial
           VAlign = vaBottom
         end
         object Memo1: TfrxMemoView
-          Top = 23.433070866141690000
-          Width = 71.811070000000000000
+          Top = 23.433070869999990000
+          Width = 94.866141732283500000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -7775,6 +7775,7 @@ object FormInicial: TFormInicial
     Top = 312
   end
   object cdsCalibracao: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCalibracao'
@@ -7900,6 +7901,7 @@ object FormInicial: TFormInicial
     Top = 312
   end
   object cdsEquip: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEquip'

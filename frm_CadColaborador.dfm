@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsHabilidades
+    ActivePage = tsDadosPessoais
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -3005,7 +3005,6 @@ object FormCadColaboradores: TFormCadColaboradores
           Height = 72
           Align = alBottom
           TabOrder = 2
-          ExplicitTop = 128
           object btnCopiarHab: TBitBtn
             Left = 1
             Top = 1

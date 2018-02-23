@@ -1966,6 +1966,8 @@ begin
          medtCEP.Clear;
          edtFone.Clear;
          edtCelular.Clear;
+         medtCPF.Clear;
+         edtRG.Clear;
          dtAdmissao.Clear;
          chkValidacao.Checked:= False;
       end;

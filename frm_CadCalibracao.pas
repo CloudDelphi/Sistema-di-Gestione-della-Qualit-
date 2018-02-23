@@ -82,9 +82,6 @@ type
     edtFaixa: TEdit;
     edtCaminho: TEdit;
     dblEquipamentos: TDBLookupComboBox;
-    pnl4: TPanel;
-    dblProcessos: TDBLookupComboBox;
-    lbl15: TLabel;
     dblFreq: TDBLookupComboBox;
     edtCodigo: TEdit;
     lbl16: TLabel;
@@ -203,10 +200,10 @@ type
     btnImpressora: TBitBtn;
     pnl3: TPanel;
     rgOrdemImpressao: TRadioGroup;
-    lbl29: TLabel;
-    dblProcessosPesq: TDBLookupComboBox;
     lbl30: TLabel;
     dblEquipamentosPesq: TDBLookupComboBox;
+    lbl15: TLabel;
+    dblProcessos: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -252,6 +249,8 @@ type
     procedure sbVisualizarDocClick(Sender: TObject);
     procedure cdsDocumentosdoc_descricaoGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
+    procedure AtualizarPesquisa();
+    procedure dblEquipamentosPesqCloseUp(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -328,6 +327,27 @@ begin
          Active:= True;
       end;
    end;
+end;
+
+procedure TFormCadCalibracao.AtualizarPesquisa;
+begin
+   with cdsCalibracao do begin
+         Active:= False;
+         CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio, ' +
+                       ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, ' +
+                       ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes, ' +
+                       ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado, ' +
+                       ' cali_processo, cali_arquivo, cali_erro, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
+                       ' I.codi_inf, I.desc_inf, cali_obs, cali_unidade' +
+                       ' FROM calibracao C ' +
+                       ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip '+
+                       ' WHERE cali_processo = ' + IntToStr(dblProcessos.KeyValue);
+         if (dblEquipamentosPesq.KeyValue <> -1) and (dblEquipamentosPesq.KeyValue <> null) then begin
+            CommandText:= CommandText + ' AND cali_equip = ' + IntToStr(dblEquipamentosPesq.KeyValue);
+         end;
+                       CommandText:= CommandText + ' ORDER BY cali_codigo';
+         Active:= True;
+      end;
 end;
 
 procedure TFormCadCalibracao.Botoes(flag: Boolean);
@@ -721,6 +741,11 @@ begin
    edtResolucao.Text := cdsEquip.FieldByName('inf_resolucao').AsString;
 end;
 
+procedure TFormCadCalibracao.dblEquipamentosPesqCloseUp(Sender: TObject);
+begin
+   AtualizarPesquisa();
+end;
+
 procedure TFormCadCalibracao.dblFreqCloseUp(Sender: TObject);
 begin
    if dtCalibracao.Text <> '  /  /    ' then begin
@@ -745,20 +770,8 @@ begin
          end;
       end;
 
-      with cdsCalibracao do begin
-         Active:= False;
-         CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio, ' +
-                       ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, ' +
-                       ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes, ' +
-                       ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado, ' +
-                       ' cali_processo, cali_arquivo, cali_erro, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
-                       ' I.codi_inf, I.desc_inf, cali_obs, cali_unidade' +
-                       ' FROM calibracao C ' +
-                       ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip '+
-                       ' WHERE cali_processo = ' + IntToStr(dblProcessos.KeyValue) +
-                       ' ORDER BY cali_codigo';
-         Active:= True;
-      end;
+      dblEquipamentosPesq.KeyValue:= -1;
+      AtualizarPesquisa();
 
       if AllTrim(edtCodigo.Text) <> EmptyStr then begin
          cdsCalibracao.Locate('cali_codigo', edtCodigo.Text,[])
