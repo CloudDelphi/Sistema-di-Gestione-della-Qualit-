@@ -3,7 +3,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Auditoria Autom'#225'tica'
+  Caption = 'Auditoria'
   ClientHeight = 568
   ClientWidth = 1022
   Color = clBtnFace
@@ -14,23 +14,21 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlEsquerda: TPanel
     Left = 0
     Top = 0
-    Width = 169
+    Width = 307
     Height = 496
     Align = alLeft
     TabOrder = 0
-    ExplicitLeft = -5
-    ExplicitTop = 64
-    ExplicitHeight = 465
     object dbgAuditorias: TDBGrid
       Left = 1
       Top = 1
-      Width = 167
+      Width = 305
       Height = 494
       Hint = 'Selecione a data para exibir o relat'#243'rio'
       Align = alClient
@@ -67,13 +65,13 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     end
   end
   object pnlRelatorio: TPanel
-    Left = 169
+    Left = 307
     Top = 0
     Width = 853
     Height = 496
-    Align = alRight
+    Align = alLeft
     TabOrder = 1
-    ExplicitHeight = 465
+    ExplicitLeft = 313
     object frxPreview1: TfrxPreview
       Left = 1
       Top = 1
@@ -81,14 +79,15 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       Height = 494
       Align = alClient
       OutlineVisible = False
-      OutlineWidth = 121
+      OutlineWidth = 0
       ThumbnailVisible = False
       UseReportHints = True
-      ExplicitHeight = 463
+      ExplicitLeft = 166
+      ExplicitTop = 21
     end
     object dbg1: TDBGrid
-      Left = 86
-      Top = 2
+      Left = 158
+      Top = 126
       Width = 589
       Height = 393
       Hint = 'Selecione o registro para alterar'
@@ -118,7 +117,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     Height = 72
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 465
     object btnSair: TBitBtn
       Left = 948
       Top = 1
@@ -1190,7 +1188,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       ShowHint = True
       TabOrder = 7
       OnClick = btnGraficosClick
-      ExplicitLeft = 545
     end
   end
   object pnlEvidencias: TPanel
@@ -1744,7 +1741,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43130.646590810180000000
+    ReportOptions.LastChange = 43152.426399537040000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -1774,9 +1771,10 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 219.212598425196800000
+        Height = 192.181107240000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        Stretched = True
         object Memo4: TfrxMemoView
           Top = 22.267780000000000000
           Width = 718.110700000000000000
@@ -1800,11 +1798,12 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ShowHint = False
           Diagonal = True
         end
-        object Memo2: TfrxMemoView
-          Top = 71.811070000000000000
+        object Memo16: TfrxMemoView
+          Top = 63.472479999999990000
           Width = 718.110236220000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataSet = FormResumoInd.frxdbResumoIndicador
           DataSetName = 'frxdbResumoIndicador'
           DisplayFormat.DecimalSeparator = ','
@@ -1819,8 +1818,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo3: TfrxMemoView
-          Top = 90.708720000000000000
+        object Memo17: TfrxMemoView
+          Top = 82.370130000000000000
           Width = 718.110236220000000000
           Height = 71.811070000000000000
           ShowHint = False
@@ -1838,31 +1837,13 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
             'Escopo: [frxDBAuditoriaAuto."emp_escopo"]')
           ParentFont = False
         end
-        object Memo13: TfrxMemoView
-          Top = 181.519685039370000000
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = FormResumoInd.frxdbResumoIndicador
-          DataSetName = 'frxdbResumoIndicador'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'Auditor: [frxDBAuditoriaAuto."aud_auditor"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo14: TfrxMemoView
+        object Memo19: TfrxMemoView
           Left = 377.953000000000000000
-          Top = 162.622047240000000000
+          Top = 173.283457240000000000
           Width = 340.157236220000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataSet = FormResumoInd.frxdbResumoIndicador
           DataSetName = 'frxdbResumoIndicador'
           DisplayFormat.DecimalSeparator = ','
@@ -1879,11 +1860,12 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo15: TfrxMemoView
-          Top = 162.622047240000000000
+        object Memo20: TfrxMemoView
+          Top = 173.283457240000000000
           Width = 377.952536220000000000
           Height = 18.897650000000000000
           ShowHint = False
+          StretchMode = smActualHeight
           DataSet = FormResumoInd.frxdbResumoIndicador
           DataSetName = 'frxdbResumoIndicador'
           DisplayFormat.DecimalSeparator = ','
@@ -1900,10 +1882,26 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ParentFont = False
           VAlign = vaCenter
         end
+        object Memo2: TfrxMemoView
+          Top = 154.535560000000000000
+          Width = 718.110236220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smActualHeight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Auditor: [frxDBAuditoriaAuto."aud_auditor"]')
+          ParentFont = False
+        end
       end
       object Detalhe: TfrxMasterData
         Height = 22.677180000000000000
-        Top = 389.291590000000000000
+        Top = 362.834880000000000000
         Width = 718.110700000000000000
         DataSet = frxDBAuditoriaAuto
         DataSetName = 'frxDBAuditoriaAuto'
@@ -1973,7 +1971,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       end
       object PageFooter1: TfrxPageFooter
         Height = 60.472480000000000000
-        Top = 472.441250000000000000
+        Top = 445.984540000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 925.945270000000000000
@@ -2437,7 +2435,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         end
         object Line1: TfrxLineView
           Left = 3.779530000000000000
-          Top = 34.015769999999920000
+          Top = 34.015769999999860000
           Width = 653.858690000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
@@ -2445,7 +2443,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       end
       object GroupHeader1: TfrxGroupHeader
         Height = 68.047263620000000000
-        Top = 298.582870000000000000
+        Top = 272.126160000000000000
         Width = 718.110700000000000000
         Condition = '<frxDBAuditoriaAuto."aud_processo">'
         object Memo5: TfrxMemoView

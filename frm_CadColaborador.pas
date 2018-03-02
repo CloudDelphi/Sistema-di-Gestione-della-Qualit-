@@ -901,7 +901,10 @@ begin
    if (Acesso(cUsuario, 6, 'exclusao') = 1) then begin
       case pctColaboradores.TabIndex of
          0: begin // Cadastro
-            if Application.MessageBox('Confirma a exclusão do colaborador ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+            if Application.MessageBox(PChar('A exclusão do colaborador pode causar perda de informações' +
+               ' se ele estiver vinculado em outros cadastros do sistema. Altere o campo Status para Inativar' +
+               ' para que isso não ocorra.' + #13 + #13 +
+               'Confirma a exclusão do colaborador ?'), 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
                sCodColaborador:= cdsColaboradorescodi_col.AsString;
                sNomeColaborador:= cdsColaboradoresnome_col.AsString;
 
@@ -945,7 +948,7 @@ begin
                   Execute;
                end;
 
-               Auditoria('CADASTRO DE COLABORADORES',sNomeColaborador,'E','');
+               Auditoria('CADASTRO DE COLABORADORES','Cod: ' + sCodColaborador + '-' + sNomeColaborador,'E','');
                Application.MessageBox('Colaborador excluído corretamente', 'Aviso', MB_OK + MB_ICONINFORMATION);
 
                AtualizarDados;

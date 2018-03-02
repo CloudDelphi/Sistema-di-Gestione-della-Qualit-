@@ -62,6 +62,7 @@ var
    i: Integer;
    iContHab, iContTre: Integer;
 begin
+
 //   //Cria o banco de dados
 //   with dm.cdsAuxiliar do begin
 //      Active:= False;
