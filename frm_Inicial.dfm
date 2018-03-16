@@ -1786,6 +1786,7 @@ object FormInicial: TFormInicial
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgPMCAcoesDblClick
           Columns = <
             item
               Expanded = False
@@ -5529,12 +5530,19 @@ object FormInicial: TFormInicial
         OnClick = CartadeAtualizao1Click
       end
     end
+    object Spiltag1: TMenuItem
+      Caption = 'Spiltag'
+      object ImportaodeDadosTOTVS1: TMenuItem
+        Caption = 'Importa'#231#227'o de Dados TOTVS'
+        OnClick = ImportaodeDadosTOTVS1Click
+      end
+    end
   end
   object imlMenu: TImageList
     Left = 496
     Top = 112
     Bitmap = {
-      494C0101110018001C0310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800300310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6538,7 +6546,7 @@ object FormInicial: TFormInicial
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43153.455901342600000000
+    ReportOptions.LastChange = 43164.636665578710000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -6647,7 +6655,7 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
-          Width = 94.866141732283500000
+          Width = 94.866141732283490000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'cali_numero'
@@ -6670,7 +6678,7 @@ object FormInicial: TFormInicial
           Width = 420.283291260000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'DescEquip'
+          DataField = 'desc_inf'
           DataSet = frxDBCalibracao
           DataSetName = 'frxDBCalibracao'
           Font.Charset = DEFAULT_CHARSET
@@ -6680,7 +6688,7 @@ object FormInicial: TFormInicial
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBCalibracao."DescEquip"]')
+            '[frxDBCalibracao."desc_inf"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -7212,7 +7220,7 @@ object FormInicial: TFormInicial
         end
         object Memo1: TfrxMemoView
           Top = 23.433070869999990000
-          Width = 94.866141732283500000
+          Width = 94.866141732283490000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -7718,29 +7726,11 @@ object FormInicial: TFormInicial
     UserName = 'frxDBCalibracao'
     CloseDataSource = False
     FieldAliases.Strings = (
-      'cali_capacidade=cali_capacidade'
-      'cali_codigo=cali_codigo'
-      'cali_criterio=cali_criterio'
-      'cali_dataCalibracao=cali_dataCalibracao'
-      'cali_erro=cali_erro'
-      'cali_faixa=cali_faixa'
-      'cali_frequencia=cali_frequencia'
-      'cali_localizacao=cali_localizacao'
+      'cali_datacalibracao=cali_dataCalibracao'
       'cali_numero=cali_numero'
-      'cali_padroes=cali_padroes'
-      'cali_parecer=cali_parecer'
-      'cali_proxCalibracao=cali_proxCalibracao'
-      'cali_resolucao=cali_resolucao'
-      'cali_certificado=cali_certificado'
-      'cali_processo=cali_processo'
-      'cali_arquivo=cali_arquivo'
-      'codi_inf=codi_inf'
       'desc_inf=desc_inf'
-      'DescEquip=DescEquip'
-      'cali_incerteza=cali_incerteza'
-      'cali_erroTotal=cali_erroTotal'
-      'cali_aprovado=cali_aprovado'
-      'cali_equip=cali_equip'
+      'cali_localizacao=cali_localizacao'
+      'cali_proxcalibracao=cali_proxCalibracao'
       'descprocesso=descprocesso')
     DataSet = cdsCalibracao
     BCDToCurrency = False
@@ -7750,19 +7740,17 @@ object FormInicial: TFormInicial
   object zqryCalibracao: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT cali_capacidade, cali_codigo, cali_criterio, '
-      'cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, '
-      'cali_frequencia, cali_localizacao, cali_numero, cali_padroes, '
       
-        'cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certific' +
-        'ado,'
-      
-        'cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cal' +
-        'i_aprovado, '
-      'I.codi_inf, I.desc_inf, nome_pro as DescProcesso'
+        'SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_locali' +
+        'zacao, '
+      'cali_proxCalibracao, nome_pro as DescProcesso'
       'FROM calibracao C'
-      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_codigo'
-      'INNER JOIN processos P ON P.codi_pro = cali_processo')
+      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip '
+      'INNER JOIN processos P ON P.codi_pro = cali_processo'
+      
+        'WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FRO' +
+        'M calibracao WHERE cali_numero = C.cali_numero)'
+      'ORDER BY DescProcesso, cali_numero')
     Params = <>
     Left = 741
     Top = 312
@@ -7775,103 +7763,28 @@ object FormInicial: TFormInicial
     Top = 312
   end
   object cdsCalibracao: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCalibracao'
     Left = 813
     Top = 312
-    object cdsCalibracaocali_capacidade: TWideStringField
-      FieldName = 'cali_capacidade'
-      Size = 30
+    object cdsCalibracaocali_datacalibracao: TDateTimeField
+      FieldName = 'cali_datacalibracao'
     end
-    object cdsCalibracaocali_codigo: TLargeintField
-      FieldName = 'cali_codigo'
-      Required = True
+    object cdsCalibracaocali_numero: TWideStringField
+      FieldName = 'cali_numero'
+      Size = 40
     end
-    object cdsCalibracaocali_criterio: TWideStringField
-      FieldName = 'cali_criterio'
-      Size = 30
-    end
-    object cdsCalibracaocali_dataCalibracao: TDateTimeField
-      FieldName = 'cali_dataCalibracao'
-    end
-    object cdsCalibracaocali_erro: TWideStringField
-      FieldName = 'cali_erro'
-      Size = 30
-    end
-    object cdsCalibracaocali_faixa: TWideStringField
-      FieldName = 'cali_faixa'
-      Size = 30
-    end
-    object cdsCalibracaocali_frequencia: TWideStringField
-      FieldName = 'cali_frequencia'
+    object cdsCalibracaodesc_inf: TWideStringField
+      FieldName = 'desc_inf'
+      Size = 100
     end
     object cdsCalibracaocali_localizacao: TWideStringField
       FieldName = 'cali_localizacao'
       Size = 50
     end
-    object cdsCalibracaocali_numero: TWideStringField
-      FieldName = 'cali_numero'
-      Size = 10
-    end
-    object cdsCalibracaocali_padroes: TMemoField
-      FieldName = 'cali_padroes'
-      BlobType = ftMemo
-    end
-    object cdsCalibracaocali_parecer: TWideStringField
-      FieldName = 'cali_parecer'
-      Size = 1
-    end
-    object cdsCalibracaocali_proxCalibracao: TDateTimeField
-      FieldName = 'cali_proxCalibracao'
-    end
-    object cdsCalibracaocali_resolucao: TWideStringField
-      FieldName = 'cali_resolucao'
-      Size = 30
-    end
-    object cdsCalibracaocali_certificado: TWideStringField
-      FieldName = 'cali_certificado'
-      Size = 30
-    end
-    object cdsCalibracaocali_processo: TLargeintField
-      FieldName = 'cali_processo'
-    end
-    object cdsCalibracaocali_arquivo: TWideStringField
-      FieldName = 'cali_arquivo'
-      Size = 150
-    end
-    object cdsCalibracaocodi_inf: TLargeintField
-      FieldName = 'codi_inf'
-      Required = True
-    end
-    object cdsCalibracaodesc_inf: TWideStringField
-      FieldName = 'desc_inf'
-      Size = 50
-    end
-    object cdsCalibracaoDescEquip: TStringField
-      FieldKind = fkLookup
-      FieldName = 'DescEquip'
-      LookupDataSet = cdsEquip
-      LookupKeyFields = 'codi_inf'
-      LookupResultField = 'desc_inf'
-      KeyFields = 'cali_equip'
-      Size = 80
-      Lookup = True
-    end
-    object cdsCalibracaocali_incerteza: TWideStringField
-      FieldName = 'cali_incerteza'
-      Size = 50
-    end
-    object cdsCalibracaocali_erroTotal: TWideStringField
-      FieldName = 'cali_erroTotal'
-      Size = 50
-    end
-    object cdsCalibracaocali_aprovado: TIntegerField
-      FieldName = 'cali_aprovado'
-    end
-    object cdsCalibracaocali_equip: TLargeintField
-      FieldName = 'cali_equip'
+    object cdsCalibracaocali_proxcalibracao: TDateTimeField
+      FieldName = 'cali_proxcalibracao'
     end
     object cdsCalibracaodescprocesso: TWideStringField
       FieldName = 'descprocesso'
@@ -7901,7 +7814,6 @@ object FormInicial: TFormInicial
     Top = 312
   end
   object cdsEquip: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEquip'

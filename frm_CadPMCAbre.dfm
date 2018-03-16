@@ -1070,8 +1070,8 @@ object FormCadPMCAbre: TFormCadPMCAbre
         end
       end
       object pnlEmail: TPanel
-        Left = 667
-        Top = 37
+        Left = 37
+        Top = 173
         Width = 578
         Height = 188
         TabOrder = 15

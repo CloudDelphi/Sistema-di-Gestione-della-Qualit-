@@ -207,7 +207,7 @@ object dmPendencias: TdmPendencias
   object zqryPMCAcoes: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT P.nume_pmc, PA.desc_aco, '
+      'SELECT P.codi_pmc, P.nume_pmc, PA.desc_aco, '
       'C.nome_col as ResponsavelAcao, PA.aco_prazo, PA.vimp_aco'
       'FROM pmc P'
       'INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc'
@@ -250,6 +250,10 @@ object dmPendencias: TdmPendencias
     object cdsPMCAcoesvimp_aco: TWideMemoField
       FieldName = 'vimp_aco'
       BlobType = ftWideMemo
+    end
+    object cdsPMCAcoescodi_pmc: TLargeintField
+      FieldName = 'codi_pmc'
+      Required = True
     end
   end
   object dsPMCAcoes: TDataSource

@@ -3,7 +3,7 @@ object FormCadRiscoMacroAmbiente: TFormCadRiscoMacroAmbiente
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'An'#225'lise de Macroambiente'
+  Caption = 'An'#225'lise de Macroambiente Externo'
   ClientHeight = 547
   ClientWidth = 630
   Color = clBtnFace
@@ -62,6 +62,10 @@ object FormCadRiscoMacroAmbiente: TFormCadRiscoMacroAmbiente
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl1: TLabel
         Left = 15
         Top = 9

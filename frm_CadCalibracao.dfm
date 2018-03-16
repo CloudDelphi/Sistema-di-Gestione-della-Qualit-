@@ -22,7 +22,7 @@ object FormCadCalibracao: TFormCadCalibracao
     Top = 0
     Width = 750
     Height = 412
-    ActivePage = tsPesquisa
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -64,7 +64,7 @@ object FormCadCalibracao: TFormCadCalibracao
       Caption = 'Cadastro'
       object lbl5: TLabel
         Left = 447
-        Top = 7
+        Top = 80
         Width = 62
         Height = 13
         Caption = 'Identifica'#231#227'o'
@@ -80,7 +80,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl6: TLabel
         Left = 87
-        Top = 7
+        Top = 80
         Width = 125
         Height = 13
         Caption = 'Equipamento/Instrumento'
@@ -96,7 +96,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl1: TLabel
         Left = 21
-        Top = 50
+        Top = 123
         Width = 49
         Height = 13
         Caption = 'Resolu'#231#227'o'
@@ -112,7 +112,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl2: TLabel
         Left = 126
-        Top = 50
+        Top = 123
         Width = 54
         Height = 13
         Caption = 'Localiza'#231#227'o'
@@ -128,7 +128,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl3: TLabel
         Left = 570
-        Top = 50
+        Top = 123
         Width = 53
         Height = 13
         Caption = 'Frequ'#234'ncia'
@@ -144,7 +144,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl4: TLabel
         Left = 21
-        Top = 96
+        Top = 169
         Width = 89
         Height = 13
         Caption = 'Faixa de Utiliza'#231#227'o'
@@ -160,7 +160,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl7: TLabel
         Left = 213
-        Top = 96
+        Top = 169
         Width = 56
         Height = 13
         Caption = 'Capacidade'
@@ -176,7 +176,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl8: TLabel
         Left = 405
-        Top = 96
+        Top = 169
         Width = 100
         Height = 13
         Caption = 'Crit'#233'rio de Aceita'#231#227'o'
@@ -192,7 +192,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl13: TLabel
         Left = 565
-        Top = 96
+        Top = 169
         Width = 67
         Height = 13
         Caption = 'Certificado N'#186
@@ -208,7 +208,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl14: TLabel
         Left = 20
-        Top = 140
+        Top = 213
         Width = 91
         Height = 13
         Caption = 'Data da Calibra'#231#227'o'
@@ -224,7 +224,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl11: TLabel
         Left = 132
-        Top = 140
+        Top = 213
         Width = 91
         Height = 13
         Caption = 'Pr'#243'xima Calibra'#231#227'o'
@@ -240,7 +240,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl12: TLabel
         Left = 20
-        Top = 183
+        Top = 256
         Width = 107
         Height = 13
         Caption = 'Arquivo do Certificado'
@@ -256,7 +256,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object sbArquivo: TSpeedButton
         Left = 639
-        Top = 192
+        Top = 265
         Width = 32
         Height = 31
         Hint = 'Clique para escolher o arquivo do documento'
@@ -378,7 +378,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object sbVisualizar: TSpeedButton
         Left = 677
-        Top = 192
+        Top = 265
         Width = 32
         Height = 31
         Hint = 'Clique para visualizar o arquivo'
@@ -501,7 +501,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl16: TLabel
         Left = 20
-        Top = 7
+        Top = 80
         Width = 33
         Height = 13
         Caption = 'C'#243'digo'
@@ -517,7 +517,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl17: TLabel
         Left = 243
-        Top = 140
+        Top = 213
         Width = 20
         Height = 13
         Caption = 'Erro'
@@ -533,7 +533,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl18: TLabel
         Left = 374
-        Top = 140
+        Top = 213
         Width = 46
         Height = 13
         Caption = 'Incerteza'
@@ -549,7 +549,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl19: TLabel
         Left = 505
-        Top = 140
+        Top = 213
         Width = 47
         Height = 13
         Caption = 'Erro Total'
@@ -565,7 +565,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl20: TLabel
         Left = 20
-        Top = 228
+        Top = 301
         Width = 55
         Height = 13
         Caption = 'Aprovado ?'
@@ -581,7 +581,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl21: TLabel
         Left = 103
-        Top = 228
+        Top = 301
         Width = 63
         Height = 13
         Caption = 'Observa'#231#245'es'
@@ -597,7 +597,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object lbl22: TLabel
         Left = 583
-        Top = 7
+        Top = 80
         Width = 39
         Height = 13
         Caption = 'Unidade'
@@ -613,7 +613,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtCapacidade: TEdit
         Left = 213
-        Top = 110
+        Top = 183
         Width = 186
         Height = 26
         CharCase = ecUpperCase
@@ -628,7 +628,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtCriterio: TEdit
         Left = 405
-        Top = 110
+        Top = 183
         Width = 154
         Height = 26
         CharCase = ecUpperCase
@@ -644,7 +644,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtCertificado: TEdit
         Left = 565
-        Top = 110
+        Top = 183
         Width = 144
         Height = 26
         CharCase = ecUpperCase
@@ -659,7 +659,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dtCalibracao: TDateEdit
         Left = 20
-        Top = 154
+        Top = 227
         Width = 103
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -674,7 +674,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dtProxima: TDateEdit
         Left = 132
-        Top = 154
+        Top = 227
         Width = 105
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -688,7 +688,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtIdent: TEdit
         Left = 447
-        Top = 21
+        Top = 94
         Width = 130
         Height = 26
         Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
@@ -708,7 +708,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtResolucao: TEdit
         Left = 21
-        Top = 64
+        Top = 137
         Width = 102
         Height = 26
         CharCase = ecUpperCase
@@ -723,7 +723,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtLocalizacao: TEdit
         Left = 126
-        Top = 64
+        Top = 137
         Width = 439
         Height = 26
         CharCase = ecUpperCase
@@ -738,7 +738,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtFaixa: TEdit
         Left = 21
-        Top = 110
+        Top = 183
         Width = 186
         Height = 26
         Hint = 'Digite a frequ'#234'ncia'
@@ -756,7 +756,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtCaminho: TEdit
         Left = 21
-        Top = 197
+        Top = 270
         Width = 611
         Height = 26
         Hint = 'Escolha o local do certificado'
@@ -772,7 +772,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dblEquipamentos: TDBLookupComboBox
         Left = 87
-        Top = 21
+        Top = 94
         Width = 354
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -790,7 +790,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dblFreq: TDBLookupComboBox
         Left = 570
-        Top = 64
+        Top = 137
         Width = 139
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -808,7 +808,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtCodigo: TEdit
         Left = 20
-        Top = 21
+        Top = 94
         Width = 63
         Height = 26
         Hint = 'C'#243'digo interno'
@@ -828,7 +828,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtErro: TEdit
         Left = 243
-        Top = 154
+        Top = 227
         Width = 125
         Height = 26
         Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
@@ -847,7 +847,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtIncerteza: TEdit
         Left = 374
-        Top = 154
+        Top = 227
         Width = 125
         Height = 26
         Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
@@ -866,7 +866,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtErroTotal: TEdit
         Left = 505
-        Top = 154
+        Top = 227
         Width = 125
         Height = 26
         Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
@@ -884,7 +884,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dblAprovado: TDBLookupComboBox
         Left = 20
-        Top = 242
+        Top = 315
         Width = 77
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -902,9 +902,9 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object mmoObs: TMemo
         Left = 103
-        Top = 242
+        Top = 315
         Width = 606
-        Height = 139
+        Height = 69
         Hint = 'Observa'#231#245'es'
         CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
@@ -918,7 +918,7 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object edtUnidade: TEdit
         Left = 583
-        Top = 21
+        Top = 94
         Width = 126
         Height = 26
         Hint = 'Unidade de calibra'#231#227'o'
@@ -935,6 +935,48 @@ object FormCadCalibracao: TFormCadCalibracao
         ParentShowHint = False
         ShowHint = False
         TabOrder = 3
+      end
+      object pnlProcesso: TPanel
+        Left = 0
+        Top = 0
+        Width = 742
+        Height = 70
+        Align = alTop
+        TabOrder = 19
+        object lbl15: TLabel
+          Left = 21
+          Top = 9
+          Width = 43
+          Height = 13
+          Caption = 'Processo'
+          Color = clBackground
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Transparent = True
+        end
+        object dblProcessos: TDBLookupComboBox
+          Tag = 30
+          Left = 21
+          Top = 26
+          Width = 354
+          Height = 26
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          KeyField = 'codi_pro'
+          ListField = 'nome_pro'
+          ListSource = dsProcessos
+          ParentFont = False
+          TabOrder = 0
+          OnCloseUp = dblProcessosCloseUp
+        end
       end
     end
     object tsDocumentos: TTabSheet
@@ -1480,27 +1522,11 @@ object FormCadCalibracao: TFormCadCalibracao
         Caption = 'Pesquisar por'
       end
       object lbl30: TLabel
-        Left = 381
-        Top = 9
+        Left = 21
+        Top = 12
         Width = 125
         Height = 13
         Caption = 'Equipamento/Instrumento'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl15: TLabel
-        Left = 21
-        Top = 9
-        Width = 43
-        Height = 13
-        Caption = 'Processo'
         Color = clBackground
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1636,8 +1662,8 @@ object FormCadCalibracao: TFormCadCalibracao
       end
       object dblEquipamentosPesq: TDBLookupComboBox
         Tag = 30
-        Left = 381
-        Top = 25
+        Left = 21
+        Top = 28
         Width = 354
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -1652,24 +1678,6 @@ object FormCadCalibracao: TFormCadCalibracao
         ParentFont = False
         TabOrder = 3
         OnCloseUp = dblEquipamentosPesqCloseUp
-      end
-      object dblProcessos: TDBLookupComboBox
-        Tag = 30
-        Left = 21
-        Top = 26
-        Width = 354
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_pro'
-        ListField = 'nome_pro'
-        ListSource = dsProcessos
-        ParentFont = False
-        TabOrder = 4
-        OnCloseUp = dblProcessosCloseUp
       end
     end
   end

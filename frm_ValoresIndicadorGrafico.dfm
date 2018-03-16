@@ -554,6 +554,8 @@ object FormValoresIndicadoresGrafico: TFormValoresIndicadoresGrafico
     XAxisZoomSensitivity = 1.000000000000000000
     YAxisZoomSensitivity = 1.000000000000000000
     DoubleBuffered = True
+    ExplicitLeft = 16
+    ExplicitTop = 10
   end
   object pnl2: TPanel
     Left = 0
@@ -1082,5 +1084,43 @@ object FormValoresIndicadoresGrafico: TFormValoresIndicadoresGrafico
     DataSet = cdsMedias
     Left = 216
     Top = 232
+  end
+  object zqryMediasFinais: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 96
+    Top = 288
+  end
+  object dspMediasFinais: TDataSetProvider
+    DataSet = zqryMediasFinais
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 136
+    Top = 288
+  end
+  object cdsMediasFinais: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMediasFinais'
+    OnCalcFields = cdsValorIndicadoresCalcFields
+    Left = 176
+    Top = 288
+    object WideMemoField1: TWideMemoField
+      FieldName = 'ano'
+      ReadOnly = True
+      OnGetText = cdsMediasanoGetText
+      BlobType = ftWideMemo
+    end
+    object FloatField1: TFloatField
+      FieldName = 'mediaindicador'
+      ReadOnly = True
+    end
+  end
+  object dsMediasFinais: TDataSource
+    DataSet = cdsMediasFinais
+    Left = 216
+    Top = 288
   end
 end

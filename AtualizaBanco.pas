@@ -110,12 +110,13 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 465;
+   iUltimo:= 466;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         466: CriarCampo('pmc_usuario_eficacia', 'pmc', 'character varying(30)');
          465: CriarCampo('usu_pend_rnc_naopreenchido', 'usuarios', 'integer', '0', 'I');
          464: GravarTabelaCombos(5, 'ORIGEM - ABERTURA PMC', 8, 'PROGRAMA 6S', 8);
          463: CriarCampo('aud_contOM', 'auditoria_auto', 'integer');

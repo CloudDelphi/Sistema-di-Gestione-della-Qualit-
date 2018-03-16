@@ -2938,8 +2938,8 @@ object FormCadFuncoes: TFormCadFuncoes
     end
   end
   object pnlImprimir: TPanel
-    Left = 132
-    Top = 190
+    Left = 138
+    Top = 158
     Width = 385
     Height = 351
     TabOrder = 2
@@ -3541,7 +3541,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 48
   end
   object cdsImprimir: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -3664,7 +3663,7 @@ object FormCadFuncoes: TFormCadFuncoes
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42928.620069918980000000
+    ReportOptions.LastChange = 43171.377691956020000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -4515,6 +4514,7 @@ object FormCadFuncoes: TFormCadFuncoes
         Top = 143.622140000000000000
         Width = 718.110700000000000000
         Condition = '<frxDBFuncoesHabTre."desc_fun">'
+        Stretched = True
         object frxControleDATA: TfrxMemoView
           Left = 49.133858270000000000
           Top = 34.000000000000000000
@@ -4707,6 +4707,7 @@ object FormCadFuncoes: TFormCadFuncoes
           Width = 718.110236220000000000
           Height = 238.110292360000000000
           ShowHint = False
+          StretchMode = smMaxHeight
           DataSet = frxDBDSFuncoes
           DataSetName = 'frxDBDSFuncoes'
           Font.Charset = DEFAULT_CHARSET
@@ -5290,7 +5291,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 184
   end
   object cdsImprimirHabTre: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimirHabTre'
@@ -5379,7 +5379,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 232
   end
   object cdsImprimirHabTreHab: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimirHabTreHab'

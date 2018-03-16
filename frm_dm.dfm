@@ -1986,34 +1986,35 @@ object dm: Tdm
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42965.388135706000000000
+    ReportOptions.LastChange = 43166.383057708350000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      ''
       'procedure Memo3OnBeforePrint(Sender: TfrxComponent);'
       'begin                                              '
-      '//   Memo16.Memo:= '#39'Tipo2: '#39' + <frxDBRiscos."GrauRiscoDesc">;'
-      '//   if (<frxDBRiscos."GrauRiscoDesc"> = '#39'BAIXO'#39') then begin'
+      '//   Memo3.Color:= clWhite;'
+      'if (Memo3.Text = '#39'BAIXO'#39') then begin'
       
-        '//      Memo3.Color:= RGB(35,142,35);                           ' +
-        '                                            '
-      '//   end;'
-      '//   if (<frxDBRiscos."GrauRiscoDesc"> = '#39'M'#201'DIO'#39') then begin'
+        '      Memo3.Color:= ClGreen;                                    ' +
+        '                                   '
+      '   end;'
+      '   if (Memo3.Text = '#39'M'#201'DIO'#39') then begin'
       
-        '//      Memo3.Color:= RGB(255,255,0);                           ' +
-        '                                            '
-      '//   end;'
-      '//   if (<frxDBRiscos."GrauRiscoDesc"> = '#39'ALTO'#39') then begin'
+        '      Memo3.Color:= ClYellow;                                   ' +
+        '                                    '
+      '   end;'
+      '   if (Memo3.Text = '#39'ALTO'#39') then begin'
       
-        '//      Memo3.Color:= RGB(255,165,0);                           ' +
-        '                                            '
-      '//   end;'
-      '//   if (<frxDBRiscos."GrauRiscoDesc"> = '#39'SEVERO'#39') then begin'
+        '      Memo3.Color:= clWhite;                                    ' +
+        '                                   '
+      '   end;'
+      '   if (Memo3.Text = '#39'SEVERO'#39') then begin'
       
-        '//      Memo3.Color:= RGB(255,0,0);                             ' +
-        '                                          '
-      '//   end;            '
-      'end;    '
-      '  '
+        '      Memo3.Color:= ClRed;                                      ' +
+        '                                 '
+      '   end;  '
+      'end;'
+      ''
       'begin'
       '  '
       'end.')
@@ -2085,11 +2086,11 @@ object dm: Tdm
       end
       object PageFooter1: TfrxPageFooter
         Height = 56.692950000000000000
-        Top = 343.937230000000000000
+        Top = 385.512060000000000000
         Width = 1046.929810000000000000
         object Picture1: TfrxPictureView
           Left = 1001.575450000000000000
-          Top = 9.338590000000010000
+          Top = 9.338590000000012000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -2545,9 +2546,32 @@ object dm: Tdm
           Frame.Typ = [ftTop]
         end
       end
+      object GroupHeader1: TfrxGroupHeader
+        Height = 18.897650000000000000
+        Top = 158.740260000000000000
+        Width = 1046.929810000000000000
+        Condition = '<frxDBRiscos."processo">'
+        object Memo6: TfrxMemoView
+          Width = 1045.039736220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = clInactiveCaption
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Processo: [frxDBRiscos."processo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+      end
       object MasterData1: TfrxMasterData
         Height = 124.724477800000000000
-        Top = 158.740260000000000000
+        Top = 200.315090000000000000
         Width = 1046.929810000000000000
         DataSet = FormAnaliseRisco.frxDBRiscos
         DataSetName = 'frxDBRiscos'
@@ -2669,6 +2693,7 @@ object dm: Tdm
           Height = 18.897650000000000000
           OnBeforePrint = 'Memo3OnBeforePrint'
           ShowHint = False
+          DataField = 'GrauRiscoDesc'
           DataSet = FormAnaliseRisco.frxDBRiscos
           DataSetName = 'frxDBRiscos'
           DisplayFormat.DecimalSeparator = ','
@@ -2684,7 +2709,7 @@ object dm: Tdm
           ParentFont = False
           VAlign = vaCenter
         end
-        object MemoTipoRisco: TfrxMemoView
+        object Memo16: TfrxMemoView
           Left = 833.276130000000000000
           Top = 19.000000000000000000
           Width = 211.653543310000000000
@@ -2705,6 +2730,46 @@ object dm: Tdm
             '[frxDBRiscos."tipo"]')
           ParentFont = False
           VAlign = vaCenter
+        end
+        object Memo19: TfrxMemoView
+          Left = 0.338590000000000000
+          Top = 0.157468109999996400
+          Width = 88.818646220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = clMenuBar
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Probabilidade')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo20: TfrxMemoView
+          Left = 89.283471890000000000
+          Top = 0.157468109999996400
+          Width = 88.818887870000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = clMenuBar
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Consequ'#234'ncia')
+          ParentFont = False
+          VAlign = vaBottom
         end
         object Memo2: TfrxMemoView
           Left = 178.086501890000000000
@@ -2802,9 +2867,8 @@ object dm: Tdm
           VAlign = vaBottom
         end
         object Memo1: TfrxMemoView
-          Left = 228.551330000000000000
           Top = 37.795300000000000000
-          Width = 604.724409448818900000
+          Width = 833.385826771654000000
           Height = 18.897650000000000000
           ShowHint = False
           Color = clMenuBar
@@ -2862,12 +2926,11 @@ object dm: Tdm
           VAlign = vaBottom
         end
         object Memo21: TfrxMemoView
-          Left = 229.039370080000000000
-          Top = 56.692949999999990000
-          Width = 604.346456690000000000
-          Height = 68.031527800000000000
+          Top = 56.692950000000000000
+          Width = 833.385826770000000000
+          Height = 68.031527800000010000
           ShowHint = False
-          StretchMode = smActualHeight
+          StretchMode = smMaxHeight
           DataField = 'mac_texto'
           DataSet = FormAnaliseRisco.frxDBRiscos
           DataSetName = 'frxDBRiscos'
@@ -2884,9 +2947,9 @@ object dm: Tdm
         end
         object Memo22: TfrxMemoView
           Left = 833.276130000000000000
-          Top = 56.692949999999990000
+          Top = 56.692950000000000000
           Width = 105.826703310000000000
-          Height = 68.031527800000000000
+          Height = 68.031527800000010000
           ShowHint = False
           StretchMode = smMaxHeight
           DataField = 'pmc'
@@ -2907,9 +2970,9 @@ object dm: Tdm
         end
         object Memo23: TfrxMemoView
           Left = 939.102970000000000000
-          Top = 56.692949999999990000
+          Top = 56.692950000000000000
           Width = 105.826703310000000000
-          Height = 68.031527800000000000
+          Height = 68.031527800000010000
           ShowHint = False
           StretchMode = smMaxHeight
           DataField = 'mac_pdca'
@@ -2927,85 +2990,6 @@ object dm: Tdm
             '[frxDBRiscos."mac_pdca"]')
           ParentFont = False
           VAlign = vaCenter
-        end
-        object Memo6: TfrxMemoView
-          Top = 56.692913390000000000
-          Width = 229.417322830000000000
-          Height = 68.031527800000000000
-          ShowHint = False
-          StretchMode = smMaxHeight
-          DataField = 'processo'
-          DataSet = FormAnaliseRisco.frxDBRiscos
-          DataSetName = 'frxDBRiscos'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBRiscos."processo"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo24: TfrxMemoView
-          Top = 37.795300000000000000
-          Width = 229.417322834646000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clMenuBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Processo')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo19: TfrxMemoView
-          Left = 0.338590000000000000
-          Width = 88.818646220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clMenuBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Probabilidade')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo20: TfrxMemoView
-          Left = 89.283471890000000000
-          Width = 88.818887870000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clMenuBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Consequ'#234'ncia')
-          ParentFont = False
-          VAlign = vaBottom
         end
       end
     end

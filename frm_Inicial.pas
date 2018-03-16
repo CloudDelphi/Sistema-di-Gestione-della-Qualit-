@@ -287,29 +287,6 @@ type
     zqryCalibracao: TZQuery;
     dspCalibracao: TDataSetProvider;
     cdsCalibracao: TClientDataSet;
-    cdsCalibracaocali_capacidade: TWideStringField;
-    cdsCalibracaocali_codigo: TLargeintField;
-    cdsCalibracaocali_criterio: TWideStringField;
-    cdsCalibracaocali_dataCalibracao: TDateTimeField;
-    cdsCalibracaocali_erro: TWideStringField;
-    cdsCalibracaocali_faixa: TWideStringField;
-    cdsCalibracaocali_frequencia: TWideStringField;
-    cdsCalibracaocali_localizacao: TWideStringField;
-    cdsCalibracaocali_numero: TWideStringField;
-    cdsCalibracaocali_padroes: TMemoField;
-    cdsCalibracaocali_parecer: TWideStringField;
-    cdsCalibracaocali_proxCalibracao: TDateTimeField;
-    cdsCalibracaocali_resolucao: TWideStringField;
-    cdsCalibracaocali_certificado: TWideStringField;
-    cdsCalibracaocali_processo: TLargeintField;
-    cdsCalibracaocali_arquivo: TWideStringField;
-    cdsCalibracaocodi_inf: TLargeintField;
-    cdsCalibracaodesc_inf: TWideStringField;
-    cdsCalibracaoDescEquip: TStringField;
-    cdsCalibracaocali_incerteza: TWideStringField;
-    cdsCalibracaocali_erroTotal: TWideStringField;
-    cdsCalibracaocali_aprovado: TIntegerField;
-    cdsCalibracaocali_equip: TLargeintField;
     dsCalibracao: TDataSource;
     pnlImprimirCalib: TPanel;
     pnl8: TPanel;
@@ -325,7 +302,6 @@ type
     cdsEquipiden_inf: TWideStringField;
     cdsEquipdesc_inf: TWideStringField;
     dsEquip: TDataSource;
-    cdsCalibracaodescprocesso: TWideStringField;
     N12: TMenuItem;
     VincularRiscoaoPMC1: TMenuItem;
     ISO900120081: TMenuItem;
@@ -404,6 +380,14 @@ type
     chkTodosAvaliadores: TCheckBox;
     cpnlRNCNaoRespondida: TCategoryPanel;
     dbgRNCNaoRespondida: TDBGrid;
+    cdsCalibracaocali_datacalibracao: TDateTimeField;
+    cdsCalibracaocali_numero: TWideStringField;
+    cdsCalibracaodesc_inf: TWideStringField;
+    cdsCalibracaocali_localizacao: TWideStringField;
+    cdsCalibracaocali_proxcalibracao: TDateTimeField;
+    cdsCalibracaodescprocesso: TWideStringField;
+    Spiltag1: TMenuItem;
+    ImportaodeDadosTOTVS1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -532,6 +516,8 @@ type
     procedure btn1Click(Sender: TObject);
     procedure chkTodosAvaliadoresClick(Sender: TObject);
     procedure dbgRNCNaoRespondidaDblClick(Sender: TObject);
+    procedure dbgPMCAcoesDblClick(Sender: TObject);
+    procedure ImportaodeDadosTOTVS1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -803,6 +789,7 @@ begin
 //     //Crio o objeto que gerencia o arquivo excel
 //     planilha:= CreateOleObject('Excel.Application');
 //
+
 //     //Abro o arquivo
 //     planilha.WorkBooks.open('C:\Users\Daniel\Desktop\FUNCIONARIOS DESTRA.xlsx');
 //
@@ -1294,6 +1281,16 @@ begin
    FormCadPMCFecha:= nil;
 end;
 
+procedure TFormInicial.dbgPMCAcoesDblClick(Sender: TObject);
+begin
+   FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
+   FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCAcoes.FieldByName('codi_pmc').AsString;
+   FormCadPMCFecha.ShowModal;
+   FormCadPMCFecha.Release;
+   FormCadPMCFecha.Free;
+   FormCadPMCFecha:= nil;
+end;
+
 procedure TFormInicial.dbgRNCNaoRespondidaDblClick(Sender: TObject);
 begin
    if dmPendencias.cdsRNCSemResposta.RecordCount = 0 then begin
@@ -1491,6 +1488,13 @@ begin
    nomeSistema:= 'Destra Manager';
 end;
 
+procedure TFormInicial.ImportaodeDadosTOTVS1Click(Sender: TObject);
+begin
+   if Acesso(cUsuario, 1, 'acesso') = 1 then begin  // Cadastro de Empresas
+      AbrirArquivo(ExtractFilePath(Application.ExeName) + 'Spiltag/ImportaTOTVS.exe', '');
+   end;
+end;
+
 procedure TFormInicial.FormShow(Sender: TObject);
 var
    aDadosEmpresa: TStringList;
@@ -1499,6 +1503,10 @@ var
 begin
    if not VerificarProjetoCEA() then begin
       Exportao1.Visible:= False;
+   end;
+
+   if not VerificarProjetoSpiltag() then begin
+      Spiltag1.Visible:= False;
    end;
 
    Self.Caption:= nomeSistema + ' - Versão ' + versao;
@@ -1955,16 +1963,23 @@ begin
 
    with cdsCalibracao do begin
       Active:= False;
-      CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio,' +
-                    ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa,' +
-                    ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes,' +
-                    ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado,' +
-                    ' cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
-                    ' I.codi_inf, I.desc_inf, nome_pro as DescProcesso' +
+      CommandText:= ' SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_localizacao,' +
+                    ' cali_proxCalibracao, nome_pro as DescProcesso' +
                     ' FROM calibracao C' +
-                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip ' +
+                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip' +
                     ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+                    ' WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)' +
                     ' ORDER BY DescProcesso, ' + sCampoOrdem;
+//      CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio,' +
+//                    ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa,' +
+//                    ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes,' +
+//                    ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado,' +
+//                    ' cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
+//                    ' I.codi_inf, I.desc_inf, nome_pro as DescProcesso' +
+//                    ' FROM calibracao C' +
+//                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip ' +
+//                    ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+//                    ' ORDER BY DescProcesso, ' + sCampoOrdem;
       Active:= True;
    end;
 
@@ -2725,7 +2740,7 @@ begin
    if dm.cdsAuxiliar.FieldByName('usu_pend_pmcacoes').AsInteger = 1 then begin
       with dmPendencias.cdsPMCAcoes do begin
          Active:= False;
-         CommandText:= ' SELECT P.nume_pmc, PA.desc_aco,' +
+         CommandText:= ' SELECT P.codi_pmc, P.nume_pmc, PA.desc_aco,' +
                        ' C.nome_col as ResponsavelAcao, PA.aco_prazo, PA.vimp_aco' +
                        ' FROM pmc P' +
                        ' INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc' +
@@ -2807,17 +2822,24 @@ begin
    if dm.cdsAuxiliar.FieldByName('usu_pend_calibracao').AsInteger = 1 then begin
       with dmPendencias.cdsCalibracao do begin
          Active:= False;
+//         CommandText:= ' SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_localizacao,' +
+//                    ' cali_proxCalibracao, nome_pro as DescProcesso' +
+//                    ' FROM calibracao C' +
+//                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip' +
+//                    ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+//                    ' WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)' +
          CommandText:= ' SELECT cali_codigo, cali_numero, I.desc_inf as Equipamento, cali_resolucao, cali_localizacao, ' +
                        ' cali_frequencia, cali_faixa, cali_capacidade, cali_criterio,' +
                        ' cali_certificado, cali_datacalibracao, cali_proxcalibracao, cali_padroes,' +
                        ' cali_erro, cali_parecer, cali_processo, cali_arquivo, cali_incerteza,' +
                        ' cali_errototal, cali_aprovado, cali_equip, cali_obs, P.nome_pro' +
-                       ' FROM calibracao' +
-                       // Usado Inner Join para que os equipamentos excluídos não7
+                       ' FROM calibracao C' +
+                       // Usado Inner Join para que os equipamentos excluídos não
                        // apareçam nas pendência(s) de calibração
                        ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip AND I.inf_status = 1' + // Ativos
                        ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
-                       ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date());
+                       ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date()) +
+                       ' AND cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)';
          Active:= True;
 
          if RecordCount > 0 then begin

@@ -53,6 +53,12 @@ type
     DBAdvGDIPChartView1: TDBAdvGDIPChartView;
     pnlTitulo1: TPanel;
     pnlTitulo2: TPanel;
+    zqryMediasFinais: TZQuery;
+    dspMediasFinais: TDataSetProvider;
+    cdsMediasFinais: TClientDataSet;
+    WideMemoField1: TWideMemoField;
+    FloatField1: TFloatField;
+    dsMediasFinais: TDataSource;
     procedure Inicializar();
     procedure FormShow(Sender: TObject);
     procedure btn4Click(Sender: TObject);
@@ -108,6 +114,14 @@ begin
                     ' ORDER BY SUBSTR(CAST(peri_vin as varchar), 1, 4)';
       Active:= True;
    end;
+
+//   if cdsMedias.RecordCount = 1 then begin      aqui
+//      cdsMediasFinais.Open;
+//      cdsMediasFinais.Append;
+//      cdsMediasFinais.FieldByName('MediaIndicador').AsFloat:= cdsMedias.FieldByName('MediaIndicador').AsFloat;
+//      cdsMediasFinais.FieldByName('Ano').AsString:= cdsMedias.FieldByName('Ano').AsString;
+//   end;
+
 end;
 
 procedure TFormValoresIndicadoresGrafico.btn4Click(Sender: TObject);
@@ -206,12 +220,12 @@ var
 begin
    // Gráfico de metas dos 3 anos anteriores, inclusive o atual
    with DBAdvGDIPChartView2.Panes[0] do begin
-      XAxis.Size := 00; // Altura da base do gráfico do Eixo X
-      YAxis.AutoUnits:= False; // Ajusta a escala do eixo Y automaticamente
-      Series[0].AutoRange:= arCommon;                                           // 10%
+      XAxis.Size := 50; // Altura da base do gráfico do Eixo X
+      YAxis.AutoUnits:= True; // Ajusta a escala do eixo Y automaticamente
+      Series[0].AutoRange:= arEnabled;                                           // 10%
       Series[0].Maximum:= cdsMedias.FieldByName('MediaIndicador').AsInteger + (cdsMedias.FieldByName('MediaIndicador').AsInteger * 10 / 100);
       Series[0].ValueFormat:= FormValorIndicadores.Formato; // Formato do valor do gráfico
-      Series[0].ValueOffsetY:= 0;
+      Series[0].ValueOffsetY:= -2;
       Series[0].ValueOffsetX:= 0;
       Series[0].ShowValue:= True; // Mostra valores na barra
       Series[0].ShowValueInTracker:= False;
@@ -246,8 +260,8 @@ begin
       Series[0].ValueOffsetY:= -2;
       Series[0].ValueOffsetX:= 0;
       Series[0].ShowValue   := True; // Mostra valores na barra
-      Series[0].ShowValueInTracker    := False;
-      Series[0].ValueFormatType       := vftFloat;
+      Series[0].ShowValueInTracker:= False;
+      Series[0].ValueFormatType   := vftFloat;
       Series[0].XAxis.TextBottom.Angle:= 90; // Angulo do texto do eixo X
 
       // Meta

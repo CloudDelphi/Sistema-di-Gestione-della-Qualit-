@@ -128,6 +128,7 @@ type
     cdsRNCSemRespostarnc_nconformidade: TWideMemoField;
     cdsRNCSemRespostastatus: TWideStringField;
     cdsRNCSemRespostarnc_codigo: TIntegerField;
+    cdsPMCAcoescodi_pmc: TLargeintField;
     procedure cdsManutencaoiden_infGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure cdsManutencaooque_manGetText(Sender: TField; var Text: string;

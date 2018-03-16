@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsDadosPessoais
+    ActivePage = tsDoc
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -3941,8 +3941,8 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'Pesquisar por'
       end
       object dbgColaboradores: TDBGrid
-        Left = 3
-        Top = 64
+        Left = -15
+        Top = 62
         Width = 775
         Height = 314
         Hint = 'Selecione o registro para alterar'
@@ -5671,8 +5671,8 @@ object FormCadColaboradores: TFormCadColaboradores
     end
   end
   object pnlImprimir: TPanel
-    Left = 663
-    Top = 242
+    Left = 640
+    Top = 197
     Width = 731
     Height = 377
     TabOrder = 2
@@ -6210,8 +6210,8 @@ object FormCadColaboradores: TFormCadColaboradores
       end
     end
     object pnl5: TPanel
-      Left = 6
-      Top = 45
+      Left = 2
+      Top = 44
       Width = 360
       Height = 252
       TabOrder = 1
