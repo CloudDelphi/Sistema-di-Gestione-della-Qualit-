@@ -2268,34 +2268,6 @@ object FormVisualizaMatriz: TFormVisualizaMatriz
     ProviderName = 'dspTreinamentos'
     Left = 380
     Top = 208
-    object cdsTreinamentoscodi_col: TLargeintField
-      FieldName = 'codi_col'
-      Required = True
-    end
-    object cdsTreinamentoscodi_tre: TLargeintField
-      FieldName = 'codi_tre'
-      Required = True
-    end
-    object cdsTreinamentosdtpr_tre: TDateTimeField
-      FieldName = 'dtpr_tre'
-      OnGetText = cdsTreinamentosdtpr_treGetText
-    end
-    object cdsTreinamentosdtre_tre: TDateTimeField
-      FieldName = 'dtre_tre'
-      OnGetText = cdsTreinamentosdtre_treGetText
-    end
-    object CdsTreinamentosdesc_tre: TWideStringField
-      FieldName = 'desc_tre'
-      Required = True
-      Size = 70
-    end
-    object cdsTreinamentoscodi_pla: TLargeintField
-      FieldName = 'codi_pla'
-    end
-    object cdsTreinamentostipo_tre: TWideStringField
-      FieldName = 'tipo_tre'
-      Size = 1
-    end
   end
   object dsTreinamentos: TDataSource
     DataSet = cdsTreinamentos
@@ -2353,12 +2325,6 @@ object FormVisualizaMatriz: TFormVisualizaMatriz
   end
   object zqryTreinamentos: TZQuery
     Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT ct.codi_col, ct.codi_tre, ct.dtpr_tre, ct.dtre_tre,t.desc' +
-        '_tre, ct.tipo_tre, ct.codi_pla'
-      'FROM colab_treinamentos ct'
-      'INNER JOIN treinamentos t on t.codi_tre = ct.codi_tre')
     Params = <>
     Left = 309
     Top = 208

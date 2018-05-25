@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsCadastro
+    ActivePage = tsTreinamentos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -63,14 +63,14 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
       object lbl4: TLabel
-        Left = 519
+        Left = 528
         Top = 12
         Width = 151
         Height = 13
         Caption = 'N'#237'vel de Educa'#231#227'o Comprovado'
       end
       object lbl2: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -411,9 +411,9 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'Data de Admiss'#227'o'
       end
       object dblEducacao: TDBLookupComboBox
-        Left = 519
+        Left = 528
         Top = 28
-        Width = 243
+        Width = 234
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -427,7 +427,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 2
       end
       object edtNomeColaborador: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -475,7 +475,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigo: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
@@ -608,6 +608,10 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsDadosPessoais: TTabSheet
       Caption = 'Dados Pessoais'
       ImageIndex = 7
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl44: TLabel
         Left = 7
         Top = 12
@@ -616,7 +620,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl45: TLabel
-        Left = 63
+        Left = 76
         Top = 12
         Width = 104
         Height = 13
@@ -726,7 +730,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoPessoal: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -739,7 +743,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomePessoal: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -941,6 +945,10 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Curr'#237'culo'
       ImageIndex = 2
       OnShow = tsCurriculoShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl1: TLabel
         Left = 7
         Top = 12
@@ -949,7 +957,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl3: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -986,7 +994,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoCur: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -999,7 +1007,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomeCur: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -1161,6 +1169,10 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Educa'#231#227'o'
       ImageIndex = 4
       OnShow = tsCurriculoShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl20: TLabel
         Left = 7
         Top = 12
@@ -1169,7 +1181,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl21: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -1477,7 +1489,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoEdu: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -1490,7 +1502,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomeEdu: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -1691,6 +1703,10 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Documentos Diversos'
       ImageIndex = 6
       OnShow = tsDocShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl38: TLabel
         Left = 7
         Top = 12
@@ -1699,7 +1715,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl39: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -1979,7 +1995,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoDoc: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -1992,7 +2008,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomeDoc: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -2088,7 +2104,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl11: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -2421,7 +2437,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoTre: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -2434,7 +2450,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomeTre: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -2664,8 +2680,12 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Habilidades'
       ImageIndex = 5
       OnShow = tsCurriculoShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl22: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -2718,7 +2738,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Transparent = True
       end
       object edtNomeHab: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -2735,7 +2755,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoHab: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -2995,12 +3015,12 @@ object FormCadColaboradores: TFormCadColaboradores
         Left = 13
         Top = 146
         Width = 260
-        Height = 201
+        Height = 223
         TabOrder = 7
         Visible = False
         object pnl7: TPanel
           Left = 1
-          Top = 128
+          Top = 150
           Width = 258
           Height = 72
           Align = alBottom
@@ -3295,7 +3315,7 @@ object FormCadColaboradores: TFormCadColaboradores
           Left = 7
           Top = 43
           Width = 247
-          Height = 78
+          Height = 102
           TabOrder = 1
           object lbl37: TLabel
             Left = 76
@@ -3323,8 +3343,16 @@ object FormCadColaboradores: TFormCadColaboradores
             Top = 51
             Width = 216
             Height = 17
-            Caption = 'Manter as notas do ano anterior'
+            Caption = 'Copiar as notas do ano anterior'
             TabOrder = 1
+          end
+          object chkCopiaTodos: TCheckBox
+            Left = 8
+            Top = 74
+            Width = 225
+            Height = 17
+            Caption = 'Copia para todos os Colaboradores'
+            TabOrder = 2
           end
         end
       end
@@ -3809,6 +3837,10 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsFuncao: TTabSheet
       Caption = 'Aut./Resp. da Fun'#231#227'o'
       ImageIndex = 8
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl59: TLabel
         Left = 7
         Top = 12
@@ -3817,7 +3849,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Caption = 'C'#243'digo'
       end
       object lbl60: TLabel
-        Left = 63
+        Left = 75
         Top = 12
         Width = 104
         Height = 13
@@ -3847,7 +3879,7 @@ object FormCadColaboradores: TFormCadColaboradores
       object edtCodigoResp: TEdit
         Left = 7
         Top = 28
-        Width = 52
+        Width = 62
         Height = 26
         CharCase = ecUpperCase
         Enabled = False
@@ -3860,7 +3892,7 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 0
       end
       object edtNomeResp: TEdit
-        Left = 63
+        Left = 75
         Top = 28
         Width = 450
         Height = 26
@@ -3918,6 +3950,10 @@ object FormCadColaboradores: TFormCadColaboradores
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13
@@ -3934,8 +3970,8 @@ object FormCadColaboradores: TFormCadColaboradores
       end
       object dbgColaboradores: TDBGrid
         Left = 3
-        Top = 64
-        Width = 775
+        Top = 62
+        Width = 771
         Height = 314
         Hint = 'Selecione o registro para alterar'
         DataSource = dsColaboradores
@@ -3967,7 +4003,7 @@ object FormCadColaboradores: TFormCadColaboradores
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 45
+            Width = 55
             Visible = True
           end
           item
@@ -5663,8 +5699,8 @@ object FormCadColaboradores: TFormCadColaboradores
     end
   end
   object pnlImprimir: TPanel
-    Left = 663
-    Top = 242
+    Left = 640
+    Top = 197
     Width = 731
     Height = 377
     TabOrder = 2
@@ -6202,8 +6238,8 @@ object FormCadColaboradores: TFormCadColaboradores
       end
     end
     object pnl5: TPanel
-      Left = 6
-      Top = 45
+      Left = 2
+      Top = 44
       Width = 360
       Height = 252
       TabOrder = 1

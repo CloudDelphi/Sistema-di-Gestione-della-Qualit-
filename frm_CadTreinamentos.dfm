@@ -127,7 +127,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
         TabOrder = 1
       end
       object pnlNavegacao: TPanel
-        Left = 356
+        Left = 359
         Top = 326
         Width = 161
         Height = 40
@@ -696,6 +696,20 @@ object FormCadTreinamentos: TFormCadTreinamentos
         ListSource = dsStatus
         ParentFont = False
         TabOrder = 4
+      end
+      object chkEficacia: TCheckBox
+        Left = 106
+        Top = 343
+        Width = 252
+        Height = 17
+        Caption = 'N'#227'o necessita de verifica'#231#227'o de efic'#225'cia'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
       end
     end
     object tsPesquisa: TTabSheet
@@ -1755,8 +1769,8 @@ object FormCadTreinamentos: TFormCadTreinamentos
     end
   end
   object pnlImprimir: TPanel
-    Left = 155
-    Top = 99
+    Left = 331
+    Top = 50
     Width = 365
     Height = 219
     TabOrder = 2
@@ -2178,13 +2192,13 @@ object FormCadTreinamentos: TFormCadTreinamentos
       Height = 29
       Align = alTop
       Alignment = taLeftJustify
-      Caption = ' Filtro de Impress'#227'o'
+      Caption = ' Op'#231#245'es de Impress'#227'o'
       Color = clGradientActiveCaption
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 0
     end
@@ -2222,9 +2236,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
   object zqryTreinamentos: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT codi_tre, desc_tre, tre_conteudo, tre_status'
-      'FROM treinamentos'
-      'ORDER BY desc_tre')
+      '')
     Params = <>
     Left = 64
     Top = 215
@@ -2304,7 +2316,6 @@ object FormCadTreinamentos: TFormCadTreinamentos
     Top = 216
   end
   object cdsImprimir: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'

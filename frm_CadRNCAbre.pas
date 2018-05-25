@@ -196,6 +196,9 @@ type
     edtCodigoRNC: TEdit;
     lbl23: TLabel;
     edtOrdemProd: TEdit;
+    edtCusto: TCurrencyEdit;
+    lbl24: TLabel;
+    cdsImprimirrnc_custo: TFloatField;
 
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
@@ -339,7 +342,8 @@ begin
                     ' rnc_processo, rnc_setor, rnc_origem, rnc_cliente, rnc_fornecedor,' +
                     ' rnc_consumidor, rnc_nconformidade, rnc_procede, rnc_responsavel,' +
                     ' rnc_departamento, rnc_relacionamento, rnc_representante,' +
-                    ' C.nome_col as Emitido, TC.valo_com as Motivo, rnc_ordemprod' +
+                    ' C.nome_col as Emitido, TC.valo_com as Motivo, rnc_ordemprod, ' +
+                    ' rnc_custo' +
                     ' FROM rnc R' +
                     ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
                     ' INNER JOIN tabela_combos TC ON TC.tipo_com = 32 AND TC.codi_com = R.rnc_motivo' +
@@ -481,7 +485,7 @@ begin
                                    ' rnc_processo, rnc_setor, rnc_origem, rnc_cliente, rnc_fornecedor,' +
                                    ' rnc_consumidor, rnc_nconformidade, rnc_procede, rnc_responsavel,' +
                                    ' rnc_departamento, rnc_relacionamento, rnc_representante, rnc_status, ' +
-                                   ' rnc_ordemprod)' +
+                                   ' rnc_ordemprod, rnc_custo)' +
                                    ' VALUES(' +
                                    sCodigoRNC + ',' +
                                    QuotedStr(edtIdentificacao.Text) + ',' +
@@ -501,7 +505,8 @@ begin
                                    IntToStr(dblRelacionamento.KeyValue) + ',' +
                                    QuotedStr(edtRepresentante.Text) + ',' +
                                    '1' + ',' +// Aberto
-                                   QuotedStr(edtOrdemProd.Text) +
+                                   QuotedStr(edtOrdemProd.Text) + ',' +
+                                   VirgulaParaPonto(edtCusto.Value, 2) +
                                    ')';
                      Execute;
 
@@ -525,7 +530,8 @@ begin
                                    ' rnc_departamento = ' + QuotedStr(edtDepartamento.Text) + ',' +
                                    ' rnc_relacionamento = ' + IntToStr(dblRelacionamento.KeyValue) + ',' +
                                    ' rnc_representante = ' + QuotedStr(edtRepresentante.Text) + ',' +
-                                   ' rnc_ordemprod = ' + QuotedStr(edtOrdemProd.Text) +
+                                   ' rnc_ordemprod = ' + QuotedStr(edtOrdemProd.Text) + ',' +
+                                   ' rnc_custo = ' + VirgulaParaPonto(edtCusto.Value, 2) +
                                    ' WHERE rnc_codigo = ' + cdsRNC.FieldByName('rnc_codigo').Asstring;
                      Execute;
                   end;
@@ -958,6 +964,7 @@ begin
             edtDepartamento.Text   := FieldByName('rnc_departamento').AsString;
             edtRepresentante.Text  := FieldByName('rnc_representante').AsString;
             edtOrdemProd.Text      := FieldByName('rnc_ordemprod').AsString;
+            edtCusto.Value         := FieldByName('rnc_custo').AsFloat;
 
             if FieldByName('rnc_emitido').AsString <> EmptyStr then begin
                dblEmitido.KeyValue:= FieldByName('rnc_emitido').AsString;
@@ -1201,7 +1208,7 @@ begin
                     ' CL.cli_nome, rnc_fornecedor, F.forn_nome, rnc_consumidor, rnc_nconformidade, ' +
                     ' rnc_procede, rnc_responsavel, C1.nome_col as Responsavel, ' +
                     ' rnc_departamento, rnc_relacionamento, rnc_representante,' +
-                    ' C.nome_col as Emitido, TC.valo_com as Motivo' +
+                    ' C.nome_col as Emitido, TC.valo_com as Motivo, rnc_custo' +
                     ' FROM rnc R' +
                     ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
                     ' INNER JOIN colaboradores C1 ON C1.codi_col = R.rnc_responsavel' +

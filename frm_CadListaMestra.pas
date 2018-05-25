@@ -155,6 +155,7 @@ type
     cdsExcel: TClientDataSet;
     dsExcel: TDataSource;
     dbgExcel: TDBGrid;
+    rgPesqTipo: TRadioGroup;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -193,6 +194,7 @@ type
     procedure GravarTreinamento();
     procedure btnTreinamentoClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure rgPesqTipoClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -260,7 +262,7 @@ begin
          CommandText:= ' SELECT lis_codiProcesso, lis_codiDocumento, lis_qtd, P.nome_pro' +
                        ' FROM lista_mestra_proc L' +
                        ' INNER JOIN Processos P ON P.codi_pro = L.lis_codiProcesso' +
-                       ' WHERE lis_codiDocumento = ' + cdsListaMestracodi_lis.AsString +
+                       ' WHERE lis_codiDocumento = ' + cdsListaMestra.FieldByName('codi_lis').AsString +
                        ' ORDER BY nome_pro';
          Active:= True;
       end;
@@ -305,6 +307,21 @@ procedure TFormCadListaMestra.btnExcelClick(Sender: TObject);
 begin
    with cdsExcel do begin
       Active:= False;
+//      case rgPesqTipo.ItemIndex of
+//         0: begin
+//            CommandText:= CommandText + ' ORDER BY iden_lis';
+//         end;
+//         1: begin
+//            CommandText:= CommandText +
+//                          ' WHERE lm.tipo_lis = 0' +
+//                          ' ORDER BY iden_lis';
+//         end;
+//         2: begin
+//            CommandText:= CommandText +
+//                          ' WHERE lm.tipo_lis = 1' +
+//                          ' ORDER BY iden_lis';
+//         end;
+//      end;
       Active:= True;
    end;
 
@@ -323,8 +340,8 @@ var
 begin
    if (Acesso(cUsuario, 7, 'exclusao') = 1) then begin
       if Application.MessageBox('Confirma a exclusão do registro ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
-         sCodLista := cdsListaMestracodi_lis.AsString;
-         sIdenLista:= cdsListaMestraiden_lis.AsString;
+         sCodLista := cdsListaMestra.FieldByName('codi_lis').AsString;
+         sIdenLista:= cdsListaMestra.FieldByName('iden_lis').AsString;
 
          with cdsGravar do begin
             Active:= False;
@@ -451,12 +468,11 @@ begin
       Exit;
    end;
 
-
    with dm.cdsAuxiliar do begin
       Active:= False;
       CommandText:= ' SELECT COUNT(*) AS QTD' +
                     ' FROM lista_mestra_proc' +
-                    ' WHERE lis_codiDocumento = ' + cdsListaMestracodi_lis.AsString +
+                    ' WHERE lis_codiDocumento = ' + cdsListaMestra.FieldByName('codi_lis').AsString +
                     ' AND lis_codiProcesso = ' + IntToStr(dblProcessos.KeyValue) ;
       Active:= True;
 
@@ -472,7 +488,7 @@ begin
          CommandText:= ' INSERT INTO lista_mestra_proc (lis_codiProcesso, lis_codiDocumento, lis_qtd, lis_novo)' +
                        ' VALUES(' +
                        IntToStr(dblProcessos.KeyValue) + ',' +
-                       cdsListaMestracodi_lis.AsString + ',' +
+                       cdsListaMestra.FieldByName('codi_lis').AsString + ',' +
                        VirgulaParaPonto(spnQtd.Value,0) + ',' +
                        QuotedStr('S') +
                        ')';
@@ -579,6 +595,9 @@ begin
       PreencherCampos();
    end
    else begin // Pesquisa
+//      cdsListaMestra.Filtered:= False;
+      rgPesqTipo.ItemIndex   := 0;
+
       btnNovo.Enabled       := False;
       btnGravar.Enabled     := False;
       btnExcluir.Enabled    := False;
@@ -751,6 +770,25 @@ begin
          sbVisualizar.Enabled:= False;
       end;
    end;
+end;
+
+procedure TFormCadListaMestra.rgPesqTipoClick(Sender: TObject);
+begin
+   case rgPesqTipo.ItemIndex of
+      0: begin
+         cdsListaMestra.Filtered:= False;
+      end;
+      1: begin
+         cdsListaMestra.Filter:= 'tipo_lis = 0'; // Interno
+         cdsListaMestra.Filtered:= True;
+      end;
+      2: begin
+         cdsListaMestra.Filter:= 'tipo_lis = 1'; // Enterno
+         cdsListaMestra.Filtered:= True;
+      end;
+   end;
+
+   AjustaBarraGrid(dbgListaMestra);
 end;
 
 procedure TFormCadListaMestra.sbArquivoClick(Sender: TObject);

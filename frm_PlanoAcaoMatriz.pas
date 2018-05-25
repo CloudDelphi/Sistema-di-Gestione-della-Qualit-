@@ -132,7 +132,7 @@ begin
       try
          if iTela = 1 then begin // Matriz de Competências
             if cTipo = 'T' then begin // Treinamentos
-               iCodColab:= FormVisualizaMatriz.cdsTreinamentoscodi_col.AsInteger;
+               iCodColab:= FormVisualizaMatriz.cdsTreinamentos.FieldByName('codi_col').AsInteger;
             end
             else begin // Habilidades
                iCodColab:= FormVisualizaMatriz.cdsHabilidadescodi_col.AsInteger;
@@ -185,10 +185,10 @@ begin
 
    if iTela = 1 then begin // Matriz de Competências
       if cTipo = 'T' then begin // Treinamentos
-         iCodColab:= FormVisualizaMatriz.cdsTreinamentoscodi_col.AsInteger;
+         iCodColab:= FormVisualizaMatriz.cdsTreinamentos.FieldByName('codi_col').AsInteger;
       end
       else begin // Habilidades
-         iCodColab:= FormVisualizaMatriz.cdsHabilidadescodi_col.AsInteger;
+         iCodColab:= FormVisualizaMatriz.cdsHabilidades.FieldByName('codi_col').AsInteger;
       end;
    end
    else begin // iTela = 2 -> Cadastro de Colaboradores

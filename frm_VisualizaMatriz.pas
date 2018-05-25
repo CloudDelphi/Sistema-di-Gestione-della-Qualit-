@@ -53,19 +53,12 @@ type
     dsHabilidades: TDataSource;
     zqryAuxiliar: TZQuery;
     zqryTreinamentos: TZQuery;
-    cdsTreinamentoscodi_col: TLargeintField;
-    cdsTreinamentoscodi_tre: TLargeintField;
-    cdsTreinamentosdtpr_tre: TDateTimeField;
-    cdsTreinamentosdtre_tre: TDateTimeField;
-    CdsTreinamentosdesc_tre: TWideStringField;
-    cdsTreinamentoscodi_pla: TLargeintField;
     zqryHabilidades: TZQuery;
     cdsHabilidadescodi_col: TLargeintField;
     cdsHabilidadescodi_hab: TLargeintField;
     CdsHabilidadeshabilidade: TWideStringField;
     cdsHabilidadesnota: TFloatField;
     cdsHabilidadescodi_pla: TLargeintField;
-    cdsTreinamentostipo_tre: TWideStringField;
     cdsHabilidadeshab_ano: TWideStringField;
     zqryImpressao: TZQuery;
     dspImpressao: TDataSetProvider;
@@ -211,22 +204,24 @@ end;
 procedure TFormVisualizaMatriz.cdsTreinamentosdtpr_treGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
 begin
-   if (cdsTreinamentosdtpr_tre.AsString = '30/12/1899') or (cdsTreinamentosdtpr_tre.AsString = '') then begin
+   if (cdsTreinamentos.FieldByName('dtpr_tre').AsString = '30/12/1899') or
+      (cdsTreinamentos.FieldByName('dtpr_tre').AsString = '') then begin
       Text:= '';
    end
    else begin
-      Text:= FormatDateTime('dd/mm/yyyy', cdsTreinamentosdtpr_tre.AsDateTime);
+      Text:= FormatDateTime('dd/mm/yyyy', cdsTreinamentos.FieldByName('dtpr_tre').AsDateTime);
    end;
 end;
 
 procedure TFormVisualizaMatriz.cdsTreinamentosdtre_treGetText(Sender: TField;
   var Text: string; DisplayText: Boolean);
 begin
-   if (cdsTreinamentosdtre_tre.AsString = '30/12/1899') or (cdsTreinamentosdtre_tre.AsString = '') then begin
+   if (cdsTreinamentos.FieldByName('dtre_tre').AsString = '30/12/1899') or
+      (cdsTreinamentos.FieldByName('dtre_tre').AsString = '') then begin
       Text:= '';
    end
    else begin
-      Text:= FormatDateTime('dd/mm/yyyy', cdsTreinamentosdtre_tre.AsDateTime);
+      Text:= FormatDateTime('dd/mm/yyyy', cdsTreinamentos.FieldByName('dtre_tre').AsDateTime);
    end;
 end;
 
@@ -257,10 +252,10 @@ begin
       t_PlanoAcaoMatriz:= Tt_PlanoAcaoMatriz.Create(nil);
       t_PlanoAcaoMatriz.cTipo:= 'T';
       t_PlanoAcaoMatriz.iTela:= 1; // Matriz de Competências
-      t_PlanoAcaoMatriz.iCodPlano:= cdsTreinamentoscodi_pla.AsInteger;
-      t_PlanoAcaoMatriz.iCodHabTre:= cdsTreinamentoscodi_tre.AsInteger;
+      t_PlanoAcaoMatriz.iCodPlano:= cdsTreinamentos.FieldByName('codi_pla').AsInteger;
+      t_PlanoAcaoMatriz.iCodHabTre:= cdsTreinamentos.FieldByName('codi_tre').AsInteger;
       t_PlanoAcaoMatriz.lblCodigo.Caption:= dblColaborador.KeyValue;
-      t_PlanoAcaoMatriz.mmoAcao.Text:= cdsTreinamentosdesc_tre.AsString;
+      t_PlanoAcaoMatriz.mmoAcao.Text:= cdsTreinamentos.FieldByName('desc_tre').AsString;
       t_PlanoAcaoMatriz.ShowModal;
       t_PlanoAcaoMatriz.Release;
    end;
@@ -274,8 +269,10 @@ begin
 //      dbgTreinamentos.DefaultDrawDataCell(Rect, dbgTreinamentos.columns[datacol].field, State);
 //   end;
 
-   if (cdsTreinamentos.FieldByName('codi_pla').AsString = '') or
-      (cdsTreinamentos.FieldByName('codi_pla').AsString = '0') then begin
+   // Chamado TT583
+   if ((cdsTreinamentos.FieldByName('codi_pla').AsString = '') or
+      (cdsTreinamentos.FieldByName('codi_pla').AsString = '0')) and
+      (cdsTreinamentos.FieldByName('tre_eficacia').AsString = '0') then begin
       dbgTreinamentos.Canvas.Font.Color:= clRed;
       dbgTreinamentos.DefaultDrawDataCell(Rect, dbgTreinamentos.columns[datacol].field, State);
    end;
@@ -459,7 +456,7 @@ begin
    with cdsTreinamentos do begin
       Active:= False;
       CommandText:= ' SELECT CT.dtpr_tre, CT.dtre_tre, T.desc_tre, CT.codi_pla,' +
-                    ' CT.codi_col, CT.codi_tre, CT.tipo_tre' +
+                    ' CT.codi_col, CT.codi_tre, CT.tipo_tre, T.tre_eficacia' +
                     ' FROM colab_treinamentos CT' +
                     ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
                     ' WHERE CT.codi_col = ' + IntToStr(dblColaborador.KeyValue);
@@ -472,9 +469,6 @@ begin
       Active:= True;
 
       First;
-//      lstTreinamentos.Clear;
-//      lstPrevisao.Clear;
-//      lstRealizado.Clear;
       sbTreinamentos.Enabled:= False;
       iTreinamento:= False;
 

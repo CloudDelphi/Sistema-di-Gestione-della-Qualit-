@@ -399,11 +399,45 @@ object FormCadPMCAbre: TFormCadPMCAbre
         OnClick = sbVisualizarClick
       end
       object lblCEA: TLabel
-        Left = 468
+        Left = 597
         Top = 291
         Width = 83
         Height = 13
         Caption = 'Libera para C&&A?'
+      end
+      object lbl24: TLabel
+        Left = 468
+        Top = 292
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+      object edtCusto: TCurrencyEdit
+        Left = 468
+        Top = 307
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 12
       end
       object dblTipo: TDBLookupComboBox
         Left = 580
@@ -516,6 +550,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
         Top = 76
         Width = 180
         Height = 26
+        DropDownRows = 8
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -590,7 +625,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
         ListField = 'valo_com'
         ListSource = dsProcede
         ParentFont = False
-        TabOrder = 13
+        TabOrder = 14
       end
       object edtCaminho: TEdit
         Left = 7
@@ -603,10 +638,10 @@ object FormCadPMCAbre: TFormCadPMCAbre
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 14
+        TabOrder = 15
       end
       object dblCEA: TDBLookupComboBox
-        Left = 468
+        Left = 597
         Top = 307
         Width = 83
         Height = 26
@@ -619,11 +654,11 @@ object FormCadPMCAbre: TFormCadPMCAbre
         ListField = 'valo_com'
         ListSource = dsCEA
         ParentFont = False
-        TabOrder = 12
+        TabOrder = 13
       end
       object pnlImprimir: TPanel
-        Left = 652
-        Top = 147
+        Left = 636
+        Top = 67
         Width = 365
         Height = 188
         TabOrder = 10
@@ -1069,11 +1104,11 @@ object FormCadPMCAbre: TFormCadPMCAbre
         end
       end
       object pnlEmail: TPanel
-        Left = 667
-        Top = 37
+        Left = 412
+        Top = 80
         Width = 578
         Height = 188
-        TabOrder = 15
+        TabOrder = 16
         object lbl15: TLabel
           Left = 16
           Top = 61
@@ -3054,7 +3089,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       
         'tc3.valo_com as Eficaz, pr.nome_pro, p.vefi_pmc, CL.cli_nome, F.' +
         'forn_nome, '
-      'C.nome_col as Responsavel, pmc_dataFecha'
+      'C.nome_col as Responsavel, pmc_dataFecha, pmc_custo'
       'FROM pmc P'
       'INNER JOIN processos pr ON p.prcs_pmc = pr.codi_pro'
       
@@ -3081,6 +3116,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
     Top = 144
   end
   object cdsImprimir: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -3136,6 +3172,9 @@ object FormCadPMCAbre: TFormCadPMCAbre
     object cdsImprimirpmc_datafecha: TDateTimeField
       FieldName = 'pmc_datafecha'
     end
+    object cdsImprimirpmc_custo: TFloatField
+      FieldName = 'pmc_custo'
+    end
   end
   object zqryPMC: TZQuery
     Connection = dm.Conexao
@@ -3145,7 +3184,8 @@ object FormCadPMCAbre: TFormCadPMCAbre
         'c, proc_pmc, resp_pmc, '
       
         'efic_pmc, prcs_pmc, requ_pmc, nume_pmc, pmc_cliente, pmc_fornece' +
-        'dor, pmc_arq_evidencia, pmc_cea'
+        'dor, pmc_arq_evidencia, '
+      'pmc_cea, pmc_custo'
       'FROM pmc'
       'ORDER BY nume_pmc')
     Params = <>
@@ -3247,6 +3287,9 @@ object FormCadPMCAbre: TFormCadPMCAbre
     object cdsPMCpmc_fornecedor: TIntegerField
       FieldName = 'pmc_fornecedor'
     end
+    object cdsPMCpmc_custo: TFloatField
+      FieldName = 'pmc_custo'
+    end
   end
   object dsPMC: TDataSource
     DataSet = cdsPMC
@@ -3262,7 +3305,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42229.411698738400000000
+    ReportOptions.LastChange = 43236.686491585700000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -3270,7 +3313,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       ''
       'end.')
     Left = 320
-    Top = 152
+    Top = 144
     Datasets = <
       item
         DataSet = frxDBPMC
@@ -3359,7 +3402,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
         object frxControleLANCAMENTO: TfrxMemoView
           Left = 170.456692910000000000
           Top = 19.000000000000000000
-          Width = 603.968503937008000000
+          Width = 486.803073939999000000
           Height = 79.370130000000000000
           ShowHint = False
           DataField = 'ncon_pmc'
@@ -3400,7 +3443,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
           VAlign = vaCenter
         end
         object Memo11: TfrxMemoView
-          Left = 910.039890000000000000
+          Left = 793.039890000000000000
           Top = 19.000000000000000000
           Width = 135.307086610000000000
           Height = 79.370130000000000000
@@ -3448,7 +3491,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
           VAlign = vaCenter
         end
         object Memo2: TfrxMemoView
-          Left = 774.354330710000000000
+          Left = 657.354330710000000000
           Top = 19.000000000000000000
           Width = 135.685039370000000000
           Height = 79.370130000000000000
@@ -3531,7 +3574,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
         end
         object Memo7: TfrxMemoView
           Left = 169.897684170000000000
-          Width = 603.968503937008000000
+          Width = 487.181102362205000000
           Height = 18.897650000000000000
           ShowHint = False
           Color = cl3DLight
@@ -3549,7 +3592,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
           VAlign = vaBottom
         end
         object Memo8: TfrxMemoView
-          Left = 773.795270710000000000
+          Left = 657.259842520000000000
           Width = 136.440944880000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3588,7 +3631,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
           VAlign = vaBottom
         end
         object Memo1: TfrxMemoView
-          Left = 910.480830000000000000
+          Left = 793.480830000000000000
           Top = 0.133890000000008100
           Width = 134.929133860000000000
           Height = 18.897650000000000000
@@ -3792,6 +3835,51 @@ object FormCadPMCAbre: TFormCadPMCAbre
           HAlign = haCenter
           Memo.UTF8W = (
             'Data Verifica'#231#227'o Efic'#225'cia')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo22: TfrxMemoView
+          Left = 927.764380000000000000
+          Top = 18.866109999999990000
+          Width = 117.165354330000000000
+          Height = 79.748031500000000000
+          ShowHint = False
+          DataField = 'pmc_custo'
+          DataSet = frxDBPMC
+          DataSetName = 'frxDBPMC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBPMC."pmc_custo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo24: TfrxMemoView
+          Left = 928.205320000000000000
+          Width = 116.787401574803000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Custo')
           ParentFont = False
           VAlign = vaBottom
         end
@@ -4275,7 +4363,8 @@ object FormCadPMCAbre: TFormCadPMCAbre
       'cli_nome=cli_nome'
       'forn_nome=forn_nome'
       'responsavel=responsavel'
-      'pmc_datafecha=pmc_datafecha')
+      'pmc_datafecha=pmc_datafecha'
+      'pmc_custo=pmc_custo')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 408

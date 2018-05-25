@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Grids, DBGrids, DBCtrls, Mask, ComCtrls, JvgPage, Buttons,
   ExtCtrls, DB, DBClient, Provider, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, rxToolEdit, rxCurrEdit, ImgList, JvComponentBase, JvBalloonHint,
-  frxClass, frxDBSet, ShellAPI, RXSpin;
+  frxClass, frxDBSet, ShellAPI, RXSpin, Jpeg;
 
 type
   TFormCadInfraestrutura = class(TForm)
@@ -124,11 +124,15 @@ type
     cds2: TWideStringField;
     dsStatus: TDataSource;
     cdsInfrainf_status: TIntegerField;
+    sbArquivo: TSpeedButton;
+    cdsInfrainf_imagem: TWideMemoField;
+    pnlImagem: TPanel;
+    imgEquipamento: TImage;
+    opd1: TOpenDialog;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
     procedure Botoes(flag: Boolean);
-    procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -154,10 +158,13 @@ type
     procedure btnVideoClick(Sender: TObject);
     procedure btnImpressoraClick(Sender: TObject);
     procedure Impressao(tipoImp: string);
+    procedure AlterarCalibracao();
+    procedure sbArquivoClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
     sNovoCodigo: string;
+    sCaminhoCompletoImagem: string;
   public
     { Public declarations }
   end;
@@ -170,6 +177,14 @@ implementation
 uses frm_dm, frm_Inicial, Funcoes;
 
 {$R *.dfm}
+
+procedure TFormCadInfraestrutura.AlterarCalibracao;
+begin
+   Executar(' UPDATE calibracao SET' +
+            ' cali_processo = ' + QuotedStr(dblProcesso.KeyValue) +
+            ' WHERE cali_equip = ' + QuotedStr(edtCodigo.Text)
+           );
+end;
 
 procedure TFormCadInfraestrutura.AtualizarDados;
 begin
@@ -235,7 +250,7 @@ procedure TFormCadInfraestrutura.btnAlterarClick(Sender: TObject);
 begin
    if (Acesso(cUsuario, 14, 'alteracao') = 1) then begin
       cOperacao:= 'A';
-      HabilitarCampos(True, False);
+      HabilitarCampos(True, False, Self);
       TryFocus(edtDescricao);
       Botoes(False);
    end;
@@ -246,7 +261,7 @@ begin
    LimparCampos;
    PreencherCampos;
    Botoes(True);
-   HabilitarCampos(False, False);
+   HabilitarCampos(False, False, Self);
 end;
 
 procedure TFormCadInfraestrutura.btnExcluirClick(Sender: TObject);
@@ -279,13 +294,16 @@ procedure TFormCadInfraestrutura.btnGravarClick(Sender: TObject);
 begin
    if ValidarDados() then begin
       try
+         sCaminhoCompletoImagem:= ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.jpg';
+
          with cdsGravar do begin
             Active:= False;
             if cOperacao = 'I' then begin
                CommandText:= ' INSERT INTO infraestrutura' +
                              ' (codi_inf, tipo_inf, qtde_inf, desc_inf, iden_inf, ' +
                              ' proc_inf, manu_inf, inf_diasaviso, inf_capacidade, ' +
-                             ' inf_resolucao, inf_unidade, inf_status' + ')' +
+                             ' inf_resolucao, inf_unidade, inf_status, inf_imagem' +
+                             ')' +
                              ' VALUES(' +
                              QuotedStr(sNovoCodigo) + ',' +
                              IntToStr(dblTipo.KeyValue) + ',' +
@@ -298,7 +316,8 @@ begin
                              QuotedStr(edtCapacidade.Text) + ',' +
                              QuotedStr(edtResolucao.Text) + ',' +
                              QuotedStr(edtUnidade.Text) + ',' +
-                             QuotedStr(dblStatus.KeyValue) +
+                             QuotedStr(dblStatus.KeyValue) + ',' +
+                             QuotedStr(sCaminhoCompletoImagem) +
                              ')';
                Execute;
             end
@@ -313,16 +332,21 @@ begin
                              ' inf_capacidade = ' + QuotedStr(edtCapacidade.Text) + ',' +
                              ' inf_resolucao = ' + QuotedStr(edtResolucao.Text) + ',' +
                              ' inf_unidade = ' + QuotedStr(edtUnidade.Text) + ',' +
-                             ' inf_status = ' + QuotedStr(dblStatus.KeyValue) +
+                             ' inf_status = ' + QuotedStr(dblStatus.KeyValue) + ',' +
+                             ' inf_imagem = ' + QuotedStr(sCaminhoCompletoImagem) +
                              ' WHERE codi_inf = ' + cdsInfracodi_inf.AsString;
                Execute;
+
+               AlterarCalibracao();
             end;
          end;
+         // Grava a imagem na pasta Imagens
+         imgEquipamento.Picture.SaveToFile(ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.jpg');
 
          Auditoria('CADASTRO DE INFRAESTRUTURA', edtDescricao.Text, cOperacao,'');
          AtualizarDados();
 
-         HabilitarCampos(False, False);
+         HabilitarCampos(False, False, Self);
          Botoes(True);
          Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
       except
@@ -352,7 +376,7 @@ begin
    if (Acesso(cUsuario, 14, 'cadastro') = 1) then begin
       cOperacao:= 'I';
       LimparCampos;
-      HabilitarCampos(True, True);
+      HabilitarCampos(True, True, Self);
       Botoes(False);
       btnExcluir.Enabled := False;
       btnAlterar.Enabled := False;
@@ -471,28 +495,11 @@ begin
    AtualizarDados();
    PreencherCampos;
    Botoes(True);
-   HabilitarCampos(False, False);
+   HabilitarCampos(False, False, Self);
    pnlImprimir.Visible:= False;
    spnDiasAviso.Hint:= 'Informe em quantos dias de antecedência o sistema deve ' + #13 +
                        'avisar o vencimento da próxima calibração para esse equipamento.' + #13 +
                        '0(zero) para não avisar.';
-end;
-
-procedure TFormCadInfraestrutura.HabilitarCampos(Flag, Codigo: Boolean);
-begin
-   edtCodigo.Enabled    := Codigo;
-   edtDescricao.Enabled := Flag;
-   edtIdent.Enabled     := Flag;
-   dblTipo.Enabled      := Flag;
-   dblProcesso.Enabled  := Flag;
-   dblManutPrev.Enabled := Flag;
-   spnDiasAviso.Enabled := Flag;
-   edtUnidade.Enabled   := Flag;
-   edtResolucao.Enabled := Flag;
-   edtCapacidade.Enabled:= Flag;
-   dblStatus.Enabled    := Flag;
-
-   pctInfra.Pages[1].TabVisible:= not Flag;
 end;
 
 procedure TFormCadInfraestrutura.LimparCampos;
@@ -541,6 +548,27 @@ begin
       if FieldByName('inf_status').AsString <> EmptyStr then begin
          dblStatus.KeyValue:= FieldByName('inf_status').AsString;
       end;
+
+      if FileExists(FieldByName('inf_imagem').AsString) then begin
+         imgEquipamento.Picture.LoadFromFile(FieldByName('inf_imagem').AsString);
+      end;
+   end;
+end;
+
+procedure TFormCadInfraestrutura.sbArquivoClick(Sender: TObject);
+var
+   Imagem         : TJpegImage;
+   BlobStream     : TStream;
+begin
+   opd1.Filter:= 'Imagem no formato JPEG (*.jpg)|*.jpg';
+   opd1.DefaultExt:='jpg';
+   opd1.Execute;
+
+   if opd1.FileName <> '' then begin
+      Imagem:= TJPEGImage.Create;// Cria o objeto imagem
+      Imagem.Scale:= jsFullSize; // Atribui uma escala.. exibir 100%
+      Imagem.LoadFromFile(opd1.FileName);// Carrega a imagem em memória
+      imgEquipamento.Picture.Bitmap.assign(Imagem);// Carrega a imagem no TImage
    end;
 end;
 

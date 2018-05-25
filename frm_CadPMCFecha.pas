@@ -343,6 +343,30 @@ type
     btnExcliurEvidencia: TBitBtn;
     btnInserirEvidencia: TBitBtn;
     mmoArquivo: TMemo;
+    lbl34: TLabel;
+    edtUsuarioEficacia: TEdit;
+    lbl35: TLabel;
+    edtColabEficacia: TEdit;
+    cdsPMCpmc_usuario_eficacia: TWideStringField;
+    btnRiscos: TBitBtn;
+    pnlRiscos: TPanel;
+    pnl19: TPanel;
+    btnFecharRiscos: TBitBtn;
+    pnl20: TPanel;
+    rgTipoRisco: TRadioGroup;
+    btnAbrirRiscos: TBitBtn;
+    pnlCadEmail: TPanel;
+    lbl36: TLabel;
+    lbl37: TLabel;
+    lblNomeColab: TLabel;
+    pnl21: TPanel;
+    btn1: TBitBtn;
+    btn2: TBitBtn;
+    pnl22: TPanel;
+    edtEmailAcoes: TEdit;
+    lbl38: TLabel;
+    edtCusto: TCurrencyEdit;
+    cdsPMCpmc_custo: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -415,6 +439,9 @@ type
     procedure btnInserirEvidenciaClick(Sender: TObject);
     procedure btnExcliurEvidenciaClick(Sender: TObject);
     procedure dbgEvidenciasCellClick(Column: TColumn);
+    procedure btnRiscosClick(Sender: TObject);
+    procedure btnFecharRiscosClick(Sender: TObject);
+    procedure btnAbrirRiscosClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -422,6 +449,7 @@ type
     sNovoCodigoAcao: string;
     sNovoCodigoIshikawa: string;
     sEmailAcao: string;
+    sVerificacaoEficacia: string;
   public
     { Public declarations }
     sCodigoPMC: string;
@@ -434,7 +462,7 @@ var
 implementation
 
 uses frm_dm, frm_Inicial, Funcoes, frm_Tartaruga,
-  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA;
+  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA, frm_CadRiscoAnaliseInterna, frm_CadRiscoMacroAmbiente;
 
 {$R *.dfm}
 
@@ -544,6 +572,15 @@ begin
       Active:= True;
    end;
 
+   with cdsProcessos do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro, nome_pro ' +
+                    ' FROM processos' +
+                    ' WHERE pro_exibelista = ' + QuotedStr('S') +
+                    ' ORDER BY nome_pro';
+      Active:= True;
+   end;
+
    with cdsPMC do begin
       Active:= False;
 //      if iTela = 3 then begin // Gestão de Riscos
@@ -555,20 +592,14 @@ begin
       CommandText:= ' SELECT codi_pmc, data_pmc, emit_pmc, tipo_pmc, orig_pmc, ' +
                     ' ncon_pmc, proc_pmc, resp_pmc,  prcs_pmc, requ_pmc, nume_pmc,' +
                     ' imed_pmc, caus_pmc, vefi_pmc, efic_pmc, pmc_dataFecha, pmc_cliente, ' +
-                    ' pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_preveficacia' +
+                    ' pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_preveficacia,' +
+                    ' pmc_usuario_eficacia, pmc_custo' +
                     ' FROM pmc' +
                     ' WHERE codi_pmc = ' + sCodigoPMC;
       Active:= True;
-//      sCodigoPMC:= FieldByName('codi_pmc').AsString;
-   end;
 
-   with cdsProcessos do begin
-      Active:= False;
-      CommandText:= ' SELECT codi_pro, nome_pro ' +
-                    ' FROM processos' +
-                    ' WHERE pro_exibelista = ' + QuotedStr('S') +
-                    ' ORDER BY nome_pro';
-      Active:= True;
+      sVerificacaoEficacia:= FieldByName('vefi_pmc').AsString;
+//      sCodigoPMC:= FieldByName('codi_pmc').AsString;
    end;
 
 //   if AllTrim(edtIdentificacao.Text) <> EmptyStr then begin
@@ -619,6 +650,7 @@ begin
    btnImprimir.Enabled:= Flag;
    btnEmail.Enabled   := Flag;
    btnPDCA.Enabled    := Flag;
+   btnRiscos.Enabled  := Flag;
 
    if pctFechaPMC.TabIndex = 2 then begin
       btnExcluir.Enabled := Flag;
@@ -633,6 +665,22 @@ begin
       btnGravar.Enabled  := False;
       btnCancelar.Enabled:= False;
       btnImprimir.Enabled:= False;
+   end;
+end;
+
+procedure TFormCadPMCFecha.btnAbrirRiscosClick(Sender: TObject);
+begin
+   case rgTipoRisco.ItemIndex of
+      0: begin // Análise Interna
+         if Acesso(cUsuario, 38, 'acesso') = 1 then begin
+            AbrirForm(TFormCadRiscoAnaliseInterna, FormCadRiscoAnaliseInterna);
+         end;
+      end;
+      1: begin // Análise de Macroambiente Externo
+         if Acesso(cUsuario, 37, 'acesso') = 1 then begin
+            AbrirForm(TFormCadRiscoMacroAmbiente, FormCadRiscoMacroAmbiente);
+         end;
+      end;
    end;
 end;
 
@@ -738,6 +786,11 @@ begin
    pnlNaoConformidade.Visible:= False;
 end;
 
+procedure TFormCadPMCFecha.btnFecharRiscosClick(Sender: TObject);
+begin
+   pnlRiscos.Visible:= False;
+end;
+
 procedure TFormCadPMCFecha.btnFecharTextoClick(Sender: TObject);
 begin
    mmoTexto.Visible      := False;
@@ -776,6 +829,35 @@ begin
                                 ' pmc_fase = ' + IntToStr(dblFase.KeyValue) +
                                 ' WHERE codi_pmc = ' + sCodigoPMC;
                   Execute;
+               end;
+
+               // Chamado TT514 - Verifica se houve alteração do campo Verificação de Eficácia e grava o usuário
+               // que fez a inclusão dos dados
+               if sVerificacaoEficacia <> mmoEficacia.Text then begin
+                  if mmoEficacia.Text = EmptyStr then begin
+                     with cdsGravar do begin
+                        Active:= False;
+                        CommandText:= ' UPDATE pmc SET' +
+                                      ' pmc_usuario_eficacia = ' + QuotedStr('') +
+                                      ' WHERE codi_pmc = ' + sCodigoPMC;
+                        Execute;
+                     end;
+
+                     edtUsuarioEficacia.Text:= '';
+                     edtColabEficacia.Text  := '';
+                  end
+                  else begin
+                     with cdsGravar do begin
+                        Active:= False;
+                        CommandText:= ' UPDATE pmc SET' +
+                                      ' pmc_usuario_eficacia = ' + QuotedStr(cUsuario) +
+                                      ' WHERE codi_pmc = ' + sCodigoPMC;
+                        Execute;
+                     end;
+
+                     edtUsuarioEficacia.Text:= cUsuario;
+                     edtColabEficacia.Text  := BuscarNomeColaborador(edtUsuarioEficacia.Text);
+                  end;
                end;
 
                Auditoria('PMC FECHAMENTO', edtIdentificacao.Text, cOperacao,'');
@@ -931,14 +1013,14 @@ begin
    end;
 
    if pnlEmail.Tag = 2 then begin // E-mail Ações
-      sEmailAcao:= edtEmail.Text;
+      sEmailAcao:= edtEmailAcoes.Text;
 
       Executar(' UPDATE colaboradores' +
               ' SET col_email = ' + QuotedStr(edtEmail.Text) +
               ' WHERE codi_col = ' + cdsPMC_Acoes.FieldByName('resp_aco').AsString
               );
 
-      pnlEmail.Visible:= False;
+      pnlEmailAcoes.Visible:= False;
 
       try
          EnviarEmail(sTextoEmail, 'Ações do PMC', sEmailAcao, 'sistema');
@@ -1050,6 +1132,11 @@ procedure TFormCadPMCFecha.btnProximoClick(Sender: TObject);
 begin
    cdsPMC.Next;
    PreencherCampos();
+end;
+
+procedure TFormCadPMCFecha.btnRiscosClick(Sender: TObject);
+begin
+   AbrePanel(pnlRiscos, Self);
 end;
 
 procedure TFormCadPMCFecha.btnUltimoClick(Sender: TObject);
@@ -1232,7 +1319,7 @@ begin
          edtPMCSubs.Enabled      := Flag;
 
          pctFechaPMC.Pages[1].TabVisible:= not Flag;
-         pctFechaPMC.Pages[2].TabVisible:= not Flag;
+//         pctFechaPMC.Pages[2].TabVisible:= not Flag;
       end;
       2: begin
          mmoDescricaoAcao.Enabled  := Flag;
@@ -1320,6 +1407,7 @@ begin
             mmoNaoConformidade.Text   := FieldByName('ncon_pmc').AsString;
             mmoNaoConformidadeBig.Text:= FieldByName('ncon_pmc').AsString;
             edtCaminho.Text           := FieldByName('pmc_arq_evidencia').AsString;
+            edtCusto.Value            := FieldByName('pmc_custo').AsFloat;
 
             mmoAcaoContencao.Text     := FieldByName('imed_pmc').AsString;
             mmoCausa.Text             := FieldByName('caus_pmc').AsString;
@@ -1327,6 +1415,9 @@ begin
             dtPrevEficacia.Date       := FieldByName('pmc_preveficacia').AsDateTime;
             dtDataEficacia.Date       := FieldByName('pmc_dataFecha').AsDateTime;
             edtPMCSubs.Text           := FieldByName('pmc_substituto').AsString;
+
+            edtUsuarioEficacia.Text   := FieldByName('pmc_usuario_eficacia').AsString;
+            edtColabEficacia.Text     := BuscarNomeColaborador(edtUsuarioEficacia.Text);
 
             if FieldByName('emit_pmc').AsString <> EmptyStr then begin
                dblEmitido.KeyValue:= FieldByName('emit_pmc').AsString;
@@ -1479,8 +1570,9 @@ begin
 
          if FieldByName('col_email').AsString = EmptyStr then begin
             if Application.MessageBox(PChar('O colaborador ' + FieldByName('nome_col').AsString + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
+                  lblNomeColab.Caption:= FieldByName('nome_col').AsString;
                   edtEmail.Enabled:= True;
-                  AbrePanel(pnlEmail, Self);
+                  AbrePanel(pnlCadEmail, Self);
                   lblNomeCol.Caption:= FieldByName('nome_col').AsString;
                   TryFocus(edtEmail);
             end;

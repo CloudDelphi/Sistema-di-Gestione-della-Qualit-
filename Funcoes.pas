@@ -145,8 +145,8 @@ procedure EnviarEmail(sTexto: string; sAssunto: string; sPara: string; sTipo: st
 function VerificarConfigEmail(): Boolean;
 // Verifica se está conectado à internet
 function VerificarConexaoInternet(ExibeMsg: Boolean): Boolean;
-// Busca o nome da empresa
-function BuscarNomeEmpresa(): string;
+// Busca dados da empresa
+function BuscarNomeEmpresa(): TStringList;
 // Copia o processo de armazenamento dos registros da qualidade para a nova tabela formularios_locais
 procedure CopiarArmazenamento();
 // Habilita ou desabilita os campos de um formulário
@@ -159,7 +159,7 @@ procedure LimparCampos(Tela: TForm);
 // Controla a habilitação do botão visualiza documentos nos forms
 procedure ControlarBotaoVisualiza(Tela: TForm);
 // Abre os arquivos físicos
-procedure AbrirArquivo(arquivo: string; Tela: string);
+procedure AbrirArquivo(arquivo: string; Tela: string; Maximizado: string = 'S');
 // Executa comandos SQL
 function Executar(sComando: string): Boolean;
 // No filtro dos dataset a barra de rolagem some. Essa procedure dá um "refresh" para reaparecer a barra
@@ -168,6 +168,8 @@ procedure AjustaBarraGrid(NomeDBGrid: TDBGrid);
 function LeConfig(sTipo: string): string;
 // Verifica se o cliente é do projeto C&A
 function VerificarProjetoCEA(): Boolean;
+// Verifica se é o projeto específico da Spiltag
+function VerificarProjetoSpiltag(): Boolean;
 // Transforma uma data em um número inteiro para comparações entre datas
 function ArrumaDataNumero(dData: TDateTime): Integer;
 // Transforma dados no formato anomes tipo caracter
@@ -240,10 +242,98 @@ procedure PrepararEmailAutoManut(sEmail: string);
 procedure PrepararEmailAutoCalib(sEmail: string);
 // Atualiza o grid para que a barra de rolagem apareça, pois as vezes ao atualizar dados ela some
 procedure AtualizarGrid(dbGrid: TDBGrid);
+// Busca o nome do gestor do processo especificado
+function BuscarGestorProcesso(sCodProcesso: string): string;
+// Busca o código do processo do indicador especificado
+function BuscarProcessoInd(sCodIndicador: string): string;
+// Busca o nome do colaborador se tiver usuário relacionado
+function BuscarNomeColaborador(sUsuario: string): string;
+// Busca o parâmetro do dia do indicador para pendência
+function BuscarParametroDiaIndicador(): string;
+// Verifica se o indicador está vencido na data de atualizaçãi em Parâmetros - TT162
+function VerificaPendIndicador(iMesAnterior: Integer): Boolean;
 
 implementation
 
 uses frm_dm, frm_Inicial, frm_MsgErro, WebBrowser;
+
+function VerificaPendIndicador(iMesAnterior: Integer): Boolean;
+var
+   iMes, iAno: Integer;
+   sDataVerificacaoInd: string;
+begin
+   iMes:= StrToInt(Copy(IntToStr(iMesAnterior), 5,2));
+   iAno:= StrToInt(Copy(IntToStr(iMesAnterior), 1,4));
+   sDataVerificacaoInd:= BuscarParametroDiaIndicador();
+   sDataVerificacaoInd:= ZerosEsquerda(sDataVerificacaoInd,2) + '/' +
+                         ZerosEsquerda(IntToStr(iMes),2) + '/' +
+                         IntToStr(iAno);
+
+   if IncMonth(StrToDate(sDataVerificacaoInd)) <= Date() then begin
+      Result:= True;
+   end
+   else begin
+      Result:= False;
+   end;
+end;
+
+function BuscarParametroDiaIndicador(): string;
+begin
+   // Projeto TT162
+    with dm.cdsAux4 do begin
+      Active:= False;
+      CommandText:= ' SELECT dias_indicadores' +
+                    ' FROM parametros';
+      Active:= True;
+
+      Result:= FieldByName('dias_indicadores').AsString;
+    end;
+end;
+
+function BuscarNomeColaborador(sUsuario: string): string;
+begin
+   if sUsuario = EmptyStr then begin
+      Result:= '';
+      Exit;
+   end;
+
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT nome_col ' +
+                    ' FROM colaboradores' +
+                    ' WHERE col_usuario = ' + QuotedStr(sUsuario);
+      Active:= True;
+
+      Result:= FieldByName('nome_col').AsString;
+   end;
+end;
+
+function BuscarProcessoInd(sCodIndicador: string): string;
+begin
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT proc_ind ' +
+                    ' FROM indicadores' +
+                    ' WHERE codi_ind = ' + sCodIndicador;
+      Active:= True;
+
+      Result:= FieldByName('proc_ind').AsString;
+   end;
+end;
+
+function BuscarGestorProcesso(sCodProcesso: string): string;
+begin
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT C.nome_col as Gestor ' +
+                    ' FROM processos P' +
+                    ' INNER JOIN colaboradores C ON C.codi_col = P.gest_pro' +
+                    ' WHERE codi_pro = ' + sCodProcesso;
+      Active:= True;
+
+      Result:= FieldByName('Gestor').AsString;
+   end;
+end;
 
 procedure AtualizarGrid(dbGrid: TDBGrid);
 begin
@@ -3212,7 +3302,7 @@ begin
       Result:= StringParaLogico(FieldByName(item).AsString);
 
       if StringParaLogico(FieldByName(item).AsString) = False then begin
-         Application.MessageBox(PChar('Usuário ' + cUsuario + ' não pode acessar este item no tartaruga'), 'Aviso', MB_OK + MB_ICONWARNING);
+         Application.MessageBox(PChar('Usuário ' + cUsuario + ' não pode acessar este item'), 'Aviso', MB_OK + MB_ICONWARNING);
       end;
    end;
 end;
@@ -3378,19 +3468,19 @@ begin
 end;
 
 procedure MostrarErro(Mensagem: string; MensagemDelphi: string; Formulario: string);
+var
+   aDadosEmpresa: TStringList;
 begin
-//   with dm.cdsAux do begin
-//      Active:= False;
-//      CommandText:= ' SELECT nome_emp FROM Empresa';
-//      Active:= True;
-//   end;
-//
+   aDadosEmpresa:= TStringList.Create;
+
    FormMsgErro:= TFormMsgErro.Create(nil);
    FormMsgErro.sErro       := Mensagem;
    FormMsgErro.sErroDelphi := MensagemDelphi;
    FormMsgErro.sFormulario := Formulario;
 //   FormMsgErro.sNomeEmpresa:= dm.cdsAux.FieldByName('nome_emp').AsString;
-   FormMsgErro.sNomeEmpresa:= BuscarNomeEmpresa();
+   aDadosEmpresa:= BuscarNomeEmpresa();
+   FormMsgErro.sNomeEmpresa:= aDadosEmpresa[0]; // Nome da Empresa
+   FormMsgErro.sCodigoDM   := aDadosEmpresa[2]; // Código DM
    FormMsgErro.ShowModal;
    FormMsgErro.Release;
 end;
@@ -3690,14 +3780,23 @@ begin
 //   end;
 end;
 
-function BuscarNomeEmpresa(): string;
+function BuscarNomeEmpresa(): TStringList;
+var
+   aDadosEmpresa: TStringList;
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT nome_emp FROM empresa ';
+      CommandText:= ' SELECT nome_emp, emp_escopo, emp_codidm ' +
+                    ' FROM empresa ';
       Active:= True;
 
-      Result:= FieldByName('nome_emp').AsString;
+      aDadosEmpresa:= TStringList.Create;
+
+      aDadosEmpresa.Add(FieldByName('nome_emp').AsString);
+      aDadosEmpresa.Add(FieldByName('emp_escopo').AsString);
+      aDadosEmpresa.Add(FieldByName('emp_codidm').AsString);
+
+      Result:= aDadosEmpresa;
    end;
 end;
 
@@ -3994,7 +4093,7 @@ begin
    end;
 end;
 
-procedure AbrirArquivo(Arquivo: string; Tela: string);
+procedure AbrirArquivo(Arquivo: string; Tela: string; Maximizado: string = 'S');
 var
    iErro: Integer;
 begin
@@ -4006,8 +4105,13 @@ begin
          end;
       end;
 
+      if Maximizado = 'S' then begin
 //      ShellExecute(Application.Handle, nil, PChar(arquivo), nil, nil, SW_SHOWMAXIMIZED);
-      iErro:= ShellExecute(Application.Handle,'open',PChar(arquivo),nil, nil,SW_SHOWMAXIMIZED);
+         iErro:= ShellExecute(Application.Handle,'open',PChar(arquivo),nil, nil,SW_SHOWMAXIMIZED);
+      end
+      else begin
+         iErro:= ShellExecute(Application.Handle,'open',PChar(arquivo),nil, nil,SW_SHOWNORMAL);
+      end;
 
       case iErro of
          2: begin // ERROR_FILE_NOT_FOUND
@@ -4101,6 +4205,16 @@ end;
 function VerificarProjetoCEA(): Boolean;
 begin
    if FileExists(ExtractFilePath(Application.ExeName) + 'Exp/DestraExp.exe') then begin
+      Result:= True;
+   end
+   else begin
+      Result:= False;
+   end;
+end;
+
+function VerificarProjetoSpiltag(): Boolean;
+begin
+   if FileExists(ExtractFilePath(Application.ExeName) + 'Spiltag/ImportarTOTVS.exe') then begin
       Result:= True;
    end
    else begin

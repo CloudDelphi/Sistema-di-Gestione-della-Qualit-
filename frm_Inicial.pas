@@ -287,29 +287,6 @@ type
     zqryCalibracao: TZQuery;
     dspCalibracao: TDataSetProvider;
     cdsCalibracao: TClientDataSet;
-    cdsCalibracaocali_capacidade: TWideStringField;
-    cdsCalibracaocali_codigo: TLargeintField;
-    cdsCalibracaocali_criterio: TWideStringField;
-    cdsCalibracaocali_dataCalibracao: TDateTimeField;
-    cdsCalibracaocali_erro: TWideStringField;
-    cdsCalibracaocali_faixa: TWideStringField;
-    cdsCalibracaocali_frequencia: TWideStringField;
-    cdsCalibracaocali_localizacao: TWideStringField;
-    cdsCalibracaocali_numero: TWideStringField;
-    cdsCalibracaocali_padroes: TMemoField;
-    cdsCalibracaocali_parecer: TWideStringField;
-    cdsCalibracaocali_proxCalibracao: TDateTimeField;
-    cdsCalibracaocali_resolucao: TWideStringField;
-    cdsCalibracaocali_certificado: TWideStringField;
-    cdsCalibracaocali_processo: TLargeintField;
-    cdsCalibracaocali_arquivo: TWideStringField;
-    cdsCalibracaocodi_inf: TLargeintField;
-    cdsCalibracaodesc_inf: TWideStringField;
-    cdsCalibracaoDescEquip: TStringField;
-    cdsCalibracaocali_incerteza: TWideStringField;
-    cdsCalibracaocali_erroTotal: TWideStringField;
-    cdsCalibracaocali_aprovado: TIntegerField;
-    cdsCalibracaocali_equip: TLargeintField;
     dsCalibracao: TDataSource;
     pnlImprimirCalib: TPanel;
     pnl8: TPanel;
@@ -325,7 +302,6 @@ type
     cdsEquipiden_inf: TWideStringField;
     cdsEquipdesc_inf: TWideStringField;
     dsEquip: TDataSource;
-    cdsCalibracaodescprocesso: TWideStringField;
     N12: TMenuItem;
     VincularRiscoaoPMC1: TMenuItem;
     ISO900120081: TMenuItem;
@@ -395,6 +371,25 @@ type
     N17: TMenuItem;
     sbAuditoria: TSpeedButton;
     btn1: TButton;
+    zqryAvaliadores: TZQuery;
+    dspAvaliadores: TDataSetProvider;
+    cdsAvaliadores: TClientDataSet;
+    dsAvaliadores: TDataSource;
+    lbl4: TLabel;
+    dblAvaliador: TDBLookupComboBox;
+    chkTodosAvaliadores: TCheckBox;
+    cpnlRNCNaoRespondida: TCategoryPanel;
+    dbgRNCNaoRespondida: TDBGrid;
+    cdsCalibracaocali_datacalibracao: TDateTimeField;
+    cdsCalibracaocali_numero: TWideStringField;
+    cdsCalibracaodesc_inf: TWideStringField;
+    cdsCalibracaocali_localizacao: TWideStringField;
+    cdsCalibracaocali_proxcalibracao: TDateTimeField;
+    cdsCalibracaodescprocesso: TWideStringField;
+    Spiltag1: TMenuItem;
+    ImportaodeDadosTOTVS1: TMenuItem;
+    cpnlRNCAceiteRecusa: TCategoryPanel;
+    dbg2: TDBGrid;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -521,6 +516,11 @@ type
     procedure Cronograma1Click(Sender: TObject);
     procedure sbAuditoriaClick(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure chkTodosAvaliadoresClick(Sender: TObject);
+    procedure dbgRNCNaoRespondidaDblClick(Sender: TObject);
+    procedure dbgPMCAcoesDblClick(Sender: TObject);
+    procedure ImportaodeDadosTOTVS1Click(Sender: TObject);
+    procedure dbg2DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -557,7 +557,7 @@ uses Funcoes, frm_Login, Validacao, frm_dm, frm_cartaAtualizacao,
   frm_CadRiscoAnaliseRisco, frm_CadModoRecuperacao, frm_DefCadClasse,
   frm_DefCadDefeitos, frm_DefCadOrigem, frm_DefLancamentos, frm_CadProdutos,
   frm_PDCA, frm_CadContexto, frm_CadPartesInteressadas, frm_CadContextoAnalise,
-  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto;
+  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto, frm_CadRNCFecha;
 
 {$R *.dfm}
 
@@ -748,6 +748,16 @@ begin
       cdsColab.Active:= False;
       cdsColab.Active:= True;
 
+      with cdsAvaliadores do begin
+         Active:= False;
+         CommandText:= ' SELECT ava_codavaliador, C.nome_col ' +
+                       ' FROM colab_avaliador' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = ava_codavaliador' +
+                       ' WHERE col_status = 1' + // Ativos
+                       ' ORDER BY C.nome_col';
+         Active:= True;
+      end;
+
       with cdsProcessos do begin
          Active:= False;
          CommandText:= ' SELECT codi_pro, nome_pro ' +
@@ -773,7 +783,31 @@ begin
 end;
 
 procedure TFormInicial.btn1Click(Sender: TObject);
+var
+   planilha, sheet: OleVariant;
+   linha, coluna: Integer;
 begin
+//   GravaUsuarios(QuotedStr('47'));
+
+//     //Crio o objeto que gerencia o arquivo excel
+//     planilha:= CreateOleObject('Excel.Application');
+//
+
+//     //Abro o arquivo
+//     planilha.WorkBooks.open('C:\Users\Daniel\Desktop\FUNCIONARIOS DESTRA.xlsx');
+//
+//     //Pega a primeira planilha do arquivo
+//     sheet:= planilha.WorkSheets[1];
+//
+//     //Aqui pego o texto de uma das células
+//     linha:= 2;
+//     coluna:= 2;
+//     ShowMessage(sheet.cells[linha, coluna]);
+//
+//     //Fecho a planilha
+//     planilha.WorkBooks.Close;
+
+
 // Copia as habilidades cadastradas na função
 //   if Application.MessageBox('Deseja copiar as habilidades que estão cadastradas no cadastro da função para o colaborador ?', 'Confirmação', MB_YESNO + MB_ICONWARNING) = IDYES then begin
 //      with dm.cdsGravar do begin
@@ -833,7 +867,7 @@ begin
 //
 //   Executar(' ALTER TABLE pdca' +
 //                         ' ALTER COLUMN pdca_descricao TYPE character varying(150);');
-
+//
 //   Executar(' CREATE TABLE IF NOT EXISTS partes(' +
 //                         ' par_codigo integer NOT NULL,' +
 //                         ' par_nome character varying(200),' +
@@ -851,7 +885,7 @@ begin
 //                         ' VALUES (2, ' + QuotedStr('ACIONISTA') + ',' + QuotedStr('') + ');');
 //         Executar(' INSERT INTO partes(par_codigo, par_nome, par_descricao)' +
 //                        ' VALUES (1, ' + QuotedStr('CLIENTE') + ',' + QuotedStr('') + ');');
-
+//
 //   Executar(' CREATE TABLE IF NOT EXISTS contexto_analise(' +
 //                         ' ana_codigo integer NOT NULL,' +
 //                         ' ana_contexto integer,' +
@@ -860,14 +894,14 @@ begin
 //                         ' ana_monitoramento text,' +
 //                         ' CONSTRAINT PK_contexto_analise PRIMARY KEY (ana_codigo)' +
 //                         ' )');
-
+////
 //   Executar(' CREATE TABLE IF NOT EXISTS contextos(' +
 //                         ' con_codigo integer NOT NULL,' +
 //                         ' con_nome character varying(200),' +
 //                         ' con_descricao text,' +
 //                         ' CONSTRAINT PK_contextos PRIMARY KEY (con_codigo)' +
 //                         ' )');
-
+////
 //         Executar(' CREATE TABLE IF NOT EXISTS produtos(' +
 //                         ' pro_codigo integer NOT NULL,' +
 //                         ' pro_descricao character varying(200),' +
@@ -935,6 +969,18 @@ begin
 //                         ' pro_codigo integer NOT NULL,' +
 //                         ' CONSTRAINT PK_processos_antecedentes PRIMARY KEY (ant_codigo, pro_codigo)' +
 //                         ' )');
+
+//   CriarCampo('hab_especificacao', 'habilidades', 'text');
+//   CriarCampo('emp_Valores', 'empresa', 'text');
+//   CriarCampo('emp_Visao', 'empresa', 'text');
+//   CriarCampo('emp_Missao', 'empresa', 'text');
+
+//   GravarNovaFuncao(40, 'CADASTRO DE CONTEXTOS', 40);
+//   GravarNovaFuncao(41, 'CADASTRO DE PARTES INTERESSADAS', 41);
+//   GravarNovaFuncao(42, 'ANÁLISE DE CONTEXTO', 42);
+//   GravarNovaFuncao(44, 'PDCA', 44);
+//   GravarNovaFuncao(47, 'RELATÓRIO DE CALIBRAÇÃO', 47);
+
 end;
 
 
@@ -1073,6 +1119,11 @@ end;
 procedure TFormInicial.chkTodosTreinamentoTreClick(Sender: TObject);
 begin
    dblTreinamento.Enabled:= not chkTodosTreinamentoTre.Checked;
+end;
+
+procedure TFormInicial.chkTodosAvaliadoresClick(Sender: TObject);
+begin
+   dblAvaliador.Enabled:= not chkTodosAvaliadores.Checked;
 end;
 
 procedure TFormInicial.chkTodosColabClick(Sender: TObject);
@@ -1217,32 +1268,96 @@ end;
 
 procedure TFormInicial.dbgPMCsemAcaoImediataDblClick(Sender: TObject);
 begin
-   FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
-   FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCsemAcaoImediata.FieldByName('codi_pmc').AsString;
-   FormCadPMCFecha.ShowModal;
-   FormCadPMCFecha.Release;
-   FormCadPMCFecha.Free;
-   FormCadPMCFecha:= nil;
+    if dmPendencias.cdsPMCsemAcaoImediata.RecordCount > 0 then begin
+      FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
+      FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCsemAcaoImediata.FieldByName('codi_pmc').AsString;
+      FormCadPMCFecha.ShowModal;
+      FormCadPMCFecha.Release;
+      FormCadPMCFecha.Free;
+      FormCadPMCFecha:= nil;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
 end;
 
 procedure TFormInicial.dbgPMCDblClick(Sender: TObject);
 begin
-   FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
-   FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMC.FieldByName('codi_pmc').AsString;
-   FormCadPMCFecha.ShowModal;
-   FormCadPMCFecha.Release;
-   FormCadPMCFecha.Free;
-   FormCadPMCFecha:= nil;
+   if dmPendencias.cdsPMC.RecordCount > 0 then begin
+      FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
+      FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMC.FieldByName('codi_pmc').AsString;
+      FormCadPMCFecha.ShowModal;
+      FormCadPMCFecha.Release;
+      FormCadPMCFecha.Free;
+      FormCadPMCFecha:= nil;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
 end;
 
 procedure TFormInicial.dbgPMCSemCausaDblClick(Sender: TObject);
 begin
-   FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
-   FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCsemCausa.FieldByName('codi_pmc').AsString;
-   FormCadPMCFecha.ShowModal;
-   FormCadPMCFecha.Release;
-   FormCadPMCFecha.Free;
-   FormCadPMCFecha:= nil;
+   if dmPendencias.cdsPMCsemCausa.RecordCount > 0 then begin
+      FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
+      FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCsemCausa.FieldByName('codi_pmc').AsString;
+      FormCadPMCFecha.ShowModal;
+      FormCadPMCFecha.Release;
+      FormCadPMCFecha.Free;
+      FormCadPMCFecha:= nil;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
+end;
+
+procedure TFormInicial.dbg2DblClick(Sender: TObject);
+begin
+   if dmPendencias.cdsRNCSemAceiteRecusa.RecordCount > 0 then begin
+      if AcessoTartaruga('RNC') then begin
+         FormCadRNCFecha:= TFormCadRNCFecha.Create(nil);
+         FormCadRNCFecha.sCodigoRNC:= dmPendencias.cdsRNCSemAceiteRecusa.FieldByName('rnc_codigo').AsString;
+         FormCadRNCFecha.iTela:= 1;
+         FormCadRNCFecha.ShowModal;
+         FormCadRNCFecha.Release;
+         FreeAndNil(FormCadRNCFecha);
+      end;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
+end;
+
+procedure TFormInicial.dbgPMCAcoesDblClick(Sender: TObject);
+begin
+   if dmPendencias.cdsPMCAcoes.RecordCount > 0 then begin
+      FormCadPMCFecha:= TFormCadPMCFecha.Create(nil);
+      FormCadPMCFecha.sCodigoPMC:= dmPendencias.cdsPMCAcoes.FieldByName('codi_pmc').AsString;
+      FormCadPMCFecha.ShowModal;
+      FormCadPMCFecha.Release;
+      FormCadPMCFecha.Free;
+      FormCadPMCFecha:= nil;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
+end;
+
+procedure TFormInicial.dbgRNCNaoRespondidaDblClick(Sender: TObject);
+begin
+   if dmPendencias.cdsRNCSemResposta.RecordCount = 0 then begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end
+   else begin
+      if AcessoTartaruga('RNC') then begin
+         FormCadRNCFecha:= TFormCadRNCFecha.Create(nil);
+         FormCadRNCFecha.sCodigoRNC:= dmPendencias.cdsRNCSemResposta.FieldByName('rnc_codigo').AsString;
+         FormCadRNCFecha.iTela:= 1;
+         FormCadRNCFecha.ShowModal;
+         FormCadRNCFecha.Release;
+         FreeAndNil(FormCadRNCFecha);
+      end;
+   end;
 end;
 
 procedure TFormInicial.Empresa1Click(Sender: TObject);
@@ -1425,13 +1540,25 @@ begin
    nomeSistema:= 'Destra Manager';
 end;
 
+procedure TFormInicial.ImportaodeDadosTOTVS1Click(Sender: TObject);
+begin
+//   if Acesso(cUsuario, 1, 'acesso') = 1 then begin  // Cadastro de Empresas
+      AbrirArquivo(ExtractFilePath(Application.ExeName) + 'Spiltag/ImportarTOTVS.exe', '', 'N');
+//   end;
+end;
+
 procedure TFormInicial.FormShow(Sender: TObject);
-//var
+var
+   aDadosEmpresa: TStringList;
 //   Reg, cExpira: String;
 //   DataVenc: TDateTime;
 begin
    if not VerificarProjetoCEA() then begin
       Exportao1.Visible:= False;
+   end;
+
+   if not VerificarProjetoSpiltag() then begin
+      Spiltag1.Visible:= False;
    end;
 
    Self.Caption:= nomeSistema + ' - Versão ' + versao;
@@ -1448,10 +1575,13 @@ begin
       Self.Close;
    end;
 
+   aDadosEmpresa:= TStringList.Create;
+   aDadosEmpresa:= BuscarNomeEmpresa();
+
    StatPrincipal.Panels[0].Text:= 'DATA: ' + DateToStr(DATE());
    StatPrincipal.Panels[1].Text:= 'USUÁRIO: ' + cUsuario;
    StatPrincipal.Panels[2].Text:= 'SERVIDOR: ' + dm.Conexao.HostName;
-   StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + BuscarNomeEmpresa();
+   StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + aDadosEmpresa[0];
 
 //   with cdsEmpresa do begin
 //      Active:= False;
@@ -1558,6 +1688,11 @@ begin
    if (chkTodosColab.Checked = False) AND ((dblColaborador.KeyValue = Null) OR (dblColaborador.KeyValue = -1)) then begin
       Application.MessageBox('Selecione um Colaborador ou marque TODOS !', 'Aviso', MB_OK + MB_ICONWARNING);
       TryFocus(dblColaborador);
+      Exit;
+   end;
+   if (chkTodosAvaliadores.Checked = False) AND ((dblAvaliador.KeyValue = Null) OR (dblAvaliador.KeyValue = -1)) then begin
+      Application.MessageBox('Selecione um Avaliador ou marque TODOS !', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblAvaliador);
       Exit;
    end;
 
@@ -1668,7 +1803,8 @@ begin
                           ' INNER JOIN habilidades H ON H.codi_hab = CH2.codi_hab ' +
                           '      WHERE CH2.codi_col = CH.codi_col AND CH2.hab_ano = ' + QuotedStr(spnAno.Text) + ') AS TotalHab, ' +
                           ' CH.codi_col, CH.codi_hab, CH.nota_hab, CH.hab_ano, H.desc_hab, ' +
-                          ' (SELECT nome_col FROM colaboradores WHERE codi_col = CA.ava_codavaliador) as Avaliador' +
+                          ' (SELECT nome_col FROM colaboradores WHERE codi_col = CA.ava_codavaliador) as Avaliador,' +
+                          ' CA.ava_codavaliador' +
                           ' FROM colab_habilidades CH' +
                           ' INNER JOIN colaboradores C ON C.codi_col = CH.codi_col' +
                           ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
@@ -1685,6 +1821,9 @@ begin
             end;
             if chkTodosFuncao.Checked = False then begin
                CommandText:= CommandText + ' AND C.func_col = ' + FloatToStr(dblFuncoes.KeyValue);
+            end;
+            if chkTodosAvaliadores.Checked = False then begin
+               CommandText:= CommandText + ' AND CA.ava_codavaliador = ' + FloatToStr(dblAvaliador.KeyValue);
             end;
             if chkNotaZerada.Checked = True then begin
                CommandText:= CommandText + ' AND CH.nota_hab > 0';
@@ -1876,16 +2015,23 @@ begin
 
    with cdsCalibracao do begin
       Active:= False;
-      CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio,' +
-                    ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa,' +
-                    ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes,' +
-                    ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado,' +
-                    ' cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
-                    ' I.codi_inf, I.desc_inf, nome_pro as DescProcesso' +
+      CommandText:= ' SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_localizacao,' +
+                    ' cali_proxCalibracao, nome_pro as DescProcesso' +
                     ' FROM calibracao C' +
-                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip ' +
+                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip' +
                     ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+                    ' WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)' +
                     ' ORDER BY DescProcesso, ' + sCampoOrdem;
+//      CommandText:= ' SELECT cali_capacidade, cali_codigo, cali_criterio,' +
+//                    ' cali_dataCalibracao, cali_equip, cali_erro, cali_faixa,' +
+//                    ' cali_frequencia, cali_localizacao, cali_numero, cali_padroes,' +
+//                    ' cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certificado,' +
+//                    ' cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cali_aprovado, ' +
+//                    ' I.codi_inf, I.desc_inf, nome_pro as DescProcesso' +
+//                    ' FROM calibracao C' +
+//                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip ' +
+//                    ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+//                    ' ORDER BY DescProcesso, ' + sCampoOrdem;
       Active:= True;
    end;
 
@@ -2386,8 +2532,11 @@ end;
 
 procedure TFormInicial.sbAuditoriaClick(Sender: TObject);
 begin
-    if Acesso(cUsuario, 61, 'acesso') = 1 then begin
-      AbrirForm(TFormAuditoriaAuto, FormAuditoriaAuto);
+   if Acesso(cUsuario, 63, 'acesso') = 1 then begin
+//      AbrirForm(TFormAuditoriaAuto, FormAuditoriaAuto);
+      FormAuditoriaAuto:= TFormAuditoriaAuto.Create(nil);
+      FormAuditoriaAuto.ShowModal;
+      FormAuditoriaAuto.Release;
    end;
 end;
 
@@ -2496,6 +2645,7 @@ var
    wDia, wMes, wAno: Word;
    iMesAnterior: Integer;
    i: Integer;
+   dDataVerificacaoInd: string; // Pega o dia que considera pra mostrar que o indicador está desatualizado - TT162
 begin
    // Busca quais pendências serão mostradas na tela inicial para o usuário
    // conforme configuração no cadastro de usuários (aba pendências)
@@ -2506,7 +2656,7 @@ begin
                     ' usu_pend_coleducacao, usu_pend_treinprevisao, usu_pend_treineficacia,' +
                     ' usu_pend_avaliacao, usu_pend_procedimentos, usu_pend_forn, usu_pend_pmcacoes,' +
                     ' usu_pend_pmc, usu_pend_calibracao, usu_pend_indicadores, usu_pend_pmc_causa,' +
-                    ' usu_pend_pmc_acaoimediata' +
+                    ' usu_pend_pmc_acaoimediata, usu_pend_rnc_naopreenchido, usu_pend_rnc_aceite' +
                     ' FROM usuarios' +
                     ' WHERE nome_usu = ' + QuotedStr(cUsuario);
       Active:= True;
@@ -2563,6 +2713,7 @@ begin
                   4: iMesAnterior:= (wAno * 100) + wMes - 12;
                   5: iMesAnterior:= (wAno * 100) + wMes - 24;
                   6: iMesAnterior:= (wAno * 100) + wMes - 36;
+                  7: iMesAnterior:= (wAno * 100) + wMes - 48;
                end;
 
                if (Copy(IntToStr(iMesAnterior),5,2) = '00') or (StrToInt(Copy(IntToStr(iMesAnterior),5,2)) >= 13) then begin
@@ -2574,6 +2725,7 @@ begin
                      4: iMesAnterior:= iMesAnterior - 88;
                      5: iMesAnterior:= iMesAnterior - 176;
                      6: iMesAnterior:= iMesAnterior - 264;
+                     7: iMesAnterior:= iMesAnterior - 352;
                   end;
                end;
 
@@ -2587,9 +2739,13 @@ begin
                   Active:= True;
 
                   if dm.cdsAux2.RecordCount = 0 then begin
-                     stgIndicadores.Cells[0,stgIndicadores.RowCount-1]:= dm.cdsAux.FieldByName('desc_ind').AsString;
-                     stgIndicadores.Cells[1,stgIndicadores.RowCount-1]:= dm.cdsAux.FieldByName('nome_pro').AsString;
-                     stgIndicadores.RowCount:= stgIndicadores.RowCount + 1;
+                     // Verifica a data gravada em parâmetros para definir se aparece a pendência do indicador
+                     // Projeto TT162
+                     if VerificaPendIndicador(iMesAnterior) = True then begin
+                        stgIndicadores.Cells[0,stgIndicadores.RowCount-1]:= dm.cdsAux.FieldByName('desc_ind').AsString;
+                        stgIndicadores.Cells[1,stgIndicadores.RowCount-1]:= dm.cdsAux.FieldByName('nome_pro').AsString;
+                        stgIndicadores.RowCount:= stgIndicadores.RowCount + 1;
+                     end;
                   end;
                end;
 
@@ -2643,7 +2799,7 @@ begin
    if dm.cdsAuxiliar.FieldByName('usu_pend_pmcacoes').AsInteger = 1 then begin
       with dmPendencias.cdsPMCAcoes do begin
          Active:= False;
-         CommandText:= ' SELECT P.nume_pmc, PA.desc_aco,' +
+         CommandText:= ' SELECT P.codi_pmc, P.nume_pmc, PA.desc_aco,' +
                        ' C.nome_col as ResponsavelAcao, PA.aco_prazo, PA.vimp_aco' +
                        ' FROM pmc P' +
                        ' INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc' +
@@ -2725,17 +2881,24 @@ begin
    if dm.cdsAuxiliar.FieldByName('usu_pend_calibracao').AsInteger = 1 then begin
       with dmPendencias.cdsCalibracao do begin
          Active:= False;
+//         CommandText:= ' SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_localizacao,' +
+//                    ' cali_proxCalibracao, nome_pro as DescProcesso' +
+//                    ' FROM calibracao C' +
+//                    ' INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip' +
+//                    ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
+//                    ' WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)' +
          CommandText:= ' SELECT cali_codigo, cali_numero, I.desc_inf as Equipamento, cali_resolucao, cali_localizacao, ' +
                        ' cali_frequencia, cali_faixa, cali_capacidade, cali_criterio,' +
                        ' cali_certificado, cali_datacalibracao, cali_proxcalibracao, cali_padroes,' +
                        ' cali_erro, cali_parecer, cali_processo, cali_arquivo, cali_incerteza,' +
                        ' cali_errototal, cali_aprovado, cali_equip, cali_obs, P.nome_pro' +
-                       ' FROM calibracao' +
-                       // Usado Inner Join para que os equipamentos excluídos não7
+                       ' FROM calibracao C' +
+                       // Usado Inner Join para que os equipamentos excluídos não
                        // apareçam nas pendência(s) de calibração
                        ' INNER JOIN infraestrutura I ON I.codi_inf = cali_equip AND I.inf_status = 1' + // Ativos
                        ' INNER JOIN processos P ON P.codi_pro = cali_processo' +
-                       ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date());
+                       ' WHERE cali_proxcalibracao <= ' + ArrumaDataSQL(Date()) +
+                       ' AND cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FROM calibracao WHERE cali_numero = C.cali_numero)';
          Active:= True;
 
          if RecordCount > 0 then begin
@@ -3014,7 +3177,9 @@ begin
                        ' FROM colab_habilidades H' +
                        ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col AND C.col_status = 1' +
                        ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
-                       ' WHERE nota_hab <= ' + dm.cdsAux.FieldByName('notapendencia').AsString;
+                       ' WHERE nota_hab <= ' + dm.cdsAux.FieldByName('notapendencia').AsString +
+                       ' AND col_admissao + interval ' + QuotedStr(IntToStr(BuscarDiasPendHab()) + ' days') +
+                       ' < ' + ArrumaDataSQL(Date());
    //                    ' AND H.hab_ano = ' + QuotedStr(sAnoHabilidade);
          Active:= True;
 
@@ -3062,6 +3227,58 @@ begin
    end
    else begin
       cpnlHabilidadeVencida.Visible:= False;
+   end;
+
+   // Verifica se tem RNC não respondidas
+   if dm.cdsAuxiliar.FieldByName('usu_pend_rnc_naopreenchido').AsInteger = 1 then begin
+      with dmPendencias.cdsRNCSemResposta do begin
+         Active:= False;
+         CommandText:= ' SELECT rnc_codigo, rnc_identificacao, TC.valo_com as "Motivo", C.nome_col as Responsavel  ' +
+                       ' FROM rnc' +
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 32 AND TC.codi_com = rnc_motivo' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = rnc_responsavel' +
+                       ' WHERE rnc_status = 1' + // Sem resposta
+                       ' ORDER BY rnc_identificacao';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            cpnlRNCNaoRespondida.Caption:= 'RNC sem resposta - ' + IntToStr(RecordCount) + ' pendência(s)';
+            cpnlRNCNaoRespondida.Visible:= True;
+         end
+         else begin
+            cpnlRNCNaoRespondida.Caption:= 'RNC sem resposta ';
+            cpnlRNCNaoRespondida.Visible:= False;
+         end;
+      end;
+   end
+   else begin
+      cpnlRNCNaoRespondida.Visible:= False;
+   end;
+
+   // Verifica se tem RNC sem aceite ou recusa
+   if dm.cdsAuxiliar.FieldByName('usu_pend_rnc_aceite').AsInteger = 1 then begin
+      with dmPendencias.cdsRNCSemAceiteRecusa do begin
+         Active:= False;
+         CommandText:= ' SELECT rnc_codigo, rnc_identificacao, TC.valo_com as "Motivo", C.nome_col as Responsavel  ' +
+                       ' FROM rnc' +
+                       ' INNER JOIN tabela_combos TC ON TC.tipo_com = 32 AND TC.codi_com = rnc_motivo' +
+                       ' INNER JOIN colaboradores C ON C.codi_col = rnc_emitido' +
+                       ' WHERE rnc_status = 2' + // Sem Aceite/Recusa
+                       ' ORDER BY rnc_identificacao';
+         Active:= True;
+
+         if RecordCount > 0 then begin
+            cpnlRNCAceiteRecusa.Caption:= 'RNC sem Aceite/Recusa - ' + IntToStr(RecordCount) + ' pendência(s)';
+            cpnlRNCAceiteRecusa.Visible:= True;
+         end
+         else begin
+            cpnlRNCAceiteRecusa.Caption:= 'RNC sem Aceite/Recusa ';
+            cpnlRNCAceiteRecusa.Visible:= False;
+         end;
+      end;
+   end
+   else begin
+      cpnlRNCAceiteRecusa.Visible:= False;
    end;
 
    // Verifica se tem todos os PMC abertos para as análises de risco do processo

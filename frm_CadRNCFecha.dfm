@@ -4,7 +4,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Fechamento de RNC'
-  ClientHeight = 539
+  ClientHeight = 568
   ClientWidth = 751
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
     Left = 0
     Top = 0
     Width = 751
-    Height = 467
+    Height = 496
     ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -64,7 +64,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       Caption = 'Cadastro RNC'
       object lbl4: TLabel
         Left = 7
-        Top = 154
+        Top = 195
         Width = 89
         Height = 13
         Caption = 'N'#227'o Conformidade'
@@ -106,14 +106,14 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object lbl3: TLabel
         Left = 81
-        Top = 202
+        Top = 243
         Width = 61
         Height = 13
         Caption = 'Respons'#225'vel'
       end
       object lbl8: TLabel
         Left = 7
-        Top = 202
+        Top = 243
         Width = 47
         Height = 13
         Caption = 'Procede ?'
@@ -134,14 +134,14 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object lbl12: TLabel
         Left = 7
-        Top = 252
+        Top = 293
         Width = 50
         Height = 13
         Caption = 'Disposi'#231#227'o'
       end
       object lbl17: TLabel
         Left = 586
-        Top = 383
+        Top = 424
         Width = 31
         Height = 13
         Caption = 'Status'
@@ -180,7 +180,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object sbVisualizarNC: TSpeedButton
         Left = 714
-        Top = 176
+        Top = 217
         Width = 25
         Height = 26
         Hint = 'Clique para exibir/ocultar o texto da N'#227'o Conformidade'
@@ -192,7 +192,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object sbVisualizarDisp: TSpeedButton
         Left = 549
-        Top = 398
+        Top = 439
         Width = 25
         Height = 26
         Hint = 'Clique para exibir/ocultar o texto da Disposi'#231#227'o'
@@ -204,10 +204,33 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object lbl9: TLabel
         Left = 587
-        Top = 252
+        Top = 293
         Width = 59
         Height = 13
         Caption = 'Fechamento'
+      end
+      object lbl14: TLabel
+        Left = 7
+        Top = 151
+        Width = 110
+        Height = 13
+        Caption = 'N'#186' Ordem de Produ'#231#227'o'
+      end
+      object lbl15: TLabel
+        Left = 125
+        Top = 151
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
       end
       object dblTipo: TDBLookupComboBox
         Tag = 30
@@ -263,7 +286,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object dblResponsavel: TDBLookupComboBox
         Left = 81
-        Top = 219
+        Top = 260
         Width = 464
         Height = 26
         Enabled = False
@@ -280,7 +303,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object dblProcede: TDBLookupComboBox
         Left = 7
-        Top = 218
+        Top = 259
         Width = 68
         Height = 26
         Enabled = False
@@ -366,7 +389,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       object mmoNaoConformidade: TMemo
         Tag = 30
         Left = 7
-        Top = 170
+        Top = 211
         Width = 701
         Height = 26
         Enabled = False
@@ -383,7 +406,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object mmoDisposicao: TMemo
         Left = 7
-        Top = 268
+        Top = 309
         Width = 536
         Height = 157
         Font.Charset = DEFAULT_CHARSET
@@ -400,7 +423,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object dblStatus: TDBLookupComboBox
         Left = 586
-        Top = 399
+        Top = 440
         Width = 153
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -451,8 +474,8 @@ object FormCadRNCFecha: TFormCadRNCFecha
         TabOrder = 13
       end
       object pnlEmail: TPanel
-        Left = 611
-        Top = 33
+        Left = 539
+        Top = 290
         Width = 578
         Height = 188
         TabOrder = 15
@@ -787,7 +810,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object btnAceitar: TBitBtn
         Left = 587
-        Top = 268
+        Top = 309
         Width = 73
         Height = 70
         Hint = 'Clique para aceitar a disposi'#231#227'o'
@@ -920,7 +943,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
       end
       object btnRecusar: TBitBtn
         Left = 666
-        Top = 268
+        Top = 309
         Width = 73
         Height = 70
         Hint = 'Clique para recusar a disposi'#231#227'o'
@@ -1052,8 +1075,8 @@ object FormCadRNCFecha: TFormCadRNCFecha
         OnClick = btnRecusarClick
       end
       object pnlTexto: TPanel
-        Left = 673
-        Top = -8
+        Left = 689
+        Top = 209
         Width = 730
         Height = 270
         TabOrder = 14
@@ -1225,6 +1248,43 @@ object FormCadRNCFecha: TFormCadRNCFecha
           OnKeyPress = mmoDescricaoAcaoKeyPress
         end
       end
+      object edtOrdemProd: TEdit
+        Tag = 30
+        Left = 7
+        Top = 166
+        Width = 110
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 10
+        ParentFont = False
+        TabOrder = 18
+      end
+      object edtCusto: TCurrencyEdit
+        Tag = 30
+        Left = 125
+        Top = 166
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 19
+      end
     end
     object tsHistorico: TTabSheet
       Caption = 'Hist'#243'rico'
@@ -1350,7 +1410,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
   end
   object pnl1: TPanel
     Left = 0
-    Top = 467
+    Top = 496
     Width = 751
     Height = 72
     Align = alBottom
@@ -2818,27 +2878,27 @@ object FormCadRNCFecha: TFormCadRNCFecha
       'rnc_representante, rnc_status, rnc_disposicao'
       'FROM rnc R')
     Params = <>
-    Left = 128
-    Top = 176
+    Left = 288
+    Top = 184
   end
   object dspRNC: TDataSetProvider
     DataSet = zqryRNC
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 176
+    Left = 328
+    Top = 184
   end
   object cdsRNC: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRNC'
-    Left = 208
-    Top = 176
+    Left = 368
+    Top = 184
   end
   object dsRNC: TDataSource
     DataSet = cdsRNC
-    Left = 248
-    Top = 176
+    Left = 408
+    Top = 184
   end
   object cdsMotivo: TClientDataSet
     Aggregates = <>

@@ -62,6 +62,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro RNC'
+      ExplicitTop = 23
       object lbl18: TLabel
         Left = 468
         Top = 332
@@ -188,6 +189,22 @@ object FormCadRNCAbre: TFormCadRNCAbre
         Height = 13
         Caption = 'N'#186' Ordem de Produ'#231#227'o'
       end
+      object lbl24: TLabel
+        Left = 621
+        Top = 151
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
       object dblMotivo: TDBLookupComboBox
         Left = 532
         Top = 27
@@ -248,7 +265,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         ListField = 'nome_col'
         ListSource = dsResponsavel
         ParentFont = False
-        TabOrder = 16
+        TabOrder = 17
       end
       object dtData: TDateEdit
         Left = 116
@@ -310,7 +327,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 13
+        TabOrder = 14
         OnKeyPress = mmoNaoConformidadeKeyPress
       end
       object dblCliente: TDBLookupComboBox
@@ -360,14 +377,14 @@ object FormCadRNCAbre: TFormCadRNCAbre
         ListField = 'valo_com'
         ListSource = dsProcede
         ParentFont = False
-        TabOrder = 15
+        TabOrder = 16
       end
       object pnlEmail: TPanel
         Left = 679
         Top = 258
         Width = 578
         Height = 188
-        TabOrder = 14
+        TabOrder = 15
         object lbl15: TLabel
           Left = 16
           Top = 61
@@ -711,7 +728,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         ListField = 'valo_com'
         ListSource = dsRelacionamento
         ParentFont = False
-        TabOrder = 18
+        TabOrder = 19
       end
       object edtDepartamento: TEdit
         Left = 468
@@ -726,7 +743,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         Font.Style = []
         MaxLength = 25
         ParentFont = False
-        TabOrder = 17
+        TabOrder = 18
       end
       object edtCodigoCli: TEdit
         Left = 7
@@ -756,7 +773,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         Font.Style = []
         MaxLength = 25
         ParentFont = False
-        TabOrder = 19
+        TabOrder = 20
       end
       object edtSetor: TEdit
         Left = 334
@@ -790,10 +807,10 @@ object FormCadRNCAbre: TFormCadRNCAbre
       end
       object pnlImprimir: TPanel
         Left = 705
-        Top = 86
+        Top = 212
         Width = 365
         Height = 188
-        TabOrder = 12
+        TabOrder = 13
         object pnl3: TPanel
           Left = 1
           Top = 1
@@ -1249,6 +1266,24 @@ object FormCadRNCAbre: TFormCadRNCAbre
         MaxLength = 10
         ParentFont = False
         TabOrder = 11
+      end
+      object edtCusto: TCurrencyEdit
+        Left = 621
+        Top = 166
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 12
       end
     end
     object tsDocumentos: TTabSheet
@@ -3285,7 +3320,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
       'rnc_fornecedor, F.forn_nome, rnc_consumidor, rnc_nconformidade, '
       'rnc_procede, rnc_responsavel, C1.nome_col as Responsavel, '
       'rnc_departamento, rnc_relacionamento, rnc_representante, '
-      'C.nome_col as Emitido, TC.valo_com as Motivo'
+      'C.nome_col as Emitido, TC.valo_com as Motivo, rnc_custo'
       'FROM rnc R'
       'INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido'
       'INNER JOIN colaboradores C1 ON C1.codi_col = R.rnc_responsavel'
@@ -3310,6 +3345,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
     Top = 144
   end
   object cdsImprimir: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -3402,6 +3438,9 @@ object FormCadRNCAbre: TFormCadRNCAbre
       ReadOnly = True
       Size = 45
     end
+    object cdsImprimirrnc_custo: TFloatField
+      FieldName = 'rnc_custo'
+    end
   end
   object zqryRNC: TZQuery
     Connection = dm.Conexao
@@ -3437,7 +3476,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42850.408072905100000000
+    ReportOptions.LastChange = 43236.654001863400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -3534,7 +3573,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         object frxControleLANCAMENTO: TfrxMemoView
           Left = 170.456692910000000000
           Top = 19.000000000000000000
-          Width = 603.968503937008000000
+          Width = 490.582603939999000000
           Height = 79.370130000000000000
           ShowHint = False
           DataField = 'rnc_nconformidade'
@@ -3575,7 +3614,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
           VAlign = vaCenter
         end
         object Memo11: TfrxMemoView
-          Left = 910.039890000000000000
+          Left = 796.039890000000000000
           Top = 19.000000000000000000
           Width = 135.307086610000000000
           Height = 79.370130000000000000
@@ -3623,9 +3662,9 @@ object FormCadRNCAbre: TFormCadRNCAbre
           VAlign = vaCenter
         end
         object Memo2: TfrxMemoView
-          Left = 774.354330710000000000
+          Left = 661.039370078740000000
           Top = 19.000000000000000000
-          Width = 135.685039370000000000
+          Width = 135.307086614173000000
           Height = 79.370130000000000000
           ShowHint = False
           DataField = 'Origem'
@@ -3666,7 +3705,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
         end
         object Memo7: TfrxMemoView
           Left = 169.897684170000000000
-          Width = 603.968503937008000000
+          Width = 490.582603939999000000
           Height = 18.897650000000000000
           ShowHint = False
           Color = cl3DLight
@@ -3684,7 +3723,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
           VAlign = vaBottom
         end
         object Memo8: TfrxMemoView
-          Left = 773.795270710000000000
+          Left = 659.795270710000000000
           Width = 136.440944880000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3723,7 +3762,7 @@ object FormCadRNCAbre: TFormCadRNCAbre
           VAlign = vaBottom
         end
         object Memo1: TfrxMemoView
-          Left = 910.480830000000000000
+          Left = 796.480830000000000000
           Top = 0.133890000000008100
           Width = 134.929133860000000000
           Height = 18.897650000000000000
@@ -4015,6 +4054,49 @@ object FormCadRNCAbre: TFormCadRNCAbre
           HAlign = haCenter
           Memo.UTF8W = (
             'Consumidor')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo25: TfrxMemoView
+          Left = 931.543910000000000000
+          Top = 18.866109999999990000
+          Width = 113.385826770000000000
+          Height = 79.748031500000000000
+          ShowHint = False
+          DataField = 'rnc_custo'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_custo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo26: TfrxMemoView
+          Left = 931.653543307087000000
+          Width = 113.385826770000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Custo')
           ParentFont = False
           VAlign = vaBottom
         end
@@ -4509,7 +4591,8 @@ object FormCadRNCAbre: TFormCadRNCAbre
       'cli_nome=cli_nome'
       'forn_nome=forn_nome'
       'origem=origem'
-      'responsavel=responsavel')
+      'responsavel=responsavel'
+      'rnc_custo=rnc_custo')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 408

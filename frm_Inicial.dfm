@@ -838,6 +838,140 @@ object FormInicial: TFormInicial
       HeaderFont.Name = 'Tahoma'
       HeaderFont.Style = []
       TabOrder = 1
+      object cpnlRNCAceiteRecusa: TCategoryPanel
+        Top = 540
+        Height = 30
+        Caption = 'RNC sem Aceite/Recusa'
+        Collapsed = True
+        TabOrder = 0
+        object dbg2: TDBGrid
+          Left = 8
+          Top = 4
+          Width = 880
+          Height = 174
+          TabStop = False
+          DataSource = dmPendencias.dsRNCSemAceiteRecusa
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnDblClick = dbg2DblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'rnc_identificacao'
+              Title.Caption = 'N'#250'mero RNC'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 80
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Motivo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 350
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Responsavel'
+              Title.Caption = 'Respons'#225'vel'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 400
+              Visible = True
+            end>
+        end
+      end
+      object cpnlRNCNaoRespondida: TCategoryPanel
+        Top = 510
+        Height = 30
+        Caption = 'RNC n'#227'o respondida'
+        Collapsed = True
+        TabOrder = 1
+        object dbgRNCNaoRespondida: TDBGrid
+          Left = 8
+          Top = 4
+          Width = 880
+          Height = 174
+          TabStop = False
+          DataSource = dmPendencias.dsRNCSemResposta
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnDblClick = dbgRNCNaoRespondidaDblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'rnc_identificacao'
+              Title.Caption = 'N'#250'mero RNC'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 80
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Motivo'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 350
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'Responsavel'
+              Title.Caption = 'Respons'#225'vel'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'Tahoma'
+              Title.Font.Style = [fsBold]
+              Width = 400
+              Visible = True
+            end>
+        end
+      end
       object cpnlAnaliseCritica: TCategoryPanel
         Top = 480
         Height = 30
@@ -845,7 +979,7 @@ object FormInicial: TFormInicial
           'A'#231#245'es de An'#225'lise Cr'#237'tica vencidas ou que n'#227'o tem parecer satisfa' +
           't'#243'rio'
         Collapsed = True
-        TabOrder = 0
+        TabOrder = 2
         ExpandedHeight = 212
         object dbgAnaliseCritica: TDBGrid
           Left = 8
@@ -925,7 +1059,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'A'#231#245'es de PDCA vencidas'
         Collapsed = True
-        TabOrder = 1
+        TabOrder = 3
         ExpandedHeight = 212
         object dbgPDCA: TDBGrid
           Left = 8
@@ -1029,7 +1163,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Manuten'#231#245'es Preventivas pendentes'
         Collapsed = True
-        TabOrder = 2
+        TabOrder = 4
         ExpandedHeight = 212
         object dbgManutencao: TDBGrid
           Left = 8
@@ -1108,7 +1242,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Colaboradores com experi'#234'ncia abaixo do exigido'
         Collapsed = True
-        TabOrder = 3
+        TabOrder = 5
         ExpandedHeight = 212
         object dbgExperiencia: TDBGrid
           Left = 8
@@ -1176,7 +1310,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Colaboradores com n'#237'vel de educa'#231#227'o abaixo do exigido'
         Collapsed = True
-        TabOrder = 4
+        TabOrder = 6
         ExpandedHeight = 212
         object dbgEducacao: TDBGrid
           Left = 8
@@ -1244,7 +1378,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Treinamentos sem verifica'#231#227'o de efic'#225'cia'
         Collapsed = True
-        TabOrder = 5
+        TabOrder = 7
         ExpandedHeight = 212
         object dbgEficacia: TDBGrid
           Left = 8
@@ -1324,7 +1458,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Treinamentos com previs'#227'o vencida ou sem data de previs'#227'o'
         Collapsed = True
-        TabOrder = 6
+        TabOrder = 8
         ExpandedHeight = 212
         object dbgTreinamentos: TDBGrid
           Left = 8
@@ -1404,7 +1538,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Habilidades com nota menor igual a'
         Collapsed = True
-        TabOrder = 7
+        TabOrder = 9
         ExpandedHeight = 212
         object dbgHabilidades: TDBGrid
           Left = 8
@@ -1484,7 +1618,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Colaboradores com avalia'#231#227'o de habilidades vencida'
         Collapsed = True
-        TabOrder = 8
+        TabOrder = 10
         ExpandedHeight = 212
         object dbg1: TDBGrid
           Left = 11
@@ -1540,7 +1674,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Procedimentos n'#227'o aprovados'
         Collapsed = True
-        TabOrder = 9
+        TabOrder = 11
         ExpandedHeight = 212
         object dbgProcedimentos: TDBGrid
           Left = 8
@@ -1608,7 +1742,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Fornecedores com homologa'#231#227'o vencida'
         Collapsed = True
-        TabOrder = 10
+        TabOrder = 12
         ExpandedHeight = 212
         object dbgFornecedores: TDBGrid
           Left = 8
@@ -1694,7 +1828,7 @@ object FormInicial: TFormInicial
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 11
+        TabOrder = 13
         ExpandedHeight = 214
         object dbgPMCAcoes: TDBGrid
           Left = 11
@@ -1718,6 +1852,7 @@ object FormInicial: TFormInicial
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgPMCAcoesDblClick
           Columns = <
             item
               Expanded = False
@@ -1780,7 +1915,7 @@ object FormInicial: TFormInicial
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 12
+        TabOrder = 14
         ExpandedHeight = 214
         object dbgPMC: TDBGrid
           Left = 11
@@ -1890,7 +2025,7 @@ object FormInicial: TFormInicial
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 13
+        TabOrder = 15
         ExpandedHeight = 214
         object dbgPMCSemCausa: TDBGrid
           Left = 11
@@ -2000,7 +2135,7 @@ object FormInicial: TFormInicial
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 14
+        TabOrder = 16
         ExpandedHeight = 214
         object dbgPMCsemAcaoImediata: TDBGrid
           Left = 11
@@ -2104,7 +2239,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Tabela de Calibra'#231#227'o'
         Collapsed = True
-        TabOrder = 15
+        TabOrder = 17
         ExpandedHeight = 218
         object dbgCalibracao: TDBGrid
           Left = 11
@@ -2208,7 +2343,7 @@ object FormInicial: TFormInicial
         Height = 30
         Caption = 'Indicadores'
         Collapsed = True
-        TabOrder = 16
+        TabOrder = 18
         ExpandedHeight = 212
         object stgIndicadores: TStringGrid
           Left = 11
@@ -2328,10 +2463,10 @@ object FormInicial: TFormInicial
     end
   end
   object pnlAvalHab: TPanel
-    Left = 258
-    Top = 88
+    Left = 588
+    Top = -44
     Width = 498
-    Height = 381
+    Height = 428
     TabOrder = 2
     Visible = False
     object lbl1: TLabel
@@ -2362,9 +2497,16 @@ object FormInicial: TFormInicial
       Height = 13
       Caption = 'Fun'#231#227'o'
     end
+    object lbl4: TLabel
+      Left = 96
+      Top = 193
+      Width = 45
+      Height = 13
+      Caption = 'Avaliador'
+    end
     object pnl2: TPanel
       Left = 1
-      Top = 308
+      Top = 355
       Width = 496
       Height = 72
       Align = alBottom
@@ -2894,7 +3036,7 @@ object FormInicial: TFormInicial
     end
     object rgAgrupaAvHab: TRadioGroup
       Left = 8
-      Top = 190
+      Top = 237
       Width = 481
       Height = 59
       Caption = 'Agrupar por'
@@ -2921,7 +3063,7 @@ object FormInicial: TFormInicial
     end
     object grp1: TGroupBox
       Left = 8
-      Top = 252
+      Top = 299
       Width = 481
       Height = 51
       TabOrder = 10
@@ -2934,10 +3076,44 @@ object FormInicial: TFormInicial
         TabOrder = 0
       end
     end
+    object dblAvaliador: TDBLookupComboBox
+      Left = 96
+      Top = 209
+      Width = 329
+      Height = 26
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      KeyField = 'ava_codavaliador'
+      ListField = 'nome_col'
+      ListSource = dsAvaliadores
+      ParentFont = False
+      TabOrder = 11
+    end
+    object chkTodosAvaliadores: TCheckBox
+      Left = 429
+      Top = 213
+      Width = 61
+      Height = 17
+      Caption = 'TODOS'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      State = cbChecked
+      TabOrder = 12
+      OnClick = chkTodosAvaliadoresClick
+    end
   end
   object pnlPendenciasHab: TPanel
-    Left = 227
-    Top = 394
+    Left = 660
+    Top = 129
     Width = 365
     Height = 255
     ParentBackground = False
@@ -3418,8 +3594,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlTreinamentos: TPanel
-    Left = 458
-    Top = 73
+    Left = 506
+    Top = 16
     Width = 446
     Height = 336
     TabOrder = 5
@@ -4529,8 +4705,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlImprimirCalib: TPanel
-    Left = 562
-    Top = 325
+    Left = 638
+    Top = 175
     Width = 365
     Height = 188
     TabOrder = 7
@@ -5420,12 +5596,19 @@ object FormInicial: TFormInicial
         OnClick = CartadeAtualizao1Click
       end
     end
+    object Spiltag1: TMenuItem
+      Caption = 'Spiltag'
+      object ImportaodeDadosTOTVS1: TMenuItem
+        Caption = 'Importa'#231#227'o de Dados TOTVS'
+        OnClick = ImportaodeDadosTOTVS1Click
+      end
+    end
   end
   object imlMenu: TImageList
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800F40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800500310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6429,7 +6612,7 @@ object FormInicial: TFormInicial
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42929.458687881900000000
+    ReportOptions.LastChange = 43164.636665578710000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -6538,7 +6721,7 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
-          Width = 71.810996770000000000
+          Width = 94.866141732283490000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'cali_numero'
@@ -6557,11 +6740,11 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo10: TfrxMemoView
-          Left = 72.385826770000000000
-          Width = 442.960471260000000000
+          Left = 95.063006770000000000
+          Width = 420.283291260000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'DescEquip'
+          DataField = 'desc_inf'
           DataSet = frxDBCalibracao
           DataSetName = 'frxDBCalibracao'
           Font.Charset = DEFAULT_CHARSET
@@ -6571,7 +6754,7 @@ object FormInicial: TFormInicial
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBCalibracao."DescEquip"]')
+            '[frxDBCalibracao."desc_inf"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -7036,7 +7219,7 @@ object FormInicial: TFormInicial
         end
         object Memo11: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 34.015769999999970000
+          Top = 34.015769999999980000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -7083,9 +7266,9 @@ object FormInicial: TFormInicial
           VAlign = vaCenter
         end
         object Memo9: TfrxMemoView
-          Left = 72.385826770000000000
+          Left = 95.063006770000000000
           Top = 23.433070869999990000
-          Width = 442.960471260000000000
+          Width = 420.283291260000000000
           Height = 19.275590550000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -7102,8 +7285,8 @@ object FormInicial: TFormInicial
           VAlign = vaBottom
         end
         object Memo1: TfrxMemoView
-          Top = 23.433070866141690000
-          Width = 71.811070000000000000
+          Top = 23.433070869999990000
+          Width = 94.866141732283490000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -7609,29 +7792,11 @@ object FormInicial: TFormInicial
     UserName = 'frxDBCalibracao'
     CloseDataSource = False
     FieldAliases.Strings = (
-      'cali_capacidade=cali_capacidade'
-      'cali_codigo=cali_codigo'
-      'cali_criterio=cali_criterio'
-      'cali_dataCalibracao=cali_dataCalibracao'
-      'cali_erro=cali_erro'
-      'cali_faixa=cali_faixa'
-      'cali_frequencia=cali_frequencia'
-      'cali_localizacao=cali_localizacao'
+      'cali_datacalibracao=cali_dataCalibracao'
       'cali_numero=cali_numero'
-      'cali_padroes=cali_padroes'
-      'cali_parecer=cali_parecer'
-      'cali_proxCalibracao=cali_proxCalibracao'
-      'cali_resolucao=cali_resolucao'
-      'cali_certificado=cali_certificado'
-      'cali_processo=cali_processo'
-      'cali_arquivo=cali_arquivo'
-      'codi_inf=codi_inf'
       'desc_inf=desc_inf'
-      'DescEquip=DescEquip'
-      'cali_incerteza=cali_incerteza'
-      'cali_erroTotal=cali_erroTotal'
-      'cali_aprovado=cali_aprovado'
-      'cali_equip=cali_equip'
+      'cali_localizacao=cali_localizacao'
+      'cali_proxcalibracao=cali_proxCalibracao'
       'descprocesso=descprocesso')
     DataSet = cdsCalibracao
     BCDToCurrency = False
@@ -7641,19 +7806,17 @@ object FormInicial: TFormInicial
   object zqryCalibracao: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT cali_capacidade, cali_codigo, cali_criterio, '
-      'cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, '
-      'cali_frequencia, cali_localizacao, cali_numero, cali_padroes, '
       
-        'cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certific' +
-        'ado,'
-      
-        'cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cal' +
-        'i_aprovado, '
-      'I.codi_inf, I.desc_inf, nome_pro as DescProcesso'
+        'SELECT cali_dataCalibracao, cali_numero, I.desc_inf, cali_locali' +
+        'zacao, '
+      'cali_proxCalibracao, nome_pro as DescProcesso'
       'FROM calibracao C'
-      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_codigo'
-      'INNER JOIN processos P ON P.codi_pro = cali_processo')
+      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_equip '
+      'INNER JOIN processos P ON P.codi_pro = cali_processo'
+      
+        'WHERE cali_proxCalibracao = (SELECT MAX(cali_proxCalibracao) FRO' +
+        'M calibracao WHERE cali_numero = C.cali_numero)'
+      'ORDER BY DescProcesso, cali_numero')
     Params = <>
     Left = 741
     Top = 312
@@ -7671,97 +7834,23 @@ object FormInicial: TFormInicial
     ProviderName = 'dspCalibracao'
     Left = 813
     Top = 312
-    object cdsCalibracaocali_capacidade: TWideStringField
-      FieldName = 'cali_capacidade'
-      Size = 30
+    object cdsCalibracaocali_datacalibracao: TDateTimeField
+      FieldName = 'cali_datacalibracao'
     end
-    object cdsCalibracaocali_codigo: TLargeintField
-      FieldName = 'cali_codigo'
-      Required = True
+    object cdsCalibracaocali_numero: TWideStringField
+      FieldName = 'cali_numero'
+      Size = 40
     end
-    object cdsCalibracaocali_criterio: TWideStringField
-      FieldName = 'cali_criterio'
-      Size = 30
-    end
-    object cdsCalibracaocali_dataCalibracao: TDateTimeField
-      FieldName = 'cali_dataCalibracao'
-    end
-    object cdsCalibracaocali_erro: TWideStringField
-      FieldName = 'cali_erro'
-      Size = 30
-    end
-    object cdsCalibracaocali_faixa: TWideStringField
-      FieldName = 'cali_faixa'
-      Size = 30
-    end
-    object cdsCalibracaocali_frequencia: TWideStringField
-      FieldName = 'cali_frequencia'
+    object cdsCalibracaodesc_inf: TWideStringField
+      FieldName = 'desc_inf'
+      Size = 100
     end
     object cdsCalibracaocali_localizacao: TWideStringField
       FieldName = 'cali_localizacao'
       Size = 50
     end
-    object cdsCalibracaocali_numero: TWideStringField
-      FieldName = 'cali_numero'
-      Size = 10
-    end
-    object cdsCalibracaocali_padroes: TMemoField
-      FieldName = 'cali_padroes'
-      BlobType = ftMemo
-    end
-    object cdsCalibracaocali_parecer: TWideStringField
-      FieldName = 'cali_parecer'
-      Size = 1
-    end
-    object cdsCalibracaocali_proxCalibracao: TDateTimeField
-      FieldName = 'cali_proxCalibracao'
-    end
-    object cdsCalibracaocali_resolucao: TWideStringField
-      FieldName = 'cali_resolucao'
-      Size = 30
-    end
-    object cdsCalibracaocali_certificado: TWideStringField
-      FieldName = 'cali_certificado'
-      Size = 30
-    end
-    object cdsCalibracaocali_processo: TLargeintField
-      FieldName = 'cali_processo'
-    end
-    object cdsCalibracaocali_arquivo: TWideStringField
-      FieldName = 'cali_arquivo'
-      Size = 150
-    end
-    object cdsCalibracaocodi_inf: TLargeintField
-      FieldName = 'codi_inf'
-      Required = True
-    end
-    object cdsCalibracaodesc_inf: TWideStringField
-      FieldName = 'desc_inf'
-      Size = 50
-    end
-    object cdsCalibracaoDescEquip: TStringField
-      FieldKind = fkLookup
-      FieldName = 'DescEquip'
-      LookupDataSet = cdsEquip
-      LookupKeyFields = 'codi_inf'
-      LookupResultField = 'desc_inf'
-      KeyFields = 'cali_equip'
-      Size = 80
-      Lookup = True
-    end
-    object cdsCalibracaocali_incerteza: TWideStringField
-      FieldName = 'cali_incerteza'
-      Size = 50
-    end
-    object cdsCalibracaocali_erroTotal: TWideStringField
-      FieldName = 'cali_erroTotal'
-      Size = 50
-    end
-    object cdsCalibracaocali_aprovado: TIntegerField
-      FieldName = 'cali_aprovado'
-    end
-    object cdsCalibracaocali_equip: TLargeintField
-      FieldName = 'cali_equip'
+    object cdsCalibracaocali_proxcalibracao: TDateTimeField
+      FieldName = 'cali_proxcalibracao'
     end
     object cdsCalibracaodescprocesso: TWideStringField
       FieldName = 'descprocesso'
@@ -7813,5 +7902,30 @@ object FormInicial: TFormInicial
     DataSet = cdsEquip
     Left = 656
     Top = 312
+  end
+  object zqryAvaliadores: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 312
+    Top = 344
+  end
+  object dspAvaliadores: TDataSetProvider
+    DataSet = zqryAvaliadores
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 352
+    Top = 344
+  end
+  object cdsAvaliadores: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspAvaliadores'
+    Left = 392
+    Top = 344
+  end
+  object dsAvaliadores: TDataSource
+    DataSet = cdsAvaliadores
+    Left = 432
+    Top = 344
   end
 end

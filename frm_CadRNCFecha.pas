@@ -190,6 +190,10 @@ type
     cdsImprimircliente: TWideStringField;
     cdsImprimirfornecedor: TWideStringField;
     cdsImprimirprocede: TWideStringField;
+    lbl14: TLabel;
+    edtOrdemProd: TEdit;
+    lbl15: TLabel;
+    edtCusto: TCurrencyEdit;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -326,7 +330,8 @@ begin
                     ' rnc_processo, rnc_setor, rnc_origem, rnc_cliente, ' +
                     ' rnc_fornecedor, rnc_consumidor, rnc_nconformidade, ' +
                     ' rnc_procede, rnc_responsavel, rnc_status, rnc_disposicao,' +
-                    ' rnc_departamento, rnc_relacionamento, rnc_representante' +
+                    ' rnc_departamento, rnc_relacionamento, rnc_representante,' +
+                    ' rnc_ordemprod, rnc_custo' +
                     ' FROM rnc R' +
                     ' WHERE rnc_codigo = ' + sCodigoRNC;
       Active:= True;
@@ -673,15 +678,18 @@ begin
    case pctFechaRNC.TabIndex of
       0: begin
          with cdsRNC do begin
-            edtIdentificacao.Text     := FieldByName('rnc_identificacao').AsString;
-            dtData.Date               := FieldByName('rnc_data').AsDateTime;
-            edtIdentificacaoHist.Text := FieldByName('rnc_identificacao').AsString;
-            dtDataHist.Date           := FieldByName('rnc_data').AsDateTime;
+            edtIdentificacao.Text    := FieldByName('rnc_identificacao').AsString;
+            dtData.Date              := FieldByName('rnc_data').AsDateTime;
+            edtIdentificacaoHist.Text:= FieldByName('rnc_identificacao').AsString;
+            dtDataHist.Date          := FieldByName('rnc_data').AsDateTime;
+            mmoNaoConformidade.Text  := FieldByName('rnc_nconformidade').AsString;
+            mmoDisposicao.Text       := FieldByName('rnc_disposicao').AsString;
+            edtOrdemProd.Text        := FieldByName('rnc_ordemprod').AsString;
+            edtCusto.Value           := FieldByName('rnc_custo').AsFloat;
 
-            mmoNaoConformidade.Text   := FieldByName('rnc_nconformidade').AsString;
-            mmoDisposicao.Text        := FieldByName('rnc_disposicao').AsString;
-            btnAceitar.Enabled        := mmoDisposicao.Text <> EmptyStr;
-            btnRecusar.Enabled        := mmoDisposicao.Text <> EmptyStr;
+            btnAceitar.Enabled       := mmoDisposicao.Text <> EmptyStr;
+            btnRecusar.Enabled       := mmoDisposicao.Text <> EmptyStr;
+
             if FieldByName('rnc_status').AsInteger >= 3 then begin // Aceito ou Recusado
                btnAceitar.Enabled:= False;
                btnRecusar.Enabled:= False;

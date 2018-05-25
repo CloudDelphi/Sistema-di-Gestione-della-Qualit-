@@ -22,7 +22,7 @@ object FormPDCA: TFormPDCA
     Top = 0
     Width = 933
     Height = 531
-    ActivePage = tsPesqLanc
+    ActivePage = tsLancamentos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -3966,8 +3966,8 @@ object FormPDCA: TFormPDCA
     end
   end
   object pnlEmailAcoes: TPanel
-    Left = 235
-    Top = 170
+    Left = 579
+    Top = 169
     Width = 365
     Height = 282
     TabOrder = 3
