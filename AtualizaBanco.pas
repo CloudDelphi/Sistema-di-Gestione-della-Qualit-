@@ -110,12 +110,44 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 466;
+   iUltimo:= 484;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         484: GravarTabelaCombos(27, 'ORIGEM PDCA', 9, 'ANÁLISE CRÍTICA', 9);
+         483: CriarCampo('enviogestor', 'parametros', 'integer', '0', 'I');
+         482: sComando:= ' CREATE TABLE treinamento_prog_col' +
+                         '(' +
+                         ' pro_codigo integer NOT NULL,' +
+                         ' pro_cod_colaborador integer,' +
+                         ' CONSTRAINT pk_treinamento_prog_col PRIMARY KEY (pro_codigo, pro_cod_colaborador)' +
+                         ')';
+         481: sComando:= ' CREATE TABLE treinamento_prog' +
+                         '(' +
+                         ' pro_codigo integer NOT NULL,' +
+                         ' pro_cod_treinamento integer,' +
+                         ' pro_tipo character(1),' +
+                         ' pro_data_prevista timestamp without time zone,' +
+                         ' CONSTRAINT pk_treinamento_prog PRIMARY KEY (pro_codigo)' +
+                         ')';
+         480: GravarNovaFuncao(58, 'LANÇAR LISTA DE TREINAMENTO', 58);
+         479: CriarCampo('inf_imagem', 'infraestrutura', 'text');
+         478: CriarCampo('tre_eficacia', 'treinamentos', 'integer', '0', 'I');
+         477: CriarCampo('iqf_apoio', 'iqf_remessa', 'integer', '0', 'I');
+         476: CriarCampo('pmc_custo', 'pmc', 'double precision');
+         475: CriarCampo('rnc_custo', 'rnc', 'double precision');
+         474: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 7, 'DELETAR E DESCARTAR', 7);
+         473: GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 20, 'DURANTE USO', 20);
+         472: GravarNovaFuncao(57, 'ACEITAR/RECUSAR DISPOSIÇÃO DE RNC', 57);
+         471: GravarTabelaCombos(18, 'PERIODICIDADE - INDICADORES', 7, 'QUADRIENAL', 7);
+         470: sComando:= ' UPDATE processos SET ' +
+                         ' pro_nome_abreviado = ' + QuotedStr('PROV EXT') +
+                         ' WHERE codi_pro = 99';
+         469: CriarCampo('dias_indicadores', 'parametros', 'integer', '1', 'I');
+         468: CriarCampo('usu_pend_rnc_aceiterecusa', 'usuarios', 'integer', '0', 'I');
+         467: CriarCampo('usu_pend_rnc_aceite', 'usuarios', 'integer', '0', 'I');
          466: CriarCampo('pmc_usuario_eficacia', 'pmc', 'character varying(30)');
          465: CriarCampo('usu_pend_rnc_naopreenchido', 'usuarios', 'integer', '0', 'I');
          464: GravarTabelaCombos(5, 'ORIGEM - ABERTURA PMC', 8, 'PROGRAMA 6S', 8);
@@ -1756,7 +1788,7 @@ end;
 
 procedure PreencherDataAcaoPMC();
 var
-   wDia, wAno, wMes: word;
+   wDia, wAno, wMes: Word;
    sData: string;
    iQtd: Integer;
 begin
@@ -1909,21 +1941,32 @@ end;
 
 procedure GravarNovaFuncao(Codigo: Integer; Descricao: string; Ordem: Integer);
 begin
-   with dm.cdsGravar do begin
+   with dm.cdsAux4 do begin
       Active:= False;
-      CommandText:= ' INSERT INTO tabela_combos(' +
-                    '         tipo_com, desc_com, codi_com, valo_com, orde_com)' +
-                    ' VALUES (' +
-                    QuotedStr('99') + ',' +
-                    QuotedStr('FUNÇÕES DO SISTEMA') + ',' +
-                    IntToStr(Codigo) + ',' +
-                    QuotedStr(Descricao) + ',' +
-                    IntToStr(Ordem) +
-                    ');';
-      Execute;
+      CommandText:= ' SELECT COUNT(*) as Qtd' +
+                    ' FROM tabela_combos' +
+                    ' WHERE tipo_com = 99 AND' +
+                    ' codi_com = ' + IntToStr(Codigo);
+      Active:= True;
    end;
 
-   GravaUsuarios(QuotedStr(IntToStr(Codigo)));
+   if dm.cdsAux4.FieldByName('Qtd').AsInteger = 0 then begin
+      with dm.cdsGravar do begin
+         Active:= False;
+         CommandText:= ' INSERT INTO tabela_combos(' +
+                       '         tipo_com, desc_com, codi_com, valo_com, orde_com)' +
+                       ' VALUES (' +
+                       QuotedStr('99') + ',' +
+                       QuotedStr('FUNÇÕES DO SISTEMA') + ',' +
+                       IntToStr(Codigo) + ',' +
+                       QuotedStr(Descricao) + ',' +
+                       IntToStr(Ordem) +
+                       ');';
+         Execute;
+      end;
+
+      GravaUsuarios(QuotedStr(IntToStr(Codigo)));
+   end;
 end;
 
 // Grava uma nova função em todos os usuários cadastrados com o status "Sem permissão"

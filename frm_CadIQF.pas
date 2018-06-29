@@ -210,6 +210,7 @@ type
     dspDoc: TDataSetProvider;
     cdsDoc: TClientDataSet;
     dsDoc: TDataSource;
+    chkApoio: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados(CodFornecedor: string = '');
     procedure AtualizarDadosAcessorios();
@@ -217,7 +218,6 @@ type
     procedure Botoes(Flag: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
-    procedure LimparCampos;
     procedure btnSairImpClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -254,6 +254,8 @@ type
     procedure sbAbrirDocClick(Sender: TObject);
     procedure sbVisualizarDocClick(Sender: TObject);
     procedure dbgDocCellClick(Column: TColumn);
+    procedure dblFornecedorExit(Sender: TObject);
+    procedure dblFantasiaExit(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -346,7 +348,8 @@ begin
       if CodFornecedor <> '' then begin
          CommandText:= ' SELECT iqf_CodFornecedor, iqf_codigo, iqf_conforme, ' +
                        ' iqf_data, iqf_NF, iqf_pontual, iqf_responsavel, iqf_obs,' +
-                       ' C.nome_col as Responsavel, F.forn_nome as Razao, F.forn_fantasia as Fantasia' +
+                       ' C.nome_col as Responsavel, F.forn_nome as Razao, F.forn_fantasia as Fantasia, ' +
+                       ' iqf_apoio' +
                        ' FROM iqf_remessa' +
                        ' INNER JOIN colaboradores C ON C.codi_col = iqf_responsavel' +
                        ' INNER JOIN fornecedores F ON F.forn_codigo = iqf_CodFornecedor' +
@@ -356,7 +359,8 @@ begin
       else begin
          CommandText:= ' SELECT iqf_CodFornecedor, iqf_codigo, iqf_conforme, ' +
                        ' iqf_data, iqf_NF, iqf_pontual, iqf_responsavel, iqf_obs,' +
-                       ' C.nome_col as Responsavel, F.forn_nome as Razao, F.forn_fantasia as Fantasia' +
+                       ' C.nome_col as Responsavel, F.forn_nome as Razao, F.forn_fantasia as Fantasia,' +
+                       ' iqf_apoio' +
                        ' FROM iqf_remessa' +
                        ' INNER JOIN colaboradores C ON C.codi_col = iqf_responsavel' +
                        ' INNER JOIN fornecedores F ON F.forn_codigo = iqf_CodFornecedor' +
@@ -437,7 +441,7 @@ end;
 
 procedure TFormCadIQF.btnCancelarClick(Sender: TObject);
 begin
-   LimparCampos;
+   LimparCampos(Self);
    PreencherCampos;
    Botoes(True);
    HabilitarCampos(False, False, Self, 1, 2);
@@ -461,7 +465,7 @@ begin
             with cdsGravar do begin
                Active:= False;
                CommandText:= ' DELETE FROM iqf_doc' +
-                             ' WHERE iqf_codigo = ' + sCodIQF;
+                             ' WHERE doc_cod_iqf = ' + sCodIQF;
                Execute;
             end;
 
@@ -474,7 +478,7 @@ begin
             end;
 
             Auditoria('IQF', sData + '-' + sForn, 'E', '');
-            LimparCampos();
+            LimparCampos(Self);
             AtualizarDados();
             PreencherCampos();
          end;
@@ -491,7 +495,7 @@ begin
             end;
 
             Auditoria('IQF - DOCUMENTOS', sDoc, 'E', '');
-            LimparCampos();
+            LimparCampos(Self);
             AtualizarDadosAcessorios();
             PreencherCampos();
 
@@ -511,7 +515,7 @@ begin
                if cOperacao = 'I' then begin
                   CommandText:= ' INSERT INTO iqf_remessa (' +
                                 ' iqf_codigo, iqf_data, iqf_CodFornecedor, iqf_pontual, iqf_conforme, ' +
-                                ' iqf_NF, iqf_responsavel, iqf_obs)' +
+                                ' iqf_NF, iqf_responsavel, iqf_obs, iqf_apoio)' +
                                 ' VALUES(' +
                                 BuscarNovoCodigo('iqf_remessa', 'iqf_codigo') + ',' +
                                 ArrumaDataSQL(dtData.Date) + ',' +
@@ -520,7 +524,8 @@ begin
                                 IntToStr(dblConforme.KeyValue) + ',' +
                                 QuotedStr(edtLote.Text) + ',' +
                                 IntToStr(dblResponsavel.KeyValue) + ',' +
-                                QuotedStr(mmoObs.Text) +
+                                QuotedStr(mmoObs.Text) + ',' +
+                                LogicoParaString(chkApoio.Checked) +
                                    ')';
                   Execute;
                end
@@ -532,7 +537,8 @@ begin
                                 ' iqf_conforme = ' + IntToStr(dblConforme.KeyValue) + ',' +
                                 ' iqf_NF = ' + QuotedStr(edtLote.Text) + ',' +
                                 ' iqf_responsavel = ' + IntToStr(dblResponsavel.KeyValue) + ',' +
-                                ' iqf_obs = ' + QuotedStr(mmoObs.Text) +
+                                ' iqf_obs = ' + QuotedStr(mmoObs.Text) + ',' +
+                                ' iqf_apoio = ' + LogicoParaString(chkApoio.Checked) +
                                 ' WHERE iqf_codigo = ' + edtCodigo.Text;
                   Execute;
                end;
@@ -568,7 +574,6 @@ begin
                   Execute;
                end;
             end;
-
             Auditoria('IQF - DOCUMENTOS', 'Cod. IQF: ' + edtCodigo.Text + edtDescricaoDoc.Text + '-' + edtCaminhoDoc.Text, cOperacao,'');
             AtualizarDadosAcessorios();
 
@@ -607,7 +612,7 @@ end;
 procedure TFormCadIQF.btnNovoClick(Sender: TObject);
 begin
    cOperacao:= 'I';
-   LimparCampos();
+   LimparCampos(Self);
 
    case pctIQF.TabIndex of
       0: begin // Cadastro
@@ -814,10 +819,20 @@ begin
    edtAvaliacao.Value    := cdsForn.FieldByName('forn_avaliacao').AsFloat;
 end;
 
+procedure TFormCadIQF.dblFantasiaExit(Sender: TObject);
+begin
+   dblFantasiaCloseUp(Self);
+end;
+
 procedure TFormCadIQF.dblFornecedorCloseUp(Sender: TObject);
 begin
    dblFantasia.KeyValue:= dblFornecedor.KeyValue;
    edtAvaliacao.Value  := cdsForn.FieldByName('forn_avaliacao').AsFloat;
+end;
+
+procedure TFormCadIQF.dblFornecedorExit(Sender: TObject);
+begin
+   dblFornecedorCloseUp(Self);
 end;
 
 procedure TFormCadIQF.dblFornImpCloseUp(Sender: TObject);
@@ -849,25 +864,6 @@ begin
    pnlImprimir.Visible:= False;
 end;
 
-procedure TFormCadIQF.LimparCampos;
-begin
-   if pctIQF.TabIndex = 0 then begin
-      dtData.Clear;
-      dblFornecedor.KeyValue:= -1;
-      dblFantasia.KeyValue:= -1;
-      dblPontual.KeyValue:= -1;
-      dblConforme.KeyValue:= -1;
-      edtLote.Clear;
-      dblResponsavel.KeyValue:= -1;
-      mmoObs.Clear;
-   end;
-
-   if pctIQF.TabIndex = 1 then begin
-      edtDescricaoDoc.Clear;
-      edtCaminhoDoc.Clear;
-   end;
-end;
-
 procedure TFormCadIQF.mmoObsKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -882,10 +878,11 @@ end;
 procedure TFormCadIQF.PreencherCampos;
 begin
    with cdsIQF do begin
-      edtCodigo.Text:= FieldByName('iqf_codigo').AsString;
-      dtData.Date   := FieldByName('iqf_data').AsDateTime;
-      edtLote.Text  := FieldByName('iqf_NF').AsString;
-      mmoObs.Text   := FieldByName('iqf_obs').AsString;
+      edtCodigo.Text  := FieldByName('iqf_codigo').AsString;
+      dtData.Date     := FieldByName('iqf_data').AsDateTime;
+      edtLote.Text    := FieldByName('iqf_NF').AsString;
+      mmoObs.Text     := FieldByName('iqf_obs').AsString;
+      chkApoio.Checked:= StringParaLogico(FieldByName('iqf_apoio').AsString);
 
       if FieldByName('iqf_CodFornecedor').AsString <> EmptyStr then begin
          dblFornecedor.KeyValue:= FieldByName('iqf_CodFornecedor').AsString;
@@ -937,7 +934,7 @@ end;
 
 procedure TFormCadIQF.rgTipoRelClick(Sender: TObject);
 begin
-   chkObs.Enabled:= (rgTipoRel.ItemIndex = 0);
+   chkObs.Enabled:= (rgTipoRel.ItemIndex = 0) or (rgTipoRel.ItemIndex = 2);
 end;
 
 procedure TFormCadIQF.sbAbrirDocClick(Sender: TObject);
@@ -1039,231 +1036,365 @@ begin
 
    sPeriodo:= dtDataInicial.Text + ' à ' + dtDataFinal.Text;
 
-   if rgTipoRel.ItemIndex = 0 then begin // Relação de Remessas
-      nCont   := 0;
-      nContSimP:= 0;
-      nContNaoP:= 0;
-      nContSimC:= 0;
-      nContNaoC:= 0;
+   case rgTipoRel.ItemIndex of
+      0: begin // Relação de Remessas
+         nCont    := 0;
+         nContSimP:= 0;
+         nContNaoP:= 0;
+         nContSimC:= 0;
+         nContNaoC:= 0;
 
-      if chkTipoProd.Checked = True then begin
-         case rgOrdemImpressao.ItemIndex of
-            0: begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome, I.iqf_data';
+         if chkTipoProd.Checked = True then begin
+            case rgOrdemImpressao.ItemIndex of
+               0: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome, I.iqf_data';
+               end;
+               1: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia, I.iqf_data';
+               end;
+               2: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, IQF, I.iqf_data';
+               end;
             end;
-            1: begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia, I.iqf_data';
-            end;
-            2: begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, IQF, I.iqf_data';
+         end
+         else begin
+            case rgOrdemImpressao.ItemIndex of
+               0: begin
+                  sCampoOrdem:= 'F.forn_nome, I.iqf_data';
+               end;
+               1: begin
+                  sCampoOrdem:= 'F.forn_fantasia, I.iqf_data';
+               end;
+               2: begin
+                  sCampoOrdem:= 'IQF, I.iqf_data';
+               end;
             end;
          end;
-      end
-      else begin
-         case rgOrdemImpressao.ItemIndex of
-            0: begin
-               sCampoOrdem:= 'F.forn_nome, I.iqf_data';
-            end;
-            1: begin
-               sCampoOrdem:= 'F.forn_fantasia, I.iqf_data';
-            end;
-            2: begin
-               sCampoOrdem:= 'IQF, I.iqf_data';
-            end;
-         end;
-      end;
 
-      with cdsImpRelacao do begin
-         Active:= False;
-
-         CommandText:= ' SELECT F.forn_nome, I.iqf_data, I.iqf_CodFornecedor, I.iqf_pontual, ' +
-                       ' I.iqf_conforme, I.iqf_NF, iqf_responsavel, TC.valo_com as Pontual, ' +
-                       ' TC1.valo_com as Conforme, C.nome_col as Responsavel, F.forn_avaliacao,' +
-//                       ' (forn_avaliacao * 0.2) + ((iqf_pontual * (forn_avaliacao * 0.3)) + ' +
-//                       ' (iqf_conforme * (forn_avaliacao * 0.5))) as IQF,' +
-                       ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
-                       ' F.forn_tipoProd, I.iqf_obs, ' +
-                       ' CASE ' +
-                       '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
-                       '    WHEN F.forn_tipoProd <= 0 THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
-                       '    ELSE P.tipo_nomeTipo' +
-                       ' END as tipo_nomeTipo' +
-                       ' FROM iqf_remessa I' +
-                       ' INNER JOIN Fornecedores F ON F.forn_codigo = I.iqf_codFornecedor' +
-                       ' INNER JOIN Tabela_Combos TC ON TC.tipo_com = 20 AND TC.codi_com = I.iqf_pontual' +
-                       ' INNER JOIN Tabela_Combos TC1 ON TC1.tipo_com = 20 AND TC1.codi_com = I.iqf_conforme' +
-                       ' INNER JOIN Colaboradores C ON C.codi_col = I.iqf_responsavel' +
-                       ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
-                       ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
-                       '                AND '+ ArrumaDataSQL(dtDataFinal.Date);
-         if chkTodosForn.Checked = False then begin
-            CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
-         end;
-         CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
-         Active:= True;
-      end;
-
-      if cdsImpRelacao.RecordCount = 0 then begin
-         Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
-         Exit;
-      end
-      else begin
          with cdsImpRelacao do begin
-            First;
-            while not Eof do begin
-               nCont:= nCont + 1;
-               if FieldByName('iqf_pontual').AsInteger = 0 then begin// Não
-                  nContNaoP:= nContNaoP + 1;
-               end
-               else begin
-                  nContSimP:= nContSimP + 1;
-               end;
-               if FieldByName('iqf_conforme').AsInteger = 0 then begin// Não
-                  nContNaoC:= nContNaoC + 1;
-               end
-               else begin
-                  nContSimC:= nContSimC + 1;
-               end;
+            Active:= False;
 
+            CommandText:= ' SELECT F.forn_nome, I.iqf_data, I.iqf_CodFornecedor, I.iqf_pontual, ' +
+                          ' I.iqf_conforme, I.iqf_NF, iqf_responsavel, TC.valo_com as Pontual, ' +
+                          ' TC1.valo_com as Conforme, C.nome_col as Responsavel, F.forn_avaliacao,' +
+   //                       ' (forn_avaliacao * 0.2) + ((iqf_pontual * (forn_avaliacao * 0.3)) + ' +
+   //                       ' (iqf_conforme * (forn_avaliacao * 0.5))) as IQF,' +
+                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+                          ' F.forn_tipoProd, I.iqf_obs, ' +
+                          ' CASE ' +
+                          '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    WHEN F.forn_tipoProd <= 0 THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    ELSE P.tipo_nomeTipo' +
+                          ' END as tipo_nomeTipo' +
+                          ' FROM iqf_remessa I' +
+                          ' INNER JOIN Fornecedores F ON F.forn_codigo = I.iqf_codFornecedor' +
+                          ' INNER JOIN Tabela_Combos TC ON TC.tipo_com = 20 AND TC.codi_com = I.iqf_pontual' +
+                          ' INNER JOIN Tabela_Combos TC1 ON TC1.tipo_com = 20 AND TC1.codi_com = I.iqf_conforme' +
+                          ' INNER JOIN Colaboradores C ON C.codi_col = I.iqf_responsavel' +
+                          ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
+                          '                AND '+ ArrumaDataSQL(dtDataFinal.Date) +
+                          ' AND iqf_apoio <> 1'; // Chamado TT480
+            if chkTodosForn.Checked = False then begin
+               CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
+            end;
+            CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
+            Active:= True;
+         end;
+
+         if cdsImpRelacao.RecordCount = 0 then begin
+            Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
+            Exit;
+         end
+         else begin
+            with cdsImpRelacao do begin
+               First;
+               while not Eof do begin
+                  nCont:= nCont + 1;
+                  if FieldByName('iqf_pontual').AsInteger = 0 then begin// Não
+                     nContNaoP:= nContNaoP + 1;
+                  end
+                  else begin
+                     nContSimP:= nContSimP + 1;
+                  end;
+                  if FieldByName('iqf_conforme').AsInteger = 0 then begin// Não
+                     nContNaoC:= nContNaoC + 1;
+                  end
+                  else begin
+                     nContSimC:= nContSimC + 1;
+                  end;
+
+                  Next;
+               end;
+            end;
+         end;
+
+         with frxReport1 do begin
+            if chkTipoProd.Checked = True then begin
+               if chkObs.Checked = True then begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessaObs.fr3');
+               end
+               else begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessa.fr3');
+               end;
+            end
+            else begin
+               if chkObs.Checked = True then begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessaObs.fr3');
+               end
+               else begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessa.fr3');
+               end;
+            end;
+
+            Variables['TituloRel']:= QuotedStr('IQF - RELAÇÃO DE REMESSAS');
+            Variables['Periodo']:= QuotedStr(sPeriodo);
+            Variables['Total']:= nCont;
+            Variables['TotSimP']:= nContSimP;
+            Variables['TotNaoP']:= nContNaoP;
+            Variables['TotSimC']:= nContSimC;
+            Variables['TotNaoC']:= nContNaoC;
+
+            if tipoImp = 'I' then begin
+            // Imprimir direto
+               PrepareReport;
+               PrintOptions.ShowDialog:= False;
+               Print;
+            end
+            else begin
+               ShowReport;
+            end;
+         end;
+      end;
+      1: begin // Média de IQF
+         case rgOrdemImpressao.ItemIndex of
+            0: begin
+               if chkTipoProd.Checked = True then begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome';
+               end
+               else begin
+                  sCampoOrdem:= 'F.forn_nome';
+               end;
+            end;
+            1: begin
+               if chkTipoProd.Checked = True then begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia';
+               end
+               else begin
+                  sCampoOrdem:= 'F.forn_fantasia';
+               end;
+            end;
+            2: begin
+               if chkTipoProd.Checked = True then begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, IQF';
+               end
+               else begin
+                  sCampoOrdem:= 'IQF';
+               end;
+            end;
+         end;
+         if rgOrdemImpressao.ItemIndex = 0 then begin
+
+         end
+         else begin
+
+         end;
+
+         nCont   := 0;
+         nAcumula:= 0;
+
+         with cdsImprimir do begin
+            Active:= False;
+            CommandText:= ' SELECT F.forn_nome, F.forn_avaliacao, F.forn_validade, F.forn_area,  ' +
+                          ' F.forn_tipoProd, ' +
+                          ' CASE ' +
+                          '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    WHEN F.forn_tipoProd <= 0 THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    ELSE P.tipo_nomeTipo' +
+                          ' END as tipo_nomeTipo,' +
+                          ' iqf_codFornecedor, COUNT(*) as Qtd, ' +
+      //                    ' SUM(iqf_pontual) as Pontual,' +
+      //                    ' SUM(iqf_conforme) as Conforme,' +
+   //                       ' (forn_avaliacao * 0.2) + ((SUM(iqf_pontual) * (forn_avaliacao * 0.3)) + (SUM(iqf_conforme) * (forn_avaliacao * 0.5))) / COUNT(*) as IQF' +
+                          ' (forn_avaliacao * ' + sPesoAval + ') + ((SUM(iqf_pontual) / COUNT(*)) * ' + sPesoPont + ') + ((SUM(iqf_conforme) / COUNT(*)) * ' + sPesoConf + ') as IQF' +
+                          ' FROM iqf_remessa' +
+                          ' INNER JOIN Fornecedores F ON F.forn_codigo = iqf_codFornecedor' +
+                          ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
+                          '                AND '+ ArrumaDataSQL(dtDataFinal.Date) +
+                          ' AND iqf_apoio <> 1'; // Chamado TT480
+            if chkTodosForn.Checked = False then begin
+               CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
+            end;
+            CommandText:= CommandText + ' GROUP BY iqf_codFornecedor, F.forn_nome, F.forn_avaliacao, ' +
+                                        ' F.forn_validade, F.forn_area, F.forn_tipoProd, P.tipo_nomeTipo, F.forn_fantasia' +
+                          ' ORDER BY ' + sCampoOrdem;
+            Active:= True;
+            First;
+
+            // Acumula os valores de IQF e quantidade de registros para cálculo da média
+            while not Eof do begin
+               nAcumula:= nAcumula + FieldByName('IQF').AsFloat;
+               nCont:= nCont + 1;
                Next;
             end;
+
+            First;
+         end;
+
+         if cdsImprimir.RecordCount = 0 then begin
+            Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
+            Exit;
+         end;
+
+         with frxReport1 do begin
+            if chkTipoProd.Checked = True then begin
+               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipo.fr3');
+            end
+            else begin
+               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQF.fr3');
+            end;
+            Variables['Periodo']:= QuotedStr(sPeriodo);
+            Variables['Media']  := QuotedStr(FormatFloat('##,##0.00',nAcumula / nCont));
+
+            if tipoImp = 'I' then begin
+            // Imprimir direto
+               PrepareReport;
+               PrintOptions.ShowDialog:= False;
+               Print;
+            end
+            else begin
+               ShowReport;
+            end;
          end;
       end;
+      2: begin // Relatório de lançamentos de apoio
+         nCont    := 0;
+         nContSimP:= 0;
+         nContNaoP:= 0;
+         nContSimC:= 0;
+         nContNaoC:= 0;
 
-      with frxReport1 do begin
          if chkTipoProd.Checked = True then begin
-            if chkObs.Checked = True then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessaObs.fr3');
-            end
-            else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessa.fr3');
+            case rgOrdemImpressao.ItemIndex of
+               0: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome, I.iqf_data';
+               end;
+               1: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia, I.iqf_data';
+               end;
+               2: begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, IQF, I.iqf_data';
+               end;
             end;
          end
          else begin
-            if chkObs.Checked = True then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessaObs.fr3');
-            end
-            else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessa.fr3');
+            case rgOrdemImpressao.ItemIndex of
+               0: begin
+                  sCampoOrdem:= 'F.forn_nome, I.iqf_data';
+               end;
+               1: begin
+                  sCampoOrdem:= 'F.forn_fantasia, I.iqf_data';
+               end;
+               2: begin
+                  sCampoOrdem:= 'IQF, I.iqf_data';
+               end;
             end;
          end;
-         Variables['Periodo']:= QuotedStr(sPeriodo);
-         Variables['Total']:= nCont;
-         Variables['TotSimP']:= nContSimP;
-         Variables['TotNaoP']:= nContNaoP;
-         Variables['TotSimC']:= nContSimC;
-         Variables['TotNaoC']:= nContNaoC;
 
-         if tipoImp = 'I' then begin
-         // Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= False;
-            Print;
+         with cdsImpRelacao do begin
+            Active:= False;
+
+            CommandText:= ' SELECT F.forn_nome, I.iqf_data, I.iqf_CodFornecedor, I.iqf_pontual, ' +
+                          ' I.iqf_conforme, I.iqf_NF, iqf_responsavel, TC.valo_com as Pontual, ' +
+                          ' TC1.valo_com as Conforme, C.nome_col as Responsavel, F.forn_avaliacao,' +
+   //                       ' (forn_avaliacao * 0.2) + ((iqf_pontual * (forn_avaliacao * 0.3)) + ' +
+   //                       ' (iqf_conforme * (forn_avaliacao * 0.5))) as IQF,' +
+                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+                          ' F.forn_tipoProd, I.iqf_obs, ' +
+                          ' CASE ' +
+                          '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    WHEN F.forn_tipoProd <= 0 THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
+                          '    ELSE P.tipo_nomeTipo' +
+                          ' END as tipo_nomeTipo' +
+                          ' FROM iqf_remessa I' +
+                          ' INNER JOIN Fornecedores F ON F.forn_codigo = I.iqf_codFornecedor' +
+                          ' INNER JOIN Tabela_Combos TC ON TC.tipo_com = 20 AND TC.codi_com = I.iqf_pontual' +
+                          ' INNER JOIN Tabela_Combos TC1 ON TC1.tipo_com = 20 AND TC1.codi_com = I.iqf_conforme' +
+                          ' INNER JOIN Colaboradores C ON C.codi_col = I.iqf_responsavel' +
+                          ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
+                          '                AND '+ ArrumaDataSQL(dtDataFinal.Date) +
+                          ' AND iqf_apoio = 1'; // Chamado TT480
+            if chkTodosForn.Checked = False then begin
+               CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
+            end;
+            CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
+            Active:= True;
+         end;
+
+         if cdsImpRelacao.RecordCount = 0 then begin
+            Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
+            Exit;
          end
          else begin
-            ShowReport;
+            with cdsImpRelacao do begin
+               First;
+               while not Eof do begin
+                  nCont:= nCont + 1;
+                  if FieldByName('iqf_pontual').AsInteger = 0 then begin// Não
+                     nContNaoP:= nContNaoP + 1;
+                  end
+                  else begin
+                     nContSimP:= nContSimP + 1;
+                  end;
+                  if FieldByName('iqf_conforme').AsInteger = 0 then begin// Não
+                     nContNaoC:= nContNaoC + 1;
+                  end
+                  else begin
+                     nContSimC:= nContSimC + 1;
+                  end;
+
+                  Next;
+               end;
+            end;
          end;
-      end;
-   end
-   else begin // Média de IQF
-      case rgOrdemImpressao.ItemIndex of
-         0: begin
+
+         with frxReport1 do begin
             if chkTipoProd.Checked = True then begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome';
+               if chkObs.Checked = True then begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessaObs.fr3');
+               end
+               else begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessa.fr3');
+               end;
             end
             else begin
-               sCampoOrdem:= 'F.forn_nome';
+               if chkObs.Checked = True then begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessaObs.fr3');
+               end
+               else begin
+                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessa.fr3');
+               end;
             end;
-         end;
-         1: begin
-            if chkTipoProd.Checked = True then begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia';
+
+            Variables['TituloRel']:= QuotedStr('IQF - RELAÇÃO DE REMESSAS DE APOIO');
+            Variables['Periodo']:= QuotedStr(sPeriodo);
+            Variables['Total']:= nCont;
+            Variables['TotSimP']:= nContSimP;
+            Variables['TotNaoP']:= nContNaoP;
+            Variables['TotSimC']:= nContSimC;
+            Variables['TotNaoC']:= nContNaoC;
+
+            if tipoImp = 'I' then begin
+            // Imprimir direto
+               PrepareReport;
+               PrintOptions.ShowDialog:= False;
+               Print;
             end
             else begin
-               sCampoOrdem:= 'F.forn_fantasia';
+               ShowReport;
             end;
-         end;
-         2: begin
-            if chkTipoProd.Checked = True then begin
-               sCampoOrdem:= 'P.tipo_nomeTipo, IQF';
-            end
-            else begin
-               sCampoOrdem:= 'IQF';
-            end;
-         end;
-      end;
-      if rgOrdemImpressao.ItemIndex = 0 then begin
-
-      end
-      else begin
-
-      end;
-
-      nCont   := 0;
-      nAcumula:= 0;
-
-      with cdsImprimir do begin
-         Active:= False;
-
-         CommandText:= ' SELECT F.forn_nome, F.forn_avaliacao, F.forn_validade, F.forn_area,  ' +
-                       ' F.forn_tipoProd, ' +
-                       ' CASE ' +
-                       '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
-                       '    WHEN F.forn_tipoProd <= 0 THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
-                       '    ELSE P.tipo_nomeTipo' +
-                       ' END as tipo_nomeTipo,' +
-                       ' iqf_codFornecedor, COUNT(*) as Qtd, ' +
-   //                    ' SUM(iqf_pontual) as Pontual,' +
-   //                    ' SUM(iqf_conforme) as Conforme,' +
-//                       ' (forn_avaliacao * 0.2) + ((SUM(iqf_pontual) * (forn_avaliacao * 0.3)) + (SUM(iqf_conforme) * (forn_avaliacao * 0.5))) / COUNT(*) as IQF' +
-                       ' (forn_avaliacao * ' + sPesoAval + ') + ((SUM(iqf_pontual) / COUNT(*)) * ' + sPesoPont + ') + ((SUM(iqf_conforme) / COUNT(*)) * ' + sPesoConf + ') as IQF' +
-                       ' FROM iqf_remessa' +
-                       ' INNER JOIN Fornecedores F ON F.forn_codigo = iqf_codFornecedor' +
-                       ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
-                       ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
-                       '                AND '+ ArrumaDataSQL(dtDataFinal.Date);
-         if chkTodosForn.Checked = False then begin
-            CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
-         end;
-         CommandText:= CommandText + ' GROUP BY iqf_codFornecedor, F.forn_nome, F.forn_avaliacao, ' +
-                                     ' F.forn_validade, F.forn_area, F.forn_tipoProd, P.tipo_nomeTipo, F.forn_fantasia' +
-                       ' ORDER BY ' + sCampoOrdem;
-         Active:= True;
-         First;
-
-         // Acumula os valores de IQF e quantidade de registros para cálculo da média
-         while not Eof do begin
-            nAcumula:= nAcumula + FieldByName('IQF').AsFloat;
-            nCont:= nCont + 1;
-            Next;
-         end;
-
-         First;
-      end;
-
-      if cdsImprimir.RecordCount = 0 then begin
-         Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
-         Exit;
-      end;
-
-      with frxReport1 do begin
-         if chkTipoProd.Checked = True then begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipo.fr3');
-         end
-         else begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQF.fr3');
-         end;
-         Variables['Periodo']:= QuotedStr(sPeriodo);
-         Variables['Media']  := QuotedStr(FormatFloat('##,##0.00',nAcumula / nCont));
-
-         if tipoImp = 'I' then begin
-         // Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= False;
-            Print;
-         end
-         else begin
-            ShowReport;
          end;
       end;
    end;

@@ -5,7 +5,7 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
   BorderStyle = bsSingle
   Caption = 'Consulta de A'#231#245'es de PMC Sem Verifica'#231#227'o de Implanta'#231#227'o'
   ClientHeight = 654
-  ClientWidth = 802
+  ClientWidth = 986
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,8 +34,8 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     Transparent = True
   end
   object lbllb2: TLabel
-    Left = 7
-    Top = 44
+    Left = 796
+    Top = 3
     Width = 59
     Height = 13
     Caption = 'Tipo do PMC'
@@ -100,10 +100,11 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
   object pnl1: TPanel
     Left = 0
     Top = 582
-    Width = 802
+    Width = 986
     Height = 72
     Align = alBottom
     TabOrder = 0
+    ExplicitWidth = 802
     object lblMsgFiltro: TLabel
       Left = 402
       Top = 8
@@ -387,7 +388,7 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
       OnClick = btnImprimirClick
     end
     object btnSair: TBitBtn
-      Left = 728
+      Left = 912
       Top = 1
       Width = 73
       Height = 70
@@ -519,6 +520,7 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
       ShowHint = True
       TabOrder = 3
       OnClick = btnSairClick
+      ExplicitLeft = 728
     end
     object btnVisualizar: TBitBtn
       Left = 74
@@ -1335,7 +1337,7 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
   object AdvChartView3DPMC: TAdvChartView3D
     Left = 0
     Top = 329
-    Width = 802
+    Width = 986
     Height = 253
     Align = alBottom
     TabOrder = 1
@@ -1409,11 +1411,12 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     Title.Font.Style = []
     Title.Text = 'Gr'#225'fico de Tipo de PMC'
     Version = '1.0.2.2 FEBRUARY, 2015'
+    ExplicitWidth = 802
   end
   object dbg1: TDBGrid
     Left = 8
     Top = 91
-    Width = 779
+    Width = 961
     Height = 237
     Hint = 'Selecione o registro para alterar'
     TabStop = False
@@ -1482,6 +1485,30 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
         Title.Font.Style = [fsBold]
         Width = 300
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'emitente'
+        Title.Caption = 'Emitente do PMC'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 200
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ncon_pmc'
+        Title.Caption = 'N'#227'o Conformidade'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 600
+        Visible = True
       end>
   end
   object dtDataIni: TDateEdit
@@ -1544,8 +1571,8 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     OnClick = chkRespClick
   end
   object chkTipo: TCheckBox
-    Left = 137
-    Top = 59
+    Left = 926
+    Top = 18
     Width = 61
     Height = 26
     Caption = 'TODOS'
@@ -1574,8 +1601,8 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     OnClick = chkDataClick
   end
   object dblTipo: TDBLookupComboBox
-    Left = 8
-    Top = 59
+    Left = 797
+    Top = 18
     Width = 129
     Height = 26
     Font.Charset = DEFAULT_CHARSET
@@ -2052,9 +2079,9 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     OnChange = edtNumPMCChange
   end
   object rgOpcoes: TRadioGroup
-    Left = 204
+    Left = 8
     Top = 45
-    Width = 389
+    Width = 417
     Height = 43
     Caption = 'Op'#231#245'es'
     Columns = 3
@@ -2147,13 +2174,15 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     Connection = dm.Conexao
     SQL.Strings = (
       'SELECT PM.codi_pmc, nume_pmc, TC.valo_com as Tipo, aco_prazo, '
-      'C.nome_col as Responsavel'
+      'C.nome_col as Responsavel, CE.nome_col as "Emitente",'
+      'PM.ncon_pmc'
       'FROM pmc PM'
       'INNER JOIN pmc_acoes PA ON PA.codi_pmc = PM.codi_pmc'
       'INNER JOIN colaboradores C ON C.codi_col = PA.resp_aco'
       
         'INNER JOIN tabela_combos TC ON TC.tipo_com = 4 AND TC.codi_com =' +
-        ' tipo_pmc')
+        ' tipo_pmc'
+      'INNER JOIN colaboradores CE ON CE.codi_col = PM.emit_pmc')
     Params = <>
     Left = 128
     Top = 216
@@ -2191,6 +2220,17 @@ object FormCadPMCAcoesConsulta: TFormCadPMCAcoesConsulta
     object cdsAcoesPMCcodi_pmc: TLargeintField
       FieldName = 'codi_pmc'
       Required = True
+    end
+    object cdsAcoesPMCemitente: TWideStringField
+      FieldName = 'emitente'
+      ReadOnly = True
+      Size = 45
+    end
+    object cdsAcoesPMCncon_pmc: TWideMemoField
+      FieldName = 'ncon_pmc'
+      Required = True
+      OnGetText = cdsAcoesPMCncon_pmcGetText
+      BlobType = ftWideMemo
     end
   end
   object dsAcoesPMC: TDataSource

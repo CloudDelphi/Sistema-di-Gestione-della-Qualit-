@@ -232,7 +232,6 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
     Height = 72
     Align = alBottom
     TabOrder = 0
-    ExplicitWidth = 802
     object btnPesquisar: TBitBtn
       Left = 1
       Top = 1
@@ -635,7 +634,6 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
       ShowHint = True
       TabOrder = 3
       OnClick = btnSairClick
-      ExplicitLeft = 728
     end
     object btnVisualizar: TBitBtn
       Left = 74
@@ -1450,9 +1448,9 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
   end
   object AdvChartView3DMotivos: TAdvChartView3D
     Left = 0
-    Top = 329
+    Top = 368
     Width = 482
-    Height = 253
+    Height = 209
     TabOrder = 1
     Series = <
       item
@@ -1528,7 +1526,7 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
   end
   object dbgRNC: TDBGrid
     Left = 8
-    Top = 175
+    Top = 220
     Width = 908
     Height = 148
     Hint = 'Selecione o registro para alterar'
@@ -1963,9 +1961,9 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
   end
   object AdvChartView3DStatus: TAdvChartView3D
     Left = 448
-    Top = 329
+    Top = 368
     Width = 473
-    Height = 253
+    Height = 209
     TabOrder = 27
     Series = <
       item
@@ -2501,6 +2499,21 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
     TabOrder = 16
     OnChange = edtNumRNCChange
   end
+  object rgFiltro: TRadioGroup
+    Left = 8
+    Top = 168
+    Width = 505
+    Height = 49
+    Caption = 'Status'
+    Columns = 3
+    ItemIndex = 0
+    Items.Strings = (
+      'TODOS'
+      'Pendentes de Resposta'
+      'Pendentes de Aceite/Recusa')
+    TabOrder = 28
+    OnClick = rgFiltroClick
+  end
   object zqryGravar: TZQuery
     Connection = dm.Conexao
     Params = <>
@@ -2535,7 +2548,7 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
         'onformidade, '
       'rnc_procede, rnc_responsavel, C1.nome_col as Responsavel, '
       'rnc_departamento, rnc_relacionamento, rnc_representante,'
-      'C.nome_col as Emitido, TC.valo_com as Motivo'
+      'C.nome_col as Emitido, TC.valo_com as Motivo, rnc_custo'
       'FROM rnc R'
       'INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido'
       'INNER JOIN colaboradores C1 ON C1.codi_col = R.rnc_responsavel'
@@ -2647,6 +2660,9 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
       FieldName = 'motivo'
       ReadOnly = True
       Size = 50
+    end
+    object cdsImprimirrnc_custo: TFloatField
+      FieldName = 'rnc_custo'
     end
   end
   object zqryRNC: TZQuery
@@ -2794,7 +2810,7 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42809.587795219910000000
+    ReportOptions.LastChange = 43236.654001863400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -2805,8 +2821,8 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
     Top = 144
     Datasets = <
       item
-        DataSet = frxDBPMCFecha
-        DataSetName = 'frxDBPMCFecha'
+        DataSet = frxDBRNC
+        DataSetName = 'frxDBRNC'
       end>
     Variables = <
       item
@@ -2814,7 +2830,7 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
         Value = Null
       end
       item
-        Name = 'fase'
+        Name = 'vlMedia'
         Value = Null
       end>
     Style = <>
@@ -2823,20 +2839,22 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
       Width = 1000.000000000000000000
     end
     object Page1: TfrxReportPage
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 62.543290000000000000
+        Height = 80.425182200000000000
         Top = 18.897650000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
+        StartNewPage = True
         object Memo4: TfrxMemoView
           Top = 22.267780000000000000
-          Width = 718.110700000000000000
+          Width = 1046.929810000000000000
           Height = 34.015770000000000000
           ShowHint = False
           AutoWidth = True
@@ -2849,7 +2867,7 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'PMC - PEDIDO DE MELHORIA CONT'#205'NUA')
+            'RELAT'#211'RIO DE RNC')
           ParentFont = False
         end
         object Line2: TfrxLineView
@@ -2859,123 +2877,153 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
         end
       end
       object Detalhe: TfrxMasterData
-        Height = 198.653680000000000000
-        Top = 793.701300000000000000
-        Width = 718.110700000000000000
-        DataSet = frxDBPMCFecha
-        DataSetName = 'frxDBPMCFecha'
+        Height = 181.519790000000000000
+        Top = 158.740260000000000000
+        Width = 1046.929810000000000000
+        DataSet = frxDBRNC
+        DataSetName = 'frxDBRNC'
         RowCount = 0
-        object Memo23: TfrxMemoView
-          Left = 177.637800160000000000
-          Top = 5.456710000000044000
-          Width = 506.456956540000000000
-          Height = 68.031540000000000000
+        object frxControleDATA: TfrxMemoView
+          Left = 0.377952760000000000
+          Top = 19.000000000000000000
+          Width = 82.771653540000000000
+          Height = 79.370130000000000000
           ShowHint = False
-          DataField = 'desc_aco'
-          DataSet = frxDBPMCFecha
-          DataSetName = 'frxDBPMCFecha'
+          DataField = 'rnc_identificacao'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_identificacao"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object frxControleLANCAMENTO: TfrxMemoView
+          Left = 170.456692910000000000
+          Top = 19.000000000000000000
+          Width = 490.582603939999000000
+          Height = 79.370130000000000000
+          ShowHint = False
+          DataField = 'rnc_nconformidade'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
           DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
           Memo.UTF8W = (
-            '[frxDBPMCFecha."desc_aco"]')
+            '[frxDBRNC."rnc_nconformidade"]')
           ParentFont = False
         end
-        object Memo24: TfrxMemoView
-          Left = 30.236220470000000000
-          Top = 164.417439999999600000
-          Width = 147.401670000000000000
-          Height = 34.015770000000000000
+        object Memo10: TfrxMemoView
+          Left = 82.771653540000000000
+          Top = 19.000000000000000000
+          Width = 87.307086610000000000
+          Height = 79.370130000000000000
           ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
+          DataField = 'rnc_data'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Respons'#225'vel pela A'#231#227'o:')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo25: TfrxMemoView
-          Left = 177.637795275591000000
-          Top = 164.637909999999400000
-          Width = 336.378106540000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          DataField = 'NomeRespAcao'
-          DataSet = frxDBPMCFecha
-          DataSetName = 'frxDBPMCFecha'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
+          HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBPMCFecha."NomeRespAcao"]')
+            '[frxDBRNC."rnc_data"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo26: TfrxMemoView
-          Left = 513.764070000000000000
-          Top = 164.637909999999400000
-          Width = 60.472480000000000000
-          Height = 34.015770000000000000
+        object Memo11: TfrxMemoView
+          Left = 796.039890000000000000
+          Top = 19.000000000000000000
+          Width = 135.307086610000000000
+          Height = 79.370130000000000000
           ShowHint = False
+          DataField = 'motivo'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
           DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Prazo:')
+            '[frxDBRNC."motivo"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo2: TfrxMemoView
-          Left = 574.488560000000000000
-          Top = 164.637909999999400000
-          Width = 109.606306540000000000
-          Height = 34.015770000000000000
+        object Memo12: TfrxMemoView
+          Left = 774.496600000000000000
+          Top = 155.063080000000000000
+          Width = 156.094488190000000000
+          Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'aco_prazo'
-          DataSet = frxDBPMCFecha
-          DataSetName = 'frxDBPMCFecha'
+          DataField = 'rnc_setor'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = 'dd/mm/yyyy'
           DisplayFormat.Kind = fkDateTime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBPMCFecha."aco_prazo"]')
+            '[frxDBRNC."rnc_setor"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo10: TfrxMemoView
-          Left = 30.236220470000000000
-          Top = 5.448818899999992000
-          Width = 147.401574803150000000
-          Height = 68.031540000000000000
+        object Memo2: TfrxMemoView
+          Left = 661.039370078740000000
+          Top = 19.000000000000000000
+          Width = 135.307086614173000000
+          Height = 79.370130000000000000
           ShowHint = False
+          DataField = 'Origem'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."Origem"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo6: TfrxMemoView
+          Width = 82.771648660000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2985,74 +3033,417 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'A'#231#227'o Corretiva/Preventiva:')
+            'Identifica'#231#227'o')
           ParentFont = False
-          VAlign = vaCenter
+          VAlign = vaBottom
         end
-        object Memo31: TfrxMemoView
-          Left = 30.236220470000000000
-          Top = 73.590599999999880000
-          Width = 653.858626540000000000
-          Height = 90.708720000000000000
+        object Memo7: TfrxMemoView
+          Left = 169.897684170000000000
+          Width = 490.582603939999000000
+          Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'vimp_aco'
-          DataSet = frxDBPMCFecha
-          DataSetName = 'frxDBPMCFecha'
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Descri'#231#227'o da N'#227'o Conformidade')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo8: TfrxMemoView
+          Left = 659.795270710000000000
+          Width = 136.440944880000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Origem')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo9: TfrxMemoView
+          Left = 83.370130000000000000
+          Top = 0.188942200000013800
+          Width = 87.307086610000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Data')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo1: TfrxMemoView
+          Left = 796.480830000000000000
+          Top = 0.133890000000008100
+          Width = 134.929133860000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Motivo')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo14: TfrxMemoView
+          Top = 117.543307090000000000
+          Width = 521.196850393701000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'cli_nome'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
           Memo.UTF8W = (
-            '[frxDBPMCFecha."vimp_aco"]')
+            '[frxDBRNC."cli_nome"]')
           ParentFont = False
         end
-      end
-      object PageFooter1: TfrxPageFooter
-        Height = 57.031540000000000000
-        Top = 1224.567720000000000000
-        Width = 718.110700000000000000
-        object Memo1: TfrxMemoView
-          Left = 925.945270000000000000
-          Top = 3.779529999999795000
-          Width = 117.165430000000000000
+        object Memo15: TfrxMemoView
+          Top = 98.645669289999970000
+          Width = 521.196850390000000000
           Height = 18.897650000000000000
           ShowHint = False
+          BrushStyle = bsClear
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
-          HAlign = haRight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
-            'P'#225'gina: [Page#]')
+            'Cliente')
+          ParentFont = False
+          VAlign = vaBottom
         end
-        object Memo34: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 34.015769999999970000
-          Width = 166.299320000000000000
+        object Memo16: TfrxMemoView
+          Left = 521.196850390000000000
+          Top = 117.543307090000000000
+          Width = 524.220472440000000000
           Height = 18.897650000000000000
           ShowHint = False
+          DataField = 'forn_nome'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            '[frxDBRNC."forn_nome"]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 520.818897640000000000
+          Top = 98.645669289999970000
+          Width = 524.598425200000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Fornecedor')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo18: TfrxMemoView
+          Top = 154.960717800000000000
+          Width = 430.487961970000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'responsavel'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            'P'#225'gina: [Page#] de [TotalPages#]')
+            '[frxDBRNC."responsavel"]')
           ParentFont = False
         end
-        object Line1: TfrxLineView
-          Left = 3.779530000000000000
-          Top = 30.236239999999720000
-          Width = 604.724409448818900000
+        object Memo19: TfrxMemoView
+          Top = 136.063080000000000000
+          Width = 430.488130389998000000
+          Height = 18.897650000000000000
           ShowHint = False
-          Frame.Typ = [ftTop]
+          BrushStyle = bsClear
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Respons'#225'vel pelo RNC')
+          ParentFont = False
+          VAlign = vaBottom
         end
+        object Memo20: TfrxMemoView
+          Left = 930.456692910000000000
+          Top = 155.063080000000000000
+          Width = 114.897637795276000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'rnc_departamento'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_departamento"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo21: TfrxMemoView
+          Left = 930.543910000000000000
+          Top = 136.063080000000000000
+          Width = 114.897637795276000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Departamento')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo5: TfrxMemoView
+          Left = 774.362710000000000000
+          Top = 136.063080000000000000
+          Width = 155.716535430000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Setor')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo3: TfrxMemoView
+          Left = 430.559370000000000000
+          Top = 155.063080000000000000
+          Width = 156.094488190000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'rnc_consumidor'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = 'dd/mm/yyyy'
+          DisplayFormat.Kind = fkDateTime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_consumidor"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo13: TfrxMemoView
+          Left = 586.519462910000000000
+          Top = 155.063080000000000000
+          Width = 187.464566929134000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'rnc_representante'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_representante"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo22: TfrxMemoView
+          Left = 586.606680000000000000
+          Top = 136.063080000000000000
+          Width = 187.464566929134000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Representante')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo24: TfrxMemoView
+          Left = 430.425480000000000000
+          Top = 136.063080000000000000
+          Width = 155.716535430000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Consumidor')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo25: TfrxMemoView
+          Left = 931.543910000000000000
+          Top = 18.866109999999990000
+          Width = 113.385826770000000000
+          Height = 79.748031500000000000
+          ShowHint = False
+          DataField = 'rnc_custo'
+          DataSet = frxDBRNC
+          DataSetName = 'frxDBRNC'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBRNC."rnc_custo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo26: TfrxMemoView
+          Left = 931.653543307087000000
+          Width = 113.385826770000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Custo')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        Height = 52.913420000000000000
+        Top = 400.630180000000000000
+        Width = 1046.929810000000000000
         object Picture2: TfrxPictureView
-          Left = 663.622450000000000000
-          Top = 3.779529999999795000
-          Width = 37.795300000000000000
-          Height = 52.913420000000000000
+          Left = 992.559680000000000000
+          Top = 8.779530000000079000
+          Width = 34.015770000000000000
+          Height = 34.015770000000000000
           ShowHint = False
           Picture.Data = {
             0A544A504547496D616765B2340000FFD8FFE105034578696600004D4D002A00
@@ -3483,722 +3874,27 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
           Transparent = False
           TransparentColor = clWhite
         end
-      end
-      object GroupFooter1: TfrxGroupFooter
-        Height = 147.401670000000000000
-        Top = 1016.693570000000000000
-        Width = 718.110700000000000000
-        object Memo27: TfrxMemoView
-          Left = 30.236240000000000000
-          Top = 22.456710000000040000
-          Width = 559.370376540000100000
-          Height = 117.165430000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."vefi_pmc"]')
-          ParentFont = False
-        end
-        object Memo28: TfrxMemoView
-          Left = 30.236240000000000000
-          Top = 3.779529999999908000
-          Width = 559.370440000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Verifica'#231#227'o da Efic'#225'cia')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo29: TfrxMemoView
-          Left = 594.819163700000000000
-          Top = 22.456710000000040000
-          Width = 90.708656540000010000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."DescEficaz"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo30: TfrxMemoView
-          Left = 594.441269530000000000
-          Top = 3.779529999999908000
-          Width = 90.708720000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'A'#231#227'o Eficaz ?')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo32: TfrxMemoView
-          Left = 593.834933700000000000
-          Top = 67.354359999999920000
-          Width = 90.708656540000010000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."pmc_preveficacia"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo33: TfrxMemoView
-          Left = 593.457039530000000000
-          Top = 48.677180000000250000
-          Width = 90.708720000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Previs'#227'o Efic.')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo41: TfrxMemoView
-          Left = 593.764123700000000000
-          Top = 117.165430000000100000
-          Width = 90.708656540000010000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."pmc_dataFecha"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo42: TfrxMemoView
-          Left = 593.386229530000000000
-          Top = 98.488250000000000000
-          Width = 90.708720000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Data Efic'#225'cia')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-      end
-      object GroupHeader1: TfrxGroupHeader
-        Height = 625.472702130000000000
-        Top = 143.622140000000000000
-        Width = 718.110700000000000000
-        Condition = 'frxDBPMCFecha."nume_pmc"'
-        StartNewPage = True
-        object Memo11: TfrxMemoView
+        object Memo23: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 0.440940000000011900
-          Width = 718.110236220000000000
+          Top = 30.236239999999900000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          Color = cl3DLight
-          DataSet = FormResumoInd.frxdbResumoIndicador
-          DataSetName = 'frxdbResumoIndicador'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            'Identifica'#231#227'o: [frxdbPMCFecha."nume_pmc"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object frxControleDESCRICAO: TfrxMemoView
-          Left = 11.716484170000000000
-          Top = 43.913420000000000000
-          Width = 90.708656540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."data_pmc"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo9: TfrxMemoView
-          Left = 11.338590000000000000
-          Top = 25.236240000000010000
-          Width = 90.708720000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Data')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo5: TfrxMemoView
-          Left = 110.543324170000000000
-          Top = 43.913420000000000000
-          Width = 302.362336540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
           Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8W = (
-            '[frxdbPMCFecha."NomeEmit"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo12: TfrxMemoView
-          Left = 110.165430000000000000
-          Top = 25.236240000000010000
-          Width = 302.362400000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Emitido por')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo13: TfrxMemoView
-          Left = 421.346664170000000000
-          Top = 43.913420000000000000
-          Width = 166.299256540000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."DescTipo"]')
+            'P'#225'gina: [Page#] de [TotalPages#]')
           ParentFont = False
         end
-        object Memo14: TfrxMemoView
-          Left = 420.968770000000000000
-          Top = 25.236240000000010000
-          Width = 166.299320000000000000
-          Height = 18.897650000000000000
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 26.456709999999870000
+          Width = 952.441560000000000000
           ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Tipo')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo15: TfrxMemoView
-          Left = 597.165740000000000000
-          Top = 42.574829999999990000
-          Width = 117.165430000000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."DescOrigem"]')
-          ParentFont = False
-        end
-        object Memo16: TfrxMemoView
-          Left = 595.811380000000000000
-          Top = 25.236240000000010000
-          Width = 117.165430000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Origem')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo3: TfrxMemoView
-          Left = 11.716484170000000000
-          Top = 179.826840000000000000
-          Width = 702.992516540000000000
-          Height = 120.944960000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."ncon_pmc"]')
-          ParentFont = False
-        end
-        object Memo6: TfrxMemoView
-          Left = 12.338590000000000000
-          Top = 161.149660000000000000
-          Width = 702.992580000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Descri'#231#227'o da N'#227'o Conformidade')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo7: TfrxMemoView
-          Left = 14.110424170000000000
-          Top = 136.826840000000000000
-          Width = 56.692886540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."Procede"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo8: TfrxMemoView
-          Left = 13.732530000000000000
-          Top = 118.149660000000000000
-          Width = 56.692950000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Procede')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo17: TfrxMemoView
-          Left = 74.165356770000000000
-          Top = 137.047310000000000000
-          Width = 302.362336540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."NomeResp"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo18: TfrxMemoView
-          Left = 74.165356770000000000
-          Top = 118.370130000000000000
-          Width = 302.362400000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Respons'#225'vel')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo19: TfrxMemoView
-          Left = 12.472443390000000000
-          Top = 324.330860000000000000
-          Width = 702.992125980000000000
-          Height = 136.063080000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."imed_pmc"]')
-          ParentFont = False
-        end
-        object Memo20: TfrxMemoView
-          Left = 12.472443390000000000
-          Top = 305.653680000000000000
-          Width = 702.992580000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'A'#231#227'o de Conten'#231#227'o Imediata')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo21: TfrxMemoView
-          Left = 12.472443390000000000
-          Top = 489.409710000000100000
-          Width = 702.992125980000000000
-          Height = 136.062992125984000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."caus_pmc"]')
-          ParentFont = False
-        end
-        object Memo22: TfrxMemoView
-          Left = 12.472443390000000000
-          Top = 470.732529999999900000
-          Width = 702.992125980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Identifica'#231#227'o da Causa')
-          ParagraphGap = 0.230000000000000000
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo35: TfrxMemoView
-          Left = 11.338590000000000000
-          Top = 95.488250000000000000
-          Width = 347.716696540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."cli_nome"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo36: TfrxMemoView
-          Left = 11.338590000000000000
-          Top = 76.811070000000000000
-          Width = 347.716760000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Cliente')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo37: TfrxMemoView
-          Left = 362.834880000000000000
-          Top = 95.488250000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."forn_nome"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo38: TfrxMemoView
-          Left = 362.834880000000000000
-          Top = 76.590600000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Fornecedor')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo39: TfrxMemoView
-          Left = 379.748300000000000000
-          Top = 136.842610000000000000
-          Width = 336.378106540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."nome_pro"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo40: TfrxMemoView
-          Left = 379.748300000000000000
-          Top = 118.165430000000000000
-          Width = 332.598640000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Processo')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object MFase: TfrxMemoView
-          Left = 399.512060000000000000
-          Width = 321.260050000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          HAlign = haRight
-          Memo.UTF8W = (
-            'Fase: [frxDBPMCFecha."fase"]')
-          ParentFont = False
+          Frame.Typ = [ftTop]
         end
       end
     end
@@ -4228,7 +3924,8 @@ object FormCadRNCConsulta: TFormCadRNCConsulta
       'rnc_relacionamento=rnc_relacionamento'
       'rnc_representante=rnc_representante'
       'emitido=emitido'
-      'motivo=motivo')
+      'motivo=motivo'
+      'rnc_custo=rnc_custo')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 608

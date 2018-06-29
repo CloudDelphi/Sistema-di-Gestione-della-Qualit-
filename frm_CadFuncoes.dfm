@@ -22,7 +22,7 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsCadastro
+    ActivePage = tsPesquisa
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -2938,8 +2938,8 @@ object FormCadFuncoes: TFormCadFuncoes
     end
   end
   object pnlImprimir: TPanel
-    Left = 138
-    Top = 158
+    Left = 372
+    Top = 73
     Width = 385
     Height = 351
     TabOrder = 2

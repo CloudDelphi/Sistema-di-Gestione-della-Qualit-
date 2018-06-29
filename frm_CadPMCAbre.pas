@@ -178,12 +178,15 @@ type
     cdsImprimirforn_nome: TWideStringField;
     cdsImprimirresponsavel: TWideStringField;
     cdsImprimirpmc_datafecha: TDateTimeField;
+    edtCusto: TCurrencyEdit;
+    lbl24: TLabel;
+    cdsPMCpmc_custo: TFloatField;
+    cdsImprimirpmc_custo: TFloatField;
 
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
     procedure Botoes(flag: Boolean);
-//    procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -394,7 +397,8 @@ begin
                CommandText:= ' INSERT INTO pmc (' +
                              ' codi_pmc, nume_pmc, data_pmc, emit_pmc, tipo_pmc, prcs_pmc, ' +
                              ' requ_pmc, orig_pmc, ncon_pmc, efic_pmc, proc_pmc, resp_pmc, ' +
-                             ' pmc_cliente, pmc_fornecedor, pmc_arq_evidencia, pmc_cea, pmc_fase)' +
+                             ' pmc_cliente, pmc_fornecedor, pmc_arq_evidencia, pmc_cea, ' +
+                             ' pmc_custo, pmc_fase)' +
                              ' VALUES(' +
                              sNovoCodigo + ',' +
                              QuotedStr(edtIdentificacao.Text) + ',' +
@@ -412,6 +416,7 @@ begin
                              Nulo(dblFornecedor.KeyValue, 'I') + ',' +
                              QuotedStr(edtCaminho.Text) + ',' +
                              IntToStr(dblCEA.KeyValue) + ',' +
+                             VirgulaParaPonto(edtCusto.Value, 2) + ',' +
                              '1' + // Fase Ação de Contenção Imediata
                              ')';
                Execute;
@@ -431,6 +436,7 @@ begin
                              ' pmc_cliente = ' + Nulo(dblCliente.KeyValue, 'I') + ',' +
                              ' pmc_fornecedor = ' + Nulo(dblFornecedor.KeyValue, 'I') + ',' +
                              ' pmc_arq_evidencia = ' + QuotedStr(edtCaminho.Text) + ',' +
+                             ' pmc_custo = ' + VirgulaParaPonto(edtCusto.Value, 2) + ',' +
                              ' pmc_cea = ' + IntToStr(dblCEA.KeyValue) +
                              ' WHERE codi_pmc = ' + cdsPMCcodi_pmc.Asstring;
                Execute;
@@ -749,24 +755,6 @@ begin
    end;
 end;
 
-//procedure TFormCadPMCAbre.HabilitarCampos(Flag, Codigo: Boolean);
-//begin
-//   edtIdentificacao.Enabled  := Flag;
-//   dtData.Enabled            := Flag;
-//   dblEmitido.Enabled        := Flag;
-//   dblTipo.Enabled           := Flag;
-//   dblProcesso.Enabled       := Flag;
-//   edtReqNorma.Enabled       := Flag;
-//   dblOrigem.Enabled         := Flag;
-//   mmoNaoConformidade.Enabled:= Flag;
-//   dblProcesso.Enabled       := Flag;
-//   dblProcede.Enabled        := Flag;
-//   dblResponsavel.Enabled    := Flag;
-//
-//
-//   pctAbrePMC.Pages[1].TabVisible:= not Flag;
-//end;
-
 procedure TFormCadPMCAbre.LimparCampos;
 begin
    edtIdentificacao.Clear;
@@ -783,6 +771,7 @@ begin
    dblCliente.KeyValue:= -1;
    dblFornecedor.KeyValue:= -1;
    edtCaminho.Clear;
+   edtCusto.Clear;
 end;
 
 procedure TFormCadPMCAbre.mmoNaoConformidadeKeyPress(Sender: TObject;
@@ -804,6 +793,7 @@ begin
       edtReqNorma.Text       := FieldByName('requ_pmc').AsString;
       mmoNaoConformidade.Text:= FieldByName('ncon_pmc').AsString;
       edtCaminho.Text        := FieldByName('pmc_arq_evidencia').AsString;
+      edtCusto.Value         := FieldByName('pmc_custo').AsFloat;
 
       dblCliente.KeyValue    := FieldByName('pmc_cliente').AsInteger;
       dblFornecedor.KeyValue := FieldByName('pmc_fornecedor').AsString;
@@ -850,6 +840,7 @@ procedure TFormCadPMCAbre.PrepararEmail;
 var
    i: Integer;
    sTextoNC: string;
+   sPara: string;
 begin
    if VerificarConexaoInternet(True) then begin
       // Busca <Enter> na não conformidade para ajustar o envio de e-mail
@@ -882,6 +873,11 @@ begin
             end;
          end
          else begin
+            // Chamado TT657 - BBosch
+            if BuscarParametroEnvioGestor() = '1' then begin
+               EnviarEmail(sTextoEmail, 'Novo PMC', BuscarEmail(BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod')), 'sistema');
+            end;
+
             EnviarEmail(sTextoEmail, 'Novo PMC', cdsResponsavelcol_email.AsString, 'sistema');
          end;
 //      end;
@@ -1020,7 +1016,7 @@ begin
       CommandText:= ' SELECT p.nume_pmc, p.data_pmc, p.ncon_pmc, tc2.valo_com as Origem, ' +
                     ' tc.valo_com as Tipo, tc3.valo_com as Eficaz,' +
                     ' pr.nome_pro, p.vefi_pmc, CL.cli_nome, F.forn_nome, ' +
-                    ' C.nome_col as Responsavel, P.pmc_dataFecha' +
+                    ' C.nome_col as Responsavel, P.pmc_dataFecha, pmc_custo' +
                     ' FROM pmc p' +
                     ' INNER JOIN processos pr ON p.prcs_pmc = pr.codi_pro' +
                     ' INNER JOIN tabela_combos tc ON tc.tipo_com = 4 and tc.codi_com = p.tipo_pmc' +

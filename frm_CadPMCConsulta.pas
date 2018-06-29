@@ -206,7 +206,6 @@ type
     cdsImprimirComppmc_tiporisco: TIntegerField;
     cdsImprimirComppmc_fase: TIntegerField;
     cdsImprimirCompfase: TWideStringField;
-    lblMsgFiltro: TLabel;
     cdsPMCimed_pmc: TWideMemoField;
     cdsPMCcaus_pmc: TWideMemoField;
     cdsPMCvefi_pmc: TWideMemoField;
@@ -225,6 +224,13 @@ type
     cdsPMCcol_status: TIntegerField;
     pnl4: TPanel;
     lbl6: TLabel;
+    btnExcel: TBitBtn;
+    lblMsgFiltro: TLabel;
+    dbgExcel: TDBGrid;
+    zqryExcel: TZQuery;
+    dspExcel: TDataSetProvider;
+    cdsExcel: TClientDataSet;
+    dsExcel: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
@@ -257,6 +263,7 @@ type
     procedure btnImprimirCompletoClick(Sender: TObject);
     procedure dbgPMCDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -410,6 +417,40 @@ begin
    cdsPMC.Prior;
 end;
 
+procedure TFormCadPMCConsulta.btnExcelClick(Sender: TObject);
+begin
+   with cdsExcel do begin
+      Active:= False;
+      CommandText:= ' SELECT nume_pmc as "Número PMC", data_pmc as "Data", C.nome_col as "Emissor", ' +
+                    ' TC.valo_com as "Tipo", PR.nome_pro as "Processo",' +
+                    ' TC2.valo_com as "Origem", CL.cli_nome as "Cliente", ncon_pmc as "Não Conformidade", ' +
+                    ' TC3.valo_com as "Procede", C1.nome_col as "Responsável",' +
+                    ' imed_pmc as "Ação de Contenção Imediata", caus_pmc as "Identificação da Causa", ' +
+                    ' vefi_pmc as "Verificação de Eficácia", TC4.valo_com as "Eficaz", ' +
+                    ' pmc_datafecha as "Data de Verificação de Eficácia", ' +
+                    ' pmc_usuario_eficacia as "Usuário que verificou eficácia" ' +
+                    ' FROM PMC P' +
+                    ' LEFT JOIN colaboradores C ON C.codi_col = P.emit_pmc' +
+                    ' LEFT JOIN colaboradores C1 ON C1.codi_col = P.resp_pmc' +
+                    ' LEFT JOIN tabela_combos TC ON TC.codi_com = P.tipo_pmc AND TC.tipo_com = 4' +
+                    ' LEFT JOIN tabela_combos TC2 ON TC2.codi_com = P.orig_pmc AND TC2.tipo_com = 5' +
+                    ' LEFT JOIN tabela_combos TC3 ON TC3.codi_com = P.proc_pmc AND TC3.tipo_com = 14' +
+                    ' LEFT JOIN tabela_combos TC4 ON TC4.codi_com = P.efic_pmc AND TC4.tipo_com = 21' +
+                    ' LEFT JOIN processos PR ON PR.codi_pro = P.prcs_pmc' +
+                    ' LEFT JOIN clientes CL ON CL.cli_codigo = P.pmc_cliente' +
+                    ' WHERE 1 = 1' + varWhere +
+                    ' ORDER BY nume_pmc';
+      Active:= True;
+   end;
+
+   if cdsExcel.RecordCount <= 0 then begin
+      Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
+   end
+   else begin
+      ExpExcel(dbgExcel, cdsExcel, 'Lista de PMC', Self);
+   end;
+end;
+
 procedure TFormCadPMCConsulta.btnProximoClick(Sender: TObject);
 begin
    cdsPMC.Next;
@@ -550,7 +591,7 @@ begin
    end;
 
    // Monta o select para os dados e gráfico
-   if (sDataPmcIni <> EmptyStr) and (sDataPmcFim <> EmptyStr) then
+   if (sDataPmcIni <> EmptyStr) and (sDataPmcFim <> EmptyStr) and (chkData.Checked = False) then
       varWhere:= varWhere + ' AND data_pmc between ' + sDataPmcIni + ' and ' + sDataPmcFim;
    if iEmitido <> 0 then
       varWhere:= varWhere + ' AND emit_pmc = ' + IntToStr(iEmitido);
@@ -600,11 +641,15 @@ begin
       btnVisualizar.Enabled      := False;
       btnImprimir.Enabled        := False;
       btnImprimirCompleto.Enabled:= False;
+      btnExcel.Enabled           := False;
    end
    else begin
+      AtualizarGrid(dbgPMC);
+
       btnVisualizar.Enabled      := True;
       btnImprimir.Enabled        := True;
       btnImprimirCompleto.Enabled:= True;
+      btnExcel.Enabled           := True;
    end;
 end;
 

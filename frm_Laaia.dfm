@@ -62,6 +62,10 @@ object FormLaaia: TFormLaaia
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl4: TLabel
         Left = 7
         Top = 48
@@ -1077,6 +1081,10 @@ object FormLaaia: TFormLaaia
       Caption = 'Impactos Ambientais'
       ImageIndex = 3
       OnShow = tsLeisShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl3: TLabel
         Left = 7
         Top = 56
@@ -1452,6 +1460,10 @@ object FormLaaia: TFormLaaia
       Caption = 'Leis'
       ImageIndex = 2
       OnShow = tsLeisShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl8: TLabel
         Left = 7
         Top = 59
@@ -1997,6 +2009,10 @@ object FormLaaia: TFormLaaia
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13

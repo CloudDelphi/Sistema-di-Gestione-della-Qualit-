@@ -359,7 +359,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, 'Registros da Qualidade');
+      ExpExcel(dbgExcel, cdsExcel, 'Registros da Qualidade', Self);
    end;
 end;
 

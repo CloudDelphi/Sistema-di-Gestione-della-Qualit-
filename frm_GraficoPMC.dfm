@@ -426,7 +426,6 @@ object FormGraficoPMC: TFormGraficoPMC
       ShowHint = True
       TabOrder = 2
       OnClick = btnExcelClick
-      ExplicitLeft = 439
     end
   end
   object pctGraficos: TJvgPageControl
@@ -471,10 +470,12 @@ object FormGraficoPMC: TFormGraficoPMC
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitLeft = 17
-    ExplicitTop = 91
     object ts1: TTabSheet
       Caption = 'PMC sem An'#225'lise de Causa'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView1: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -679,13 +680,15 @@ object FormGraficoPMC: TFormGraficoPMC
         XAxisZoomSensitivity = 1.000000000000000000
         YAxisZoomSensitivity = 1.000000000000000000
         DoubleBuffered = True
-        ExplicitLeft = 3
-        ExplicitTop = 16
       end
     end
     object ts2: TTabSheet
       Caption = 'PMC sem Plano de A'#231#227'o'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView2: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -895,6 +898,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object tsAcoesVencidasPMC: TTabSheet
       Caption = 'A'#231#245'es de PMC a vencer/vencidas'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView3: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1104,6 +1111,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object ts4: TTabSheet
       Caption = 'RNC Aguardando Resposta/Disposi'#231#227'o'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView5: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1313,6 +1324,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object ts5: TTabSheet
       Caption = 'RNC a Finalizar (Aceite/Recusa)'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView6: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1522,6 +1537,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object ts6: TTabSheet
       Caption = 'RNC por Motivo'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView7: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1732,6 +1751,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object ts7: TTabSheet
       Caption = 'RNC por Processo'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView8: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1940,6 +1963,10 @@ object FormGraficoPMC: TFormGraficoPMC
     object ts3: TTabSheet
       Caption = 'A'#231#245'es em Andamento, Atrasadas, Conclu'#237'das'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView4: TDBAdvGDIPChartView
         Left = 0
         Top = 0

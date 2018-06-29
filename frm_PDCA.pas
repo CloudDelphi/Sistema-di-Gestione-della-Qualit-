@@ -261,7 +261,6 @@ type
     procedure pctPDCAChange(Sender: TObject);
     procedure tsLancamentosShow(Sender: TObject);
     procedure dblDefeitoCloseUp(Sender: TObject);
-    procedure edtCodLancExit(Sender: TObject);
     procedure mmoOqueKeyPress(Sender: TObject; var Key: Char);
     procedure cdsLanclan_oqueGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
@@ -281,6 +280,10 @@ type
     procedure btnFecharTextoClick(Sender: TObject);
     procedure sbVisualizarRecursosClick(Sender: TObject);
     procedure btnEmailClick(Sender: TObject);
+    procedure dtPrevistaClick(Sender: TObject);
+    procedure VerificarFazer();
+    procedure dtFinalizarClick(Sender: TObject);
+    procedure mmoObsCheckEnter(Sender: TObject);
 
   private
     { Private declarations }
@@ -963,23 +966,14 @@ begin
 //   edtCodLanc.Text:= dblDefeito.KeyValue;
 end;
 
-procedure TFormPDCA.edtCodLancExit(Sender: TObject);
+procedure TFormPDCA.dtFinalizarClick(Sender: TObject);
 begin
-   with dm.cdsAuxiliar do begin
-      Active:= False;
-      CommandText:= ' SELECT def_codigo, def_descricao, def_classe' +
-                    ' FROM defeitos';
-//                    ' WHERE def_codigo = ' + edtCodLanc.Text;
-      Active:= True;
+   VerificarFazer();
+end;
 
-      if RecordCount <= 0 then begin
-         Application.MessageBox('Não existe o código do defeito digitado', 'Aviso', MB_OK + MB_ICONWARNING);
-//         TryFocus(edtCodLanc);
-      end
-      else begin
-//         dblDefeito.KeyValue:= edtCodLanc.Text;
-      end;
-   end;
+procedure TFormPDCA.dtPrevistaClick(Sender: TObject);
+begin
+   VerificarFazer();
 end;
 
 procedure TFormPDCA.edtValorChange(Sender: TObject);
@@ -1289,6 +1283,11 @@ begin
    end;
 end;
 
+procedure TFormPDCA.mmoObsCheckEnter(Sender: TObject);
+begin
+   VerificarFazer();
+end;
+
 procedure TFormPDCA.mmoOqueKeyPress(Sender: TObject; var Key: Char);
 begin
    Key:= AcertaUpperLetra(Key);
@@ -1402,4 +1401,17 @@ begin
 
    Result:= True;
 end;
+procedure TFormPDCA.VerificarFazer;
+begin
+   if (dtDataRealizada.Text = '  /  /    ') OR (mmoVerificacaoImpl.Text = EmptyStr) then begin
+      Application.MessageBox('Para preencher o "Checar/Agir" o "Fazer" deve estar preenchido', 'Aviso', MB_OK + MB_ICONWARNING);
+      if dtDataRealizada.Text = '  /  /    ' then begin
+         TryFocus(dtDataRealizada);
+      end
+      else begin
+         TryFocus(mmoVerificacaoImpl);
+      end;
+   end;
+end;
+
 end.

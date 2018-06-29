@@ -574,6 +574,7 @@ begin
                4: iMesAnterior:= (wAno * 100) + wMes - 12;
                5: iMesAnterior:= (wAno * 100) + wMes - 24;
                6: iMesAnterior:= (wAno * 100) + wMes - 36;
+               7: iMesAnterior:= (wAno * 100) + wMes - 48;
             end;
 
             if (Copy(IntToStr(iMesAnterior),5,2) = '00') or (StrToInt(Copy(IntToStr(iMesAnterior),5,2)) >= 13) then begin
@@ -585,6 +586,7 @@ begin
                   4: iMesAnterior:= iMesAnterior - 88;
                   5: iMesAnterior:= iMesAnterior - 176;
                   6: iMesAnterior:= iMesAnterior - 264;
+                  7: iMesAnterior:= iMesAnterior - 352;
                end;
             end;
 
@@ -1047,7 +1049,7 @@ begin
                        ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
                        ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 6 AND TC1.codi_com = C.educ_col' +
                        ' INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 6 AND TC2.codi_com = F.educ_fun' +
-                       ' WHERE TC1.orde_com > TC2.orde_com' +
+                       ' WHERE (TC1.orde_com > TC2.orde_com AND C.col_validacao_educ_exp = 0)' +
                        '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
                        ' ORDER BY nome_col';
          Active:= True;
@@ -1077,7 +1079,7 @@ begin
                        ' INNER JOIN funcoes F ON F.codi_fun = C.func_col' +
                        ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 7 AND TC1.codi_com = C.expe_col' +
                        ' INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 7 AND TC2.codi_com = F.expe_fun' +
-                       ' WHERE TC1.orde_com < TC2.orde_com' +
+                       ' WHERE (TC1.orde_com < TC2.orde_com AND C.col_validacao_educ_exp = 0)' +
                        '       AND C.proc_col = ' + QuotedStr(sCodProcesso) +
                        ' ORDER BY nome_col';
          Active:= True;

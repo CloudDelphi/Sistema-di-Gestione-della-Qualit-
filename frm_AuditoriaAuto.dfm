@@ -71,7 +71,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     Height = 496
     Align = alLeft
     TabOrder = 1
-    ExplicitLeft = 313
     object frxPreview1: TfrxPreview
       Left = 1
       Top = 1
@@ -82,8 +81,6 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       OutlineWidth = 0
       ThumbnailVisible = False
       UseReportHints = True
-      ExplicitLeft = 166
-      ExplicitTop = 21
     end
     object dbg1: TDBGrid
       Left = 158

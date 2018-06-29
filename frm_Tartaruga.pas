@@ -294,6 +294,7 @@ var
    sRiscoBaixoPfo, sRiscoMedioPfo, sRiscoAltoPfo, sRiscoSeveroPfo: Integer;
    sRiscoBaixoAme, sRiscoMedioAme, sRiscoAltoAme, sRiscoSeveroAme: Integer;
    sRiscoBaixoOpo, sRiscoMedioOpo, sRiscoAltoOpo, sRiscoSeveroOpo: Integer;
+   dDataVerificacaoInd: string; // Pega o dia que considera pra mostrar que o indicador está desatualizado - TT162
 begin
    // Infraetrutura não gera pendência
    imgInfra.Picture:= imgOk.Picture;
@@ -472,6 +473,7 @@ begin
             4: iMesAnterior:= (wAno * 100) + wMes - 12;
             5: iMesAnterior:= (wAno * 100) + wMes - 24;
             6: iMesAnterior:= (wAno * 100) + wMes - 36;
+            7: iMesAnterior:= (wAno * 100) + wMes - 48;
          end;
 
          if (Copy(IntToStr(iMesAnterior),5,2) = '00') or (StrToInt(Copy(IntToStr(iMesAnterior),5,2)) >= 13) then begin
@@ -483,6 +485,7 @@ begin
                4: iMesAnterior:= iMesAnterior - 89;
                5: iMesAnterior:= iMesAnterior - 176;
                6: iMesAnterior:= iMesAnterior - 264;
+               7: iMesAnterior:= iMesAnterior - 352;
             end;
          end;
 
@@ -498,7 +501,10 @@ begin
 
          // Se não tiver lançamento para o último mês da periodicidade, tem pendência
          if cdsAux.FieldByName('TemMesAnt').AsInteger = 0 then begin
-            lFlag:= False; // Luz Vermelha
+            // Projeto TT162
+            if VerificaPendIndicador(iMesAnterior) = True then begin
+               lFlag:= False; // Luz Vermelha
+            end;
          end;
 
          Next;
@@ -960,7 +966,9 @@ begin
                     ' FROM pdca P ' +
                     ' LEFT JOIN pdca_lanc L ON L.pdca_codigo = P.pdca_codigo ' +
                     ' WHERE P.pdca_processo = ' + lblCodigo.Caption +
-                    ' AND (lan_dtprevista is null OR (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
+                    ' AND ((lan_quando <= CURRENT_DATE AND lan_datarealizada is null) OR ' +
+                    '     (lan_dtprevista <= CURRENT_DATE AND lan_dtfinalizado is null)) ';
+//                    ' AND (lan_dtprevista is null OR (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
       Active:= True;
       First;
 

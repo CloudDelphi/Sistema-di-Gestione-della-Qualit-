@@ -85,7 +85,6 @@ uses
   frm_CadContextoAnalise in 'frm_CadContextoAnalise.pas' {FormContextoAnalise},
   frm_CadParametros in 'frm_CadParametros.pas' {FormCadParametros},
   frm_VisualizaPDCA in 'frm_VisualizaPDCA.pas' {FormVisualizaPDCA},
-//  MidasLib,
   frm_CadPMCVinculo in 'frm_CadPMCVinculo.pas' {FormCadPMCVinculo},
   frm_CadRiscoVisualizacao in 'frm_CadRiscoVisualizacao.pas' {FormCadRiscoVisualizacao},
   frm_PrevEficacia in 'frm_PrevEficacia.pas' {FormPrevEficacia},
@@ -114,7 +113,12 @@ uses
   frm_CadManutencao in 'frm_CadManutencao.pas' {FormCadManutencao},
   frmRelatorioGeral in 'frmRelatorioGeral.pas' {FormRelatorioGeral},
   frm_CadCronograma in 'frm_CadCronograma.pas' {FormCadCronograma},
-  frm_AuditoriaAuto in 'frm_AuditoriaAuto.pas' {FormAuditoriaAuto};
+  frm_AuditoriaAuto in 'frm_AuditoriaAuto.pas' {FormAuditoriaAuto},
+  frm_CadAuditoriaAutoCabec in 'frm_CadAuditoriaAutoCabec.pas' {FormCadAuditoriaAutoCabec},
+  frm_GraficoAudAuto in 'frm_GraficoAudAuto.pas' {FormGraficoAudAuto},
+  frm_CadCalibracaoLista in 'frm_CadCalibracaoLista.pas' {FormCadCalibracaoLista},
+  frm_LancarTreinamentos in 'frm_LancarTreinamentos.pas' {FormLancarTreinamentos},
+  frm_ProgramarTreinamentos in 'frm_ProgramarTreinamentos.pas' {FormProgramarTreinamentos};
 
 {$R *.res}
 //{$SetPEFlags IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP

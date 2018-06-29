@@ -119,7 +119,7 @@ end;
 
 procedure TFormVisualizaAnalise.btnExcelClick(Sender: TObject);
 begin
-   ExpExcel(dbgAnalise, cdsExcel, 'Análise Crítica');
+   ExpExcel(dbgAnalise, cdsExcel, 'Análise Crítica', Self);
 end;
 
 procedure TFormVisualizaAnalise.btnImprimirClick(Sender: TObject);

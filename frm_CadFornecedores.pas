@@ -168,6 +168,12 @@ type
     WideStringField1: TWideStringField;
     dsTipoProdImp: TDataSource;
     cdsDocsdoc_caminho: TWideMemoField;
+    tsAvaliacao: TTabSheet;
+    dbgHistorico: TDBGrid;
+    lbl28: TLabel;
+    edt1: TCurrencyEdit;
+    lbl29: TLabel;
+    dt1: TDateEdit;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -706,6 +712,8 @@ begin
    chkSeparaProduto.Checked:= False;
    chkSeparaProduto.Enabled:= True;
    dblTipoProdImp.Enabled:= False;
+
+   pctForn.Pages[3].TabVisible:= False;
 end;
 
 //procedure TFormCadFornecedores.HabilitarCampos(Flag, Codigo: Boolean);

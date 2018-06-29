@@ -364,6 +364,9 @@ type
     btn2: TBitBtn;
     pnl22: TPanel;
     edtEmailAcoes: TEdit;
+    lbl38: TLabel;
+    edtCusto: TCurrencyEdit;
+    cdsPMCpmc_custo: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -481,7 +484,8 @@ begin
       Active:= False;
       CommandText:= ' SELECT arqu_aco, desc_aco, codi_aco, codi_pmc, aco_prazo, resp_aco, vimp_aco' +
                     ' FROM pmc_acoes' +
-                    ' WHERE codi_pmc = ' + QuotedStr(cdsPMCcodi_pmc.AsString);
+                    ' WHERE codi_pmc = ' + QuotedStr(cdsPMCcodi_pmc.AsString) +
+                    ' ORDER BY aco_prazo';
       Active:= True;
 
       if pctFechaPMC.TabIndex = 2 then begin // Ações
@@ -590,7 +594,7 @@ begin
                     ' ncon_pmc, proc_pmc, resp_pmc,  prcs_pmc, requ_pmc, nume_pmc,' +
                     ' imed_pmc, caus_pmc, vefi_pmc, efic_pmc, pmc_dataFecha, pmc_cliente, ' +
                     ' pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_preveficacia,' +
-                    ' pmc_usuario_eficacia' +
+                    ' pmc_usuario_eficacia, pmc_custo' +
                     ' FROM pmc' +
                     ' WHERE codi_pmc = ' + sCodigoPMC;
       Active:= True;
@@ -1316,7 +1320,7 @@ begin
          edtPMCSubs.Enabled      := Flag;
 
          pctFechaPMC.Pages[1].TabVisible:= not Flag;
-         pctFechaPMC.Pages[2].TabVisible:= not Flag;
+//         pctFechaPMC.Pages[2].TabVisible:= not Flag;
       end;
       2: begin
          mmoDescricaoAcao.Enabled  := Flag;
@@ -1404,6 +1408,7 @@ begin
             mmoNaoConformidade.Text   := FieldByName('ncon_pmc').AsString;
             mmoNaoConformidadeBig.Text:= FieldByName('ncon_pmc').AsString;
             edtCaminho.Text           := FieldByName('pmc_arq_evidencia').AsString;
+            edtCusto.Value            := FieldByName('pmc_custo').AsFloat;
 
             mmoAcaoContencao.Text     := FieldByName('imed_pmc').AsString;
             mmoCausa.Text             := FieldByName('caus_pmc').AsString;

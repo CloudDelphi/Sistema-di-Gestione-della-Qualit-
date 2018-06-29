@@ -500,7 +500,7 @@ begin
             Active:= True;
          end;
       end;
-      2: begin // PMC sem análise de causa
+      2: begin
          case rgOpcoes.ItemIndex of
             0: begin
                sTituloExcel:= 'Ações de PMC Vencidas';
@@ -536,45 +536,77 @@ begin
             Active:= True;
          end;
       end;
-      3: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      3: begin
+         sTituloExcel:= 'RNC Aguardando Resposta/Disposição';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Responsável" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_responsavel' +
+                          ' WHERE rnc_status = 1' + // Status ABERTO
+                          sWhere +
+                          ' ORDER BY rnc_identificacao';
             Active:= True;
          end;
       end;
-      4: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      4: begin
+         sTituloExcel:= 'RNC a finalizar (Aceite/Recusa)';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' WHERE rnc_status = 2' + // Status RESPONDIDO
+                          sWhere +
+                          ' ORDER BY rnc_identificacao';
             Active:= True;
          end;
       end;
-      5: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      5: begin
+         sTituloExcel:= 'RNC por Motivo';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT TC.valo_com as "Motivo", ' +
+                          ' rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 32 AND TC.codi_com = rnc_motivo' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' ORDER BY TC.valo_com, rnc_identificacao';
             Active:= True;
          end;
       end;
-      6: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      6: begin
+         sTituloExcel:= 'RNC por Processo';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT P.nome_pro as "Processo", ' +
+                          ' rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' ORDER BY P.nome_pro, rnc_identificacao';
             Active:= True;
          end;
       end;
       7: begin // PMC sem análise de causa
-         sTituloExcel:= '';
-         with cdsExcel do begin
-            Active:= False;
-            CommandText:= '';
-            Active:= True;
-         end;
+         Exit;
+//         sTituloExcel:= 'Ações em andamento, atrasadas e conclúidas';
+//         with cdsExcel do begin
+//            Active:= False;
+//            CommandText:= '';
+//            Active:= True;
+//         end;
       end;
    end;
 
@@ -582,7 +614,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, sTituloExcel);
+      ExpExcel(dbgExcel, cdsExcel, sTituloExcel, Self);
    end;
 end;
 
@@ -864,6 +896,16 @@ begin
       end;
       7: begin
          rgTipoGrafico.Visible:= False;
+      end;
+   end;
+
+   // Exportação Excel
+   case pctGraficos.TabIndex of
+      0..6: begin
+         btnExcel.Visible:= True;
+      end;
+      7: begin
+         btnExcel.Visible:= False;
       end;
    end;
 

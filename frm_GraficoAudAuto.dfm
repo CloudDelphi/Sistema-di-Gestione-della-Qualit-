@@ -433,7 +433,7 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
     Top = 67
     Width = 994
     Height = 443
-    ActivePage = ts4
+    ActivePage = ts3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -472,6 +472,10 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object ts1: TTabSheet
       Caption = 'Qtd. de N'#227'o Conformidades por Requisito'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView1: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -680,6 +684,10 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
     object ts2: TTabSheet
       Caption = 'Qtd. de N'#227'o Conformidades por Processo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView2: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -885,12 +893,15 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
         XAxisZoomSensitivity = 1.000000000000000000
         YAxisZoomSensitivity = 1.000000000000000000
         DoubleBuffered = True
-        ExplicitTop = -1
       end
     end
     object ts3: TTabSheet
       Caption = 'Qtd. de Observa'#231#245'es por Processo'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView3: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -933,6 +944,7 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
             Series = <
               item
                 AutoRange = arDisabled
+                Pie.Size = 300
                 Pie.ValueFont.Charset = DEFAULT_CHARSET
                 Pie.ValueFont.Color = clWindowText
                 Pie.ValueFont.Height = -11
@@ -947,6 +959,7 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
                 Annotations = <>
                 ChartType = ctStackedBar
                 Color = 16737843
+                CrossHairYValue.BorderWidth = 0
                 CrossHairYValue.Font.Charset = DEFAULT_CHARSET
                 CrossHairYValue.Font.Color = clWindowText
                 CrossHairYValue.Font.Height = -11
@@ -1095,12 +1108,15 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
         XAxisZoomSensitivity = 1.000000000000000000
         YAxisZoomSensitivity = 1.000000000000000000
         DoubleBuffered = True
-        ExplicitTop = -1
       end
     end
     object ts4: TTabSheet
       Caption = 'Qtd. de Observa'#231#245'es de Melhoria por Processo'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBAdvGDIPChartView4: TDBAdvGDIPChartView
         Left = 0
         Top = 0
@@ -1157,6 +1173,7 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
                 Annotations = <>
                 ChartType = ctStackedBar
                 Color = 16737843
+                CrossHairYValue.BorderWidth = 0
                 CrossHairYValue.Font.Charset = DEFAULT_CHARSET
                 CrossHairYValue.Font.Color = clWindowText
                 CrossHairYValue.Font.Height = -11
@@ -1305,7 +1322,6 @@ object FormGraficoAudAuto: TFormGraficoAudAuto
         XAxisZoomSensitivity = 1.000000000000000000
         YAxisZoomSensitivity = 1.000000000000000000
         DoubleBuffered = True
-        ExplicitTop = -1
       end
     end
   end

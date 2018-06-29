@@ -62,6 +62,29 @@ object FormCadRNCFecha: TFormCadRNCFecha
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro RNC'
+      object lbl14: TLabel
+        Left = 7
+        Top = 151
+        Width = 110
+        Height = 13
+        Caption = 'N'#186' Ordem de Produ'#231#227'o'
+      end
+      object lbl15: TLabel
+        Left = 125
+        Top = 151
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
       object lbl4: TLabel
         Left = 7
         Top = 195
@@ -209,12 +232,42 @@ object FormCadRNCFecha: TFormCadRNCFecha
         Height = 13
         Caption = 'Fechamento'
       end
-      object lbl14: TLabel
+      object edtCusto: TCurrencyEdit
+        Tag = 30
+        Left = 125
+        Top = 166
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 19
+      end
+      object edtOrdemProd: TEdit
+        Tag = 30
         Left = 7
-        Top = 151
+        Top = 166
         Width = 110
-        Height = 13
-        Caption = 'N'#186' Ordem de Produ'#231#227'o'
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 10
+        ParentFont = False
+        TabOrder = 18
       end
       object dblTipo: TDBLookupComboBox
         Tag = 30
@@ -458,8 +511,8 @@ object FormCadRNCFecha: TFormCadRNCFecha
         TabOrder = 13
       end
       object pnlEmail: TPanel
-        Left = 539
-        Top = 290
+        Left = 580
+        Top = 293
         Width = 578
         Height = 188
         TabOrder = 15
@@ -1231,23 +1284,6 @@ object FormCadRNCFecha: TFormCadRNCFecha
           TabOrder = 1
           OnKeyPress = mmoDescricaoAcaoKeyPress
         end
-      end
-      object edtOrdemProd: TEdit
-        Tag = 30
-        Left = 7
-        Top = 166
-        Width = 110
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        TabOrder = 18
       end
     end
     object tsHistorico: TTabSheet
@@ -2842,27 +2878,27 @@ object FormCadRNCFecha: TFormCadRNCFecha
       'rnc_representante, rnc_status, rnc_disposicao'
       'FROM rnc R')
     Params = <>
-    Left = 128
-    Top = 176
+    Left = 288
+    Top = 184
   end
   object dspRNC: TDataSetProvider
     DataSet = zqryRNC
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 176
+    Left = 328
+    Top = 184
   end
   object cdsRNC: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRNC'
-    Left = 208
-    Top = 176
+    Left = 368
+    Top = 184
   end
   object dsRNC: TDataSource
     DataSet = cdsRNC
-    Left = 248
-    Top = 176
+    Left = 408
+    Top = 184
   end
   object cdsMotivo: TClientDataSet
     Aggregates = <>

@@ -60,6 +60,8 @@ object FormCadListaMestra: TFormCadListaMestra
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitLeft = 80
+    ExplicitTop = 40
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
       object shpAprovado: TShape
@@ -1652,6 +1654,21 @@ object FormCadListaMestra: TFormCadListaMestra
           'Identifica'#231#227'o'
           'Descri'#231#227'o do Documento')
       end
+      object rgPesqTipo: TRadioGroup
+        Left = 519
+        Top = 3
+        Width = 259
+        Height = 55
+        Caption = 'Tipo do Documento'
+        Columns = 3
+        ItemIndex = 0
+        Items.Strings = (
+          'TODOS'
+          'INTERNO'
+          'EXTERNO')
+        TabOrder = 3
+        OnClick = rgPesqTipoClick
+      end
     end
   end
   object pnl1: TPanel
@@ -2869,8 +2886,8 @@ object FormCadListaMestra: TFormCadListaMestra
     end
   end
   object pnlImprimir: TPanel
-    Left = 540
-    Top = 220
+    Left = 606
+    Top = 109
     Width = 365
     Height = 247
     TabOrder = 2
@@ -4586,28 +4603,28 @@ object FormCadListaMestra: TFormCadListaMestra
         'di_lis'
       'LEFT JOIN processos P ON P.codi_pro = lmp.lis_codiProcesso'
       'LEFT JOIN funcoes F ON F.codi_fun = lm.resp_lis'
-      'ORDER BY iden_lis')
+      '')
     Params = <>
-    Left = 592
-    Top = 32
+    Left = 648
+    Top = 168
   end
   object dspExcel: TDataSetProvider
     DataSet = zqryExcel
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 632
-    Top = 32
+    Left = 688
+    Top = 168
   end
   object cdsExcel: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspExcel'
-    Left = 672
-    Top = 32
+    Left = 728
+    Top = 168
   end
   object dsExcel: TDataSource
     DataSet = cdsExcel
-    Left = 712
-    Top = 32
+    Left = 768
+    Top = 168
   end
 end

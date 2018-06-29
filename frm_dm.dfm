@@ -1922,14 +1922,14 @@ object dm: Tdm
   object zqryGravar: TZQuery
     Connection = Conexao
     Params = <>
-    Left = 668
+    Left = 620
     Top = 8
   end
   object dspGravar: TDataSetProvider
     DataSet = zqryGravar
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 620
+    Left = 668
     Top = 8
   end
   object cdsGravar: TClientDataSet

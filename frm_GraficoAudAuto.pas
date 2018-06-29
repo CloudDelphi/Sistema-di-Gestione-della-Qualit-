@@ -153,12 +153,12 @@ begin
       0: begin // Qtd. de Não Conformidades por Requisito
          with cdsQtdNCReq do begin
             Active:= False;
-            CommandText:= ' SELECT aud_requisito, COUNT(*) AS Qtde' +
+            CommandText:= ' SELECT aud_requisito, SUM(aud_contnc) AS Qtde ' + //COUNT(*) AS Qtde' +
                           ' FROM auditoria_auto' +
                           ' WHERE SUBSTRING(aud_naoconformidade, 1, 2) = ' + QuotedStr('NC') +
                           ' AND aud_data = ' + ArrumaDataSQL(dDataAuditoria) +
                           ' GROUP BY aud_requisito' +
-                          ' ORDER BY COUNT(*) DESC';
+                          ' ORDER BY SUM(aud_contnc) DESC';
             Active:= True;
          end;
       end;
@@ -285,7 +285,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, sTituloExcel);
+      ExpExcel(dbgExcel, cdsExcel, sTituloExcel, Self);
    end;
 end;
 
@@ -331,6 +331,7 @@ begin
       Series[0].ShowValueInTracker:= False;
       Series[0].ValueFormatType:= vftFloat;
       Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+      Series[0].Pie.Size:= 300;
    end;
 
    // Gráfico de Qtd de NC por processo
@@ -347,14 +348,15 @@ begin
       Series[0].ShowValueInTracker:= False;
       Series[0].ValueFormatType:= vftFloat;
       Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+      Series[0].Pie.Size:= 300;
    end;
 
    // Gráfico de Qtd de OBS por processo
    with DBAdvGDIPChartView3.Panes[0] do begin
       XAxis.Size := 50; // Altura da base do gráfico do Eixo X
       YAxis.AutoUnits:= True; // Ajusta a escala do eixo Y automaticamente
-
-      Series[0].AutoRange:= arEnabled;
+//
+//      Series[0].AutoRange:= arEnabled;
       Series[0].Maximum:= cdsQtdObsProc.FieldByName('QtdObs').AsInteger + 10;
       Series[0].ValueFormat:= '###0'; // Formato do valor do gráfico
       Series[0].ValueOffsetY:= 0;
@@ -363,6 +365,7 @@ begin
       Series[0].ShowValueInTracker:= False;
       Series[0].ValueFormatType:= vftFloat;
       Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+      Series[0].Pie.Size:= 300;
    end;
 
    // Gráfico de Qtd de OM por processo
@@ -370,7 +373,7 @@ begin
       XAxis.Size := 50; // Altura da base do gráfico do Eixo X
       YAxis.AutoUnits:= True; // Ajusta a escala do eixo Y automaticamente
 
-      Series[0].AutoRange:= arEnabled;
+//      Series[0].AutoRange:= arEnabled;
       Series[0].Maximum:= cdsQtdOMProc.FieldByName('QtdOM').AsInteger + 10;
       Series[0].ValueFormat:= '###0'; // Formato do valor do gráfico
       Series[0].ValueOffsetY:= 0;
@@ -379,6 +382,7 @@ begin
       Series[0].ShowValueInTracker:= False;
       Series[0].ValueFormatType:= vftFloat;
       Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+      Series[0].Pie.Size:= 300;
    end;
 
    case rgTipoGrafico.ItemIndex of

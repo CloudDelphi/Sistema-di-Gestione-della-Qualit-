@@ -239,6 +239,8 @@ type
     lbl6: TLabel;
     edtOrdemProd: TEdit;
     cdsRNCrnc_ordemprod: TWideStringField;
+    rgFiltro: TRadioGroup;
+    cdsImprimirrnc_custo: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
@@ -269,6 +271,7 @@ type
     procedure edtNumRNCChange(Sender: TObject);
     procedure dbgRNCDblClick(Sender: TObject);
     procedure btnImprimirCompletoClick(Sender: TObject);
+    procedure rgFiltroClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -544,26 +547,47 @@ begin
    varWhere:= '';
 
    // Monta o select para os dados e gráfico
-   if (sDataRncIni <> EmptyStr) and (sDataRncFim <> EmptyStr) then
+   if (sDataRncIni <> EmptyStr) and (sDataRncFim <> EmptyStr) then begin
       varWhere:= varWhere + ' AND rnc_data between ' + sDataRncIni + ' and ' + sDataRncFim;
-   if iEmitido <> 0 then
+   end;
+   if iEmitido <> 0 then begin
       varWhere:= varWhere + ' AND rnc_emitido = ' + IntToStr(iEmitido);
-   if iMotivo <> 0 then
+   end;
+   if iMotivo <> 0 then begin
       varWhere:= varWhere + ' AND rnc_motivo = ' + IntToStr(iMotivo);
-   if iOrigem <> 0 then
+   end;
+   if iOrigem <> 0 then begin
       varWhere:= varWhere + ' AND rnc_origem = ' + IntToStr(iOrigem);
-   if iProcesso <> 0 then
+   end;
+   if iProcesso <> 0 then begin
       varWhere:= varWhere + ' AND rnc_processo = ' + IntToStr(iProcesso);
-   if iProcede <> -1 then
+   end;
+   if iProcede <> -1 then begin
       varWhere:= varWhere + ' AND rnc_procede = ' + IntToStr(iProcede);
-   if iRespons <> 0 then
+   end;
+   if iRespons <> 0 then begin
       varWhere:= varWhere + ' AND rnc_responsavel = ' + IntToStr(iRespons);
-   if iStatus <> -1 then
+   end;
+   if iStatus <> -1 then begin
       varWhere:= varWhere + ' AND rnc_status = ' + IntToStr(iStatus);
-   if iCliente <> -1 then
+   end;
+   if iCliente <> -1 then begin
       varWhere:= varWhere + ' AND rnc_cliente = ' + IntToStr(iCliente);
-   if sForn <> EmptyStr then
+   end;
+   if sForn <> EmptyStr then begin
       varWhere:= varWhere + ' AND rnc_fornecedor = ' + QuotedStr(sForn);
+   end;
+
+   // Chamado TT651 - Criar filtro de pendente de resposta e pendente de aceite/recusa
+   case rgFiltro.ItemIndex of
+      1: begin // Pendente de Resposta
+         varWhere:= varWhere + 'AND rnc_status = 1';
+      end;
+      2: begin // Pendente de Aceite/Recusa
+         varWhere:= varWhere + 'AND rnc_status = 2';
+      end;
+   end;
+
 
    with cdsGrafico do begin
       Active:= False;
@@ -604,6 +628,8 @@ begin
       btnImprimir.Enabled        := True;
       btnImprimirCompleto.Enabled:= True;
    end;
+
+   AtualizarGrid(dbgRNC);
 end;
 
 procedure TFormCadRNCConsulta.chkClienteClick(Sender: TObject);
@@ -731,7 +757,7 @@ begin
                        ' CL.cli_nome, rnc_fornecedor, F.forn_nome, rnc_consumidor, rnc_nconformidade, ' +
                        ' rnc_procede, rnc_responsavel, C1.nome_col as Responsavel, ' +
                        ' rnc_departamento, rnc_relacionamento, rnc_representante,' +
-                       ' C.nome_col as Emitido, TC.valo_com as Motivo' +
+                       ' C.nome_col as Emitido, TC.valo_com as Motivo, rnc_custo' +
                        ' FROM rnc R' +
                        ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
                        ' INNER JOIN colaboradores C1 ON C1.codi_col = R.rnc_responsavel' +
@@ -922,6 +948,11 @@ begin
 
       EndUpdate;
    end;
+end;
+
+procedure TFormCadRNCConsulta.rgFiltroClick(Sender: TObject);
+begin
+   btnPesquisarClick(Self);
 end;
 
 end.

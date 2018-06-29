@@ -513,6 +513,10 @@ object FormCadRegistros: TFormCadRegistros
     object tsLocais: TTabSheet
       Caption = 'Locais'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl11: TLabel
         Left = 7
         Top = 12
@@ -556,14 +560,14 @@ object FormCadRegistros: TFormCadRegistros
         Caption = 'Modo de Recupera'#231#227'o'
       end
       object lbl18: TLabel
-        Left = 463
+        Left = 441
         Top = 108
         Width = 81
         Height = 13
         Caption = 'Reten'#231#227'o M'#237'nima'
       end
       object lbl19: TLabel
-        Left = 597
+        Left = 575
         Top = 108
         Width = 50
         Height = 13
@@ -1003,7 +1007,7 @@ object FormCadRegistros: TFormCadRegistros
       object dblModoRecuperacao: TDBLookupComboBox
         Left = 239
         Top = 124
-        Width = 218
+        Width = 196
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1017,7 +1021,7 @@ object FormCadRegistros: TFormCadRegistros
         TabOrder = 8
       end
       object dblRetencaoMinima: TDBLookupComboBox
-        Left = 463
+        Left = 441
         Top = 124
         Width = 130
         Height = 26
@@ -1034,9 +1038,9 @@ object FormCadRegistros: TFormCadRegistros
         TabOrder = 9
       end
       object dblDisposicao: TDBLookupComboBox
-        Left = 597
+        Left = 575
         Top = 124
-        Width = 168
+        Width = 188
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -2799,7 +2803,7 @@ object FormCadRegistros: TFormCadRegistros
   end
   object pnlImprimir: TPanel
     Left = 603
-    Top = 151
+    Top = 180
     Width = 465
     Height = 253
     TabOrder = 2

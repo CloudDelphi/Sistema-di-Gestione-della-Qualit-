@@ -22,7 +22,7 @@ object FormCadParametros: TFormCadParametros
     Top = 0
     Width = 499
     Height = 379
-    ActivePage = tsAvisoCalib
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -59,10 +59,10 @@ object FormCadParametros: TFormCadParametros
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitLeft = -1
-    ExplicitTop = -5
     object tsCadastro: TTabSheet
       Caption = 'Diversos'
+      ExplicitLeft = 1
+      ExplicitTop = 23
       object grp11: TGroupBox
         Left = 4
         Top = 8
@@ -146,65 +146,13 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 2
         end
       end
-      object grp12: TGroupBox
-        Left = 3
-        Top = 112
-        Width = 479
-        Height = 86
-        Caption = 'Indicadores'
-        TabOrder = 1
-        object lbl15: TLabel
-          Left = 16
-          Top = 22
-          Width = 73
-          Height = 13
-          Caption = 'Casas Decimais'
-        end
-        object lbl4: TLabel
-          Left = 181
-          Top = 22
-          Width = 40
-          Height = 13
-          Caption = 'Exemplo'
-        end
-        object lblExemplo: TLabel
-          Left = 181
-          Top = 42
-          Width = 55
-          Height = 18
-          Caption = '123,45'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object spnCasas: TRxSpinEdit
-          Left = 16
-          Top = 39
-          Width = 73
-          Height = 26
-          MaxValue = 6.000000000000000000
-          MinValue = 2.000000000000000000
-          Value = 2.000000000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          OnChange = spnCasasChange
-        end
-      end
       object grp13: TGroupBox
         Left = 3
-        Top = 199
+        Top = 115
         Width = 479
-        Height = 78
+        Height = 107
         Caption = 'PMC'
-        TabOrder = 2
+        TabOrder = 1
         object lbl21: TLabel
           Left = 16
           Top = 22
@@ -366,11 +314,103 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 1
           OnClick = btnLimpaDataPMCClick
         end
+        object chkEnvioGestor: TCheckBox
+          Left = 12
+          Top = 85
+          Width = 325
+          Height = 17
+          Caption = 'Incluir gestor do processo no envio de e-mails de PMC'
+          TabOrder = 2
+        end
       end
     end
     object tsIndicadores: TTabSheet
       Caption = 'Indicadores'
       ImageIndex = 1
+      object grp12: TGroupBox
+        Left = 9
+        Top = 3
+        Width = 479
+        Height = 86
+        Caption = 'Indicadores'
+        TabOrder = 0
+        object lbl15: TLabel
+          Left = 16
+          Top = 22
+          Width = 73
+          Height = 13
+          Caption = 'Casas Decimais'
+        end
+        object lbl4: TLabel
+          Left = 181
+          Top = 22
+          Width = 40
+          Height = 13
+          Caption = 'Exemplo'
+        end
+        object lblExemplo: TLabel
+          Left = 181
+          Top = 42
+          Width = 55
+          Height = 18
+          Caption = '123,45'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object spnCasas: TRxSpinEdit
+          Left = 16
+          Top = 39
+          Width = 73
+          Height = 26
+          MaxValue = 6.000000000000000000
+          MinValue = 2.000000000000000000
+          Value = 2.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = spnCasasChange
+        end
+      end
+      object grp14: TGroupBox
+        Left = 9
+        Top = 92
+        Width = 479
+        Height = 86
+        Caption = 'Atualizar indicadores at'#233' o dia '
+        TabOrder = 1
+        object lbl41: TLabel
+          Left = 16
+          Top = 22
+          Width = 71
+          Height = 13
+          Caption = 'Selecione o dia'
+        end
+        object spnDiaAtuIndicador: TRxSpinEdit
+          Left = 16
+          Top = 39
+          Width = 73
+          Height = 26
+          MaxValue = 31.000000000000000000
+          MinValue = 1.000000000000000000
+          Value = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = spnCasasChange
+        end
+      end
     end
     object tsRisco: TTabSheet
       Caption = 'An'#225'lise de Riscos'
@@ -1095,7 +1135,7 @@ object FormCadParametros: TFormCadParametros
         Width = 58
         Height = 26
         Decimal = 0
-        MaxValue = 100.000000000000000000
+        MaxValue = 365.000000000000000000
         MinValue = 1.000000000000000000
         Value = 1.000000000000000000
         Font.Charset = DEFAULT_CHARSET
@@ -2356,7 +2396,10 @@ object FormCadParametros: TFormCadParametros
       
         'email_pmc, email_risco, notamaxhab, notapendencia, periodohab, p' +
         'rimeiraavaliacao,'
-      'aviso_pmc, nao_enviar_email_pmc, riscos_cores, data_filtro_pmc'
+      
+        'aviso_pmc, nao_enviar_email_pmc, riscos_cores, data_filtro_pmc, ' +
+        'dias_indicadores,'
+      'enviogestor'
       'FROM parametros'
       '')
     Params = <>
@@ -2467,6 +2510,12 @@ object FormCadParametros: TFormCadParametros
     end
     object cdsParametrosdata_filtro_pmc: TDateTimeField
       FieldName = 'data_filtro_pmc'
+    end
+    object cdsParametrosdias_indicadores: TIntegerField
+      FieldName = 'dias_indicadores'
+    end
+    object cdsParametrosenviogestor: TIntegerField
+      FieldName = 'enviogestor'
     end
   end
   object cdsPeriodoHab: TClientDataSet

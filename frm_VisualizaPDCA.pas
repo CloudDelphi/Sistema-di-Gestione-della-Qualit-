@@ -96,6 +96,7 @@ end;
 
 procedure TFormVisualizaPDCA.btnSairClick(Sender: TObject);
 begin
+   FormTartaruga.VerificaPendencias;
    Self.Close;
 end;
 

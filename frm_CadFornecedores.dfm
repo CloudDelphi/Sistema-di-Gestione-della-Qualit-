@@ -22,7 +22,7 @@ object FormCadFornecedores: TFormCadFornecedores
     Top = 0
     Width = 866
     Height = 460
-    ActivePage = tsDocumentos
+    ActivePage = tsAvaliacao
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -820,7 +820,7 @@ object FormCadFornecedores: TFormCadFornecedores
         TabOrder = 18
       end
       object pnlImprimir: TPanel
-        Left = 417
+        Left = 274
         Top = 128
         Width = 365
         Height = 311
@@ -1886,6 +1886,134 @@ object FormCadFornecedores: TFormCadFornecedores
           'C'#243'digo'
           'Raz'#227'o Social'
           'Nome Fantasia')
+      end
+    end
+    object tsAvaliacao: TTabSheet
+      Caption = 'Pontua'#231#227'o de Avalia'#231#227'o'
+      ImageIndex = 3
+      object lbl28: TLabel
+        Left = 5
+        Top = 14
+        Width = 87
+        Height = 13
+        Caption = 'Pont. Qualifica'#231#227'o'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+      object lbl29: TLabel
+        Left = 98
+        Top = 14
+        Width = 75
+        Height = 13
+        Caption = 'Validade Qualif.'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+      object dbgHistorico: TDBGrid
+        Left = 3
+        Top = 64
+        Width = 852
+        Height = 365
+        Hint = 'Duolo clique para visualizar o texto completo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'his_data'
+            Title.Caption = 'Data Cadastro'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'his_usuario'
+            Title.Caption = 'Pontua'#231#227'o Qualifica'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'probabilidade'
+            Title.Caption = 'Validade da Qualifica'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 150
+            Visible = True
+          end>
+      end
+      object edt1: TCurrencyEdit
+        Left = 5
+        Top = 30
+        Width = 87
+        Height = 26
+        Hint = 'Nota de avalia'#231#227'o'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',0.00;-,0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object dt1: TDateEdit
+        Left = 97
+        Top = 30
+        Width = 103
+        Height = 26
+        Hint = 'Digite a validade da pontua'#231#227'o'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        NumGlyphs = 2
+        ParentFont = False
+        TabOrder = 2
       end
     end
   end

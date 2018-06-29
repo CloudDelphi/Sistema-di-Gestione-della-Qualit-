@@ -22,7 +22,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 0
     Width = 750
     Height = 602
-    ActivePage = tsCadastro
+    ActivePage = tsAcoes
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -60,10 +60,24 @@ object FormCadPMCFecha: TFormCadPMCFecha
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitLeft = 74
-    ExplicitTop = 88
     object tsCadastro: TTabSheet
       Caption = 'Cadastro PMC'
+      object lbl38: TLabel
+        Left = 553
+        Top = 243
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
       object lbl34: TLabel
         Left = 373
         Top = 530
@@ -401,6 +415,26 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ShowHint = True
         OnClick = sbVisualizaCausaClick
+      end
+      object edtCusto: TCurrencyEdit
+        Tag = 30
+        Left = 553
+        Top = 258
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 25
       end
       object edtColabEficacia: TEdit
         Left = 519
@@ -13871,8 +13905,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
     end
   end
   object pnlEmailAcoes: TPanel
-    Left = 296
-    Top = 314
+    Left = 40
+    Top = 334
     Width = 365
     Height = 282
     TabOrder = 4
@@ -14220,8 +14254,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
     end
   end
   object mmoTexto: TMemo
-    Left = 622
-    Top = 160
+    Left = 665
+    Top = 306
     Width = 315
     Height = 343
     Font.Charset = DEFAULT_CHARSET
@@ -14239,8 +14273,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
     OnKeyPress = mmoDescricaoAcaoKeyPress
   end
   object btnFecharTexto: TBitBtn
-    Left = 563
-    Top = 268
+    Left = 493
+    Top = 338
     Width = 73
     Height = 70
     Hint = 'Clique para fechar'
@@ -14373,8 +14407,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
     OnClick = btnFecharTextoClick
   end
   object pnlRiscos: TPanel
-    Left = 167
-    Top = 226
+    Left = 99
+    Top = 301
     Width = 272
     Height = 175
     TabOrder = 7
@@ -14685,8 +14719,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
     end
   end
   object pnlCadEmail: TPanel
-    Left = 248
-    Top = 137
+    Left = 256
+    Top = -48
     Width = 578
     Height = 188
     TabOrder = 8
@@ -15264,7 +15298,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         '_pmc, pmc_dataFecha, pmc_cliente, '
       
         'pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_prevefica' +
-        'cia, pmc_usuario_eficacia'
+        'cia, pmc_usuario_eficacia, pmc_custo'
       'FROM pmc'
       'ORDER BY nume_pmc')
     Params = <>
@@ -15388,6 +15422,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
     object cdsPMCpmc_usuario_eficacia: TWideStringField
       FieldName = 'pmc_usuario_eficacia'
       Size = 30
+    end
+    object cdsPMCpmc_custo: TFloatField
+      FieldName = 'pmc_custo'
     end
   end
   object dsPMC: TDataSource
@@ -15858,6 +15895,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = 'dd/mm/yyyy'
@@ -15901,6 +15939,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -15942,6 +15981,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 30.236240000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -15982,6 +16022,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 30.236240000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16023,6 +16064,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           ShowHint = False
           StretchMode = smActualHeight
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16063,6 +16105,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16104,6 +16147,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16146,6 +16190,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           ShowHint = False
           StretchMode = smMaxHeight
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16187,6 +16232,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           ShowHint = False
           StretchMode = smActualHeight
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16228,6 +16274,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16269,6 +16316,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16310,6 +16358,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17005,6 +17054,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 117.165430000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17045,6 +17095,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17086,6 +17137,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17127,6 +17179,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
+          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET

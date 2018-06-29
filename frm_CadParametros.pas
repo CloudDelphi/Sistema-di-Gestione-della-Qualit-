@@ -155,11 +155,6 @@ type
     edtAvaliacao: TCurrencyEdit;
     edtPontualidade: TCurrencyEdit;
     edtConformidade: TCurrencyEdit;
-    grp12: TGroupBox;
-    lbl15: TLabel;
-    lbl4: TLabel;
-    lblExemplo: TLabel;
-    spnCasas: TRxSpinEdit;
     grp13: TGroupBox;
     lbl21: TLabel;
     dtPMC: TDateEdit;
@@ -193,6 +188,17 @@ type
     dspColabManut: TDataSetProvider;
     cdsColabManut: TClientDataSet;
     dsColabManut: TDataSource;
+    grp12: TGroupBox;
+    lbl15: TLabel;
+    lbl4: TLabel;
+    lblExemplo: TLabel;
+    spnCasas: TRxSpinEdit;
+    grp14: TGroupBox;
+    lbl41: TLabel;
+    spnDiaAtuIndicador: TRxSpinEdit;
+    cdsParametrosdias_indicadores: TIntegerField;
+    chkEnvioGestor: TCheckBox;
+    cdsParametrosenviogestor: TIntegerField;
     procedure btnSairClick(Sender: TObject);
     procedure Botoes(Flag: Boolean);
     procedure btnAlterarClick(Sender: TObject);
@@ -372,7 +378,9 @@ begin
                              ' periodohab = ' + QuotedStr(dblPeriodoHab.KeyValue) + ',' +
                              ' primeiraavaliacao = ' + VirgulaParaPonto(spnPrimeiraAvaliacao.Value, 0) + ',' +
                              ' data_filtro_pmc = ' + ArrumaDataSQL(dtPMC.Date) + ',' +
-                             ' riscos_cores = ' + sOpcaoCoresRisco;
+                             ' riscos_cores = ' + sOpcaoCoresRisco + ',' +
+                             ' dias_indicadores = ' + spnDiaAtuIndicador.Text + ',' +
+                             ' enviogestor = ' + LogicoParaString(chkEnvioGestor.Checked);
             Execute;
          end;
 
@@ -471,7 +479,7 @@ begin
    pnlAltoOp2b.Color  := RGB(255,165,0);
    pnlSeveroOp2b.Color:= RGB(255,0,0);
 
-   pctParametros.Pages[1].TabVisible:= False;
+//   pctParametros.Pages[1].TabVisible:= False;
 end;
 
 procedure TFormCadParametros.PreencherCampos;
@@ -506,6 +514,8 @@ begin
       dblPeriodoHab.KeyValue    := FieldByName('periodohab').AsInteger;
       spnPrimeiraAvaliacao.Value:= FieldByName('primeiraavaliacao').AsFloat;
       dtPMC.Date                := FieldByName('data_filtro_pmc').AsDateTime;
+      spnDiaAtuIndicador.Value  := FieldByName('dias_indicadores').AsFloat;
+      chkEnvioGestor.Checked    := StringParaLogico(FieldByName('enviogestor').AsString);
 
       rbOpcao1.Checked:= FieldByName('riscos_cores').AsInteger = 0;
       rbOpcao2.Checked:= FieldByName('riscos_cores').AsInteger = 1;
