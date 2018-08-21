@@ -367,6 +367,28 @@ type
     lbl38: TLabel;
     edtCusto: TCurrencyEdit;
     cdsPMCpmc_custo: TFloatField;
+    tsBrainstorm: TTabSheet;
+    mmoBrainstorm: TMemo;
+    lbl39: TLabel;
+    cdsPMCpmc_brainstorm: TWideMemoField;
+    lbl40: TLabel;
+    dblProduto: TDBLookupComboBox;
+    dblMotivo: TDBLookupComboBox;
+    lbl41: TLabel;
+    zqryMotivos: TZQuery;
+    dspMotivos: TDataSetProvider;
+    cdsMotivos: TClientDataSet;
+    cdsMotivoscodi_com: TLargeintField;
+    cdsMotivosvalo_com: TWideStringField;
+    dsMotivos: TDataSource;
+    dsProdutos: TDataSource;
+    cdsProdutos: TClientDataSet;
+    cdsProdutospro_codigo: TIntegerField;
+    cdsProdutospro_descricao: TWideStringField;
+    dspProdutos: TDataSetProvider;
+    zqryProdutos: TZQuery;
+    cdsPMCpmc_produto: TIntegerField;
+    cdsPMCpmc_motivo: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -442,6 +464,7 @@ type
     procedure btnRiscosClick(Sender: TObject);
     procedure btnFecharRiscosClick(Sender: TObject);
     procedure btnAbrirRiscosClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     cOperacao: Char;
@@ -462,7 +485,7 @@ var
 implementation
 
 uses frm_dm, frm_Inicial, Funcoes, frm_Tartaruga,
-  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA, frm_CadRiscoAnaliseInterna, frm_CadRiscoMacroAmbiente;
+  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA, frm_CadRiscoAnaliseInterna, frm_CadRiscoMacroAmbiente, frm_CadEmail;
 
 {$R *.dfm}
 
@@ -477,17 +500,18 @@ begin
       sCodiAcao:= sNovoCodigoAcao;
    end
    else begin
-      sCodiAcao:= cdsPMC_Acoescodi_aco.AsString;
+      sCodiAcao:= cdsPMC_Acoes.FieldByName('codi_aco').AsString;
    end;
 
    with cdsPMC_Acoes do begin
       Active:= False;
       CommandText:= ' SELECT arqu_aco, desc_aco, codi_aco, codi_pmc, aco_prazo, resp_aco, vimp_aco' +
                     ' FROM pmc_acoes' +
-                    ' WHERE codi_pmc = ' + QuotedStr(cdsPMCcodi_pmc.AsString);
+                    ' WHERE codi_pmc = ' + QuotedStr(cdsPMCcodi_pmc.AsString) +
+                    ' ORDER BY aco_prazo';
       Active:= True;
 
-      if pctFechaPMC.TabIndex = 2 then begin // Ações
+      if pctFechaPMC.TabIndex = 3 then begin // Ações
          if RecordCount = 0 then begin
             btnAlterar.Enabled:= False;
             btnExcluir.Enabled:= False;
@@ -581,6 +605,22 @@ begin
       Active:= True;
    end;
 
+   with cdsProdutos do begin
+      Active:= False;
+      CommandText:= ' SELECT pro_codigo, pro_descricao' +
+                    ' FROM produtos' +
+                    ' ORDER BY pro_descricao';
+      Active:= True;
+   end;
+
+   with cdsMotivos do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
+                    ' WHERE tipo_com = 37' +
+                    ' ORDER BY orde_com';
+      Active:= True;
+   end;
+
    with cdsPMC do begin
       Active:= False;
 //      if iTela = 3 then begin // Gestão de Riscos
@@ -593,7 +633,8 @@ begin
                     ' ncon_pmc, proc_pmc, resp_pmc,  prcs_pmc, requ_pmc, nume_pmc,' +
                     ' imed_pmc, caus_pmc, vefi_pmc, efic_pmc, pmc_dataFecha, pmc_cliente, ' +
                     ' pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_preveficacia,' +
-                    ' pmc_usuario_eficacia, pmc_custo' +
+                    ' pmc_usuario_eficacia, pmc_custo, pmc_brainstorm, pmc_produto,' +
+                    ' pmc_motivo' +
                     ' FROM pmc' +
                     ' WHERE codi_pmc = ' + sCodigoPMC;
       Active:= True;
@@ -652,7 +693,7 @@ begin
    btnPDCA.Enabled    := Flag;
    btnRiscos.Enabled  := Flag;
 
-   if pctFechaPMC.TabIndex = 2 then begin
+   if pctFechaPMC.TabIndex = 3 then begin
       btnExcluir.Enabled := Flag;
    end
    else begin
@@ -696,17 +737,22 @@ begin
             Botoes(False);
          end;
       end;
+      1: begin
+         HabilitarCampos(True, True);
+         TryFocus(mmoMeioAmbiente);
+         Botoes(False);
+      end;
       2: begin
+         mmoBrainstorm.Enabled:= True;
+         TryFocus(mmoBrainstorm);
+         Botoes(False);
+      end;
+      3: begin
          if (Acesso(cUsuario, 27, 'alteracao') = 1) then begin // Ações do PMC
             HabilitarCampos(True, False);
             TryFocus(mmoDescricaoAcao);
             Botoes(False);
          end;
-      end;
-      1: begin
-         HabilitarCampos(True, True);
-         TryFocus(mmoMeioAmbiente);
-         Botoes(False);
       end;
    end;
 end;
@@ -721,6 +767,12 @@ begin
          HabilitarCampos(False, False);
       end;
       2: begin
+         AtualizarDados();
+         PreencherCampos();
+         Botoes(True);
+         mmoBrainstorm.Enabled:= False;
+      end;
+      3: begin
          AtualizarDados();
          PreencherCampos();
          Botoes(True);
@@ -798,6 +850,9 @@ begin
 end;
 
 procedure TFormCadPMCFecha.btnGravarClick(Sender: TObject);
+var
+   i: integer;
+   sTextoNC: string;
 begin
    case pctFechaPMC.TabIndex of
       0: begin // Cadastro
@@ -805,6 +860,7 @@ begin
             if edtPMCSubs.Text = EmptyStr then begin
                if Application.MessageBox('O PMC não foi Eficaz. Deseja abrir o PMC substituto ?', 'Novo PMC', MB_YESNO + MB_ICONQUESTION) = IDYES then  begin
                   FormCadPMCAbre:= TFormCadPMCAbre.Create(nil);
+                  FormCadPMCAbre.iTela:= 4; // Fechamento de PMC
                   FormCadPMCAbre.ShowModal;
                   FormCadPMCAbre.Release;
                end;
@@ -867,16 +923,42 @@ begin
 
                Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
 
+               // Busca <Enter> na não conformidade para ajustar o envio de e-mail
+               for i:= 1 to Length(mmoNaoConformidade.Text) do begin
+                  sTextoNC:= sTextoNC + mmoNaoConformidade.Text[i];
+
+                  if mmoNaoConformidade.Text[i] = #13 then begin
+                     sTextoNC:= sTextoNC + '<br>'
+                  end;
+               end;
+
+               sTextoEmail:= 'O PMC identificado abaixo foi alterado. <br><br>' +
+                             '<b>PMC:</b> ' + edtIdentificacao.Text + '<br>' +
+                             '<b>Data PMC:</b> ' + dtData.Text + '<br>' +
+                             '<b>Não Conformidade:</b> ' + sTextoNC +
+                             '<br><br>'+
+                             'Acesse o sistema Destra Manager para maiores detalhes.';
+
                if Application.MessageBox('Deseja enviar um e-mail ao emitente avisando as alterações do PMC ?', 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
                   PrepararEmail();
                end;
 
-//               AtualizarAcoes();
-//               if cdsPMC_Acoes.RecordCount > 0 then begin
-//                  if Application.MessageBox('Deseja enviar um e-mail aos responsáveis das ações ?', 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
-//                     PrepararEmailAcoes();
-//                  end;
-//               end;
+               //Chamado TT656 - Enviar e-mails de PMC para lista de e-mails definida nos parâmetros
+               with dm.cdsAux3 do begin
+                  Active:= False;
+                  CommandText:= ' SELECT par_codigo, par_tipo, par_colaborador, ' +
+                                ' C.nome_col, C.col_email' +
+                                ' FROM parametros_email_aviso' +
+                                ' INNER JOIN colaboradores C ON C.codi_col = par_colaborador' +
+                                ' WHERE par_tipo = ' + QuotedStr('P');
+                  Active:= True;
+                  First;
+
+                  while not Eof do begin
+                     EnviarEmail(sTextoEmail, 'PMC Alterado', FieldByName('col_email').AsString, 'sistema', 'N');
+                     Next;
+                  end;
+               end;
             except
                on E:Exception do begin
                   MostrarErro('Erro ao gravar dados. Verifique', E.Message, Self.Name);
@@ -936,7 +1018,29 @@ begin
             end;
          end;
       end;
-      2: begin // Ações PMC
+      2: begin // Brainstorm
+         try
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' UPDATE pmc SET' +
+                             ' pmc_brainstorm = ' + QuotedStr(mmoBrainstorm.Text) +
+                             ' WHERE codi_pmc = ' + cdsPMC.FieldByName('codi_pmc').AsString;
+               Execute;
+            end;
+
+            Auditoria('BRAINSTORM', Copy(mmoBrainstorm.Text, 1, 50), cOperacao,'');
+
+            mmoBrainstorm.Enabled:= False;
+            Botoes(True);
+            AtualizarDados();
+            Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
+         except
+            on E:Exception do begin
+               MostrarErro('Erro ao gravar brainstorm. Verifique', E.Message, Self.Name);
+            end;
+         end;
+      end;
+      3: begin // Ações PMC
          if ValidarDados() then begin
             try
                if cOperacao = 'I' then begin
@@ -1078,7 +1182,7 @@ end;
 
 procedure TFormCadPMCFecha.btnNovoClick(Sender: TObject);
 begin
-   if (pctFechaPMC.TabIndex = 0) or (pctFechaPMC.TabIndex = 2) then begin // Ações do PMC
+   if (pctFechaPMC.TabIndex = 0) or (pctFechaPMC.TabIndex = 3) then begin // Ações do PMC
       if (Acesso(cUsuario, 27, 'cadastro') = 1) then begin // Ações do PMC
          cOperacao:= 'I';
          LimparCampos();
@@ -1146,6 +1250,8 @@ begin
 end;
 
 procedure TFormCadPMCFecha.btnSairClick(Sender: TObject);
+var
+   lPreencheuBrainstorm, lPreencheuIshikawa: Boolean;
 begin
    if iTela = 1 then begin // Tela de Visualizar PMC do Tartaruga
       dm.cdsPMC.Active:= False;
@@ -1244,13 +1350,30 @@ begin
          btnExcluir.Visible := False;
 //         btnImprimir.Visible:= False;
          btnEmail.Visible   := False;
+         btnPDCA.Visible    := False;
+         btnRiscos.Visible  := False;
          Botoes(True);
          HabilitarCampos(False, False);
 
          AtualizarIshikawa();
          PreencherCampos();
       end;
-      2: begin // Ações
+      2: begin // Brainstorm
+         btnNovo.Visible    := False;
+         btnExcluir.Visible := False;
+         btnImprimir.Visible:= False;
+         btnEmail.Visible   := False;
+         btnPDCA.Visible    := False;
+         btnRiscos.Visible  := False;
+         Botoes(True);
+
+         mmoBrainstorm.Enabled:= False;
+//         HabilitarCampos(False, False);
+
+         AtualizarDados();
+         PreencherCampos();
+      end;
+      3: begin // Ações
          if (Acesso(cUsuario, 27, 'acesso') = 1) then begin
             btnNovo.Visible    := True;
             btnExcluir.Visible := True;
@@ -1283,6 +1406,49 @@ end;
 procedure TFormCadPMCFecha.dbgEvidenciasCellClick(Column: TColumn);
 begin
    PreencherCampos();
+end;
+
+procedure TFormCadPMCFecha.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+var
+   lPreencheuBrainstorm, lPreencheuIshikawa: Boolean;
+begin
+   // Chamado TT663
+   if BuscarParametro('obrigar_causa_pmc') = '1' then begin
+      // Verifica se preencheu o Brainstorm
+//      ShowMessage(cdsPMC.FieldByName('nume_pmc').AsString);
+//      ShowMessage(cdsPMC.FieldByName('pmc_brainstorm').AsString);
+      if Alltrim(cdsPMC.FieldByName('pmc_brainstorm').AsString) <> EmptyStr then begin
+         lPreencheuBrainstorm:= True;
+      end
+      else begin
+         lPreencheuBrainstorm:= False;
+      end;
+
+      // Verifica se preencheu o Ishikawa
+      with dm.cdsAux6 do begin
+         Active:= False;
+         CommandText:= ' SELECT COUNT(*) AS Qtd' +
+                       ' FROM ishikawa' +
+                       ' WHERE ish_codigopmc = ' + cdsPMC.FieldByName('codi_pmc').AsString;
+         Active:= True;
+
+         if FieldByName('Qtd').AsInteger > 0 then begin
+            lPreencheuIshikawa:= True;
+         end
+         else begin
+            lPreencheuIshikawa:= False;
+         end;
+      end;
+
+      if (lPreencheuBrainstorm = False) AND (lPreencheuIshikawa = False) then begin
+         Application.MessageBox('É obrigatório o preenchimento de uma das abas de Análise de Causa (Ishikawa - Brainstorm)', 'Aviso', MB_OK + MB_ICONWARNING + MB_DEFBUTTON2);
+         CanClose:= False;
+      end;
+   end
+   else begin
+      CanClose:= True;
+   end;
 end;
 
 procedure TFormCadPMCFecha.FormShow(Sender: TObject);
@@ -1319,17 +1485,9 @@ begin
          edtPMCSubs.Enabled      := Flag;
 
          pctFechaPMC.Pages[1].TabVisible:= not Flag;
-//         pctFechaPMC.Pages[2].TabVisible:= not Flag;
+         pctFechaPMC.Pages[2].TabVisible:= not Flag;
       end;
-      2: begin
-         mmoDescricaoAcao.Enabled  := Flag;
-         dtPrazoAcao.Enabled       := Flag;
-         dblResponsavelAcao.Enabled:= Flag;
-         mmoVerificacaoAcao.Enabled:= Flag;
-         mmoArquivo.Enabled        := Flag;
-//         sbArquivo.Enabled         := Flag;
-      end;
-      1: begin
+      1: begin // Ishikawa
          mmoMeioAmbiente.Enabled:= Flag;
          mmoMaquina.Enabled     := Flag;
          mmoMetodo.Enabled      := Flag;
@@ -1337,6 +1495,14 @@ begin
          mmoMaoObra.Enabled     := Flag;
          mmoMateriaPrima.Enabled:= Flag;
          mmoProblema.Enabled    := Flag;
+      end;
+      3: begin // Ações
+         mmoDescricaoAcao.Enabled  := Flag;
+         dtPrazoAcao.Enabled       := Flag;
+         dblResponsavelAcao.Enabled:= Flag;
+         mmoVerificacaoAcao.Enabled:= Flag;
+         mmoArquivo.Enabled        := Flag;
+//         sbArquivo.Enabled         := Flag;
       end;
    end;
 end;
@@ -1458,32 +1624,18 @@ begin
             if FieldByName('pmc_fornecedor').AsString <> EmptyStr then begin
                dblForn.KeyValue:= FieldByName('pmc_fornecedor').AsString;
             end;
+
+            if FieldByName('pmc_produto').AsString <> EmptyStr then begin
+               dblProcesso.KeyValue:= FieldByName('pmc_produto').AsString;
+            end;
+
+            if FieldByName('pmc_motivo').AsString <> EmptyStr then begin
+               dblMotivo.KeyValue:= FieldByName('pmc_motivo').AsString;
+            end;
          end;
 
          ControlarBotaoVisualiza(Self);
          VerificarFasePMC();
-      end;
-      2: begin
-         with cdsPMC_Acoes do begin
-            mmoDescricaoAcao.Text      := FieldByName('desc_aco').AsString;
-            dtPrazoAcao.Text           := FieldByName('aco_prazo').AsString;
-            dblResponsavelAcao.KeyValue:= FieldByName('resp_aco').AsString;
-            mmoVerificacaoAcao.Text    := FieldByName('vimp_aco').AsString;
-//            mmoArquivo.Text            := FieldByName('arqu_aco').AsString;
-         end;
-
-         if cdsPMC_Acoes.RecordCount > 0 then begin
-            with cdsAcoes_Evidencias do begin
-               mmoArquivo.Text:= FieldByName('evi_arquivo').AsString;
-            end;
-         end;
-
-         if AllTrim(mmoArquivo.Text) <> EmptyStr then begin
-            sbVisualizar1.Enabled:= True;
-         end
-         else begin
-            sbVisualizar1.Enabled:= False;
-         end;
       end;
       1: begin
          with cdsIshikawa do begin
@@ -1497,20 +1649,41 @@ begin
             mmoProblema.Text    := FieldByName('ish_problema').AsString;
          end;
       end;
+      2: begin
+         mmoBrainstorm.Text:= cdsPMC.FieldByName('pmc_brainstorm').AsString;
+      end;
+      3: begin
+         with cdsPMC_Acoes do begin
+            mmoDescricaoAcao.Text      := FieldByName('desc_aco').AsString;
+            dtPrazoAcao.Text           := FieldByName('aco_prazo').AsString;
+            dblResponsavelAcao.KeyValue:= FieldByName('resp_aco').AsString;
+            mmoVerificacaoAcao.Text    := FieldByName('vimp_aco').AsString;
+//            mmoArquivo.Text            := FieldByName('arqu_aco').AsString;
+         end;
+
+         if cdsPMC_Acoes.RecordCount > 0 then begin
+            with cdsAcoes_Evidencias do begin
+//               AtualizarEvidencias();
+               mmoArquivo.Text:= FieldByName('evi_arquivo').AsString;
+            end;
+         end;
+
+         if AllTrim(mmoArquivo.Text) <> EmptyStr then begin
+            sbVisualizar1.Enabled:= True;
+         end
+         else begin
+            sbVisualizar1.Enabled:= False;
+         end;
+      end;
    end;
 end;
 
 procedure TFormCadPMCFecha.PrepararEmail;
+var
+   sNomeGestor: string;
 begin
    if VerificarConexaoInternet(True) then begin
       pnlEmail.Tag:= 1;
-
-      sTextoEmail:= 'O PMC identificado abaixo foi alterado. <br><br>' +
-               '<b>PMC:</b> ' + edtIdentificacao.Text + '<br>' +
-               '<b>Data PMC:</b> ' + dtData.Text + '<br>' +
-               '<b>Não Conformidade:</b> ' + mmoNaoConformidade.Text +
-               '<br><br>'+
-               'Acesse o sistema Destra Manager para maiores detalhes.';
 
       if AllTrim(cdsEmitidocol_email.AsString) = EmptyStr then begin
          if Application.MessageBox(PChar('O colaborador ' + dblEmitido.Text + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
@@ -1521,6 +1694,26 @@ begin
          end;
       end
       else begin
+         // Chamado TT657 - BBosch
+         if BuscarParametroEnvioGestor() = '1' then begin
+            if BuscarEmail(BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod')) = '' then begin
+               sNomeGestor:= BuscarGestorProcesso(dblProcesso.KeyValue);
+
+               if Application.MessageBox(PChar('O Gestor ' + sNomeGestor + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
+                  FormCadEmail:= TFormCadEmail.Create(nil);
+                  FormCadEmail.lblNomeCol.Caption:= sNomeGestor;
+                  FormCadEmail.sCodColab:= BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod');
+                  FormCadEmail.ShowModal;
+                  FormCadEmail.Release;
+
+                  Exit;
+               end;
+            end
+            else begin
+               EnviarEmail(sTextoEmail, 'PMC Alterado', BuscarEmail(BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod')), 'sistema');
+            end;
+         end;
+
          EnviarEmail(sTextoEmail, 'PMC Alterado', cdsEmitidocol_email.AsString, 'sistema');
       end;
    end;
@@ -1740,8 +1933,8 @@ end;
 
 procedure TFormCadPMCFecha.sbVisualizarNCClick(Sender: TObject);
 begin
-   pnlNaoConformidade.Left:= 7;
-   pnlNaoConformidade.Top := 170;
+   pnlNaoConformidade.Left:= mmoNaoConformidade.Left;
+   pnlNaoConformidade.Top := mmoNaoConformidade.Top;
    pnlNaoConformidade.Visible := True;
 end;
 
@@ -1768,7 +1961,7 @@ begin
 
          Result:= True;
       end;
-      2: begin
+      3: begin
          if AllTrim(mmoDescricaoAcao.Text) = EmptyStr then begin
             Application.MessageBox('Campo Descrição da Ação é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
             TryFocus(mmoDescricaoAcao);
@@ -1875,9 +2068,11 @@ begin
             Exit;
          end;
 
-         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_PMC.fr3');
-         frxReport1.Variables['fase']:= QuotedStr(dblFase.Text);
-         Auditoria('PMC',dm.cdsPMCnume_pmc.AsString,'R', '');
+         Imprimir('rel_PMC', frxReport1, tipoImp, 'fase', QuotedStr(dblFase.Text));
+
+//         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_PMC.fr3');
+//         frxReport1.Variables['fase']:= QuotedStr(dblFase.Text);
+//         Auditoria('PMC',dm.cdsPMCnume_pmc.AsString,'R', '');
       end;
       1: begin// Ishikawa
          with cdsIshikawaImp do begin
@@ -1896,20 +2091,10 @@ begin
             Exit;
          end;
 
-         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_Ishikawa.fr3');
-         Auditoria('Ishikawa',sCodigoPMC,'R', '');
-      end;
-   end;
+         Imprimir('rel_Ishikawa', frxReport1, tipoImp);
 
-   with frxReport1 do begin
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
+//         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_Ishikawa.fr3');
+//         Auditoria('Ishikawa',sCodigoPMC,'R', '');
       end;
    end;
 end;
@@ -1925,14 +2110,7 @@ end;
 procedure TFormCadPMCFecha.LimparCampos;
 begin
    case pctFechaPMC.TabIndex of
-      2: begin
-         mmoDescricaoAcao.Clear;
-         dtPrazoAcao.Clear;
-         dblResponsavelAcao.KeyValue:= -1;
-         mmoVerificacaoAcao.Clear;
-//         edtArquivo.Clear;
-      end;
-      1: begin
+      1: begin // Cadastro
          mmoMeioAmbiente.Clear;
          mmoMaquina.Clear;
          mmoMetodo.Clear;
@@ -1940,6 +2118,13 @@ begin
          mmoMaoObra.Clear;
          mmoMateriaPrima.Clear;
          mmoProblema.Clear;
+      end;
+      3: begin // Ações
+         mmoDescricaoAcao.Clear;
+         dtPrazoAcao.Clear;
+         dblResponsavelAcao.KeyValue:= -1;
+         mmoVerificacaoAcao.Clear;
+//         edtArquivo.Clear;
       end;
    end;
 end;

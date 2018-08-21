@@ -124,8 +124,6 @@ type
     cdsFornforn_certificado: TWideStringField;
     cdsFornforn_tipoprod: TIntegerField;
     cdsImprimirforn_nome: TWideStringField;
-    cdsImprimirforn_avaliacao: TFloatField;
-    cdsImprimirforn_validade: TDateTimeField;
     cdsImprimirforn_tipoprod: TIntegerField;
     lbl14: TLabel;
     dblSituacao: TDBLookupComboBox;
@@ -168,15 +166,40 @@ type
     WideStringField1: TWideStringField;
     dsTipoProdImp: TDataSource;
     cdsDocsdoc_caminho: TWideMemoField;
+    tsAvaliacao: TTabSheet;
+    dbgAvaliacao: TDBGrid;
+    lbl28: TLabel;
+    edtPontuacao: TCurrencyEdit;
+    lbl29: TLabel;
+    dtValidadeQualif: TDateEdit;
+    lbl30: TLabel;
+    dtValidadeDoc: TDateEdit;
+    cdsDocsdoc_data_validade: TDateTimeField;
+    zqryQualificacao: TZQuery;
+    dspQualificacao: TDataSetProvider;
+    cdsQualificacao: TClientDataSet;
+    dsQualificacao: TDataSource;
+    lbl32: TLabel;
+    lbl33: TLabel;
+    lbl34: TLabel;
+    edtCodigoPont: TEdit;
+    edtRazaoPont: TEdit;
+    edtFantasiaPont: TEdit;
+    btnInserirQualif: TBitBtn;
+    btnExcluirQualif: TBitBtn;
+    cdsQualificacaofor_codigo: TIntegerField;
+    cdsQualificacaofor_codfor: TIntegerField;
+    cdsQualificacaofor_data_validade: TDateTimeField;
+    cdsQualificacaofor_avaliacao: TFloatField;
+    cdsImprimiravaliacao: TFloatField;
+    cdsImprimirvalidade: TDateTimeField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
     procedure Botoes(flag: Boolean);
-//    procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
-    procedure BuscarNovoCodigo;
     procedure btnSairImpClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnGravarClick(Sender: TObject);
@@ -209,6 +232,9 @@ type
     function BuscarNovoCodigoDoc(): string;
     procedure dbgDocumentosCellClick(Column: TColumn);
     procedure sbVisualizarDocClick(Sender: TObject);
+    procedure btnInserirQualifClick(Sender: TObject);
+    procedure btnExcluirQualifClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
     cOperacao: Char;
@@ -269,13 +295,28 @@ begin
    edtRazaoDoc.Text   := edtRazao.Text;
    edtFantasiaDoc.Text:= edtNomeFantasia.Text;
 
+   edtCodigoPont.Text  := edtCodigo.Text;
+   edtRazaoPont.Text   := edtRazao.Text;
+   edtFantasiaPont.Text:= edtNomeFantasia.Text;
+
    if edtCodigo.Text <> '' then begin
       with cdsDocs do begin
          Active:= False;
-         CommandText:= ' SELECT for_codigo, doc_codigo, doc_descricao, doc_caminho' +
+         CommandText:= ' SELECT for_codigo, doc_codigo, doc_descricao, ' +
+                       ' doc_caminho, doc_data_validade' +
                        ' FROM forn_documentos' +
                        ' WHERE for_codigo = ' + QuotedStr(edtCodigo.Text) +
                        ' ORDER BY doc_descricao';
+         Active:= True;
+      end;
+
+      with cdsQualificacao do begin
+         Active:= False;
+         CommandText:= ' SELECT for_codigo, for_codfor, for_data_validade, ' +
+                       ' for_avaliacao' +
+                       ' FROM forn_avaliacao' +
+                       ' WHERE for_codfor = ' + QuotedStr(edtCodigo.Text) +
+                       ' ORDER BY for_data_validade DESC';
          Active:= True;
       end;
    end;
@@ -288,20 +329,30 @@ begin
    btnExcluir.Enabled := Flag;
    btnGravar.Enabled  := not Flag;
    btnCancelar.Enabled:= not Flag;
-   btnImprimir.Enabled:= Flag;
 
    case pctForn.TabIndex of
       0: begin // Cadastro
+         btnImprimir.Enabled:= Flag;
+
          if cdsForn.RecordCount = 0 then begin
-            btnAlterar.Enabled:= False;
-            btnExcluir.Enabled:= False;
+            btnAlterar.Enabled := False;
+            btnExcluir.Enabled := False;
          end;
       end;
       1: begin // Documentos
+         btnImprimir.Enabled:= False;
+
          if cdsDocs.RecordCount = 0 then begin
-            btnAlterar.Enabled:= False;
-            btnExcluir.Enabled:= False;
+            btnAlterar.Enabled := False;
+            btnExcluir.Enabled := False;
          end;
+      end;
+      2: begin
+         btnNovo.Enabled    := False;
+         btnAlterar.Enabled := False;
+         btnExcluir.Enabled := False;
+         btnGravar.Enabled  := False;
+         btnCancelar.Enabled:= False;
       end;
    end;
 end;
@@ -329,7 +380,6 @@ begin
    LimparCampos;
    PreencherCampos;
    Botoes(True);
-//   HabilitarCampos(False, False);
    HabilitarCampos(False, False, Self, 1);
 end;
 
@@ -380,6 +430,24 @@ begin
          PreencherCampos;
       end;
       Botoes(True);
+   end;
+end;
+
+procedure TFormCadFornecedores.btnExcluirQualifClick(Sender: TObject);
+begin
+   if Application.MessageBox('Confirma a exclusão do registro ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+      with cdsGravar do begin
+         Active:= False;
+         CommandText:= ' DELETE FROM forn_avaliacao' +
+                       ' WHERE for_codigo = ' + cdsQualificacao.FieldByName('for_codigo').AsString;
+         Execute;
+      end;
+
+      Auditoria('FORNECEDORES - QUALIFICAÇÃO', 'Forn.: ' + edtCodigoPont.Text + '-' +
+                   'Valid.' + dtValidadeQualif.Text + '-' +
+                   'Pont. ' + edtPontuacao.Text, 'E', '');
+
+      AtualizarDadosAcessorios();
    end;
 end;
 
@@ -449,24 +517,27 @@ begin
                   end;
                end;
             end;
-            1: begin
+            1: begin // Documentos
                with cdsGravar do begin
                   Active:= False;
                   if cOperacao = 'I' then begin
                      CommandText:= ' INSERT INTO forn_documentos' +
-                                   ' (for_codigo, doc_codigo, doc_descricao, doc_caminho)' +
+                                   ' (for_codigo, doc_codigo, doc_descricao, ' +
+                                   ' doc_caminho, doc_data_validade)' +
                                    ' VALUES (' +
                                    edtCodigo.Text + ',' +
                                    BuscarNovoCodigoDoc() + ',' +
                                    QuotedStr(edtDocumento.Text) + ',' +
-                                   QuotedStr(edtCaminhoDoc.Text) +
+                                   QuotedStr(edtCaminhoDoc.Text) + ',' +
+                                   ArrumaDataSQL(dtValidadeDoc.Date) +
                                    ')';
                      Execute;
                   end
                   else begin
                      CommandText:= ' UPDATE forn_documentos SET' +
                                    ' doc_descricao = ' + QuotedStr(edtDocumento.Text) + ',' +
-                                   ' doc_caminho = ' + QuotedStr(edtCaminhoDoc.Text) +
+                                   ' doc_caminho = ' + QuotedStr(edtCaminhoDoc.Text) + ',' +
+                                   ' doc_data_validade = ' + ArrumaDataSQL(dtValidadeDoc.Date) +
                                    ' WHERE for_codigo = ' + edtCodigo.Text +
                                    ' AND doc_codigo = ' + cdsDocs.FieldByName('doc_codigo').AsString;
                      Execute;
@@ -510,6 +581,43 @@ begin
    pnlImprimir.Visible := True;
 end;
 
+procedure TFormCadFornecedores.btnInserirQualifClick(Sender: TObject);
+begin
+   if (edtPontuacao.Value <= 0) then begin
+      Application.MessageBox('Digite uma nota de qualificação', 'Aviso', MB_OK + MB_ICONWARNING);
+      Exit;
+   end;
+
+   if dtValidadeQualif.Text = '  /  /    ' then begin
+      Application.MessageBox('Campo Data de Validade é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dtValidadeQualif);
+      Exit;
+   end;
+
+   with cdsQualificacao do begin
+      try
+         Active:= False;
+         CommandText:= ' INSERT INTO forn_avaliacao (for_codigo, for_codfor, for_data_validade, for_avaliacao)' +
+                       ' VALUES(' +
+                       BuscarNovoCodigo('forn_avaliacao', 'for_codigo') + ',' +
+                       edtCodigoPont.Text + ',' +
+                       ArrumaDataSQL(dtValidadeQualif.Date) + ',' +
+                       VirgulaParaPonto(edtPontuacao.Value, 2) +
+                       ')';
+         Execute;
+         Auditoria('FORNECEDORES - QUALIFICAÇÃO', 'Forn.: ' + edtCodigoPont.Text + '-' +
+                   'Valid.' + dtValidadeQualif.Text + '-' +
+                   'Pont. ' + edtPontuacao.Text, 'I', '');
+      except
+         on E: Exception do begin
+            Application.MessageBox(PChar('Erro ao gravar o registro!' + #13 + E.Message), 'Aviso', MB_OK + MB_ICONWARNING);
+         end;
+      end;
+   end;
+
+   AtualizarDadosAcessorios();
+end;
+
 procedure TFormCadFornecedores.btnNovoClick(Sender: TObject);
 begin
    if (Acesso(cUsuario, 25, 'cadastro') = 1) then begin
@@ -522,7 +630,7 @@ begin
 
    case pctForn.TabIndex of
       0: begin // Cadastro
-         BuscarNovoCodigo();
+         sNovoCodigo:= BuscarNovoCodigo('fornecedores', 'forn_codigo');
          HabilitarCampos(True, False, Self, 1);
          edtCodigo.Text:= sNovoCodigo;
          dblSituacao.KeyValue:= 1;
@@ -541,6 +649,7 @@ begin
    PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
+   Botoes(True);
 end;
 
 procedure TFormCadFornecedores.btnAnteriorClick(Sender: TObject);
@@ -549,6 +658,7 @@ begin
    PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
+   Botoes(True);
 end;
 
 procedure TFormCadFornecedores.btnProximoClick(Sender: TObject);
@@ -557,6 +667,7 @@ begin
    PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
+   Botoes(True);
 end;
 
 procedure TFormCadFornecedores.btnUltimoClick(Sender: TObject);
@@ -565,6 +676,7 @@ begin
    PreencherCampos();
    AtualizarDadosAcessorios();
    PreencherCampos();
+   Botoes(True);
 end;
 
 procedure TFormCadFornecedores.btnSairClick(Sender: TObject);
@@ -580,24 +692,6 @@ end;
 procedure TFormCadFornecedores.btnVideoClick(Sender: TObject);
 begin
    Impressao('V');
-end;
-
-procedure TFormCadFornecedores.BuscarNovoCodigo;
-begin
-   with dm.cdsAuxiliar do begin
-      Active:= False;
-      CommandText:= ' SELECT MAX(forn_codigo) AS NovoCodigo FROM fornecedores' +
-                    ' WHERE forn_codigo < 999999';
-      Active:= True;
-
-      if FieldByName('NovoCodigo').AsString = EmptyStr then begin
-         sNovoCodigo:= '1';
-      end
-      else begin
-         sNovoCodigo:= IntToStr(StrToInt(FieldByName('NovoCodigo').AsString) + 1);
-//         sNovoCodigo:= ZerosEsquerda(IntToStr(StrToInt(sNovoCodigo) + 1),8);
-      end;
-   end;
 end;
 
 function TFormCadFornecedores.BuscarNovoCodigoDoc: string;
@@ -629,31 +723,33 @@ end;
 
 procedure TFormCadFornecedores.ControlarAbas;
 begin
-   if pctForn.TabIndex <= 1 then begin  // Cadastro
-      if edtCodigo.Text <> '' then begin
-         AtualizarDadosAcessorios();
-         Botoes(True);
-         PreencherCampos();
+   case pctForn.TabIndex of
+      0..1: begin
+         if edtCodigo.Text <> '' then begin
+            AtualizarDadosAcessorios();
+            Botoes(True);
+            PreencherCampos();
+         end;
+         if pctForn.TabIndex = 1 then begin
+            btnImprimir.Enabled:= False;
+         end;
       end;
-      if pctForn.TabIndex = 1 then begin
+      else begin
+         btnNovo.Enabled    := False;
+         btnGravar.Enabled  := False;
+         btnExcluir.Enabled := False;
+         btnCancelar.Enabled:= False;
          btnImprimir.Enabled:= False;
-      end;
-   end
-   else begin // Pesquisa
-      btnNovo.Enabled    := False;
-      btnGravar.Enabled  := False;
-      btnExcluir.Enabled := False;
-      btnCancelar.Enabled:= False;
-      btnImprimir.Enabled:= False;
-      btnAlterar.Enabled := False;
+         btnAlterar.Enabled := False;
 
-      if pctForn.TabIndex = 2 then begin
-         edtValor.Clear;
-         edtValor.Enabled:= True;
-         TryFocus(edtValor);
-      end;
+         if pctForn.TabIndex = 3 then begin
+            edtValor.Clear;
+            edtValor.Enabled:= True;
+            TryFocus(edtValor);
+         end;
 
-      AtualizarDadosAcessorios();
+         AtualizarDadosAcessorios();
+      end;
    end;
 end;
 
@@ -689,11 +785,27 @@ begin
    end;
 end;
 
+procedure TFormCadFornecedores.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+   if cdsQualificacao.RecordCount = 0 then begin
+      Application.MessageBox('É obrigatório o preenchimento de uma nota de avaliação', 'Aviso', MB_OK + MB_ICONWARNING + MB_DEFBUTTON2);
+      pctForn.TabIndex:= 2;
+      TryFocus(edtPontuacao);
+      CanClose:= False;
+   end
+   else begin
+      CanClose:= True;
+   end;
+
+end;
+
 procedure TFormCadFornecedores.FormShow(Sender: TObject);
 begin
    pctForn.TabIndex:= 0;
    AtualizarDados();
    PreencherCampos;
+   AtualizarDadosAcessorios();
    Botoes(True);
 //   HabilitarCampos(False, False);
    HabilitarCampos(False, False, Self, 1);
@@ -706,42 +818,9 @@ begin
    chkSeparaProduto.Checked:= False;
    chkSeparaProduto.Enabled:= True;
    dblTipoProdImp.Enabled:= False;
-end;
 
-//procedure TFormCadFornecedores.HabilitarCampos(Flag, Codigo: Boolean);
-//begin
-//   edtCodigo.Enabled      := Flag;
-//   edtRazao.Enabled       := Flag;
-//   edtNomeFantasia.Enabled:= Flag;
-//   edtEndereco.Enabled    := Flag;
-//   edtNumero.Enabled      := Flag;
-//   edtBairro.Enabled      := Flag;
-//   edtCidade.Enabled      := Flag;
-//   edtEstado.Enabled      := Flag;
-//   medtCEP.Enabled        := Flag;
-//   edtFone.Enabled        := Flag;
-//   edtCNPJ.Enabled        := Flag;
-//   edtInscEst.Enabled     := Flag;
-//   edtContato.Enabled     := Flag;
-//   edtEmail.Enabled       := Flag;
-//   edtNota.Enabled        := Flag;
-//   dtValidade.Enabled     := Flag;
-//   edtCaminho.Enabled     := False;
-//   mmoArea.Enabled        := Flag;
-//   mmoObs.Enabled         := Flag;
-//   dblTipoProd.Enabled    := Flag;
-//
-//   sbArquivo.Enabled   := Flag;
-//
-//   if AllTrim(edtCaminho.Text) <> EmptyStr then begin
-//      sbVisualizar.Enabled:= True;
-//   end
-//   else begin
-//      sbVisualizar.Enabled:= False;
-//   end;
-//
-//   pctForn.Pages[1].TabVisible:= not Flag;
-//end;
+//   pctForn.Pages[3].TabVisible:= False;
+end;
 
 procedure TFormCadFornecedores.LimparCampos;
 begin
@@ -770,7 +849,8 @@ begin
       end;
       1: begin // Documentos
          edtDocumento.Clear;
-         edtCaminhoDoc.Clear
+         edtCaminhoDoc.Clear;
+         dtValidadeDoc.Clear;
       end;
    end;
 end;
@@ -782,7 +862,7 @@ end;
 
 procedure TFormCadFornecedores.pctFornChange(Sender: TObject);
 begin
-   ControlarAbas;
+   ControlarAbas();
 end;
 
 procedure TFormCadFornecedores.PreencherCampos;
@@ -824,6 +904,7 @@ begin
 //      1: begin
          edtDocumento.Text := cdsDocs.FieldByName('doc_descricao').AsString;
          edtCaminhoDoc.Text:= cdsDocs.FieldByName('doc_caminho').AsString;
+         dtValidadeDoc.Date:= cdsDocs.FieldByName('doc_data_validade').AsDateTime;
 //      end;
 //   end;
 
@@ -875,19 +956,19 @@ begin
             Exit;
          end;
 
-         if AllTrim(edtNota.Text) = EmptyStr then begin
-            Application.MessageBox('Campo Nota é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-            TryFocus(edtNota);
-            Result:= False;
-            Exit;
-         end;
-
-         if dtValidade.Text = '  /  /    ' then begin
-            Application.MessageBox('Campo Data de Validade é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-            TryFocus(dtValidade);
-            Result:= False;
-            Exit;
-         end;
+//         if AllTrim(edtNota.Text) = EmptyStr then begin
+//            Application.MessageBox('Campo Nota é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+//            TryFocus(edtNota);
+//            Result:= False;
+//            Exit;
+//         end;
+//
+//         if dtValidade.Text = '  /  /    ' then begin
+//            Application.MessageBox('Campo Data de Validade é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+//            TryFocus(dtValidade);
+//            Result:= False;
+//            Exit;
+//         end;
 
          if dblTipoProd.KeyValue <= 0 then begin
             sTipoProd:= '0';
@@ -946,7 +1027,6 @@ begin
       sFiltro:= sFiltro + ' - TIPO DE PRODUTO: ' + dblTipoProdImp.Text;
    end;
 
-
    case rgOrdemImpressao.ItemIndex of
       0: begin
          if chkSeparaProduto.Checked = True then begin
@@ -976,14 +1056,19 @@ begin
 
    with cdsImprimir do begin
       Active:= False;
-      CommandText:= ' SELECT forn_codigo, forn_nome, forn_avaliacao, forn_validade, forn_tipoProd' +
+      CommandText:= ' SELECT forn_codigo, forn_nome, forn_tipoProd,' +
+                    ' (SELECT MAX(for_data_validade) FROM forn_avaliacao ' +
+                    ' WHERE for_codfor = forn_codigo) AS validade,' +
+                    ' (SELECT for_avaliacao FROM forn_avaliacao' +
+                    '  WHERE for_codfor = forn_codigo' +
+                    '  ORDER BY for_data_validade DESC LIMIT 1) AS avaliacao' +
                     ' FROM fornecedores' +
-                    ' WHERE 1 = 1';
+                    ' WHERE forn_codigo < 999999';
       if chkTodos.Checked = False then begin
          CommandText:= CommandText + ' AND forn_tipoProd = ' + IntToStr(dblTipoProdImp.KeyValue);
       end;
       CommandText:= CommandText + sStatus;
-      CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
+      CommandText:= CommandText + 'ORDER BY ' + sCampoOrdem;
       Active:= True;
    end;
 
@@ -994,22 +1079,10 @@ begin
 
    with frxReport1 do begin
       if chkSeparaProduto.Checked = True then begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_Fornecedores_Separa.fr3');
+         Imprimir('rel_Fornecedores_Separa', frxReport1, tipoImp, 'Filtro', sFiltro);
       end
       else begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_Fornecedores.fr3');
-      end;
-
-      Variables['Filtro']:= QuotedStr(sFiltro);
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-//            PrintOptions.Printer:= 'CutePDF Writer';
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
+         Imprimir('rel_Fornecedores', frxReport1, tipoImp, 'Filtro', sFiltro);
       end;
    end;
 end;

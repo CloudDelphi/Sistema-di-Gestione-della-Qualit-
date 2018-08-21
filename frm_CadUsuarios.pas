@@ -135,7 +135,6 @@ type
     cdsImprimirexclusao: TSmallintField;
     cdsImprimirfunc_ace: TLargeintField;
     cdsImprimirusua_ace: TWideStringField;
-    cdsImprimirDescFuncao: TStringField;
     cdsAcessosdescfunc: TWideStringField;
     btnInserirTodos: TBitBtn;
     chkPDCA: TCheckBox;
@@ -211,6 +210,14 @@ type
     cdsUsuariosrnc: TWideStringField;
     cdsUsuariosusu_pend_pmc_causa: TIntegerField;
     cdsUsuariosusu_pend_pmc_acaoimediata: TIntegerField;
+    chkPend_rnc_naopreenchido: TCheckBox;
+    chkPend_rnc_aceiterecusa: TCheckBox;
+    cdsUsuariosusu_pend_rnc_naopreenchido: TIntegerField;
+    cdsUsuariosusu_pend_rnc_aceite: TIntegerField;
+    cdsImprimirdescfuncao: TWideStringField;
+    edtConfSenha: TEdit;
+    lbl6: TLabel;
+    chkVisualizaSenha: TCheckBox;
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -235,7 +242,6 @@ type
     procedure btnAnteriorClick(Sender: TObject);
     procedure btnProximoClick(Sender: TObject);
     procedure btnUltimoClick(Sender: TObject);
-    procedure edtSenhaExit(Sender: TObject);
     procedure edtValorChange(Sender: TObject);
     procedure pctUsuariosChange(Sender: TObject);
     procedure AtualizarDadosAcessorios();
@@ -262,6 +268,9 @@ type
     procedure btnAlterarPendClick(Sender: TObject);
     procedure btnGravarPendClick(Sender: TObject);
     procedure btnCancelarPendClick(Sender: TObject);
+    procedure edtConfSenhaExit(Sender: TObject);
+    procedure edtSenhaExit(Sender: TObject);
+    procedure chkVisualizaSenhaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -307,7 +316,8 @@ begin
                     ' usu_pend_coleducacao, usu_pend_treinprevisao, usu_pend_treineficacia, ' +
                     ' usu_pend_avaliacao, usu_pend_procedimentos, usu_pend_forn, ' +
                     ' usu_pend_pmcacoes, usu_pend_pmc, usu_pend_calibracao, usu_pend_indicadores,' +
-                    ' usu_desabilita_cliente_forn, usu_pend_pmc_causa, usu_pend_pmc_acaoimediata' +
+                    ' usu_desabilita_cliente_forn, usu_pend_pmc_causa, usu_pend_pmc_acaoimediata,' +
+                    ' usu_pend_rnc_naopreenchido, usu_pend_rnc_aceite' +
                     ' FROM usuarios' +
                     ' WHERE nome_usu <> ' + QuotedStr('-- N/A --') +
                     ' ORDER BY nome_usu';
@@ -446,7 +456,6 @@ begin
          end;
          Next;
       end;
-
    end;
   
    AtualizarDadosAcessorios();
@@ -466,7 +475,7 @@ begin
    if (Acesso(cUsuario, 16, 'alteracao') = 1) then begin
       cOperacao:= 'A';
       HabilitarCampos(True, False);
-      TryFocus(edtUsuario);
+      TryFocus(edtSenha);
       Botoes(False);
    end;
 end;
@@ -576,6 +585,12 @@ end;
 
 procedure TFormCadUsuarios.btnGravarClick(Sender: TObject);
 begin
+//   if edtSenha.Text <> edtConfSenha.Text then begin
+//      Application.MessageBox('As senhas não conferem.  ', 'Aviso', MB_OK + MB_ICONWARNING);
+//      TryFocus(edtSenha);
+//      Exit;
+//   end;
+
    try
       with cdsGravar do begin
          Active:= False;
@@ -665,7 +680,9 @@ begin
                     ' usu_pend_calibracao = ' + LogicoParaString(chkPend_calibracao.Checked) + ',' +
                     ' usu_pend_indicadores = ' + LogicoParaString(chkPend_indicadores.Checked) + ',' +
                     ' usu_pend_pmc_causa = ' + LogicoParaString(chkPend_pmc_causa.Checked) + ',' +
-                    ' usu_pend_pmc_acaoimediata = ' + LogicoParaString(chkPend_pmc_acaoimediata.Checked) +
+                    ' usu_pend_pmc_acaoimediata = ' + LogicoParaString(chkPend_pmc_acaoimediata.Checked) + ',' +
+                    ' usu_pend_rnc_naopreenchido = ' + LogicoParaString(chkPend_rnc_naopreenchido.Checked) + ',' +
+                    ' usu_pend_rnc_aceite = ' + LogicoParaString(chkPend_rnc_aceiterecusa.Checked) +
                     ' WHERE nome_usu = ' + QuotedStr(edtUsuario.Text);
       Execute;
    end;
@@ -789,6 +806,17 @@ end;
 procedure TFormCadUsuarios.cdsAcessosAfterPost(DataSet: TDataSet);
 begin
    cdsAcessos.ApplyUpdates(0);
+end;
+
+procedure TFormCadUsuarios.chkVisualizaSenhaClick(Sender: TObject);
+begin
+   if chkVisualizaSenha.Checked = True then begin
+      edtSenha.PasswordChar:= #0;
+   end
+   else begin
+      edtSenha.PasswordChar:= '*';
+   end;
+
 end;
 
 procedure TFormCadUsuarios.ControlarAbas;
@@ -945,9 +973,19 @@ begin
    ControlarAbas;
 end;
 
+procedure TFormCadUsuarios.edtConfSenhaExit(Sender: TObject);
+begin
+   if edtSenha.Text <> edtConfSenha.Text then begin
+      Application.MessageBox('As senhas não conferem.  ', 'Aviso', MB_OK + MB_ICONWARNING + MB_DEFBUTTON2);
+      TryFocus(edtSenha);
+   end;
+end;
+
 procedure TFormCadUsuarios.edtSenhaExit(Sender: TObject);
 begin
-   TryFocus(btnGravar);
+   if VerificarSenhaForte(edtSenha.Text) = False then begin
+      TryFocus(edtSenha);
+   end;
 end;
 
 procedure TFormCadUsuarios.edtValorChange(Sender: TObject);
@@ -1089,6 +1127,8 @@ begin
        chkPend_indicadores.Checked        := StringParaLogico(FieldByName('usu_pend_indicadores').AsString);
        chkPend_pmc_acaoimediata.Checked   := StringParaLogico(FieldByName('usu_pend_pmc_acaoimediata').AsString);
        chkPend_pmc_causa.Checked          := StringParaLogico(FieldByName('usu_pend_pmc_causa').AsString);
+       chkPend_rnc_naopreenchido.Checked  := StringParaLogico(FieldByName('usu_pend_rnc_naopreenchido').AsString);
+       chkPend_rnc_aceiterecusa.Checked   := StringParaLogico(FieldByName('usu_pend_rnc_aceite').AsString);
    end;
 end;
 
@@ -1110,8 +1150,10 @@ begin
 
    with cdsImprimir do begin
       Active:= False;
-      CommandText:= ' SELECT alteracao, cadastro, acesso, exclusao, func_ace, usua_ace' +
-                    ' FROM acessos' +
+      CommandText:= ' SELECT alteracao, cadastro, acesso, exclusao, func_ace, usua_ace,' +
+                    ' TC.valo_com as DescFuncao' +
+                    ' FROM acessos A' +
+                    ' INNER JOIN tabela_combos TC ON TC.tipo_com = 99 AND TC.codi_com = A.func_ace' +
                     ' ORDER BY ' + sCampoOrdem;
       Active:= True;
    end;
@@ -1121,19 +1163,7 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_acessosUsuarios.fr3');
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-//            PrintOptions.Printer:= 'CutePDF Writer';
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_acessosUsuarios', frxReport1, tipoImp);
 end;
 
 end.

@@ -390,6 +390,12 @@ type
     ImportaodeDadosTOTVS1: TMenuItem;
     cpnlRNCAceiteRecusa: TCategoryPanel;
     dbg2: TDBGrid;
+    N18: TMenuItem;
+    LanarTreinamentos1: TMenuItem;
+    N19: TMenuItem;
+    CadastrodeOrigemdePMC1: TMenuItem;
+    LanarVerificaodeEficciadeTreinamentos1: TMenuItem;
+    CadastrodeMotivosdePMC1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -521,8 +527,15 @@ type
     procedure dbgPMCAcoesDblClick(Sender: TObject);
     procedure ImportaodeDadosTOTVS1Click(Sender: TObject);
     procedure dbg2DblClick(Sender: TObject);
+    procedure LanarTreinamentos1Click(Sender: TObject);
+    procedure dbgPDCADblClick(Sender: TObject);
+    procedure CadastrodeOrigemdePMC1Click(Sender: TObject);
+    procedure LanarVerificaodeEficciadeTreinamentos1Click(Sender: TObject);
+    procedure CadastrodeMotivosdePMC1Click(Sender: TObject);
   private
     { Private declarations }
+    sNotaPendencia: string;
+    sPeriodoHab   : string;
   public
     { Public declarations }
     versao: string;
@@ -557,7 +570,7 @@ uses Funcoes, frm_Login, Validacao, frm_dm, frm_cartaAtualizacao,
   frm_CadRiscoAnaliseRisco, frm_CadModoRecuperacao, frm_DefCadClasse,
   frm_DefCadDefeitos, frm_DefCadOrigem, frm_DefLancamentos, frm_CadProdutos,
   frm_PDCA, frm_CadContexto, frm_CadPartesInteressadas, frm_CadContextoAnalise,
-  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto, frm_CadRNCFecha;
+  frm_CadParametros, frm_CadPMCVinculo, frm_AuditoriaInterna2015, frm_AuditoriaRelatorio2015, frm_dmPendencias, frm_CadDanos, frm_Perigos, frm_AlteraSenha, frm_CadRNCAbre, frm_CadMotivoRNC, frm_CadOrigemRNC, frm_CadRNCConsulta, frm_CadPlanMudanca, frm_EmailAuto, frm_CadPMCFecha, frm_PesqTreinamentos, frm_GraficoPMC, frm_CadPMCAcoesConsulta, frm_CadManutModelo, frm_CadManutencao, frmRelatorioGeral, frm_CadCronograma, frm_AuditoriaAuto, frm_CadRNCFecha, frm_LancarTreinamentos, frm_CadOrigemPMC, frm_LancarEficacia, frm_CadMotivoPMC;
 
 {$R *.dfm}
 
@@ -1077,6 +1090,13 @@ begin
 end;
 
 
+procedure TFormInicial.CadastrodeMotivosdePMC1Click(Sender: TObject);
+begin
+   if Acesso(cUsuario, 68, 'acesso') = 1 then begin
+      AbrirForm(TFormCadMotivoPMC, FormCadMotivoPMC);
+   end;
+end;
+
 procedure TFormInicial.CadastrodeMotivosdeRNC1Click(Sender: TObject);
 begin
    if Acesso(cUsuario, 54, 'acesso') = 1 then begin
@@ -1160,6 +1180,13 @@ begin
    FormCadDefDefeitos:= TFormCadDefDefeitos.Create(nil);
    FormCadDefDefeitos.ShowModal;
    FormCadDefDefeitos.Release;
+end;
+
+procedure TFormInicial.CadastrodeOrigemdePMC1Click(Sender: TObject);
+begin
+   if Acesso(cUsuario, 66, 'acesso') = 1 then begin
+      AbrirForm(TFormCadOrigemPMC, FormCadOrigemPMC);
+   end;
 end;
 
 procedure TFormInicial.CadastrodeOrigemdeRNC1Click(Sender: TObject);
@@ -1322,6 +1349,22 @@ begin
          FormCadRNCFecha.Release;
          FreeAndNil(FormCadRNCFecha);
       end;
+   end
+   else begin
+      Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
+   end;
+end;
+
+procedure TFormInicial.dbgPDCADblClick(Sender: TObject);
+begin
+   if dmPendencias.cdsPDCA.RecordCount > 0 then begin
+      FormPDCA:= TFormPDCA.Create(nil);
+      FormPDCA.sCodigoPDCA:= dmPendencias.cdsPDCA.FieldByName('pdca_codigo').AsString;
+      FormPDCA.iTela:= 1;
+      FormPDCA.ShowModal;
+      FormPDCA.Release;
+      FormPDCA.Free;
+      FormPDCA:= nil;
    end
    else begin
       Application.MessageBox('Não existem pendências para esse item', 'Aviso', MB_OK + MB_ICONWARNING);
@@ -1536,7 +1579,7 @@ begin
       end;;
    end;
 
-   versao     := '2.10';
+   versao     := '2.11';
    nomeSistema:= 'Destra Manager';
 end;
 
@@ -1553,6 +1596,16 @@ var
 //   Reg, cExpira: String;
 //   DataVenc: TDateTime;
 begin
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT notapendencia, periodohab' +
+                    ' FROM parametros';
+      Active:= True;
+
+      sNotaPendencia:= FieldByName('notapendencia').AsString;
+      sPeriodoHab   := FieldByName('periodohab').AsString;
+   end;
+
    if not VerificarProjetoCEA() then begin
       Exportao1.Visible:= False;
    end;
@@ -1573,6 +1626,11 @@ begin
 
    if not LoginOk then begin
       Self.Close;
+   end;
+
+   // Projeto TT437 - Zanini
+   if MudarSenha() then begin
+      AbrirForm(TFormAlteraSenha, FormAlteraSenha);
    end;
 
    aDadosEmpresa:= TStringList.Create;
@@ -1768,23 +1826,27 @@ begin
             rMediaGeral:= rMediaGeral / iQtd;
          end;
 
-         with frxReport1 do begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AvalHabTotal.fr3');
+         Imprimir('rel_AvalHabTotal', frxReport1, tipo,
+                  'varMedia', VirgulaParaPonto(rMediaGeral, 2, 'S'),
+                  'varPeriodo', spnAno.Text);
 
-            Variables['varMedia']:= rMediaGeral;
-            Variables['varPeriodo']:= spnAno.Text;
-
-            if tipo = 'I' then begin
-      //       Imprimir direto
-               PrepareReport;
-      //            PrintOptions.Printer:= 'CutePDF Writer';
-               PrintOptions.ShowDialog:= True;
-               Print;
-            end
-            else begin
-               ShowReport;
-            end;
-         end;
+//         with frxReport1 do begin
+//            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AvalHabTotal.fr3');
+//
+//            Variables['varMedia']:= rMediaGeral;
+//            Variables['varPeriodo']:= spnAno.Text;
+//
+//            if tipo = 'I' then begin
+//      //       Imprimir direto
+//               PrepareReport;
+//      //            PrintOptions.Printer:= 'CutePDF Writer';
+//               PrintOptions.ShowDialog:= True;
+//               Print;
+//            end
+//            else begin
+//               ShowReport;
+//            end;
+//         end;
       end;
       1: begin // Colaboradores
          with cdsAvalHab do begin
@@ -1903,24 +1965,29 @@ begin
             rMediaGeral:= rMediaGeral / iQtd;
          end;
 
-         with frxReport1 do begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AvalHabilidades.fr3');
+         Imprimir('rel_AvalHabilidades', frxReport1, tipo,
+                  'varMediaGeral', VirgulaParaPonto(rMediaGeral, 2, 'S'),
+                  'varNotaMaxHab', sNotaMaxHab,
+                  'varMediaNotas', VirgulaParaPonto(rMediaNotas, 2, 'S'));
 
-            Variables['varMediaGeral']:= rMediaGeral;
-            Variables['varNotaMaxHab']:= sNotaMaxHab;
-            Variables['varMediaNotas']:= rMediaNotas;
-
-            if tipo = 'I' then begin
-      //       Imprimir direto
-               PrepareReport;
-      //            PrintOptions.Printer:= 'CutePDF Writer';
-               PrintOptions.ShowDialog:= True;
-               Print;
-            end
-            else begin
-               ShowReport;
-            end;
-         end;
+//         with frxReport1 do begin
+//            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AvalHabilidades.fr3');
+//
+//            Variables['varMediaGeral']:= rMediaGeral;
+//            Variables['varNotaMaxHab']:= sNotaMaxHab;
+//            Variables['varMediaNotas']:= rMediaNotas;
+//
+//            if tipo = 'I' then begin
+//      //       Imprimir direto
+//               PrepareReport;
+//      //            PrintOptions.Printer:= 'CutePDF Writer';
+//               PrintOptions.ShowDialog:= True;
+//               Print;
+//            end
+//            else begin
+//               ShowReport;
+//            end;
+//         end;
       end;
    end;
 end;
@@ -1972,32 +2039,20 @@ begin
          Exit;
       end;
 
-      with frxReport1 do begin
-         if rgAgrupa.ItemIndex = 0 then begin
-            if rgFiltroTre.ItemIndex <= 1 then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_TreinamentosRealizadosCol.fr3');
-            end
-            else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_TreinamentosAbertosCol.fr3');
-            end;
+      if rgAgrupa.ItemIndex = 0 then begin
+         if rgFiltroTre.ItemIndex <= 1 then begin
+            Imprimir('rel_TreinamentosRealizadosCol', frxReport1, tipo);
          end
          else begin
-            if rgFiltroTre.ItemIndex <= 1 then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_TreinamentosRealizadosTre.fr3');
-            end
-            else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_TreinamentosAbertosTre.fr3');
-            end;
+            Imprimir('rel_TreinamentosAbertosCol', frxReport1, tipo);
          end;
-
-         if tipo = 'I' then begin
-   //       Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= True;
-            Print;
+      end
+      else begin
+         if rgFiltroTre.ItemIndex <= 1 then begin
+            Imprimir('rel_TreinamentosRealizadosTre', frxReport1, tipo);
          end
          else begin
-            ShowReport;
+            Imprimir('rel_TreinamentosAbertosTre', frxReport1, tipo);
          end;
       end;
    end;
@@ -2144,6 +2199,21 @@ begin
 //      end;
 end;
 
+procedure TFormInicial.LanarTreinamentos1Click(Sender: TObject);
+begin
+   if Acesso(cUsuario, 65, 'acesso') = 1 then begin
+      AbrirForm(TFormLancarTreinamentos, FormLancarTreinamentos);
+   end;
+end;
+
+procedure TFormInicial.LanarVerificaodeEficciadeTreinamentos1Click(
+  Sender: TObject);
+begin
+   if Acesso(cUsuario, 67, 'acesso') = 1 then begin
+      AbrirForm(TFormLancarEficacia, FormLancarEficacia);
+   end;
+end;
+
 procedure TFormInicial.ListadeHabilidadescomPendncia1Click(Sender: TObject);
 begin
    if Acesso(cUsuario, 45, 'acesso') = 1 then begin
@@ -2252,16 +2322,18 @@ begin
          Active:= False;
          CommandText:= ' WITH consulta AS (' +
                        ' SELECT C.codi_col, C.nome_col, F.desc_fun, ' +
-                       ' (select orde_com from tabela_combos' +
-                       ' where tipo_com = 7 and codi_com = expe_fun) >' +
-                       ' (select orde_com from tabela_combos' +
-                       ' where tipo_com = 7 and codi_com = expe_col) as Experiencia, ' +
-                       ' TC.orde_com <= TF.orde_com as Educacao,' +
+                       // Verifica se está marcado o flag de validação de educação e experiências
+                       ' TCE.orde_com >= TFE.orde_com OR C.col_validacao_educ_exp = 1 as Experiencia,' +
+                       // Verifica se está marcado o flag de validação de educação e experiência
+                       ' TC.orde_com <= TF.orde_com OR C.col_validacao_educ_exp = 1 as Educacao,' +
                        ' expe_fun, educ_fun, expe_col, educ_col,' +
-                       ' (SELECT Count(*) FROM colab_treinamentos CT INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
-                       '     WHERE CT.codi_col = C.codi_col' +
-                       '     and' +
-                       '     ((CT.dtpr_tre < now() or CT.dtpr_tre is null) and (CT.dtre_tre = ' + QuotedStr('30/12/1899') + ' or CT.dtre_tre is null))) as PendTreinam,' +
+                       ' (SELECT Count(*) FROM colab_treinamentos CT ' +
+                       ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
+                       ' WHERE CT.codi_col = C.codi_col' +
+                       ' and' +
+                       ' ((CT.dtpr_tre < now() or CT.dtpr_tre is null) and (CT.dtre_tre = ' +
+                         QuotedStr('30/12/1899') + ' or CT.dtre_tre is null))) as PendTreinam,' +
+
                        ' (SELECT Count(*) ' +
                        '    FROM colab_treinamentos CT' +
                        '    INNER JOIN planoacao P ON P.codi_pla = CT.codi_pla' +
@@ -2270,15 +2342,36 @@ begin
                        '    FROM colab_treinamentos CT' +
                        '    INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre ' + // novo
                        '    WHERE CT.codi_col = C.codi_col) as QtdTreinamentos,' +
-                       ' P.codi_pro, P.nome_pro,' +
-                       ' (SELECT Count(*) FROM colab_habilidades CH' +
-                       '  INNER JOIN Habilidades HB ON HB.codi_hab = CH.codi_hab' +
-                       ' WHERE CH.codi_col = C.codi_col' +
-                       ' and CH.nota_hab <= 2 and CH.hab_ano = ' + QuotedStr(FormatDateTime('yyyy', Date())) + ') as PendHab' +
+                       ' P.codi_pro, P.nome_pro,';
+//                       ' (SELECT Count(*) FROM colab_habilidades CH' +
+//                       '  INNER JOIN Habilidades HB ON HB.codi_hab = CH.codi_hab' +
+//                       ' WHERE CH.codi_col = C.codi_col' +
+//                       ' and CH.nota_hab <= ' + sNotaPendencia +
+//                       ' and CH.hab_ano = ' + QuotedStr(FormatDateTime('yyyy', Date())) +
+//                       ' AND col_admissao + interval ' + QuotedStr(IntToStr(BuscarDiasPendHab()) + ' days') +
+//                       ' < ' + ArrumaDataSQL(Date()) + ')' +
+//                       ' as PendHab' +
+                       // Chamado TT694 - Verifica se a empresa faz avaliação de habilidades no Destra Manager
+                       if BuscarParametro('nao_controlar_hab') = '0' then begin
+                          CommandText:= CommandText +
+                          ' (SELECT Count(*) FROM colab_habilidades CH' +
+                          '  INNER JOIN Habilidades HB ON HB.codi_hab = CH.codi_hab' +
+                          ' WHERE CH.codi_col = C.codi_col' +
+                          ' and CH.nota_hab <= ' + sNotaPendencia +
+                          ' and CH.hab_ano = ' + QuotedStr(FormatDateTime('yyyy', Date())) +
+                          ' AND col_admissao + interval ' + QuotedStr(IntToStr(BuscarDiasPendHab()) + ' days') +
+                          ' < ' + ArrumaDataSQL(Date()) + ')';
+                       end
+                       else begin
+                          CommandText:= CommandText + ' cast(0 as bigint)';
+                       end;
+                       CommandText:= CommandText + ' as PendHab' +
                        ' FROM funcoes F' +
                        ' INNER JOIN colaboradores C on codi_fun = func_col' +
                        ' INNER JOIN tabela_combos TC ON TC.codi_com = C.educ_col and TC.tipo_com = 6' +
                        ' INNER JOIN tabela_combos TF ON TF.codi_com = F.educ_fun and TF.tipo_com = 6' +
+                       ' INNER JOIN tabela_combos TCE ON TCE.codi_com = C.expe_col and TCE.tipo_com = 7' +
+                       ' INNER JOIN tabela_combos TFE ON TFE.codi_com = F.expe_fun and TFE.tipo_com = 7' +
                        ' INNER JOIN processos P ON P.codi_pro = C.proc_col ' +
                        ' WHERE col_status = 1' + // Ativos
                        sWhere +
@@ -2286,7 +2379,7 @@ begin
                        ')' +
                        ' SELECT * FROM consulta';
                        if chkSomentePendencias.Checked then begin
-                          CommandText:= CommandText + ' WHERE  PendTreinam > 0 OR pendtreinameficaz < qtdtreinamentos OR pendhab > 0 OR educacao = false OR experiencia = true';
+                          CommandText:= CommandText + ' WHERE  PendTreinam > 0 OR pendtreinameficaz < qtdtreinamentos OR pendhab > 0 OR educacao = false OR experiencia = false';
                        end;
          Active:= True;
 
@@ -2296,28 +2389,18 @@ begin
          end;
       end;
 
-      with frxReport1 do begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_PendenciasMatriz.fr3');
+      Imprimir('rel_PendenciasMatriz', frxReport1, tipoImp);
 
-         if tipoImp = 'I' then begin
-         // Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= False;
-            Print;
-         end
-         else begin
-            ShowReport;
-         end;
-      end;
    end;
 
 end;
 
 procedure TFormInicial.PendnciasGerais1Click(Sender: TObject);
 begin
-   pnlPendenciasMatriz.Top    := Self.Height div 2 - pnlPendenciasMatriz.Height div 2;
-   pnlPendenciasMatriz.Left   := Self.Width div 2 - pnlPendenciasMatriz.Width div 2;
-   pnlPendenciasMatriz.Visible:= True;
+   AbrePanel(pnlPendenciasMatriz, Self);
+//   pnlPendenciasMatriz.Top    := Self.Height div 2 - pnlPendenciasMatriz.Height div 2;
+//   pnlPendenciasMatriz.Left   := Self.Width div 2 - pnlPendenciasMatriz.Width div 2;
+//   pnlPendenciasMatriz.Visible:= True;
 
    with cdsProcessos do begin
       Active:= False;
@@ -2980,7 +3063,7 @@ begin
                        ' CT.dtpr_tre, CT.dtre_tre, CT.codi_pla, CT.tipo_tre, CT.tre_certificado' +
                        ' FROM colab_treinamentos CT' +
                        ' INNER JOIN colaboradores C ON C.codi_col = CT.codi_col AND C.col_status = 1' +
-                       ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre' +
+                       ' INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre AND tre_eficacia = 0' +
                        ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtre_tre notnull)' +
 //                       ' WHERE (codi_pla = 0 OR codi_pla isnull) and (dtpr_tre < ' + ArrumaDataSQL(Date()) + ')' +
                        ' ORDER BY C.nome_col, T.desc_tre';
@@ -3118,7 +3201,8 @@ begin
          CommandText:= ' SELECT *' +
                        ' FROM pdca P' +
                        ' LEFT JOIN pdca_lanc L ON L.pdca_codigo = P.pdca_codigo' +
-                       ' WHERE ((lan_quando < CURRENT_DATE AND lan_dtprevista isnull AND lan_datarealizada is null) OR' +
+//                       ' WHERE ((lan_quando < CURRENT_DATE AND lan_dtprevista is null AND lan_datarealizada is null) OR' +
+                       ' WHERE ((lan_quando < CURRENT_DATE AND lan_datarealizada is null) OR' +
                        ' (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
          Active:= True;
 
@@ -3162,70 +3246,63 @@ begin
       cpnlAnaliseCritica.Visible:= False;
    end;
 
-   // Verifica se tem habilidades com nota menor que o mínimo cadastrado em parâmetros
-   if dm.cdsAuxiliar.FieldByName('usu_pend_habilidades').AsInteger = 1 then begin
-      with dm.cdsAux do begin
-         Active:= False;
-         CommandText:= ' SELECT notapendencia, periodohab' +
-                       ' FROM parametros';
-         Active:= True;
-      end;
+   // Chamado TT694 - Verifica se a empresa faz avaliação de habilidades no Destra Manager
+   if BuscarParametro('nao_controlar_hab') = '0' then begin
+      // Verifica se tem habilidades com nota menor que o mínimo cadastrado em parâmetros
+      if dm.cdsAuxiliar.FieldByName('usu_pend_habilidades').AsInteger = 1 then begin
+         with dmPendencias.cdsHabilidade do begin
+            Active:= False;
+            CommandText:= ' SELECT C.nome_col, HB.desc_hab, H.nota_hab, H.hab_ano' +
+                          ' FROM colab_habilidades H' +
+                          ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col AND C.col_status = 1' +
+                          ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
+                          ' WHERE nota_hab <= ' + sNotaPendencia +
+                          ' AND col_admissao + interval ' + QuotedStr(IntToStr(BuscarDiasPendHab()) + ' days') +
+                          ' < ' + ArrumaDataSQL(Date());
+      //                    ' AND H.hab_ano = ' + QuotedStr(sAnoHabilidade);
+            Active:= True;
 
-      with dmPendencias.cdsHabilidade do begin
-         Active:= False;
-         CommandText:= ' SELECT C.nome_col, HB.desc_hab, H.nota_hab, H.hab_ano' +
-                       ' FROM colab_habilidades H' +
-                       ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col AND C.col_status = 1' +
-                       ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
-                       ' WHERE nota_hab <= ' + dm.cdsAux.FieldByName('notapendencia').AsString +
-                       ' AND col_admissao + interval ' + QuotedStr(IntToStr(BuscarDiasPendHab()) + ' days') +
-                       ' < ' + ArrumaDataSQL(Date());
-   //                    ' AND H.hab_ano = ' + QuotedStr(sAnoHabilidade);
-         Active:= True;
-
-         if RecordCount > 0 then begin
-            cpnlHabilidades.Caption:= 'Habilidades com nota menor igual a ' + dm.cdsAux.FieldByName('notapendencia').AsString + ' - ' + IntToStr(RecordCount) + ' pendência(s)';
-         end
-         else begin
-            cpnlHabilidades.Caption:= 'Habilidades com nota menor igual a ' + dm.cdsAux.FieldByName('notapendencia').AsString;
+            if RecordCount > 0 then begin
+               cpnlHabilidades.Caption:= 'Habilidades com nota menor igual a ' + sNotaPendencia + ' - ' + IntToStr(RecordCount) + ' pendência(s)';
+            end
+            else begin
+               cpnlHabilidades.Caption:= 'Habilidades com nota menor igual a ' + sNotaPendencia;
+            end;
          end;
+         cpnlHabilidades.Visible:= True;
+      end
+      else begin
+         cpnlHabilidades.Visible:= False;
       end;
-      cpnlHabilidades.Visible:= True;
+
+      // Verifica se tem habilidades vencidas conforme o parâmetro (1 ano, 2 anos ou 3 anos)
+      if dm.cdsAuxiliar.FieldByName('usu_pend_avaliacao').AsInteger = 1 then begin
+         with dmPendencias.cdsHabVencida do begin
+            Active:= False;
+            CommandText:= ' SELECT C.codi_col, C.nome_col, MAX(hab_ano) as UltimaAvaliacao' +
+                          ' FROM colab_habilidades H' +
+                          ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col AND C.col_status = 1' +
+                          ' GROUP BY C.codi_col' +
+                          ' HAVING CAST(MAX(hab_ano) as integer) < (SELECT EXTRACT(YEAR FROM CURRENT_DATE) - ' +
+                          sPeriodoHab + ')' +
+                          ' ORDER BY C.nome_col';
+            Active:= True;
+
+            if RecordCount > 0 then begin
+               cpnlHabilidadeVencida.Caption:= 'Colaboradores com Avaliação de Habilidades vencida - ' + IntToStr(RecordCount) + ' pendência(s)';
+            end
+            else begin
+               cpnlHabilidadeVencida.Caption:= 'Colaboradores com Avaliação de Habilidades vencida ';
+            end;
+         end;
+         cpnlHabilidadeVencida.Visible:= True;
+      end
+      else begin
+         cpnlHabilidadeVencida.Visible:= False;
+      end;
    end
    else begin
-      cpnlHabilidades.Visible:= False;
-   end;
-
-   // Verifica se tem habilidades vencidas conforme o parâmetro (1 ano, 2 anos ou 3 anos)
-   if dm.cdsAuxiliar.FieldByName('usu_pend_avaliacao').AsInteger = 1 then begin
-      with dm.cdsAux do begin
-         Active:= False;
-         CommandText:= ' SELECT notapendencia, periodohab' +
-                       ' FROM parametros';
-         Active:= True;
-      end;
-
-      with dmPendencias.cdsHabVencida do begin
-         Active:= False;
-         CommandText:= ' SELECT C.codi_col, C.nome_col, MAX(hab_ano) as UltimaAvaliacao' +
-                       ' FROM colab_habilidades H' +
-                       ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col AND C.col_status = 1' +
-                       ' GROUP BY C.codi_col' +
-                       ' HAVING CAST(MAX(hab_ano) as integer) < (SELECT EXTRACT(YEAR FROM CURRENT_DATE) - ' +
-                       dm.cdsAux.FieldByName('periodohab').AsString + ')' +
-                       ' ORDER BY C.nome_col';
-         Active:= True;
-
-         if RecordCount > 0 then begin
-            cpnlHabilidadeVencida.Caption:= 'Colaboradores com Avaliação de Habilidades vencida - ' + IntToStr(RecordCount) + ' pendência(s)';
-         end
-         else begin
-            cpnlHabilidadeVencida.Caption:= 'Colaboradores com Avaliação de Habilidades vencida ';
-         end;
-      end;
-      cpnlHabilidadeVencida.Visible:= True;
-   end
-   else begin
+      cpnlHabilidades.Visible      := False;
       cpnlHabilidadeVencida.Visible:= False;
    end;
 

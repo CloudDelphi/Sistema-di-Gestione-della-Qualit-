@@ -305,7 +305,6 @@ type
     btnCancelarHab: TBitBtn;
     btnAvaliador: TBitBtn;
     lbl36: TLabel;
-    edtTreCertificado: TEdit;
     sbAbreTreCertificado: TSpeedButton;
     sbVisualizaTreCertificado: TSpeedButton;
     cdsTreinamentosColtre_certificado: TWideStringField;
@@ -447,6 +446,8 @@ type
     cdsTreinamentosColtre_tempo: TWideStringField;
     cdsImprimirTretre_custo: TFloatField;
     cdsImprimirTretre_tempo: TWideStringField;
+    chkCopiaTodos: TCheckBox;
+    edtTreComprovacao: TEdit;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -500,7 +501,6 @@ type
     procedure btnCancelarHabClick(Sender: TObject);
     procedure btnAvaliadorClick(Sender: TObject);
     procedure sbAbreTreCertificadoClick(Sender: TObject);
-    procedure sbLimpaTreCertificadoClick(Sender: TObject);
     procedure sbVisualizaTreCertificadoClick(Sender: TObject);
     procedure sbAbrirDocClick(Sender: TObject);
     procedure tsDocShow(Sender: TObject);
@@ -750,6 +750,9 @@ begin
          4: begin
             TryFocus(edtDescricaoDoc);
          end;
+         5: begin
+            TryFocus(medtTempoTrein);
+         end;
       end;
    end;
 end;
@@ -786,10 +789,17 @@ var
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
-                    ' FROM colab_habilidades' +
-                    ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text) +
-                    ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+      if chkCopiaTodos.Checked = True then begin
+         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                       ' FROM colab_habilidades' +
+                       ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text);
+      end
+      else begin
+         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                       ' FROM colab_habilidades' +
+                       ' WHERE hab_ano = ' + QuotedStr(edtAnoCopia.Text) +
+                       ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+      end;
       Active:= True;
 
       if RecordCount <= 0 then begin
@@ -801,10 +811,17 @@ begin
       // Verifica se alguma habilidade do ano selecionado já está cadastrado e pede confirmação
       with dm.cdsAux do begin
          Active:= False;
-         CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
-                       ' FROM colab_habilidades' +
-                       ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date())) +
-                       ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+         if chkCopiaTodos.Checked = True then begin
+            CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                          ' FROM colab_habilidades' +
+                          ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date()));
+         end
+         else begin
+            CommandText:= ' SELECT codi_col, codi_hab, nota_hab, codi_pla, hab_ano' +
+                          ' FROM colab_habilidades' +
+                          ' WHERE hab_ano = ' + QuotedStr(FormatDateTime('yyyy',Date())) +
+                          ' AND codi_col = ' + QuotedStr(edtCodigoHab.Text);
+         end;
          Active:= True;
       end;
 
@@ -886,7 +903,10 @@ begin
    if (Acesso(cUsuario, 6, 'exclusao') = 1) then begin
       case pctColaboradores.TabIndex of
          0: begin // Cadastro
-            if Application.MessageBox('Confirma a exclusão do colaborador ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
+            if Application.MessageBox(PChar('A exclusão do colaborador pode causar perda de informações' +
+               ' se ele estiver vinculado em outros cadastros do sistema. Altere o campo Status para Inativar' +
+               ' para que isso não ocorra.' + #13 + #13 +
+               'Confirma a exclusão do colaborador ?'), 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
                sCodColaborador:= cdsColaboradorescodi_col.AsString;
                sNomeColaborador:= cdsColaboradoresnome_col.AsString;
 
@@ -930,7 +950,7 @@ begin
                   Execute;
                end;
 
-               Auditoria('CADASTRO DE COLABORADORES',sNomeColaborador,'E','');
+               Auditoria('CADASTRO DE COLABORADORES','Cod: ' + sCodColaborador + '-' + sNomeColaborador,'E','');
                Application.MessageBox('Colaborador excluído corretamente', 'Aviso', MB_OK + MB_ICONINFORMATION);
 
                AtualizarDados;
@@ -1328,7 +1348,7 @@ begin
                                 ArrumaDataSQL(dtDataPrevista.Date) + ',' +
                                 ArrumaDataSQL(dtDataRealizacao.Date) + ',' +
                                 QuotedStr(sTipo) + ',' +
-                                QuotedStr(edtTreCertificado.Text) + ',' +
+                                QuotedStr(edtTreComprovacao.Text) + ',' +
                                 QuotedStr(medtTempoTrein.Text) + ',' +
                                 VirgulaParaPonto(edtCustoTrein.Value, 2) +
                                 ')';
@@ -1338,7 +1358,7 @@ begin
                                 ' dtpr_tre = ' + ArrumaDataSQL(dtDataPrevista.Date) + ',' +
                                 ' dtre_tre = ' + ArrumaDataSQL(dtDataRealizacao.Date) + ',' +
                                 ' tipo_tre = ' + QuotedStr(sTipo) + ',' +
-                                ' tre_certificado = ' + QuotedStr(edtTreCertificado.Text) + ',' +
+                                ' tre_certificado = ' + QuotedStr(edtTreComprovacao.Text) + ',' +
                                 ' tre_tempo = ' + QuotedStr(medtTempoTrein.Text) + ',' +
                                 ' tre_custo = ' + VirgulaParaPonto(edtCustoTrein.Value, 2) +
                                 ' WHERE codi_tre = ' + cdsTreinamentosColcodi_tre.AsString +
@@ -1910,7 +1930,7 @@ begin
          cbTipo.Enabled           := Flag;
          dtDataPrevista.Enabled   := Flag;
          dtDataRealizacao.Enabled := Flag;
-         edtTreCertificado.Enabled:= Flag;
+         edtTreComprovacao.Enabled:= Flag;
          medtTempoTrein.Enabled   := Flag;
          edtCustoTrein.Enabled    := Flag;
 
@@ -1951,6 +1971,8 @@ begin
          medtCEP.Clear;
          edtFone.Clear;
          edtCelular.Clear;
+         medtCPF.Clear;
+         edtRG.Clear;
          dtAdmissao.Clear;
          chkValidacao.Checked:= False;
       end;
@@ -1977,7 +1999,7 @@ begin
          cbTipo.ItemIndex:= -1;
          dtDataPrevista.Clear;
          dtDataRealizacao.Clear;
-         edtTreCertificado.Clear;
+         edtTreComprovacao.Clear;
          medtTempoTrein.Clear;
          edtCustoTrein.Clear;
       end;
@@ -2127,7 +2149,7 @@ begin
          LimparCampos();
          with cdsTreinamentosCol do begin
             dblTreinamentos.KeyValue:= FieldByName('codi_tre').AsString;
-            edtTreCertificado.Text  := FieldByName('tre_certificado').AsString;
+            edtTreComprovacao.Text  := FieldByName('tre_certificado').AsString;
             medtTempoTrein.Text     := FieldByName('tre_tempo').AsString;
             edtCustoTrein.Value     := FieldByName('tre_custo').AsFloat;
 
@@ -2145,7 +2167,7 @@ begin
             end;
          end;
 
-         if AllTrim(edtTreCertificado.Text) <> EmptyStr then begin
+         if AllTrim(edtTreComprovacao.Text) <> EmptyStr then begin
             sbVisualizaTreCertificado.Enabled:= True;
          end
          else begin
@@ -2179,7 +2201,7 @@ end;
 procedure TFormCadColaboradores.sbAbreTreCertificadoClick(Sender: TObject);
 begin
    OPD1.Execute;
-   edtTreCertificado.Text:= OPD1.FileName;
+   edtTreComprovacao.Text:= OPD1.FileName;
 end;
 
 procedure TFormCadColaboradores.sbAbrirDocClick(Sender: TObject);
@@ -2212,12 +2234,6 @@ begin
    sbVisualizar.Enabled:= False;
 end;
 
-procedure TFormCadColaboradores.sbLimpaTreCertificadoClick(Sender: TObject);
-begin
-   edtTreCertificado.Clear;
-   sbVisualizaTreCertificado.Enabled:= False;
-end;
-
 procedure TFormCadColaboradores.sbVisualizar1Click(Sender: TObject);
 begin
    AbrirArquivo(edtArquivo1.Text, Self.Name);
@@ -2235,7 +2251,7 @@ end;
 
 procedure TFormCadColaboradores.sbVisualizaTreCertificadoClick(Sender: TObject);
 begin
-   AbrirArquivo(edtTreCertificado.Text, Self.Name);
+   AbrirArquivo(edtTreComprovacao.Text, Self.Name);
 end;
 
 procedure TFormCadColaboradores.tsCurriculoShow(Sender: TObject);
@@ -2372,7 +2388,7 @@ begin
                Exit;
             end;
 
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_Colaboradores.fr3');
+            Imprimir('rel_Colaboradores', frxReport1, tipoImp, 'sNovaPagina', IIf(chkQuebra.Checked, QuotedStr('S'), QuotedStr('N')));
          end;
          1: begin
             with cdsImprimirTre do begin
@@ -2410,7 +2426,7 @@ begin
                Exit;
             end;
 
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_ColabTre.fr3');
+            Imprimir('rel_ColabTre', frxReport1, tipoImp, 'sNovaPagina', IIf(chkQuebra.Checked, QuotedStr('S'), QuotedStr('N')));
          end;
          2: begin
             with cdsImprimirHab do begin
@@ -2447,21 +2463,8 @@ begin
                Exit;
             end;
 
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_ColabHab.fr3');
+            Imprimir('rel_ColabHab', frxReport1, tipoImp, 'sNovaPagina', IIf(chkQuebra.Checked, QuotedStr('S'), QuotedStr('N')));
          end;
-      end;
-
-      Variables['sNovaPagina']:= IIf(chkQuebra.Checked, QuotedStr('S'), QuotedStr('N'));
-
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-//            PrintOptions.Printer:= 'CutePDF Writer';
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
       end;
    end;
 end;

@@ -13,7 +13,7 @@ object FormAlteraSenha: TFormAlteraSenha
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
+  Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -80,10 +80,7 @@ object FormAlteraSenha: TFormAlteraSenha
     Height = 72
     Align = alBottom
     TabOrder = 0
-    ExplicitLeft = -17
-    ExplicitTop = 187
-    ExplicitWidth = 409
-    object sbSairMatriz: TSpeedButton
+    object sbSair: TSpeedButton
       Left = 181
       Top = 1
       Width = 73
@@ -213,7 +210,7 @@ object FormAlteraSenha: TFormAlteraSenha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      OnClick = sbSairMatrizClick
+      OnClick = sbSairClick
       ExplicitLeft = 909
       ExplicitTop = 6
       ExplicitHeight = 55
@@ -351,7 +348,6 @@ object FormAlteraSenha: TFormAlteraSenha
       ShowHint = True
       TabOrder = 0
       OnClick = btnOkClick
-      ExplicitHeight = 65
     end
   end
   object edtUsuario: TEdit
@@ -374,13 +370,12 @@ object FormAlteraSenha: TFormAlteraSenha
     Top = 70
     Width = 218
     Height = 26
-    CharCase = ecUpperCase
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
-    MaxLength = 8
+    MaxLength = 20
     ParentFont = False
     PasswordChar = '*'
     TabOrder = 2
@@ -390,29 +385,28 @@ object FormAlteraSenha: TFormAlteraSenha
     Top = 118
     Width = 218
     Height = 26
-    CharCase = ecUpperCase
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
-    MaxLength = 8
+    MaxLength = 20
     ParentFont = False
     PasswordChar = '*'
     TabOrder = 3
+    OnExit = edtNovaSenhaExit
   end
   object edtConfSenha: TEdit
     Left = 16
     Top = 165
     Width = 218
     Height = 26
-    CharCase = ecUpperCase
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
-    MaxLength = 8
+    MaxLength = 20
     ParentFont = False
     PasswordChar = '*'
     TabOrder = 4

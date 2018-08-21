@@ -86,6 +86,12 @@ type
     cdsImprimirresponsavel: TWideStringField;
     cdsImprimirstatus: TWideStringField;
     rgTipoRel: TRadioGroup;
+    btnExcel: TBitBtn;
+    zqryExcel: TZQuery;
+    dspExcel: TDataSetProvider;
+    cdsExcel: TClientDataSet;
+    dsExcel: TDataSource;
+    dbgExcel: TDBGrid;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -120,6 +126,7 @@ type
     procedure mmoResultadoExit(Sender: TObject);
     procedure CalcularStatus();
     procedure chkTodosRespClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -199,6 +206,34 @@ begin
    PreencherCampos;
    Botoes(True);
    HabilitarCampos(False, False, Self, 1);
+end;
+
+procedure TFormCadCronograma.btnExcelClick(Sender: TObject);
+begin
+   with cdsExcel do begin
+      Active:= False;
+      CommandText:= ' SELECT C.cro_codigo as "Código", C.cro_requisito as "Requisito", ' +
+                    ' C.cro_tela_destra as "Caminho Destra Manager", C.cro_atividade as "Atividade", ' +
+                    ' CO.nome_col as "Responsável",' +
+                    ' C.cro_data_prevista as "Data Prevista", ' +
+                    ' C.cro_data_realizada as "Data de Realização", C.cro_resultado as "Resultado",' +
+                    '        CAST(CASE WHEN C.cro_data_prevista ISNULL THEN ' + QuotedStr('NÃO PLANEJADO') +
+                    '             WHEN C.cro_data_prevista > ' + ArrumaDataSQL(Date()) + ' AND C.cro_data_realizada ISNULL THEN ' + QuotedStr('ATIVIDADE NO PRAZO') +
+                    '        WHEN C.cro_data_prevista <= ' + ArrumaDataSQL(Date()) + ' AND C.cro_data_realizada ISNULL THEN ' + QuotedStr('ATIVIDADE FORA DO PRAZO') +
+                    '             WHEN C.cro_data_realizada NOTNULL THEN ' + QuotedStr('ATIVIDADE REALIZADA') +
+                    '        END as character varying(25)) as "Status"' +
+                    ' FROM cronograma C' +
+                    ' LEFT JOIN colaboradores CO on CO.codi_col = C.cro_responsavel' +
+                    ' ORDER BY C.cro_codigo';
+      Active:= True;
+   end;
+
+   if cdsExcel.RecordCount <= 0 then begin
+      Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
+   end
+   else begin
+      ExpExcel(dbgExcel, cdsExcel, 'Cronograma', Self);
+   end;
 end;
 
 procedure TFormCadCronograma.btnExcluirClick(Sender: TObject);

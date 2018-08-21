@@ -3,8 +3,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Auditoria Autom'#225'tica'
-  ClientHeight = 537
+  Caption = 'Auditoria'
+  ClientHeight = 568
   ClientWidth = 1022
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,21 +14,22 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  WindowState = wsMaximized
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlEsquerda: TPanel
     Left = 0
     Top = 0
-    Width = 169
-    Height = 465
+    Width = 307
+    Height = 496
     Align = alLeft
     TabOrder = 0
     object dbgAuditorias: TDBGrid
       Left = 1
       Top = 1
-      Width = 167
-      Height = 463
+      Width = 305
+      Height = 494
       Hint = 'Selecione a data para exibir o relat'#243'rio'
       Align = alClient
       DataSource = dsGravadas
@@ -64,26 +65,26 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     end
   end
   object pnlRelatorio: TPanel
-    Left = 169
+    Left = 307
     Top = 0
     Width = 853
-    Height = 465
-    Align = alRight
+    Height = 496
+    Align = alLeft
     TabOrder = 1
     object frxPreview1: TfrxPreview
       Left = 1
       Top = 1
       Width = 851
-      Height = 463
+      Height = 494
       Align = alClient
       OutlineVisible = False
-      OutlineWidth = 121
+      OutlineWidth = 0
       ThumbnailVisible = False
       UseReportHints = True
     end
     object dbg1: TDBGrid
-      Left = 86
-      Top = 2
+      Left = 158
+      Top = 126
       Width = 589
       Height = 393
       Hint = 'Selecione o registro para alterar'
@@ -108,7 +109,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   end
   object pnl1: TPanel
     Left = 0
-    Top = 465
+    Top = 496
     Width = 1022
     Height = 72
     Align = alBottom
@@ -382,7 +383,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       OnClick = btnGerarAuditoriaClick
     end
     object btnImprimir: TBitBtn
-      Left = 220
+      Left = 293
       Top = 1
       Width = 73
       Height = 70
@@ -784,7 +785,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       OnClick = btnCancelarClick
     end
     object btnEvidencias: TBitBtn
-      Left = 293
+      Left = 366
       Top = 1
       Width = 122
       Height = 70
@@ -917,16 +918,284 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       TabOrder = 5
       OnClick = btnEvidenciasClick
     end
+    object btnExcluir: TBitBtn
+      Left = 220
+      Top = 1
+      Width = 73
+      Height = 70
+      Hint = 'Clique para excluir um registro'
+      Align = alLeft
+      Caption = '&Excluir'
+      DoubleBuffered = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        B60D0000424DB60D000000000000360000002800000030000000180000000100
+        180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEB3
+        CBF8719EF2417EEE266BEB2369EB266BEB417EEE719EF2B3CBF8F8FAFEFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFBFAFACECDCDA3A1A184828173706F716E6D73706F848281A3A1A1CE
+        CDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFCFDFFA2BFF73676ED2369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB3676EDA2BFF7FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDC3C2C17D7B7A716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECF2FD598EF02369EB2369EB31
+        72EC76A1F3B6CDF8D3E1FBE3ECFCD3E1FBB6CDF876A1F33072EC2369EB2369EB
+        598EF0ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F2F29492
+        91716E6D716E6D7A7776A6A5A4D0CFCEE3E2E2EDEDEDE3E2E2D0CFCEA6A5A479
+        7776716E6D716E6D949291F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        E9F0FD417EEE2369EB266BEB8CB1F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFF5F8FE8CB1F5266BEB2369EB417EEEE9F0FDFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFF1F0F0848281716E6D73706FB5B3B3F8F8F8FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B5B3B373706F716E6D848281F1F0
+        F0FFFFFFFFFFFFFFFFFFFFFFFFF9FBFE5188EF2369EB2F71ECC9DAFAFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA
+        2F71EC2369EB5188EFF9FBFEFFFFFFFFFFFFFFFFFFFBFBFB8F8C8B716E6D7976
+        75DCDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFDCDBDB797675716E6D8F8C8BFBFBFBFFFFFFFFFFFFFFFFFF91B4F5
+        2369EB276CEBCBDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCADBFA276CEB2369EB91B4F5FFFFFFFF
+        FFFFFFFFFFB8B7B6716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDCDC747170716E
+        6DB8B7B6FFFFFFFFFFFFEFF4FE2C6FEC2369EB92B5F5FFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF91B4F52369EB2C6FECEFF4FEFFFFFFF4F4F4777473716E6DB9B7B7FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D777473F4F4F4FFFFFF9FBEF62369EB
+        3374ECF7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE3374EC2369EB9FBEF6FF
+        FFFFC1C0BF716E6D7C7978FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87B78
+        77716E6DC1C0BFFFFFFF5F92F02369EB7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF7EA7F32369EB5F92F0FFFFFF979595716E6DADABAAFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFABAAA9716E6D979595FFFFFF3475ED2369EB
+        B5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBDD2F9ACC7F7ACC7F7ACC7F7ACC7F7ACC7
+        F7ACC7F7ACC7F7BDD2F9FDFEFFFFFFFFFFFFFFFFFFFFB4CCF82369EB3475EDFF
+        FFFF7C7978716E6DCFCECEFFFFFFFFFFFFFFFFFFFEFEFED4D3D3CAC8C8CAC8C8
+        CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8D4D3D3FEFEFEFFFFFFFFFFFFFFFFFFCFCE
+        CD716E6D7C7978FFFFFF2369EB2369EBD0DFFBFFFFFFFFFFFFFFFFFFA3C0F723
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBA4C1F7FFFFFF
+        FFFFFFFFFFFFCFDEFB2369EB2369EBFFFFFF716E6D716E6DE1E0E0FFFFFFFFFF
+        FFFFFFFFC3C2C2716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DFDF716E6D716E6DFFFFFF2369EB2369EB
+        D0DFFBFFFFFFFFFFFFFFFFFFA2BFF72369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFCFDEFB2369EB2369EBFF
+        FFFF716E6D716E6DE1E0E0FFFFFFFFFFFFFFFFFFC3C2C1716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DF
+        DF716E6D716E6DFFFFFF3475ED2369EBB5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBA
+        D0F99EBDF69EBDF69EBDF69EBDF69EBDF69EBDF69EBDF6BBD1F9FDFEFFFFFFFF
+        FFFFFFFFFFFFB4CCF82369EB3475EDFFFFFF7C7978716E6DCFCECEFFFFFFFFFF
+        FFFFFFFFFEFEFED2D2D1C1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFD3
+        D2D2FEFEFEFFFFFFFFFFFFFFFFFFCFCECD716E6D7C7978FFFFFF5F92F02369EB
+        7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7EA7F32369EB5F92F0FF
+        FFFF979595716E6DADABAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABAA
+        A9716E6D979595FFFFFF9FBEF62369EB3374ECF7FAFEFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFF5F8FE3374EC2369EB9FBEF6FFFFFFC1C0BF716E6D7C7978FAFAFAFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFF8F8F87B7877716E6DC1C0BFFFFFFFEFF4FE2C6FEC
+        2369EB92B5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F52369EB2C6FECEFF4FEFF
+        FFFFF4F4F4777473716E6DB9B7B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6716E
+        6D777473F4F4F4FFFFFFFFFFFF91B4F52369EB276CEBCBDCFAFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        CBDCFA276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFB8B7B6716E6D747170DEDD
+        DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFDEDDDD747170716E6DB8B7B6FFFFFFFFFFFFFFFFFFF9FBFE
+        5188EF2369EB2F71ECCADBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA2F71EC2369EB5188EFF9FBFEFFFFFFFF
+        FFFFFFFFFFFBFBFB8F8C8B716E6D797675DCDCDCFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDBDB797675716E6D8F8C
+        8BFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFE8EFFD417EEE2369EB266BEB8DB1F5F5
+        F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE8DB1F5266BEB
+        2369EB417EEEE9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0848281716E
+        6D73706FB5B4B3F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+        F8F8B5B4B373706F716E6D848281F1F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFECF2FD588DF02369EB2369EB3172EC77A2F3B7CEF8D4E2FBE3ECFCD4E2
+        FBB7CEF876A1F33172EC2369EB2369EB598EF0ECF2FDFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFF3F2F2949190716E6D716E6D7A7776A7A5A5D0CFCF
+        E3E3E2EDEDEDE3E3E2D0CFCFA6A5A47A7776716E6D716E6D949291F3F2F2FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFFA2BFF73676ED23
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3676EDA2BFF7
+        FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFD
+        FDC3C2C17D7B7A716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFF7FAFEB3CBF8719EF2417EEE266BEB2369EB266B
+        EB417EEE719EF2B3CBF8F8FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFACECDCDA3A1A1848281
+        73706F716E6D73706F848281A3A1A1CECDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+      OnClick = btnExcluirClick
+    end
+    object btnGraficos: TBitBtn
+      Left = 488
+      Top = 1
+      Width = 73
+      Height = 70
+      Hint = 'Clique para visualizar os gr'#225'ficos'
+      Align = alLeft
+      Caption = '&Gr'#225'ficos'
+      DoubleBuffered = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        B60D0000424DB60D000000000000360000002800000030000000180000000100
+        180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBDD2F9
+        2F71EC2E71EC2E71ECA3C0F7FFFFFF4681EE2E71EC2E71EC5289EFFFFFFF92B5
+        F52E71EC2E71EC2F71ECE9F0FDEEF3FD3072EC2E71EC2E71EC82AAF4FFFFFFFF
+        FFFFFFFFFFD5D4D3797675787574787574C3C2C2FFFFFF888584787574787574
+        908D8CFFFFFFB9B7B7787574787574797675F1F0F0F4F4F47977767875747875
+        74AEADACFFFFFFFFFFFFFFFFFFAAC5F72369EB2369EB2369EB8DB1F5FFFFFF24
+        6AEB2369EB2369EB3374ECFFFFFF7CA6F32369EB2369EB2369EBE0EAFCE7EFFD
+        2369EB2369EB2369EB6797F1FFFFFFFFFFFFFFFFFFC8C7C6716E6D716E6D716E
+        6DB5B4B3FFFFFF726F6E716E6D716E6D7B7877FFFFFFAAA9A8716E6D716E6D71
+        6E6DEBEBEAEFEFEF716E6D716E6D716E6D9D9B9AFFFFFFFFFFFFFFFFFFB0C9F8
+        2369EB2369EB2369EB97B8F6FFFFFF3676ED2369EB2369EB427EEEFFFFFF87AD
+        F42369EB2369EB2369EBE3ECFCE9F0FD2369EB2369EB2369EB74A0F2FFFFFFFF
+        FFFFFFFFFFCCCBCB716E6D716E6D716E6DBCBBBAFFFFFF7D7B7A716E6D716E6D
+        858282FFFFFFB2B0AF716E6D716E6D716E6DEDEDEDF1F1F1716E6D716E6D716E
+        6DA5A3A3FFFFFFFFFFFFFFFFFFAAC5F72369EB2369EB2369EB97B8F6FFFFFF37
+        77ED2369EB2369EB2369EBFFFFFF80A9F32369EB2369EB2369EBE3ECFCE9F0FD
+        2369EB2369EB2369EB74A0F2FFFFFFFFFFFFFFFFFFC8C7C7716E6D716E6D716E
+        6DBCBBBAFFFFFF7E7B7A716E6D716E6D716E6DFFFFFFADABAB716E6D716E6D71
+        6E6DEDEDEDF1F1F1716E6D716E6D716E6DA5A3A3FFFFFFFFFFFFFFFFFFFFFFFF
+        A9C4F7266BEB2369EB9DBCF6FFFFFF3374EC2369EB4D86EFC1D5F9FFFFFF83AA
+        F42369EB2369EB2369EBE3ECFCE9F0FD2369EB2369EB2369EB74A0F2FFFFFFFF
+        FFFFFFFFFFFFFFFFC7C6C673706F716E6DC0BEBEFFFFFF7C7978716E6D8C8A89
+        D7D6D6FFFFFFAFADAD716E6D716E6D716E6DEDEDEDF1F1F1716E6D716E6D716E
+        6DA5A3A3FFFFFFFFFFFFF4F7FEC0D4F9FFFFFFE3ECFC2369EB76A1F3FFFFFF23
+        69EB588DF0FFFFFFFEFEFFE3ECFCFFFFFF588DF02369EB2369EBE4EDFDE9F0FD
+        2369EB2369EB2369EB74A0F2FFFFFFFFFFFFF8F8F8D6D5D5FFFFFFEDEDED716E
+        6DA6A5A4FFFFFF716E6D939190FFFFFFFEFEFEEDEDEDFFFFFF949190716E6D71
+        6E6DEEEDEDF1F1F1716E6D716E6D716E6DA5A3A3FFFFFFFFFFFF437FEE2369EB
+        5289EFFFFFFFCBDCFA9BBBF6EFF4FE7CA6F3FFFFFFCDDDFA2369EB256AEBDDE8
+        FCFFFFFF588DF02369EBE3ECFCEAF1FD2369EB2369EB2369EB74A0F2FFFFFFFF
+        FFFF868382716E6D8F8D8CFFFFFFDEDDDDBEBDBDF5F5F5AAA9A8FFFFFFDFDEDE
+        716E6D726F6EE9E9E9FFFFFF949190716E6DEDEDEDF2F1F1716E6D716E6D716E
+        6DA5A3A3FFFFFFFFFFFF3676ED2369EB2369EB4D86EFFFFFFFFFFFFFF6F9FEFF
+        FFFFC6D8FA2369EB2369EB2369EB2369EBD8E5FBFFFFFF4C85EFC7D9FAECF2FD
+        2369EB2369EB2369EB74A0F2FFFFFFFFFFFF7D7B7A716E6D716E6D8C8A89FFFF
+        FFFFFFFFF9F9F9FFFFFFDAD9D9716E6D716E6D716E6D716E6DE6E5E5FFFFFF8B
+        8988DBDADAF3F2F2716E6D716E6D716E6DA5A3A3FFFFFFFFFFFFE9F0FD3F7CEE
+        2369EB2369EB4983EEFDFEFFFFFFFFBDD2F92369EB2369EB2369EB2369EB2369
+        EB2369EBD4E2FBFFFFFFEFF4FECDDDFA2369EB2369EB2369EB74A0F2FFFFFFFF
+        FFFFF1F1F183807F716E6D716E6D8A8786FEFEFEFFFFFFD5D4D3716E6D716E6D
+        716E6D716E6D716E6D716E6DE3E3E2FFFFFFF4F4F4DFDEDE716E6D716E6D716E
+        6DA5A3A3FFFFFFFFFFFFFFFFFFEFF4FE407DEE2369EB2369EB598EF0A5C2F723
+        69EB2369EB2369EB9ABAF68DB1F52369EB2369EB2369EBD2E0FBFFFFFFC2D5F9
+        2369EB2369EB2369EB74A0F2FFFFFFFFFFFFFFFFFFF5F5F5848180716E6D716E
+        6D949291C5C4C3716E6D716E6D716E6DBEBCBCB5B4B3716E6D716E6D716E6DE2
+        E1E1FFFFFFD7D7D6716E6D716E6D716E6DA5A3A3FFFFFFFFFFFFFFFFFFFFFFFF
+        F1F6FE427EEE2369EB2369EB2369EB2369EB2369EB88AEF4FFFFFFFFFFFF77A2
+        F32369EB2369EB2369EBC7D9FAFFFFFF6697F12369EB2369EB76A1F3FFFFFFFF
+        FFFFFFFFFFFFFFFFF6F6F6858282716E6D716E6D716E6D716E6D716E6DB2B1B0
+        FFFFFFFFFFFFA7A5A5716E6D716E6D716E6DDBDADAFFFFFF9C9A9A716E6D716E
+        6DA6A5A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F7FE4681EE2369EB2369EB23
+        69EB8BB0F4FFFFFFFFFFFFFFFFFFFFFFFF7AA4F32369EB2369EB2369EBCADBFA
+        FFFFFF6999F12369EB729FF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F78885
+        84716E6D716E6D716E6DB4B3B2FFFFFFFFFFFFFFFFFFFFFFFFA9A7A7716E6D71
+        6E6D716E6DDCDCDCFFFFFF9E9C9B716E6DA4A2A1FFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFF6F9FE4983EE2369EB8FB3F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFF7EA7F32369EB2369EB2369EBC9DAFAFFFFFF4F87EF4782EEFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFF9F9F98A8786716E6DB7B5B5FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFABAAA9716E6D716E6D716E6DDCDBDBFFFFFF8D8B
+        8A888685FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFFD7E4FBFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF81A9F42369EB2369EB
+        2369EBC4D7FAFFFFFFCDDDFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFDFDFDE5E5E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAE
+        ACAB716E6D716E6D716E6DD9D8D8FFFFFFDFDEDEFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EBCFDEFBFFFFFF729FF27C
+        A6F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6DE0DF
+        DFFFFFFFA4A2A1AAA9A8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF4
+        2369EB2369EB256AEB5E91F02369EB3273ECFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFB2B0AF716E6D716E6D726F6E979594716E6D7A7877FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF93B5F52C6FEC2369EB2369EB2369EB48
+        82EEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9B8B7777473716E
+        6D716E6D716E6D898686FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF4782EE2369EB2369EB2369EB3E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF888685716E6D716E6D716E6D82807FFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFF578CF02369EB2369EB2369EB2369EB23
+        69EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE92908F716E6D716E
+        6D716E6D716E6D716E6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFF
+        6193F14E86EF4681EE3D7BED3273EC4D86EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFEFEFE9997968D8A8A888584827F7E7A78778C8A89FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 7
+      OnClick = btnGraficosClick
+    end
   end
   object pnlEvidencias: TPanel
-    Left = 384
-    Top = 0
+    Left = 632
+    Top = -15
     Width = 468
-    Height = 479
+    Height = 525
     TabOrder = 3
     object pnl2: TPanel
       Left = 1
-      Top = 406
+      Top = 452
       Width = 466
       Height = 72
       Align = alBottom
@@ -1217,11 +1486,11 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       ParentFont = False
       TabOrder = 0
     end
-    object pnls: TPanel
+    object pnlDados: TPanel
       Left = 2
       Top = 36
       Width = 461
-      Height = 369
+      Height = 415
       TabOrder = 2
       object lbl18: TLabel
         Left = 5
@@ -1253,7 +1522,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       end
       object lbl1: TLabel
         Left = 5
-        Top = 233
+        Top = 281
         Width = 293
         Height = 13
         Caption = 'N'#227'o Conformidade / Observa'#231#245'es / Observa'#231#245'es de Melhoria'
@@ -1271,6 +1540,20 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         Width = 44
         Height = 13
         Caption = 'Requisito'
+      end
+      object lbl4: TLabel
+        Left = 5
+        Top = 240
+        Width = 124
+        Height = 13
+        Caption = 'Tipo da n'#227'o conformidade'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
       end
       object dblProcesso: TDBLookupComboBox
         Left = 5
@@ -1317,7 +1600,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       end
       object mmoNaoConformidade: TMemo
         Left = 5
-        Top = 249
+        Top = 297
         Width = 447
         Height = 116
         Font.Charset = DEFAULT_CHARSET
@@ -1342,6 +1625,26 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+      end
+      object cbbTipo: TComboBox
+        Left = 5
+        Top = 254
+        Width = 447
+        Height = 26
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 5
+        Text = 'NC - N'#227'o Conformidade'
+        Items.Strings = (
+          'NC - N'#227'o Conformidade'
+          'OBS - Observa'#231#227'o'
+          'OM - Observa'#231#227'o de Melhoria')
       end
     end
   end
@@ -1413,6 +1716,13 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       FieldName = 'FuncaoGestor'
       Size = 80
     end
+    object cdsAuditoriaaud_tipoNC: TStringField
+      FieldName = 'aud_tipoNC'
+      Size = 3
+    end
+    object cdsAuditoriaaud_contNC: TIntegerField
+      FieldName = 'aud_contNC'
+    end
   end
   object dsAuditoria: TDataSource
     DataSet = cdsAuditoria
@@ -1428,10 +1738,37 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43066.490339803240000000
+    ReportOptions.LastChange = 43304.434750300900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -1440,10 +1777,26 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     Top = 120
     Datasets = <
       item
-        DataSet = frxDBDSSemGravar
-        DataSetName = 'frxDBDSSemGravar'
+        DataSet = frxDBAuditoriaAuto
+        DataSetName = 'frxDBAuditoriaAuto'
       end>
-    Variables = <>
+    Variables = <
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
+        Value = Null
+      end>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
@@ -1458,9 +1811,10 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 76.913420000000000000
+        Height = 192.181107240000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        Stretched = True
         object Memo4: TfrxMemoView
           Top = 22.267780000000000000
           Width = 718.110700000000000000
@@ -1476,7 +1830,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'RELAT'#211'RIO DE AUDITORIA AUTOM'#193'TICA')
+            'RELAT'#211'RIO DE AUDITORIA')
           ParentFont = False
         end
         object Line2: TfrxLineView
@@ -1484,13 +1838,128 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ShowHint = False
           Diagonal = True
         end
+        object Memo16: TfrxMemoView
+          Top = 63.472480000000000000
+          Width = 718.110236220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smActualHeight
+          DataSet = FormResumoInd.frxdbResumoIndicador
+          DataSetName = 'frxdbResumoIndicador'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Empresa: [frxDBAuditoriaAuto."nome_emp"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo17: TfrxMemoView
+          Top = 82.370130000000000000
+          Width = 718.110236220000000000
+          Height = 71.811070000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataSet = FormResumoInd.frxdbResumoIndicador
+          DataSetName = 'frxdbResumoIndicador'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Escopo: [frxDBAuditoriaAuto."emp_escopo"]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 377.953000000000000000
+          Top = 173.283457240000000000
+          Width = 340.157236220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smActualHeight
+          DataSet = FormResumoInd.frxdbResumoIndicador
+          DataSetName = 'frxdbResumoIndicador'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            
+              'Per'#237'odo da Auditoria: [<frxDBAuditoriaAuto."aud_periodo_ini">] a' +
+              ' [<frxDBAuditoriaAuto."aud_periodo_fim">]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo20: TfrxMemoView
+          Top = 173.283457240000000000
+          Width = 377.952536220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smActualHeight
+          DataSet = FormResumoInd.frxdbResumoIndicador
+          DataSetName = 'frxdbResumoIndicador'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            
+              'Data do Programa de Auditoria: [frxDBAuditoriaAuto."aud_data_pro' +
+              'grama"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo2: TfrxMemoView
+          Top = 154.535560000000000000
+          Width = 718.110236220000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smActualHeight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Auditor: [frxDBAuditoriaAuto."aud_auditor"]')
+          ParentFont = False
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object Detalhe: TfrxMasterData
         Height = 22.677180000000000000
-        Top = 234.330860000000000000
+        Top = 362.834880000000000000
         Width = 718.110700000000000000
-        DataSet = frxDBDSSemGravar
-        DataSetName = 'frxDBDSSemGravar'
+        DataSet = frxDBAuditoriaAuto
+        DataSetName = 'frxDBAuditoriaAuto'
         RowCount = 0
         Stretched = True
         object frxControleDATA: TfrxMemoView
@@ -1500,8 +1969,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           ShowHint = False
           StretchMode = smMaxHeight
           DataField = 'aud_tipo'
-          DataSet = frxDBDSSemGravar
-          DataSetName = 'frxDBDSSemGravar'
+          DataSet = frxDBAuditoriaAuto
+          DataSetName = 'frxDBAuditoriaAuto'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1510,19 +1979,19 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDSSemGravar."aud_tipo"]')
+            '[frxDBAuditoriaAuto."aud_tipo"]')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo10: TfrxMemoView
           Left = 175.039580000000000000
-          Width = 241.133858270000000000
+          Width = 275.149628270000000000
           Height = 22.677180000000000000
           ShowHint = False
           StretchMode = smMaxHeight
           DataField = 'aud_conformidade'
-          DataSet = frxDBDSSemGravar
-          DataSetName = 'frxDBDSSemGravar'
+          DataSet = frxDBAuditoriaAuto
+          DataSetName = 'frxDBAuditoriaAuto'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1530,40 +1999,19 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBDSSemGravar."aud_conformidade"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo2: TfrxMemoView
-          Left = 415.748300000000000000
-          Width = 61.228346460000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          StretchMode = smMaxHeight
-          DataField = 'aud_requisito'
-          DataSet = frxDBDSSemGravar
-          DataSetName = 'frxDBDSSemGravar'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBDSSemGravar."aud_requisito"]')
+            '[frxDBAuditoriaAuto."aud_conformidade"]')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo7: TfrxMemoView
-          Left = 477.149970000000000000
-          Width = 241.133941260000000000
+          Left = 450.693260000000000000
+          Width = 267.590651260000000000
           Height = 22.677180000000000000
           ShowHint = False
           StretchMode = smMaxHeight
           DataField = 'aud_naoconformidade'
-          DataSet = frxDBDSSemGravar
-          DataSetName = 'frxDBDSSemGravar'
+          DataSet = frxDBAuditoriaAuto
+          DataSetName = 'frxDBAuditoriaAuto'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1571,14 +2019,14 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBDSSemGravar."aud_naoconformidade"]')
+            '[frxDBAuditoriaAuto."aud_naoconformidade"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
       object PageFooter1: TfrxPageFooter
         Height = 60.472480000000000000
-        Top = 317.480520000000000000
+        Top = 445.984540000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 925.945270000000000000
@@ -1592,7 +2040,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         end
         object Picture1: TfrxPictureView
           Left = 672.756340000000000000
-          Top = 11.338590000000010000
+          Top = 11.338589999999900000
           Width = 30.236240000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -2027,7 +2475,7 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         end
         object Memo11: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 37.795300000000000000
+          Top = 37.795299999999880000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -2042,17 +2490,33 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
         end
         object Line1: TfrxLineView
           Left = 3.779530000000000000
-          Top = 34.015769999999970000
+          Top = 34.015769999999920000
           Width = 653.858690000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 13.118119999999980000
+          Width = 982.677800000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object GroupHeader1: TfrxGroupHeader
-        Height = 56.708673620000000000
-        Top = 154.960730000000000000
+        Height = 68.047263620000000000
+        Top = 272.126160000000000000
         Width = 718.110700000000000000
-        Condition = '<frxDBDSSemGravar."aud_processo">'
+        Condition = '<frxDBAuditoriaAuto."aud_processo">'
         object Memo5: TfrxMemoView
           Width = 718.110236220000000000
           Height = 18.897650000000000000
@@ -2068,15 +2532,16 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            'Processo: [frxDBDSSemGravar."Processo"]')
+            'Processo: [frxDBAuditoriaAuto."processo"]')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
-          Top = 37.811023619999990000
-          Width = 174.992125984252000000
-          Height = 18.897650000000000000
+          Top = 37.811023620000190000
+          Width = 174.992125980000000000
+          Height = 30.236240000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2088,14 +2553,15 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Memo.UTF8W = (
             'Identifica'#231#227'o')
           ParentFont = False
-          VAlign = vaBottom
+          VAlign = vaCenter
         end
         object Memo9: TfrxMemoView
           Left = 175.480520000000000000
-          Top = 37.811023619999990000
-          Width = 241.133858270000000000
-          Height = 18.897650000000000000
+          Top = 37.811023620000190000
+          Width = 275.149628270000000000
+          Height = 30.236240000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2107,33 +2573,15 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Memo.UTF8W = (
             'Conformidade')
           ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo3: TfrxMemoView
-          Left = 416.189240000000000000
-          Top = 37.811023619999990000
-          Width = 60.850310710000200000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Requisito')
-          ParentFont = False
-          VAlign = vaBottom
+          VAlign = vaCenter
         end
         object Memo8: TfrxMemoView
-          Left = 477.590910000000000000
-          Top = 37.811023619999990000
-          Width = 240.755905511811000000
-          Height = 18.897650000000000000
+          Left = 450.519685040000000000
+          Top = 37.811023620000190000
+          Width = 267.212615510000000000
+          Height = 30.236240000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2143,12 +2591,12 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'N'#227'o Conformidade')
+            'N'#227'o Conformidade / Observa'#231#227'o de  Melhoria / Observa'#231#245'es')
           ParentFont = False
-          VAlign = vaBottom
+          VAlign = vaCenter
         end
         object Memo12: TfrxMemoView
-          Top = 18.897650000000000000
+          Top = 18.897650000000110000
           Width = 718.110236220000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -2163,8 +2611,8 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
             
-              'Gestor: [frxDBDSSemGravar."Gestor"] - [frxDBDSSemGravar."FuncaoG' +
-              'estor"]')
+              'Gestor: [frxDBAuditoriaAuto."Gestor"] - [frxDBAuditoriaAuto."Fun' +
+              'caoGestor"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -2230,7 +2678,13 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       'aud_gestor=aud_gestor'
       'processo=processo'
       'gestor=gestor'
-      'funcaogestor=funcaogestor')
+      'funcaogestor=funcaogestor'
+      'aud_auditor=aud_auditor'
+      'aud_periodo_ini=aud_periodo_ini'
+      'aud_periodo_fim=aud_periodo_fim'
+      'aud_data_programa=aud_data_programa'
+      'nome_emp=nome_emp'
+      'emp_escopo=emp_escopo')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 624
@@ -2240,18 +2694,23 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
     Connection = dm.Conexao
     SQL.Strings = (
       
-        'SELECT aud_codigo, aud_data, aud_conformidade, aud_requisito, au' +
-        'd_naoconformidade, '
+        'SELECT aud_codigo, A.aud_data, aud_conformidade, aud_requisito, ' +
+        'aud_naoconformidade,'
+      '    aud_tipo, aud_processo, aud_gestor, P.nome_pro as Processo,'
+      '    C.nome_col as Gestor, F.desc_fun as FuncaoGestor,'
       
-        '       aud_tipo, aud_processo, aud_gestor, P.nome_pro as Process' +
-        'o,'
-      '       C.nome_col as Gestor, F.desc_fun as FuncaoGestor'
-      'FROM auditoria_auto'
+        '    CB.aud_auditor, CB.aud_periodo_ini, CB.aud_periodo_fim, CB.a' +
+        'ud_data_programa,'
+      
+        '    (SELECT nome_emp FROM empresa), (SELECT emp_escopo FROM empr' +
+        'esa)'
+      'FROM auditoria_auto A'
       'INNER JOIN processos P ON P.codi_pro = aud_processo'
       'LEFT JOIN colaboradores C ON C.codi_col = aud_gestor'
       'LEFT JOIN funcoes F ON F.codi_fun = C.func_col'
-      'WHERE aud_data = '#39'2017-10-18'#39
-      'ORDER BY Processo')
+      'INNER JOIN auditoria_auto_cabec CB ON CB.aud_data = A.aud_data'
+      'WHERE A.aud_data = '#39'2018-01-25'#39
+      'ORDER BY Processo, aud_codigo')
     Params = <>
     Left = 693
     Top = 120
@@ -2314,6 +2773,29 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
       FieldName = 'funcaogestor'
       ReadOnly = True
       Size = 50
+    end
+    object cdsImprimiraud_auditor: TWideStringField
+      FieldName = 'aud_auditor'
+      Size = 50
+    end
+    object cdsImprimiraud_periodo_ini: TDateTimeField
+      FieldName = 'aud_periodo_ini'
+    end
+    object cdsImprimiraud_periodo_fim: TDateTimeField
+      FieldName = 'aud_periodo_fim'
+    end
+    object cdsImprimiraud_data_programa: TDateTimeField
+      FieldName = 'aud_data_programa'
+    end
+    object cdsImprimirnome_emp: TWideStringField
+      FieldName = 'nome_emp'
+      ReadOnly = True
+      Size = 200
+    end
+    object cdsImprimiremp_escopo: TWideMemoField
+      FieldName = 'emp_escopo'
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
   object dsAux2: TDataSource
@@ -2491,26 +2973,94 @@ object FormAuditoriaAuto: TFormAuditoriaAuto
   object zqryProcessosEvid: TZQuery
     Connection = dm.Conexao
     Params = <>
-    Left = 608
-    Top = 208
+    Left = 616
+    Top = 328
   end
   object dspProcessosEvid: TDataSetProvider
     DataSet = zqryProcessosEvid
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 648
-    Top = 208
+    Left = 656
+    Top = 328
   end
   object cdsProcessosEvid: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcessosEvid'
-    Left = 688
-    Top = 208
+    Left = 696
+    Top = 328
   end
   object dsProcessosEvid: TDataSource
     DataSet = cdsProcessosEvid
-    Left = 728
-    Top = 208
+    Left = 736
+    Top = 328
+  end
+  object zqryCabec: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      
+        'SELECT E.nome_emp, E.emp_escopo, A.aud_data, A.aud_auditor, A.au' +
+        'd_periodo_ini, '
+      'A.aud_periodo_fim, A.aud_data_programa'
+      'FROM auditoria_auto_cabec A, empresa E')
+    Params = <>
+    Left = 693
+    Top = 168
+  end
+  object dspCabec: TDataSetProvider
+    DataSet = zqryCabec
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 733
+    Top = 168
+  end
+  object cdsCabec: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCabec'
+    Left = 773
+    Top = 168
+    object cdsCabecnome_emp: TWideStringField
+      FieldName = 'nome_emp'
+      Required = True
+      Size = 200
+    end
+    object cdsCabecemp_escopo: TWideMemoField
+      FieldName = 'emp_escopo'
+      BlobType = ftWideMemo
+    end
+    object cdsCabecaud_data: TDateTimeField
+      FieldName = 'aud_data'
+      Required = True
+    end
+    object cdsCabecaud_auditor: TWideStringField
+      FieldName = 'aud_auditor'
+      Size = 50
+    end
+    object cdsCabecaud_periodo_ini: TDateTimeField
+      FieldName = 'aud_periodo_ini'
+    end
+    object cdsCabecaud_periodo_fim: TDateTimeField
+      FieldName = 'aud_periodo_fim'
+    end
+    object cdsCabecaud_data_programa: TDateTimeField
+      FieldName = 'aud_data_programa'
+    end
+  end
+  object frxDBDSCabec: TfrxDBDataset
+    UserName = 'frxDBDSCabec'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'nome_emp=nome_emp'
+      'emp_escopo=emp_escopo'
+      'aud_data=aud_data'
+      'aud_auditor=aud_auditor'
+      'aud_periodo_ini=aud_periodo_ini'
+      'aud_periodo_fim=aud_periodo_fim'
+      'aud_data_programa=aud_data_programa')
+    DataSet = cdsCabec
+    BCDToCurrency = False
+    Left = 624
+    Top = 168
   end
 end

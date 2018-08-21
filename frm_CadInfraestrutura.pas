@@ -127,8 +127,11 @@ type
     sbArquivo: TSpeedButton;
     cdsInfrainf_imagem: TWideMemoField;
     pnlImagem: TPanel;
-    imgEquipamento: TImage;
     opd1: TOpenDialog;
+    sbVisualizaTreCertificado: TSpeedButton;
+    lbl36: TLabel;
+    edtCaminhoImagem: TEdit;
+    dbimg1: TDBImage;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -160,11 +163,14 @@ type
     procedure Impressao(tipoImp: string);
     procedure AlterarCalibracao();
     procedure sbArquivoClick(Sender: TObject);
+    procedure sbVisualizaTreCertificadoClick(Sender: TObject);
+    procedure CarregarImagem();
   private
     { Private declarations }
     cOperacao: Char;
     sNovoCodigo: string;
     sCaminhoCompletoImagem: string;
+    Imagem    : TJpegImage;
   public
     { Public declarations }
   end;
@@ -294,7 +300,7 @@ procedure TFormCadInfraestrutura.btnGravarClick(Sender: TObject);
 begin
    if ValidarDados() then begin
       try
-         sCaminhoCompletoImagem:= ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.jpg';
+//         sCaminhoCompletoImagem:= ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.jpg';
 
          with cdsGravar do begin
             Active:= False;
@@ -317,7 +323,7 @@ begin
                              QuotedStr(edtResolucao.Text) + ',' +
                              QuotedStr(edtUnidade.Text) + ',' +
                              QuotedStr(dblStatus.KeyValue) + ',' +
-                             QuotedStr(sCaminhoCompletoImagem) +
+                             QuotedStr(edtCaminhoImagem.Text) +
                              ')';
                Execute;
             end
@@ -333,7 +339,7 @@ begin
                              ' inf_resolucao = ' + QuotedStr(edtResolucao.Text) + ',' +
                              ' inf_unidade = ' + QuotedStr(edtUnidade.Text) + ',' +
                              ' inf_status = ' + QuotedStr(dblStatus.KeyValue) + ',' +
-                             ' inf_imagem = ' + QuotedStr(sCaminhoCompletoImagem) +
+                             ' inf_imagem = ' + QuotedStr(edtCaminhoImagem.Text) +
                              ' WHERE codi_inf = ' + cdsInfracodi_inf.AsString;
                Execute;
 
@@ -341,10 +347,11 @@ begin
             end;
          end;
          // Grava a imagem na pasta Imagens
-         imgEquipamento.Picture.SaveToFile(ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.jpg');
+//         imgEquipamento.Picture.SaveToFile(ExtractFilePath(Application.ExeName) + '\Imagens\Infra' + edtCodigo.Text + '.bmp');
 
          Auditoria('CADASTRO DE INFRAESTRUTURA', edtDescricao.Text, cOperacao,'');
          AtualizarDados();
+         CarregarImagem();
 
          HabilitarCampos(False, False, Self);
          Botoes(True);
@@ -441,6 +448,26 @@ begin
    end;
 end;
 
+procedure TFormCadInfraestrutura.CarregarImagem;
+begin
+   if edtCaminhoImagem.Text <> EmptyStr then begin
+      if FileExists(edtCaminhoImagem.Text) then begin
+         dbimg1.Picture.LoadFromFile(edtCaminhoImagem.Text);
+      end
+      else begin
+         if Copy(edtCaminhoImagem.Text, 1, 4) = 'http' then begin
+            dbimg1.Picture.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Imagens\imgNaoDisponivel.jpg');
+         end
+         else begin
+            dbimg1.Picture.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Imagens\imgNaoEncontrada.jpg');
+         end;
+      end;
+   end
+   else begin
+      dbimg1.Picture:= nil;
+   end;
+end;
+
 procedure TFormCadInfraestrutura.ControlarAbas;
 begin
    if pctInfra.TabIndex = 0 then begin  // Cadastro
@@ -493,7 +520,7 @@ procedure TFormCadInfraestrutura.FormShow(Sender: TObject);
 begin
    pctInfra.TabIndex:= 0;
    AtualizarDados();
-   PreencherCampos;
+   PreencherCampos();
    Botoes(True);
    HabilitarCampos(False, False, Self);
    pnlImprimir.Visible:= False;
@@ -524,13 +551,14 @@ end;
 procedure TFormCadInfraestrutura.PreencherCampos;
 begin
    with cdsInfra do begin
-      edtCodigo.Text    := FieldByName('codi_inf').AsString;
-      edtDescricao.Text := FieldByName('desc_inf').AsString;
-      edtIdent.Text     := FieldByName('iden_inf').AsString;
-      spnDiasAviso.Value:= FieldByName('inf_diasaviso').AsFloat;
-      edtUnidade.Text   := FieldByName('inf_unidade').AsString;
-      edtResolucao.Text := FieldByName('inf_resolucao').AsString;
-      edtCapacidade.Text:= FieldByName('inf_capacidade').AsString;
+      edtCodigo.Text       := FieldByName('codi_inf').AsString;
+      edtDescricao.Text    := FieldByName('desc_inf').AsString;
+      edtIdent.Text        := FieldByName('iden_inf').AsString;
+      spnDiasAviso.Value   := FieldByName('inf_diasaviso').AsFloat;
+      edtUnidade.Text      := FieldByName('inf_unidade').AsString;
+      edtResolucao.Text    := FieldByName('inf_resolucao').AsString;
+      edtCapacidade.Text   := FieldByName('inf_capacidade').AsString;
+      edtCaminhoImagem.Text:= FieldByName('inf_imagem').AsString;
 
       // Falta definir como vai ficar esse campo
       if FieldByName('tipo_inf').AsString <> EmptyStr then begin
@@ -549,27 +577,23 @@ begin
          dblStatus.KeyValue:= FieldByName('inf_status').AsString;
       end;
 
-      if FileExists(FieldByName('inf_imagem').AsString) then begin
-         imgEquipamento.Picture.LoadFromFile(FieldByName('inf_imagem').AsString);
-      end;
+      CarregarImagem();
    end;
 end;
 
 procedure TFormCadInfraestrutura.sbArquivoClick(Sender: TObject);
-var
-   Imagem         : TJpegImage;
-   BlobStream     : TStream;
 begin
    opd1.Filter:= 'Imagem no formato JPEG (*.jpg)|*.jpg';
    opd1.DefaultExt:='jpg';
    opd1.Execute;
+   edtCaminhoImagem.Text:= opd1.FileName;
+   dbimg1.Picture.LoadFromFile(edtCaminhoImagem.Text);
+end;
 
-   if opd1.FileName <> '' then begin
-      Imagem:= TJPEGImage.Create;// Cria o objeto imagem
-      Imagem.Scale:= jsFullSize; // Atribui uma escala.. exibir 100%
-      Imagem.LoadFromFile(opd1.FileName);// Carrega a imagem em memória
-      imgEquipamento.Picture.Bitmap.assign(Imagem);// Carrega a imagem no TImage
-   end;
+procedure TFormCadInfraestrutura.sbVisualizaTreCertificadoClick(
+  Sender: TObject);
+begin
+   AbrirArquivo(cdsInfra.FieldByName('inf_imagem').AsString, Self.Name);
 end;
 
 function TFormCadInfraestrutura.ValidarDados(): Boolean;
@@ -643,19 +667,7 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_CadInfra.fr3');
-
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_CadInfra', frxReport1, tipoImp);
 end;
 
 end.

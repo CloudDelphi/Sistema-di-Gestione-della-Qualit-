@@ -70,9 +70,9 @@ end;
 
 procedure TFormLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
-   if Not (key in ['a'..'z', 'A'..'Z','0'..'9',#8,#13]) then begin
-      key := #0;
-   end;
+//   if Not (key in ['a'..'z', 'A'..'Z','0'..'9',#8,#13]) then begin
+//      key := #0;
+//   end;
 end;
 
 procedure TFormLogin.FormCreate(Sender: TObject);

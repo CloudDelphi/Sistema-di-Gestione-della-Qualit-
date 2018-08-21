@@ -239,6 +239,8 @@ type
     procedure btnPDCAClick(Sender: TObject);
     procedure sbVincularPDCAClick(Sender: TObject);
     procedure sbDesvincularPDCAClick(Sender: TObject);
+    procedure AtualizarValores;
+
   private
     { Private declarations }
     cOperacao: Char;
@@ -572,6 +574,8 @@ begin
                                 ' WHERE codi_ind = ' + cdsIndicadores.FieldByName('codi_ind').AsString;
                   Execute;
                end;
+
+               AtualizarValores();
             end;
 
             Auditoria('CADASTRO DE INDICADORES', edtDescricao.Text, cOperacao,'');
@@ -636,6 +640,13 @@ begin
       Botoes(True);
       Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
    end;
+end;
+
+procedure TFormCadIndicadores.AtualizarValores;
+begin
+   Executar(' UPDATE valor_indicador SET' +
+            ' proc_vin = ' + IntToStr(dblProcesso.KeyValue) +
+            ' WHERE codi_ind = ' + cdsIndicadores.FieldByName('codi_ind').AsString);
 end;
 
 procedure TFormCadIndicadores.btnImpressoraClick(Sender: TObject);

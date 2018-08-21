@@ -65,12 +65,6 @@ type
     lbl5: TLabel;
     lbl4: TLabel;
     mmoObs: TMemo;
-    cdsImprimirforn_nome: TWideStringField;
-    cdsImprimirforn_avaliacao: TFloatField;
-    cdsImprimirforn_validade: TDateTimeField;
-    cdsImprimirforn_area: TMemoField;
-    cdsImprimirQtd: TLargeintField;
-    cdsImprimirIQF: TFloatField;
     zqryConforme: TZQuery;
     dspConforme: TDataSetProvider;
     cdsConforme: TClientDataSet;
@@ -89,19 +83,6 @@ type
     dspImpRelacao: TDataSetProvider;
     cdsImpRelacao: TClientDataSet;
     frxDBImpRelacao: TfrxDBDataset;
-    cdsImpRelacaoforn_nome: TWideStringField;
-    cdsImpRelacaoiqf_data: TDateTimeField;
-    cdsImpRelacaoiqf_pontual: TLargeintField;
-    cdsImpRelacaoiqf_conforme: TLargeintField;
-    cdsImpRelacaoiqf_responsavel: TLargeintField;
-    cdsImpRelacaoPontual: TWideStringField;
-    cdsImpRelacaoConforme: TWideStringField;
-    cdsImpRelacaoResponsavel: TWideStringField;
-    cdsImpRelacaoforn_avaliacao: TFloatField;
-    cdsImpRelacaoIQF: TFloatField;
-    cdsImprimirforn_tipoProd: TIntegerField;
-    cdsImprimirtipo_nomeTipo: TWideStringField;
-    cdsImpRelacaotipo_nomeTipo: TWideStringField;
     zqryFiltroForn: TZQuery;
     dspFiltroForn: TDataSetProvider;
     cdsFiltroForn: TClientDataSet;
@@ -111,21 +92,16 @@ type
     cdsFornforn_codigo: TIntegerField;
     cdsFornImpforn_codigo: TIntegerField;
     cdsFiltroFornforn_codigo: TIntegerField;
-    cdsImprimiriqf_codfornecedor: TIntegerField;
-    cdsImpRelacaoiqf_codfornecedor: TIntegerField;
-    cdsImpRelacaoiqf_nf: TWideStringField;
-    cdsImpRelacaoforn_tipoprod: TIntegerField;
     lbl14: TLabel;
     edtCodigo: TEdit;
-    cdsImpRelacaoiqf_obs: TWideMemoField;
     pnlImprimir: TPanel;
     pnl2: TPanel;
     pnl3: TPanel;
     rgOrdemImpressao: TRadioGroup;
     rgTipoRel: TRadioGroup;
     pnl4: TPanel;
-    lbl11: TLabel;
-    lbl8: TLabel;
+    lblDataFinal: TLabel;
+    lblDataInicial: TLabel;
     dtDataFinal: TDateEdit;
     dtDataInicial: TDateEdit;
     pnl5: TPanel;
@@ -211,6 +187,40 @@ type
     cdsDoc: TClientDataSet;
     dsDoc: TDataSource;
     chkApoio: TCheckBox;
+    cdsImprimirforn_nome: TWideStringField;
+    cdsImprimirforn_avaliacao: TFloatField;
+    cdsImprimirforn_validade: TDateTimeField;
+    cdsImprimirforn_area: TWideMemoField;
+    cdsImprimirforn_tipoprod: TIntegerField;
+    cdsImprimirtipo_nometipo: TWideStringField;
+    cdsImprimiriqf_codfornecedor: TIntegerField;
+    cdsImprimirqtd: TLargeintField;
+    cdsImprimiriqf: TFloatField;
+    cdsImpRelacaoforn_nome: TWideStringField;
+    cdsImpRelacaoiqf_data: TDateTimeField;
+    cdsImpRelacaoiqf_codfornecedor: TIntegerField;
+    cdsImpRelacaoiqf_pontual: TLargeintField;
+    cdsImpRelacaoiqf_conforme: TLargeintField;
+    cdsImpRelacaoiqf_nf: TWideStringField;
+    cdsImpRelacaoiqf_responsavel: TLargeintField;
+    cdsImpRelacaopontual: TWideStringField;
+    cdsImpRelacaoconforme: TWideStringField;
+    cdsImpRelacaoresponsavel: TWideStringField;
+    cdsImpRelacaoiqf: TFloatField;
+    cdsImpRelacaoforn_tipoprod: TIntegerField;
+    cdsImpRelacaoiqf_obs: TWideMemoField;
+    cdsImpRelacaotipo_nometipo: TWideStringField;
+    cdsImpRelacaoavaliacao: TFloatField;
+    zqryRelIndiceMensal: TZQuery;
+    dspRelIndiceMensal: TDataSetProvider;
+    cdsRelIndiceMensal: TClientDataSet;
+    frxDBRelIndiceMensal: TfrxDBDataset;
+    cdsRelIndiceMensalforn_nome: TWideStringField;
+    cdsRelIndiceMensalforn_codigo: TIntegerField;
+    cdsRelIndiceMensaliqf1: TFloatField;
+    cdsRelIndiceMensaliqf2: TFloatField;
+    cdsRelIndiceMensaliqf3: TFloatField;
+    cdsRelIndiceMensaliqf4: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados(CodFornecedor: string = '');
     procedure AtualizarDadosAcessorios();
@@ -254,6 +264,8 @@ type
     procedure sbAbrirDocClick(Sender: TObject);
     procedure sbVisualizarDocClick(Sender: TObject);
     procedure dbgDocCellClick(Column: TColumn);
+    procedure dblFornecedorExit(Sender: TObject);
+    procedure dblFantasiaExit(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -594,17 +606,8 @@ end;
 
 procedure TFormCadIQF.btnImprimirClick(Sender: TObject);
 begin
-   pnlImprimir.Top     := Self.Height div 2 - pnlImprimir.Height div 2 - 40;
-   pnlImprimir.Left    := Self.Width div 2 - pnlImprimir.Width div 2;
-   pnlImprimir.Visible := True;
-
+   AbrePanel(pnlImprimir, Self);
    rgOrdemImpressao.ItemIndex:= 1;
-   dtDataInicial.Date  := Date();
-   dtDataFinal.Date    := Date();
-   dblFornImp.Enabled  := False;
-   chkTodosForn.Checked:= True;
-   rgTipoRel.ItemIndex := 1;
-   chkObs.Enabled      := False;
 end;
 
 procedure TFormCadIQF.btnNovoClick(Sender: TObject);
@@ -817,10 +820,20 @@ begin
    edtAvaliacao.Value    := cdsForn.FieldByName('forn_avaliacao').AsFloat;
 end;
 
+procedure TFormCadIQF.dblFantasiaExit(Sender: TObject);
+begin
+   dblFantasiaCloseUp(Self);
+end;
+
 procedure TFormCadIQF.dblFornecedorCloseUp(Sender: TObject);
 begin
    dblFantasia.KeyValue:= dblFornecedor.KeyValue;
    edtAvaliacao.Value  := cdsForn.FieldByName('forn_avaliacao').AsFloat;
+end;
+
+procedure TFormCadIQF.dblFornecedorExit(Sender: TObject);
+begin
+   dblFornecedorCloseUp(Self);
 end;
 
 procedure TFormCadIQF.dblFornImpCloseUp(Sender: TObject);
@@ -850,6 +863,13 @@ begin
    Botoes(True);
    HabilitarCampos(False, False, Self, 1, 2);
    pnlImprimir.Visible:= False;
+
+   dtDataInicial.Date  := Date();
+   dtDataFinal.Date    := Date();
+   dblFornImp.Enabled  := False;
+   chkTodosForn.Checked:= True;
+   rgTipoRel.ItemIndex := 1;
+   chkObs.Enabled      := False;
 end;
 
 procedure TFormCadIQF.mmoObsKeyPress(Sender: TObject;
@@ -923,6 +943,18 @@ end;
 procedure TFormCadIQF.rgTipoRelClick(Sender: TObject);
 begin
    chkObs.Enabled:= (rgTipoRel.ItemIndex = 0) or (rgTipoRel.ItemIndex = 2);
+
+   if rgTipoRel.ItemIndex = 3 then begin// Índice Mensal
+      TCustomRadioGroup(rgOrdemImpressao.Components[2]).Enabled:= False;
+      lblDataFinal.Visible:= False;
+      dtDataFinal.Visible:= False;
+      TryFocus(dtDataInicial);
+   end
+   else begin
+      TCustomRadioGroup(rgOrdemImpressao.Components[2]).Enabled:= True;
+      lblDataFinal.Visible:= True;
+      dtDataFinal.Visible:= True;
+   end;
 end;
 
 procedure TFormCadIQF.sbAbrirDocClick(Sender: TObject);
@@ -1009,17 +1041,24 @@ var
    nAcumula: Real;
    nContSimP, nContNaoP, nContSimC, nContNaoC: Integer;
    sPesoAval, sPesoConf, sPesoPont: String;
+   sNomeRel: string;
+   dDataIni1, dDataIni2, dDataIni3, dDataIni4: TDateTime;
+   dDataFim1, dDataFim2, dDataFim3, dDataFim4: TDateTime;
+   sMes1, sMes2, sMes3, sMes4: string;
+   sMetaIQF: string;
 begin
    // Busca os percentuais na tabela de parâmetros
    with dm.cdsAux do begin
       Active:= False;
-      CommandText:= ' SELECT pesoiqfconformidade, pesoiqfpontualidade, pesoiqfavaliacao' +
+      CommandText:= ' SELECT pesoiqfconformidade, pesoiqfpontualidade, ' +
+                    ' pesoiqfavaliacao, meta_iqf' +
                     ' FROM parametros';
       Active:= True;
 
       sPesoAval:= VirgulaParaPonto(FieldByName('pesoiqfavaliacao').AsFloat / 100, 2);
       sPesoConf:= FieldByName('pesoiqfconformidade').AsString;
       sPesoPont:= FieldByName('pesoiqfpontualidade').AsString;
+      sMetaIQF := FieldByName('meta_iqf').AsString;
    end;
 
    sPeriodo:= dtDataInicial.Text + ' à ' + dtDataFinal.Text;
@@ -1034,26 +1073,26 @@ begin
 
          if chkTipoProd.Checked = True then begin
             case rgOrdemImpressao.ItemIndex of
-               0: begin
+               0: begin // Razão Social
                   sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome, I.iqf_data';
                end;
-               1: begin
+               1: begin // Nome Fantasia
                   sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia, I.iqf_data';
                end;
-               2: begin
+               2: begin // Valor IQF
                   sCampoOrdem:= 'P.tipo_nomeTipo, IQF, I.iqf_data';
                end;
             end;
          end
          else begin
             case rgOrdemImpressao.ItemIndex of
-               0: begin
+               0: begin // Razão Social
                   sCampoOrdem:= 'F.forn_nome, I.iqf_data';
                end;
-               1: begin
+               1: begin // Nome Fantasia
                   sCampoOrdem:= 'F.forn_fantasia, I.iqf_data';
                end;
-               2: begin
+               2: begin // Valor IQF
                   sCampoOrdem:= 'IQF, I.iqf_data';
                end;
             end;
@@ -1067,7 +1106,15 @@ begin
                           ' TC1.valo_com as Conforme, C.nome_col as Responsavel, F.forn_avaliacao,' +
    //                       ' (forn_avaliacao * 0.2) + ((iqf_pontual * (forn_avaliacao * 0.3)) + ' +
    //                       ' (iqf_conforme * (forn_avaliacao * 0.5))) as IQF,' +
-                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+//                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+                          // Chaamado TT660
+                          ' (SELECT for_avaliacao FROM forn_avaliacao ' +
+                          ' WHERE (for_data_validade BETWEEN i.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+                          ' ORDER BY for_data_validade LIMIT 1) as Avaliacao,' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao ' +
+                          '    WHERE (for_data_validade BETWEEN i.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+                          '    ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') + ' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
                           ' F.forn_tipoProd, I.iqf_obs, ' +
                           ' CASE ' +
                           '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
@@ -1117,42 +1164,31 @@ begin
             end;
          end;
 
-         with frxReport1 do begin
-            if chkTipoProd.Checked = True then begin
-               if chkObs.Checked = True then begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessaObs.fr3');
-               end
-               else begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessa.fr3');
-               end;
+         if chkTipoProd.Checked = True then begin
+            if chkObs.Checked = True then begin
+               sNomeRel:= 'rel_IQFTipoRemessaObs';
             end
             else begin
-               if chkObs.Checked = True then begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessaObs.fr3');
-               end
-               else begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessa.fr3');
-               end;
+               sNomeRel:= 'rel_IQFTipoRemessa';
             end;
-
-            Variables['TituloRel']:= QuotedStr('IQF - RELAÇÃO DE REMESSAS');
-            Variables['Periodo']:= QuotedStr(sPeriodo);
-            Variables['Total']:= nCont;
-            Variables['TotSimP']:= nContSimP;
-            Variables['TotNaoP']:= nContNaoP;
-            Variables['TotSimC']:= nContSimC;
-            Variables['TotNaoC']:= nContNaoC;
-
-            if tipoImp = 'I' then begin
-            // Imprimir direto
-               PrepareReport;
-               PrintOptions.ShowDialog:= False;
-               Print;
+         end
+         else begin
+            if chkObs.Checked = True then begin
+               sNomeRel:= 'rel_IQFRemessaObs';
             end
             else begin
-               ShowReport;
+               sNomeRel:= 'rel_IQFRemessa';
             end;
          end;
+
+         Imprimir(sNomeRel, frxReport1, tipoImp,
+                  'TituloRel', 'IQF - RELAÇÃO DE REMESSAS',
+                  'Periodo', sPeriodo,
+                  'Total', IntToStr(nCont),
+                  'TotSimP', IntToStr(nContSimP),
+                  'TotNaoP', IntToStr(nContNaoP),
+                  'TotSimC', IntToStr(nContSimC),
+                  'TotNaoC', IntToStr(nContNaoC));
       end;
       1: begin // Média de IQF
          case rgOrdemImpressao.ItemIndex of
@@ -1181,12 +1217,12 @@ begin
                end;
             end;
          end;
-         if rgOrdemImpressao.ItemIndex = 0 then begin
-
-         end
-         else begin
-
-         end;
+//         if rgOrdemImpressao.ItemIndex = 0 then begin
+//
+//         end
+//         else begin
+//
+//         end;
 
          nCont   := 0;
          nAcumula:= 0;
@@ -1201,11 +1237,20 @@ begin
                           '    ELSE P.tipo_nomeTipo' +
                           ' END as tipo_nomeTipo,' +
                           ' iqf_codFornecedor, COUNT(*) as Qtd, ' +
+//                          ' (SELECT for_avaliacao FROM forn_avaliacao' +
+//                          '  WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+//                          '  ORDER BY for_data_validade LIMIT 1) as AvaliacaoRecente, ' +
+                          // Cálculo da Média dos IQF individuais do fornecedor - Chamado TT660
+                          ' AVG(' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao' +
+                          '  WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+                          '  ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') +' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ')) as IQF' +
       //                    ' SUM(iqf_pontual) as Pontual,' +
       //                    ' SUM(iqf_conforme) as Conforme,' +
    //                       ' (forn_avaliacao * 0.2) + ((SUM(iqf_pontual) * (forn_avaliacao * 0.3)) + (SUM(iqf_conforme) * (forn_avaliacao * 0.5))) / COUNT(*) as IQF' +
-                          ' (forn_avaliacao * ' + sPesoAval + ') + ((SUM(iqf_pontual) / COUNT(*)) * ' + sPesoPont + ') + ((SUM(iqf_conforme) / COUNT(*)) * ' + sPesoConf + ') as IQF' +
-                          ' FROM iqf_remessa' +
+//                          ' (forn_avaliacao * ' + sPesoAval + ') + ((SUM(iqf_pontual) / COUNT(*)) * ' + sPesoPont + ') + ((SUM(iqf_conforme) / COUNT(*)) * ' + sPesoConf + ') as IQF' +
+                          ' FROM iqf_remessa I' +
                           ' INNER JOIN Fornecedores F ON F.forn_codigo = iqf_codFornecedor' +
                           ' LEFT JOIN forn_tipo_produto P ON P.tipo_codigo = F.forn_tipoProd' +
                           ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dtDataInicial.Date) +
@@ -1215,7 +1260,10 @@ begin
                CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
             end;
             CommandText:= CommandText + ' GROUP BY iqf_codFornecedor, F.forn_nome, F.forn_avaliacao, ' +
-                                        ' F.forn_validade, F.forn_area, F.forn_tipoProd, P.tipo_nomeTipo, F.forn_fantasia' +
+                                        ' F.forn_validade, F.forn_area, F.forn_tipoProd, P.tipo_nomeTipo, ' +
+                                        ' F.forn_fantasia ' +
+//                                        ' I.iqf_data, ' +
+//                                        ' F.forn_codigo' +
                           ' ORDER BY ' + sCampoOrdem;
             Active:= True;
             First;
@@ -1235,26 +1283,16 @@ begin
             Exit;
          end;
 
-         with frxReport1 do begin
-            if chkTipoProd.Checked = True then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipo.fr3');
-            end
-            else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQF.fr3');
-            end;
-            Variables['Periodo']:= QuotedStr(sPeriodo);
-            Variables['Media']  := QuotedStr(FormatFloat('##,##0.00',nAcumula / nCont));
-
-            if tipoImp = 'I' then begin
-            // Imprimir direto
-               PrepareReport;
-               PrintOptions.ShowDialog:= False;
-               Print;
-            end
-            else begin
-               ShowReport;
-            end;
+         if chkTipoProd.Checked = True then begin
+            sNomeRel:= 'rel_IQFTipo_retrato';
+         end
+         else begin
+            sNomeRel:= 'rel_IQF_retrato';
          end;
+
+         Imprimir(sNomeRel, frxReport1, tipoImp,
+                  'Periodo', sPeriodo,
+                  'Media', FormatFloat('##,##0.00',nAcumula / nCont));
       end;
       2: begin // Relatório de lançamentos de apoio
          nCont    := 0;
@@ -1292,13 +1330,20 @@ begin
 
          with cdsImpRelacao do begin
             Active:= False;
-
             CommandText:= ' SELECT F.forn_nome, I.iqf_data, I.iqf_CodFornecedor, I.iqf_pontual, ' +
                           ' I.iqf_conforme, I.iqf_NF, iqf_responsavel, TC.valo_com as Pontual, ' +
                           ' TC1.valo_com as Conforme, C.nome_col as Responsavel, F.forn_avaliacao,' +
    //                       ' (forn_avaliacao * 0.2) + ((iqf_pontual * (forn_avaliacao * 0.3)) + ' +
    //                       ' (iqf_conforme * (forn_avaliacao * 0.5))) as IQF,' +
-                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+//                          ' (F.forn_avaliacao * ' + sPesoAval + ') + (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
+                          // Chaamado TT660
+                          ' (SELECT for_avaliacao FROM forn_avaliacao ' +
+                          ' WHERE (for_data_validade BETWEEN i.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+                          ' ORDER BY for_data_validade LIMIT 1) as Avaliacao,' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao ' +
+                          '    WHERE (for_data_validade BETWEEN i.iqf_data AND for_data_validade) AND for_codfor = F.forn_codigo' +
+                          '    ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') + ' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ') as IQF,' +
                           ' F.forn_tipoProd, I.iqf_obs, ' +
                           ' CASE ' +
                           '    WHEN F.forn_tipoProd IS NULL THEN ' + QuotedStr('SEM CLASSIFICAÇÃO') +
@@ -1318,6 +1363,7 @@ begin
                CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
             end;
             CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
+
             Active:= True;
          end;
 
@@ -1348,42 +1394,169 @@ begin
             end;
          end;
 
-         with frxReport1 do begin
-            if chkTipoProd.Checked = True then begin
-               if chkObs.Checked = True then begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessaObs.fr3');
-               end
-               else begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFTipoRemessa.fr3');
-               end;
+         if chkTipoProd.Checked = True then begin
+            if chkObs.Checked = True then begin
+               sNomeRel:= 'rel_IQFTipoRemessaObs';
             end
             else begin
-               if chkObs.Checked = True then begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessaObs.fr3');
-               end
-               else begin
-                  LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_IQFRemessa.fr3');
-               end;
+               sNomeRel:= 'rel_IQFTipoRemessa';
             end;
-
-            Variables['TituloRel']:= QuotedStr('IQF - RELAÇÃO DE REMESSAS DE APOIO');
-            Variables['Periodo']:= QuotedStr(sPeriodo);
-            Variables['Total']:= nCont;
-            Variables['TotSimP']:= nContSimP;
-            Variables['TotNaoP']:= nContNaoP;
-            Variables['TotSimC']:= nContSimC;
-            Variables['TotNaoC']:= nContNaoC;
-
-            if tipoImp = 'I' then begin
-            // Imprimir direto
-               PrepareReport;
-               PrintOptions.ShowDialog:= False;
-               Print;
+         end
+         else begin
+            if chkObs.Checked = True then begin
+               sNomeRel:= 'rel_IQFRemessaObs';
             end
             else begin
-               ShowReport;
+               sNomeRel:= 'rel_IQFRemessa';
             end;
          end;
+
+         Imprimir(sNomeRel, frxReport1, tipoImp,
+                  'TituloRel', 'IQF - RELAÇÃO DE REMESSAS DE APOIO',
+                  'Periodo', sPeriodo,
+                  'Total', IntToStr(nCont),
+                  'TotSimP', IntToStr(nContSimP),
+                  'TotNaoP', IntToStr(nContNaoP),
+                  'TotSimC', IntToStr(nContSimC),
+                  'TotNaoC', IntToStr(nContNaoC));
+      end;
+      3: begin // Índice Mensal - Chamado TT639
+         // Desabilita a ordenaçao por IQF
+         case rgOrdemImpressao.ItemIndex of
+            0: begin
+               if chkTipoProd.Checked = True then begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_nome';
+               end
+               else begin
+                  sCampoOrdem:= 'F.forn_nome';
+               end;
+            end;
+            1: begin
+               if chkTipoProd.Checked = True then begin
+                  sCampoOrdem:= 'P.tipo_nomeTipo, F.forn_fantasia';
+               end
+               else begin
+                  sCampoOrdem:= 'F.forn_fantasia';
+               end;
+            end;
+//            2: begin
+//               if chkTipoProd.Checked = True then begin
+//                  sCampoOrdem:= 'P.tipo_nomeTipo, IQF';
+//               end
+//               else begin
+//                  sCampoOrdem:= 'IQF';
+//               end;
+//            end;
+         end;
+
+         // Monta as datas inicial e final dos 4 meses do relatório com base na data inicial da tela
+         dDataIni1:= StrToDate('01/' + FormatDateTime('mm', dtDataInicial.Date) + '/' +
+                               FormatDateTime('yyyy', dtDataInicial.Date));
+         dDataIni2:= IncMonth(dDataIni1);
+         dDataIni3:= IncMonth(dDataIni2);
+         dDataIni4:= IncMonth(dDataIni3);
+
+         dDataFim1:= StrToDate(UltimoDiaDoMes(dDataIni1) + '/' +
+                               FormatDateTime('mm', dtDataInicial.Date) + '/' +
+                               FormatDateTime('yyyy', dtDataInicial.Date));
+         dDataFim2:= StrToDate(UltimoDiaDoMes(dDataIni2) + '/' +
+                               FormatDateTime('mm', dDataIni2) + '/' +
+                               FormatDateTime('yyyy', dDataIni2));
+         dDataFim3:= StrToDate(UltimoDiaDoMes(dDataIni3) + '/' +
+                               FormatDateTime('mm', dDataIni3) + '/' +
+                               FormatDateTime('yyyy', dDataIni3));
+         dDataFim4:= StrToDate(UltimoDiaDoMes(dDataIni4) + '/' +
+                               FormatDateTime('mm', dDataIni4) + '/' +
+                               FormatDateTime('yyyy', dDataIni4));
+
+         sMes1:= FormatDateTime('mm', dDataIni1) + '/' +
+                 FormatDateTime('yyyy', dDataIni1);
+         sMes2:= FormatDateTime('mm', dDataIni2) + '/' +
+                 FormatDateTime('yyyy', dDataIni2);
+         sMes3:= FormatDateTime('mm', dDataIni3) + '/' +
+                 FormatDateTime('yyyy', dDataIni3);
+         sMes4:= FormatDateTime('mm', dDataIni4) + '/' +
+                 FormatDateTime('yyyy', dDataIni4);
+
+         with cdsRelIndiceMensal do begin
+            Active:= False;
+            CommandText:= ' SELECT F.forn_nome, F.forn_codigo,' +
+                          ' (SELECT AVG(' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao' +
+                          ' WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = iqf_codfornecedor' +
+                          ' ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') +' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ')) as iqf1' +
+                          ' FROM iqf_remessa I' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dDataIni1) + ' AND ' + ArrumaDataSQL(dDataFim1) +
+                          ' AND iqf_codfornecedor = F.forn_codigo' +
+                          ' AND iqf_apoio <> 1' +
+                          ' GROUP BY iqf_codfornecedor' +
+                          ' ),' +
+                          ' (SELECT AVG(' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao' +
+                          ' WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = iqf_codfornecedor' +
+                          ' ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') +' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ')) as iqf2' +
+                          ' FROM iqf_remessa I' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dDataIni2) + ' AND ' + ArrumaDataSQL(dDataFim2) +
+                          ' AND iqf_codfornecedor = F.forn_codigo' +
+                          ' AND iqf_apoio <> 1' +
+                          ' GROUP BY iqf_codfornecedor' +
+                          ' ),' +
+                          ' (SELECT AVG(' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao' +
+                          ' WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = iqf_codfornecedor' +
+                          ' ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') +' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ')) as iqf3' +
+                          ' FROM iqf_remessa I' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dDataIni3) + ' AND ' + ArrumaDataSQL(dDataFim3) +
+                          ' AND iqf_codfornecedor = F.forn_codigo' +
+                          ' AND iqf_apoio <> 1' +
+                          ' GROUP BY iqf_codfornecedor' +
+                          ' ),' +
+                          ' (SELECT AVG(' +
+                          ' ((SELECT for_avaliacao FROM forn_avaliacao' +
+                          ' WHERE (for_data_validade BETWEEN I.iqf_data AND for_data_validade) AND for_codfor = iqf_codfornecedor' +
+                          ' ORDER BY for_data_validade LIMIT 1) * ' + sPesoAval + ') +' +
+                          ' (iqf_pontual * ' + sPesoPont + ') + (iqf_conforme * ' + sPesoConf + ')) as iqf4' +
+                          ' FROM iqf_remessa I' +
+                          ' WHERE iqf_data BETWEEN ' + ArrumaDataSQL(dDataIni4) + ' AND ' + ArrumaDataSQL(dDataFim4) +
+                          ' AND iqf_codfornecedor = F.forn_codigo' +
+                          ' AND iqf_apoio <> 1' +
+                          ' GROUP BY iqf_codfornecedor' +
+                          ' )' +
+                          ' FROM Fornecedores F' +
+                          ' WHERE forn_codigo < 999999';
+
+            if chkTodosForn.Checked = False then begin
+               CommandText:= CommandText + ' AND F.forn_codigo = ' + QuotedStr(dblFornImp.KeyValue);
+            end;
+            CommandText:= CommandText + ' ORDER BY ' + sCampoOrdem;
+            Active:= True;
+            First;
+         end;
+
+         if cdsRelIndiceMensal.RecordCount = 0 then begin
+            Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
+            Exit;
+         end;
+
+         if chkTipoProd.Checked = True then begin
+            sNomeRel:= 'rel_IQF_IndiceMensal';
+         end
+         else begin
+            sNomeRel:= 'rel_IQF_IndiceMensal';
+         end;
+
+         sPeriodo:= DateToStr(dDataIni1) + ' - ' + DateToStr(dDataFim4);
+         Imprimir(sNomeRel, frxReport1, tipoImp,
+                  'Periodo', sPeriodo,
+                  'Mes1', sMes1,
+                  'Mes2', sMes2,
+                  'Mes3', sMes3,
+                  'Mes4', sMes4,
+                  'MetaIQF', sMetaIQF);
+         // A cor do memo no relatório tem a condição na propriedade Highlights de cada memo
       end;
    end;
 end;

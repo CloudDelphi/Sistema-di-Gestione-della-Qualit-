@@ -135,6 +135,8 @@ type
     cdsImprimirresponsavelacao: TWideStringField;
     Imprimiraco_prazo: TDateTimeField;
     cdsAcoesPMCcodi_pmc: TLargeintField;
+    cdsAcoesPMCemitente: TWideStringField;
+    cdsAcoesPMCncon_pmc: TWideMemoField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
@@ -161,6 +163,8 @@ type
     procedure cdsAcoesPMCresponsavelGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure rgOpcoesClick(Sender: TObject);
+    procedure cdsAcoesPMCncon_pmcGetText(Sender: TField; var Text: string;
+      DisplayText: Boolean);
   private
     { Private declarations }
     cOperacao: Char;
@@ -385,11 +389,13 @@ begin
    with cdsAcoesPMC do begin
       Active:= False;
       CommandText:= ' SELECT PM.codi_pmc, nume_pmc, TC.valo_com as Tipo, aco_prazo,' +
-                    ' C.nome_col as Responsavel' +
+                    ' C.nome_col as Responsavel, CE.nome_col as Emitente,' +
+                    ' PM.ncon_pmc' +
                     ' FROM pmc PM' +
                     ' INNER JOIN pmc_acoes PA ON PA.codi_pmc = PM.codi_pmc' +
                     ' INNER JOIN colaboradores C ON C.codi_col = PA.resp_aco' +
                     ' INNER JOIN tabela_combos TC ON TC.tipo_com = 4 AND TC.codi_com = tipo_pmc' +
+                    ' INNER JOIN colaboradores CE ON CE.codi_col = PM.emit_pmc' +
                     ' WHERE ' + sWhereAcoes + 'PA.vimp_aco = ' + QuotedStr('') +
                     varWhere +
                     ' ORDER BY nume_pmc DESC';
@@ -407,6 +413,12 @@ begin
       btnImprimir.Enabled        := True;
       btnImprimirCompleto.Enabled:= True;
    end;
+end;
+
+procedure TFormCadPMCAcoesConsulta.cdsAcoesPMCncon_pmcGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+   Text:= Copy(cdsAcoesPMC.FieldByName('ncon_pmc').AsString, 1, 500);
 end;
 
 procedure TFormCadPMCAcoesConsulta.cdsAcoesPMCresponsavelGetText(Sender: TField;
@@ -536,23 +548,11 @@ begin
          sValorPeriodo:= dtDataIni.Text + ' a ' + dtDataFim.Text;
       end;
 
-      with frxReport1 do begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_GraficoPMCAcoesLista.fr3');
-         Variables['periodo']:= QuotedStr(sValorPeriodo);
-         Variables['titulo'] := QuotedStr(sTituloRelatorio);
+      Imprimir('rel_GraficoPMCAcoesLista', frxReport1, tipoImp,
+               'periodo', QuotedStr(sValorPeriodo),
+               'titulo', QuotedStr(sTituloRelatorio));
 
-         if tipoImp = 'I' then begin
-         // Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= False;
-            Print;
-         end
-         else begin
-            ShowReport;
-         end;
-      end;
-
-      Auditoria('CONSULTA AÇÕES DE PMC','','R', '');
+//      Auditoria('CONSULTA AÇÕES DE PMC','','R', '');
    end;
 
    if sTipoRel = 'C' then begin // Completo
@@ -577,19 +577,7 @@ begin
          Exit;
       end;
 
-      with frxReport1 do begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_PMC_Completo.fr3');
-
-         if tipoImp = 'I' then begin
-         // Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= False;
-            Print;
-         end
-         else begin
-            ShowReport;
-         end;
-      end;
+      Imprimir('rel_PMC_Completo', frxReport1, tipoImp);
 
       with dm.cdsAux2 do begin
          Active:= False;
@@ -598,7 +586,7 @@ begin
          Active:= True;
       end;
 //      frxReport1.Variables['fase']:= QuotedStr(dblFase.Text);
-      Auditoria('PMC LISTA COMPLETA','','R', '');
+//      Auditoria('PMC LISTA COMPLETA','','R', '');
    end;
 end;
 

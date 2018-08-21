@@ -1166,8 +1166,8 @@ object FormCadRiscoVisualizacao: TFormCadRiscoVisualizacao
     end
   end
   object pnlPMCLista: TPanel
-    Left = 312
-    Top = 109
+    Left = 413
+    Top = -10
     Width = 353
     Height = 430
     TabOrder = 2
@@ -1646,8 +1646,8 @@ object FormCadRiscoVisualizacao: TFormCadRiscoVisualizacao
     end
   end
   object pnlPDCALista: TPanel
-    Left = 436
-    Top = 191
+    Left = 540
+    Top = 48
     Width = 469
     Height = 430
     TabOrder = 3

@@ -7,7 +7,7 @@
 			<DCC_DependencyCheckOutputName>Destra.exe</DCC_DependencyCheckOutputName>
 			<ProjectVersion>12.2</ProjectVersion>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Config Condition="'$(Config)'==''">Release</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
@@ -415,6 +415,39 @@
 			</DCCReference>
 			<DCCReference Include="frm_AuditoriaAuto.pas">
 				<Form>FormAuditoriaAuto</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadAuditoriaAutoCabec.pas">
+				<Form>FormCadAuditoriaAutoCabec</Form>
+			</DCCReference>
+			<DCCReference Include="frm_GraficoAudAuto.pas">
+				<Form>FormGraficoAudAuto</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadCalibracaoLista.pas">
+				<Form>FormCadCalibracaoLista</Form>
+			</DCCReference>
+			<DCCReference Include="frm_LancarTreinamentos.pas">
+				<Form>FormLancarTreinamentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_ProgramarTreinamentos.pas">
+				<Form>FormProgramarTreinamentos</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadEmail.pas">
+				<Form>FormCadEmail</Form>
+			</DCCReference>
+			<DCCReference Include="frm_MotivoRecusaRNC.pas">
+				<Form>FormMotivoRecusaRNC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_VisualizaHistoricoRNC.pas">
+				<Form>FormVisualizaHistoricoRNC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadOrigemPMC.pas">
+				<Form>FormCadOrigemPMC</Form>
+			</DCCReference>
+			<DCCReference Include="frm_LancarEficacia.pas">
+				<Form>FormLancarEficacia</Form>
+			</DCCReference>
+			<DCCReference Include="frm_CadMotivoPMC.pas">
+				<Form>FormCadMotivoPMC</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Debug">
 				<Key>Cfg_2</Key>

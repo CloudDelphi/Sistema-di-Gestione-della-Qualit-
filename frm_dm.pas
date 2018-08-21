@@ -352,6 +352,9 @@ type
     dspAux6: TDataSetProvider;
     cdsAux6: TClientDataSet;
     zqryAux6: TZQuery;
+    dspAuxParametro: TDataSetProvider;
+    cdsAuxParametro: TClientDataSet;
+    zqryAuxParametro: TZQuery;
     procedure cdsAnalise_AcoesCalcFields(DataSet: TDataSet);
     procedure cdsAnaliseresu_anaGetText(Sender: TField; var Text: string;
       DisplayText: Boolean);
@@ -648,6 +651,7 @@ begin
          4: cdsindicadoresDescPeriodicidade.AsString:= 'ANUAL';
          5: cdsindicadoresDescPeriodicidade.AsString:= 'BIENAL';
          6: cdsindicadoresDescPeriodicidade.AsString:= 'TRIENAL';
+         7: cdsindicadoresDescPeriodicidade.AsString:= 'QUADRIENAL';
       end;
    end;
 end;

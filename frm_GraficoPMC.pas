@@ -150,6 +150,42 @@ type
     cdsExcel: TClientDataSet;
     dsExcel: TDataSource;
     dbgExcel: TDBGrid;
+    ts8: TTabSheet;
+    ts9: TTabSheet;
+    DBAdvGDIPChartView9: TDBAdvGDIPChartView;
+    zqryPMCMotivo: TZQuery;
+    dspPMCMotivo: TDataSetProvider;
+    cdsPMCMotivo: TClientDataSet;
+    dsPMCMotivo: TDataSource;
+    DBAdvGDIPChartView10: TDBAdvGDIPChartView;
+    zqryPMCTipo: TZQuery;
+    dspPMCTipo: TDataSetProvider;
+    cdsPMCTipo: TClientDataSet;
+    cds6: TLargeintField;
+    cds7: TWideStringField;
+    cds8: TLargeintField;
+    dsPMCTipo: TDataSource;
+    cdsPMCMotivomotivo: TWideStringField;
+    cdsPMCMotivoqtde: TLargeintField;
+    frxDBPMCMotivo: TfrxDBDataset;
+    zqryImpPMCMotivo: TZQuery;
+    dspImpPMCMotivo: TDataSetProvider;
+    cdsImpPMCMotivo: TClientDataSet;
+    cdsImpPMCMotivonume_pmc: TWideStringField;
+    cdsImpPMCMotivodata_pmc: TDateTimeField;
+    cdsImpPMCMotivoresponsavel: TWideStringField;
+    cdsImpPMCMotivoorigem: TWideStringField;
+    cdsImpPMCMotivomotivo: TWideStringField;
+    cdsImpPMCMotivotipo: TWideStringField;
+    frxDBDSPMCTipo: TfrxDBDataset;
+    zqryImpPMCTipo: TZQuery;
+    dspImpPMCTipo: TDataSetProvider;
+    cdsImpPMCTipo: TClientDataSet;
+    cdsImpPMCTiponume_pmc: TWideStringField;
+    cdsImpPMCTipodata_pmc: TDateTimeField;
+    cdsImpPMCTiporesponsavel: TWideStringField;
+    cdsImpPMCTipoorigem: TWideStringField;
+    cdsImpPMCTipotipo: TWideStringField;
     procedure Inicializar();
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
@@ -205,6 +241,7 @@ begin
          0..1: sWhere:= sWhere + ' AND data_pmc between ' + sDataPmcIni + ' and ' + sDataPmcFim;
          2   : sWhere:= sWhere + ' AND aco_prazo between ' + sDataPmcIni + ' and ' + sDataPmcFim;
          3..6: sWhere:= sWhere + ' AND rnc_data between ' + sDataPmcIni + ' and ' + sDataPmcFim;
+         8..9: sWhere:= sWhere + ' AND data_pmc between ' + sDataPmcIni + ' and ' + sDataPmcFim;
       end;
    end;
 
@@ -306,7 +343,7 @@ begin
             Active:= True;
          end;
       end;
-      5: begin
+      5: begin // RNC por Motivo
          with cdsRNCMotivo do begin
             Active:= False;
             CommandText:= ' SELECT TC.valo_com as Motivo,' +
@@ -321,7 +358,7 @@ begin
             Active:= True;
          end;
       end;
-      6: begin
+      6: begin // RNC por Processo
          with cdsRNCProcesso do begin
             Active:= False;
             CommandText:= ' SELECT CASE WHEN P.pro_nome_abreviado = ' + QuotedStr('') +
@@ -339,7 +376,7 @@ begin
             Active:= True;
          end;
       end;
-      7: begin
+      7: begin // Ações em Andamento/Atrsadas/Concluídas
          with cdsAcoesGeral do begin
             Active:= False;
             CommandText:= ' SELECT codi_pro,' +
@@ -381,6 +418,30 @@ begin
                           ' WHERE PA.vimp_aco <> ' + QuotedStr('') +
                           ' AND prcs_pmc = codi_pro) > 0' +
                           ' ORDER BY fechado DESC';
+            Active:= True;
+         end;
+      end;
+      8: begin // PMC por Tipo
+         with cdsPMCTipo do begin
+            Active:= False;
+            CommandText:= ' SELECT tipo_pmc, valo_com as Tipo, COUNT(*) as Qtde ' +
+                          ' FROM pmc' +
+                          ' INNER JOIN tabela_combos TC on TC.tipo_com = 4 and TC.codi_com = tipo_pmc' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' GROUP BY tipo_pmc, valo_com';
+            Active:= True;
+         end;
+      end;
+      9: begin // PMC por Motivo
+         with cdsPMCMotivo do begin
+            Active:= False;
+            CommandText:= ' SELECT tipo_pmc, valo_com as Motivo, COUNT(*) as Qtde ' +
+                          ' FROM pmc' +
+                          ' INNER JOIN tabela_combos TC on TC.tipo_com = 37 and TC.codi_com = pmc_motivo' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' GROUP BY tipo_pmc, valo_com';
             Active:= True;
          end;
       end;
@@ -500,7 +561,7 @@ begin
             Active:= True;
          end;
       end;
-      2: begin // PMC sem análise de causa
+      2: begin
          case rgOpcoes.ItemIndex of
             0: begin
                sTituloExcel:= 'Ações de PMC Vencidas';
@@ -536,45 +597,77 @@ begin
             Active:= True;
          end;
       end;
-      3: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      3: begin
+         sTituloExcel:= 'RNC Aguardando Resposta/Disposição';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Responsável" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_responsavel' +
+                          ' WHERE rnc_status = 1' + // Status ABERTO
+                          sWhere +
+                          ' ORDER BY rnc_identificacao';
             Active:= True;
          end;
       end;
-      4: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      4: begin
+         sTituloExcel:= 'RNC a finalizar (Aceite/Recusa)';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' WHERE rnc_status = 2' + // Status RESPONDIDO
+                          sWhere +
+                          ' ORDER BY rnc_identificacao';
             Active:= True;
          end;
       end;
-      5: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      5: begin
+         sTituloExcel:= 'RNC por Motivo';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT TC.valo_com as "Motivo", ' +
+                          ' rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 32 AND TC.codi_com = rnc_motivo' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' ORDER BY TC.valo_com, rnc_identificacao';
             Active:= True;
          end;
       end;
-      6: begin // PMC sem análise de causa
-         sTituloExcel:= '';
+      6: begin
+         sTituloExcel:= 'RNC por Processo';
          with cdsExcel do begin
             Active:= False;
-            CommandText:= '';
+            CommandText:= ' SELECT P.nome_pro as "Processo", ' +
+                          ' rnc_identificacao as "Número RNC", rnc_data as "Data",' +
+                          ' C.nome_col as "Emissor" ' +
+                          ' FROM rnc R' +
+                          ' INNER JOIN processos P ON P.codi_pro = R.rnc_processo' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = R.rnc_emitido' +
+                          ' WHERE 1 = 1' +
+                          sWhere +
+                          ' ORDER BY P.nome_pro, rnc_identificacao';
             Active:= True;
          end;
       end;
       7: begin // PMC sem análise de causa
-         sTituloExcel:= '';
-         with cdsExcel do begin
-            Active:= False;
-            CommandText:= '';
-            Active:= True;
-         end;
+         Exit;
+//         sTituloExcel:= 'Ações em andamento, atrasadas e conclúidas';
+//         with cdsExcel do begin
+//            Active:= False;
+//            CommandText:= '';
+//            Active:= True;
+//         end;
       end;
    end;
 
@@ -582,7 +675,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, sTituloExcel);
+      ExpExcel(dbgExcel, cdsExcel, sTituloExcel, Self);
    end;
 end;
 
@@ -743,28 +836,62 @@ begin
       Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
    end;
 
+   // Gráfico de PMC por Tipo
+   with DBAdvGDIPChartView9.Panes[0] do begin
+      XAxis.Size     := 50; // Altura da base do gráfico do Eixo X
+      YAxis.AutoUnits:= True; // Ajusta a escala do eixo Y automaticamente
+      Series[0].AutoRange:= arDisabled;
+      Series[0].Maximum:= cdsPMCTipo.FieldByName('Qtde').AsInteger + 3;
+      Series[0].ValueFormat:= '###0'; // Formato do valor do gráfico
+      Series[0].ValueOffsetY:= 0;
+      Series[0].ValueOffsetX:= 0;
+      Series[0].ShowValue:= True; // Mostra valores na barra
+      Series[0].ShowValueInTracker:= False;
+      Series[0].ValueFormatType:= vftFloat;
+      Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+   end;
+
+   // Gráfico de PMC por Motivo
+   with DBAdvGDIPChartView10.Panes[0] do begin
+      XAxis.Size     := 50; // Altura da base do gráfico do Eixo X
+      YAxis.AutoUnits:= True; // Ajusta a escala do eixo Y automaticamente
+      Series[0].AutoRange:= arDisabled;
+      Series[0].Maximum:= cdsPMCMotivo.FieldByName('Qtde').AsInteger + 3;
+      Series[0].ValueFormat:= '###0'; // Formato do valor do gráfico
+      Series[0].ValueOffsetY:= 0;
+      Series[0].ValueOffsetX:= 0;
+      Series[0].ShowValue:= True; // Mostra valores na barra
+      Series[0].ShowValueInTracker:= False;
+      Series[0].ValueFormatType:= vftFloat;
+      Series[0].XAxis.TextBottom.Angle:= 0; // Angulo do texto do eixo X
+   end;
+
 //   DBAdvGDIPChartView4.SerieByName['Aberto'].AddMultiPoints(Random(50), Random(50), Random(50), Random(50));
 
    case rgTipoGrafico.ItemIndex of
       0: begin
-         DBAdvGDIPChartView2.Panes[0].Series[0].ChartType:= ctBar;
-         DBAdvGDIPChartView3.Panes[0].Series[0].ChartType:= ctBar;
-         DBAdvGDIPChartView1.Panes[0].Series[0].ChartType:= ctBar;
+         DBAdvGDIPChartView2.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView3.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView1.Panes[0].Series[0].ChartType := ctBar;
 //         DBAdvGDIPChartView4.SerieByName['Aberto'].ChartType:= ctBar;
-         DBAdvGDIPChartView5.Panes[0].Series[0].ChartType:= ctBar;
-         DBAdvGDIPChartView6.Panes[0].Series[0].ChartType:= ctBar;
-         DBAdvGDIPChartView7.Panes[0].Series[0].ChartType:= ctBar;
-         DBAdvGDIPChartView8.Panes[0].Series[0].ChartType:= ctBar;
+         DBAdvGDIPChartView5.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView6.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView7.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView8.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView9.Panes[0].Series[0].ChartType := ctBar;
+         DBAdvGDIPChartView10.Panes[0].Series[0].ChartType:= ctBar;
 
          // Cor azul para as barras
-         DBAdvGDIPChartView2.Panes[0].Series[0].Color      := $00FF6633;
-         DBAdvGDIPChartView3.Panes[0].Series[0].Color      := $00FF6633;
-         DBAdvGDIPChartView1.Panes[0].Series[0].Color      := $00FF6633;
+         DBAdvGDIPChartView2.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView3.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView1.Panes[0].Series[0].Color := $00FF6633;
 //         DBAdvGDIPChartView4.SerieByName['Aberto'].Color:= $00FF6633;
-         DBAdvGDIPChartView5.Panes[0].Series[0].Color      := $00FF6633;
-         DBAdvGDIPChartView6.Panes[0].Series[0].Color      := $00FF6633;
-         DBAdvGDIPChartView7.Panes[0].Series[0].Color      := $00FF6633;
-         DBAdvGDIPChartView8.Panes[0].Series[0].Color      := $00FF6633;
+         DBAdvGDIPChartView5.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView6.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView7.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView8.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView9.Panes[0].Series[0].Color := $00FF6633;
+         DBAdvGDIPChartView10.Panes[0].Series[0].Color:= $00FF6633;
 
 //         DBAdvGDIPChartView2.SerieByName['Causa'].ColorTo    := clNone;
 //         DBAdvGDIPChartView1.SerieByName['Acoes'].ColorTo    := clNone;
@@ -776,22 +903,26 @@ begin
 //         DBAdvGDIPChartView8.Panes[0].Series[0].ColorTo      := clNone;
       end;
       1: begin
-         DBAdvGDIPChartView2.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView1.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView3.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView5.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView6.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView7.Panes[0].Series[0].ChartType:= ctPie;
-         DBAdvGDIPChartView8.Panes[0].Series[0].ChartType:= ctPie;
+         DBAdvGDIPChartView2.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView1.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView3.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView5.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView6.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView7.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView8.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView9.Panes[0].Series[0].ChartType := ctPie;
+         DBAdvGDIPChartView10.Panes[0].Series[0].ChartType:= ctPie;
 
-         DBAdvGDIPChartView2.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView1.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView3.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView2.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView1.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView3.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
 //         DBAdvGDIPChartView4.SerieByName['Aberto'].Color:= RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView5.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView6.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView7.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
-         DBAdvGDIPChartView8.Panes[0].Series[0].Color      := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView5.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView6.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView7.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView8.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView9.Panes[0].Series[0].Color := RGB(Random(255), Random(255), Random(255));
+         DBAdvGDIPChartView10.Panes[0].Series[0].Color:= RGB(Random(255), Random(255), Random(255));
 
 //         DBAdvGDIPChartView2.SerieByName['Causa'].ColorTo    := RGB(Random(255), Random(255), Random(255));
 //         DBAdvGDIPChartView1.SerieByName['Acoes'].ColorTo    := RGB(Random(255), Random(255), Random(255));
@@ -844,6 +975,8 @@ end;
 
 procedure TFormGraficoPMC.pctGraficosChange(Sender: TObject);
 begin
+   pnlTituloRel.Caption:= 'Imprimir - ' + pctGraficos.Pages[pctGraficos.TabIndex].Caption;
+
    // Opções Ações
    case pctGraficos.TabIndex of
       0..1: begin
@@ -852,7 +985,7 @@ begin
       2: begin
          rgOpcoes.Visible:= True;
       end;
-      3..7: begin
+      3..9: begin
          rgOpcoes.Visible:= False;
       end;
    end;
@@ -864,6 +997,22 @@ begin
       end;
       7: begin
          rgTipoGrafico.Visible:= False;
+      end;
+      8..9: begin
+         rgTipoGrafico.Visible:= True;
+      end;
+   end;
+
+   // Exportação Excel
+   case pctGraficos.TabIndex of
+      0..6: begin
+         btnExcel.Visible:= True;
+      end;
+      7: begin
+         btnExcel.Visible:= False;
+      end;
+      8..9: begin
+         btnExcel.Visible:= True;
       end;
    end;
 
@@ -879,7 +1028,6 @@ begin
       1: DBAdvGDIPChartView3.Panes[0].Title.Text:= 'Ações de PMC a vencer';
       2: DBAdvGDIPChartView3.Panes[0].Title.Text:= 'Todas as Ações de PMC';
    end;
-
 end;
 
 procedure TFormGraficoPMC.sbSairTreClick(Sender: TObject);
@@ -903,6 +1051,8 @@ begin
       0..1: sNomeRelatorio:= 'rel_GraficoPMC';
       2   : sNomeRelatorio:= 'rel_GraficoPMCAcoesLista';
       3..6: sNomeRelatorio:= 'rel_RNC_Grafico';
+      8   : sNomeRelatorio:= 'rel_GraficoPMCTipo';
+      9   : sNomeRelatorio:= 'rel_GraficoPMCMotivo';
    end;
 
    with cdsImprimir do begin
@@ -941,6 +1091,45 @@ begin
          Application.MessageBox('Não há registros para imprimir','Aviso', MB_OK + MB_ICONWARNING);
          Exit;
       end;
+   end;
+
+   with cdsImpPMCTipo do begin
+      Active:= False;
+      case pctGraficos.TabIndex of
+         8: begin
+            sTituloRelatorio:= 'RELATÓRIO DE PMC POR TIPO';
+            CommandText:= ' SELECT nume_pmc, data_pmc, C.nome_col as Responsavel,' +
+                          ' TC.valo_com as Origem, TC1.valo_com as Tipo' +
+                          ' FROM pmc PM' +
+                          ' LEFT JOIN processos P ON P.codi_pro = prcs_pmc' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = resp_pmc' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com = orig_pmc' +
+                          ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_com = tipo_pmc' +
+                          sWhere +
+                          ' ORDER BY TC1.valo_com, nume_pmc';
+         end;
+      end;
+      Active:= True;
+   end;
+
+   with cdsImpPMCMotivo do begin
+      Active:= False;
+      case pctGraficos.TabIndex of
+         9: begin
+            sTituloRelatorio:= 'RELATÓRIO DE PMC POR MOTIVO';
+            CommandText:= ' SELECT nume_pmc, data_pmc, ' +
+                          ' C.nome_col as Responsavel, TC1.valo_com as Tipo,' +
+                          ' TC.valo_com as Origem, TC2.valo_com as Motivo' +
+                          ' FROM pmc' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = resp_pmc' +
+                          ' INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com = orig_pmc' +
+                          ' INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_com = tipo_pmc' +
+                          ' INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 37 AND TC2.codi_com = pmc_motivo' +
+                          sWhere +
+                          ' ORDER BY TC2.valo_com, nume_pmc';
+         end;
+      end;
+      Active:= True;
    end;
 
    with cdsImprimirAcoes do begin
@@ -1055,25 +1244,12 @@ begin
       sValorPeriodo:= dtDataIni.Text + ' a ' + dtDataFim.Text;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\' + sNomeRelatorio + '.fr3');
-      Variables['nomeGrupo']:= QuotedStr(sNomeGrupo);
-      Variables['periodo']  := QuotedStr(sValorPeriodo);
-      Variables['titulo']   := QuotedStr(sTituloRelatorio);
-      Variables['tituloCol']:= QuotedStr(sTituloColResp);
+   Imprimir(sNomeRelatorio, frxReport1, tipoImp,
+            'nomeGrupo', sNomeGrupo,
+            'periodo', sValorPeriodo,
+            'titulo', sTituloRelatorio,
+            'tituloCol', sTituloColResp);
 
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
-
-//   Imprimir(sNomeRelatorio, frxReport1, tipoImp, 'Periodo', QuotedStr(sValorPeriodo));
 end;
 
 end.

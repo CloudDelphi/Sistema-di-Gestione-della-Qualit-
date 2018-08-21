@@ -52,7 +52,7 @@ begin
       Application.MessageBox('Não existem Formulários para esse processo', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgForm, cdsFormularios, 'Formulários');
+      ExpExcel(dbgForm, cdsFormularios, 'Formulários', Self);
    end;
 end;
 

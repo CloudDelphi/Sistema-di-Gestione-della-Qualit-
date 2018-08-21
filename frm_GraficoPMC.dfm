@@ -292,6 +292,7 @@ object FormGraficoPMC: TFormGraficoPMC
       ShowHint = True
       TabOrder = 1
       OnClick = btnImprimirClick
+      ExplicitTop = 2
     end
     object btnExcel: TBitBtn
       Left = 1
@@ -426,7 +427,6 @@ object FormGraficoPMC: TFormGraficoPMC
       ShowHint = True
       TabOrder = 2
       OnClick = btnExcelClick
-      ExplicitLeft = 439
     end
   end
   object pctGraficos: TJvgPageControl
@@ -434,7 +434,7 @@ object FormGraficoPMC: TFormGraficoPMC
     Top = 67
     Width = 994
     Height = 443
-    ActivePage = ts1
+    ActivePage = ts6
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -471,8 +471,6 @@ object FormGraficoPMC: TFormGraficoPMC
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitLeft = 17
-    ExplicitTop = 91
     object ts1: TTabSheet
       Caption = 'PMC sem An'#225'lise de Causa'
       object DBAdvGDIPChartView1: TDBAdvGDIPChartView
@@ -679,8 +677,6 @@ object FormGraficoPMC: TFormGraficoPMC
         XAxisZoomSensitivity = 1.000000000000000000
         YAxisZoomSensitivity = 1.000000000000000000
         DoubleBuffered = True
-        ExplicitLeft = 3
-        ExplicitTop = 16
       end
     end
     object ts2: TTabSheet
@@ -2340,6 +2336,426 @@ object FormGraficoPMC: TFormGraficoPMC
         DoubleBuffered = True
       end
     end
+    object ts8: TTabSheet
+      Caption = 'PMC por Tipo'
+      ImageIndex = 8
+      object DBAdvGDIPChartView9: TDBAdvGDIPChartView
+        Left = 0
+        Top = 0
+        Width = 986
+        Height = 415
+        ShowDesignHelper = False
+        Align = alClient
+        Color = clWhite
+        Panes = <
+          item
+            Bands.Distance = 2.000000000000000000
+            Background.Font.Charset = DEFAULT_CHARSET
+            Background.Font.Color = clWindowText
+            Background.Font.Height = -11
+            Background.Font.Name = 'Tahoma'
+            Background.Font.Style = []
+            BorderColor = clBlack
+            CrossHair.CrossHairType = chtNone
+            CrossHair.CrossHairYValues.Position = [chYAxis]
+            CrossHair.Distance = 0
+            CrossHair.Visible = True
+            Height = 100.000000000000000000
+            Legend.Font.Charset = DEFAULT_CHARSET
+            Legend.Font.Color = clWindowText
+            Legend.Font.Height = -11
+            Legend.Font.Name = 'Tahoma'
+            Legend.Font.Style = []
+            Legend.Visible = False
+            Legend.Angle = 45
+            Margin.LeftMargin = 10
+            Margin.RightMargin = 10
+            Margin.TopMargin = 10
+            Name = 'ChartPane 0'
+            Options = []
+            Range.StartDate = 42174.444806111110000000
+            Range.RangeTo = 23
+            Series.SerieValueTotals = True
+            Series = <
+              item
+                AutoRange = arDisabled
+                Pie.ValueFont.Charset = DEFAULT_CHARSET
+                Pie.ValueFont.Color = clWindowText
+                Pie.ValueFont.Height = -11
+                Pie.ValueFont.Name = 'Tahoma'
+                Pie.ValueFont.Style = []
+                Pie.LegendFont.Charset = DEFAULT_CHARSET
+                Pie.LegendFont.Color = clWindowText
+                Pie.LegendFont.Height = -11
+                Pie.LegendFont.Name = 'Tahoma'
+                Pie.LegendFont.Style = []
+                Pie.LegendTitleVisible = True
+                Annotations = <>
+                ChartType = ctBar
+                Color = 16737843
+                CrossHairYValue.BorderWidth = 0
+                CrossHairYValue.Font.Charset = DEFAULT_CHARSET
+                CrossHairYValue.Font.Color = clWindowText
+                CrossHairYValue.Font.Height = -11
+                CrossHairYValue.Font.Name = 'Tahoma'
+                CrossHairYValue.Font.Style = []
+                CrossHairYValue.GradientSteps = 0
+                LineColor = clGreen
+                LegendText = 'Motivo'
+                Marker.MarkerColor = clGreen
+                Marker.MarkerSize = 8
+                Marker.MarkerLineWidth = 2
+                Marker.GradientType = gtTexture
+                Maximum = 12.000000000000000000
+                Name = 'RNCMotivo'
+                ShowValue = True
+                ValueFont.Charset = DEFAULT_CHARSET
+                ValueFont.Color = clWindowText
+                ValueFont.Height = -12
+                ValueFont.Name = 'Tahoma'
+                ValueFont.Style = [fsBold]
+                ValueFormat = '%g'
+                ValueFormatType = vftFloat
+                ValueWidth = 80
+                ValueOffsetX = -40
+                ValueOffsetY = 10
+                XAxis.DateTimeFont.Charset = DEFAULT_CHARSET
+                XAxis.DateTimeFont.Color = clWindowText
+                XAxis.DateTimeFont.Height = -11
+                XAxis.DateTimeFont.Name = 'Tahoma'
+                XAxis.DateTimeFont.Style = []
+                XAxis.MajorFont.Charset = DEFAULT_CHARSET
+                XAxis.MajorFont.Color = clWindowText
+                XAxis.MajorFont.Height = -9
+                XAxis.MajorFont.Name = 'Tahoma'
+                XAxis.MajorFont.Style = []
+                XAxis.MajorUnit = 1.000000000000000000
+                XAxis.MajorUnitSpacing = 0
+                XAxis.MinorFont.Charset = DEFAULT_CHARSET
+                XAxis.MinorFont.Color = clWindowText
+                XAxis.MinorFont.Height = -11
+                XAxis.MinorFont.Name = 'Tahoma'
+                XAxis.MinorFont.Style = []
+                XAxis.MinorUnit = 1.000000000000000000
+                XAxis.MinorUnitSpacing = 0
+                XAxis.TextTop.Font.Charset = DEFAULT_CHARSET
+                XAxis.TextTop.Font.Color = clWindowText
+                XAxis.TextTop.Font.Height = -11
+                XAxis.TextTop.Font.Name = 'Tahoma'
+                XAxis.TextTop.Font.Style = []
+                XAxis.TextBottom.Angle = 90
+                XAxis.TextBottom.Font.Charset = DEFAULT_CHARSET
+                XAxis.TextBottom.Font.Color = clWindowText
+                XAxis.TextBottom.Font.Height = -9
+                XAxis.TextBottom.Font.Name = 'Tahoma'
+                XAxis.TextBottom.Font.Style = []
+                XAxis.TextBottom.Offset = 50
+                XAxis.TickMarkSize = 5
+                XAxis.AutoUnits = False
+                YAxis.AutoUnits = False
+                YAxis.MajorFont.Charset = DEFAULT_CHARSET
+                YAxis.MajorFont.Color = clWindowText
+                YAxis.MajorFont.Height = -11
+                YAxis.MajorFont.Name = 'Tahoma'
+                YAxis.MajorFont.Style = []
+                YAxis.MajorUnit = 1.000000000000000000
+                YAxis.MajorUnitSpacing = 0
+                YAxis.MinorFont.Charset = DEFAULT_CHARSET
+                YAxis.MinorFont.Color = clWindowText
+                YAxis.MinorFont.Height = -11
+                YAxis.MinorFont.Name = 'Tahoma'
+                YAxis.MinorFont.Style = []
+                YAxis.MinorUnitVisible = False
+                YAxis.MinorUnitSpacing = 0
+                YAxis.TextLeft.Angle = -90
+                YAxis.TextLeft.Font.Charset = DEFAULT_CHARSET
+                YAxis.TextLeft.Font.Color = clWindowText
+                YAxis.TextLeft.Font.Height = -11
+                YAxis.TextLeft.Font.Name = 'Tahoma'
+                YAxis.TextLeft.Font.Style = []
+                YAxis.TextRight.Angle = 90
+                YAxis.TextRight.Font.Charset = DEFAULT_CHARSET
+                YAxis.TextRight.Font.Color = clWindowText
+                YAxis.TextRight.Font.Height = -11
+                YAxis.TextRight.Font.Name = 'Tahoma'
+                YAxis.TextRight.Font.Style = []
+                YAxis.TickMarkColor = clRed
+                Darken3D = False
+                Offset3D = 10
+                BarValueTextFont.Charset = DEFAULT_CHARSET
+                BarValueTextFont.Color = clWindowText
+                BarValueTextFont.Height = -11
+                BarValueTextFont.Name = 'Tahoma'
+                BarValueTextFont.Style = []
+                XAxisGroups = <>
+                SerieType = stNormal
+                FieldNameValue = 'Qtde'
+                FieldNameXAxis = 'Tipo'
+              end>
+            Title.Alignment = taCenter
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -16
+            Title.Font.Name = 'Calibri'
+            Title.Font.Style = [fsBold]
+            Title.Position = tTop
+            Title.Text = 'PMC por Tipo'
+            XAxis.Font.Charset = DEFAULT_CHARSET
+            XAxis.Font.Color = clBlack
+            XAxis.Font.Height = -11
+            XAxis.Font.Name = 'Tahoma'
+            XAxis.Font.Style = []
+            XAxis.Text = 'Motivo'
+            XGrid.MajorFont.Charset = DEFAULT_CHARSET
+            XGrid.MajorFont.Color = clWindowText
+            XGrid.MajorFont.Height = -11
+            XGrid.MajorFont.Name = 'Tahoma'
+            XGrid.MajorFont.Style = []
+            XGrid.MinorFont.Charset = DEFAULT_CHARSET
+            XGrid.MinorFont.Color = clWindowText
+            XGrid.MinorFont.Height = -11
+            XGrid.MinorFont.Name = 'Tahoma'
+            XGrid.MinorFont.Style = []
+            YAxis.AutoUnits = False
+            YAxis.Font.Charset = DEFAULT_CHARSET
+            YAxis.Font.Color = clWindowText
+            YAxis.Font.Height = -11
+            YAxis.Font.Name = 'Tahoma'
+            YAxis.Font.Style = []
+            YAxis.Size = 40
+            YAxis.Text = 'Qtd'
+            YAxis.Offset3D = 0
+            YGrid.MinorDistance = 1.000000000000000000
+            YGrid.MajorDistance = 2.000000000000000000
+            DataSource = dsPMCTipo
+          end>
+        Tracker.Font.Charset = DEFAULT_CHARSET
+        Tracker.Font.Color = clWindowText
+        Tracker.Font.Height = -11
+        Tracker.Font.Name = 'Tahoma'
+        Tracker.Font.Style = []
+        Tracker.Title.Font.Charset = DEFAULT_CHARSET
+        Tracker.Title.Font.Color = clWindowText
+        Tracker.Title.Font.Height = -11
+        Tracker.Title.Font.Name = 'Tahoma'
+        Tracker.Title.Font.Style = []
+        Tracker.Title.Text = 'TRACKER'
+        Version = '3.2.6.0 MAY, 2015'
+        XAxisZoomSensitivity = 1.000000000000000000
+        YAxisZoomSensitivity = 1.000000000000000000
+        DoubleBuffered = True
+      end
+    end
+    object ts9: TTabSheet
+      Caption = 'PMC por Motivo'
+      ImageIndex = 9
+      object DBAdvGDIPChartView10: TDBAdvGDIPChartView
+        Left = 0
+        Top = 0
+        Width = 986
+        Height = 415
+        ShowDesignHelper = False
+        Align = alClient
+        Color = clWhite
+        Panes = <
+          item
+            Bands.Distance = 2.000000000000000000
+            Background.Font.Charset = DEFAULT_CHARSET
+            Background.Font.Color = clWindowText
+            Background.Font.Height = -11
+            Background.Font.Name = 'Tahoma'
+            Background.Font.Style = []
+            BorderColor = clBlack
+            CrossHair.CrossHairType = chtNone
+            CrossHair.CrossHairYValues.Position = [chYAxis]
+            CrossHair.Distance = 0
+            CrossHair.Visible = True
+            Height = 100.000000000000000000
+            Legend.Font.Charset = DEFAULT_CHARSET
+            Legend.Font.Color = clWindowText
+            Legend.Font.Height = -11
+            Legend.Font.Name = 'Tahoma'
+            Legend.Font.Style = []
+            Legend.Visible = False
+            Legend.Angle = 45
+            Margin.LeftMargin = 10
+            Margin.RightMargin = 10
+            Margin.TopMargin = 10
+            Name = 'ChartPane 0'
+            Options = []
+            Range.StartDate = 42174.444806111110000000
+            Range.RangeTo = 23
+            Series.SerieValueTotals = True
+            Series = <
+              item
+                AutoRange = arDisabled
+                Pie.ValueFont.Charset = DEFAULT_CHARSET
+                Pie.ValueFont.Color = clWindowText
+                Pie.ValueFont.Height = -11
+                Pie.ValueFont.Name = 'Tahoma'
+                Pie.ValueFont.Style = []
+                Pie.LegendFont.Charset = DEFAULT_CHARSET
+                Pie.LegendFont.Color = clWindowText
+                Pie.LegendFont.Height = -11
+                Pie.LegendFont.Name = 'Tahoma'
+                Pie.LegendFont.Style = []
+                Pie.LegendTitleVisible = True
+                Annotations = <>
+                ChartType = ctBar
+                Color = 16737843
+                CrossHairYValue.BorderWidth = 0
+                CrossHairYValue.Font.Charset = DEFAULT_CHARSET
+                CrossHairYValue.Font.Color = clWindowText
+                CrossHairYValue.Font.Height = -11
+                CrossHairYValue.Font.Name = 'Tahoma'
+                CrossHairYValue.Font.Style = []
+                CrossHairYValue.GradientSteps = 0
+                LineColor = clGreen
+                LegendText = 'Motivo'
+                Marker.MarkerColor = clGreen
+                Marker.MarkerSize = 8
+                Marker.MarkerLineWidth = 2
+                Marker.GradientType = gtTexture
+                Maximum = 12.000000000000000000
+                Name = 'RNCMotivo'
+                ShowValue = True
+                ValueFont.Charset = DEFAULT_CHARSET
+                ValueFont.Color = clWindowText
+                ValueFont.Height = -12
+                ValueFont.Name = 'Tahoma'
+                ValueFont.Style = [fsBold]
+                ValueFormat = '%g'
+                ValueFormatType = vftFloat
+                ValueWidth = 80
+                ValueOffsetX = -40
+                ValueOffsetY = 10
+                XAxis.DateTimeFont.Charset = DEFAULT_CHARSET
+                XAxis.DateTimeFont.Color = clWindowText
+                XAxis.DateTimeFont.Height = -11
+                XAxis.DateTimeFont.Name = 'Tahoma'
+                XAxis.DateTimeFont.Style = []
+                XAxis.MajorFont.Charset = DEFAULT_CHARSET
+                XAxis.MajorFont.Color = clWindowText
+                XAxis.MajorFont.Height = -9
+                XAxis.MajorFont.Name = 'Tahoma'
+                XAxis.MajorFont.Style = []
+                XAxis.MajorUnit = 1.000000000000000000
+                XAxis.MajorUnitSpacing = 0
+                XAxis.MinorFont.Charset = DEFAULT_CHARSET
+                XAxis.MinorFont.Color = clWindowText
+                XAxis.MinorFont.Height = -11
+                XAxis.MinorFont.Name = 'Tahoma'
+                XAxis.MinorFont.Style = []
+                XAxis.MinorUnit = 1.000000000000000000
+                XAxis.MinorUnitSpacing = 0
+                XAxis.TextTop.Font.Charset = DEFAULT_CHARSET
+                XAxis.TextTop.Font.Color = clWindowText
+                XAxis.TextTop.Font.Height = -11
+                XAxis.TextTop.Font.Name = 'Tahoma'
+                XAxis.TextTop.Font.Style = []
+                XAxis.TextBottom.Angle = 90
+                XAxis.TextBottom.Font.Charset = DEFAULT_CHARSET
+                XAxis.TextBottom.Font.Color = clWindowText
+                XAxis.TextBottom.Font.Height = -9
+                XAxis.TextBottom.Font.Name = 'Tahoma'
+                XAxis.TextBottom.Font.Style = []
+                XAxis.TextBottom.Offset = 50
+                XAxis.TickMarkSize = 5
+                XAxis.AutoUnits = False
+                YAxis.AutoUnits = False
+                YAxis.MajorFont.Charset = DEFAULT_CHARSET
+                YAxis.MajorFont.Color = clWindowText
+                YAxis.MajorFont.Height = -11
+                YAxis.MajorFont.Name = 'Tahoma'
+                YAxis.MajorFont.Style = []
+                YAxis.MajorUnit = 1.000000000000000000
+                YAxis.MajorUnitSpacing = 0
+                YAxis.MinorFont.Charset = DEFAULT_CHARSET
+                YAxis.MinorFont.Color = clWindowText
+                YAxis.MinorFont.Height = -11
+                YAxis.MinorFont.Name = 'Tahoma'
+                YAxis.MinorFont.Style = []
+                YAxis.MinorUnitVisible = False
+                YAxis.MinorUnitSpacing = 0
+                YAxis.TextLeft.Angle = -90
+                YAxis.TextLeft.Font.Charset = DEFAULT_CHARSET
+                YAxis.TextLeft.Font.Color = clWindowText
+                YAxis.TextLeft.Font.Height = -11
+                YAxis.TextLeft.Font.Name = 'Tahoma'
+                YAxis.TextLeft.Font.Style = []
+                YAxis.TextRight.Angle = 90
+                YAxis.TextRight.Font.Charset = DEFAULT_CHARSET
+                YAxis.TextRight.Font.Color = clWindowText
+                YAxis.TextRight.Font.Height = -11
+                YAxis.TextRight.Font.Name = 'Tahoma'
+                YAxis.TextRight.Font.Style = []
+                YAxis.TickMarkColor = clRed
+                Darken3D = False
+                Offset3D = 10
+                BarValueTextFont.Charset = DEFAULT_CHARSET
+                BarValueTextFont.Color = clWindowText
+                BarValueTextFont.Height = -11
+                BarValueTextFont.Name = 'Tahoma'
+                BarValueTextFont.Style = []
+                XAxisGroups = <>
+                SerieType = stNormal
+                FieldNameValue = 'Qtde'
+                FieldNameXAxis = 'Motivo'
+              end>
+            Title.Alignment = taCenter
+            Title.Font.Charset = ANSI_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -16
+            Title.Font.Name = 'Calibri'
+            Title.Font.Style = [fsBold]
+            Title.Position = tTop
+            Title.Text = 'PMC por Motivo'
+            XAxis.Font.Charset = DEFAULT_CHARSET
+            XAxis.Font.Color = clBlack
+            XAxis.Font.Height = -11
+            XAxis.Font.Name = 'Tahoma'
+            XAxis.Font.Style = []
+            XAxis.Text = 'Motivo'
+            XGrid.MajorFont.Charset = DEFAULT_CHARSET
+            XGrid.MajorFont.Color = clWindowText
+            XGrid.MajorFont.Height = -11
+            XGrid.MajorFont.Name = 'Tahoma'
+            XGrid.MajorFont.Style = []
+            XGrid.MinorFont.Charset = DEFAULT_CHARSET
+            XGrid.MinorFont.Color = clWindowText
+            XGrid.MinorFont.Height = -11
+            XGrid.MinorFont.Name = 'Tahoma'
+            XGrid.MinorFont.Style = []
+            YAxis.AutoUnits = False
+            YAxis.Font.Charset = DEFAULT_CHARSET
+            YAxis.Font.Color = clWindowText
+            YAxis.Font.Height = -11
+            YAxis.Font.Name = 'Tahoma'
+            YAxis.Font.Style = []
+            YAxis.Size = 40
+            YAxis.Text = 'Qtd'
+            YAxis.Offset3D = 0
+            YGrid.MinorDistance = 1.000000000000000000
+            YGrid.MajorDistance = 2.000000000000000000
+            DataSource = dsPMCMotivo
+          end>
+        Tracker.Font.Charset = DEFAULT_CHARSET
+        Tracker.Font.Color = clWindowText
+        Tracker.Font.Height = -11
+        Tracker.Font.Name = 'Tahoma'
+        Tracker.Font.Style = []
+        Tracker.Title.Font.Charset = DEFAULT_CHARSET
+        Tracker.Title.Font.Color = clWindowText
+        Tracker.Title.Font.Height = -11
+        Tracker.Title.Font.Name = 'Tahoma'
+        Tracker.Title.Font.Style = []
+        Tracker.Title.Text = 'TRACKER'
+        Version = '3.2.6.0 MAY, 2015'
+        XAxisZoomSensitivity = 1.000000000000000000
+        YAxisZoomSensitivity = 1.000000000000000000
+        DoubleBuffered = True
+      end
+    end
   end
   object pnlRelatorio: TPanel
     Left = 524
@@ -3165,10 +3581,37 @@ object FormGraficoPMC: TFormGraficoPMC
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42963.438149629600000000
+    ReportOptions.LastChange = 43318.562517280100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -3176,8 +3619,8 @@ object FormGraficoPMC: TFormGraficoPMC
     Top = 122
     Datasets = <
       item
-        DataSet = frxDBDSRNCAberto
-        DataSetName = 'frxDBDSRNCAberto'
+        DataSet = frxDBDSPMCTipo
+        DataSetName = 'frxDBDSPMCTipo'
       end>
     Variables = <
       item
@@ -3193,12 +3636,20 @@ object FormGraficoPMC: TFormGraficoPMC
         Value = Null
       end
       item
-        Name = 'nomeGrupo'
-        Value = ''
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
       end
       item
-        Name = 'tituloCol'
-        Value = ''
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
+        Value = Null
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -3257,7 +3708,7 @@ object FormGraficoPMC: TFormGraficoPMC
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 63.252010000000000000
+          Left = 64.252010000000000000
           Top = 73.811070000000000000
           Width = 343.937230000000000000
           Height = 18.897650000000000000
@@ -3271,22 +3722,36 @@ object FormGraficoPMC: TFormGraficoPMC
             '[Periodo]')
           ParentFont = False
         end
+        object mConfidencialCabec: TfrxMemoView
+          Width = 665.196645350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object Detalhe: TfrxMasterData
-        Height = 18.897650000000000000
+        Height = 18.897637800000000000
         Top = 234.330860000000000000
         Width = 718.110700000000000000
-        DataSet = frxDBDSRNCAberto
-        DataSetName = 'frxDBDSRNCAberto'
+        DataSet = frxDBDSPMCTipo
+        DataSetName = 'frxDBDSPMCTipo'
         RowCount = 0
         object frxControleDATA: TfrxMemoView
-          Top = 0.000012199999986251
-          Width = 131.905543540000000000
+          Left = 0.377952760000000000
+          Width = 82.771653540000000000
           Height = 18.897637800000000000
           ShowHint = False
-          DataField = 'rnc_identificacao'
-          DataSet = frxDBDSRNCAberto
-          DataSetName = 'frxDBDSRNCAberto'
+          DataField = 'nume_pmc'
+          DataSet = frxDBDSPMCTipo
+          DataSetName = 'frxDBDSPMCTipo'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -3295,19 +3760,18 @@ object FormGraficoPMC: TFormGraficoPMC
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDSRNCAberto."rnc_identificacao"]')
+            '[frxDBDSPMCTipo."nume_pmc"]')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo10: TfrxMemoView
-          Left = 131.771653540000000000
-          Top = 0.000012199999986251
-          Width = 132.283493860000000000
+          Left = 82.771653540000000000
+          Width = 86.929133860000000000
           Height = 18.897637800000000000
           ShowHint = False
-          DataField = 'rnc_data'
-          DataSet = frxDBDSRNCAberto
-          DataSetName = 'frxDBDSRNCAberto'
+          DataField = 'data_pmc'
+          DataSet = frxDBDSPMCTipo
+          DataSetName = 'frxDBDSPMCTipo'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -3316,19 +3780,18 @@ object FormGraficoPMC: TFormGraficoPMC
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDSRNCAberto."rnc_data"]')
+            '[frxDBDSPMCTipo."data_pmc"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo2: TfrxMemoView
-          Left = 264.440944880000000000
-          Top = 0.000012199999986251
-          Width = 453.921323310001000000
+        object Memo11: TfrxMemoView
+          Left = 625.889763780000000000
+          Width = 91.464566930000000000
           Height = 18.897637800000000000
           ShowHint = False
-          DataField = 'emissor'
-          DataSet = frxDBDSRNCAberto
-          DataSetName = 'frxDBDSRNCAberto'
+          DataField = 'tipo'
+          DataSet = frxDBDSPMCTipo
+          DataSetName = 'frxDBDSPMCTipo'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = '%2.6n'
           DisplayFormat.Kind = fkNumeric
@@ -3340,7 +3803,50 @@ object FormGraficoPMC: TFormGraficoPMC
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDSRNCAberto."emissor"]')
+            '[frxDBDSPMCTipo."tipo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo2: TfrxMemoView
+          Left = 497.763779527559000000
+          Width = 128.503932130000000000
+          Height = 18.897637800000000000
+          ShowHint = False
+          DataField = 'origem'
+          DataSet = frxDBDSPMCTipo
+          DataSetName = 'frxDBDSPMCTipo'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSPMCTipo."origem"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo3: TfrxMemoView
+          Left = 169.700787401575000000
+          Width = 328.818909840000000000
+          Height = 18.897637800000000000
+          ShowHint = False
+          DataField = 'responsavel'
+          DataSet = frxDBDSPMCTipo
+          DataSetName = 'frxDBDSPMCTipo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSPMCTipo."responsavel"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -3351,7 +3857,7 @@ object FormGraficoPMC: TFormGraficoPMC
         Width = 718.110700000000000000
         object Memo23: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 30.236239999999900000
+          Top = 30.236240000000010000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3367,13 +3873,13 @@ object FormGraficoPMC: TFormGraficoPMC
         object Line1: TfrxLineView
           Left = 3.779530000000000000
           Top = 26.456709999999990000
-          Width = 657.638220000000000000
+          Width = 661.417750000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
         object Picture2: TfrxPictureView
-          Left = 676.110700000000000000
-          Top = 11.338590000000010000
+          Left = 672.756340000000000000
+          Top = 7.559059999999988000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -3806,36 +4312,30 @@ object FormGraficoPMC: TFormGraficoPMC
           Transparent = False
           TransparentColor = clWhite
         end
-      end
-      object GrupoProcesso: TfrxGroupHeader
-        Height = 37.897662200000000000
-        Top = 173.858380000000000000
-        Width = 718.110700000000000000
-        Condition = '<frxDBDSRNCAberto."processo">'
-        object Memo13: TfrxMemoView
-          Width = 718.110236220000000000
-          Height = 18.897637800000000000
+        object mConfidencialRodape: TfrxMemoView
+          Top = 7.559059999999988000
+          Width = 665.196645350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
           ShowHint = False
-          Color = clScrollBar
-          DataSet = frxDBDSRelatorio
-          DataSetName = 'frxDBDSRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.6n'
-          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[nomeGrupo] [frxDBDSRNCAberto."processo"]')
+            '[TextoConf]')
           ParentFont = False
-          VAlign = vaCenter
         end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        Height = 37.897650000000000000
+        Top = 173.858380000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBDSPMCTipo."tipo"'
         object Memo6: TfrxMemoView
-          Top = 19.000012199999990000
-          Width = 131.905538660000000000
+          Top = 19.000000000000000000
+          Width = 82.771648660000000000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -3852,9 +4352,9 @@ object FormGraficoPMC: TFormGraficoPMC
           VAlign = vaBottom
         end
         object Memo8: TfrxMemoView
-          Left = 264.456692910000000000
-          Top = 19.000012199999990000
-          Width = 453.543512130001000000
+          Left = 497.795600240000000000
+          Top = 19.000000000000000000
+          Width = 128.503932130000000000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -3866,14 +4366,14 @@ object FormGraficoPMC: TFormGraficoPMC
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[tituloCol]')
+            'Origem')
           ParentFont = False
           VAlign = vaBottom
         end
         object Memo9: TfrxMemoView
-          Left = 131.771653540000000000
-          Top = 18.897650000000000000
-          Width = 132.283550000000000000
+          Left = 82.771653540000000000
+          Top = 18.897637800000010000
+          Width = 86.929190000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -3888,6 +4388,65 @@ object FormGraficoPMC: TFormGraficoPMC
             'Data')
           ParentFont = False
           VAlign = vaBottom
+        end
+        object Memo1: TfrxMemoView
+          Left = 625.889763780000000000
+          Top = 18.897637800000010000
+          Width = 91.464566930000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Tipo')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo5: TfrxMemoView
+          Left = 169.519790000000000000
+          Top = 18.897637795275610000
+          Width = 328.819110000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Respons'#225'vel')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo13: TfrxMemoView
+          Width = 717.354706610000000000
+          Height = 18.897637800000000000
+          ShowHint = False
+          Color = clScrollBar
+          DataSet = frxDBDSRelatorio
+          DataSetName = 'frxDBDSRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.6n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            'Tipo: [frxDBDSPMCTipo."tipo"]')
+          ParentFont = False
+          VAlign = vaCenter
         end
       end
     end
@@ -4522,5 +5081,240 @@ object FormGraficoPMC: TFormGraficoPMC
     DataSet = cdsExcel
     Left = 944
     Top = 128
+  end
+  object zqryPMCMotivo: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT valo_com as Motivo, COUNT(*) as Qtde '
+      'FROM pmc '
+      
+        'INNER JOIN tabela_combos TC on TC.tipo_com = 37 and TC.codi_com ' +
+        '= tipo_pmc'
+      'GROUP BY valo_com')
+    Params = <>
+    Left = 480
+    Top = 280
+  end
+  object dspPMCMotivo: TDataSetProvider
+    DataSet = zqryPMCMotivo
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 520
+    Top = 280
+  end
+  object cdsPMCMotivo: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPMCMotivo'
+    Left = 560
+    Top = 280
+    object cdsPMCMotivomotivo: TWideStringField
+      FieldName = 'motivo'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsPMCMotivoqtde: TLargeintField
+      FieldName = 'qtde'
+      ReadOnly = True
+    end
+  end
+  object dsPMCMotivo: TDataSource
+    DataSet = cdsPMCMotivo
+    Left = 600
+    Top = 280
+  end
+  object zqryPMCTipo: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT tipo_pmc, valo_com as Tipo, COUNT(*) as Qtde '
+      'FROM pmc '
+      
+        'INNER JOIN tabela_combos TC on TC.tipo_com = 4 and TC.codi_com =' +
+        ' tipo_pmc'
+      'GROUP BY tipo_pmc, valo_com')
+    Params = <>
+    Left = 480
+    Top = 336
+  end
+  object dspPMCTipo: TDataSetProvider
+    DataSet = zqryPMCTipo
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 520
+    Top = 336
+  end
+  object cdsPMCTipo: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPMCTipo'
+    Left = 560
+    Top = 336
+    object cds6: TLargeintField
+      FieldName = 'tipo_pmc'
+      Required = True
+    end
+    object cds7: TWideStringField
+      FieldName = 'tipo'
+      ReadOnly = True
+      Size = 50
+    end
+    object cds8: TLargeintField
+      FieldName = 'qtde'
+      ReadOnly = True
+    end
+  end
+  object dsPMCTipo: TDataSource
+    DataSet = cdsPMCTipo
+    Left = 600
+    Top = 336
+  end
+  object frxDBPMCMotivo: TfrxDBDataset
+    UserName = 'frxDBDSPMCMotivo'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'nume_pmc=nume_pmc'
+      'data_pmc=data_pmc'
+      'responsavel=responsavel'
+      'origem=origem'
+      'motivo=motivo'
+      'tipo=tipo')
+    DataSet = cdsImpPMCMotivo
+    BCDToCurrency = False
+    Left = 576
+    Top = 74
+  end
+  object zqryImpPMCMotivo: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT nume_pmc, data_pmc, C.nome_col as Responsavel,'
+      
+        'TC.valo_com as Origem, TC1.valo_com as Motivo, TC1.valo_com as T' +
+        'ipo'
+      'FROM pmc '
+      'INNER JOIN colaboradores C ON C.codi_col = resp_pmc'
+      
+        'INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com =' +
+        ' orig_pmc '
+      
+        'INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_co' +
+        'm = pmc_motivo '
+      
+        'INNER JOIN tabela_combos TC2 ON TC2.tipo_com = 37 AND TC2.codi_c' +
+        'om = pmc_motivo ')
+    Params = <>
+    Left = 632
+    Top = 74
+  end
+  object dspImpPMCMotivo: TDataSetProvider
+    DataSet = zqryImpPMCMotivo
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 672
+    Top = 74
+  end
+  object cdsImpPMCMotivo: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspImpPMCMotivo'
+    Left = 712
+    Top = 74
+    object cdsImpPMCMotivonume_pmc: TWideStringField
+      FieldName = 'nume_pmc'
+      Size = 15
+    end
+    object cdsImpPMCMotivodata_pmc: TDateTimeField
+      FieldName = 'data_pmc'
+      Required = True
+    end
+    object cdsImpPMCMotivoresponsavel: TWideStringField
+      FieldName = 'responsavel'
+      ReadOnly = True
+      Size = 45
+    end
+    object cdsImpPMCMotivoorigem: TWideStringField
+      FieldName = 'origem'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsImpPMCMotivomotivo: TWideStringField
+      FieldName = 'motivo'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsImpPMCMotivotipo: TWideStringField
+      FieldName = 'tipo'
+      ReadOnly = True
+      Size = 50
+    end
+  end
+  object frxDBDSPMCTipo: TfrxDBDataset
+    UserName = 'frxDBDSPMCTipo'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'nume_pmc=nume_pmc'
+      'data_pmc=data_pmc'
+      'responsavel=responsavel'
+      'origem=origem'
+      'tipo=tipo')
+    DataSet = cdsImpPMCTipo
+    BCDToCurrency = False
+    Left = 576
+    Top = 34
+  end
+  object zqryImpPMCTipo: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT nume_pmc, data_pmc, C.nome_col as Responsavel,'
+      'TC.valo_com as Origem, TC1.valo_com as Tipo'
+      'FROM pmc '
+      'INNER JOIN colaboradores C ON C.codi_col = resp_pmc'
+      
+        'INNER JOIN tabela_combos TC ON TC.tipo_com = 5 AND TC.codi_com =' +
+        ' orig_pmc '
+      
+        'INNER JOIN tabela_combos TC1 ON TC1.tipo_com = 4 AND TC1.codi_co' +
+        'm = tipo_pmc ')
+    Params = <>
+    Left = 632
+    Top = 34
+  end
+  object dspImpPMCTipo: TDataSetProvider
+    DataSet = zqryImpPMCTipo
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 672
+    Top = 34
+  end
+  object cdsImpPMCTipo: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspImpPMCTipo'
+    Left = 712
+    Top = 34
+    object cdsImpPMCTiponume_pmc: TWideStringField
+      FieldName = 'nume_pmc'
+      Size = 15
+    end
+    object cdsImpPMCTipodata_pmc: TDateTimeField
+      FieldName = 'data_pmc'
+      Required = True
+    end
+    object cdsImpPMCTiporesponsavel: TWideStringField
+      FieldName = 'responsavel'
+      ReadOnly = True
+      Size = 45
+    end
+    object cdsImpPMCTipoorigem: TWideStringField
+      FieldName = 'origem'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsImpPMCTipotipo: TWideStringField
+      FieldName = 'tipo'
+      ReadOnly = True
+      Size = 50
+    end
   end
 end

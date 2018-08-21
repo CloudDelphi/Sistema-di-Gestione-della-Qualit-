@@ -65,13 +65,12 @@ object FormLogin: TFormLogin
     Top = 70
     Width = 218
     Height = 26
-    CharCase = ecUpperCase
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Arial'
     Font.Style = [fsBold]
-    MaxLength = 8
+    MaxLength = 20
     ParentFont = False
     PasswordChar = '*'
     TabOrder = 1

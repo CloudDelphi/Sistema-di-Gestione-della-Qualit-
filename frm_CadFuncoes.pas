@@ -227,6 +227,14 @@ type
     sbArquivo: TSpeedButton;
     sbVisualizar: TSpeedButton;
     opd1: TOpenDialog;
+    lbl19: TLabel;
+    edtArea: TEdit;
+    cdsFuncoesfun_area: TWideStringField;
+    cdsImprimirfun_area: TWideStringField;
+    cdsImprimirHabfun_area: TWideStringField;
+    cdsImprimirTrefun_area: TWideStringField;
+    cdsImprimirHabTrefun_area: TWideStringField;
+    cdsImprimirHabTreHabfun_area: TWideStringField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -293,6 +301,15 @@ procedure TFormCadFuncoes.AtualizarDados;
 begin
    with cdsFuncoes do begin
       Active:= False;
+      CommandText:= ' SELECT F.codi_fun, F.desc_fun, F.educ_fun, F.expe_fun, F.resp_fun, ' +
+                    ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, ' +
+                    ' F.fun_edudesejada, F.fun_expdesejada, F.fun_cbo, F.fun_organograma,' +
+                    ' F.fun_area' +
+                    ' FROM funcoes F' +
+                    ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
+                    ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
+                    ' WHERE F.codi_fun < 999' + // Código 999 Projeto Spiltag TOTVS
+                    ' ORDER BY desc_fun';
       Active:= True;
    end;
 
@@ -689,7 +706,8 @@ begin
             if cOperacao = 'I' then begin
                CommandText:= ' INSERT INTO funcoes (' +
                              ' codi_fun, desc_fun, educ_fun, expe_fun, resp_fun, ' +
-                             ' fun_edudesejada, fun_expdesejada, fun_cbo, fun_organograma' +
+                             ' fun_edudesejada, fun_expdesejada, fun_cbo, ' +
+                             ' fun_organograma, fun_area' +
                              ' )' +
                              ' VALUES(' +
                              sNovoCodigo + ',' +
@@ -700,7 +718,8 @@ begin
                              QuotedStr(dblEducDesejada.KeyValue) + ',' +
                              QuotedStr(dblExpDesejada.KeyValue) + ',' +
                              QuotedStr(edtCBO.Text) + ',' +
-                             QuotedStr(edtOrganograma.Text) +
+                             QuotedStr(edtOrganograma.Text) + ',' +
+                             QuotedStr(edtArea.Text) +
                              ')';
                Execute;
             end
@@ -713,7 +732,8 @@ begin
                              ' fun_edudesejada = ' + QuotedStr(dblEducDesejada.KeyValue) + ',' +
                              ' fun_expdesejada = ' + QuotedStr(dblExpDesejada.KeyValue) + ',' +
                              ' fun_cbo = ' + QuotedStr(edtCBO.Text) + ',' +
-                             ' fun_organograma = ' + QuotedStr(edtOrganograma.Text) +
+                             ' fun_organograma = ' + QuotedStr(edtOrganograma.Text) + ',' +
+                             ' fun_area = ' + QuotedStr(edtArea.Text) +
                              ' WHERE codi_fun = ' + cdsFuncoescodi_fun.Asstring;
                Execute;
             end;
@@ -806,7 +826,8 @@ procedure TFormCadFuncoes.BuscarNovoCodigo;
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT MAX(codi_fun) AS NovoCodigo FROM funcoes';
+      CommandText:= ' SELECT MAX(codi_fun) AS NovoCodigo FROM funcoes' +
+                    ' WHERE codi_fun < 999'; // Código 999 Projeto Spiltag TOTVS
       Active:= True;
 
       if FieldByName('NovoCodigo').AsString = EmptyStr then begin
@@ -929,6 +950,7 @@ begin
    mmoResponsabilidades.Enabled:= Flag;
    edtCBO.Enabled              := Flag;
    edtOrganograma.Enabled      := Flag;
+   edtArea.Enabled             := Flag;
    sbArquivo.Enabled           := Flag;
 
    pctFuncoes.Pages[1].TabVisible:= not Flag;
@@ -946,6 +968,7 @@ begin
    mmoResponsabilidades.Clear;
    edtCBO.Clear;
    edtOrganograma.Clear;
+   edtArea.Clear;
 end;
 
 procedure TFormCadFuncoes.mmoResponsabilidadesExit(Sender: TObject);
@@ -971,6 +994,7 @@ begin
       mmoResponsabilidades.Text:= FieldByName('resp_fun').AsString;
       edtCBO.Text              := FieldByName('fun_cbo').AsString;
       edtOrganograma.Text      := FieldByName('fun_organograma').AsString;
+      edtArea.Text             := FieldByName('fun_area').AsString;
 
       if AllTrim(edtOrganograma.Text) <> EmptyStr then begin
          sbVisualizar.Enabled:= True;
@@ -1100,7 +1124,8 @@ begin
          with cdsImprimir do begin
             Active:= False;
             CommandText:= ' SELECT F.codi_fun, F.desc_fun, F.educ_fun, F.expe_fun, F.resp_fun, ' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia,' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6   ' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
@@ -1119,7 +1144,8 @@ begin
             Active:= False;
             CommandText:= ' SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_fun, ' +
                           ' F.expe_fun, F.resp_fun,' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia,' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
@@ -1140,7 +1166,8 @@ begin
             Active:= False;
             CommandText:= ' SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_fun, ' +
                           ' F.expe_fun, F.resp_fun,' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia,' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
@@ -1176,7 +1203,8 @@ begin
             Active:= False;
             CommandText:= ' SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_fun, ' +
                           ' F.expe_fun, F.resp_fun,' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia,' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
@@ -1208,12 +1236,13 @@ begin
             Active:= False;
             CommandText:= ' SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_fun, ' +
                           ' F.expe_fun, F.resp_fun,' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, ' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
                           ' LEFT JOIN funcoes_treinamentos FT ON FT.codi_fun = F.codi_fun' +
-                          ' INNER JOIN treinamentos T ON T.codi_tre = FT.codi_tre' +
+                          ' LEFT JOIN treinamentos T ON T.codi_tre = FT.codi_tre' +
                           ' WHERE F.codi_fun = ' + IntToStr(dblMatrizFuncao.KeyValue) +
                           ' ORDER BY T.desc_tre';
             Active:= True;
@@ -1223,7 +1252,8 @@ begin
             Active:= False;
             CommandText:= ' SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_fun, ' +
                           ' F.expe_fun, F.resp_fun,' +
-                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia' +
+                          ' T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, ' +
+                          ' F.fun_area' +
                           ' FROM funcoes F' +
                           ' INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.tipo_com = 6' +
                           ' INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.tipo_com = 7' +
@@ -1243,35 +1273,19 @@ begin
 
    with frxReport1 do begin
       case rgTipoRel.ItemIndex of
-         0: LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_ListaFuncoes.fr3');
-         1: LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesCompleto.fr3');
-         2: LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesHab.fr3');
-         3: begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesTre.fr3');
-               Variables['Titulo']:= QuotedStr('RELATÓRIO DE FUNÇÕES');
-         end;
+         0: Imprimir('rel_ListaFuncoes', frxReport1, tipoImp);
+         1: Imprimir('rel_FuncoesCompleto', frxReport1, tipoImp);
+         2: Imprimir('rel_FuncoesHab', frxReport1, tipoImp);
+         3: Imprimir('rel_FuncoesTre', frxReport1, tipoImp, 'Titulo', 'RELATÓRIO DE FUNÇÕES');
          4: begin
             if rgMatrizFuncao.ItemIndex = 0 then begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesTre.fr3');
-               Variables['Titulo']:= QuotedStr('MATRIZ DE FUNÇÃO - POR FUNÇÃO');
+               Imprimir('rel_FuncoesTre', frxReport1, tipoImp, 'Titulo', 'MATRIZ DE FUNÇÃO - POR FUNÇÃO');
             end
             else begin
-               LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesMatriz.fr3');
+               Imprimir('rel_FuncoesMatriz', frxReport1, tipoImp);
             end;
          end;
-         5: begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_FuncoesHabTre.fr3');
-         end;
-      end;
-
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
+         5: Imprimir('rel_FuncoesHabTre', frxReport1, tipoImp);
       end;
    end;
 end;

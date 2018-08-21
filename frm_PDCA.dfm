@@ -936,6 +936,7 @@ object FormPDCA: TFormPDCA
         ParentFont = False
         ScrollBars = ssVertical
         TabOrder = 12
+        OnEnter = mmoObsCheckEnter
         OnKeyPress = mmoOqueKeyPress
       end
       object dtPrevista: TDateEdit
@@ -951,6 +952,7 @@ object FormPDCA: TFormPDCA
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 13
+        OnClick = dtPrevistaClick
       end
       object dtFinalizar: TDateEdit
         Left = 772
@@ -965,10 +967,11 @@ object FormPDCA: TFormPDCA
         NumGlyphs = 2
         ParentFont = False
         TabOrder = 14
+        OnClick = dtFinalizarClick
       end
       object mmoTexto: TMemo
-        Left = 76
-        Top = 317
+        Left = 169
+        Top = 265
         Width = 424
         Height = 203
         Font.Charset = DEFAULT_CHARSET
@@ -3966,8 +3969,8 @@ object FormPDCA: TFormPDCA
     end
   end
   object pnlEmailAcoes: TPanel
-    Left = 579
-    Top = 169
+    Left = 726
+    Top = 74
     Width = 365
     Height = 282
     TabOrder = 3

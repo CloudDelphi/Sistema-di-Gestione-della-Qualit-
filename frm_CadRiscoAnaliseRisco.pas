@@ -116,7 +116,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnSairImpClick(Sender: TObject);
     procedure btnVideoCalibracaoClick(Sender: TObject);
-    procedure Imprimir(sTipo: string);
+    procedure Impressao(sTipoImp: string);
     procedure btnImpCalibracaoClick(Sender: TObject);
   private
     { Private declarations }
@@ -188,12 +188,12 @@ end;
 
 procedure TFormAnaliseRisco.btnVideoCalibracaoClick(Sender: TObject);
 begin
-   Imprimir('V');
+   Impressao('V');
 end;
 
 procedure TFormAnaliseRisco.btnImpCalibracaoClick(Sender: TObject);
 begin
-   Imprimir('I');
+   Impressao('I');
 end;
 
 procedure TFormAnaliseRisco.btnImprimirClick(Sender: TObject);
@@ -669,7 +669,7 @@ begin
    end;
 end;
 
-procedure TFormAnaliseRisco.Imprimir(sTipo: string);
+procedure TFormAnaliseRisco.Impressao(sTipoImp: string);
 var
    sOrdem: string;
 begin
@@ -679,23 +679,11 @@ begin
          Exit;
       end;
 
-      with dm.frxReport1 do begin
-         if chkProcesso.Checked then begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AnaliseRiscosAgrupa.fr3');
-         end
-         else begin
-            LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AnaliseRiscos.fr3');
-         end;
-
-         if sTipo = 'I' then begin
-   //       Imprimir direto
-            PrepareReport;
-            PrintOptions.ShowDialog:= True;
-            Print;
-         end
-         else begin
-            ShowReport;
-         end;
+      if chkProcesso.Checked then begin
+         Imprimir('rel_AnaliseRiscosAgrupa', dm.frxReport1, sTipoImp);
+      end
+      else begin
+         Imprimir('rel_AnaliseRiscos', dm.frxReport1, sTipoImp);
       end;
    end;
 

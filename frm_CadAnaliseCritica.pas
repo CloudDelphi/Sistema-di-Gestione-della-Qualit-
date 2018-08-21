@@ -875,21 +875,9 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AnaliseCritica.fr3');
+   Imprimir('rel_AnaliseCritica', frxReport1, tipoImp);
 
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
-
-   Auditoria('ANÁLISE CRÍTICA',dm.cdsPMCnume_pmc.AsString,'R', '');
+//   Auditoria('ANÁLISE CRÍTICA',dm.cdsPMCnume_pmc.AsString,'R', '');
 end;
 
 procedure TFormCadAnaliseCritica.LimparCampos;

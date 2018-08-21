@@ -5,7 +5,7 @@ object FormCadParametros: TFormCadParametros
   BorderStyle = bsSingle
   Caption = 'Par'#226'metros do Sistema'
   ClientHeight = 451
-  ClientWidth = 499
+  ClientWidth = 610
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,9 @@ object FormCadParametros: TFormCadParametros
   object pctParametros: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 499
+    Width = 610
     Height = 379
-    ActivePage = tsAvisoCalib
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -59,14 +59,12 @@ object FormCadParametros: TFormCadParametros
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitLeft = -1
-    ExplicitTop = -5
     object tsCadastro: TTabSheet
       Caption = 'Diversos'
       object grp11: TGroupBox
         Left = 4
         Top = 8
-        Width = 478
+        Width = 595
         Height = 105
         Caption = 'IQF'
         TabOrder = 0
@@ -90,6 +88,13 @@ object FormCadParametros: TFormCadParametros
           Width = 93
           Height = 13
           Caption = 'Peso Conformidade'
+        end
+        object lbl44: TLabel
+          Left = 358
+          Top = 16
+          Width = 73
+          Height = 13
+          Caption = 'Meta IQF Geral'
         end
         object edtAvaliacao: TCurrencyEdit
           Left = 175
@@ -145,14 +150,156 @@ object FormCadParametros: TFormCadParametros
           ParentFont = False
           TabOrder = 2
         end
+        object edtMetaIQF: TCurrencyEdit
+          Left = 439
+          Top = 10
+          Width = 66
+          Height = 26
+          Hint = 'Meta de IQG Geral'
+          Margins.Left = 5
+          Margins.Top = 1
+          AutoSize = False
+          DisplayFormat = '0.00;-0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+        end
       end
+      object grp15: TGroupBox
+        Left = 4
+        Top = 192
+        Width = 595
+        Height = 144
+        Caption = 'Relat'#243'rios'
+        TabOrder = 1
+        object lbl43: TLabel
+          Left = 12
+          Top = 76
+          Width = 215
+          Height = 13
+          Caption = 'Texto para Cabe'#231'alho/Rodap'#233' dos relat'#243'rios'
+        end
+        object chkConf_cabec: TCheckBox
+          Left = 12
+          Top = 24
+          Width = 269
+          Height = 17
+          Caption = 'Inserir texto no cabe'#231'alho dos relat'#243'rios'
+          TabOrder = 0
+        end
+        object chkConf_rodap: TCheckBox
+          Left = 12
+          Top = 47
+          Width = 269
+          Height = 17
+          Caption = 'Inserir texto no rodap'#233' dos relat'#243'rios'
+          TabOrder = 1
+        end
+        object mmoTextoRel: TMemo
+          Left = 12
+          Top = 91
+          Width = 573
+          Height = 45
+          Hint = 'M'#225'ximo de 80 caracteres'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          Lines.Strings = (
+            '')
+          MaxLength = 80
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+        end
+      end
+      object grp16: TGroupBox
+        Left = 4
+        Top = 116
+        Width = 292
+        Height = 75
+        Caption = 'Cadastro de Motivos de RNC'
+        TabOrder = 2
+        object chkFiltroMotivoProcesso: TCheckBox
+          Left = 12
+          Top = 21
+          Width = 277
+          Height = 17
+          Caption = 'Usar filtro de Motivos por Processo'
+          TabOrder = 0
+        end
+      end
+      object grp19: TGroupBox
+        Left = 299
+        Top = 116
+        Width = 298
+        Height = 75
+        Caption = 'Verifica'#231#227'o de Senha'
+        TabOrder = 3
+        object lbl45: TLabel
+          Left = 207
+          Top = 19
+          Width = 19
+          Height = 13
+          Caption = 'dias'
+        end
+        object lblTextoSenhaForte: TLabel
+          Left = 31
+          Top = 54
+          Width = 154
+          Height = 13
+          Caption = 'n'#250'meros e caracteres especiais)'
+        end
+        object chkTrocaSenha: TCheckBox
+          Left = 12
+          Top = 21
+          Width = 120
+          Height = 17
+          Caption = 'Trocar senha a cada'
+          TabOrder = 0
+        end
+        object spnDiasTrocaSenha: TRxSpinEdit
+          Left = 132
+          Top = 15
+          Width = 73
+          Height = 26
+          MaxValue = 999.000000000000000000
+          Value = 2.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnChange = spnCasasChange
+        end
+        object chkSenhaForte: TCheckBox
+          Left = 12
+          Top = 39
+          Width = 277
+          Height = 17
+          Caption = 'Usar regra de senha forte (Obrigat'#243'rio letras, '
+          TabOrder = 2
+        end
+      end
+    end
+    object tsIndicadores: TTabSheet
+      Caption = 'Indicadores'
+      ImageIndex = 1
       object grp12: TGroupBox
-        Left = 3
-        Top = 112
-        Width = 479
+        Left = 9
+        Top = 3
+        Width = 589
         Height = 86
         Caption = 'Indicadores'
-        TabOrder = 1
+        TabOrder = 0
         object lbl15: TLabel
           Left = 16
           Top = 22
@@ -198,13 +345,56 @@ object FormCadParametros: TFormCadParametros
           OnChange = spnCasasChange
         end
       end
-      object grp13: TGroupBox
+      object grp14: TGroupBox
+        Left = 9
+        Top = 92
+        Width = 589
+        Height = 86
+        Caption = 'Atualizar indicadores at'#233' o dia '
+        TabOrder = 1
+        object lbl41: TLabel
+          Left = 16
+          Top = 22
+          Width = 71
+          Height = 13
+          Caption = 'Selecione o dia'
+        end
+        object spnDiaAtuIndicador: TRxSpinEdit
+          Left = 16
+          Top = 39
+          Width = 73
+          Height = 26
+          MaxValue = 31.000000000000000000
+          MinValue = 1.000000000000000000
+          Value = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          OnChange = spnCasasChange
+        end
+      end
+    end
+    object tsPMC: TTabSheet
+      Caption = 'PMC'
+      ImageIndex = 7
+      object lbl42: TLabel
         Left = 3
-        Top = 199
-        Width = 479
-        Height = 78
-        Caption = 'PMC'
-        TabOrder = 2
+        Top = 127
+        Width = 256
+        Height = 13
+        Caption = 'Insira os colaboradores para receber o e-mail de PMC'
+      end
+      object grp13: TGroupBox
+        Left = 10
+        Top = 6
+        Width = 589
+        Height = 80
+        Caption = 'Filtro de PMC'
+        TabOrder = 0
         object lbl21: TLabel
           Left = 16
           Top = 22
@@ -367,10 +557,344 @@ object FormCadParametros: TFormCadParametros
           OnClick = btnLimpaDataPMCClick
         end
       end
-    end
-    object tsIndicadores: TTabSheet
-      Caption = 'Indicadores'
-      ImageIndex = 1
+      object dblColPMC: TDBLookupComboBox
+        Left = 3
+        Top = 144
+        Width = 406
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_col'
+        ListField = 'nome_col'
+        ListSource = dsColabPMC
+        ParentFont = False
+        TabOrder = 1
+      end
+      object dbgEmailPMC: TDBGrid
+        Left = 3
+        Top = 174
+        Width = 596
+        Height = 152
+        Hint = 'Selecione o registro para excluir'
+        DataSource = dsParEmailPMC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'nome_col'
+            Title.Caption = 'Colaboradores que recebem e-mail de Manuten'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 440
+            Visible = True
+          end>
+      end
+      object btnInserirEmailPMC: TBitBtn
+        Tag = 50
+        Left = 430
+        Top = 124
+        Width = 82
+        Height = 51
+        Hint = 'Insere o processo para o usu'#225'rio'
+        Caption = 'Inserir'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          B60D0000424DB60D000000000000360000002800000030000000180000000100
+          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEB3
+          CBF8719EF2417EEE266BEB2369EB266BEB417EEE719EF2B3CBF8F8FAFEFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFBFAFACECDCDA3A1A184828173706F716E6D73706F848281A3A1A1CE
+          CDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFCFDFFA2BFF73676ED2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB3676EDA2BFF7FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDC3C2C17D7B7A716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECF2FD598EF02369EB2369EB31
+          72EC76A1F3B6CDF8D3E1FBE3ECFCD3E1FBB6CDF876A1F33072EC2369EB2369EB
+          598EF0ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F2F29492
+          91716E6D716E6D7A7776A6A5A4D0CFCEE3E2E2EDEDEDE3E2E2D0CFCEA6A5A479
+          7776716E6D716E6D949291F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          E9F0FD417EEE2369EB266BEB8CB1F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFF5F8FE8CB1F5266BEB2369EB417EEEE9F0FDFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFF1F0F0848281716E6D73706FB5B3B3F8F8F8FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B5B3B373706F716E6D848281F1F0
+          F0FFFFFFFFFFFFFFFFFFFFFFFFF9FBFE5188EF2369EB2F71ECC9DAFAFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA
+          2F71EC2369EB5188EFF9FBFEFFFFFFFFFFFFFFFFFFFBFBFB8F8C8B716E6D7976
+          75DCDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFDCDBDB797675716E6D8F8C8BFBFBFBFFFFFFFFFFFFFFFFFF91B4F5
+          2369EB276CEBCBDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCADBFA276CEB2369EB91B4F5FFFFFFFF
+          FFFFFFFFFFB8B7B6716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDCDC747170716E
+          6DB8B7B6FFFFFFFFFFFFEFF4FE2C6FEC2369EB92B5F5FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFA6C2F75188EFA6C2F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF91B4F52369EB2C6FECEFF4FEFFFFFFF4F4F4777473716E6DB9B7B7FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C4C48F8C8BC6C4C4FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D777473F4F4F4FFFFFF9FBEF62369EB
+          3374ECF7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2C6FEC2369EB3374
+          ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE3374EC2369EB9FBEF6FF
+          FFFFC1C0BF716E6D7C7978FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          777473716E6D7C7978FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87B78
+          77716E6DC1C0BFFFFFFF5F92F02369EB7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF2369EB2369EB3072ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF7EA7F32369EB5F92F0FFFFFF979595716E6DADABAAFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF716E6D716E6D797776FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFABAAA9716E6D979595FFFFFF3475ED2369EB
+          B5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBDD2F9ACC7F7ACC7F72369EB2369EB2B6E
+          ECACC7F7ACC7F7BDD2F9FDFEFFFFFFFFFFFFFFFFFFFFB4CCF82369EB3475EDFF
+          FFFF7C7978716E6DCFCECEFFFFFFFFFFFFFFFFFFFEFEFED4D3D3CAC8C8CAC8C8
+          716E6D716E6D767372CAC8C8CAC8C8D4D3D3FEFEFEFFFFFFFFFFFFFFFFFFCFCE
+          CD716E6D7C7978FFFFFF2369EB2369EBD0DFFBFFFFFFFFFFFFFFFFFFA3C0F723
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBA4C1F7FFFFFF
+          FFFFFFFFFFFFCFDEFB2369EB2369EBFFFFFF716E6D716E6DE1E0E0FFFFFFFFFF
+          FFFFFFFFC3C2C2716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DFDF716E6D716E6DFFFFFF2369EB2369EB
+          D0DFFBFFFFFFFFFFFFFFFFFFA2BFF72369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFCFDEFB2369EB2369EBFF
+          FFFF716E6D716E6DE1E0E0FFFFFFFFFFFFFFFFFFC3C2C1716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DF
+          DF716E6D716E6DFFFFFF3475ED2369EBB5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBA
+          D0F99EBDF69EBDF62369EB2369EB2A6EEC9EBDF69EBDF6BBD1F9FDFEFFFFFFFF
+          FFFFFFFFFFFFB4CCF82369EB3475EDFFFFFF7C7978716E6DCFCECEFFFFFFFFFF
+          FFFFFFFFFEFEFED2D2D1C1BFBFC1BFBF716E6D716E6D757372C1BFBFC1BFBFD3
+          D2D2FEFEFEFFFFFFFFFFFFFFFFFFCFCECD716E6D7C7978FFFFFF5F92F02369EB
+          7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2369EB2369EB3072
+          ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7EA7F32369EB5F92F0FF
+          FFFF979595716E6DADABAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          716E6D716E6D797776FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABAA
+          A9716E6D979595FFFFFF9FBEF62369EB3374ECF7FAFEFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFF2C6FEC2369EB3374ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFF5F8FE3374EC2369EB9FBEF6FFFFFFC1C0BF716E6D7C7978FAFAFAFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF777473716E6D7C7978FFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFF8F8F87B7877716E6DC1C0BFFFFFFFEFF4FE2C6FEC
+          2369EB92B5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5C2F74D86EFA5C2
+          F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F52369EB2C6FECEFF4FEFF
+          FFFFF4F4F4777473716E6DB9B7B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          C5C4C38C8A89C5C4C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6716E
+          6D777473F4F4F4FFFFFFFFFFFF91B4F52369EB276CEBCBDCFAFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          CBDCFA276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFB8B7B6716E6D747170DEDD
+          DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB8B7B6FFFFFFFFFFFFFFFFFFF9FBFE
+          5188EF2369EB2F71ECCADBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA2F71EC2369EB5188EFF9FBFEFFFFFFFF
+          FFFFFFFFFFFBFBFB8F8C8B716E6D797675DCDCDCFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDBDB797675716E6D8F8C
+          8BFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFE8EFFD417EEE2369EB266BEB8DB1F5F5
+          F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE8DB1F5266BEB
+          2369EB417EEEE9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0848281716E
+          6D73706FB5B4B3F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+          F8F8B5B4B373706F716E6D848281F1F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFECF2FD588DF02369EB2369EB3172EC77A2F3B7CEF8D4E2FBE3ECFCD4E2
+          FBB7CEF876A1F33172EC2369EB2369EB598EF0ECF2FDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFF3F2F2949190716E6D716E6D7A7776A7A5A5D0CFCF
+          E3E3E2EDEDEDE3E3E2D0CFCFA6A5A47A7776716E6D716E6D949291F3F2F2FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFFA2BFF73676ED23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3676EDA2BFF7
+          FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFD
+          FDC3C2C17D7B7A716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFF7FAFEB3CBF8719EF2417EEE266BEB2369EB266B
+          EB417EEE719EF2B3CBF8F8FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFACECDCDA3A1A1848281
+          73706F716E6D73706F848281A3A1A1CECDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        Layout = blGlyphTop
+        NumGlyphs = 2
+        ParentDoubleBuffered = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
+        OnClick = btnInserirEmailPMCClick
+      end
+      object btnExcluirEmailPMC: TBitBtn
+        Tag = 50
+        Left = 517
+        Top = 124
+        Width = 82
+        Height = 51
+        Hint = 'Exclui o processo para o usu'#225'rio'
+        Caption = 'Excluir'
+        DoubleBuffered = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          B60D0000424DB60D000000000000360000002800000030000000180000000100
+          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEB3
+          CBF8719EF2417EEE266BEB2369EB266BEB417EEE719EF2B3CBF8F8FAFEFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFBFAFACECDCDA3A1A184828173706F716E6D73706F848281A3A1A1CE
+          CDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFCFDFFA2BFF73676ED2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB3676EDA2BFF7FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDC3C2C17D7B7A716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECF2FD598EF02369EB2369EB31
+          72EC76A1F3B6CDF8D3E1FBE3ECFCD3E1FBB6CDF876A1F33072EC2369EB2369EB
+          598EF0ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F2F29492
+          91716E6D716E6D7A7776A6A5A4D0CFCEE3E2E2EDEDEDE3E2E2D0CFCEA6A5A479
+          7776716E6D716E6D949291F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          E9F0FD417EEE2369EB266BEB8CB1F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFF5F8FE8CB1F5266BEB2369EB417EEEE9F0FDFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFF1F0F0848281716E6D73706FB5B3B3F8F8F8FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B5B3B373706F716E6D848281F1F0
+          F0FFFFFFFFFFFFFFFFFFFFFFFFF9FBFE5188EF2369EB2F71ECC9DAFAFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA
+          2F71EC2369EB5188EFF9FBFEFFFFFFFFFFFFFFFFFFFBFBFB8F8C8B716E6D7976
+          75DCDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFDCDBDB797675716E6D8F8C8BFBFBFBFFFFFFFFFFFFFFFFFF91B4F5
+          2369EB276CEBCBDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCADBFA276CEB2369EB91B4F5FFFFFFFF
+          FFFFFFFFFFB8B7B6716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDCDC747170716E
+          6DB8B7B6FFFFFFFFFFFFEFF4FE2C6FEC2369EB92B5F5FFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFF91B4F52369EB2C6FECEFF4FEFFFFFFF4F4F4777473716E6DB9B7B7FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D777473F4F4F4FFFFFF9FBEF62369EB
+          3374ECF7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE3374EC2369EB9FBEF6FF
+          FFFFC1C0BF716E6D7C7978FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87B78
+          77716E6DC1C0BFFFFFFF5F92F02369EB7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFF7EA7F32369EB5F92F0FFFFFF979595716E6DADABAAFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFABAAA9716E6D979595FFFFFF3475ED2369EB
+          B5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBDD2F9ACC7F7ACC7F7ACC7F7ACC7F7ACC7
+          F7ACC7F7ACC7F7BDD2F9FDFEFFFFFFFFFFFFFFFFFFFFB4CCF82369EB3475EDFF
+          FFFF7C7978716E6DCFCECEFFFFFFFFFFFFFFFFFFFEFEFED4D3D3CAC8C8CAC8C8
+          CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8D4D3D3FEFEFEFFFFFFFFFFFFFFFFFFCFCE
+          CD716E6D7C7978FFFFFF2369EB2369EBD0DFFBFFFFFFFFFFFFFFFFFFA3C0F723
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBA4C1F7FFFFFF
+          FFFFFFFFFFFFCFDEFB2369EB2369EBFFFFFF716E6D716E6DE1E0E0FFFFFFFFFF
+          FFFFFFFFC3C2C2716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DFDF716E6D716E6DFFFFFF2369EB2369EB
+          D0DFFBFFFFFFFFFFFFFFFFFFA2BFF72369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFCFDEFB2369EB2369EBFF
+          FFFF716E6D716E6DE1E0E0FFFFFFFFFFFFFFFFFFC3C2C1716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DF
+          DF716E6D716E6DFFFFFF3475ED2369EBB5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBA
+          D0F99EBDF69EBDF69EBDF69EBDF69EBDF69EBDF69EBDF6BBD1F9FDFEFFFFFFFF
+          FFFFFFFFFFFFB4CCF82369EB3475EDFFFFFF7C7978716E6DCFCECEFFFFFFFFFF
+          FFFFFFFFFEFEFED2D2D1C1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFD3
+          D2D2FEFEFEFFFFFFFFFFFFFFFFFFCFCECD716E6D7C7978FFFFFF5F92F02369EB
+          7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7EA7F32369EB5F92F0FF
+          FFFF979595716E6DADABAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABAA
+          A9716E6D979595FFFFFF9FBEF62369EB3374ECF7FAFEFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFF5F8FE3374EC2369EB9FBEF6FFFFFFC1C0BF716E6D7C7978FAFAFAFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFF8F8F87B7877716E6DC1C0BFFFFFFFEFF4FE2C6FEC
+          2369EB92B5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F52369EB2C6FECEFF4FEFF
+          FFFFF4F4F4777473716E6DB9B7B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6716E
+          6D777473F4F4F4FFFFFFFFFFFF91B4F52369EB276CEBCBDCFAFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          CBDCFA276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFB8B7B6716E6D747170DEDD
+          DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB8B7B6FFFFFFFFFFFFFFFFFFF9FBFE
+          5188EF2369EB2F71ECCADBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA2F71EC2369EB5188EFF9FBFEFFFFFFFF
+          FFFFFFFFFFFBFBFB8F8C8B716E6D797675DCDCDCFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDBDB797675716E6D8F8C
+          8BFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFE8EFFD417EEE2369EB266BEB8DB1F5F5
+          F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE8DB1F5266BEB
+          2369EB417EEEE9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0848281716E
+          6D73706FB5B4B3F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+          F8F8B5B4B373706F716E6D848281F1F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFECF2FD588DF02369EB2369EB3172EC77A2F3B7CEF8D4E2FBE3ECFCD4E2
+          FBB7CEF876A1F33172EC2369EB2369EB598EF0ECF2FDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFF3F2F2949190716E6D716E6D7A7776A7A5A5D0CFCF
+          E3E3E2EDEDEDE3E3E2D0CFCFA6A5A47A7776716E6D716E6D949291F3F2F2FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFFA2BFF73676ED23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3676EDA2BFF7
+          FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFD
+          FDC3C2C17D7B7A716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFF7FAFEB3CBF8719EF2417EEE266BEB2369EB266B
+          EB417EEE719EF2B3CBF8F8FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFACECDCDA3A1A1848281
+          73706F716E6D73706F848281A3A1A1CECDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        Layout = blGlyphTop
+        NumGlyphs = 2
+        ParentDoubleBuffered = False
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 4
+        OnClick = btnExcluirEmailPMCClick
+      end
+      object chkEnvioGestor: TCheckBox
+        Left = 3
+        Top = 331
+        Width = 325
+        Height = 17
+        Caption = 'Incluir gestor do processo no envio de e-mails de PMC'
+        TabOrder = 5
+      end
+      object chkObrigaCausa: TCheckBox
+        Left = 10
+        Top = 100
+        Width = 543
+        Height = 17
+        Caption = 
+          'Obrigar preenchimento de uma ferramenta de An'#225'lise de Causa (Ish' +
+          'iwawa, Brainstorm)'
+        TabOrder = 6
+      end
     end
     object tsRisco: TTabSheet
       Caption = 'An'#225'lise de Riscos'
@@ -392,7 +916,7 @@ object FormCadParametros: TFormCadParametros
       object grp3: TGroupBox
         Left = 0
         Top = 40
-        Width = 489
+        Width = 601
         Height = 75
         Caption = 'Ponto Forte'
         TabOrder = 0
@@ -432,7 +956,7 @@ object FormCadParametros: TFormCadParametros
       object grp4: TGroupBox
         Left = 0
         Top = 116
-        Width = 489
+        Width = 601
         Height = 75
         Caption = 'Ponto Fraco'
         TabOrder = 1
@@ -472,7 +996,7 @@ object FormCadParametros: TFormCadParametros
       object grp5: TGroupBox
         Left = 0
         Top = 193
-        Width = 489
+        Width = 601
         Height = 75
         Caption = 'Oportunidades'
         TabOrder = 2
@@ -512,7 +1036,7 @@ object FormCadParametros: TFormCadParametros
       object grp6: TGroupBox
         Left = 0
         Top = 269
-        Width = 489
+        Width = 601
         Height = 75
         Caption = 'Amea'#231'as'
         TabOrder = 3
@@ -556,7 +1080,7 @@ object FormCadParametros: TFormCadParametros
       object grp7: TGroupBox
         Left = -1
         Top = 23
-        Width = 489
+        Width = 601
         Height = 63
         Caption = 'Ponto Forte e Oportunidades'
         TabOrder = 0
@@ -568,21 +1092,21 @@ object FormCadParametros: TFormCadParametros
           Caption = 'Risco Baixo'
         end
         object lbl23: TLabel
-          Left = 123
+          Left = 133
           Top = 16
           Width = 56
           Height = 13
           Caption = 'Risco M'#233'dio'
         end
         object lbl24: TLabel
-          Left = 215
+          Left = 235
           Top = 16
           Width = 47
           Height = 13
           Caption = 'Risco Alto'
         end
         object lbl25: TLabel
-          Left = 313
+          Left = 338
           Top = 16
           Width = 62
           Height = 13
@@ -596,21 +1120,21 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 0
         end
         object pnlAltoOp1a: TPanel
-          Left = 215
+          Left = 235
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 1
         end
         object pnlMedioOp1a: TPanel
-          Left = 123
+          Left = 133
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 2
         end
         object pnlSeveroOp1a: TPanel
-          Left = 313
+          Left = 338
           Top = 34
           Width = 62
           Height = 21
@@ -620,7 +1144,7 @@ object FormCadParametros: TFormCadParametros
       object grp8: TGroupBox
         Left = 0
         Top = 85
-        Width = 489
+        Width = 601
         Height = 63
         Caption = 'Ponto Fraco e Amea'#231'as'
         TabOrder = 1
@@ -632,21 +1156,21 @@ object FormCadParametros: TFormCadParametros
           Caption = 'Risco Baixo'
         end
         object lbl27: TLabel
-          Left = 123
+          Left = 132
           Top = 16
           Width = 56
           Height = 13
           Caption = 'Risco M'#233'dio'
         end
         object lbl28: TLabel
-          Left = 215
+          Left = 234
           Top = 16
           Width = 47
           Height = 13
           Caption = 'Risco Alto'
         end
         object lbl29: TLabel
-          Left = 313
+          Left = 337
           Top = 16
           Width = 62
           Height = 13
@@ -660,21 +1184,21 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 0
         end
         object pnlAltoOp1b: TPanel
-          Left = 215
+          Left = 234
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 1
         end
         object pnlMedioOp1b: TPanel
-          Left = 123
+          Left = 132
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 2
         end
         object pnlSeveroOp1b: TPanel
-          Left = 313
+          Left = 337
           Top = 34
           Width = 62
           Height = 21
@@ -684,7 +1208,7 @@ object FormCadParametros: TFormCadParametros
       object grp9: TGroupBox
         Left = 0
         Top = 283
-        Width = 489
+        Width = 601
         Height = 63
         Caption = 'Ponto Fraco e Amea'#231'as'
         TabOrder = 2
@@ -696,21 +1220,21 @@ object FormCadParametros: TFormCadParametros
           Caption = 'Risco Baixo'
         end
         object lbl31: TLabel
-          Left = 123
+          Left = 132
           Top = 15
           Width = 56
           Height = 13
           Caption = 'Risco M'#233'dio'
         end
         object lbl32: TLabel
-          Left = 215
+          Left = 234
           Top = 16
           Width = 47
           Height = 13
           Caption = 'Risco Alto'
         end
         object lbl33: TLabel
-          Left = 313
+          Left = 337
           Top = 16
           Width = 62
           Height = 13
@@ -724,21 +1248,21 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 0
         end
         object pnlAltoOp2b: TPanel
-          Left = 215
+          Left = 234
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 1
         end
         object pnlMedioOp2b: TPanel
-          Left = 123
+          Left = 132
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 2
         end
         object pnlSeveroOp2b: TPanel
-          Left = 313
+          Left = 337
           Top = 34
           Width = 62
           Height = 21
@@ -747,8 +1271,8 @@ object FormCadParametros: TFormCadParametros
       end
       object grp10: TGroupBox
         Left = 0
-        Top = 221
-        Width = 489
+        Top = 222
+        Width = 601
         Height = 63
         Caption = 'Ponto Forte e Oportunidades'
         TabOrder = 3
@@ -760,21 +1284,21 @@ object FormCadParametros: TFormCadParametros
           Caption = 'Risco Baixo'
         end
         object lbl35: TLabel
-          Left = 123
+          Left = 132
           Top = 16
           Width = 56
           Height = 13
           Caption = 'Risco M'#233'dio'
         end
         object lbl36: TLabel
-          Left = 215
+          Left = 234
           Top = 16
           Width = 47
           Height = 13
           Caption = 'Risco Alto'
         end
         object lbl37: TLabel
-          Left = 313
+          Left = 337
           Top = 16
           Width = 62
           Height = 13
@@ -788,21 +1312,21 @@ object FormCadParametros: TFormCadParametros
           TabOrder = 0
         end
         object pnlAltoOp2a: TPanel
-          Left = 215
+          Left = 234
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 1
         end
         object pnlMedioOp2a: TPanel
-          Left = 123
+          Left = 132
           Top = 34
           Width = 62
           Height = 21
           TabOrder = 2
         end
         object pnlSeveroOp2a: TPanel
-          Left = 313
+          Left = 337
           Top = 34
           Width = 62
           Height = 21
@@ -844,7 +1368,7 @@ object FormCadParametros: TFormCadParametros
       object grp1: TGroupBox
         Left = 0
         Top = 3
-        Width = 488
+        Width = 600
         Height = 100
         Caption = 'PMC'
         TabOrder = 0
@@ -911,8 +1435,8 @@ object FormCadParametros: TFormCadParametros
           OnChange = spnCasasChange
         end
         object chkEmailPMC: TCheckBox
-          Left = 379
-          Top = 81
+          Left = 491
+          Top = 49
           Width = 106
           Height = 17
           Caption = 'N'#227'o enviar e-mail'
@@ -922,7 +1446,7 @@ object FormCadParametros: TFormCadParametros
       object grp2: TGroupBox
         Left = 0
         Top = 154
-        Width = 488
+        Width = 600
         Height = 100
         Caption = 'An'#225'lise de Riscos'
         TabOrder = 1
@@ -990,8 +1514,8 @@ object FormCadParametros: TFormCadParametros
           OnChange = spnCasasChange
         end
         object chk2: TCheckBox
-          Left = 379
-          Top = 80
+          Left = 491
+          Top = 56
           Width = 106
           Height = 17
           Caption = 'N'#227'o enviar e-mail'
@@ -1002,110 +1526,132 @@ object FormCadParametros: TFormCadParametros
     object tsv: TTabSheet
       Caption = 'Habilidades'
       ImageIndex = 4
-      object lbl11: TLabel
-        Left = 15
-        Top = 18
-        Width = 183
-        Height = 13
-        Caption = 'Nota m'#225'xima Avalia'#231#227'o de Habilidades'
-      end
-      object lbl17: TLabel
-        Left = 15
-        Top = 52
-        Width = 190
-        Height = 13
-        Caption = 'Nota para pend'#234'ncia (menor ou igual a)'
-      end
-      object lbl18: TLabel
-        Left = 15
-        Top = 85
-        Width = 172
-        Height = 13
-        Caption = 'Per'#237'odo da Avalia'#231#227'o de Habilidades'
-      end
-      object lbl19: TLabel
-        Left = 15
-        Top = 116
-        Width = 285
-        Height = 13
-        Caption = 'Cobrar pend'#234'ncias da primeira avalia'#231#227'o de habilidades em '
-      end
-      object lbl20: TLabel
-        Left = 15
-        Top = 131
-        Width = 234
-        Height = 13
-        Caption = 'dias a partir da data de admiss'#227'o do colaborador'
-      end
-      object spnNota: TRxSpinEdit
-        Left = 208
-        Top = 11
-        Width = 58
-        Height = 26
-        Decimal = 0
-        MaxValue = 100.000000000000000000
-        MinValue = 1.000000000000000000
-        Value = 1.000000000000000000
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 4
-        ParentFont = False
+      object grp17: TGroupBox
+        Left = 3
+        Top = -1
+        Width = 596
+        Height = 55
         TabOrder = 0
+        object chkNaoControlarHab: TCheckBox
+          Left = 7
+          Top = 22
+          Width = 256
+          Height = 17
+          Caption = 'N'#227'o controlar Habilidades pelo Destra Manager'
+          TabOrder = 0
+        end
       end
-      object spnNotaPendencia: TRxSpinEdit
-        Left = 208
-        Top = 45
-        Width = 58
-        Height = 26
-        Decimal = 0
-        MaxValue = 100.000000000000000000
-        MinValue = 1.000000000000000000
-        Value = 1.000000000000000000
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 4
-        ParentFont = False
+      object grp18: TGroupBox
+        Left = 3
+        Top = 55
+        Width = 596
+        Height = 153
         TabOrder = 1
-      end
-      object dblPeriodoHab: TDBLookupComboBox
-        Left = 208
-        Top = 79
-        Width = 88
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListSource = dsPeriodoHab
-        ParentFont = False
-        TabOrder = 2
-      end
-      object spnPrimeiraAvaliacao: TRxSpinEdit
-        Left = 302
-        Top = 111
-        Width = 58
-        Height = 26
-        Decimal = 0
-        MaxValue = 100.000000000000000000
-        MinValue = 1.000000000000000000
-        Value = 1.000000000000000000
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 4
-        ParentFont = False
-        TabOrder = 3
+        object lbl11: TLabel
+          Left = 12
+          Top = 21
+          Width = 183
+          Height = 13
+          Caption = 'Nota m'#225'xima Avalia'#231#227'o de Habilidades'
+        end
+        object lbl17: TLabel
+          Left = 12
+          Top = 55
+          Width = 190
+          Height = 13
+          Caption = 'Nota para pend'#234'ncia (menor ou igual a)'
+        end
+        object lbl18: TLabel
+          Left = 12
+          Top = 88
+          Width = 172
+          Height = 13
+          Caption = 'Per'#237'odo da Avalia'#231#227'o de Habilidades'
+        end
+        object lbl19: TLabel
+          Left = 12
+          Top = 117
+          Width = 285
+          Height = 13
+          Caption = 'Cobrar pend'#234'ncias da primeira avalia'#231#227'o de habilidades em '
+        end
+        object lbl20: TLabel
+          Left = 359
+          Top = 117
+          Width = 234
+          Height = 13
+          Caption = 'dias a partir da data de admiss'#227'o do colaborador'
+        end
+        object spnNota: TRxSpinEdit
+          Left = 205
+          Top = 14
+          Width = 58
+          Height = 26
+          Decimal = 0
+          MaxValue = 100.000000000000000000
+          MinValue = 1.000000000000000000
+          Value = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          MaxLength = 4
+          ParentFont = False
+          TabOrder = 0
+        end
+        object spnNotaPendencia: TRxSpinEdit
+          Left = 205
+          Top = 48
+          Width = 58
+          Height = 26
+          Decimal = 0
+          MaxValue = 100.000000000000000000
+          MinValue = 1.000000000000000000
+          Value = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          MaxLength = 4
+          ParentFont = False
+          TabOrder = 1
+        end
+        object dblPeriodoHab: TDBLookupComboBox
+          Left = 205
+          Top = 82
+          Width = 88
+          Height = 26
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          KeyField = 'codi_com'
+          ListField = 'valo_com'
+          ListSource = dsPeriodoHab
+          ParentFont = False
+          TabOrder = 2
+        end
+        object spnPrimeiraAvaliacao: TRxSpinEdit
+          Left = 299
+          Top = 114
+          Width = 58
+          Height = 26
+          Decimal = 0
+          MaxValue = 365.000000000000000000
+          MinValue = 1.000000000000000000
+          Value = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          MaxLength = 4
+          ParentFont = False
+          TabOrder = 3
+        end
       end
     end
     object tsAvisoCalib: TTabSheet
@@ -1132,7 +1678,7 @@ object FormCadParametros: TFormCadParametros
       object dblColCalibracao: TDBLookupComboBox
         Left = 3
         Top = 23
-        Width = 312
+        Width = 398
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1148,7 +1694,7 @@ object FormCadParametros: TFormCadParametros
       object dblColManutencao: TDBLookupComboBox
         Left = 3
         Top = 197
-        Width = 321
+        Width = 407
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1164,7 +1710,7 @@ object FormCadParametros: TFormCadParametros
       object dbgCalibracao: TDBGrid
         Left = 3
         Top = 55
-        Width = 485
+        Width = 593
         Height = 119
         Hint = 'Selecione o registro para excluir'
         DataSource = dsParEmailCalib
@@ -1200,7 +1746,7 @@ object FormCadParametros: TFormCadParametros
       object dbgManutencao: TDBGrid
         Left = 3
         Top = 227
-        Width = 485
+        Width = 593
         Height = 119
         Hint = 'Selecione o registro para excluir'
         DataSource = dsParEmailManut
@@ -1235,7 +1781,7 @@ object FormCadParametros: TFormCadParametros
       end
       object btnInserirEmailCalib: TBitBtn
         Tag = 50
-        Left = 323
+        Left = 428
         Top = 4
         Width = 82
         Height = 51
@@ -1369,7 +1915,7 @@ object FormCadParametros: TFormCadParametros
       end
       object btnExcluirEmailCalib: TBitBtn
         Tag = 50
-        Left = 408
+        Left = 513
         Top = 4
         Width = 82
         Height = 51
@@ -1503,7 +2049,7 @@ object FormCadParametros: TFormCadParametros
       end
       object btnInserirEmailManut: TBitBtn
         Tag = 50
-        Left = 323
+        Left = 428
         Top = 177
         Width = 82
         Height = 51
@@ -1637,7 +2183,7 @@ object FormCadParametros: TFormCadParametros
       end
       object btnExcluirEmailManut: TBitBtn
         Tag = 50
-        Left = 409
+        Left = 514
         Top = 177
         Width = 82
         Height = 51
@@ -1774,7 +2320,7 @@ object FormCadParametros: TFormCadParametros
   object pnl1: TPanel
     Left = 0
     Top = 379
-    Width = 499
+    Width = 610
     Height = 72
     Align = alBottom
     TabOrder = 1
@@ -2047,7 +2593,7 @@ object FormCadParametros: TFormCadParametros
       OnClick = btnCancelarClick
     end
     object btnSair: TBitBtn
-      Left = 425
+      Left = 536
       Top = 1
       Width = 73
       Height = 70
@@ -2356,7 +2902,15 @@ object FormCadParametros: TFormCadParametros
       
         'email_pmc, email_risco, notamaxhab, notapendencia, periodohab, p' +
         'rimeiraavaliacao,'
-      'aviso_pmc, nao_enviar_email_pmc, riscos_cores, data_filtro_pmc'
+      
+        'aviso_pmc, nao_enviar_email_pmc, riscos_cores, data_filtro_pmc, ' +
+        'dias_indicadores,'
+      
+        'enviogestor, rel_conf_cabec, rel_conf_rodap, texto_cabec_rodape,' +
+        ' filtro_motivo_processo,'
+      
+        'obrigar_causa_pmc, nao_controlar_hab, meta_iqf, senha_forte, dia' +
+        's_troca_senha, troca_senha'
       'FROM parametros'
       '')
     Params = <>
@@ -2467,6 +3021,44 @@ object FormCadParametros: TFormCadParametros
     end
     object cdsParametrosdata_filtro_pmc: TDateTimeField
       FieldName = 'data_filtro_pmc'
+    end
+    object cdsParametrosdias_indicadores: TIntegerField
+      FieldName = 'dias_indicadores'
+    end
+    object cdsParametrosenviogestor: TIntegerField
+      FieldName = 'enviogestor'
+    end
+    object cdsParametrosrel_conf_cabec: TIntegerField
+      FieldName = 'rel_conf_cabec'
+    end
+    object cdsParametrosrel_conf_rodap: TIntegerField
+      FieldName = 'rel_conf_rodap'
+    end
+    object cdsParametrostexto_cabec_rodape: TWideStringField
+      FieldName = 'texto_cabec_rodape'
+      Size = 115
+    end
+    object cdsParametrosfiltro_motivo_processo: TIntegerField
+      FieldName = 'filtro_motivo_processo'
+    end
+    object cdsParametrosobrigar_causa_pmc: TIntegerField
+      FieldName = 'obrigar_causa_pmc'
+    end
+    object cdsParametrosnao_controlar_hab: TIntegerField
+      FieldName = 'nao_controlar_hab'
+    end
+    object cdsParametrosmeta_iqf: TFloatField
+      FieldName = 'meta_iqf'
+    end
+    object cdsParametrossenha_forte: TIntegerField
+      FieldName = 'senha_forte'
+    end
+    object cdsParametrosdias_troca_senha: TIntegerField
+      FieldName = 'dias_troca_senha'
+    end
+    object cdsParametrostroca_senha: TIntegerField
+      FieldName = 'troca_senha'
+      ReadOnly = True
     end
   end
   object cdsPeriodoHab: TClientDataSet
@@ -2611,5 +3203,59 @@ object FormCadParametros: TFormCadParametros
     DataSet = cdsColabManut
     Left = 164
     Top = 175
+  end
+  object zqryParEmailPMC: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 256
+    Top = 223
+  end
+  object dspParEmailPMC: TDataSetProvider
+    DataSet = zqryParEmailPMC
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 296
+    Top = 223
+  end
+  object cdsParEmailPMC: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspParEmailPMC'
+    Left = 336
+    Top = 223
+  end
+  object dsParEmailPMC: TDataSource
+    DataSet = cdsParEmailPMC
+    Left = 380
+    Top = 223
+  end
+  object zqryColabPMC: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 40
+    Top = 231
+  end
+  object dspColabPMC: TDataSetProvider
+    DataSet = zqryColabPMC
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 80
+    Top = 231
+  end
+  object cdsColabPMC: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspColabPMC'
+    Left = 120
+    Top = 231
+  end
+  object dsColabPMC: TDataSource
+    DataSet = cdsColabPMC
+    Left = 164
+    Top = 231
   end
 end

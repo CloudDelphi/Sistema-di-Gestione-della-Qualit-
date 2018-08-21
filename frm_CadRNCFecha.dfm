@@ -62,6 +62,29 @@ object FormCadRNCFecha: TFormCadRNCFecha
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tsCadastro: TTabSheet
       Caption = 'Cadastro RNC'
+      object lbl14: TLabel
+        Left = 7
+        Top = 151
+        Width = 110
+        Height = 13
+        Caption = 'N'#186' Ordem de Produ'#231#227'o'
+      end
+      object lbl15: TLabel
+        Left = 125
+        Top = 151
+        Width = 28
+        Height = 13
+        Caption = 'Custo'
+        Color = clBackground
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
       object lbl4: TLabel
         Left = 7
         Top = 195
@@ -209,28 +232,42 @@ object FormCadRNCFecha: TFormCadRNCFecha
         Height = 13
         Caption = 'Fechamento'
       end
-      object lbl14: TLabel
-        Left = 7
-        Top = 151
-        Width = 110
-        Height = 13
-        Caption = 'N'#186' Ordem de Produ'#231#227'o'
-      end
-      object lbl15: TLabel
+      object edtCusto: TCurrencyEdit
+        Tag = 30
         Left = 125
-        Top = 151
-        Width = 28
-        Height = 13
-        Caption = 'Custo'
-        Color = clBackground
+        Top = 166
+        Width = 122
+        Height = 26
+        Hint = 'Custo'
+        Margins.Left = 5
+        Margins.Top = 1
+        AutoSize = False
+        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
+        Font.Color = clWindowText
+        Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
-        ParentColor = False
         ParentFont = False
-        Transparent = True
+        TabOrder = 19
+      end
+      object edtOrdemProd: TEdit
+        Tag = 30
+        Left = 7
+        Top = 166
+        Width = 110
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 10
+        ParentFont = False
+        TabOrder = 18
       end
       object dblTipo: TDBLookupComboBox
         Tag = 30
@@ -474,8 +511,8 @@ object FormCadRNCFecha: TFormCadRNCFecha
         TabOrder = 13
       end
       object pnlEmail: TPanel
-        Left = 539
-        Top = 290
+        Left = 559
+        Top = 99
         Width = 578
         Height = 188
         TabOrder = 15
@@ -1248,43 +1285,6 @@ object FormCadRNCFecha: TFormCadRNCFecha
           OnKeyPress = mmoDescricaoAcaoKeyPress
         end
       end
-      object edtOrdemProd: TEdit
-        Tag = 30
-        Left = 7
-        Top = 166
-        Width = 110
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        TabOrder = 18
-      end
-      object edtCusto: TCurrencyEdit
-        Tag = 30
-        Left = 125
-        Top = 166
-        Width = 122
-        Height = 26
-        Hint = 'Custo'
-        Margins.Left = 5
-        Margins.Top = 1
-        AutoSize = False
-        DisplayFormat = ',R$ 0.00;-,R$ 0.00'
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 19
-      end
     end
     object tsHistorico: TTabSheet
       Caption = 'Hist'#243'rico'
@@ -1326,6 +1326,7 @@ object FormCadRNCFecha: TFormCadRNCFecha
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnCellClick = dbgRegistrosCellClick
         Columns = <
           item
             Expanded = False
@@ -1372,7 +1373,19 @@ object FormCadRNCFecha: TFormCadRNCFecha
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 320
+            Width = 160
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'his_motivo_recusa'
+            Title.Caption = 'Motivo da Recusa'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 150
             Visible = True
           end>
       end
@@ -4500,8 +4513,9 @@ object FormCadRNCFecha: TFormCadRNCFecha
     SQL.Strings = (
       
         'SELECT his_codigo, rnc_codigo, his_data, his_historico, his_usua' +
-        'rio, his_disposicao'
-      '  FROM rnc_historico')
+        'rio, '
+      '       his_disposicao, his_motivo_recusa'
+      '  FROM rnc_historico;')
     Params = <>
     Left = 560
     Top = 232
@@ -4541,6 +4555,11 @@ object FormCadRNCFecha: TFormCadRNCFecha
     object cdsHistoricohis_disposicao: TWideMemoField
       FieldName = 'his_disposicao'
       OnGetText = cdsHistoricohis_disposicaoGetText
+      BlobType = ftWideMemo
+    end
+    object cdsHistoricohis_motivo_recusa: TWideMemoField
+      FieldName = 'his_motivo_recusa'
+      OnGetText = cdsHistoricohis_motivo_recusaGetText
       BlobType = ftWideMemo
     end
   end

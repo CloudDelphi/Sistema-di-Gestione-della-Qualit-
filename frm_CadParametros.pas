@@ -43,8 +43,6 @@ type
     cdsParametrosemail_pmc: TIntegerField;
     cdsParametrosemail_risco: TIntegerField;
     tsv: TTabSheet;
-    lbl11: TLabel;
-    spnNota: TRxSpinEdit;
     cdsParametrosnotamaxhab: TFloatField;
     lbl12: TLabel;
     spnAvisoPMC: TRxSpinEdit;
@@ -90,11 +88,7 @@ type
     cdsParametrosrisco_medio_pfo: TIntegerField;
     cdsParametrosrisco_alto_pfo: TIntegerField;
     cdsParametrosrisco_severo_pfo: TIntegerField;
-    lbl17: TLabel;
-    spnNotaPendencia: TRxSpinEdit;
     cdsParametrosnotapendencia: TFloatField;
-    lbl18: TLabel;
-    dblPeriodoHab: TDBLookupComboBox;
     cdsPeriodoHab: TClientDataSet;
     dspPeriodoHab: TDataSetProvider;
     zqryPeriodoHab: TZQuery;
@@ -102,9 +96,6 @@ type
     cdsPeriodoHabcodi_com: TLargeintField;
     cdsPeriodoHabvalo_com: TWideStringField;
     cdsParametrosperiodohab: TIntegerField;
-    lbl19: TLabel;
-    spnPrimeiraAvaliacao: TRxSpinEdit;
-    lbl20: TLabel;
     cdsParametrosprimeiraavaliacao: TIntegerField;
     cdsParametrosaviso_pmc: TIntegerField;
     cdsParametrosnao_enviar_email_pmc: TIntegerField;
@@ -155,16 +146,6 @@ type
     edtAvaliacao: TCurrencyEdit;
     edtPontualidade: TCurrencyEdit;
     edtConformidade: TCurrencyEdit;
-    grp12: TGroupBox;
-    lbl15: TLabel;
-    lbl4: TLabel;
-    lblExemplo: TLabel;
-    spnCasas: TRxSpinEdit;
-    grp13: TGroupBox;
-    lbl21: TLabel;
-    dtPMC: TDateEdit;
-    lbl38: TLabel;
-    btnLimpaDataPMC: TBitBtn;
     cdsParametrosdata_filtro_pmc: TDateTimeField;
     tsAvisoCalib: TTabSheet;
     lbl39: TLabel;
@@ -193,6 +174,74 @@ type
     dspColabManut: TDataSetProvider;
     cdsColabManut: TClientDataSet;
     dsColabManut: TDataSource;
+    grp12: TGroupBox;
+    lbl15: TLabel;
+    lbl4: TLabel;
+    lblExemplo: TLabel;
+    spnCasas: TRxSpinEdit;
+    grp14: TGroupBox;
+    lbl41: TLabel;
+    spnDiaAtuIndicador: TRxSpinEdit;
+    cdsParametrosdias_indicadores: TIntegerField;
+    cdsParametrosenviogestor: TIntegerField;
+    tsPMC: TTabSheet;
+    grp13: TGroupBox;
+    lbl21: TLabel;
+    lbl38: TLabel;
+    dtPMC: TDateEdit;
+    btnLimpaDataPMC: TBitBtn;
+    lbl42: TLabel;
+    dblColPMC: TDBLookupComboBox;
+    dbgEmailPMC: TDBGrid;
+    btnInserirEmailPMC: TBitBtn;
+    btnExcluirEmailPMC: TBitBtn;
+    chkEnvioGestor: TCheckBox;
+    zqryParEmailPMC: TZQuery;
+    dspParEmailPMC: TDataSetProvider;
+    cdsParEmailPMC: TClientDataSet;
+    dsParEmailPMC: TDataSource;
+    zqryColabPMC: TZQuery;
+    dspColabPMC: TDataSetProvider;
+    cdsColabPMC: TClientDataSet;
+    dsColabPMC: TDataSource;
+    grp15: TGroupBox;
+    chkConf_cabec: TCheckBox;
+    chkConf_rodap: TCheckBox;
+    cdsParametrosrel_conf_cabec: TIntegerField;
+    cdsParametrosrel_conf_rodap: TIntegerField;
+    lbl43: TLabel;
+    mmoTextoRel: TMemo;
+    cdsParametrostexto_cabec_rodape: TWideStringField;
+    grp16: TGroupBox;
+    chkFiltroMotivoProcesso: TCheckBox;
+    cdsParametrosfiltro_motivo_processo: TIntegerField;
+    chkObrigaCausa: TCheckBox;
+    cdsParametrosobrigar_causa_pmc: TIntegerField;
+    grp17: TGroupBox;
+    chkNaoControlarHab: TCheckBox;
+    grp18: TGroupBox;
+    lbl11: TLabel;
+    lbl17: TLabel;
+    lbl18: TLabel;
+    lbl19: TLabel;
+    lbl20: TLabel;
+    spnNota: TRxSpinEdit;
+    spnNotaPendencia: TRxSpinEdit;
+    dblPeriodoHab: TDBLookupComboBox;
+    spnPrimeiraAvaliacao: TRxSpinEdit;
+    cdsParametrosnao_controlar_hab: TIntegerField;
+    lbl44: TLabel;
+    edtMetaIQF: TCurrencyEdit;
+    cdsParametrosmeta_iqf: TFloatField;
+    grp19: TGroupBox;
+    chkTrocaSenha: TCheckBox;
+    spnDiasTrocaSenha: TRxSpinEdit;
+    lbl45: TLabel;
+    chkSenhaForte: TCheckBox;
+    lblTextoSenhaForte: TLabel;
+    cdsParametrossenha_forte: TIntegerField;
+    cdsParametrosdias_troca_senha: TIntegerField;
+    cdsParametrostroca_senha: TIntegerField;
     procedure btnSairClick(Sender: TObject);
     procedure Botoes(Flag: Boolean);
     procedure btnAlterarClick(Sender: TObject);
@@ -209,8 +258,11 @@ type
     procedure btnInserirEmailManutClick(Sender: TObject);
     function ValidarDadosEmailCalib(): Boolean;
     function ValidarDadosEmailManut(): Boolean;
+    function ValidarDadosEmailPMC(): Boolean;
     procedure btnExcluirEmailCalibClick(Sender: TObject);
     procedure btnExcluirEmailManutClick(Sender: TObject);
+    procedure btnInserirEmailPMCClick(Sender: TObject);
+    procedure btnExcluirEmailPMCClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -258,6 +310,15 @@ begin
       Active:= True;
    end;
 
+   with cdsColabPMC do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_col, nome_col' +
+                    ' FROM colaboradores' +
+                    ' WHERE col_status = 1' +
+                    ' ORDER BY nome_col';
+      Active:= True;
+   end;
+
    with cdsParEmailCalib do begin
       Active:= False;
       CommandText:= ' SELECT par_codigo, par_tipo, par_colaborador, C.nome_col' +
@@ -279,6 +340,17 @@ begin
 
       btnExcluirEmailManut.Enabled:= RecordCount > 0;
    end;
+
+   with cdsParEmailPMC do begin
+      Active:= False;
+      CommandText:= ' SELECT par_codigo, par_tipo, par_colaborador, C.nome_col' +
+                    ' FROM parametros_email_aviso' +
+                    ' INNER JOIN colaboradores C ON C.codi_col = par_colaborador' +
+                    ' WHERE par_tipo = ' + QuotedStr('P');
+      Active:= True;
+
+      btnExcluirEmailPMC.Enabled:= RecordCount > 0;
+   end;
 end;
 
 procedure TFormCadParametros.Botoes(Flag: Boolean);
@@ -297,8 +369,10 @@ begin
 
    cOperacao:= 'A';
    HabilitarCampos(True, False, Self, -1);
+   lblTextoSenhaForte.Enabled  := chkSenhaForte.Enabled;
    btnExcluirEmailCalib.Enabled:= cdsParEmailCalib.RecordCount > 0;
    btnExcluirEmailManut.Enabled:= cdsParEmailManut.RecordCount > 0;
+   btnExcluirEmailPMC.Enabled  := cdsParEmailPMC.RecordCount > 0;
 //   TryFocus(edtAvaliacao);
    Botoes(False);
 end;
@@ -309,6 +383,7 @@ begin
    PreencherCampos;
    Botoes(True);
    HabilitarCampos(False, False, Self, -1);
+   lblTextoSenhaForte.Enabled:= chkSenhaForte.Enabled;
 end;
 
 procedure TFormCadParametros.btnExcluirEmailCalibClick(Sender: TObject);
@@ -323,6 +398,14 @@ procedure TFormCadParametros.btnExcluirEmailManutClick(Sender: TObject);
 begin
    Executar(' DELETE FROM parametros_email_aviso' +
             ' WHERE par_codigo = ' + cdsParEmailManut.FieldByName('par_codigo').AsString);
+
+   AtualizarDados();
+end;
+
+procedure TFormCadParametros.btnExcluirEmailPMCClick(Sender: TObject);
+begin
+   Executar(' DELETE FROM parametros_email_aviso' +
+            ' WHERE par_codigo = ' + cdsParEmailPMC.FieldByName('par_codigo').AsString);
 
    AtualizarDados();
 end;
@@ -372,7 +455,19 @@ begin
                              ' periodohab = ' + QuotedStr(dblPeriodoHab.KeyValue) + ',' +
                              ' primeiraavaliacao = ' + VirgulaParaPonto(spnPrimeiraAvaliacao.Value, 0) + ',' +
                              ' data_filtro_pmc = ' + ArrumaDataSQL(dtPMC.Date) + ',' +
-                             ' riscos_cores = ' + sOpcaoCoresRisco;
+                             ' riscos_cores = ' + sOpcaoCoresRisco + ',' +
+                             ' dias_indicadores = ' + spnDiaAtuIndicador.Text + ',' +
+                             ' enviogestor = ' + LogicoParaString(chkEnvioGestor.Checked) + ',' +
+                             ' rel_conf_cabec = ' + LogicoParaString(chkConf_cabec.Checked) + ',' +
+                             ' rel_conf_rodap = ' + LogicoParaString(chkConf_rodap.Checked) + ',' +
+                             ' texto_cabec_rodape = ' + QuotedStr(mmoTextoRel.Text) + ',' +
+                             ' filtro_motivo_processo = ' + LogicoParaString(chkFiltroMotivoProcesso.Checked) + ',' +
+                             ' obrigar_causa_pmc = ' + LogicoParaString(chkObrigaCausa.Checked) + ',' +
+                             ' nao_controlar_hab = ' + LogicoParaString(chkNaoControlarHab.Checked) + ',' +
+                             ' meta_iqf = ' + VirgulaParaPonto(edtMetaIQF.Value, 2) + ',' +
+                             ' senha_forte = ' + LogicoParaString(chkSenhaForte.Checked) + ',' +
+                             ' dias_troca_senha = ' + spnDiasTrocaSenha.Text + ',' +
+                             ' troca_senha = ' + LogicoParaString(chkTrocaSenha.Checked);
             Execute;
          end;
 
@@ -383,6 +478,7 @@ begin
 
          AtualizarDados();
          HabilitarCampos(False, False, Self, -1);
+         lblTextoSenhaForte.Enabled:= chkSenhaForte.Enabled;
          Application.MessageBox('Parâmetros gravados com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
 
       except
@@ -426,6 +522,21 @@ begin
    end;
 end;
 
+procedure TFormCadParametros.btnInserirEmailPMCClick(Sender: TObject);
+begin
+   if ValidarDadosEmailPMC() then begin
+      Executar(' INSERT INTO parametros_email_aviso(' +
+              ' par_codigo, par_tipo, par_colaborador)' +
+              ' VALUES (' +
+              BuscarNovoCodigo('parametros_email_aviso', 'par_codigo') + ',' +
+              QuotedStr('P') + ',' +
+              IntToStr(dblColPMC.KeyValue) +
+              ')');
+
+      AtualizarDados();
+   end;
+end;
+
 procedure TFormCadParametros.btnLimpaDataPMCClick(Sender: TObject);
 begin
    dtPMC.Clear;
@@ -448,6 +559,7 @@ begin
    PreencherCampos();
    Botoes(True);
    HabilitarCampos(False, False, Self, -1);
+   lblTextoSenhaForte.Enabled:= chkSenhaForte.Enabled;
    TryFocus(btnAlterar);
 
    pnlBaixoOp1a.Color := RGB(35,142,35);
@@ -471,41 +583,53 @@ begin
    pnlAltoOp2b.Color  := RGB(255,165,0);
    pnlSeveroOp2b.Color:= RGB(255,0,0);
 
-   pctParametros.Pages[1].TabVisible:= False;
+//   pctParametros.Pages[1].TabVisible:= False;
 end;
 
 procedure TFormCadParametros.PreencherCampos;
 begin
    with cdsParametros do begin
-      edtAvaliacao.Value      := FieldByName('pesoiqfavaliacao').AsFloat;
-      edtPontualidade.Value   := FieldByName('pesoiqfpontualidade').AsFloat;
-      edtConformidade.Value   := FieldByName('pesoiqfconformidade').AsFloat;
-      spnCasas.Value          := FieldByName('casasindicador').AsFloat;
-      chkRiscoBaixoPFO.Checked := StringParaLogico(FieldByName('risco_baixo_pfo').AsString);
-      chkRiscoMedioPFO.Checked := StringParaLogico(FieldByName('risco_medio_pfo').AsString);
-      chkRiscoAltoPFO.Checked  := StringParaLogico(FieldByName('risco_alto_pfo').AsString);
-      chkRiscoSeveroPFO.Checked:= StringParaLogico(FieldByName('risco_severo_pfo').AsString);
-      chkRiscoBaixoPFR.Checked := StringParaLogico(FieldByName('risco_baixo_pfr').AsString);
-      chkRiscoMedioPFR.Checked := StringParaLogico(FieldByName('risco_medio_pfr').AsString);
-      chkRiscoAltoPFR.Checked  := StringParaLogico(FieldByName('risco_alto_pfr').AsString);
-      chkRiscoSeveroPFR.Checked:= StringParaLogico(FieldByName('risco_severo_pfr').AsString);
-      chkRiscoBaixoOPO.Checked := StringParaLogico(FieldByName('risco_baixo_opo').AsString);
-      chkRiscoMedioOPO.Checked := StringParaLogico(FieldByName('risco_medio_opo').AsString);
-      chkRiscoAltoOPO.Checked  := StringParaLogico(FieldByName('risco_alto_opo').AsString);
-      chkRiscoSeveroOPO.Checked:= StringParaLogico(FieldByName('risco_severo_opo').AsString);
-      chkRiscoBaixoAME.Checked := StringParaLogico(FieldByName('risco_baixo_ame').AsString);
-      chkRiscoMedioAME.Checked := StringParaLogico(FieldByName('risco_medio_ame').AsString);
-      chkRiscoAltoAME.Checked  := StringParaLogico(FieldByName('risco_alto_ame').AsString);
-      chkRiscoSeveroAME.Checked:= StringParaLogico(FieldByName('risco_severo_ame').AsString);
-      spnEmailPMC.Value         := FieldByName('email_pmc').AsInteger;
-      spnEmailRisco.Value       := FieldByName('email_risco').AsInteger;
-      spnAvisoPMC.Value         := FieldByName('aviso_pmc').AsInteger;
-      chkEmailPMC.Checked       := StringParaLogico(FieldByName('nao_enviar_email_pmc').AsString);
-      spnNota.Value             := FieldByName('notamaxhab').AsFloat;
-      spnNotaPendencia.Value    := FieldByName('notapendencia').AsFloat;
-      dblPeriodoHab.KeyValue    := FieldByName('periodohab').AsInteger;
-      spnPrimeiraAvaliacao.Value:= FieldByName('primeiraavaliacao').AsFloat;
-      dtPMC.Date                := FieldByName('data_filtro_pmc').AsDateTime;
+      edtAvaliacao.Value             := FieldByName('pesoiqfavaliacao').AsFloat;
+      edtPontualidade.Value          := FieldByName('pesoiqfpontualidade').AsFloat;
+      edtConformidade.Value          := FieldByName('pesoiqfconformidade').AsFloat;
+      spnCasas.Value                 := FieldByName('casasindicador').AsFloat;
+      chkRiscoBaixoPFO.Checked       := StringParaLogico(FieldByName('risco_baixo_pfo').AsString);
+      chkRiscoMedioPFO.Checked       := StringParaLogico(FieldByName('risco_medio_pfo').AsString);
+      chkRiscoAltoPFO.Checked        := StringParaLogico(FieldByName('risco_alto_pfo').AsString);
+      chkRiscoSeveroPFO.Checked      := StringParaLogico(FieldByName('risco_severo_pfo').AsString);
+      chkRiscoBaixoPFR.Checked       := StringParaLogico(FieldByName('risco_baixo_pfr').AsString);
+      chkRiscoMedioPFR.Checked       := StringParaLogico(FieldByName('risco_medio_pfr').AsString);
+      chkRiscoAltoPFR.Checked        := StringParaLogico(FieldByName('risco_alto_pfr').AsString);
+      chkRiscoSeveroPFR.Checked      := StringParaLogico(FieldByName('risco_severo_pfr').AsString);
+      chkRiscoBaixoOPO.Checked       := StringParaLogico(FieldByName('risco_baixo_opo').AsString);
+      chkRiscoMedioOPO.Checked       := StringParaLogico(FieldByName('risco_medio_opo').AsString);
+      chkRiscoAltoOPO.Checked        := StringParaLogico(FieldByName('risco_alto_opo').AsString);
+      chkRiscoSeveroOPO.Checked      := StringParaLogico(FieldByName('risco_severo_opo').AsString);
+      chkRiscoBaixoAME.Checked       := StringParaLogico(FieldByName('risco_baixo_ame').AsString);
+      chkRiscoMedioAME.Checked       := StringParaLogico(FieldByName('risco_medio_ame').AsString);
+      chkRiscoAltoAME.Checked        := StringParaLogico(FieldByName('risco_alto_ame').AsString);
+      chkRiscoSeveroAME.Checked      := StringParaLogico(FieldByName('risco_severo_ame').AsString);
+      spnEmailPMC.Value              := FieldByName('email_pmc').AsInteger;
+      spnEmailRisco.Value            := FieldByName('email_risco').AsInteger;
+      spnAvisoPMC.Value              := FieldByName('aviso_pmc').AsInteger;
+      chkEmailPMC.Checked            := StringParaLogico(FieldByName('nao_enviar_email_pmc').AsString);
+      spnNota.Value                  := FieldByName('notamaxhab').AsFloat;
+      spnNotaPendencia.Value         := FieldByName('notapendencia').AsFloat;
+      dblPeriodoHab.KeyValue         := FieldByName('periodohab').AsInteger;
+      spnPrimeiraAvaliacao.Value     := FieldByName('primeiraavaliacao').AsFloat;
+      dtPMC.Date                     := FieldByName('data_filtro_pmc').AsDateTime;
+      spnDiaAtuIndicador.Value       := FieldByName('dias_indicadores').AsFloat;
+      chkEnvioGestor.Checked         := StringParaLogico(FieldByName('enviogestor').AsString);
+      chkConf_cabec.Checked          := StringParaLogico(FieldByName('rel_conf_cabec').AsString);
+      chkConf_rodap.Checked          := StringParaLogico(FieldByName('rel_conf_rodap').AsString);
+      mmoTextoRel.Text               := FieldByName('texto_cabec_rodape').AsString;
+      chkFiltroMotivoProcesso.Checked:= StringParaLogico(FieldByName('filtro_motivo_processo').AsString);
+      chkObrigaCausa.Checked         := StringParaLogico(FieldByName('obrigar_causa_pmc').AsString);
+      chkNaoControlarHab.Checked     := StringParaLogico(FieldByName('nao_controlar_hab').AsString);
+      edtMetaIQF.Value               := FieldByName('meta_iqf').AsFloat;
+      spnDiasTrocaSenha.Value        := FieldByName('dias_troca_senha').AsFloat;
+      chkSenhaForte.Checked          := StringParaLogico(FieldByName('senha_forte').AsString);
+      chkTrocaSenha.Checked          := StringParaLogico(FieldByName('troca_senha').AsString);
 
       rbOpcao1.Checked:= FieldByName('riscos_cores').AsInteger = 0;
       rbOpcao2.Checked:= FieldByName('riscos_cores').AsInteger = 1;
@@ -577,6 +701,32 @@ begin
 
       if FieldByName('QTD').AsInteger > 0 then begin
          Application.MessageBox('Colaborador já cadastrado para receber e-mail de aviso de manutenção', 'Aviso', MB_OK + MB_ICONWARNING);
+         Result:= False;
+         Exit;
+      end;
+   end;
+
+   Result:= True;
+end;
+
+function TFormCadParametros.ValidarDadosEmailPMC: Boolean;
+begin
+   if (dblColPMC.KeyValue = null) or (dblColPMC.KeyValue = -1) then begin
+      Result:= False;
+      Exit;
+   end;
+
+   // Verifica se o colaborador já foi cadastrado para e-mail de PMC
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT COUNT(*) AS QTD' +
+                    ' FROM parametros_email_aviso' +
+                    ' WHERE par_tipo = ' + QuotedStr('P') +
+                    ' AND par_colaborador = ' + IntToStr(dblColPMC.KeyValue);
+      Active:= True;
+
+      if FieldByName('QTD').AsInteger > 0 then begin
+         Application.MessageBox('Colaborador já cadastrado para receber e-mail de aviso de PMC', 'Aviso', MB_OK + MB_ICONWARNING);
          Result:= False;
          Exit;
       end;

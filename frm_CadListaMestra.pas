@@ -156,6 +156,7 @@ type
     dsExcel: TDataSource;
     dbgExcel: TDBGrid;
     rgPesqTipo: TRadioGroup;
+    btnInserirTodos: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -195,6 +196,7 @@ type
     procedure btnTreinamentoClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure rgPesqTipoClick(Sender: TObject);
+    procedure btnInserirTodosClick(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -329,7 +331,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, 'Lista Mestra de Documentos');
+      ExpExcel(dbgExcel, cdsExcel, 'Lista Mestra de Documentos', Self);
    end;
 end;
 
@@ -498,6 +500,45 @@ begin
          on E: Exception do begin
             Application.MessageBox(PChar('Erro ao gravar o registro!' + #13 + E.Message), 'Aviso', MB_OK + MB_ICONWARNING);
          end;
+      end;
+   end;
+
+   AtualizarDadosAcessorios();
+end;
+
+procedure TFormCadListaMestra.btnInserirTodosClick(Sender: TObject);
+begin
+   // Chamado TT535
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro FROM processos' +
+                    ' WHERE pro_exibelista = ' + QuotedStr('S');
+      Active:= True;
+      First;
+
+      while not dm.cdsAux.Eof do begin
+         with dm.cdsAuxiliar do begin
+            Active:= False;
+            CommandText:= ' SELECT COUNT(*) AS Qtd' +
+                          ' FROM lista_mestra_proc' +
+                          ' WHERE lis_codiDocumento = ' + cdsListaMestra.FieldByName('codi_lis').AsString +
+                          ' AND lis_codiProcesso = ' + IntToStr(dm.cdsAux.FieldByName('codi_pro').AsInteger) ;
+            Active:= True;
+         end;
+         if dm.cdsAuxiliar.FieldByName('Qtd').AsInteger <= 0 then begin
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' INSERT INTO lista_mestra_proc (lis_codiProcesso, lis_codiDocumento, lis_qtd, lis_novo)' +
+                             ' VALUES(' +
+                             IntToStr(dm.cdsAux.FieldByName('codi_pro').AsInteger) + ',' +
+                             cdsListaMestra.FieldByName('codi_lis').AsString + ',' +
+                             '1,' + // Quantidade padrão
+                             QuotedStr('S') +
+                             ')';
+               Execute;
+            end;
+         end;
+         Next;
       end;
    end;
 

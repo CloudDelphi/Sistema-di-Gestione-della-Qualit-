@@ -246,6 +246,7 @@ type
     procedure sbAbrirDocClick(Sender: TObject);
     procedure dbgDocCellClick(Column: TColumn);
     procedure sbVisualizarDocClick(Sender: TObject);
+    procedure dblProcessoCloseUp(Sender: TObject);
   private
     { Private declarations }
     cOperacao: Char;
@@ -269,12 +270,15 @@ uses frm_Inicial, Funcoes, frm_Laaia, frm_CadPMCFecha,
 
 procedure TFormCadRNCAbre.AtualizarDados;
 begin
-   with cdsMotivo do begin
-      Active:= False;
-      CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
-                    ' WHERE tipo_com = 32' +
-                    ' ORDER BY valo_com';
-      Active:= True;
+   // Projeto TT440
+   if BuscarParametroMotivoProc() = '0' then begin
+      with cdsMotivo do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
+                       ' WHERE tipo_com = 32' +
+                       ' ORDER BY valo_com';
+         Active:= True;
+      end;
    end;
 
    with cdsOrigem do begin
@@ -376,7 +380,7 @@ begin
    end;
 end;
 
-procedure TFormCadRNCAbre.Botoes(flag: Boolean);
+procedure TFormCadRNCAbre.Botoes(Flag: Boolean);
 begin
    btnNovo.Enabled    := Flag;
    btnAlterar.Enabled := Flag;
@@ -621,6 +625,7 @@ begin
 
                HabilitarCampos(False, False, Self, 1, 2);
                Botoes(True);
+               btnImprimir.Enabled:= False;
                Application.MessageBox('Documento gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
             end;
          end;
@@ -822,6 +827,22 @@ begin
          edtCodigoCli.Text:= '';
       end;
    except
+   end;
+end;
+
+procedure TFormCadRNCAbre.dblProcessoCloseUp(Sender: TObject);
+begin
+   // Projeto TT440
+   if BuscarParametroMotivoProc() = '1' then begin
+      with cdsMotivo do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_com, valo_com ' +
+                       ' FROM tabela_combos T' +
+                       ' INNER JOIN motivos_processos M ON M.mot_motivo = T.codi_com' +
+                       ' WHERE tipo_com = 32 AND M.mot_processo = ' + IntToStr(dblProcesso.KeyValue) +
+                       ' ORDER BY valo_com';
+         Active:= True;
+      end;
    end;
 end;
 
@@ -1225,18 +1246,7 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_ListaRNCAbertura.fr3');
-
-      if tipoImp = 'I' then begin
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_ListaRNCAbertura', frxReport1, tipoImp);
 end;
 
 end.

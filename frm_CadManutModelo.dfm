@@ -1507,7 +1507,7 @@ object FormCadManutModelo: TFormCadManutModelo
     Top = 0
     Width = 778
     Height = 437
-    ActivePage = tsCadastro
+    ActivePage = tsPesquisa
     Align = alClient
     TabOrder = 1
     OnChange = pgcManutChange

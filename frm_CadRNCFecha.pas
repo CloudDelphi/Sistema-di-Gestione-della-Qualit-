@@ -150,12 +150,6 @@ type
     dspHistorico: TDataSetProvider;
     cdsHistorico: TClientDataSet;
     dsHistorico: TDataSource;
-    cdsHistoricohis_codigo: TIntegerField;
-    cdsHistoricornc_codigo: TIntegerField;
-    cdsHistoricohis_data: TDateTimeField;
-    cdsHistoricohis_historico: TWideStringField;
-    cdsHistoricohis_usuario: TWideStringField;
-    cdsHistoricohis_disposicao: TWideMemoField;
     cdsImprimirrnc_codigo: TIntegerField;
     cdsImprimirrnc_identificacao: TWideStringField;
     cdsImprimirrnc_data: TDateTimeField;
@@ -194,6 +188,13 @@ type
     edtOrdemProd: TEdit;
     lbl15: TLabel;
     edtCusto: TCurrencyEdit;
+    cdsHistoricohis_codigo: TIntegerField;
+    cdsHistoricornc_codigo: TIntegerField;
+    cdsHistoricohis_data: TDateTimeField;
+    cdsHistoricohis_historico: TWideStringField;
+    cdsHistoricohis_usuario: TWideStringField;
+    cdsHistoricohis_disposicao: TWideMemoField;
+    cdsHistoricohis_motivo_recusa: TWideMemoField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -237,6 +238,9 @@ type
     procedure cdsHistoricohis_disposicaoGetText(Sender: TField;
       var Text: string; DisplayText: Boolean);
     function PermitirAceiteRecusa(): Boolean;
+    procedure dbgRegistrosCellClick(Column: TColumn);
+    procedure cdsHistoricohis_motivo_recusaGetText(Sender: TField;
+      var Text: string; DisplayText: Boolean);
   private
     { Private declarations }
     cOperacao: Char;
@@ -248,6 +252,7 @@ type
     { Public declarations }
     sCodigoRNC: string;
     iTela: Integer;
+    iRecusaPreenchida: Integer;
   end;
 
 var
@@ -256,7 +261,7 @@ var
 implementation
 
 uses frm_dm, frm_Inicial, Funcoes, frm_Tartaruga,
-  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA, frm_VisualizaRNC;
+  frm_CadPMCConsulta, frm_CadPMCAbre, frm_VisualizaPMC, WebBrowser, frm_PDCA, frm_VisualizaRNC, frm_MotivoRecusaRNC, frm_VisualizaHistoricoRNC;
 
 {$R *.dfm}
 
@@ -352,7 +357,7 @@ begin
    with cdsHistorico do begin
       Active:= False;
       CommandText:= ' SELECT his_codigo, rnc_codigo, his_data, his_historico, ' +
-                    ' his_usuario, his_disposicao ' +
+                    ' his_usuario, his_disposicao, his_motivo_recusa ' +
                     ' FROM rnc_historico ' +
                     ' WHERE rnc_codigo = ' + sCodigoRNC;
       Active:= True;
@@ -424,14 +429,29 @@ begin
    // Solicitado pela PH-FIT (Karina) em conversa via Skype dia 23/05/2017
 //   if Acesso(cUsuario, 57, 'acesso') = 1 then begin
    if PermitirAceiteRecusa() = True then begin
-      AtualizarStatusRNC(sCodigoRNC, '4');
-      GravarHistoricoRNC(sCodigoRNC, 'DISPOSIÇÃO RECUSADA', mmoDisposicao.Text);
+      FormMotivoRecusaRNC:= TFormMotivoRecusaRNC.Create(nil);
+      FormMotivoRecusaRNC.edtIdentificacao.Text:= edtIdentificacao.Text;
+      FormMotivoRecusaRNC.dtData.Text          := dtData.Text;
+      FormMotivoRecusaRNC.mmoDisposicao.Text   := mmoDisposicao.Text;
+      FormMotivoRecusaRNC.sCodigoRNC           := sCodigoRNC;
+      FormMotivoRecusaRNC.sRespRNC             := dblResponsavel.KeyValue;
+      FormMotivoRecusaRNC.ShowModal;
+      FormMotivoRecusaRNC.Release;
+      FormMotivoRecusaRNC.Free;
+      FormMotivoRecusaRNC:= nil;
 
-      AtualizarDados();
-      AtualizarHistorico();
-      PreencherCampos();
-      btnAceitar.Enabled:= False;
-      btnRecusar.Enabled:= False;
+      if iRecusaPreenchida = 1 then begin // Verifica se foi gravada o motivo da recusa
+         AtualizarStatusRNC(sCodigoRNC, '4');
+//         GravarHistoricoRNC(sCodigoRNC, 'DISPOSIÇÃO RECUSADA', mmoDisposicao.Text);
+
+         AtualizarDados();
+         AtualizarHistorico();
+         PreencherCampos();
+         btnAceitar.Enabled:= False;
+         btnRecusar.Enabled:= False;
+      end;
+
+      iRecusaPreenchida:= 0;
    end
    else begin
       Application.MessageBox(PChar('Não é possível aceitar/recusar a disposição. ' + #13 +
@@ -600,6 +620,12 @@ begin
    Text:= Copy(cdsHistorico.FieldByName('his_disposicao').AsString, 1, 70);
 end;
 
+procedure TFormCadRNCFecha.cdsHistoricohis_motivo_recusaGetText(Sender: TField;
+  var Text: string; DisplayText: Boolean);
+begin
+   Text:= Copy(cdsHistorico.FieldByName('his_motivo_recusa').AsString, 1, 70);
+end;
+
 procedure TFormCadRNCFecha.ControlarAbas;
 begin
    mmoTexto.Visible:=False;
@@ -629,6 +655,25 @@ procedure TFormCadRNCFecha.dbgAcoesPMCKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
    PreencherCampos;
+end;
+
+procedure TFormCadRNCFecha.dbgRegistrosCellClick(Column: TColumn);
+begin
+   FormVisualizaHistoricoRNC:= TFormVisualizaHistoricoRNC.Create(nil);
+
+   with FormVisualizaHistoricoRNC do begin
+      dtData.Text       := cdsHistorico.FieldByName('his_data').AsString;
+      edtUsuario.Text   := cdsHistorico.FieldByName('his_usuario').AsString;
+      edtHistorico.Text := cdsHistorico.FieldByName('his_historico').AsString;
+      mmoDisposicao.Text:= cdsHistorico.FieldByName('his_disposicao').AsString;
+      mmoRecusa.Text    := cdsHistorico.FieldByName('his_motivo_recusa').AsString;
+
+      ShowModal;
+      Release;
+      Free;
+   end;
+
+   FormVisualizaHistoricoRNC:= nil;
 end;
 
 procedure TFormCadRNCFecha.FormShow(Sender: TObject);
@@ -768,7 +813,7 @@ procedure TFormCadRNCFecha.sbVisualizarDispClick(Sender: TObject);
 begin
    mmoTexto.Text   := mmoDisposicao.Text;
    pnlTexto.Left   := 7;
-   pnlTexto.Top    := 155;
+   pnlTexto.Top    := 150;
    lblTituloTexto.Caption:= 'Disposição';
    pnlTexto.Visible:= True;
 end;
@@ -841,23 +886,12 @@ begin
             Exit;
          end;
 
-         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_RNC.fr3');
+         Imprimir('rel_RNC', frxReport1, tipoImp);
+
 //         Auditoria('PMC',dm.cdsRNCnume_pmc.AsString,'R', '');
       end;
    end;
-
-   with frxReport1 do begin
-      if tipoImp = 'I' then begin
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
 end;
-
 procedure TFormCadRNCFecha.InserirTexto(Titulo: string; Texto: string);
 begin
    mmoTexto.Clear;

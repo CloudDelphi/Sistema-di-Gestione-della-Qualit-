@@ -10,7 +10,7 @@ uses
 type
   TFormAlteraSenha = class(TForm)
     pnl11: TPanel;
-    sbSairMatriz: TSpeedButton;
+    sbSair: TSpeedButton;
     lbl1: TLabel;
     lbl2: TLabel;
     edtUsuario: TEdit;
@@ -24,9 +24,10 @@ type
     dspGravar: TDataSetProvider;
     cdsGravar: TClientDataSet;
     dsGravar: TDataSource;
-    procedure sbSairMatrizClick(Sender: TObject);
+    procedure sbSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
+    procedure edtNovaSenhaExit(Sender: TObject);
   private
     { Private declarations }
     sSenhaAtual: string;
@@ -58,6 +59,11 @@ begin
       Exit;
    end;
 
+   if VerificarSenhaForte(edtNovaSenha.Text) = False then begin
+      TryFocus(edtNovaSenha);
+      Exit;
+   end;
+
    if edtNovaSenha.Text = sSenhaAtual then begin
       Application.MessageBox('Nova senha não pode ser igual à senha atual', 'Aviso', MB_OK + MB_ICONWARNING);
       TryFocus(edtNovaSenha);
@@ -74,7 +80,8 @@ begin
       with cdsGravar do begin
          Active:= False;
          CommandText:= ' UPDATE usuarios SET' +
-                       ' senh_usu = ' + QuotedStr(edtNovaSenha.Text) +
+                       ' senh_usu = ' + QuotedStr(edtNovaSenha.Text) + ',' +
+                       ' usu_data_troca_senha = ' + ArrumaDataSQL(Date()) + // Chamado TT437
                        ' WHERE nome_usu = ' + QuotedStr(cUsuario);
          Execute;
       end;
@@ -88,6 +95,13 @@ begin
          FormMsgErro.sErroDelphi:= E.Message;
          FormMsgErro.ShowModal;
       end;
+   end;
+end;
+
+procedure TFormAlteraSenha.edtNovaSenhaExit(Sender: TObject);
+begin
+   if VerificarSenhaForte(edtNovaSenha.Text) = False then begin
+      TryFocus(edtNovaSenha);
    end;
 end;
 
@@ -107,7 +121,7 @@ begin
    TryFocus(edtSenhaAtual);
 end;
 
-procedure TFormAlteraSenha.sbSairMatrizClick(Sender: TObject);
+procedure TFormAlteraSenha.sbSairClick(Sender: TObject);
 begin
    Self.Close;
 end;

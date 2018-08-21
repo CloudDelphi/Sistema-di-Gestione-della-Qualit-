@@ -165,7 +165,7 @@ begin
             ShowReport;
          end
          else begin
-            ExpExcel(dbgResumo, cdsResumo, 'Resumo dos Indicadores');
+            ExpExcel(dbgResumo, cdsResumo, 'Resumo dos Indicadores', Self);
          end;
       end;
    end;

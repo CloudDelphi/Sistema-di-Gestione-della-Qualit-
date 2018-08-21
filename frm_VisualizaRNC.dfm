@@ -4,8 +4,8 @@ object FormVisualizaRNC: TFormVisualizaRNC
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Controle de RNC'
-  ClientHeight = 402
-  ClientWidth = 766
+  ClientHeight = 444
+  ClientWidth = 767
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
   TextHeight = 13
   object lblCodigo: TLabel
     Left = 8
-    Top = 8
+    Top = 6
     Width = 61
     Height = 16
     Caption = 'lblCodigo'
@@ -33,7 +33,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
   end
   object dbgRNC: TDBGrid
     Left = 8
-    Top = 31
+    Top = 80
     Width = 753
     Height = 289
     DataSource = dsRNC
@@ -117,13 +117,15 @@ object FormVisualizaRNC: TFormVisualizaRNC
   end
   object Panel1: TPanel
     Left = 0
-    Top = 330
-    Width = 766
+    Top = 372
+    Width = 767
     Height = 72
     Align = alBottom
     BevelOuter = bvLowered
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = 330
+    ExplicitWidth = 766
     object btnVisualizar: TBitBtn
       Left = 1
       Top = 1
@@ -259,7 +261,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
       OnClick = btnVisualizarClick
     end
     object btnSair: TBitBtn
-      Left = 692
+      Left = 693
       Top = 1
       Width = 73
       Height = 70
@@ -391,6 +393,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
       ShowHint = True
       TabOrder = 1
       OnClick = btnSairClick
+      ExplicitLeft = 692
     end
     object btnImprimir: TBitBtn
       Left = 147
@@ -662,13 +665,13 @@ object FormVisualizaRNC: TFormVisualizaRNC
     end
   end
   object grp2: TGroupBox
-    Left = 224
-    Top = 0
-    Width = 537
-    Height = 28
+    Left = 355
+    Top = -1
+    Width = 406
+    Height = 27
     TabOrder = 2
     object lbl4: TLabel
-      Left = 117
+      Left = 105
       Top = 9
       Width = 50
       Height = 16
@@ -683,7 +686,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
       ParentFont = False
     end
     object lbl5: TLabel
-      Left = 218
+      Left = 170
       Top = 9
       Width = 81
       Height = 16
@@ -696,7 +699,7 @@ object FormVisualizaRNC: TFormVisualizaRNC
       ParentFont = False
     end
     object lbl6: TLabel
-      Left = 452
+      Left = 332
       Top = 9
       Width = 68
       Height = 16
@@ -709,14 +712,14 @@ object FormVisualizaRNC: TFormVisualizaRNC
       ParentFont = False
     end
     object lbl1: TLabel
-      Left = 8
+      Left = 5
       Top = 11
       Width = 94
       Height = 13
       Caption = 'Legenda do Status:'
     end
     object lbl2: TLabel
-      Left = 347
+      Left = 269
       Top = 9
       Width = 46
       Height = 16
@@ -728,6 +731,21 @@ object FormVisualizaRNC: TFormVisualizaRNC
       Font.Style = [fsBold]
       ParentFont = False
     end
+  end
+  object rgFiltro: TRadioGroup
+    Left = 8
+    Top = 25
+    Width = 753
+    Height = 49
+    Caption = 'Filtrar por Status'
+    Columns = 3
+    ItemIndex = 0
+    Items.Strings = (
+      'TODOS'
+      'Pendentes de Resposta'
+      'Pendentes de Aceite/Recusa')
+    TabOrder = 3
+    OnClick = rgFiltroClick
   end
   object zqryRNC: TZQuery
     Connection = dm.Conexao

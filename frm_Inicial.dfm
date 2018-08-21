@@ -3,7 +3,7 @@ object FormInicial: TFormInicial
   Top = 8
   BorderStyle = bsSingle
   Caption = 'Destra Manager'
-  ClientHeight = 586
+  ClientHeight = 626
   ClientWidth = 971
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object FormInicial: TFormInicial
   TextHeight = 13
   object statPrincipal: TStatusBar
     Left = 0
-    Top = 567
+    Top = 607
     Width = 971
     Height = 19
     Enabled = False
@@ -771,12 +771,12 @@ object FormInicial: TFormInicial
     Left = 0
     Top = 67
     Width = 971
-    Height = 500
+    Height = 540
     Align = alClient
     TabOrder = 3
     object pnlInternet: TPanel
       Left = 1
-      Top = 474
+      Top = 514
       Width = 969
       Height = 25
       Align = alBottom
@@ -829,7 +829,7 @@ object FormInicial: TFormInicial
       Left = 1
       Top = 1
       Width = 910
-      Height = 473
+      Height = 513
       VertScrollBar.Smooth = True
       VertScrollBar.Tracking = True
       HeaderFont.Charset = DEFAULT_CHARSET
@@ -844,6 +844,7 @@ object FormInicial: TFormInicial
         Caption = 'RNC sem Aceite/Recusa'
         Collapsed = True
         TabOrder = 0
+        ExplicitWidth = 908
         object dbg2: TDBGrid
           Left = 8
           Top = 4
@@ -911,6 +912,7 @@ object FormInicial: TFormInicial
         Caption = 'RNC n'#227'o respondida'
         Collapsed = True
         TabOrder = 1
+        ExplicitWidth = 908
         object dbgRNCNaoRespondida: TDBGrid
           Left = 8
           Top = 4
@@ -980,6 +982,7 @@ object FormInicial: TFormInicial
           't'#243'rio'
         Collapsed = True
         TabOrder = 2
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgAnaliseCritica: TDBGrid
           Left = 8
@@ -1060,6 +1063,7 @@ object FormInicial: TFormInicial
         Caption = 'A'#231#245'es de PDCA vencidas'
         Collapsed = True
         TabOrder = 3
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgPDCA: TDBGrid
           Left = 8
@@ -1083,6 +1087,7 @@ object FormInicial: TFormInicial
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgPDCADblClick
           Columns = <
             item
               Expanded = False
@@ -1164,6 +1169,7 @@ object FormInicial: TFormInicial
         Caption = 'Manuten'#231#245'es Preventivas pendentes'
         Collapsed = True
         TabOrder = 4
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgManutencao: TDBGrid
           Left = 8
@@ -1243,6 +1249,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com experi'#234'ncia abaixo do exigido'
         Collapsed = True
         TabOrder = 5
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgExperiencia: TDBGrid
           Left = 8
@@ -1311,6 +1318,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com n'#237'vel de educa'#231#227'o abaixo do exigido'
         Collapsed = True
         TabOrder = 6
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgEducacao: TDBGrid
           Left = 8
@@ -1379,6 +1387,7 @@ object FormInicial: TFormInicial
         Caption = 'Treinamentos sem verifica'#231#227'o de efic'#225'cia'
         Collapsed = True
         TabOrder = 7
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgEficacia: TDBGrid
           Left = 8
@@ -1459,6 +1468,7 @@ object FormInicial: TFormInicial
         Caption = 'Treinamentos com previs'#227'o vencida ou sem data de previs'#227'o'
         Collapsed = True
         TabOrder = 8
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgTreinamentos: TDBGrid
           Left = 8
@@ -1539,6 +1549,7 @@ object FormInicial: TFormInicial
         Caption = 'Habilidades com nota menor igual a'
         Collapsed = True
         TabOrder = 9
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgHabilidades: TDBGrid
           Left = 8
@@ -1619,6 +1630,7 @@ object FormInicial: TFormInicial
         Caption = 'Colaboradores com avalia'#231#227'o de habilidades vencida'
         Collapsed = True
         TabOrder = 10
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbg1: TDBGrid
           Left = 11
@@ -1675,6 +1687,7 @@ object FormInicial: TFormInicial
         Caption = 'Procedimentos n'#227'o aprovados'
         Collapsed = True
         TabOrder = 11
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgProcedimentos: TDBGrid
           Left = 8
@@ -1743,6 +1756,7 @@ object FormInicial: TFormInicial
         Caption = 'Fornecedores com homologa'#231#227'o vencida'
         Collapsed = True
         TabOrder = 12
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object dbgFornecedores: TDBGrid
           Left = 8
@@ -1829,6 +1843,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 13
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCAcoes: TDBGrid
           Left = 11
@@ -1916,6 +1931,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 14
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMC: TDBGrid
           Left = 11
@@ -2026,6 +2042,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 15
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCSemCausa: TDBGrid
           Left = 11
@@ -2136,6 +2153,7 @@ object FormInicial: TFormInicial
         Font.Style = []
         ParentFont = False
         TabOrder = 16
+        ExplicitWidth = 908
         ExpandedHeight = 214
         object dbgPMCsemAcaoImediata: TDBGrid
           Left = 11
@@ -2240,6 +2258,7 @@ object FormInicial: TFormInicial
         Caption = 'Tabela de Calibra'#231#227'o'
         Collapsed = True
         TabOrder = 17
+        ExplicitWidth = 908
         ExpandedHeight = 218
         object dbgCalibracao: TDBGrid
           Left = 11
@@ -2344,6 +2363,7 @@ object FormInicial: TFormInicial
         Caption = 'Indicadores'
         Collapsed = True
         TabOrder = 18
+        ExplicitWidth = 908
         ExpandedHeight = 212
         object stgIndicadores: TStringGrid
           Left = 11
@@ -2463,8 +2483,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlAvalHab: TPanel
-    Left = 588
-    Top = -44
+    Left = 587
+    Top = 37
     Width = 498
     Height = 428
     TabOrder = 2
@@ -3595,7 +3615,7 @@ object FormInicial: TFormInicial
   end
   object pnlTreinamentos: TPanel
     Left = 506
-    Top = 16
+    Top = 73
     Width = 446
     Height = 336
     TabOrder = 5
@@ -4179,8 +4199,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlPendenciasMatriz: TPanel
-    Left = 523
-    Top = 135
+    Left = 587
+    Top = 175
     Width = 411
     Height = 260
     TabOrder = 6
@@ -4705,8 +4725,8 @@ object FormInicial: TFormInicial
     end
   end
   object pnlImprimirCalib: TPanel
-    Left = 638
-    Top = 175
+    Left = 70
+    Top = 165
     Width = 365
     Height = 188
     TabOrder = 7
@@ -5230,6 +5250,17 @@ object FormInicial: TFormInicial
         end
         object AoPreventivaMelhoriaCorretiva1: TMenuItem
           Caption = 'A'#231#227'o Preventiva/Melhoria/Corretiva'
+          object CadastrodeOrigemdePMC1: TMenuItem
+            Caption = 'Cadastro de Origem de PMC'
+            OnClick = CadastrodeOrigemdePMC1Click
+          end
+          object CadastrodeMotivosdePMC1: TMenuItem
+            Caption = 'Cadastro de Motivos de PMC'
+            OnClick = CadastrodeMotivosdePMC1Click
+          end
+          object N19: TMenuItem
+            Caption = '-'
+          end
           object AberturaPMC1: TMenuItem
             Caption = 'Abertura PMC'
             OnClick = AberturaPMC1Click
@@ -5514,6 +5545,17 @@ object FormInicial: TFormInicial
         Caption = 'Cronograma'
         OnClick = Cronograma1Click
       end
+      object N18: TMenuItem
+        Caption = '-'
+      end
+      object LanarTreinamentos1: TMenuItem
+        Caption = 'Lan'#231'ar Lista de Treinamentos'
+        OnClick = LanarTreinamentos1Click
+      end
+      object LanarVerificaodeEficciadeTreinamentos1: TMenuItem
+        Caption = 'Lan'#231'ar Verifica'#231#227'o de Efic'#225'cia de Treinamentos'
+        OnClick = LanarVerificaodeEficciadeTreinamentos1Click
+      end
     end
     object Relatrios1: TMenuItem
       Caption = 'Relat'#243'rios'
@@ -5608,7 +5650,7 @@ object FormInicial: TFormInicial
     Left = 496
     Top = 112
     Bitmap = {
-      494C010111001800500310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111001800980310001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -6612,43 +6654,93 @@ object FormInicial: TFormInicial
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43164.636665578710000000
+    ReportOptions.LastChange = 43320.685699861090000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
-      ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
-    Left = 824
-    Top = 72
+    Left = 432
+    Top = 64
     Datasets = <
       item
-        DataSet = frxDBCalibracao
-        DataSetName = 'frxDBCalibracao'
+        DataSet = frxDBImpTreinamentos
+        DataSetName = 'frxDBImpTreinamentos'
       end>
-    Variables = <>
+    Variables = <
+      item
+        Name = ' New Category1'
+        Value = Null
+      end
+      item
+        Name = 'vlMedia'
+        Value = Null
+      end
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
+        Value = Null
+      end>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
     object Page1: TfrxReportPage
-      Orientation = poLandscape
-      PaperWidth = 297.000000000000000000
-      PaperHeight = 210.000000000000000000
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
-      object ReportTitle1: TfrxReportTitle
-        Height = 80.692950000000000000
+      object Titulo: TfrxReportTitle
+        Height = 95.543302200000000000
         Top = 18.897650000000000000
-        Width = 1046.929810000000000000
+        Width = 718.110700000000000000
+        StartNewPage = True
         object Memo4: TfrxMemoView
-          Top = 22.267780000000000000
-          Width = 1046.929810000000000000
+          Top = 30.267780000000000000
+          Width = 718.110700000000000000
           Height = 34.015770000000000000
           ShowHint = False
           AutoWidth = True
@@ -6661,92 +6753,46 @@ object FormInicial: TFormInicial
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'RELAT'#211'RIO DE CALIBRA'#199#195'O')
+            'LISTAGEM DE TREINAMENTOS N'#195'O REALIZADOS')
           ParentFont = False
         end
         object Line2: TfrxLineView
-          Width = 1043.150280000000000000
+          Width = 1046.929810000000000000
           ShowHint = False
           Diagonal = True
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000001000
+          Width = 668.976382830000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
       object Detalhe: TfrxMasterData
         Height = 18.897650000000000000
-        Top = 222.992270000000000000
-        Width = 1046.929810000000000000
-        DataSet = frxDBCalibracao
-        DataSetName = 'frxDBCalibracao'
+        Top = 249.448980000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBImpTreinamentos
+        DataSetName = 'frxDBImpTreinamentos'
         RowCount = 0
-        object Memo3: TfrxMemoView
-          Left = 847.527559055118000000
-          Width = 98.267716540000000000
+        object frxControleDATA: TfrxMemoView
+          Left = 18.897637800000000000
+          Width = 691.275590551181100000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'cali_dataCalibracao'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_dataCalibracao"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo7: TfrxMemoView
-          Left = 945.827150000000000000
-          Width = 102.047246540000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_proxCalibracao"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo6: TfrxMemoView
-          Width = 94.866141732283490000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'cali_numero'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_numero"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo10: TfrxMemoView
-          Left = 95.063006770000000000
-          Width = 420.283291260000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'desc_inf'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
+          DataField = 'nome_col'
+          DataSet = frxDBImpTreinamentos
+          DataSetName = 'frxDBImpTreinamentos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -6754,37 +6800,19 @@ object FormInicial: TFormInicial
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBCalibracao."desc_inf"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo13: TfrxMemoView
-          Left = 515.016080000000000000
-          Width = 332.220472440945000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'cali_localizacao'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_localizacao"]')
+            '[frxDBImpTreinamentos."nome_col"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
-      object PageFooter1: TfrxPageFooter
-        Height = 56.692950000000000000
-        Top = 302.362400000000000000
-        Width = 1046.929810000000000000
+      object Rodape: TfrxPageFooter
+        Height = 52.913420000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
         object Picture1: TfrxPictureView
-          Left = 1005.937850000000000000
-          Top = 15.338590000000010000
+          Align = baRight
+          Left = 684.094930000000000000
+          Top = 9.559059999999988000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -7217,9 +7245,9 @@ object FormInicial: TFormInicial
           Transparent = False
           TransparentColor = clWhite
         end
-        object Memo11: TfrxMemoView
+        object Memo23: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 34.015769999999980000
+          Top = 30.236240000000010000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -7234,64 +7262,40 @@ object FormInicial: TFormInicial
         end
         object Line1: TfrxLineView
           Left = 3.779530000000000000
-          Top = 30.236240000000010000
-          Width = 990.236860000000000000
+          Top = 26.456709999999990000
+          Width = 668.976419450000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
-      end
-      object GroupHeader1: TfrxGroupHeader
-        Height = 42.063067800000000000
-        Top = 158.740260000000000000
-        Width = 1046.929810000000000000
-        Condition = '<frxDBCalibracao."DescProcesso">'
-        object Memo8: TfrxMemoView
-          Top = 4.000000000000000000
-          Width = 1048.441159690000000000
-          Height = 19.275590550000000000
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999988000
+          Width = 668.976382830000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
           ShowHint = False
-          Color = clScrollBar
-          DataSet = FormResumoInd.frxdbResumoIndicador
-          DataSetName = 'frxdbResumoIndicador'
-          DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            ' Processo: [frxDBCalibracao."DescProcesso"]')
+            '[TextoConf]')
           ParentFont = False
-          VAlign = vaCenter
         end
-        object Memo9: TfrxMemoView
-          Left = 95.063006770000000000
-          Top = 23.433070869999990000
-          Width = 420.283291260000000000
-          Height = 19.275590550000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Equipamento/Instrumento')
-          ParentFont = False
-          VAlign = vaBottom
-        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        Height = 52.677180000000000000
+        Top = 173.858380000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBImpTreinamentos."desc_tre"'
         object Memo1: TfrxMemoView
-          Top = 23.433070869999990000
-          Width = 94.866141732283490000
+          Left = 18.897650000000000000
+          Top = 33.779529999999990000
+          Width = 691.275590550000000000
           Height = 18.897650000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -7300,37 +7304,16 @@ object FormInicial: TFormInicial
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Identif.')
+            'Colaborador')
           ParentFont = False
           VAlign = vaBottom
         end
         object Memo2: TfrxMemoView
-          Left = 847.527559060000000000
-          Top = 23.433070869999990000
-          Width = 98.267780000000000000
-          Height = 18.897650000000000000
+          Left = 18.897650000000000000
+          Width = 691.275978660000000000
+          Height = 34.015770000000000000
           ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Data Calibra'#231#227'o')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo5: TfrxMemoView
-          Left = 945.827667480000000000
-          Top = 23.433070869999990000
-          Width = 102.047310000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -7338,30 +7321,10 @@ object FormInicial: TFormInicial
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8W = (
-            'Pr'#243'x. Calibra'#231#227'o')
+            'Treinamento: [frxDBImpTreinamentos."desc_tre"]')
           ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo12: TfrxMemoView
-          Left = 515.016080000000000000
-          Top = 23.433070869999990000
-          Width = 332.220472440945000000
-          Height = 19.275590550000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Localiza'#231#227'o')
-          ParentFont = False
-          VAlign = vaBottom
+          VAlign = vaCenter
         end
       end
     end
@@ -7448,6 +7411,7 @@ object FormInicial: TFormInicial
     Top = 213
   end
   object cdsImpTreinamentos: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImpTreinamentos'

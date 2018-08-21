@@ -685,103 +685,106 @@ begin
 //         bResultado:= True;
 //   end;
 
-   // Busca a nota de pendência e o período de avaliação de habilidades em parametros
-   with dm.cdsAux3 do begin
-      Active:= False;
-      CommandText:= ' SELECT notapendencia, periodohab' +
-                    ' FROM parametros';
-      Active:= True;
+   // Chamado TT694 - Verifica se a empresa faz avaliação de habilidades no Destra Manager
+   if BuscarParametro('nao_controlar_hab') = '0' then begin
+      // Busca a nota de pendência e o período de avaliação de habilidades em parametros
+      with dm.cdsAux3 do begin
+         Active:= False;
+         CommandText:= ' SELECT notapendencia, periodohab' +
+                       ' FROM parametros';
+         Active:= True;
 
-      sNotaPendencia:= FieldByName('notapendencia').AsString;
-   end;
-
-   // Verifica se tem HABILIDADES cadastradas para o colaborador dentro do período de avaliação
-   // gravada em parâmetros no campo "Período e Avaliação de Habilidades"
-      // Considerando o ano atual como 2017
-      // Se o parâmetro for 1 ano
-      //    Se existirem habilidades cadastradas para 2016 não gera pendência
-      // Se o parâmetro for 2 anos
-      //    Se existirem habilidades cadastradas para 2015 não gera pendência
-      // Se o parâmetro for 3 anos
-      //    Se existirem habilidades cadastradas para 2014 não gera pendência
-   sAnoHabilidade:= IntToStr(CurrentYear() - dm.cdsAux3.FieldByName('periodohab').AsInteger);
-
-
-   // Busca a lista de colaboradores ativos cadastrados do processo
-   with dm.cdsAux2 do begin
-      Active:= False;
-      CommandText:= ' SELECT codi_col, nome_col, col_admissao' +
-                    ' FROM colaboradores' +
-                    ' WHERE col_status = 1' + // Ativos
-                    ' and proc_col = ' + lblCodigo.Caption;
-      Active:= True;
-      First;
-      while not Eof do begin
-         with dm.cdsAuxiliar do begin
-            Active:= False;
-            CommandText:= ' SELECT COUNT(*) as Qtd' +
-                          ' FROM colab_habilidades H' +
-                          ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col ' +
-                          ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
-                          ' WHERE C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
-                          ' AND H.hab_ano >= ' + QuotedStr(sAnoHabilidade);
-            Active:= True;
-
-            if FieldByName('Qtd').AsInteger = 0 then begin
-               // Verifica se gera pendência pelo parâmetro de dias da primeira avaliação
-               // cadastrado em Parâmetros
-               if dm.cdsAux2.FieldByName('col_admissao').AsString = '' then begin
-                  bResultado:= False;
-               end
-               else begin
-                  if dm.cdsAux2.FieldByName('col_admissao').AsDateTime + BuscarDiasPendHab() < Date() then begin
-                     bResultado:= False;
-                  end;
-               end;
-            end;
-         end;
-
-         Next;
+         sNotaPendencia:= FieldByName('notapendencia').AsString;
       end;
-   end;
 
-   // Verifica se as notas de HABILIDADES dos colaboradores são menores ou iguais a
-   // nota de pendência em parametros, na última avaliação feita
+      // Verifica se tem HABILIDADES cadastradas para o colaborador dentro do período de avaliação
+      // gravada em parâmetros no campo "Período e Avaliação de Habilidades"
+         // Considerando o ano atual como 2017
+         // Se o parâmetro for 1 ano
+         //    Se existirem habilidades cadastradas para 2016 não gera pendência
+         // Se o parâmetro for 2 anos
+         //    Se existirem habilidades cadastradas para 2015 não gera pendência
+         // Se o parâmetro for 3 anos
+         //    Se existirem habilidades cadastradas para 2014 não gera pendência
+      sAnoHabilidade:= IntToStr(CurrentYear() - dm.cdsAux3.FieldByName('periodohab').AsInteger);
 
-   // Busca a lista de colaboradores cadastrados
-   with dm.cdsAux2 do begin
-      // Usa a mesma consulta do item acima
-      First;
-      while not Eof do begin
-         // Verifica qual o ano da última avaliação feita
-         with dm.cdsAux do begin
-            Active:= False;
-            CommandText:= ' SELECT MAX(hab_ano) as MaiorAno ' +
-                          ' FROM colab_habilidades H' +
-                          ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col' +
-                          ' WHERE C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
-                          ' AND C.proc_col = ' + lblCodigo.Caption;
-            Active:= True;
 
-            sAnoHabilidade:= FieldByName('MaiorAno').AsString;
-
+      // Busca a lista de colaboradores ativos cadastrados do processo
+      with dm.cdsAux2 do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_col, nome_col, col_admissao' +
+                       ' FROM colaboradores' +
+                       ' WHERE col_status = 1' + // Ativos
+                       ' and proc_col = ' + lblCodigo.Caption;
+         Active:= True;
+         First;
+         while not Eof do begin
             with dm.cdsAuxiliar do begin
                Active:= False;
                CommandText:= ' SELECT COUNT(*) as Qtd' +
                              ' FROM colab_habilidades H' +
                              ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col ' +
                              ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
-                             ' WHERE nota_hab <= ' + sNotaPendencia +
-                             ' AND C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
-                             ' AND H.hab_ano = ' + QuotedStr(sAnoHabilidade);
+                             ' WHERE C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
+                             ' AND H.hab_ano >= ' + QuotedStr(sAnoHabilidade);
                Active:= True;
 
-               if FieldByName('Qtd').AsInteger > 0 then begin
-                  bResultado:= False;
+               if FieldByName('Qtd').AsInteger = 0 then begin
+                  // Verifica se gera pendência pelo parâmetro de dias da primeira avaliação
+                  // cadastrado em Parâmetros
+                  if dm.cdsAux2.FieldByName('col_admissao').AsString = '' then begin
+                     bResultado:= False;
+                  end
+                  else begin
+                     if dm.cdsAux2.FieldByName('col_admissao').AsDateTime + BuscarDiasPendHab() < Date() then begin
+                        bResultado:= False;
+                     end;
+                  end;
                end;
             end;
+
+            Next;
          end;
-         Next;
+      end;
+
+      // Verifica se as notas de HABILIDADES dos colaboradores são menores ou iguais a
+      // nota de pendência em parametros, na última avaliação feita
+
+      // Busca a lista de colaboradores cadastrados
+      with dm.cdsAux2 do begin
+         // Usa a mesma consulta do item acima
+         First;
+         while not Eof do begin
+            // Verifica qual o ano da última avaliação feita
+            with dm.cdsAux do begin
+               Active:= False;
+               CommandText:= ' SELECT MAX(hab_ano) as MaiorAno ' +
+                             ' FROM colab_habilidades H' +
+                             ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col' +
+                             ' WHERE C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
+                             ' AND C.proc_col = ' + lblCodigo.Caption;
+               Active:= True;
+
+               sAnoHabilidade:= FieldByName('MaiorAno').AsString;
+
+               with dm.cdsAuxiliar do begin
+                  Active:= False;
+                  CommandText:= ' SELECT COUNT(*) as Qtd' +
+                                ' FROM colab_habilidades H' +
+                                ' INNER JOIN Colaboradores C ON C.codi_col = H.codi_col ' +
+                                ' INNER JOIN Habilidades HB ON HB.codi_hab = H.codi_hab ' +
+                                ' WHERE nota_hab <= ' + sNotaPendencia +
+                                ' AND C.codi_col = ' + dm.cdsAux2.FieldByName('codi_col').AsString +
+                                ' AND H.hab_ano = ' + QuotedStr(sAnoHabilidade);
+                  Active:= True;
+
+                  if FieldByName('Qtd').AsInteger > 0 then begin
+                     bResultado:= False;
+                  end;
+               end;
+            end;
+            Next;
+         end;
       end;
    end;
 
@@ -966,7 +969,9 @@ begin
                     ' FROM pdca P ' +
                     ' LEFT JOIN pdca_lanc L ON L.pdca_codigo = P.pdca_codigo ' +
                     ' WHERE P.pdca_processo = ' + lblCodigo.Caption +
-                    ' AND (lan_dtprevista is null OR (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
+                    ' AND ((lan_quando <= CURRENT_DATE AND lan_datarealizada is null) OR ' +
+                    '     (lan_dtprevista <= CURRENT_DATE AND lan_dtfinalizado is null)) ';
+//                    ' AND (lan_dtprevista is null OR (lan_dtprevista < CURRENT_DATE AND lan_dtfinalizado is null))';
       Active:= True;
       First;
 
@@ -1146,7 +1151,8 @@ procedure TFormTartaruga.sbRNCClick(Sender: TObject);
 begin
    if AcessoTartaruga('RNC') then begin
       FormVisualizaRNC:= TFormVisualizaRNC.Create(nil);
-      FormVisualizaRNC.sCodigoProcesso:= lblCodigo.Caption;
+      FormVisualizaRNC.sCodigoProcesso  := lblCodigo.Caption;
+      FormVisualizaRNC.lblCodigo.Caption:= lblNomeProcesso.Caption;
       FormVisualizaRNC.ShowModal;
       FormVisualizaRNC.Release;
       FreeAndNil(FormVisualizaRNC);

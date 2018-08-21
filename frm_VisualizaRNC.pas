@@ -26,6 +26,7 @@ type
     lbl1: TLabel;
     btnPMC: TBitBtn;
     lbl2: TLabel;
+    rgFiltro: TRadioGroup;
     procedure FormShow(Sender: TObject);
     procedure dbgRNCDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -34,6 +35,7 @@ type
     procedure AtualizarDados();
     procedure btnPMCClick(Sender: TObject);
     procedure dbgRNCDblClick(Sender: TObject);
+    procedure rgFiltroClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -128,7 +130,27 @@ end;
 procedure TFormVisualizaRNC.FormShow(Sender: TObject);
 begin
    AtualizarDados();
-   lblCodigo.Caption:= cdsRNC.FieldByName('processo').AsString;
+end;
+
+procedure TFormVisualizaRNC.rgFiltroClick(Sender: TObject);
+var
+   sFiltro: string;
+begin
+   // Chamado TT651 - Criar filtro de pendente de resposta e pendente de aceite/recusa
+   case rgFiltro.ItemIndex of
+      0: begin
+         sFiltro:= '';
+      end;
+      1: begin // Pendente de Resposta
+         sFiltro:= 'rnc_status = 1';
+      end;
+      2: begin // Pendente de Aceite/Recusa
+         sFiltro:= 'rnc_status = 2';
+      end;
+   end;
+
+   cdsRNC.Filter  := sFiltro;
+   cdsRNC.Filtered:= True;
 end;
 
 end.

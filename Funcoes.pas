@@ -54,7 +54,7 @@ procedure SetTaskBar(Visible: Boolean);
 // Função para validar o acesso de usuário
 function Acesso(Usuario: string; Funcao: Integer; Opcao: String; ExibeMsg: string = 'S'): Integer;
 // Muda o sinal decimal de vírgula para ponto
-function VirgulaParaPonto(valor: Real; casas: Integer): string;
+function VirgulaParaPonto(valor: Real; casas: Integer; MantemVirgula: string = 'N'): string;
 // Verifica se existem alterações no banco de dados a serem feitas
 function AtualizaBanco(): Boolean;
 // Preenche a tabela auditoria_interna com os dados dos processos na primeira vez. Depois a tabela
@@ -185,7 +185,14 @@ procedure ExecutaDOS(Comando: string);
 // Atualiza as metas dos indicadores copiando o valor do mês corrente
 procedure GravarMesesMetaIndicadores(AnoMesAtual: string);
 // Comandos para imprimir relatórios
-procedure Imprimir(nomeRelatorio: string; Report: TfrxReport; tipoImp: string; sNomeVariavel: string = ''; sValorVariavel: string = '');
+procedure Imprimir(nomeRelatorio: string; Report: TfrxReport; tipoImp: string;
+                   sNomeVariavel1: string = ''; sValorVariavel1: string = '';
+                   sNomeVariavel2: string = ''; sValorVariavel2: string = '';
+                   sNomeVariavel3: string = ''; sValorVariavel3: string = '';
+                   sNomeVariavel4: string = ''; sValorVariavel4: string = '';
+                   sNomeVariavel5: string = ''; sValorVariavel5: string = '';
+                   sNomeVariavel6: string = ''; sValorVariavel6: string = '';
+                   sNomeVariavel7: string = ''; sValorVariavel7: string = '');
 // Subtrai meses de um anomes
 function SubtrairAnoMes(anomes: string; meses: Integer): string;
 // Soma meses de um anomes
@@ -205,7 +212,7 @@ function CalcularRisco(iConsequencia: Integer; iProbabilidade: Integer): string;
 // Arredonda números reais
 function RoundNExtend(ValorReal: Extended; Casas: Integer): Extended;
 // Exporta dados para o Excel
-procedure ExpExcel(dbGrid: TDBGrid; cds: TClientDataSet; Titulo: string);
+procedure ExpExcel(dbGrid: TDBGrid; cds: TClientDataSet; Titulo: string; Form: TForm);
 // Exibe e alinha panels de impressão
 procedure AbrePanel(panel: TPanel; tela: TForm);
 // Busca a última meta cadastrada do indicador
@@ -217,7 +224,7 @@ function BuscarCodPMC(NumPMC: string): string;
 // Verifica se o usuário tem permissão de ver Clientes e Fornecedores
 function LiberarClienteForn(): Boolean;
 // Grava o histórico das movimentações de RNC
-procedure GravarHistoricoRNC(CodRNC: string; sHistorico: string; sDisposicao: string = '');
+procedure GravarHistoricoRNC(CodRNC: string; sHistorico: string; sDisposicao: string = ''; sMotivoRecusa: string = '');
 // Grava o status de RNC
 procedure AtualizarStatusRNC(CodRNC: string; CodStatus: string);
 // Busca a nota minima de habilidades em Parâmetros
@@ -243,7 +250,7 @@ procedure PrepararEmailAutoCalib(sEmail: string);
 // Atualiza o grid para que a barra de rolagem apareça, pois as vezes ao atualizar dados ela some
 procedure AtualizarGrid(dbGrid: TDBGrid);
 // Busca o nome do gestor do processo especificado
-function BuscarGestorProcesso(sCodProcesso: string): string;
+function BuscarGestorProcesso(sCodProcesso: string; sRetorno: string = 'Nome'): string;
 // Busca o código do processo do indicador especificado
 function BuscarProcessoInd(sCodIndicador: string): string;
 // Busca o nome do colaborador se tiver usuário relacionado
@@ -252,10 +259,170 @@ function BuscarNomeColaborador(sUsuario: string): string;
 function BuscarParametroDiaIndicador(): string;
 // Verifica se o indicador está vencido na data de atualizaçãi em Parâmetros - TT162
 function VerificaPendIndicador(iMesAnterior: Integer): Boolean;
+// Busca o parâmetro de envio de e-mail de PMC ao gestor
+function BuscarParametroEnvioGestor(): string;
+// Busca o parâmetro de exibir texto no Cabeçalho/Rodapé dos relatórios
+function BuscarParametroConf(sTipo: string): string;
+// Busca o texto para o Cabeçalho/Rodapé dos relatórios
+function BuscarTextoRel(): string;
+// Busca o parâmetro Usar Filtro de Motivos por Processo
+function BuscarParametroMotivoProc(): string;
+// Busca o valor do parâmetro especificado na chamada da função
+function BuscarParametro(sNomeCampoParametro: string): string;
+// Retorna o último dia de um mês
+function UltimoDiaDoMes(Data: TDate): string;
+// Verifica a troca de senha a cada x dias (determinado em parâmetros)
+function MudarSenha(): Boolean;
+// Verifica se a senha é forte de acordo com os critérios
+function VerificarSenhaForte(sSenha: string): Boolean;
+// Busca a última data de troca de senha do usuário logado
+function BuscarUltimaDataTrocaSenha(sUsuario: string): TDate;
 
 implementation
 
 uses frm_dm, frm_Inicial, frm_MsgErro, WebBrowser;
+
+function BuscarUltimaDataTrocaSenha(sUsuario: string): TDate;
+begin
+   with dm.cdsAux6 do begin
+      Active:= False;
+      CommandText:= ' SELECT usu_data_troca_senha' +
+                    ' FROM usuarios' +
+                    ' WHERE nome_usu = ' + QuotedStr(sUsuario);
+      Active:= True;
+
+      Result:= FieldByName('usu_data_troca_senha').AsDateTime;
+   end;
+end;
+
+function VerificarSenhaForte(sSenha: string): Boolean;
+  var
+   i: Integer;
+   nContEsp, nContNum, nContMai, nContMin: Integer;
+Const
+   CharEspeciais    : set of Char = [#0..#255] - ['a'..'z','A'..'Z','0'..'9'];
+   sNumeros         : set of Char = ['0'..'9'];
+   sLetrasMaiusculas: set of Char = ['A'..'Z'];
+   sLetrasMinusculas: set of Char = ['a'..'z'];
+begin
+   Result:= True;
+
+   if BuscarParametro('senha_forte') = '1' then begin
+      nContEsp:= 0;
+      nContNum:= 0;
+      nContMai:= 0;
+      nContMin:= 0;
+
+      for i:= 1 to Length(sSenha) do begin
+         if sSenha[i] in CharEspeciais then begin
+            nContEsp:= 1;
+         end;
+         if sSenha[i] in sNumeros then begin
+            nContNum:= 1;
+         end;
+         if sSenha[i] in sLetrasMaiusculas then begin
+            nContMai:= 1;
+         end;
+         if sSenha[i] in sLetrasMinusculas then begin
+            nContMin:= 1;
+         end;
+      end;
+
+      if nContEsp + nContNum + nContMai + nContMin < 4 then begin
+         Application.MessageBox('A senha tem que ter pelo menos um número, uma letra maíuscula, uma letra minúscula e um caracter especial', 'Aviso', MB_OK + MB_ICONWARNING);
+         Result:= False;
+      end;
+   end;
+end;
+
+function MudarSenha(): Boolean;
+var
+   nDiasTroca: Integer;
+   dDataUltimaTroca: TDate;
+begin
+   // Projeto TT437 - Zanini
+   Result:= False;
+
+   if BuscarParametro('troca_senha') = '1' then begin
+      nDiasTroca      := StrToInt(BuscarParametro('dias_troca_senha'));
+      dDataUltimaTroca:= BuscarUltimaDataTrocaSenha(cUsuario);
+
+      if (DateToStr(dDataUltimaTroca) = '30/12/1899') or
+         (DateToStr(dDataUltimaTroca) = '') then begin // Data vazia
+         Result:= True;
+         Exit;
+      end;
+
+      if Date() - nDiasTroca > dDataUltimaTroca then begin
+         Result:= True;
+         Exit;
+      end;
+   end;
+end;
+
+function UltimoDiaDoMes(Data: TDate): string;
+var
+   wDia: Word;
+   wMes: Word;
+   wAno: Word;
+begin
+   DecodeDate(Data, wAno, wMes, wDia);
+   if wMes in [1, 3, 5, 7, 8, 10, 12] then begin
+      UltimoDiaDoMes:= '31';
+   end;
+
+   if wMes in [4, 6, 9, 11] then begin
+      UltimoDiaDoMes:= '30';
+   end;
+
+   if wMes = 2 then begin
+      if (wAno) mod 4 = 0 then begin
+         UltimoDiaDoMes := '29';
+      end
+      else begin
+         UltimoDiaDoMes := '28';
+      end;
+   end;
+
+
+end;
+
+function BuscarParametro(sNomeCampoParametro: string): string;
+begin
+   with dm.cdsAux4 do begin
+      Active:= False;
+      CommandText:= ' SELECT ' + sNomeCampoParametro +
+                    ' FROM parametros';
+      Active:= True;
+
+      Result:= FieldByName(sNomeCampoParametro).AsString;
+   end;
+end;
+
+function BuscarParametroMotivoProc(): string;
+begin
+   // Projeto TT440
+   with dm.cdsAux4 do begin
+      Active:= False;
+      CommandText:= ' SELECT filtro_motivo_processo' +
+                    ' FROM parametros';
+      Active:= True;
+
+      Result:= FieldByName('filtro_motivo_processo').AsString;
+   end;
+end;
+
+function BuscarTextoRel(): string;
+begin
+   with dm.cdsAux4 do begin
+      Active:= False;
+      CommandText:= ' SELECT texto_cabec_rodape' +
+                    ' FROM parametros';
+      Active:= True;
+
+      Result:= FieldByName('texto_cabec_rodape').AsString;
+   end;
+end;
 
 function VerificaPendIndicador(iMesAnterior: Integer): Boolean;
 var
@@ -290,6 +457,18 @@ begin
     end;
 end;
 
+function BuscarParametroEnvioGestor(): string;
+begin
+   with dm.cdsAux4 do begin
+      Active:= False;
+      CommandText:= ' SELECT enviogestor' +
+                    ' FROM parametros';
+      Active:= True;
+
+      Result:= FieldByName('enviogestor').AsString;
+   end;
+end;
+
 function BuscarNomeColaborador(sUsuario: string): string;
 begin
    if sUsuario = EmptyStr then begin
@@ -321,17 +500,23 @@ begin
    end;
 end;
 
-function BuscarGestorProcesso(sCodProcesso: string): string;
+function BuscarGestorProcesso(sCodProcesso: string; sRetorno: string = 'Nome'): string;
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
-      CommandText:= ' SELECT C.nome_col as Gestor ' +
+      CommandText:= ' SELECT C.codi_col, C.nome_col as Gestor ' +
                     ' FROM processos P' +
                     ' INNER JOIN colaboradores C ON C.codi_col = P.gest_pro' +
                     ' WHERE codi_pro = ' + sCodProcesso;
       Active:= True;
 
-      Result:= FieldByName('Gestor').AsString;
+      if sRetorno = 'Nome' then begin
+         Result:= FieldByName('Gestor').AsString;
+      end;
+
+      if sRetorno = 'Cod' then begin
+         Result:= FieldByName('codi_col').AsString;
+      end;
    end;
 end;
 
@@ -801,19 +986,20 @@ begin
    end;
 end;
 
-procedure GravarHistoricoRNC(CodRNC: string; sHistorico: string; sDisposicao: string = '');
+procedure GravarHistoricoRNC(CodRNC: string; sHistorico: string; sDisposicao: string = ''; sMotivoRecusa: string = '');
 begin
    with dm.cdsAuxiliar do begin
       Active:= False;
       CommandText:= ' INSERT INTO rnc_historico (his_codigo, rnc_codigo, his_data, ' +
-                    ' his_historico, his_usuario, his_disposicao)' +
+                    ' his_historico, his_usuario, his_disposicao, his_motivo_recusa)' +
                     ' VALUES (' +
                     BuscarNovoCodigo('rnc_historico', 'his_codigo') + ',' +
                     QuotedStr(CodRNC) + ',' +
                     ArrumaDataSQL(Date()) + ',' +
                     QuotedStr(sHistorico) + ',' +
                     QuotedStr(cUsuario) + ',' +
-                    QuotedStr(sDisposicao) +
+                    QuotedStr(sDisposicao) + ',' +
+                    QuotedStr(sMotivoRecusa) +
                     ')';
       Execute;
    end;
@@ -894,45 +1080,61 @@ begin
    (panel as TPanel).Visible:= True;
 end;
 
-procedure ExpExcel(dbGrid: TDBGrid; cds: TClientDataSet; Titulo: string);
+procedure ExpExcel(dbGrid: TDBGrid; cds: TClientDataSet; Titulo: string; Form: TForm);
 var linha, coluna: integer;
     planilha: variant;
     valorcampo: string;
     i: Integer;
+    pAguarde: TPanel;
 begin
-   planilha:= CreateoleObject('Excel.Application');
-   planilha.WorkBooks.add(1);
-   planilha.Caption:= Titulo;
-   planilha.Visible:= True;
-
-   with dbGrid do begin
-      // Grava os títulos da coluna
-      coluna:= 0;
-      for i := 0 to FieldCount - 1 do begin
-         coluna:= coluna + 1;
-         valorcampo:= Columns[i].Title.Caption;
-         planilha.cells[2, coluna]:= valorCampo;
+   try
+      pAguarde := TPanel.Create(Form);
+      with pAguarde do begin
+         Width := 300;
+         Height:= 100;
+         Parent:= Form;
+         Caption:= 'Gerando arquivo Excel. Aguarde...';
       end;
+      AbrePanel(pAguarde, Form);
 
-      // Grava os dados da grid vindos do dataset
-      coluna:= 0;
-      with cds do begin
-         First;
-         while not Eof do begin
-            for coluna:= 0 to cds.FieldCount - 1 do begin
-//               ShowMessage(Fields.FieldByNumber(coluna + 2).AsString);
-               valorcampo:= Fields.FieldByNumber(coluna + 1).AsString;
-               planilha.cells[RecNo + 2, coluna + 1]:= valorCampo;
+      planilha:= CreateoleObject('Excel.Application');
+      planilha.WorkBooks.add(1);
+      planilha.Caption:= Titulo;
+      planilha.Visible:= True;
+
+      with dbGrid do begin
+         // Grava os títulos da coluna
+         coluna:= 0;
+         for i := 0 to FieldCount - 1 do begin
+            coluna:= coluna + 1;
+            valorcampo:= Columns[i].Title.Caption;
+            planilha.cells[2, coluna]:= valorCampo;
+         end;
+
+         // Grava os dados da grid vindos do dataset
+         coluna:= 0;
+         with cds do begin
+            First;
+            while not Eof do begin
+               for coluna:= 0 to cds.FieldCount - 1 do begin
+   //               ShowMessage(Fields.FieldByNumber(coluna + 2).AsString);
+                  valorcampo:= Fields.FieldByNumber(coluna + 1).AsString;
+                  planilha.cells[RecNo + 2, coluna + 1]:= valorCampo;
+               end;
+
+               Next;
             end;
-
-            Next;
          end;
       end;
+
+   //    http://www.devmedia.com.br/capturando-informacoes-do-dataset-em-conjunto-com-dbgrid-em-delphi/25086
+
+      planilha.columns.Autofit; // Ajusta o tamanho das colunas
+   except
+      
    end;
 
-//    http://www.devmedia.com.br/capturando-informacoes-do-dataset-em-conjunto-com-dbgrid-em-delphi/25086
-
-   planilha.columns.Autofit; // Ajusta o tamanho das colunas
+   pAguarde.Free;
 end;
 
 function RoundNExtend(ValorReal: Extended; Casas: Integer): Extended;
@@ -1170,15 +1372,62 @@ begin
    Result:= IntToStr(iAnoMes);
 end;
 
-procedure Imprimir(nomeRelatorio: string; Report: TfrxReport; tipoImp: string; sNomeVariavel: string = ''; sValorVariavel: string = '');
+function BuscarParametroConf(sTipo: string): string;
+begin
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT rel_conf_cabec, rel_conf_rodap' +
+                    ' FROM parametros';
+      Active:= True;
+
+      if sTipo = 'C' then begin
+         Result:= FieldByName('rel_conf_cabec').AsString;
+      end;
+
+      if sTipo = 'R' then begin
+         Result:= FieldByName('rel_conf_rodap').AsString;
+      end;
+   end;
+end;
+
+procedure Imprimir(nomeRelatorio: string; Report: TfrxReport; tipoImp: string;
+                   sNomeVariavel1: string = ''; sValorVariavel1: string = '';
+                   sNomeVariavel2: string = ''; sValorVariavel2: string = '';
+                   sNomeVariavel3: string = ''; sValorVariavel3: string = '';
+                   sNomeVariavel4: string = ''; sValorVariavel4: string = '';
+                   sNomeVariavel5: string = ''; sValorVariavel5: string = '';
+                   sNomeVariavel6: string = ''; sValorVariavel6: string = '';
+                   sNomeVariavel7: string = ''; sValorVariavel7: string = '');
 var
    i: integer;
 begin
    with Report do begin
       LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\' + nomeRelatorio + '.fr3');
-      if sValorVariavel <> '' then begin
-         Variables[sNomeVariavel]:= QuotedStr(sValorVariavel);
+      if sValorVariavel1 <> '' then begin
+         Variables[sNomeVariavel1]:= QuotedStr(sValorVariavel1);
       end;
+      if sValorVariavel2 <> '' then begin
+         Variables[sNomeVariavel2]:= QuotedStr(sValorVariavel2);
+      end;
+      if sValorVariavel3 <> '' then begin
+         Variables[sNomeVariavel3]:= QuotedStr(sValorVariavel3);
+      end;
+      if sValorVariavel4 <> '' then begin
+         Variables[sNomeVariavel4]:= QuotedStr(sValorVariavel4);
+      end;
+      if sValorVariavel5<> '' then begin
+         Variables[sNomeVariavel5]:= QuotedStr(sValorVariavel5);
+      end;
+      if sValorVariavel6 <> '' then begin
+         Variables[sNomeVariavel6]:= QuotedStr(sValorVariavel6);
+      end;
+      if sValorVariavel7 <> '' then begin
+         Variables[sNomeVariavel7]:= QuotedStr(sValorVariavel7);
+      end;
+
+      Variables['ConfCabec']:= BuscarParametroConf('C');
+      Variables['ConfRod']  := BuscarParametroConf('R');
+      Variables['TextoConf']:= QuotedStr(BuscarTextoRel());
 
       if tipoImp = 'I' then begin
       // Imprimir direto
@@ -1692,16 +1941,23 @@ begin
    end;
 end;
 
-function VirgulaParaPonto(valor: Real; casas: Integer): string;
+function VirgulaParaPonto(valor: Real; casas: Integer; MantemVirgula: string = 'N'): string;
 var
    posicaoPonto: Integer;
 begin
-   posicaoPonto:= Pos(',',FloatToStr(valor));
+   posicaoPonto:= Pos(',', FloatToStr(valor));
 
-   if posicaoPonto = 0 then
+   if posicaoPonto = 0 then begin
       Result:= FloatToStr(valor)
-   else
-      Result:= Copy(FloatToStr(valor),1,posicaoPonto - 1) + '.' + Copy(FloatToStr(valor),posicaoPonto + 1,casas)
+   end
+   else begin
+      if MantemVirgula = 'S' then begin
+         Result:= Copy(FloatToStr(valor), 1, posicaoPonto - 1) + ',' + Copy(FloatToStr(valor), posicaoPonto + 1, casas);
+      end
+      else begin
+         Result:= Copy(FloatToStr(valor), 1, posicaoPonto - 1) + '.' + Copy(FloatToStr(valor), posicaoPonto + 1, casas);
+      end;
+   end;
 end;
 
 function AtualizaBanco(): Boolean;

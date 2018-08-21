@@ -15,7 +15,7 @@ type
     zqryGravar: TZQuery;
     dspGravar: TDataSetProvider;
     cdsGravar: TClientDataSet;
-    pctLira: TJvgPageControl;
+    pctEmpresa: TJvgPageControl;
     tsCadastro: TTabSheet;
     lbl5: TLabel;
     lbl2: TLabel;
@@ -226,7 +226,7 @@ begin
 
          HabilitarCampos(False, False, Self, -1);
          Botoes(True);
-         FormInicial.StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + BuscarNomeEmpresa();
+         FormInicial.StatPrincipal.Panels[3].Text:= 'EMPRESA: ' + edtNomeEmp.Text;
          Application.MessageBox('Empresa cadastrada corretamente','Informação',MB_OK+MB_ICONINFORMATION);
       except
          on E: Exception do begin
@@ -324,7 +324,7 @@ begin
 //         Imagem.Scale:= jsHalf;//aqui você esta atribuindo uma escala.. exibir 100%
 //         Imagem.LoadFromFile(dm.cdsEmpresa.FieldByname('logo_emp').AsString);//aqui tá carregando a imagem
          if FileExists(cdsEmpresa.FieldByname('logo_emp').AsString) then begin
-            dbimg1.picture.LoadFromFile(cdsEmpresa.FieldByname('logo_emp').AsString);//aqui jogando ela prum Timage
+            dbimg1.Picture.LoadFromFile(cdsEmpresa.FieldByname('logo_emp').AsString);//aqui jogando ela prum Timage
          end;
 //         BlobStream := dm.cdsEmpresa.CreateBlobStream(dm.cdsEmpresa.FieldByname('logo_emp'), bmRead);
 

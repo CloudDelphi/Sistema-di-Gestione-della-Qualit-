@@ -410,8 +410,8 @@ var
 begin
    sCodigo:= cdsManut.FieldByName('man_codigo').AsString;
    cdsManut.Filtered:= False;
-   if AllTrim(edtCodigo.Text) <> EmptyStr then begin
-      cdsManut.Locate('man_codigo', edtCodigo.Text,[]);
+   if AllTrim(sCodigo) <> EmptyStr then begin
+      cdsManut.Locate('man_codigo', sCodigo,[]);
    end;
 
    PreencherCampos();

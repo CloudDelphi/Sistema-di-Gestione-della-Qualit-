@@ -49,6 +49,9 @@ procedure TransferirEvidenciasAcoes();
 procedure GravarRetencaoFormularios();
 // Insere os registros fixos do cronograma (FOR-43)
 procedure InserirCronograma();
+// Copia o valor do campo avaliação e data de validade do cadastro de Fornecedor para a nova tabela
+// de avaliação
+procedure CopiarAvaliacaoForn();
 
 implementation
 
@@ -110,12 +113,73 @@ begin
    //**********************************************
    // Alterar para o número do último comando aqui
    //**********************************************
-   iUltimo:= 479;
+   iUltimo:= 511;
    //**********************************************
 
    for i := iNumAtualizacao to iUltimo do begin
       sComando:= EmptyStr;
       case i of
+         511: CriarCampo('usu_data_troca_senha', 'usuarios', 'timestamp without time zone');
+         510: CriarCampo('troca_senha', 'parametros', 'integer', '0', 'I');
+         509: CriarCampo('dias_troca_senha', 'parametros', 'integer', '0', 'I');
+         508: CriarCampo('senha_forte', 'parametros', 'integer', '0', 'I');
+         507: CriarCampo('meta_iqf', 'parametros', 'double precision', '0', 'I');
+         506: sComando:= ' ALTER TABLE usuarios' +
+                         ' ALTER COLUMN senh_usu TYPE character varying(20);';
+         505: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 8, 'DEVOLVER AO CLIENTE', 8);
+         504: CopiarAvaliacaoForn();
+         503: sComando:= ' CREATE TABLE IF NOT EXISTS forn_avaliacao' +
+                         ' ( ' +
+                         '   for_codigo integer NOT NULL,' +
+                         '   for_codfor integer NOT NULL,' +
+//                         '   for_data_cadastro timestamp without time zone, ' +
+                         '   for_data_validade timestamp without time zone, ' +
+                         '   for_avaliacao double precision,' +
+                         '   CONSTRAINT forn_avaliacao_pkey PRIMARY KEY (for_codigo)' +
+                         ' )';
+         502: CriarCampo('nao_controlar_hab', 'parametros', 'integer', '0', 'I');
+         501: GravarNovaFuncao(68, 'CADASTRO DE MOTIVOS DE PMC', 68);
+         500: CriarCampo('pmc_motivo', 'pmc', 'integer');
+         499: CriarCampo('pmc_produto', 'pmc', 'integer');
+         498: CriarCampo('obrigar_causa_pmc', 'parametros', 'integer', '0', 'I');
+         497: GravaUsuarios('67');
+         496: sComando:= ' UPDATE tabela_combos SET codi_com = 67, ' +
+                         ' valo_com = ' + QuotedStr('LANÇAR VERIFICAÇÃO DE EFICÁCIA') +
+                         ' WHERE tipo_com = 99 AND codi_com = 61';
+         495: CriarCampo('filtro_motivo_processo', 'parametros', 'integer', '0', 'I');
+         494: sComando:= ' CREATE TABLE IF NOT EXISTS motivos_processos' +
+                         ' ( ' +
+                         '   mot_motivo integer NOT NULL,' +
+                         '   mot_processo integer NOT NULL,' +
+                         '   CONSTRAINT motivos_processos_pkey PRIMARY KEY (mot_motivo, mot_processo)' +
+                         ' )';
+         493: CriarCampo('texto_cabec_rodape', 'parametros', 'character varying(80)');
+         492: CriarCampo('fun_area', 'funcoes', 'character varying(22)');
+         491: CriarCampo('rel_conf_cabec', 'parametros', 'integer', '0', 'I');
+         490: CriarCampo('rel_conf_rodap', 'parametros', 'integer', '0', 'I');
+         489: CriarCampo('doc_data_validade', 'forn_documentos', 'timestamp without time zone');
+         488: CriarCampo('pmc_brainstorm', 'pmc', 'text');
+         487: GravarNovaFuncao(66, 'CADASTRO DE ORIGEM DE PMC', 66);
+         486: CriarCampo('his_motivo_recusa', 'rnc_historico', 'text');
+         485: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
+         // Versão 2.11 acima
+         484: GravarTabelaCombos(27, 'ORIGEM PDCA', 9, 'ANÁLISE CRÍTICA', 9);
+         483: CriarCampo('enviogestor', 'parametros', 'integer', '0', 'I');
+         482: sComando:= ' CREATE TABLE treinamento_prog_col' +
+                         '(' +
+                         ' pro_codigo integer NOT NULL,' +
+                         ' pro_cod_colaborador integer,' +
+                         ' CONSTRAINT pk_treinamento_prog_col PRIMARY KEY (pro_codigo, pro_cod_colaborador)' +
+                         ')';
+         481: sComando:= ' CREATE TABLE treinamento_prog' +
+                         '(' +
+                         ' pro_codigo integer NOT NULL,' +
+                         ' pro_cod_treinamento integer,' +
+                         ' pro_tipo character(1),' +
+                         ' pro_data_prevista timestamp without time zone,' +
+                         ' CONSTRAINT pk_treinamento_prog PRIMARY KEY (pro_codigo)' +
+                         ')';
+         480: GravarNovaFuncao(65, 'LANÇAR LISTA DE TREINAMENTO', 65);
          479: CriarCampo('inf_imagem', 'infraestrutura', 'text');
          478: CriarCampo('tre_eficacia', 'treinamentos', 'integer', '0', 'I');
          477: CriarCampo('iqf_apoio', 'iqf_remessa', 'integer', '0', 'I');
@@ -123,7 +187,7 @@ begin
          475: CriarCampo('rnc_custo', 'rnc', 'double precision');
          474: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 7, 'DELETAR E DESCARTAR', 7);
          473: GravarTabelaCombos(10, 'RETENÇÃO - FORMULARIOS', 20, 'DURANTE USO', 20);
-         472: GravarNovaFuncao(57, 'ACEITAR/RECUSAR DISPOSIÇÃO DE RNC', 57);
+         472: GravarNovaFuncao(64, 'ACEITAR/RECUSAR DISPOSIÇÃO DE RNC', 64);
          471: GravarTabelaCombos(18, 'PERIODICIDADE - INDICADORES', 7, 'QUADRIENAL', 7);
          470: sComando:= ' UPDATE processos SET ' +
                          ' pro_nome_abreviado = ' + QuotedStr('PROV EXT') +
@@ -137,7 +201,7 @@ begin
          463: CriarCampo('aud_contOM', 'auditoria_auto', 'integer');
          462: CriarCampo('aud_contNC', 'auditoria_auto', 'integer');
          461: CriarCampo('aud_contOBS', 'auditoria_auto', 'integer');
-         460: sComando:= ' CREATE TABLE auditoria_auto_cabec' +
+         460: sComando:= ' CREATE TABLE IF NOT EXISTS auditoria_auto_cabec' +
                          '(' +
                          ' aud_data timestamp without time zone NOT NULL,' +
                          ' aud_auditor character varying(50),' +
@@ -160,555 +224,555 @@ begin
                          ' CONSTRAINT PK_iqf_doc PRIMARY KEY (doc_codigo)' +
                          ' )';
          454: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
-         // 2.10 Acima
-         453: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 3, 'DEVOLUÇÃO', 3);
-         452: CriarCampo('inf_status', 'infraestrutura', 'integer', '1', 'I'); // Valor padrão - Ativo
-         451: GravarNovaFuncao(62, 'RELATÓRIO DE ANÁLISE DE RISCO', 62);
-         450: sComando:= ' CREATE TABLE auditoria_auto' +
-                         '(' +
-                         ' aud_codigo integer NOT NULL,' +
-                         ' aud_data timestamp without time zone NOT NULL,' +
-                         ' aud_conformidade text,' +
-                         ' aud_requisito character varying(10),' +
-                         ' aud_naoconformidade text,' +
-                         ' aud_tipo character(30),' +
-                         ' aud_processo integer,' +
-                         ' aud_gestor integer,' +
-                         ' CONSTRAINT pk_auditoria_auto PRIMARY KEY (aud_codigo)' +
-                         ')';
-         449: GravarNovaFuncao(61, 'AUDITORIA AUTOMÁTICA', 61);
-         448: CriarCampo('man_tipo', 'manut', 'integer', '1', 'I'); // Valor padrão - Programada
-         447: GravarTabelaCombos(36, 'TIPO DE MANUTENÇÃO', 2, 'REALIZADA', 2);
-         446: GravarTabelaCombos(36, 'TIPO DE MANUTENÇÃO', 1, 'PROGRAMADA', 1);
-         445: CriarCampo('ind_monitoramento', 'indicadores', 'integer', '0', 'I'); // Valor padrão - Não
-         444: CriarCampo('rnc_ordemprod', 'rnc', 'character varying(10)');
-         443: GravarNovaFuncao(60, 'CRONOGRAMA DE IMPLEMENTAÇÃO', 60);
-         442: InserirCronograma();
-         441: sComando:= ' CREATE TABLE cronograma' +
-                         '(' +
-                         ' cro_codigo integer NOT NULL,' +
-                         ' cro_requisito character(20) NOT NULL,' +
-                         ' cro_tela_destra character(200),' +
-                         ' cro_atividade text,' +
-                         ' cro_responsavel integer,' +
-                         ' cro_data_prevista timestamp without time zone,' +
-                         ' cro_data_realizada timestamp without time zone,' +
-                         ' cro_status character(20), ' +
-                         ' cro_resultado text, ' +
-                         ' CONSTRAINT pk_cronograma PRIMARY KEY (cro_codigo)' +
-                         ')';
-         440: CriarCampo('cali_email_enviado', 'calibracao', 'character(1)', 'N', 'S');
-         439: GravarNovaFuncao(59, 'RELATÓRIO DE MANUTENÇÃO PREVENTIVA', 59);
-         438: sComando:= ' DELETE FROM tabela_combos' +
-                         ' WHERE tipo_com = 99 AND (codi_com = 18 OR codi_com = 33 OR codi_com = 34 OR codi_com = 57)';
-         437: sComando:= ' ALTER TABLE infraestrutura' +
-                         ' ALTER COLUMN desc_inf TYPE character varying(100);';
-         436: sComando:= ' CREATE TABLE calibracao_documentos' +
-                         '(' +
-                         '  doc_codigo integer NOT NULL,' +
-                         '  cal_codigo integer NOT NULL,' +
-                         '  doc_descricao text,' +
-                         '  doc_caminho text,' +
-                         '  CONSTRAINT pk_calibracao_documentos PRIMARY KEY (doc_codigo)' +
-                         ')';
-         435: CriarCampo('emp_exclusoes', 'empresa', 'text');
-         434: CriarCampo('man_email_enviado', 'manut', 'character(1)', 'N', 'S');
-         433: CriarCampo('man_dias_aviso', 'manut_modelo', 'integer', '0', 'I');
-         432: sComando:= ' CREATE TABLE parametros_email_aviso' +
-                         '(' +
-                         ' par_codigo integer NOT NULL,' +
-                         ' par_tipo character(1),' +
-                         ' par_colaborador integer, ' +
-                         ' CONSTRAINT pk_parametros_email_aviso PRIMARY KEY (par_codigo)' +
-                         ')';
-         431: CriarCampo('tre_custo', 'colab_treinamentos', 'double precision');
-         430: CriarCampo('tre_tempo', 'colab_treinamentos', 'character(5)');
-         429: sComando:= ' CREATE TABLE manut_executores' +
-                         '(' +
-                         ' exe_codigo integer NOT NULL,' +
-                         ' man_codigo integer,' +
-                         ' exe_executor integer, ' +
-                         ' CONSTRAINT pk_manut_executores PRIMARY KEY (exe_codigo)' +
-                         ')';
-         428: sComando:= ' CREATE TABLE manut_itens' +
-                         '(' +
-                         ' ite_codigo integer NOT NULL,' +
-                         ' man_codigo integer,' +
-                         ' ite_descricao character varying(100),' +
-                         ' ite_verificado character(1),' +
-                         ' ite_obs text,' +
-                         ' CONSTRAINT pk_manut_itens PRIMARY KEY (ite_codigo)' +
-                         ')';
-         427: sComando:= ' CREATE TABLE manut' +
-                         '(' +
-                         ' man_codigo integer NOT NULL,' +
-                         ' man_modelo integer,' +
-                         ' man_processo integer,' +
-                         ' man_datainicio timestamp without time zone,' +
-                         ' man_datafim timestamp without time zone,' +
-                         ' man_horainicio character varying(5),' +
-                         ' man_horafim character varying(5),' +
-                         ' man_equipamento integer,' +
-                         ' CONSTRAINT pk_manut PRIMARY KEY (man_codigo)' +
-                         ')';
-         426: sComando:= ' CREATE TABLE manut_modelo_itens' +
-                         '(' +
-                         ' ite_codigo integer NOT NULL,' +
-                         ' man_codigo integer,' +
-                         ' ite_descricao character varying(100),' +
-                         ' CONSTRAINT pk_manut_modelo_itens PRIMARY KEY (ite_codigo)' +
-                         ')';
-         425: sComando:= ' CREATE TABLE manut_modelo' +
-                         '(' +
-                         ' man_codigo integer NOT NULL,' +
-                         ' man_identificacao character varying(30),' +
-                         ' man_descricao character varying(150),' +
-                         ' man_obs text,' +
-                         ' CONSTRAINT pk_manut_modelo PRIMARY KEY (man_codigo)' +
-                         ')';
-         424: GravarRetencaoFormularios();
-         423: CriarCampo('pro_nome_abreviado', 'processos', 'character(10)');
-         422: CriarCampo('inf_unidade', 'infraestrutura', 'character(14)');
-         421: CriarCampo('inf_resolucao', 'infraestrutura', 'character(30)');
-         420: CriarCampo('inf_capacidade', 'infraestrutura', 'character(30)');
-         419: CriarCampo('fun_organograma', 'funcoes', 'text');
-         418: sComando:= ' UPDATE colab_treinamentos SET dtre_tre = null WHERE dtre_tre = ' + QuotedStr('1899-12-30');
-         417: sComando:= ' UPDATE colab_treinamentos SET dtpr_tre = null WHERE dtpr_tre = ' + QuotedStr('1899-12-30');
-         416: GravarNovaFuncao(58, 'RELATÓRIO DE TREINAMENTOS', 58);
-         415: sComando:= 'UPDATE usuarios SET rnc = 1 WHERE nome_usu = ' + QuotedStr('DESTRA');
-         414: CriarCampo('rnc', 'usuarios', 'character(1)');
-         413: sComando:= ' ALTER TABLE colaboradores' +
-                         ' ALTER COLUMN col_rg TYPE character varying(30);';
-         412: CriarCampo('data_filtro_pmc', 'parametros', 'timestamp without time zone');
-         411: sComando:= ' CREATE TABLE pmc_email_auto_acoes_nvenc' +
-                         '(' +
-                         ' aut_codacao integer NOT NULL,' +
-                         ' CONSTRAINT pk_pmc_email_auto_acoes_nvenc PRIMARY KEY (aut_codacao)' +
-                         ')';
-         410: CriarCampo('usu_pend_pmc_acaoimediata', 'usuarios', 'integer', '0', 'I');
-         409: CriarCampo('usu_pend_pmc_causa', 'usuarios', 'integer', '0', 'I');
-         408: CriarCampo('ind_status', 'indicadores', 'integer', '1', 'I');
-         407: sComando:= ' CREATE TABLE pmc_email_auto_acoes' +
-                         '(' +
-                         ' aut_codacao integer NOT NULL,' +
-                         ' aut_ultimo_envio timestamp without time zone,' +
-                         ' CONSTRAINT pk_pmc_email_auto_acoes PRIMARY KEY (aut_codacao)' +
-                         ')';
-         406: CriarCampo('col_validacao_educ_exp', 'colaboradores', 'integer', '0', 'I');
-         405: sComando:= ' ALTER TABLE empresa' +
-                         ' ALTER COLUMN ende_emp TYPE character varying(150);';
-         404: sComando:= ' CREATE TABLE pmc_email_auto' +
-                         '(' +
-                         ' aut_codpmc integer NOT NULL,' +
-                         ' aut_ultimo_envio timestamp without time zone,' +
-                         ' CONSTRAINT pk_pmc_email_auto PRIMARY KEY (aut_codpmc)' +
-                         ')';
-         403: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 5, 'APÓS DEMISSÃO', 5);
-         402: GravarTabelaCombos(27, 'ORIGEM PDCA', 8, 'PLANEJAMENTO DE MUDANÇAS', 8);
-         401: CriarCampo('riscos_cores', 'parametros', 'integer', '0', 'I');
-         400: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
-                         ' VALUES (96, ' + QuotedStr('TRANSPORTADORAS') + ',' + QuotedStr('N') + ');';
-         399: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
-                         ' VALUES (97, ' + QuotedStr('REPRESENTANTES') + ',' + QuotedStr('N') + ');';
-         398: TransferirEvidenciasAcoes();
-         397: sComando:= ' CREATE TABLE pmc_acoes_evidencias' +
-                         '(' +
-                         ' evi_codigo integer NOT NULL,' +
-                         ' evi_codacao integer,' +
-                         ' evi_arquivo character varying(200),' +
-                         '  CONSTRAINT pk_pmc_acoes_evidencias PRIMARY KEY (evi_codigo)' +
-                         ')';
-         396: CriarCampo('nao_enviar_email_pmc', 'parametros', 'integer', '1', 'I');
-         395: CriarCampo('aviso_pmc', 'parametros', 'integer', '5', 'I');
-         394: AtualizarRetencao();
-         393: sComando:= ' CREATE TABLE risco_macro_hist' +
-                         '(' +
-                         ' his_codigo integer NOT NULL,' +
-                         ' his_codanalise integer,' +
-                         ' his_usuario character varying(30),' +
-                         ' his_data timestamp without time zone,' +
-                         ' his_probabilidade integer,' +
-                         ' his_consequencia integer, ' +
-                         ' his_texto text, ' +
-                         '  CONSTRAINT pk_risco_macro_hist PRIMARY KEY (his_codigo)' +
-                         ')';
-         392: sComando:= ' CREATE TABLE risco_analiseint_hist' +
-                         '(' +
-                         ' his_codigo integer NOT NULL,' +
-                         ' his_codanalise integer,' +
-                         ' his_usuario character varying(30),' +
-                         ' his_data timestamp without time zone,' +
-                         ' his_probabilidade integer,' +
-                         ' his_consequencia integer, ' +
-                         ' his_texto text, ' +
-                         '  CONSTRAINT pk_risco_analiseint_hist PRIMARY KEY (his_codigo)' +
-                         ')';
-         391: CriarCampo('primeiraavaliacao', 'parametros', 'integer', '30', 'I');
-         390: sComando:= ' CREATE TABLE plan_mudanca' +
-                         '(' +
-                         ' pla_codigo integer NOT NULL,' +
-                         ' pla_mudanca character varying(250),' +
-                         ' pla_proposito text,' +
-                         ' pla_integridade text,' +
-                         ' pla_recursos text, ' +
-                         ' pla_alocacao text, ' +
-                         '  CONSTRAINT pk_plan_mudanca PRIMARY KEY (pla_codigo)' +
-                         ')';
-         389: CriarCampo('tre_status', 'treinamentos', 'integer', '1', 'I');
-         388: sComando:= ' CREATE TABLE rnc_historico' +
-                         '(' +
-                         ' his_codigo integer NOT NULL,' +
-                         ' rnc_codigo integer NOT NULL,' +
-                         ' his_data timestamp without time zone,' +
-                         ' his_historico character varying(250),' +
-                         ' his_usuario character varying(30), ' +
-                         ' his_disposicao text, ' +
-                         '  CONSTRAINT pk_rnc_historico PRIMARY KEY (his_codigo)' +
-                         ')';
-         387: GravarNovaFuncao(57, 'ACEITAR/RECUSAR DISPOSIÇÃO DE RNC', 57);
-         386: GravarNovaFuncao(56, 'CONSULTA DE RNC', 56);
-         385: GravarTabelaCombos(35, 'STATUS - RNC', 1, 'ABERTO', 1);
-         384: GravarTabelaCombos(35, 'STATUS - RNC', 2, 'RESPONDIDO', 2);
-         383: GravarTabelaCombos(35, 'STATUS - RNC', 3, 'ACEITO', 3);
-         382: GravarTabelaCombos(35, 'STATUS - RNC', 4, 'RECUSADO', 4);
-         381: sComando:= ' ALTER TABLE colaboradores' +
-                         ' ALTER COLUMN col_numero TYPE character varying(10);';
-         380: GravarNovaFuncao(55, 'CADASTRO DE ORIGENS DE RNC', 55);
-         379: GravarNovaFuncao(54, 'CADASTRO DE MOTIVOS DE RNC', 54);
-         378: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 4, 'ARQUIVO MORTO', 4);
-         377: sComando:= ' CREATE TABLE rnc_documentos' +
-                         '(' +
-                         '  rnc_codigo integer NOT NULL,' +
-                         '  doc_codigo integer NOT NULL,' +
-                         '  doc_descricao text,' +
-                         '  doc_caminho text,' +
-                         '  CONSTRAINT pk_rnc_documentos PRIMARY KEY (rnc_codigo, doc_codigo)' +
-                         ')';
-         376: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 2, 'APOIO', 2);
-         375: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 1, 'RECLAMAÇÃO', 1);
-         374: GravarNovaFuncao(53, 'ABERTURA DE RNC', 53);
-         373: sComando:= ' CREATE TABLE rnc(' +
-                         ' rnc_codigo integer NOT NULL, ' +
-                         ' rnc_identificacao character varying(7) NOT NULL,' +
-                         ' rnc_data timestamp without time zone,' +
-                         ' rnc_emitido integer,' +
-                         ' rnc_motivo integer,' +
-                         ' rnc_processo integer,' +
-                         ' rnc_setor character varying(25),' +
-                         ' rnc_origem integer, ' +
-                         ' rnc_cliente integer, ' +
-                         ' rnc_fornecedor integer, ' +
-                         ' rnc_consumidor character varying(60), ' +
-                         ' rnc_nconformidade text,' +
-                         ' rnc_procede integer, ' +
-                         ' rnc_responsavel integer, ' +
-                         ' rnc_departamento character varying(25), ' +
-                         ' rnc_relacionamento integer, ' +
-                         ' rnc_representante character varying(25), ' +
-                         ' rnc_status integer, ' +
-                         ' rnc_disposicao text, ' +
-                         ' CONSTRAINT rnc_pkey PRIMARY KEY (rnc_codigo)' +
-                         ')';
-         372: CriarCampo('usu_desabilita_cliente_forn', 'usuarios', 'integer');
-         371: CriarCampo('ind_pdca', 'indicadores', 'character varying(8)');
-         370: try
-                 GravarNovaFuncao(29, 'CADASTRO DE PRODUTOS', 29);
-              except
-
-              end;
-         369: GravarMotivoRNC();
-         368: GravarOrigemRNC();
-         367: CriarCampo('cli_dataentrada', 'clientes', 'timestamp without time zone');
-         366: CriarCampo('cli_datasaida', 'clientes', 'timestamp without time zone');
-         365: CriarCampo('man_diasaviso', 'manutencao', 'integer', '0', 'I');
-         364: sComando:= ' CREATE TABLE calibracao_executores(' +
-                         ' exe_codigo integer NOT NULL, ' +
-                         ' cal_codigo integer NOT NULL,' +
-                         ' exe_executor integer NOT NULL,' +
-                         ' CONSTRAINT calibracao_executores_pkey PRIMARY KEY (exe_codigo, cal_codigo)' +
-                         ')';
-         363: CriarCampo('cali_unidade', 'calibracao', 'character varying(14)');
-         362: CriarCampo('pmc_fase', 'pmc', 'integer');
-         361: CriarCampo('inf_diasaviso', 'infraestrutura', 'integer', '0', 'I');
-         360: sComando:= ' CREATE TABLE clientes_obs(' +
-                         ' cli_codigo integer NOT NULL, ' +
-                         ' cli_codicli integer NOT NULL,' +
-                         ' cli_data timestamp without time zone,' +
-                         ' cli_contato character varying(30),' +
-                         ' cli_mail character varying(60),' +
-                         ' cli_fone character varying(60),' +
-                         ' cli_depto character varying(60),' +
-                         ' cli_obs text,' +
-                         ' CONSTRAINT clientes_obs_pkey PRIMARY KEY (cli_codigo, cli_codicli)' +
-                         ')';
-         359: CriarCampo('usu_pend_indicadores', 'usuarios', 'integer', '0', 'I');
-         358: CriarCampo('usu_pend_calibracao', 'usuarios', 'integer', '0', 'I');
-         357: CriarCampo('usu_pend_pmc', 'usuarios', 'integer', '0', 'I');
-         356: CriarCampo('usu_pend_pmcacoes', 'usuarios', 'integer', '0', 'I');
-         355: CriarCampo('usu_pend_forn', 'usuarios', 'integer', '0', 'I');
-         354: CriarCampo('usu_pend_procedimentos', 'usuarios', 'integer', '0', 'I');
-         353: CriarCampo('usu_pend_avaliacao', 'usuarios', 'integer', '0', 'I');
-         352: CriarCampo('usu_pend_treineficacia', 'usuarios', 'integer', '0', 'I');
-         351: CriarCampo('usu_pend_treinprevisao', 'usuarios', 'integer', '0', 'I');
-         350: CriarCampo('usu_pend_coleducacao', 'usuarios', 'integer', '0', 'I');
-         349: CriarCampo('usu_pend_colexperiencia', 'usuarios', 'integer', '0', 'I');
-         348: CriarCampo('usu_pend_manutpreventiva', 'usuarios', 'integer', '0', 'I');
-         347: CriarCampo('usu_pend_pdcaacoes', 'usuarios', 'integer', '0', 'I');
-         346: CriarCampo('usu_pend_analisecritica', 'usuarios', 'integer', '0', 'I');
-         345: CriarCampo('usu_pend_habilidades', 'usuarios', 'integer', '0', 'I');
-
-         344: CriarCampo('periodohab', 'parametros', 'integer', '1', 'I');
-         343: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 3, '3 ANOS', 3);
-         342: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 2, '2 ANOS', 2);
-         341: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 1, '1 ANO', 1);
-         340: CriarCampo('notapendencia', 'parametros', 'double precision', '2', 'I');
-         339: CriarCampo('col_pis', 'colaboradores', 'character(20)');
-         338: CriarCampo('col_ctps', 'colaboradores', 'character(15)');
-         337: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 10, 'MESTRADO', 1);
-         336: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 22, 'MESTRADO CURSANDO', 2);
-         335: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 23, 'MESTRADO INCOMPLETO', 3);
-         334: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  9, 'DOUTORADO', 4);
-         333: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 21, 'DOUTORADO CURSANDO', 5);
-         332: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 24, 'DOUTORADO INCOMPLETO', 6);
-         331: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  8, 'PÓS GRADUAÇÃO', 7);
-         330: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 20, 'PÓS GRADUAÇÃO CURSANDO', 8);
-         329: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 13, 'PÓS GRADUAÇÃO INCOMPLETO', 9);
-         328: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  1, 'SUPERIOR', 10);
-         327: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 19, 'SUPERIOR CURSANDO', 11);
-         326: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  2, 'SUPERIOR INCOMPLETO', 12);
-         325: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  3, 'TÉCNICO', 13);
-         324: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 18, 'TÉCNICO CURSANDO', 14);
-         323: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 12, 'TÉCNICO INCOMPLETO', 15);
-         322: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  4, 'ENSINO MÉDIO', 16);
-         321: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 17, 'ENSINO MÉDIO CURSANDO', 17);
-         320: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 15, 'ENSINO MÉDIO INCOMPLETO', 18);
-         319: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  5, 'ENSINO FUNDAMENTAL', 19);
-         318: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 16, 'ENSINO FUNDAMENTAL CURSANDO', 20);
-         317: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 14, 'ENSINO FUNDAMENTAL INCOMPLETO', 21);
-         316: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  6, 'ALFABETIZADO', 22);
-         315: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  7, 'NÃO ALFABETIZADO', 23);
-         314: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 11, 'NENHUMA', 24);
-         313: sComando:= ' DELETE FROM tabela_combos WHERE tipo_com = 6';
-         312: sComando:= ' CREATE TABLE lista_perigos_leis(' +
-                         ' lir_identificacao character varying(6) NOT NULL,' +
-                         ' lis_numperigo integer NOT NULL,' +
-                         ' CONSTRAINT lista_perigos_leis_pkey PRIMARY KEY (lir_identificacao, lis_numperigo)' +
-                         ')';
-         311: sComando:= ' CREATE TABLE lista_perigos_danos(' +
-                         ' lis_numdano integer NOT NULL,' +
-                         ' lis_numperigo integer NOT NULL,' +
-                         ' CONSTRAINT lista_perigos_danos_pkey PRIMARY KEY (lis_numdano, lis_numperigo)' +
-                         ')';
-         310: sComando:= 'DROP TABLE iqf;';
-         309: sComando:= ' CREATE TABLE lista_perigos(' +
-                         ' lis_numperigo integer NOT NULL,' +
-                         ' lis_atividade character varying(250) NOT NULL,' +
-                         ' lis_perigo character varying(250),' +
-                         ' lis_tipo_atividade integer,' +
-                         ' lis_processo integer,' +
-                         ' lis_data timestamp without time zone,' +
-                         ' lis_probabilidade integer,' +
-                         ' lis_gravidade integer,' +
-                         ' lis_responsavel integer,' +
-                         ' lis_controle text,' +
-                         ' lis_probabilidade_reav integer,' +
-                         ' lis_gravidade_reav integer,' +
-                         ' lis_data_reav timestamp without time zone,' +
-                         ' lis_responsavel_reav integer,' +
-                         ' lis_controle_reav text,' +
-                         ' CONSTRAINT lista_perigos_pkey PRIMARY KEY (lis_numperigo)' +
-                         ')';
-         308: GravarNovaFuncao(52, 'LISTA DE PERIGOS E AVALIAÇÃO DOS RISCOS', 52);
-         307: GravarNovaFuncao(51, 'CADASTRO DE RISCOS/DANOS', 51);
-         306: GravarTabelaCombos(30, 'TIPO DE ATIVIDADE - RISCOS/DANOS', 2, 'NÃO ROTINEIRA', 2);
-         305: GravarTabelaCombos(30, 'TIPO DE ATIVIDADE - RISCOS/DANOS', 1, 'ROTINEIRA', 1);
-         304: sComando:= ' CREATE TABLE danos(' +
-                         ' dan_codigo integer NOT NULL,' +
-                         ' dan_nome character varying(250) NOT NULL,' +
-                         ' dan_descricao text,' +
-                         ' CONSTRAINT danos_pkey PRIMARY KEY (dan_codigo)' +
-                         ')';
-         303: CriarCampo('col_admissao', 'colaboradores', 'timestamp without time zone');
-         302: CriarCampo('mac_pdca', 'risco_macro', 'character(10)');
-         301: CriarCampo('int_pdca', 'risco_analiseint', 'character(10)');
-         300: sComando:= ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('0.2') + ',' + QuotedStr('Principios de Gestão') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('0.3') + ',' + QuotedStr('Abordagem de processos') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.1.1') + ',' + QuotedStr('Organização e seu contexto') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.2') + ',' + QuotedStr('Necessidades e expectativas das partes interessadas') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.3') + ',' + QuotedStr('Determinação de escopo') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.4.1') + ',' + QuotedStr('Processos do SGQ') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.4.2') + ',' + QuotedStr('Extensão do SGQ') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.1.1') + ',' + QuotedStr('Liderança e comprometimento') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.1.2') + ',' + QuotedStr('Foco nos clientes') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.2.1') + ',' + QuotedStr('Desenvolvimento da política da qualidade') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.2.2') + ',' + QuotedStr('Comunicação da política da qualidade') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.3') + ',' + QuotedStr('Papéis, responsabilidades e autoridades') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.1') + ',' + QuotedStr('Abordagem de riscos e oportunidades') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.2') + ',' + QuotedStr('Objetivos da qualidade e planejamento') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.3') + ',' + QuotedStr('Planejamento de mudanças') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.1') + ',' + QuotedStr('Apoio - Recursos') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.2') + ',' + QuotedStr('Apoio - Pessoas') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.3') + ',' + QuotedStr('Apoio - Infraestrutura') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.4') + ',' + QuotedStr('Apoio - Ambiente para operações de processos') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.5.1') + ',' + QuotedStr('Recursos de monitoramento e medição') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.5.2') + ',' + QuotedStr('Rastreabilidade de medição') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.6') + ',' + QuotedStr('Conhecimento organizacional') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.2') + ',' + QuotedStr('Competência') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.3') + ',' + QuotedStr('Conscientização') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.4') + ',' + QuotedStr('Comunicação') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.5') + ',' + QuotedStr('Informação documentada') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.1') + ',' + QuotedStr('Planejamento e controle operacionais') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.1') + ',' + QuotedStr('Requisitos de produtos e serviços - Comunicação') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.2') + ',' + QuotedStr('Determinalção de requisitos de produtos e serviços') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.3') + ',' + QuotedStr('Análise crítica requisitos de produtos e serviços') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.4') + ',' + QuotedStr('Mudanças nos requisitos de produtos e serviços') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.3') + ',' + QuotedStr('Projeto e desenvolvimento') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.4') + ',' + QuotedStr('Controle de provedores externos') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.1') + ',' + QuotedStr('Controle produção e provisão de serviços') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.2') + ',' + QuotedStr('Identificação e rastreabilidade') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.3') + ',' + QuotedStr('Propriedade cliente ou provedores externos') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.4') + ',' + QuotedStr('Preservação') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.5') + ',' + QuotedStr('Atividades pós-entrega') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.6') + ',' + QuotedStr('Controle de mudanças') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.6') + ',' + QuotedStr('Liberação de produtos e serviços') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.7') + ',' + QuotedStr('Controle de saídas não conformes') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1') + ',' + QuotedStr('Monitoramento medição, análise e avaliação') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1.2') + ',' + QuotedStr('Satisfação do cliente') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1.3.6') + ',' + QuotedStr('Análise e avaliação') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.2.6') + ',' + QuotedStr('Auditoria Interna') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.3') + ',' + QuotedStr('Análise crítica da direção') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.1') + ',' + QuotedStr('Melhorias') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.2') + ',' + QuotedStr('Não Conformidade e ação corretiva') + ');' +
-                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.3') + ',' + QuotedStr('Melhoria contínua') + ');';
-         299: sComando:= ' CREATE TABLE requisitos2015(' +
-                         ' req_codigo character(7) NOT NULL,' +
-                         ' req_descricao character varying(70) NOT NULL,' +
-                         ' CONSTRAINT requisitos2015_pkey PRIMARY KEY (req_codigo)' +
-                         ')';
-         298: sComando:= ' CREATE TABLE auditoria_interna_agenda2015(' +
-                         ' aud_codigo integer NOT NULL,' +
-                         ' aud_cod_auditoria integer NOT NULL,' +
-                         ' aud_data date NOT NULL,' +
-                         ' aud_horaini character varying(5),' +
-                         ' aud_horafim character varying(5),' +
-                         ' aud_auditores character varying(80),' +
-                         ' aud_auditado integer,' +
-                         ' aud_processo integer,' +
-                         ' CONSTRAINT pk_auditoria_interna_agenda2015 PRIMARY KEY (aud_codigo)' +
-                         ')';
-         297: sComando:= ' CREATE TABLE auditoria_interna_rel_itens2015(' +
-                         ' dtpr_aud timestamp without time zone NOT NULL,' +
-                         ' proc_ite integer NOT NULL DEFAULT 0,' +
-                         ' requ_ite character varying(60) NOT NULL,' +
-                         ' cont_ite text,' +
-                         ' tipo_ite integer,' +
-                         ' ite_codigo integer NOT NULL DEFAULT 0,' +
-                         ' CONSTRAINT auditoria_interna_rel_itens2015_pkey PRIMARY KEY (ite_codigo)' +
-                         ' )';
-         296: sComando:= ' CREATE TABLE auditoria_interna_rel2015(' +
-                         ' dtpr_aud timestamp without time zone NOT NULL,' +
-                         ' tama_aud character varying(100),' +
-                         ' norm_aud character varying(100),' +
-                         ' audi_aud character varying(100),' +
-                         ' adtd_aud character varying(100),' +
-                         ' hora_aud character varying(100),' +
-                         ' data_aud character varying(100),' +
-                         ' esco_aud text,' +
-                         ' real_aud text,' +
-                         ' resu_aud text,' +
-                         ' repr_aud bigint,' +
-                         ' CONSTRAINT auditoria_interna_rel2015_pkey PRIMARY KEY (dtpr_aud)' +
-                         ' )';
-         295: sComando:= ' CREATE TABLE auditoria_interna2015(' +
-                         'aud_codigo integer NOT NULL,' +
-                         'data_aud timestamp without time zone NOT NULL,' +
-                         'proc_aud bigint NOT NULL DEFAULT 0,' +
-                         'r02_aud smallint NOT NULL DEFAULT 0,' +
-                         'r03_aud smallint NOT NULL DEFAULT 0,' +
-                         'r411_aud smallint NOT NULL DEFAULT 0,' +
-                         'r42_aud smallint NOT NULL DEFAULT 0,' +
-                         'r43_aud smallint NOT NULL DEFAULT 0,' +
-                         'r441_aud smallint NOT NULL DEFAULT 0,' +
-                         'r442_aud smallint NOT NULL DEFAULT 0,' +
-                         'r511_aud smallint NOT NULL DEFAULT 0,' +
-                         'r512_aud smallint NOT NULL DEFAULT 0,' +
-                         'r521_aud smallint NOT NULL DEFAULT 0,' +
-                         'r522_aud smallint NOT NULL DEFAULT 0,' +
-                         'r53_aud smallint NOT NULL DEFAULT 0,' +
-                         'r61_aud smallint NOT NULL DEFAULT 0,' +
-                         'r62_aud smallint NOT NULL DEFAULT 0,' +
-                         'r63_aud smallint NOT NULL DEFAULT 0,' +
-                         'r711_aud smallint NOT NULL DEFAULT 0,' +
-                         'r712_aud smallint NOT NULL DEFAULT 0,' +
-                         'r713_aud smallint NOT NULL DEFAULT 0,' +
-                         'r714_aud smallint NOT NULL DEFAULT 0,' +
-                         'r7151_aud smallint NOT NULL DEFAULT 0,' +
-                         'r7152_aud smallint NOT NULL DEFAULT 0,' +
-                         'r716_aud smallint NOT NULL DEFAULT 0,' +
-                         'r72_aud smallint NOT NULL DEFAULT 0,' +
-                         'r73_aud smallint NOT NULL DEFAULT 0,' +
-                         'r74_aud smallint NOT NULL DEFAULT 0,' +
-                         'r75_aud smallint NOT NULL DEFAULT 0,' +
-                         'r81_aud smallint NOT NULL DEFAULT 0,' +
-                         'r821_aud smallint NOT NULL DEFAULT 0,' +
-                         'r822_aud smallint NOT NULL DEFAULT 0,' +
-                         'r823_aud smallint NOT NULL DEFAULT 0,' +
-                         'r824_aud smallint NOT NULL DEFAULT 0,' +
-                         'r83_aud smallint NOT NULL DEFAULT 0,' +
-                         'r84_aud smallint NOT NULL DEFAULT 0,' +
-                         'r851_aud smallint NOT NULL DEFAULT 0,' +
-                         'r852_aud smallint NOT NULL DEFAULT 0,' +
-                         'r853_aud smallint NOT NULL DEFAULT 0,' +
-                         'r854_aud smallint NOT NULL DEFAULT 0,' +
-                         'r855_aud smallint NOT NULL DEFAULT 0,' +
-                         'r856_aud smallint NOT NULL DEFAULT 0,' +
-                         'r86_aud smallint NOT NULL DEFAULT 0,' +
-                         'r87_aud smallint NOT NULL DEFAULT 0,' +
-                         'r91_aud smallint NOT NULL DEFAULT 0,' +
-                         'r912_aud smallint NOT NULL DEFAULT 0,' +
-                         'r913_aud smallint NOT NULL DEFAULT 0,' +
-                         'r92_aud smallint NOT NULL DEFAULT 0,' +
-                         'r93_aud smallint NOT NULL DEFAULT 0,' +
-                         'r101_aud smallint NOT NULL DEFAULT 0,' +
-                         'r102_aud smallint NOT NULL DEFAULT 0,' +
-                         'r103_aud smallint NOT NULL DEFAULT 0,' +
-                         ' CONSTRAINT auditoria_interna2015_pkey PRIMARY KEY (aud_codigo, data_aud, proc_aud)' +
-                         ' )';
-         294: GravarNovaFuncao(50, 'RELATÓRIO DE AUDITORIA ISO-9001:2015', 50);
-         293: GravarNovaFuncao(49, 'PROGRAMA DE AUDITORIA ISO-9001:2015', 49);
-         292: sComando:= ' UPDATE tabela_combos SET valo_com = ' +
-                         QuotedStr('RELATÓRIO DE AUDITORIA ISO-9001:2008') +
-                         ' WHERE tipo_com = 99 AND codi_com = 20';
-         291: sComando:= ' UPDATE tabela_combos SET valo_com = ' +
-                         QuotedStr('PROGRAMA DE AUDITORIA ISO-9001:2008') +
-                         ' WHERE tipo_com = 99 AND codi_com = 19';
-         290: CriarCampo('usu_qtd_proc', 'usuarios', 'integer', '14', 'I');
-         289: sComando:= 'DELETE FROM tabela_combos WHERE tipo_com = 99 AND codi_com = 29';
-         288: CriarCampo('risco_severo_ame', 'parametros', 'integer', '1', 'I');
-         287: CriarCampo('risco_alto_ame', 'parametros', 'integer', '1', 'I');
-         286: CriarCampo('risco_medio_ame', 'parametros', 'integer', '1', 'I');
-         285: CriarCampo('risco_baixo_ame', 'parametros', 'integer', '1', 'I');
-         284: CriarCampo('risco_severo_opo', 'parametros', 'integer', '1', 'I');
-         283: CriarCampo('risco_alto_opo', 'parametros', 'integer', '1', 'I');
-         282: CriarCampo('risco_medio_opo', 'parametros', 'integer', '1', 'I');
-         281: CriarCampo('risco_baixo_opo', 'parametros', 'integer', '1', 'I');
-         280: CriarCampo('risco_severo_pfr', 'parametros', 'integer', '1', 'I');
-         279: CriarCampo('risco_alto_pfr', 'parametros', 'integer', '1', 'I');
-         278: CriarCampo('risco_medio_pfr', 'parametros', 'integer', '1', 'I');
-         277: CriarCampo('risco_baixo_pfr', 'parametros', 'integer', '1', 'I');
-
-         276: sComando:= ' ALTER TABLE parametros' +
-                         ' RENAME risco_severo TO risco_severo_pfo;';
-         275: sComando:= ' ALTER TABLE parametros' +
-                         ' RENAME risco_alto TO risco_alto_pfo;';
-         274: sComando:= ' ALTER TABLE parametros' +
-                         ' RENAME risco_medio TO risco_medio_pfo;';
-         273: sComando:= ' ALTER TABLE parametros' +
-                         ' RENAME risco_baixo TO risco_baixo_pfo;';
-         272: GravarTabelaCombos(27, 'ORIGEM PDCA', 7, 'ANÁLISE DE RISCOS', 7);
-         271: GravarTabelaCombos(27, 'ORIGEM PDCA', 6, 'PMC', 6);
-         270: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
-         // 2.09 Acima
+         // Versão 2.10 Acima
+//         453: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 3, 'DEVOLUÇÃO', 3);
+//         452: CriarCampo('inf_status', 'infraestrutura', 'integer', '1', 'I'); // Valor padrão - Ativo
+//         451: GravarNovaFuncao(62, 'RELATÓRIO DE ANÁLISE DE RISCO', 62);
+//         450: sComando:= ' CREATE TABLE auditoria_auto' +
+//                         '(' +
+//                         ' aud_codigo integer NOT NULL,' +
+//                         ' aud_data timestamp without time zone NOT NULL,' +
+//                         ' aud_conformidade text,' +
+//                         ' aud_requisito character varying(10),' +
+//                         ' aud_naoconformidade text,' +
+//                         ' aud_tipo character(30),' +
+//                         ' aud_processo integer,' +
+//                         ' aud_gestor integer,' +
+//                         ' CONSTRAINT pk_auditoria_auto PRIMARY KEY (aud_codigo)' +
+//                         ')';
+//         449: GravarNovaFuncao(61, 'AUDITORIA AUTOMÁTICA', 61);
+//         448: CriarCampo('man_tipo', 'manut', 'integer', '1', 'I'); // Valor padrão - Programada
+//         447: GravarTabelaCombos(36, 'TIPO DE MANUTENÇÃO', 2, 'REALIZADA', 2);
+//         446: GravarTabelaCombos(36, 'TIPO DE MANUTENÇÃO', 1, 'PROGRAMADA', 1);
+//         445: CriarCampo('ind_monitoramento', 'indicadores', 'integer', '0', 'I'); // Valor padrão - Não
+//         444: CriarCampo('rnc_ordemprod', 'rnc', 'character varying(10)');
+//         443: GravarNovaFuncao(60, 'CRONOGRAMA DE IMPLEMENTAÇÃO', 60);
+//         442: InserirCronograma();
+//         441: sComando:= ' CREATE TABLE cronograma' +
+//                         '(' +
+//                         ' cro_codigo integer NOT NULL,' +
+//                         ' cro_requisito character(20) NOT NULL,' +
+//                         ' cro_tela_destra character(200),' +
+//                         ' cro_atividade text,' +
+//                         ' cro_responsavel integer,' +
+//                         ' cro_data_prevista timestamp without time zone,' +
+//                         ' cro_data_realizada timestamp without time zone,' +
+//                         ' cro_status character(20), ' +
+//                         ' cro_resultado text, ' +
+//                         ' CONSTRAINT pk_cronograma PRIMARY KEY (cro_codigo)' +
+//                         ')';
+//         440: CriarCampo('cali_email_enviado', 'calibracao', 'character(1)', 'N', 'S');
+//         439: GravarNovaFuncao(59, 'RELATÓRIO DE MANUTENÇÃO PREVENTIVA', 59);
+//         438: sComando:= ' DELETE FROM tabela_combos' +
+//                         ' WHERE tipo_com = 99 AND (codi_com = 18 OR codi_com = 33 OR codi_com = 34 OR codi_com = 57)';
+//         437: sComando:= ' ALTER TABLE infraestrutura' +
+//                         ' ALTER COLUMN desc_inf TYPE character varying(100);';
+//         436: sComando:= ' CREATE TABLE calibracao_documentos' +
+//                         '(' +
+//                         '  doc_codigo integer NOT NULL,' +
+//                         '  cal_codigo integer NOT NULL,' +
+//                         '  doc_descricao text,' +
+//                         '  doc_caminho text,' +
+//                         '  CONSTRAINT pk_calibracao_documentos PRIMARY KEY (doc_codigo)' +
+//                         ')';
+//         435: CriarCampo('emp_exclusoes', 'empresa', 'text');
+//         434: CriarCampo('man_email_enviado', 'manut', 'character(1)', 'N', 'S');
+//         433: CriarCampo('man_dias_aviso', 'manut_modelo', 'integer', '0', 'I');
+//         432: sComando:= ' CREATE TABLE parametros_email_aviso' +
+//                         '(' +
+//                         ' par_codigo integer NOT NULL,' +
+//                         ' par_tipo character(1),' +
+//                         ' par_colaborador integer, ' +
+//                         ' CONSTRAINT pk_parametros_email_aviso PRIMARY KEY (par_codigo)' +
+//                         ')';
+//         431: CriarCampo('tre_custo', 'colab_treinamentos', 'double precision');
+//         430: CriarCampo('tre_tempo', 'colab_treinamentos', 'character(5)');
+//         429: sComando:= ' CREATE TABLE manut_executores' +
+//                         '(' +
+//                         ' exe_codigo integer NOT NULL,' +
+//                         ' man_codigo integer,' +
+//                         ' exe_executor integer, ' +
+//                         ' CONSTRAINT pk_manut_executores PRIMARY KEY (exe_codigo)' +
+//                         ')';
+//         428: sComando:= ' CREATE TABLE manut_itens' +
+//                         '(' +
+//                         ' ite_codigo integer NOT NULL,' +
+//                         ' man_codigo integer,' +
+//                         ' ite_descricao character varying(100),' +
+//                         ' ite_verificado character(1),' +
+//                         ' ite_obs text,' +
+//                         ' CONSTRAINT pk_manut_itens PRIMARY KEY (ite_codigo)' +
+//                         ')';
+//         427: sComando:= ' CREATE TABLE manut' +
+//                         '(' +
+//                         ' man_codigo integer NOT NULL,' +
+//                         ' man_modelo integer,' +
+//                         ' man_processo integer,' +
+//                         ' man_datainicio timestamp without time zone,' +
+//                         ' man_datafim timestamp without time zone,' +
+//                         ' man_horainicio character varying(5),' +
+//                         ' man_horafim character varying(5),' +
+//                         ' man_equipamento integer,' +
+//                         ' CONSTRAINT pk_manut PRIMARY KEY (man_codigo)' +
+//                         ')';
+//         426: sComando:= ' CREATE TABLE manut_modelo_itens' +
+//                         '(' +
+//                         ' ite_codigo integer NOT NULL,' +
+//                         ' man_codigo integer,' +
+//                         ' ite_descricao character varying(100),' +
+//                         ' CONSTRAINT pk_manut_modelo_itens PRIMARY KEY (ite_codigo)' +
+//                         ')';
+//         425: sComando:= ' CREATE TABLE manut_modelo' +
+//                         '(' +
+//                         ' man_codigo integer NOT NULL,' +
+//                         ' man_identificacao character varying(30),' +
+//                         ' man_descricao character varying(150),' +
+//                         ' man_obs text,' +
+//                         ' CONSTRAINT pk_manut_modelo PRIMARY KEY (man_codigo)' +
+//                         ')';
+//         424: GravarRetencaoFormularios();
+//         423: CriarCampo('pro_nome_abreviado', 'processos', 'character(10)');
+//         422: CriarCampo('inf_unidade', 'infraestrutura', 'character(14)');
+//         421: CriarCampo('inf_resolucao', 'infraestrutura', 'character(30)');
+//         420: CriarCampo('inf_capacidade', 'infraestrutura', 'character(30)');
+//         419: CriarCampo('fun_organograma', 'funcoes', 'text');
+//         418: sComando:= ' UPDATE colab_treinamentos SET dtre_tre = null WHERE dtre_tre = ' + QuotedStr('1899-12-30');
+//         417: sComando:= ' UPDATE colab_treinamentos SET dtpr_tre = null WHERE dtpr_tre = ' + QuotedStr('1899-12-30');
+//         416: GravarNovaFuncao(58, 'RELATÓRIO DE TREINAMENTOS', 58);
+//         415: sComando:= 'UPDATE usuarios SET rnc = 1 WHERE nome_usu = ' + QuotedStr('DESTRA');
+//         414: CriarCampo('rnc', 'usuarios', 'character(1)');
+//         413: sComando:= ' ALTER TABLE colaboradores' +
+//                         ' ALTER COLUMN col_rg TYPE character varying(30);';
+//         412: CriarCampo('data_filtro_pmc', 'parametros', 'timestamp without time zone');
+//         411: sComando:= ' CREATE TABLE pmc_email_auto_acoes_nvenc' +
+//                         '(' +
+//                         ' aut_codacao integer NOT NULL,' +
+//                         ' CONSTRAINT pk_pmc_email_auto_acoes_nvenc PRIMARY KEY (aut_codacao)' +
+//                         ')';
+//         410: CriarCampo('usu_pend_pmc_acaoimediata', 'usuarios', 'integer', '0', 'I');
+//         409: CriarCampo('usu_pend_pmc_causa', 'usuarios', 'integer', '0', 'I');
+//         408: CriarCampo('ind_status', 'indicadores', 'integer', '1', 'I');
+//         407: sComando:= ' CREATE TABLE pmc_email_auto_acoes' +
+//                         '(' +
+//                         ' aut_codacao integer NOT NULL,' +
+//                         ' aut_ultimo_envio timestamp without time zone,' +
+//                         ' CONSTRAINT pk_pmc_email_auto_acoes PRIMARY KEY (aut_codacao)' +
+//                         ')';
+//         406: CriarCampo('col_validacao_educ_exp', 'colaboradores', 'integer', '0', 'I');
+//         405: sComando:= ' ALTER TABLE empresa' +
+//                         ' ALTER COLUMN ende_emp TYPE character varying(150);';
+//         404: sComando:= ' CREATE TABLE pmc_email_auto' +
+//                         '(' +
+//                         ' aut_codpmc integer NOT NULL,' +
+//                         ' aut_ultimo_envio timestamp without time zone,' +
+//                         ' CONSTRAINT pk_pmc_email_auto PRIMARY KEY (aut_codpmc)' +
+//                         ')';
+//         403: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 5, 'APÓS DEMISSÃO', 5);
+//         402: GravarTabelaCombos(27, 'ORIGEM PDCA', 8, 'PLANEJAMENTO DE MUDANÇAS', 8);
+//         401: CriarCampo('riscos_cores', 'parametros', 'integer', '0', 'I');
+//         400: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
+//                         ' VALUES (96, ' + QuotedStr('TRANSPORTADORAS') + ',' + QuotedStr('N') + ');';
+//         399: sComando:= ' INSERT INTO processos(codi_pro, nome_pro, pro_exibelista)' +
+//                         ' VALUES (97, ' + QuotedStr('REPRESENTANTES') + ',' + QuotedStr('N') + ');';
+//         398: TransferirEvidenciasAcoes();
+//         397: sComando:= ' CREATE TABLE pmc_acoes_evidencias' +
+//                         '(' +
+//                         ' evi_codigo integer NOT NULL,' +
+//                         ' evi_codacao integer,' +
+//                         ' evi_arquivo character varying(200),' +
+//                         '  CONSTRAINT pk_pmc_acoes_evidencias PRIMARY KEY (evi_codigo)' +
+//                         ')';
+//         396: CriarCampo('nao_enviar_email_pmc', 'parametros', 'integer', '1', 'I');
+//         395: CriarCampo('aviso_pmc', 'parametros', 'integer', '5', 'I');
+//         394: AtualizarRetencao();
+//         393: sComando:= ' CREATE TABLE risco_macro_hist' +
+//                         '(' +
+//                         ' his_codigo integer NOT NULL,' +
+//                         ' his_codanalise integer,' +
+//                         ' his_usuario character varying(30),' +
+//                         ' his_data timestamp without time zone,' +
+//                         ' his_probabilidade integer,' +
+//                         ' his_consequencia integer, ' +
+//                         ' his_texto text, ' +
+//                         '  CONSTRAINT pk_risco_macro_hist PRIMARY KEY (his_codigo)' +
+//                         ')';
+//         392: sComando:= ' CREATE TABLE risco_analiseint_hist' +
+//                         '(' +
+//                         ' his_codigo integer NOT NULL,' +
+//                         ' his_codanalise integer,' +
+//                         ' his_usuario character varying(30),' +
+//                         ' his_data timestamp without time zone,' +
+//                         ' his_probabilidade integer,' +
+//                         ' his_consequencia integer, ' +
+//                         ' his_texto text, ' +
+//                         '  CONSTRAINT pk_risco_analiseint_hist PRIMARY KEY (his_codigo)' +
+//                         ')';
+//         391: CriarCampo('primeiraavaliacao', 'parametros', 'integer', '30', 'I');
+//         390: sComando:= ' CREATE TABLE plan_mudanca' +
+//                         '(' +
+//                         ' pla_codigo integer NOT NULL,' +
+//                         ' pla_mudanca character varying(250),' +
+//                         ' pla_proposito text,' +
+//                         ' pla_integridade text,' +
+//                         ' pla_recursos text, ' +
+//                         ' pla_alocacao text, ' +
+//                         '  CONSTRAINT pk_plan_mudanca PRIMARY KEY (pla_codigo)' +
+//                         ')';
+//         389: CriarCampo('tre_status', 'treinamentos', 'integer', '1', 'I');
+//         388: sComando:= ' CREATE TABLE rnc_historico' +
+//                         '(' +
+//                         ' his_codigo integer NOT NULL,' +
+//                         ' rnc_codigo integer NOT NULL,' +
+//                         ' his_data timestamp without time zone,' +
+//                         ' his_historico character varying(250),' +
+//                         ' his_usuario character varying(30), ' +
+//                         ' his_disposicao text, ' +
+//                         '  CONSTRAINT pk_rnc_historico PRIMARY KEY (his_codigo)' +
+//                         ')';
+//         387: GravarNovaFuncao(57, 'ACEITAR/RECUSAR DISPOSIÇÃO DE RNC', 57);
+//         386: GravarNovaFuncao(56, 'CONSULTA DE RNC', 56);
+//         385: GravarTabelaCombos(35, 'STATUS - RNC', 1, 'ABERTO', 1);
+//         384: GravarTabelaCombos(35, 'STATUS - RNC', 2, 'RESPONDIDO', 2);
+//         383: GravarTabelaCombos(35, 'STATUS - RNC', 3, 'ACEITO', 3);
+//         382: GravarTabelaCombos(35, 'STATUS - RNC', 4, 'RECUSADO', 4);
+//         381: sComando:= ' ALTER TABLE colaboradores' +
+//                         ' ALTER COLUMN col_numero TYPE character varying(10);';
+//         380: GravarNovaFuncao(55, 'CADASTRO DE ORIGENS DE RNC', 55);
+//         379: GravarNovaFuncao(54, 'CADASTRO DE MOTIVOS DE RNC', 54);
+//         378: GravarTabelaCombos(3, 'DESCARTE - FORMULÁRIOS', 4, 'ARQUIVO MORTO', 4);
+//         377: sComando:= ' CREATE TABLE rnc_documentos' +
+//                         '(' +
+//                         '  rnc_codigo integer NOT NULL,' +
+//                         '  doc_codigo integer NOT NULL,' +
+//                         '  doc_descricao text,' +
+//                         '  doc_caminho text,' +
+//                         '  CONSTRAINT pk_rnc_documentos PRIMARY KEY (rnc_codigo, doc_codigo)' +
+//                         ')';
+//         376: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 2, 'APOIO', 2);
+//         375: GravarTabelaCombos(34, 'RELACIONAMENTO - RNC', 1, 'RECLAMAÇÃO', 1);
+//         374: GravarNovaFuncao(53, 'ABERTURA DE RNC', 53);
+//         373: sComando:= ' CREATE TABLE rnc(' +
+//                         ' rnc_codigo integer NOT NULL, ' +
+//                         ' rnc_identificacao character varying(7) NOT NULL,' +
+//                         ' rnc_data timestamp without time zone,' +
+//                         ' rnc_emitido integer,' +
+//                         ' rnc_motivo integer,' +
+//                         ' rnc_processo integer,' +
+//                         ' rnc_setor character varying(25),' +
+//                         ' rnc_origem integer, ' +
+//                         ' rnc_cliente integer, ' +
+//                         ' rnc_fornecedor integer, ' +
+//                         ' rnc_consumidor character varying(60), ' +
+//                         ' rnc_nconformidade text,' +
+//                         ' rnc_procede integer, ' +
+//                         ' rnc_responsavel integer, ' +
+//                         ' rnc_departamento character varying(25), ' +
+//                         ' rnc_relacionamento integer, ' +
+//                         ' rnc_representante character varying(25), ' +
+//                         ' rnc_status integer, ' +
+//                         ' rnc_disposicao text, ' +
+//                         ' CONSTRAINT rnc_pkey PRIMARY KEY (rnc_codigo)' +
+//                         ')';
+//         372: CriarCampo('usu_desabilita_cliente_forn', 'usuarios', 'integer');
+//         371: CriarCampo('ind_pdca', 'indicadores', 'character varying(8)');
+//         370: try
+//                 GravarNovaFuncao(29, 'CADASTRO DE PRODUTOS', 29);
+//              except
+//
+//              end;
+//         369: GravarMotivoRNC();
+//         368: GravarOrigemRNC();
+//         367: CriarCampo('cli_dataentrada', 'clientes', 'timestamp without time zone');
+//         366: CriarCampo('cli_datasaida', 'clientes', 'timestamp without time zone');
+//         365: CriarCampo('man_diasaviso', 'manutencao', 'integer', '0', 'I');
+//         364: sComando:= ' CREATE TABLE calibracao_executores(' +
+//                         ' exe_codigo integer NOT NULL, ' +
+//                         ' cal_codigo integer NOT NULL,' +
+//                         ' exe_executor integer NOT NULL,' +
+//                         ' CONSTRAINT calibracao_executores_pkey PRIMARY KEY (exe_codigo, cal_codigo)' +
+//                         ')';
+//         363: CriarCampo('cali_unidade', 'calibracao', 'character varying(14)');
+//         362: CriarCampo('pmc_fase', 'pmc', 'integer');
+//         361: CriarCampo('inf_diasaviso', 'infraestrutura', 'integer', '0', 'I');
+//         360: sComando:= ' CREATE TABLE clientes_obs(' +
+//                         ' cli_codigo integer NOT NULL, ' +
+//                         ' cli_codicli integer NOT NULL,' +
+//                         ' cli_data timestamp without time zone,' +
+//                         ' cli_contato character varying(30),' +
+//                         ' cli_mail character varying(60),' +
+//                         ' cli_fone character varying(60),' +
+//                         ' cli_depto character varying(60),' +
+//                         ' cli_obs text,' +
+//                         ' CONSTRAINT clientes_obs_pkey PRIMARY KEY (cli_codigo, cli_codicli)' +
+//                         ')';
+//         359: CriarCampo('usu_pend_indicadores', 'usuarios', 'integer', '0', 'I');
+//         358: CriarCampo('usu_pend_calibracao', 'usuarios', 'integer', '0', 'I');
+//         357: CriarCampo('usu_pend_pmc', 'usuarios', 'integer', '0', 'I');
+//         356: CriarCampo('usu_pend_pmcacoes', 'usuarios', 'integer', '0', 'I');
+//         355: CriarCampo('usu_pend_forn', 'usuarios', 'integer', '0', 'I');
+//         354: CriarCampo('usu_pend_procedimentos', 'usuarios', 'integer', '0', 'I');
+//         353: CriarCampo('usu_pend_avaliacao', 'usuarios', 'integer', '0', 'I');
+//         352: CriarCampo('usu_pend_treineficacia', 'usuarios', 'integer', '0', 'I');
+//         351: CriarCampo('usu_pend_treinprevisao', 'usuarios', 'integer', '0', 'I');
+//         350: CriarCampo('usu_pend_coleducacao', 'usuarios', 'integer', '0', 'I');
+//         349: CriarCampo('usu_pend_colexperiencia', 'usuarios', 'integer', '0', 'I');
+//         348: CriarCampo('usu_pend_manutpreventiva', 'usuarios', 'integer', '0', 'I');
+//         347: CriarCampo('usu_pend_pdcaacoes', 'usuarios', 'integer', '0', 'I');
+//         346: CriarCampo('usu_pend_analisecritica', 'usuarios', 'integer', '0', 'I');
+//         345: CriarCampo('usu_pend_habilidades', 'usuarios', 'integer', '0', 'I');
+//
+//         344: CriarCampo('periodohab', 'parametros', 'integer', '1', 'I');
+//         343: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 3, '3 ANOS', 3);
+//         342: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 2, '2 ANOS', 2);
+//         341: GravarTabelaCombos(31, 'PERÍODO AVALIAÇÃO DE HABILIDADES', 1, '1 ANO', 1);
+//         340: CriarCampo('notapendencia', 'parametros', 'double precision', '2', 'I');
+//         339: CriarCampo('col_pis', 'colaboradores', 'character(20)');
+//         338: CriarCampo('col_ctps', 'colaboradores', 'character(15)');
+//         337: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 10, 'MESTRADO', 1);
+//         336: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 22, 'MESTRADO CURSANDO', 2);
+//         335: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 23, 'MESTRADO INCOMPLETO', 3);
+//         334: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  9, 'DOUTORADO', 4);
+//         333: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 21, 'DOUTORADO CURSANDO', 5);
+//         332: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 24, 'DOUTORADO INCOMPLETO', 6);
+//         331: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  8, 'PÓS GRADUAÇÃO', 7);
+//         330: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 20, 'PÓS GRADUAÇÃO CURSANDO', 8);
+//         329: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 13, 'PÓS GRADUAÇÃO INCOMPLETO', 9);
+//         328: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  1, 'SUPERIOR', 10);
+//         327: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 19, 'SUPERIOR CURSANDO', 11);
+//         326: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  2, 'SUPERIOR INCOMPLETO', 12);
+//         325: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  3, 'TÉCNICO', 13);
+//         324: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 18, 'TÉCNICO CURSANDO', 14);
+//         323: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 12, 'TÉCNICO INCOMPLETO', 15);
+//         322: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  4, 'ENSINO MÉDIO', 16);
+//         321: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 17, 'ENSINO MÉDIO CURSANDO', 17);
+//         320: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 15, 'ENSINO MÉDIO INCOMPLETO', 18);
+//         319: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  5, 'ENSINO FUNDAMENTAL', 19);
+//         318: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 16, 'ENSINO FUNDAMENTAL CURSANDO', 20);
+//         317: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 14, 'ENSINO FUNDAMENTAL INCOMPLETO', 21);
+//         316: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  6, 'ALFABETIZADO', 22);
+//         315: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES',  7, 'NÃO ALFABETIZADO', 23);
+//         314: GravarTabelaCombos(6, 'EDUCAÇÃO - FUNÇÕES', 11, 'NENHUMA', 24);
+//         313: sComando:= ' DELETE FROM tabela_combos WHERE tipo_com = 6';
+//         312: sComando:= ' CREATE TABLE lista_perigos_leis(' +
+//                         ' lir_identificacao character varying(6) NOT NULL,' +
+//                         ' lis_numperigo integer NOT NULL,' +
+//                         ' CONSTRAINT lista_perigos_leis_pkey PRIMARY KEY (lir_identificacao, lis_numperigo)' +
+//                         ')';
+//         311: sComando:= ' CREATE TABLE lista_perigos_danos(' +
+//                         ' lis_numdano integer NOT NULL,' +
+//                         ' lis_numperigo integer NOT NULL,' +
+//                         ' CONSTRAINT lista_perigos_danos_pkey PRIMARY KEY (lis_numdano, lis_numperigo)' +
+//                         ')';
+//         310: sComando:= 'DROP TABLE iqf;';
+//         309: sComando:= ' CREATE TABLE lista_perigos(' +
+//                         ' lis_numperigo integer NOT NULL,' +
+//                         ' lis_atividade character varying(250) NOT NULL,' +
+//                         ' lis_perigo character varying(250),' +
+//                         ' lis_tipo_atividade integer,' +
+//                         ' lis_processo integer,' +
+//                         ' lis_data timestamp without time zone,' +
+//                         ' lis_probabilidade integer,' +
+//                         ' lis_gravidade integer,' +
+//                         ' lis_responsavel integer,' +
+//                         ' lis_controle text,' +
+//                         ' lis_probabilidade_reav integer,' +
+//                         ' lis_gravidade_reav integer,' +
+//                         ' lis_data_reav timestamp without time zone,' +
+//                         ' lis_responsavel_reav integer,' +
+//                         ' lis_controle_reav text,' +
+//                         ' CONSTRAINT lista_perigos_pkey PRIMARY KEY (lis_numperigo)' +
+//                         ')';
+//         308: GravarNovaFuncao(52, 'LISTA DE PERIGOS E AVALIAÇÃO DOS RISCOS', 52);
+//         307: GravarNovaFuncao(51, 'CADASTRO DE RISCOS/DANOS', 51);
+//         306: GravarTabelaCombos(30, 'TIPO DE ATIVIDADE - RISCOS/DANOS', 2, 'NÃO ROTINEIRA', 2);
+//         305: GravarTabelaCombos(30, 'TIPO DE ATIVIDADE - RISCOS/DANOS', 1, 'ROTINEIRA', 1);
+//         304: sComando:= ' CREATE TABLE danos(' +
+//                         ' dan_codigo integer NOT NULL,' +
+//                         ' dan_nome character varying(250) NOT NULL,' +
+//                         ' dan_descricao text,' +
+//                         ' CONSTRAINT danos_pkey PRIMARY KEY (dan_codigo)' +
+//                         ')';
+//         303: CriarCampo('col_admissao', 'colaboradores', 'timestamp without time zone');
+//         302: CriarCampo('mac_pdca', 'risco_macro', 'character(10)');
+//         301: CriarCampo('int_pdca', 'risco_analiseint', 'character(10)');
+//         300: sComando:= ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('0.2') + ',' + QuotedStr('Principios de Gestão') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('0.3') + ',' + QuotedStr('Abordagem de processos') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.1.1') + ',' + QuotedStr('Organização e seu contexto') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.2') + ',' + QuotedStr('Necessidades e expectativas das partes interessadas') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.3') + ',' + QuotedStr('Determinação de escopo') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.4.1') + ',' + QuotedStr('Processos do SGQ') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('4.4.2') + ',' + QuotedStr('Extensão do SGQ') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.1.1') + ',' + QuotedStr('Liderança e comprometimento') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.1.2') + ',' + QuotedStr('Foco nos clientes') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.2.1') + ',' + QuotedStr('Desenvolvimento da política da qualidade') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.2.2') + ',' + QuotedStr('Comunicação da política da qualidade') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('5.3') + ',' + QuotedStr('Papéis, responsabilidades e autoridades') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.1') + ',' + QuotedStr('Abordagem de riscos e oportunidades') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.2') + ',' + QuotedStr('Objetivos da qualidade e planejamento') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('6.3') + ',' + QuotedStr('Planejamento de mudanças') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.1') + ',' + QuotedStr('Apoio - Recursos') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.2') + ',' + QuotedStr('Apoio - Pessoas') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.3') + ',' + QuotedStr('Apoio - Infraestrutura') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.4') + ',' + QuotedStr('Apoio - Ambiente para operações de processos') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.5.1') + ',' + QuotedStr('Recursos de monitoramento e medição') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.5.2') + ',' + QuotedStr('Rastreabilidade de medição') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.1.6') + ',' + QuotedStr('Conhecimento organizacional') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.2') + ',' + QuotedStr('Competência') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.3') + ',' + QuotedStr('Conscientização') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.4') + ',' + QuotedStr('Comunicação') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('7.5') + ',' + QuotedStr('Informação documentada') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.1') + ',' + QuotedStr('Planejamento e controle operacionais') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.1') + ',' + QuotedStr('Requisitos de produtos e serviços - Comunicação') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.2') + ',' + QuotedStr('Determinalção de requisitos de produtos e serviços') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.3') + ',' + QuotedStr('Análise crítica requisitos de produtos e serviços') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.2.4') + ',' + QuotedStr('Mudanças nos requisitos de produtos e serviços') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.3') + ',' + QuotedStr('Projeto e desenvolvimento') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.4') + ',' + QuotedStr('Controle de provedores externos') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.1') + ',' + QuotedStr('Controle produção e provisão de serviços') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.2') + ',' + QuotedStr('Identificação e rastreabilidade') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.3') + ',' + QuotedStr('Propriedade cliente ou provedores externos') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.4') + ',' + QuotedStr('Preservação') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.5') + ',' + QuotedStr('Atividades pós-entrega') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.5.6') + ',' + QuotedStr('Controle de mudanças') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.6') + ',' + QuotedStr('Liberação de produtos e serviços') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('8.7') + ',' + QuotedStr('Controle de saídas não conformes') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1') + ',' + QuotedStr('Monitoramento medição, análise e avaliação') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1.2') + ',' + QuotedStr('Satisfação do cliente') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.1.3.6') + ',' + QuotedStr('Análise e avaliação') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.2.6') + ',' + QuotedStr('Auditoria Interna') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('9.3') + ',' + QuotedStr('Análise crítica da direção') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.1') + ',' + QuotedStr('Melhorias') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.2') + ',' + QuotedStr('Não Conformidade e ação corretiva') + ');' +
+//                         ' INSERT INTO requisitos2015 VALUES (' + QuotedStr('10.3') + ',' + QuotedStr('Melhoria contínua') + ');';
+//         299: sComando:= ' CREATE TABLE requisitos2015(' +
+//                         ' req_codigo character(7) NOT NULL,' +
+//                         ' req_descricao character varying(70) NOT NULL,' +
+//                         ' CONSTRAINT requisitos2015_pkey PRIMARY KEY (req_codigo)' +
+//                         ')';
+//         298: sComando:= ' CREATE TABLE auditoria_interna_agenda2015(' +
+//                         ' aud_codigo integer NOT NULL,' +
+//                         ' aud_cod_auditoria integer NOT NULL,' +
+//                         ' aud_data date NOT NULL,' +
+//                         ' aud_horaini character varying(5),' +
+//                         ' aud_horafim character varying(5),' +
+//                         ' aud_auditores character varying(80),' +
+//                         ' aud_auditado integer,' +
+//                         ' aud_processo integer,' +
+//                         ' CONSTRAINT pk_auditoria_interna_agenda2015 PRIMARY KEY (aud_codigo)' +
+//                         ')';
+//         297: sComando:= ' CREATE TABLE auditoria_interna_rel_itens2015(' +
+//                         ' dtpr_aud timestamp without time zone NOT NULL,' +
+//                         ' proc_ite integer NOT NULL DEFAULT 0,' +
+//                         ' requ_ite character varying(60) NOT NULL,' +
+//                         ' cont_ite text,' +
+//                         ' tipo_ite integer,' +
+//                         ' ite_codigo integer NOT NULL DEFAULT 0,' +
+//                         ' CONSTRAINT auditoria_interna_rel_itens2015_pkey PRIMARY KEY (ite_codigo)' +
+//                         ' )';
+//         296: sComando:= ' CREATE TABLE auditoria_interna_rel2015(' +
+//                         ' dtpr_aud timestamp without time zone NOT NULL,' +
+//                         ' tama_aud character varying(100),' +
+//                         ' norm_aud character varying(100),' +
+//                         ' audi_aud character varying(100),' +
+//                         ' adtd_aud character varying(100),' +
+//                         ' hora_aud character varying(100),' +
+//                         ' data_aud character varying(100),' +
+//                         ' esco_aud text,' +
+//                         ' real_aud text,' +
+//                         ' resu_aud text,' +
+//                         ' repr_aud bigint,' +
+//                         ' CONSTRAINT auditoria_interna_rel2015_pkey PRIMARY KEY (dtpr_aud)' +
+//                         ' )';
+//         295: sComando:= ' CREATE TABLE auditoria_interna2015(' +
+//                         'aud_codigo integer NOT NULL,' +
+//                         'data_aud timestamp without time zone NOT NULL,' +
+//                         'proc_aud bigint NOT NULL DEFAULT 0,' +
+//                         'r02_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r03_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r411_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r42_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r43_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r441_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r442_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r511_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r512_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r521_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r522_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r53_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r61_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r62_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r63_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r711_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r712_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r713_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r714_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r7151_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r7152_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r716_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r72_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r73_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r74_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r75_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r81_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r821_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r822_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r823_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r824_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r83_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r84_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r851_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r852_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r853_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r854_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r855_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r856_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r86_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r87_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r91_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r912_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r913_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r92_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r93_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r101_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r102_aud smallint NOT NULL DEFAULT 0,' +
+//                         'r103_aud smallint NOT NULL DEFAULT 0,' +
+//                         ' CONSTRAINT auditoria_interna2015_pkey PRIMARY KEY (aud_codigo, data_aud, proc_aud)' +
+//                         ' )';
+//         294: GravarNovaFuncao(50, 'RELATÓRIO DE AUDITORIA ISO-9001:2015', 50);
+//         293: GravarNovaFuncao(49, 'PROGRAMA DE AUDITORIA ISO-9001:2015', 49);
+//         292: sComando:= ' UPDATE tabela_combos SET valo_com = ' +
+//                         QuotedStr('RELATÓRIO DE AUDITORIA ISO-9001:2008') +
+//                         ' WHERE tipo_com = 99 AND codi_com = 20';
+//         291: sComando:= ' UPDATE tabela_combos SET valo_com = ' +
+//                         QuotedStr('PROGRAMA DE AUDITORIA ISO-9001:2008') +
+//                         ' WHERE tipo_com = 99 AND codi_com = 19';
+//         290: CriarCampo('usu_qtd_proc', 'usuarios', 'integer', '14', 'I');
+//         289: sComando:= 'DELETE FROM tabela_combos WHERE tipo_com = 99 AND codi_com = 29';
+//         288: CriarCampo('risco_severo_ame', 'parametros', 'integer', '1', 'I');
+//         287: CriarCampo('risco_alto_ame', 'parametros', 'integer', '1', 'I');
+//         286: CriarCampo('risco_medio_ame', 'parametros', 'integer', '1', 'I');
+//         285: CriarCampo('risco_baixo_ame', 'parametros', 'integer', '1', 'I');
+//         284: CriarCampo('risco_severo_opo', 'parametros', 'integer', '1', 'I');
+//         283: CriarCampo('risco_alto_opo', 'parametros', 'integer', '1', 'I');
+//         282: CriarCampo('risco_medio_opo', 'parametros', 'integer', '1', 'I');
+//         281: CriarCampo('risco_baixo_opo', 'parametros', 'integer', '1', 'I');
+//         280: CriarCampo('risco_severo_pfr', 'parametros', 'integer', '1', 'I');
+//         279: CriarCampo('risco_alto_pfr', 'parametros', 'integer', '1', 'I');
+//         278: CriarCampo('risco_medio_pfr', 'parametros', 'integer', '1', 'I');
+//         277: CriarCampo('risco_baixo_pfr', 'parametros', 'integer', '1', 'I');
+//
+//         276: sComando:= ' ALTER TABLE parametros' +
+//                         ' RENAME risco_severo TO risco_severo_pfo;';
+//         275: sComando:= ' ALTER TABLE parametros' +
+//                         ' RENAME risco_alto TO risco_alto_pfo;';
+//         274: sComando:= ' ALTER TABLE parametros' +
+//                         ' RENAME risco_medio TO risco_medio_pfo;';
+//         273: sComando:= ' ALTER TABLE parametros' +
+//                         ' RENAME risco_baixo TO risco_baixo_pfo;';
+//         272: GravarTabelaCombos(27, 'ORIGEM PDCA', 7, 'ANÁLISE DE RISCOS', 7);
+//         271: GravarTabelaCombos(27, 'ORIGEM PDCA', 6, 'PMC', 6);
+//         270: sComando:= 'UPDATE parametros SET mostra_carta = ' + QuotedStr('S');
+         // Versão 2.09 Acima
 //         269: sComando:= ' ALTER TABLE pdca' +
 //                         ' ALTER COLUMN pdca_descricao TYPE character varying(150);';
 //         268: sComando:= ' ALTER TABLE risco_analiseint' +
@@ -1463,6 +1527,30 @@ begin
    Result:= True;
 end;
 
+procedure CopiarAvaliacaoForn();
+begin
+   with dm.cdsAux2 do begin
+      Active:= False;
+      CommandText:= ' SELECT forn_codigo, forn_validade, forn_avaliacao ' +
+                    ' FROM fornecedores' +
+                    ' WHERE forn_codigo < 999999';
+      Active:= True;
+      First;
+
+      while not Eof do begin
+         Executar('INSERT INTO forn_avaliacao ( ' +
+                 ' for_codigo, for_codfor, for_data_validade, for_avaliacao) ' +
+                 ' VALUES( ' +
+                 BuscarNovoCodigo('forn_avaliacao', 'for_codigo') + ',' +
+                 FieldByName('forn_codigo').AsString + ',' +
+                 ArrumaDataSQL(FieldByName('forn_validade').AsDateTime) + ',' +
+                 VirgulaParaPonto(FieldByName('forn_avaliacao').AsFloat, 2) +
+                 ')');
+         Next;
+      end;
+   end;
+end;
+
 procedure InserirCronograma();
 begin
    Executar(' INSERT INTO cronograma(cro_codigo, cro_requisito, cro_tela_destra, cro_atividade)' +
@@ -2120,25 +2208,38 @@ end;
 
 procedure CriarCampo(nomeCampo: string; nomeTabela: string; tipoCampo: string; valorPadrao: string = ''; tipoValorPadrao: string = '');
 begin
-   with dm.cdsAuxiliar do begin
+   // Verifica se o campo a criar já existe na tabela
+   with dm.cdsAux do begin
       Active:= False;
-      CommandText:= ' ALTER TABLE ' + nomeTabela +
-                    ' ADD COLUMN ' + nomeCampo + ' ' + tipoCampo;
-      Execute;
+      CommandText:= ' SELECT table_name AS tabela,' +
+                    '    column_name AS campo' +
+                    ' FROM information_schema.columns' +
+                    ' WHERE column_name = ' + QuotedStr(nomeCampo) +
+                    ' AND table_name = ' + QuotedStr(nomeTabela);
+      Active:= True;
    end;
 
-   if valorPadrao <> '' then begin
-      with dm.cdsAux2 do begin
+   if dm.cdsAux.RecordCount = 0 then begin
+      with dm.cdsAuxiliar do begin
          Active:= False;
-         if tipoValorPadrao = 'I' then begin
-            CommandText:= ' UPDATE ' + nomeTabela +
-                          ' SET ' + nomeCampo + ' = ' + valorPadrao;
-         end;
-         if tipoValorPadrao = 'S' then begin
-            CommandText:= ' UPDATE ' + nomeTabela +
-                          ' SET ' + nomeCampo + ' = ' + QuotedStr(valorPadrao);
-         end;
+         CommandText:= ' ALTER TABLE ' + nomeTabela +
+                       ' ADD COLUMN ' + nomeCampo + ' ' + tipoCampo;
          Execute;
+      end;
+
+      if valorPadrao <> '' then begin
+         with dm.cdsAux2 do begin
+            Active:= False;
+            if tipoValorPadrao = 'I' then begin
+               CommandText:= ' UPDATE ' + nomeTabela +
+                             ' SET ' + nomeCampo + ' = ' + valorPadrao;
+            end;
+            if tipoValorPadrao = 'S' then begin
+               CommandText:= ' UPDATE ' + nomeTabela +
+                             ' SET ' + nomeCampo + ' = ' + QuotedStr(valorPadrao);
+            end;
+            Execute;
+         end;
       end;
    end;
 end;

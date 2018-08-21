@@ -453,18 +453,7 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AnaliseContexto.fr3');
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_AnaliseContexto', frxReport1, tipoImp);
 end;
 
 end.

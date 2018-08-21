@@ -1,7 +1,7 @@
 object dmPendencias: TdmPendencias
   OldCreateOrder = False
-  Height = 443
-  Width = 674
+  Height = 444
+  Width = 720
   object zqryCalibracao: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
@@ -207,7 +207,7 @@ object dmPendencias: TdmPendencias
   object zqryPMCAcoes: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT P.nume_pmc, PA.desc_aco, '
+      'SELECT P.codi_pmc, P.nume_pmc, PA.desc_aco, '
       'C.nome_col as ResponsavelAcao, PA.aco_prazo, PA.vimp_aco'
       'FROM pmc P'
       'INNER JOIN pmc_acoes PA ON PA.codi_pmc = P.codi_pmc'
@@ -250,6 +250,10 @@ object dmPendencias: TdmPendencias
     object cdsPMCAcoesvimp_aco: TWideMemoField
       FieldName = 'vimp_aco'
       BlobType = ftWideMemo
+    end
+    object cdsPMCAcoescodi_pmc: TLargeintField
+      FieldName = 'codi_pmc'
+      Required = True
     end
   end
   object dsPMCAcoes: TDataSource
@@ -650,5 +654,59 @@ object dmPendencias: TdmPendencias
     DataSet = cdsPMCsemAcaoImediata
     Left = 160
     Top = 304
+  end
+  object zqryRNCSemResposta: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 272
+    Top = 360
+  end
+  object dspRNCSemResposta: TDataSetProvider
+    DataSet = zqryRNCSemResposta
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 312
+    Top = 360
+  end
+  object cdsRNCSemResposta: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspRNCSemResposta'
+    Left = 352
+    Top = 360
+  end
+  object dsRNCSemResposta: TDataSource
+    DataSet = cdsRNCSemResposta
+    Left = 392
+    Top = 360
+  end
+  object zqryRNCSemAceiteRecusa: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      '')
+    Params = <>
+    Left = 496
+    Top = 360
+  end
+  object dspRNCSemAceiteRecusa: TDataSetProvider
+    DataSet = zqryRNCSemAceiteRecusa
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 536
+    Top = 360
+  end
+  object cdsRNCSemAceiteRecusa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspRNCSemAceiteRecusa'
+    Left = 576
+    Top = 360
+  end
+  object dsRNCSemAceiteRecusa: TDataSource
+    DataSet = cdsRNCSemAceiteRecusa
+    Left = 616
+    Top = 360
   end
 end

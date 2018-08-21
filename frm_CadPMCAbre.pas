@@ -182,6 +182,24 @@ type
     lbl24: TLabel;
     cdsPMCpmc_custo: TFloatField;
     cdsImprimirpmc_custo: TFloatField;
+    lblProdutos: TLabel;
+    dblProduto: TDBLookupComboBox;
+    zqryProdutos: TZQuery;
+    dspProdutos: TDataSetProvider;
+    cdsProdutos: TClientDataSet;
+    cdsProdutospro_codigo: TIntegerField;
+    cdsProdutospro_descricao: TWideStringField;
+    dsProdutos: TDataSource;
+    cdsPMCpmc_produto: TIntegerField;
+    zqryMotivos: TZQuery;
+    dspMotivos: TDataSetProvider;
+    cdsMotivos: TClientDataSet;
+    dsMotivos: TDataSource;
+    cdsMotivoscodi_com: TLargeintField;
+    cdsMotivosvalo_com: TWideStringField;
+    lbl18: TLabel;
+    dblMotivos: TDBLookupComboBox;
+    cdsPMCpmc_motivo: TIntegerField;
 
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
@@ -222,6 +240,7 @@ type
     procedure PrepararEmail();
     procedure PreencherDadosRisco();
     procedure PreencherDadosIndicadores();
+    procedure PreencherDadosFechaPMC();
   private
     { Private declarations }
     cOperacao: Char;
@@ -239,12 +258,28 @@ implementation
 
 uses frm_Inicial, Funcoes, frm_Laaia, frm_CadPMCFecha,
   frm_dm, frm_CadRiscoVisualizacao, frm_CadRiscoAnaliseRisco,
-  frm_ValoresIndicador;
+  frm_ValoresIndicador, frm_CadEmail;
 
 {$R *.dfm}
 
 procedure TFormCadPMCAbre.AtualizarDados;
 begin
+   with cdsProdutos do begin
+      Active:= False;
+      CommandText:= ' SELECT pro_codigo, pro_descricao' +
+                    ' FROM produtos' +
+                    ' ORDER BY pro_descricao';
+      Active:= True;
+   end;
+
+   with cdsMotivos do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
+                    ' WHERE tipo_com = 37' +
+                    ' ORDER BY orde_com';
+      Active:= True;
+   end;
+
    with cdsTipo do begin
       Active:= False;
       CommandText:= ' SELECT codi_com, valo_com FROM tabela_combos' +
@@ -388,6 +423,9 @@ begin
 end;
 
 procedure TFormCadPMCAbre.btnGravarClick(Sender: TObject);
+var
+   i: Integer;
+   sTextoNC: string;
 begin
    if ValidarDados() then begin
       try
@@ -398,7 +436,7 @@ begin
                              ' codi_pmc, nume_pmc, data_pmc, emit_pmc, tipo_pmc, prcs_pmc, ' +
                              ' requ_pmc, orig_pmc, ncon_pmc, efic_pmc, proc_pmc, resp_pmc, ' +
                              ' pmc_cliente, pmc_fornecedor, pmc_arq_evidencia, pmc_cea, ' +
-                             ' pmc_custo, pmc_fase)' +
+                             ' pmc_custo, pmc_fase, pmc_produto, pmc_motivo)' +
                              ' VALUES(' +
                              sNovoCodigo + ',' +
                              QuotedStr(edtIdentificacao.Text) + ',' +
@@ -417,7 +455,9 @@ begin
                              QuotedStr(edtCaminho.Text) + ',' +
                              IntToStr(dblCEA.KeyValue) + ',' +
                              VirgulaParaPonto(edtCusto.Value, 2) + ',' +
-                             '1' + // Fase Ação de Contenção Imediata
+                             '1' + ',' + // Fase Ação de Contenção Imediata
+                             Nulo(dblProduto.KeyValue, 'I') + ',' +
+                             Nulo(dblMotivos.KeyValue, 'I') +
                              ')';
                Execute;
             end
@@ -437,7 +477,9 @@ begin
                              ' pmc_fornecedor = ' + Nulo(dblFornecedor.KeyValue, 'I') + ',' +
                              ' pmc_arq_evidencia = ' + QuotedStr(edtCaminho.Text) + ',' +
                              ' pmc_custo = ' + VirgulaParaPonto(edtCusto.Value, 2) + ',' +
-                             ' pmc_cea = ' + IntToStr(dblCEA.KeyValue) +
+                             ' pmc_cea = ' + IntToStr(dblCEA.KeyValue) + ',' +
+                             ' pmc_produto = ' + Nulo(dblProduto.KeyValue, 'I') + ',' +
+                             ' pmc_motivo = ' + Nulo(dblMotivos.KeyValue, 'I') +
                              ' WHERE codi_pmc = ' + cdsPMCcodi_pmc.Asstring;
                Execute;
             end;
@@ -450,8 +492,43 @@ begin
          Botoes(True);
          Application.MessageBox('Registro gravado com sucesso', 'Informação', MB_OK + MB_ICONINFORMATION);
 
+         // hamado TT656 - Monta o texto do e-mail para envio manual e para a lista de nomes em parâmetros
+         // Busca <Enter> na não conformidade para ajustar o envio de e-mail
+         for i:= 1 to Length(mmoNaoConformidade.Text) do begin
+            sTextoNC:= sTextoNC + mmoNaoConformidade.Text[i];
+
+            if mmoNaoConformidade.Text[i] = #13 then begin
+               sTextoNC:= sTextoNC + '<br>'
+            end;
+         end;
+
+         sTextoEmail:= 'Foi aberto um PMC com as informações abaixo: <br><br>' +
+                       '<b>PMC:</b> ' + edtIdentificacao.Text + '<br>' +
+                       '<b>Data PMC:</b> ' + dtData.Text + '<br>' +
+                       '<b>Não Conformidade:</b> ' + sTextoNC + //mmoNaoConformidade.Text +
+                       '<br><br>'+
+                       'Acesse o sistema Destra Manager para maiores detalhes.';
+
          if Application.MessageBox('Deseja enviar um e-mail ao responsável avisando do PMC ?', 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
             PrepararEmail();
+         end;
+
+         //Chamado TT656 - Enviar e-mails de PMC para lista de e-mails definida nos parâmetros
+         with dm.cdsAux3 do begin
+            Active:= False;
+            CommandText:= ' SELECT par_codigo, par_tipo, par_colaborador, ' +
+                          ' C.nome_col, C.col_email' +
+                          ' FROM parametros_email_aviso' +
+                          ' INNER JOIN colaboradores C ON C.codi_col = par_colaborador' +
+                          ' WHERE par_tipo = ' + QuotedStr('P');
+            Active:= True;
+            First;
+
+            // Chamado TT675 - Enviar e-mails sem pedir confirmação para a lista de e-mails definida nos parâmetros
+            while not Eof do begin
+               EnviarEmail(sTextoEmail, 'Novo PMC', FieldByName('col_email').AsString, 'sistema', 'N');
+               Next;
+            end;
          end;
 
          if not (FormLaaia = nil) then begin
@@ -597,20 +674,6 @@ end;
 procedure TFormCadPMCAbre.sbVisualizarClick(Sender: TObject);
 begin
    AbrirArquivo(edtCaminho.Text, Self.Name);
-//   try
-//      if not (UpperCase(Copy(edtCaminho.Text, 1, 4)) = 'HTTP') then begin
-//         if not FileExists(edtCaminho.Text) then begin
-//            Application.MessageBox('O documento não foi encontrado na pasta especificada', 'Aviso', MB_OK + MB_ICONWARNING);
-//            Exit;
-//         end;
-//      end;
-//
-//      ShellExecute(Application.Handle, nil, PChar(edtCaminho.Text), nil, nil, SW_SHOWMAXIMIZED);
-//   except
-//      on E: Exception do begin
-//         Application.MessageBox(PChar('Não foi possível abrir o arquivo.' + #13 + E.Message),'Erro',MB_OK+MB_ICONERROR);
-//      end;
-//   end;
 end;
 
 procedure TFormCadPMCAbre.BuscarNovoCodigo;
@@ -724,6 +787,30 @@ begin
       btnNovoClick(Self);
       PreencherDadosIndicadores();
    end;
+
+   if iTela = 4 then begin // PMC Não Eficaz (Fechamento de PMC)
+      btnNovoClick(Self);
+      PreencherDadosFechaPMC();
+   end;
+end;
+
+procedure TFormCadPMCAbre.PreencherDadosFechaPMC;
+begin
+   dblEmitido.KeyValue    := FormCadPMCFecha.dblEmitido.KeyValue;
+   dblTipo.KeyValue       := FormCadPMCFecha.dblTipo.KeyValue;
+   dblProcesso.KeyValue   := FormCadPMCFecha.dblProcesso.KeyValue;
+   edtReqNorma.Text       := FormCadPMCFecha.edtReqNorma.Text;
+   dblOrigem.KeyValue     := FormCadPMCFecha.dblOrigem.KeyValue;
+   dblCliente.KeyValue    := FormCadPMCFecha.dblClientes.KeyValue;
+   dblFornecedor.KeyValue := FormCadPMCFecha.dblForn.KeyValue;
+   dblProduto.KeyValue    := FormCadPMCFecha.dblProduto.KeyValue;
+   dblMotivos.KeyValue    := FormCadPMCFecha.dblMotivo.KeyValue;
+   dblProcede.KeyValue    := FormCadPMCFecha.dblProcede.KeyValue;
+   dblResponsavel.KeyValue:= FormCadPMCFecha.dblResponsavel.KeyValue;
+   edtCusto.Value         := FormCadPMCFecha.edtCusto.Value;
+   edtCaminho.Text        := FormCadPMCFecha.edtCaminho.Text;
+   mmoNaoConformidade.Text:= FormCadPMCFecha.mmoNaoConformidade.Text;
+
 end;
 
 procedure TFormCadPMCAbre.PreencherDadosIndicadores;
@@ -770,6 +857,8 @@ begin
    dblResponsavel.KeyValue:= -1;
    dblCliente.KeyValue:= -1;
    dblFornecedor.KeyValue:= -1;
+   dblProduto.KeyValue:= -1;
+   dblMotivos.KeyValue:= -1;
    edtCaminho.Clear;
    edtCusto.Clear;
 end;
@@ -795,9 +884,13 @@ begin
       edtCaminho.Text        := FieldByName('pmc_arq_evidencia').AsString;
       edtCusto.Value         := FieldByName('pmc_custo').AsFloat;
 
+      // Campos não obrigatórios
       dblCliente.KeyValue    := FieldByName('pmc_cliente').AsInteger;
       dblFornecedor.KeyValue := FieldByName('pmc_fornecedor').AsString;
+      dblProduto.KeyValue    := FieldByName('pmc_produto').AsString;
+      dblMotivos.KeyValue    := FieldByName('pmc_motivo').AsString;
 
+      // Campos obrigatórios
       if FieldByName('emit_pmc').AsString <> EmptyStr then begin
          dblEmitido.KeyValue:= FieldByName('emit_pmc').AsString;
       end;
@@ -829,6 +922,13 @@ begin
       if FieldByName('pmc_cea').AsString <> EmptyStr then begin
          dblCEA.KeyValue:= FieldByName('pmc_cea').AsString;
       end;
+
+//      if FieldByName('pmc_produto').AsString <> EmptyStr then begin
+//         dblProduto.KeyValue:= FieldByName('pmc_produto').AsString;
+//      end
+//      else begin
+//         dblProduto.KeyValue:= -1;
+//      end;
    end;
 
    sCodigo:= cdsPMC.FieldByName('codi_pmc').AsString;
@@ -840,41 +940,75 @@ procedure TFormCadPMCAbre.PrepararEmail;
 var
    i: Integer;
    sTextoNC: string;
+   sPara: string;
+   sNomeGestor: string;
 begin
    if VerificarConexaoInternet(True) then begin
-      // Busca <Enter> na não conformidade para ajustar o envio de e-mail
-      for i:= 1 to Length(mmoNaoConformidade.Text) do begin
-         sTextoNC:= sTextoNC + mmoNaoConformidade.Text[i];
-
-         if mmoNaoConformidade.Text[i] = #13 then begin
-            sTextoNC:= sTextoNC + '<br>'
-         end;
-      end;
-
-      // Verifica se existem as configurações de e-mail cadastradas.
-//      if VerificarConfigEmail() then begin
-         sTextoEmail:= 'Foi aberto um PMC com as informações abaixo: <br><br>' +
-                  '<b>PMC:</b> ' + edtIdentificacao.Text + '<br>' +
-                  '<b>Data PMC:</b> ' + dtData.Text + '<br>' +
-                  '<b>Não Conformidade:</b> ' + sTextoNC + //mmoNaoConformidade.Text +
-                  '<br><br>'+
-                  'Acesse o sistema Destra Manager para maiores detalhes.';
-
-         if AllTrim(cdsResponsavelcol_email.AsString) = EmptyStr then begin
-            if Application.MessageBox(PChar('O colaborador ' + dblResponsavel.Text + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
-               edtEmail.Enabled:= True;
-               pnlEmail.Top     := Self.Height div 2 - pnlEmail.Height div 2 - 20;
-               pnlEmail.Left    := Self.Width div 2 - pnlEmail.Width div 2;
-               pnlEmail.Visible := True;
-
-               lblNomeCol.Caption:= dblResponsavel.Text;
-               TryFocus(edtEmail);
-            end;
-         end
-         else begin
-            EnviarEmail(sTextoEmail, 'Novo PMC', cdsResponsavelcol_email.AsString, 'sistema');
-         end;
+//      // Busca <Enter> na não conformidade para ajustar o envio de e-mail
+//      for i:= 1 to Length(mmoNaoConformidade.Text) do begin
+//         sTextoNC:= sTextoNC + mmoNaoConformidade.Text[i];
+//
+//         if mmoNaoConformidade.Text[i] = #13 then begin
+//            sTextoNC:= sTextoNC + '<br>'
+//         end;
 //      end;
+//
+//      sTextoEmail:= 'Foi aberto um PMC com as informações abaixo: <br><br>' +
+//               '<b>PMC:</b> ' + edtIdentificacao.Text + '<br>' +
+//               '<b>Data PMC:</b> ' + dtData.Text + '<br>' +
+//               '<b>Não Conformidade:</b> ' + sTextoNC + //mmoNaoConformidade.Text +
+//               '<br><br>'+
+//               'Acesse o sistema Destra Manager para maiores detalhes.';
+
+      if AllTrim(cdsResponsavelcol_email.AsString) = EmptyStr then begin
+         if Application.MessageBox(PChar('O colaborador ' + dblResponsavel.Text + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
+            edtEmail.Enabled:= True;
+            AbrePanel(pnlEmail, Self);
+
+            lblNomeCol.Caption:= dblResponsavel.Text;
+            TryFocus(edtEmail);
+         end;
+      end
+      else begin
+         // Chamado TT657 - BBosch
+         if BuscarParametroEnvioGestor() = '1' then begin
+            if BuscarEmail(BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod')) = '' then begin
+               sNomeGestor:= BuscarGestorProcesso(dblProcesso.KeyValue);
+
+               if Application.MessageBox(PChar('O Gestor ' + sNomeGestor + ' não tem e-mail cadastrado no Cadastro de Colaboradores.' + #13#10 + 'Deseja cadastrar o e-mail antes de enviar ?'), 'Aviso', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
+                  FormCadEmail:= TFormCadEmail.Create(nil);
+                  FormCadEmail.lblNomeCol.Caption:= sNomeGestor;
+                  FormCadEmail.sCodColab:= BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod');
+                  FormCadEmail.ShowModal;
+                  FormCadEmail.Release;
+
+                  Exit;
+               end;
+            end
+            else begin
+               EnviarEmail(sTextoEmail, 'Novo PMC', BuscarEmail(BuscarGestorProcesso(dblProcesso.KeyValue, 'Cod')), 'sistema');
+            end;
+         end;
+
+//            //Chamado TT656 - Enviar e-mails de PMC para lista de e-mails definida nos parâmetros
+//            with dm.cdsAux3 do begin
+//               Active:= False;
+//               CommandText:= ' SELECT par_codigo, par_tipo, par_colaborador, ' +
+//                             ' C.nome_col, C.col_email' +
+//                             ' FROM parametros_email_aviso' +
+//                             ' INNER JOIN colaboradores C ON C.codi_col = par_colaborador' +
+//                             ' WHERE par_tipo = ' + QuotedStr('P');
+//               Active:= True;
+//               First;
+//
+//               while not Eof do begin
+//                  EnviarEmail(sTextoEmail, 'Novo PMC', FieldByName('col_email').AsString, 'sistema', 'N');
+//                  Next;
+//               end;
+//            end;
+
+         EnviarEmail(sTextoEmail, 'Novo PMC', cdsResponsavelcol_email.AsString, 'sistema');
+      end;
    end;
 end;
 
@@ -1028,20 +1162,7 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_ListaPMCAbertura.fr3');
-
-      if tipoImp = 'I' then begin
-      // Imprimir direto
-         PrepareReport;
-//            PrintOptions.Printer:= 'CutePDF Writer';
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_ListaPMCAbertura', frxReport1, tipoImp);
 end;
 
 end.

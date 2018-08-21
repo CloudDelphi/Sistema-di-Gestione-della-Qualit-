@@ -63,7 +63,7 @@ object FormCadFuncoes: TFormCadFuncoes
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
       object lbl17: TLabel
-        Left = 336
+        Left = 335
         Top = 103
         Width = 33
         Height = 13
@@ -112,7 +112,7 @@ object FormCadFuncoes: TFormCadFuncoes
         Caption = 'C'#243'digo'
       end
       object lbl15: TLabel
-        Left = 336
+        Left = 492
         Top = 58
         Width = 135
         Height = 13
@@ -126,14 +126,14 @@ object FormCadFuncoes: TFormCadFuncoes
         Caption = 'Experi'#234'ncia Desejada'
       end
       object lbl18: TLabel
-        Left = 441
+        Left = 440
         Top = 104
         Width = 66
         Height = 13
         Caption = 'Organograma'
       end
       object sbArquivo: TSpeedButton
-        Left = 700
+        Left = 699
         Top = 114
         Width = 32
         Height = 31
@@ -255,7 +255,7 @@ object FormCadFuncoes: TFormCadFuncoes
         OnClick = sbArquivoClick
       end
       object sbVisualizar: TSpeedButton
-        Left = 735
+        Left = 734
         Top = 114
         Width = 32
         Height = 31
@@ -377,10 +377,17 @@ object FormCadFuncoes: TFormCadFuncoes
         ShowHint = True
         OnClick = sbVisualizarClick
       end
+      object lbl19: TLabel
+        Left = 284
+        Top = 58
+        Width = 87
+        Height = 13
+        Caption = #193'rea de Educa'#231#227'o'
+      end
       object dblEducacao: TDBLookupComboBox
         Left = 7
         Top = 74
-        Width = 325
+        Width = 275
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -420,7 +427,7 @@ object FormCadFuncoes: TFormCadFuncoes
         Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 7
+        TabOrder = 8
         OnExit = mmoResponsabilidadesExit
         OnKeyPress = mmoResponsabilidadesKeyPress
       end
@@ -438,7 +445,7 @@ object FormCadFuncoes: TFormCadFuncoes
         ListField = 'valo_com'
         ListSource = dsExperiencia
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         OnCloseUp = dblExperienciaCloseUp
       end
       object edtCodigo: TEdit
@@ -456,9 +463,9 @@ object FormCadFuncoes: TFormCadFuncoes
         TabOrder = 0
       end
       object dblEducDesejada: TDBLookupComboBox
-        Left = 336
+        Left = 492
         Top = 74
-        Width = 325
+        Width = 275
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -469,7 +476,7 @@ object FormCadFuncoes: TFormCadFuncoes
         ListField = 'valo_com'
         ListSource = dsEducDesejada
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object dblExpDesejada: TDBLookupComboBox
         Left = 171
@@ -485,10 +492,10 @@ object FormCadFuncoes: TFormCadFuncoes
         ListField = 'valo_com'
         ListSource = dsExpDesejada
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
       end
       object edtCBO: TEdit
-        Left = 336
+        Left = 335
         Top = 119
         Width = 99
         Height = 26
@@ -499,10 +506,10 @@ object FormCadFuncoes: TFormCadFuncoes
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object edtOrganograma: TEdit
-        Left = 441
+        Left = 440
         Top = 119
         Width = 255
         Height = 26
@@ -513,7 +520,25 @@ object FormCadFuncoes: TFormCadFuncoes
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
+      end
+      object edtArea: TEdit
+        Left = 284
+        Top = 74
+        Width = 204
+        Height = 26
+        Hint = 'Digite a '#225'rea de educa'#231#227'o (Ex: Direito, Log'#237'stica, etc)'
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 22
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 3
       end
     end
     object tsTreinamentos: TTabSheet
@@ -2938,8 +2963,8 @@ object FormCadFuncoes: TFormCadFuncoes
     end
   end
   object pnlImprimir: TPanel
-    Left = 132
-    Top = 190
+    Left = 391
+    Top = 171
     Width = 385
     Height = 351
     TabOrder = 2
@@ -3521,7 +3546,9 @@ object FormCadFuncoes: TFormCadFuncoes
       
         'SELECT F.codi_fun, F.desc_fun, F.educ_fun, F.expe_fun, F.resp_fu' +
         'n, '
-      'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia'
+      
+        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
+        'un_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -3541,7 +3568,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 48
   end
   object cdsImprimir: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -3573,6 +3599,10 @@ object FormCadFuncoes: TFormCadFuncoes
       FieldName = 'DescExperiencia'
       Size = 50
     end
+    object cdsImprimirfun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
+    end
   end
   object zqryFuncoes: TZQuery
     Connection = dm.Conexao
@@ -3582,7 +3612,8 @@ object FormCadFuncoes: TFormCadFuncoes
         'n, T1.valo_com as DescEducacao, '
       
         'T2.valo_com as DescExperiencia, F.fun_edudesejada, F.fun_expdese' +
-        'jada, F.fun_cbo, F.fun_organograma'
+        'jada, F.fun_cbo, F.fun_organograma,'
+      'F.fun_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -3649,6 +3680,10 @@ object FormCadFuncoes: TFormCadFuncoes
       ReadOnly = True
       BlobType = ftWideMemo
     end
+    object cdsFuncoesfun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
+    end
   end
   object dsFuncoes: TDataSource
     DataSet = cdsFuncoes
@@ -3664,10 +3699,37 @@ object FormCadFuncoes: TFormCadFuncoes
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42928.620069918980000000
+    ReportOptions.LastChange = 43305.442150590280000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -3675,12 +3737,8 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 96
     Datasets = <
       item
-        DataSet = frxDBFuncoesHabTre
-        DataSetName = 'frxDBFuncoesHabTre'
-      end
-      item
-        DataSet = frxDBFuncoesHabTreHab
-        DataSetName = 'frxDBFuncoesHabTreHab'
+        DataSet = frxDBDSFuncoes
+        DataSetName = 'frxDBDSFuncoes'
       end>
     Variables = <
       item
@@ -3692,7 +3750,19 @@ object FormCadFuncoes: TFormCadFuncoes
         Value = Null
       end
       item
-        Name = 'Titulo'
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
         Value = Null
       end>
     Style = <>
@@ -3708,20 +3778,23 @@ object FormCadFuncoes: TFormCadFuncoes
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
-      object DetalheTre: TfrxMasterData
+      object Detalhe: TfrxMasterData
         Height = 18.897650000000000000
-        Top = 495.118430000000000000
+        Top = 192.756030000000000000
         Width = 718.110700000000000000
-        DataSet = frxDBFuncoesHabTre
-        DataSetName = 'frxDBFuncoesHabTre'
+        DataSet = frxDBDSFuncoes
+        DataSetName = 'frxDBDSFuncoes'
         RowCount = 0
-        object Memo8: TfrxMemoView
-          Width = 718.110236220000000000
+        Stretched = True
+        object frxControleDATA: TfrxMemoView
+          Left = 49.133858270000000000
+          Width = 290.267716540000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'desc_tre'
-          DataSet = frxDBFuncoesHabTre
-          DataSetName = 'frxDBFuncoesHabTre'
+          StretchMode = smMaxHeight
+          DataField = 'desc_fun'
+          DataSet = frxDBDSFuncoes
+          DataSetName = 'frxDBDSFuncoes'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -3729,14 +3802,97 @@ object FormCadFuncoes: TFormCadFuncoes
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."desc_tre"]')
+            '[frxDBDSFuncoes."desc_fun"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo10: TfrxMemoView
+          Left = 339.125984250000000000
+          Width = 158.740201420000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'DescEducacao'
+          DataSet = frxDBDSFuncoes
+          DataSetName = 'frxDBDSFuncoes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSFuncoes."DescEducacao"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo2: TfrxMemoView
+          Left = 611.834645670000000000
+          Width = 102.047114720000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'DescExperiencia'
+          DataSet = frxDBDSFuncoes
+          DataSetName = 'frxDBDSFuncoes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSFuncoes."DescExperiencia"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo5: TfrxMemoView
+          Width = 48.755732200000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'codi_fun'
+          DataSet = frxDBDSFuncoes
+          DataSetName = 'frxDBDSFuncoes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSFuncoes."codi_fun"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo8: TfrxMemoView
+          Left = 497.897960000000000000
+          Width = 114.141732283465000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'fun_area'
+          DataSet = frxDBDSFuncoes
+          DataSetName = 'frxDBDSFuncoes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSFuncoes."fun_area"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
       object Rodape: TfrxPageFooter
         Height = 52.913420000000000000
-        Top = 657.638220000000000000
+        Top = 272.126160000000000000
         Width = 718.110700000000000000
         object Picture2: TfrxPictureView
           Left = 967.559680000000000000
@@ -4032,8 +4188,8 @@ object FormCadFuncoes: TFormCadFuncoes
           TransparentColor = clWhite
         end
         object Picture1: TfrxPictureView
-          Left = 668.976810000000000000
-          Top = 15.118119999999980000
+          Left = 676.535870000000000000
+          Top = 11.338590000000010000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4467,7 +4623,8 @@ object FormCadFuncoes: TFormCadFuncoes
           TransparentColor = clWhite
         end
         object Memo11: TfrxMemoView
-          Top = 35.236240000000060000
+          Left = 3.779530000000000000
+          Top = 30.236240000000010000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -4481,18 +4638,36 @@ object FormCadFuncoes: TFormCadFuncoes
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 31.456710000000040000
-          Width = 653.858690000000000000
+          Left = 3.779530000000000000
+          Top = 26.456709999999990000
+          Width = 661.417750000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999988000
+          Width = 661.417310630000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
-        Height = 64.252010000000000000
+        Height = 113.307062200000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         object Memo4: TfrxMemoView
-          Top = 12.488250000000000000
+          Left = 3.779530000000000000
+          Top = 23.456710000000000000
           Width = 718.110700000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4506,96 +4681,13 @@ object FormCadFuncoes: TFormCadFuncoes
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'RELAT'#211'RIO DE DESCRI'#199#195'O DE FUN'#199#195'O')
+            'LISTAGEM DE FUN'#199#213'ES')
           ParentFont = False
-        end
-      end
-      object GroupHeader1: TfrxGroupHeader
-        Height = 328.819110000000000000
-        Top = 143.622140000000000000
-        Width = 718.110700000000000000
-        Condition = '<frxDBFuncoesHabTre."desc_fun">'
-        object frxControleDATA: TfrxMemoView
-          Left = 49.133858270000000000
-          Top = 34.000000000000000000
-          Width = 336.000012200000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."desc_fun"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo10: TfrxMemoView
-          Left = 385.125984250000000000
-          Top = 34.000000000000000000
-          Width = 226.771741420000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."DescEducacao"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo2: TfrxMemoView
-          Left = 611.834645670000000000
-          Top = 34.000000000000000000
-          Width = 106.582677170000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."DescExperiencia"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo5: TfrxMemoView
-          Top = 34.000000000000000000
-          Width = 48.755732200000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."codi_fun"]')
-          ParentFont = False
-          VAlign = vaCenter
         end
         object Memo6: TfrxMemoView
-          Left = 49.000000000000000000
-          Width = 336.000158660000000000
+          Left = 48.779530000000000000
+          Top = 79.102350000000000000
+          Width = 290.645798660000000000
           Height = 34.015770000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -4612,8 +4704,9 @@ object FormCadFuncoes: TFormCadFuncoes
           VAlign = vaCenter
         end
         object Memo9: TfrxMemoView
-          Left = 385.260050000000000000
-          Width = 226.771800000000000000
+          Left = 339.039580000000000000
+          Top = 79.291292200000000000
+          Width = 158.740260000000000000
           Height = 34.015770000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -4630,8 +4723,9 @@ object FormCadFuncoes: TFormCadFuncoes
           VAlign = vaCenter
         end
         object Memo1: TfrxMemoView
-          Left = 611.866420000000000000
-          Width = 106.582677165354000000
+          Left = 612.645950000000000000
+          Top = 79.236240000000000000
+          Width = 102.047114720000000000
           Height = 34.015770000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -4648,6 +4742,7 @@ object FormCadFuncoes: TFormCadFuncoes
           VAlign = vaCenter
         end
         object Memo3: TfrxMemoView
+          Top = 79.251922130000000000
           Width = 48.755878660000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4665,11 +4760,11 @@ object FormCadFuncoes: TFormCadFuncoes
           VAlign = vaCenter
         end
         object Memo7: TfrxMemoView
-          Top = 52.913420000000000000
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
+          Left = 498.118430000000000000
+          Top = 79.370130000000000000
+          Width = 114.141732283465000000
+          Height = 33.637795280000000000
           ShowHint = False
-          Color = clScrollBar
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4679,94 +4774,24 @@ object FormCadFuncoes: TFormCadFuncoes
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Responsabilidades e Autoridades')
+            #193'rea')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo14: TfrxMemoView
-          Top = 309.921460000000000000
-          Width = 718.110236220000000000
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 661.417310630000000000
           Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
           ShowHint = False
-          Color = clScrollBar
-          DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -12
+          Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8W = (
-            'Treinamentos Exigidos')
+            '[TextoConf]')
           ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo15: TfrxMemoView
-          Top = 71.811070000000000000
-          Width = 718.110236220000000000
-          Height = 238.110292360000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTreHab."resp_fun"]')
-          ParentFont = False
-        end
-      end
-      object DetalheHab: TfrxMasterData
-        Height = 18.897650000000000000
-        Top = 578.268090000000000000
-        Width = 718.110700000000000000
-        DataSet = frxDBFuncoesHabTreHab
-        DataSetName = 'frxDBFuncoesHabTreHab'
-        RowCount = 0
-        object Memo12: TfrxMemoView
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'desc_hab'
-          DataSet = frxDBFuncoesHabTreHab
-          DataSetName = 'frxDBFuncoesHabTreHab'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTreHab."desc_hab"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-      end
-      object GroupFooter1: TfrxGroupFooter
-        Height = 18.897650000000000000
-        Top = 536.693260000000000000
-        Width = 718.110700000000000000
-        object Memo13: TfrxMemoView
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clScrollBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Habilidades Exigidas')
-          ParentFont = False
-          VAlign = vaCenter
         end
       end
     end
@@ -4781,7 +4806,8 @@ object FormCadFuncoes: TFormCadFuncoes
       'expe_fun=expe_fun'
       'resp_fun=resp_fun'
       'DescEducacao=DescEducacao'
-      'DescExperiencia=DescExperiencia')
+      'DescExperiencia=DescExperiencia'
+      'fun_area=fun_area')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 400
@@ -4995,7 +5021,8 @@ object FormCadFuncoes: TFormCadFuncoes
       'DescEducacao=DescEducacao'
       'DescExperiencia=DescExperiencia'
       'codi_hab=codi_hab'
-      'desc_hab=desc_hab')
+      'desc_hab=desc_hab'
+      'fun_area=fun_area')
     DataSet = cdsImprimirHab
     BCDToCurrency = False
     Left = 400
@@ -5007,7 +5034,9 @@ object FormCadFuncoes: TFormCadFuncoes
       
         'SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_f' +
         'un, F.expe_fun, F.resp_fun,'
-      'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia'
+      
+        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
+        'un_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -5068,6 +5097,10 @@ object FormCadFuncoes: TFormCadFuncoes
       FieldName = 'desc_hab'
       Size = 50
     end
+    object cdsImprimirHabfun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
+    end
   end
   object frxDBDSFuncoesTre: TfrxDBDataset
     UserName = 'frxDBDSFuncoesTre'
@@ -5081,7 +5114,8 @@ object FormCadFuncoes: TFormCadFuncoes
       'desc_fun=desc_fun'
       'educ_fun=educ_fun'
       'expe_fun=expe_fun'
-      'resp_fun=resp_fun')
+      'resp_fun=resp_fun'
+      'fun_area=fun_area')
     DataSet = cdsImprimirTre
     BCDToCurrency = False
     Left = 400
@@ -5093,7 +5127,9 @@ object FormCadFuncoes: TFormCadFuncoes
       
         'SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_f' +
         'un, F.expe_fun, F.resp_fun,'
-      'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia'
+      
+        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
+        'un_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -5154,6 +5190,10 @@ object FormCadFuncoes: TFormCadFuncoes
     object cdsImprimirTreresp_fun: TMemoField
       FieldName = 'resp_fun'
       BlobType = ftMemo
+    end
+    object cdsImprimirTrefun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
     end
   end
   object zqryEducDesejada: TZQuery
@@ -5268,7 +5308,9 @@ object FormCadFuncoes: TFormCadFuncoes
       
         'SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_f' +
         'un, F.expe_fun, F.resp_fun,'
-      'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia'
+      
+        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
+        'un_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -5290,7 +5332,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 184
   end
   object cdsImprimirHabTre: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimirHabTre'
@@ -5331,6 +5372,10 @@ object FormCadFuncoes: TFormCadFuncoes
       FieldName = 'resp_fun'
       BlobType = ftMemo
     end
+    object cdsImprimirHabTrefun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
+    end
   end
   object frxDBFuncoesHabTre: TfrxDBDataset
     UserName = 'frxDBFuncoesHabTre'
@@ -5344,7 +5389,8 @@ object FormCadFuncoes: TFormCadFuncoes
       'desc_fun=desc_fun'
       'educ_fun=educ_fun'
       'expe_fun=expe_fun'
-      'resp_fun=resp_fun')
+      'resp_fun=resp_fun'
+      'fun_area=fun_area')
     DataSet = cdsImprimirHabTre
     BCDToCurrency = False
     Left = 400
@@ -5356,7 +5402,9 @@ object FormCadFuncoes: TFormCadFuncoes
       
         'SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_f' +
         'un, F.expe_fun, F.resp_fun,'
-      'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia'
+      
+        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
+        'un_area'
       'FROM funcoes F'
       
         'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
@@ -5379,7 +5427,6 @@ object FormCadFuncoes: TFormCadFuncoes
     Top = 232
   end
   object cdsImprimirHabTreHab: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimirHabTreHab'
@@ -5421,6 +5468,10 @@ object FormCadFuncoes: TFormCadFuncoes
       ReadOnly = True
       Size = 50
     end
+    object cdsImprimirHabTreHabfun_area: TWideStringField
+      FieldName = 'fun_area'
+      Size = 22
+    end
   end
   object frxDBFuncoesHabTreHab: TfrxDBDataset
     UserName = 'frxDBFuncoesHabTreHab'
@@ -5434,7 +5485,8 @@ object FormCadFuncoes: TFormCadFuncoes
       'expe_fun=expe_fun'
       'resp_fun=resp_fun'
       'desceducacao=DescEducacao'
-      'descexperiencia=DescExperiencia')
+      'descexperiencia=DescExperiencia'
+      'fun_area=fun_area')
     DataSet = cdsImprimirHabTreHab
     BCDToCurrency = False
     Left = 400

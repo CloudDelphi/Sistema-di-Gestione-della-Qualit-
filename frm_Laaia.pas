@@ -497,7 +497,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, 'L.A.A.I.A.');
+      ExpExcel(dbgExcel, cdsExcel, 'L.A.A.I.A.', Self);
    end;
 end;
 

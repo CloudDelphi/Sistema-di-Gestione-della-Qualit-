@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, frxClass, frxDBSet, DB, DBClient, Provider, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, Grids, DBGrids, StdCtrls, ComCtrls, JvgPage,
-  Buttons, ExtCtrls;
+  Buttons, ExtCtrls, DBCtrls;
 
 type
   TFormCadMotivoRNC = class(TForm)
@@ -51,11 +51,6 @@ type
     btnImpressora: TBitBtn;
     pnl3: TPanel;
     rgOrdemImpressao: TRadioGroup;
-    pnlNavegacao: TPanel;
-    btnPrimeiro: TBitBtn;
-    btnUltimo: TBitBtn;
-    btnProximo: TBitBtn;
-    btnAnterior: TBitBtn;
     frxReport1: TfrxReport;
     cdsMotivotipo_com: TLargeintField;
     cdsMotivodesc_com: TWideStringField;
@@ -67,6 +62,28 @@ type
     cdsImprimircodi_com: TLargeintField;
     cdsImprimirvalo_com: TWideStringField;
     cdsImprimirorde_com: TLargeintField;
+    lbl18: TLabel;
+    dblProcessos: TDBLookupComboBox;
+    dbgProcessos: TDBGrid;
+    btnInserirProcesso: TBitBtn;
+    btnExcluirProcesso: TBitBtn;
+    btnInserirTodos: TBitBtn;
+    zqryProcessos: TZQuery;
+    dspProcessos: TDataSetProvider;
+    cdsProcessos: TClientDataSet;
+    dsProcessos: TDataSource;
+    zqryProcMot: TZQuery;
+    dspProcMot: TDataSetProvider;
+    cdsProcMot: TClientDataSet;
+    dsProcMot: TDataSource;
+    cdsProcMotmot_motivo: TIntegerField;
+    cdsProcMotmot_processo: TIntegerField;
+    cdsProcMotnomeprocesso: TWideStringField;
+    pnlNavegacao: TPanel;
+    btnPrimeiro: TBitBtn;
+    btnUltimo: TBitBtn;
+    btnProximo: TBitBtn;
+    btnAnterior: TBitBtn;
     procedure btnSairClick(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure LimparCampos;
@@ -75,6 +92,7 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure AtualizarDados;
+    procedure AtualizarDadosAcessorios;
     procedure PreencherCampos;
     procedure btnGravarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -95,6 +113,9 @@ type
     procedure edtValorChange(Sender: TObject);
     procedure pctTreinamentosChange(Sender: TObject);
     procedure HabilitarCampos(Flag: Boolean; Codigo: Boolean);
+    procedure btnInserirProcessoClick(Sender: TObject);
+    procedure btnExcluirProcessoClick(Sender: TObject);
+    procedure btnInserirTodosClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -113,11 +134,33 @@ uses Funcoes, frm_Inicial, frm_dm, AtualizaBanco;
 
 procedure TFormCadMotivoRNC.AtualizarDados;
 begin
+   with cdsProcessos do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro, nome_pro ' +
+                    ' FROM processos' +
+                    ' WHERE pro_exibelista = ' + QuotedStr('S') +
+                    ' ORDER BY nome_pro';
+      Active:= True;
+   end;
+
    cdsMotivo.Active:= False;
    cdsMotivo.Active:= True;
 
    if AllTrim(edtCodigo.Text) <> EmptyStr then begin
       cdsMotivo.Locate('codi_com', edtCodigo.Text,[])
+   end;
+end;
+
+procedure TFormCadMotivoRNC.AtualizarDadosAcessorios;
+begin
+   with cdsProcMot do begin
+      Active:= False;
+      CommandText:= ' SELECT mot_motivo, mot_processo, P.nome_pro as NomeProcesso' +
+                    ' FROM motivos_processos M' +
+                    ' INNER JOIN processos P ON P.codi_pro = M.mot_processo' +
+                    ' WHERE mot_motivo = ' + edtCodigo.Text +
+                    ' ORDER BY P.nome_pro';
+      Active:= True;
    end;
 end;
 
@@ -129,6 +172,18 @@ begin
    btnGravar.Enabled  := not Flag;
    btnCancelar.Enabled:= not Flag;
    btnImprimir.Enabled:= Flag;
+
+   // Projeto TT440
+   if BuscarParametroMotivoProc() = '1' then begin
+      btnInserirProcesso.Enabled:= Flag;
+      btnExcluirProcesso.Enabled:= Flag;
+      btnInserirTodos.Enabled   := Flag;
+   end
+   else begin
+      btnInserirProcesso.Enabled:= False;
+      btnExcluirProcesso.Enabled:= False;
+      btnInserirTodos.Enabled   := False;
+   end;
 
    if cdsMotivo.RecordCount = 0 then begin
       btnAlterar.Enabled:= False;
@@ -146,12 +201,6 @@ begin
    HabilitarCampos(True, False);
    TryFocus(edtMotivo);
    Botoes(False);
-end;
-
-procedure TFormCadMotivoRNC.btnAnteriorClick(Sender: TObject);
-begin
-   cdsMotivo.Prior;
-   PreencherCampos;
 end;
 
 procedure TFormCadMotivoRNC.btnCancelarClick(Sender: TObject);
@@ -184,6 +233,20 @@ begin
          PreencherCampos;
       end;
       Botoes(True);
+   end;
+end;
+
+procedure TFormCadMotivoRNC.btnExcluirProcessoClick(Sender: TObject);
+begin
+   if Application.MessageBox('Confirma a exclusão do registro?', 'Confirmação', MB_YESNO + MB_ICONQUESTION) = IDYES then begin
+      with cdsGravar do begin
+         Active:= False;
+         CommandText:= ' DELETE FROM motivos_processos' +
+                       ' WHERE mot_motivo = ' + QuotedStr(edtCodigo.Text) +
+                       ' AND mot_processo = ' + cdsProcMot.FieldByName('mot_processo').AsString;
+         Execute;
+      end;
+      AtualizarDadosAcessorios();
    end;
 end;
 
@@ -232,6 +295,71 @@ begin
    rgOrdemImpressao.ItemIndex:= 1;
 end;
 
+procedure TFormCadMotivoRNC.btnInserirProcessoClick(Sender: TObject);
+begin
+   // Verifica se já existe o processo para o motivo
+   with dm.cdsAuxiliar do begin
+      Active:= False;
+      CommandText:= ' SELECT COUNT(*) qtd FROM motivos_processos' +
+                    ' WHERE mot_motivo = ' + QuotedStr(edtCodigo.Text) +
+                    '       AND mot_processo = ' + IntToStr(dblProcessos.KeyValue);
+      Active:= True;
+   end;
+
+   if dm.cdsAuxiliar.FieldByName('qtd').AsInteger > 0 then begin
+      Application.MessageBox('Este processo já foi cadastrado para esse motivo.','Aviso', MB_OK + MB_ICONWARNING);
+      dblProcessos.SetFocus;
+   end
+   else begin
+      with cdsGravar do begin
+         Active:= False;
+         CommandText:= ' INSERT INTO motivos_processos (mot_motivo, mot_processo)' +
+                       ' VALUES(' +
+                       QuotedStr(edtCodigo.Text) + ',' +
+                       IntToStr(dblProcessos.KeyValue) +
+                       ')';
+         Execute;
+      end;
+   end;
+
+   AtualizarDadosAcessorios();
+end;
+
+procedure TFormCadMotivoRNC.btnInserirTodosClick(Sender: TObject);
+begin
+   with dm.cdsAux do begin
+      Active:= False;
+      CommandText:= ' SELECT codi_pro FROM processos' +
+                    ' WHERE pro_exibelista = ' + QuotedStr('S');
+      Active:= True;
+      First;
+
+      while not dm.cdsAux.Eof do begin
+         with dm.cdsAuxiliar do begin
+            Active:= False;
+            CommandText:= ' SELECT COUNT(*) qtd FROM motivos_processos' +
+                          ' WHERE mot_motivo = ' + QuotedStr(edtCodigo.Text) +
+                          '       AND mot_processo = ' + dm.cdsAux.FieldByName('codi_pro').AsString;
+            Active:= True;
+         end;
+         if dm.cdsAuxiliar.FieldByName('qtd').AsInteger <= 0 then begin
+            with cdsGravar do begin
+               Active:= False;
+               CommandText:= ' INSERT INTO motivos_processos (mot_motivo, mot_processo)' +
+                             ' VALUES(' +
+                             QuotedStr(edtCodigo.Text) + ',' +
+                             IntToStr(dm.cdsAux.FieldByName('codi_pro').AsInteger) +
+                             ')';
+               Execute;
+            end;
+         end;
+         Next;
+      end;
+   end;
+
+   AtualizarDadosAcessorios();
+end;
+
 procedure TFormCadMotivoRNC.btnNovoClick(Sender: TObject);
 begin
    if not (Acesso(cUsuario, 54, 'cadastro') = 1) then begin
@@ -252,12 +380,28 @@ procedure TFormCadMotivoRNC.btnPrimeiroClick(Sender: TObject);
 begin
    cdsMotivo.First;
    PreencherCampos;
+   AtualizarDadosAcessorios();
+end;
+
+procedure TFormCadMotivoRNC.btnAnteriorClick(Sender: TObject);
+begin
+   cdsMotivo.Prior;
+   PreencherCampos;
+   AtualizarDadosAcessorios();
 end;
 
 procedure TFormCadMotivoRNC.btnProximoClick(Sender: TObject);
 begin
    cdsMotivo.Next;
    PreencherCampos;
+   AtualizarDadosAcessorios();
+end;
+
+procedure TFormCadMotivoRNC.btnUltimoClick(Sender: TObject);
+begin
+   cdsMotivo.Last;
+   PreencherCampos;
+   AtualizarDadosAcessorios();
 end;
 
 procedure TFormCadMotivoRNC.btnSairClick(Sender: TObject);
@@ -268,12 +412,6 @@ end;
 procedure TFormCadMotivoRNC.btnSairImpClick(Sender: TObject);
 begin
    pnlImprimir.Visible:= False;
-end;
-
-procedure TFormCadMotivoRNC.btnUltimoClick(Sender: TObject);
-begin
-   cdsMotivo.Last;
-   PreencherCampos;
 end;
 
 procedure TFormCadMotivoRNC.btnVideoClick(Sender: TObject);
@@ -357,7 +495,8 @@ end;
 procedure TFormCadMotivoRNC.HabilitarCampos(Flag, Codigo: Boolean);
 begin
    edtCodigo.Enabled   := False;
-   edtMotivo.Enabled:= Flag;
+   edtMotivo.Enabled   := Flag;
+   dblProcessos.Enabled:= not Flag;
 
    pctTreinamentos.Pages[1].TabVisible:= not Flag;
 
@@ -381,6 +520,8 @@ begin
       edtCodigo.Text   := FieldByName('codi_com').AsString;
       edtMotivo.Text:= FieldByName('valo_com').AsString;
    end;
+
+   AtualizarDadosAcessorios();
 end;
 
 procedure TFormCadMotivoRNC.Impressao(tipoImp: string);
@@ -408,20 +549,9 @@ begin
       Exit;
    end;
 
-   with frxReport1 do begin
-      LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_listaTabelaCombos.fr3');
-      Variables['Titulo']    := QuotedStr('LISTAGEM DE MOTIVOS DE RNC');
-      Variables['TituloDesc']:= QuotedStr('Motivo de RNC');
-
-      if tipoImp = 'I' then begin
-         PrepareReport;
-         PrintOptions.ShowDialog:= False;
-         Print;
-      end
-      else begin
-         ShowReport;
-      end;
-   end;
+   Imprimir('rel_listaTabelaCombos', frxReport1, tipoImp,
+            'Titulo', 'LISTAGEM DE MOTIVOS DE RNC',
+            'TituloDesc', 'Motivo de RNC');
 end;
 
 end.

@@ -729,10 +729,7 @@ begin
          Active:= True;
       end;
 
-      with frxReport1 do begin
-         LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_AuditoriaInterna.fr3');
-         ShowReport;
-      end;
+      Imprimir('rel_AuditoriaInterna', frxReport1, 'V');
    end;
 end;
 

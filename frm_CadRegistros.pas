@@ -109,9 +109,9 @@ type
     btnProximo: TBitBtn;
     btnAnterior: TBitBtn;
     tsLocais: TTabSheet;
-    dbgrdCurriculo: TDBGrid;
+    dbgLocais: TDBGrid;
     btnInserirLocal: TBitBtn;
-    btnExcluirTreinamento: TBitBtn;
+    btnExcluirLocal: TBitBtn;
     lbl11: TLabel;
     edtNumeroLocais: TEdit;
     lbl12: TLabel;
@@ -168,6 +168,7 @@ type
     cdsExcel: TClientDataSet;
     dsExcel: TDataSource;
     dbgExcel: TDBGrid;
+    btnInserirTodos: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -202,15 +203,18 @@ type
     procedure sbVisualizarClick(Sender: TObject);
     procedure AtualizarDadosAcessorios();
     procedure btnInserirLocalClick(Sender: TObject);
-    procedure btnExcluirTreinamentoClick(Sender: TObject);
+    procedure btnExcluirLocalClick(Sender: TObject);
     procedure chkTodosClick(Sender: TObject);
     procedure chkDeptoClick(Sender: TObject);
-    procedure dbgrdCurriculoCellClick(Column: TColumn);
+    procedure dbgLocaisCellClick(Column: TColumn);
     procedure btnExcelClick(Sender: TObject);
+    procedure btnInserirTodosClick(Sender: TObject);
+    function VerificarDados(): Boolean;
   private
     { Private declarations }
     cOperacao: Char;
     sNovoCodigo: string;
+    sFlagTodos: string;
   public
     { Public declarations }
   end;
@@ -304,6 +308,8 @@ begin
          Active:= True;
       end;
    end;
+
+   AtualizarGrid(dbgLocais);
 end;
 
 procedure TFormCadRegistros.Botoes(flag: Boolean);
@@ -314,6 +320,10 @@ begin
    btnGravar.Enabled  := not Flag;
    btnCancelar.Enabled:= not Flag;
    btnImprimir.Enabled:= Flag;
+
+   btnInserirLocal.Enabled:= not Flag;
+   btnExcluirLocal.Enabled:= not Flag;
+   btnInserirTodos.Enabled:= not Flag;
 
    if cdsRegistro.RecordCount = 0 then begin
       btnAlterar.Enabled:= False;
@@ -359,7 +369,7 @@ begin
       Application.MessageBox('Não existem registros para exportar', 'Aviso', MB_OK + MB_ICONWARNING);
    end
    else begin
-      ExpExcel(dbgExcel, cdsExcel, 'Registros da Qualidade');
+      ExpExcel(dbgExcel, cdsExcel, 'Registros da Qualidade', Self);
    end;
 end;
 
@@ -401,7 +411,7 @@ begin
    end;
 end;
 
-procedure TFormCadRegistros.btnExcluirTreinamentoClick(Sender: TObject);
+procedure TFormCadRegistros.btnExcluirLocalClick(Sender: TObject);
 begin
    if (Acesso(cUsuario, 9, 'exclusao') = 1) then begin
       if Application.MessageBox('Confirma a exclusão do registro ?', 'Confirmação', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES then begin
@@ -552,75 +562,104 @@ end;
 
 procedure TFormCadRegistros.btnInserirLocalClick(Sender: TObject);
 begin
-   if (dblProcessos.KeyValue = -1) or (dblProcessos.KeyValue = Null) then begin
-      Application.MessageBox('Campo Local de Armazenagem é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblProcessos);
-      Exit;
-   end;
+   sFlagTodos:= 'N';
 
-   if (dblModoRecuperacao.KeyValue = -1) OR (dblModoRecuperacao.KeyValue = Null) then begin
-      Application.MessageBox('Campo Modo de Recuperação é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblModoRecuperacao);
-      Exit;
-   end;
-
-   if (dblRetencaoMinima.KeyValue = -1) OR (dblRetencaoMinima.KeyValue = Null) then begin
-      Application.MessageBox('Campo Retenção Mínima é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblRetencaoMinima);
-      Exit;
-   end;
-
-   if (dblDisposicao.KeyValue = -1) OR (dblDisposicao.KeyValue = Null) then begin
-      Application.MessageBox('Campo Disposição é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblDisposicao);
-      Exit;
-   end;
-
-   if (dblTipoProtecao.KeyValue = -1) OR (dblTipoProtecao.KeyValue = Null) then begin
-      Application.MessageBox('Campo Tipo de Proteção é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
-      TryFocus(dblTipoProtecao);
-      Exit;
-   end;
-
-   with dm.cdsAuxiliar do begin
-      Active:= False;
-      CommandText:= ' SELECT COUNT(*) AS QTD' +
-                    ' FROM formularios_locais' +
-                    ' WHERE for_codForm = ' + cdsRegistrocodi_for.AsString +
-                    ' AND for_codProcesso = ' + IntToStr(dblProcessos.KeyValue) +
-                    ' AND for_tipo_protecao = ' + IntToStr(dblTipoProtecao.KeyValue);
-      Active:= True;
-
-      if FieldByName('QTD').AsInteger > 0 then begin
-         Application.MessageBox('Local de Armazenamento já cadastrado', 'Aviso', MB_OK + MB_ICONWARNING);
-         Exit;
-      end;
-   end;
-
-   with cdsLocais do begin
-      try
+   if VerificarDados() = True then begin
+      with dm.cdsAuxiliar do begin
          Active:= False;
-         CommandText:= ' INSERT INTO formularios_locais (for_codProcesso, for_codForm,' +
-                       ' for_disposicao, for_retencao, for_recuperacao, for_tipo_protecao)' +
-                       ' VALUES(' +
-                       IntToStr(dblProcessos.KeyValue) + ',' +
-                       cdsRegistrocodi_for.AsString + ',' +
-                       IntToStr(dblDisposicao.KeyValue) + ',' +
-                       IntToStr(dblRetencaoMinima.KeyValue) + ',' +
-                       IntToStr(dblModoRecuperacao.KeyValue) + ',' +
-                       IntToStr(dblTipoProtecao.KeyValue) +
-                       ')';
-         Execute;
-         Auditoria('REGISTROS DA QUALIDADE - LOCAIS', edtIdentificacao.Text + ' - ' + dblProcessos.Text, 'I', '');
-      except
-         on E: Exception do begin
-            MostrarErro('Erro ao gravar o registro', E.Message, Self.Name);
-//            Application.MessageBox(PChar('Erro ao gravar o registro!' + #13 + E.Message), 'Aviso', MB_OK + MB_ICONWARNING);
+         CommandText:= ' SELECT COUNT(*) AS QTD' +
+                       ' FROM formularios_locais' +
+                       ' WHERE for_codForm = ' + cdsRegistrocodi_for.AsString +
+                       ' AND for_codProcesso = ' + IntToStr(dblProcessos.KeyValue) +
+                       ' AND for_tipo_protecao = ' + IntToStr(dblTipoProtecao.KeyValue);
+         Active:= True;
+
+         if FieldByName('QTD').AsInteger > 0 then begin
+            Application.MessageBox('Local de Armazenamento já cadastrado', 'Aviso', MB_OK + MB_ICONWARNING);
+            Exit;
          end;
       end;
-   end;
 
-   AtualizarDadosAcessorios();
+      with cdsLocais do begin
+         try
+            Active:= False;
+            CommandText:= ' INSERT INTO formularios_locais (for_codProcesso, for_codForm,' +
+                          ' for_disposicao, for_retencao, for_recuperacao, for_tipo_protecao)' +
+                          ' VALUES(' +
+                          IntToStr(dblProcessos.KeyValue) + ',' +
+                          cdsRegistrocodi_for.AsString + ',' +
+                          IntToStr(dblDisposicao.KeyValue) + ',' +
+                          IntToStr(dblRetencaoMinima.KeyValue) + ',' +
+                          IntToStr(dblModoRecuperacao.KeyValue) + ',' +
+                          IntToStr(dblTipoProtecao.KeyValue) +
+                          ')';
+            Execute;
+            Auditoria('REGISTROS DA QUALIDADE - LOCAIS', edtIdentificacao.Text + ' - ' + dblProcessos.Text, 'I', '');
+         except
+            on E: Exception do begin
+               MostrarErro('Erro ao gravar o registro', E.Message, Self.Name);
+   //            Application.MessageBox(PChar('Erro ao gravar o registro!' + #13 + E.Message), 'Aviso', MB_OK + MB_ICONWARNING);
+            end;
+         end;
+      end;
+
+      AtualizarDadosAcessorios();
+   end;
+end;
+
+procedure TFormCadRegistros.btnInserirTodosClick(Sender: TObject);
+begin
+   sFlagTodos:= 'S';
+
+   if VerificarDados() = True then begin
+      with dm.cdsAux do begin
+         Active:= False;
+         CommandText:= ' SELECT codi_pro FROM processos' +
+                       ' WHERE pro_exibelista = ' + QuotedStr('S');
+         Active:= True;
+         First;
+
+         while not dm.cdsAux.Eof do begin
+            with dm.cdsAuxiliar do begin
+               Active:= False;
+               CommandText:= ' SELECT COUNT(*) AS QTD' +
+                             ' FROM formularios_locais' +
+                             ' WHERE for_codForm = ' + cdsRegistrocodi_for.AsString +
+                             ' AND for_codProcesso = ' + dm.cdsAux.FieldByName('codi_pro').AsString +
+                             ' AND for_tipo_protecao = ' + IntToStr(dblTipoProtecao.KeyValue);
+               Active:= True;
+
+               if FieldByName('QTD').AsInteger = 0 then begin
+                  with cdsLocais do begin
+                     try
+                        Active:= False;
+                        CommandText:= ' INSERT INTO formularios_locais (for_codProcesso, for_codForm,' +
+                                      ' for_disposicao, for_retencao, for_recuperacao, for_tipo_protecao)' +
+                                      ' VALUES(' +
+                                      dm.cdsAux.FieldByName('codi_pro').AsString + ',' +
+                                      cdsRegistrocodi_for.AsString + ',' +
+                                      IntToStr(dblDisposicao.KeyValue) + ',' +
+                                      IntToStr(dblRetencaoMinima.KeyValue) + ',' +
+                                      IntToStr(dblModoRecuperacao.KeyValue) + ',' +
+                                      IntToStr(dblTipoProtecao.KeyValue) +
+                                      ')';
+                        Execute;
+      //                  Auditoria('REGISTROS DA QUALIDADE - LOCAIS', edtIdentificacao.Text + ' - ' + dblProcessos.Text, 'I', '');
+                     except
+                        on E: Exception do begin
+                           MostrarErro('Erro ao gravar o registro', E.Message, Self.Name);
+                        end;
+                     end;
+                  end;
+               end;
+            end;
+            Next;
+         end;
+      end;
+
+      Botoes(True);
+      AtualizarDadosAcessorios();
+   end;
 end;
 
 procedure TFormCadRegistros.btnNovoClick(Sender: TObject);
@@ -763,7 +802,7 @@ begin
    PreencherCampos();
 end;
 
-procedure TFormCadRegistros.dbgrdCurriculoCellClick(Column: TColumn);
+procedure TFormCadRegistros.dbgLocaisCellClick(Column: TColumn);
 begin
    PreencherCampos();
 end;
@@ -1035,6 +1074,48 @@ begin
             Exit;
          end;
       end;
+   end;
+
+   Result:= True;
+end;
+
+function TFormCadRegistros.VerificarDados: Boolean;
+begin
+   if sFlagTodos = 'N' then begin
+      if (dblProcessos.KeyValue = -1) or (dblProcessos.KeyValue = Null) then begin
+         Application.MessageBox('Campo Local de Armazenagem é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+         TryFocus(dblProcessos);
+         Result:= False;
+         Exit;
+      end;
+   end;
+
+   if (dblTipoProtecao.KeyValue = -1) OR (dblTipoProtecao.KeyValue = Null) then begin
+      Application.MessageBox('Campo Tipo de Proteção é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblTipoProtecao);
+      Result:= False;
+      Exit;
+   end;
+
+   if (dblModoRecuperacao.KeyValue = -1) OR (dblModoRecuperacao.KeyValue = Null) then begin
+      Application.MessageBox('Campo Modo de Recuperação é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblModoRecuperacao);
+      Result:= False;
+      Exit;
+   end;
+
+   if (dblRetencaoMinima.KeyValue = -1) OR (dblRetencaoMinima.KeyValue = Null) then begin
+      Application.MessageBox('Campo Retenção Mínima é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblRetencaoMinima);
+      Result:= False;
+      Exit;
+   end;
+
+   if (dblDisposicao.KeyValue = -1) OR (dblDisposicao.KeyValue = Null) then begin
+      Application.MessageBox('Campo Disposição é obrigatório', 'Aviso', MB_OK + MB_ICONWARNING);
+      TryFocus(dblDisposicao);
+      Result:= False;
+      Exit;
    end;
 
    Result:= True;

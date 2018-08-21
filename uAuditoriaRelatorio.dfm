@@ -2316,10 +2316,41 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42325.603831377320000000
+    ReportOptions.LastChange = 43304.621759456020000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      '      mConfidencialCabec.Visible:= True;'
+      '      mCabec1.Visible:= True;'
+      '      mCabec2.Visible:= True;          '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;'
+      '      mCabec1.Visible:= False;'
+      '      mCabec2.Visible:= False                     '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      '      mConfidencialRodape.Visible:= True;'
+      '      mRod1.Visible:= True;'
+      '      mRod2.Visible:= True;          '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;'
+      '      mRod1.Visible:= False;'
+      '      mRod2.Visible:= False;          '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -2327,16 +2358,10 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
     Top = 48
     Datasets = <
       item
-        DataSet = frxDBAudInterna1
-        DataSetName = 'frxdbAudInterna'
       end
       item
-        DataSet = frxDBEmpresa1
-        DataSetName = 'frxdbEmpresa'
       end
       item
-        DataSet = frxDBRequisitos
-        DataSetName = 'frxDBRequisitos'
       end>
     Variables = <
       item
@@ -2345,6 +2370,22 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
       end
       item
         Name = 'Periodo'
+        Value = Null
+      end
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
         Value = Null
       end>
     Style = <>
@@ -2362,31 +2403,13 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 634.961040000000000000
+        Height = 638.740570000000000000
         Top = 18.897650000000000000
         Width = 1046.929810000000000000
         object Shape1: TfrxShapeView
           Width = 1046.929810000000000000
           Height = 83.149660000000000000
           ShowHint = False
-        end
-        object Memo4: TfrxMemoView
-          Top = 30.267780000000000000
-          Width = 1046.929810000000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -21
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'RELAT'#211'RIO DE AUDITORIA INTERNA')
-          ParentFont = False
         end
         object Line2: TfrxLineView
           Width = 1046.929810000000000000
@@ -2492,7 +2515,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         object Shape5: TfrxShapeView
           Top = 321.260050000000000000
           Width = 1046.929810000000000000
-          Height = 351.496290000000000000
+          Height = 309.921460000000000000
           ShowHint = False
         end
         object Memo20: TfrxMemoView
@@ -2535,7 +2558,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Left = 11.338590000000000000
           Top = 366.614410000000000000
           Width = 1024.252630000000000000
-          Height = 302.362400000000000000
+          Height = 260.787570000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Memo.UTF8W = (
@@ -2597,10 +2620,43 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Memo.UTF8W = (
             '[frxdbEmpresa."ende_emp"]')
         end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
+        object Memo50: TfrxMemoView
+          Top = 30.236239999999990000
+          Width = 1043.150280000000000000
+          Height = 34.015770000000010000
+          ShowHint = False
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RELAT'#211'RIO DE AUDITORIA INTERNA')
+          ParentFont = False
+        end
       end
       object PageFooter3: TfrxPageFooter
         Height = 56.692950000000010000
-        Top = 714.331170000000000000
+        Top = 718.110700000000000000
         Width = 1046.929810000000000000
         object Picture3: TfrxPictureView
           Left = 1006.575450000000000000
@@ -3059,6 +3115,22 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           ShowHint = False
           Frame.Typ = [ftTop]
         end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.220469999999977000
+          Width = 982.677800000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
     end
     object Page2: TfrxReportPage
@@ -3079,15 +3151,11 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         Height = 120.944960000000000000
         Top = 245.669450000000000000
         Width = 1046.929810000000000000
-        DataSet = frxDBAudInterna1
-        DataSetName = 'frxdbAudInterna'
         RowCount = 0
         object Memo10: TfrxMemoView
           Width = 1046.929746540000000000
           Height = 120.944960000000000000
           ShowHint = False
-          DataSet = frxDBAudInterna1
-          DataSetName = 'frxdbAudInterna'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -3111,7 +3179,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         object Memo23: TfrxMemoView
           Top = 30.236220470000000000
           Width = 1046.929810000000000000
-          Height = 34.015770000000000000
+          Height = 34.015770000000010000
           ShowHint = False
           AutoWidth = True
           DataSetName = 'cdsParametroRelatorio'
@@ -3124,6 +3192,21 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           HAlign = haCenter
           Memo.UTF8W = (
             'RELAT'#211'RIO DE AUDITORIA INTERNA')
+          ParentFont = False
+        end
+        object mCabec1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
           ParentFont = False
         end
       end
@@ -3180,7 +3263,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         Width = 1046.929810000000000000
         object Picture2: TfrxPictureView
           Left = 1006.575450000000000000
-          Top = 13.118120000000000000
+          Top = 13.118119999999980000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -3615,7 +3698,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         end
         object Memo22: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 30.236240000000100000
+          Top = 30.236240000000120000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3630,10 +3713,26 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         end
         object Line4: TfrxLineView
           Left = 3.779530000000000000
-          Top = 26.456710000000000000
+          Top = 26.456709999999990000
           Width = 990.236860000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
+        end
+        object mRod1: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999988000
+          Width = 982.677800000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
     end
@@ -3652,7 +3751,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         Width = 1046.929810000000000000
         object Picture1: TfrxPictureView
           Left = 1006.575450000000000000
-          Top = 13.118120000000000000
+          Top = 13.118119999999980000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4087,7 +4186,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         end
         object Memo11: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 30.236240000000100000
+          Top = 30.236240000000120000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -4102,10 +4201,26 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
         end
         object Line1: TfrxLineView
           Left = 3.779530000000000000
-          Top = 26.456710000000000000
+          Top = 26.456709999999990000
           Width = 990.236860000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
+        end
+        object mRod2: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000022000
+          Width = 982.677800000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
       object PageHeader2: TfrxPageHeader
@@ -4135,21 +4250,31 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
             'RELAT'#211'RIO DE AUDITORIA INTERNA')
           ParentFont = False
         end
+        object mCabec2: TfrxMemoView
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object MasterData1: TfrxMasterData
         Height = 22.677180000000000000
         Top = 207.874150000000000000
         Width = 1046.929810000000000000
-        DataSet = frxDBRequisitos
-        DataSetName = 'frxDBRequisitos'
         RowCount = 0
         object Memo2: TfrxMemoView
           Width = 831.496536540001000000
           Height = 22.677180000000000000
           ShowHint = False
           DataField = 'req_codigo'
-          DataSet = frxDBRequisitos
-          DataSetName = 'frxDBRequisitos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4167,8 +4292,6 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Height = 22.677180000000000000
           ShowHint = False
           DataField = 'conforme'
-          DataSet = frxDBRequisitos
-          DataSetName = 'frxDBRequisitos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4187,8 +4310,6 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Height = 22.677180000000000000
           ShowHint = False
           DataField = 'naoconforme'
-          DataSet = frxDBRequisitos
-          DataSetName = 'frxDBRequisitos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4211,8 +4332,6 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Height = 22.677180000000000000
           ShowHint = False
           Color = cl3DLight
-          DataSet = frxDBAudInterna1
-          DataSetName = 'frxdbAudInterna'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4231,8 +4350,6 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Height = 22.677180000000000000
           ShowHint = False
           Color = cl3DLight
-          DataSet = frxDBAudInterna1
-          DataSetName = 'frxdbAudInterna'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4251,8 +4368,6 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Height = 22.677180000000000000
           ShowHint = False
           Color = cl3DLight
-          DataSet = frxDBAudInterna1
-          DataSetName = 'frxdbAudInterna'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
