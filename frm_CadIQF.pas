@@ -266,6 +266,10 @@ type
     procedure dbgDocCellClick(Column: TColumn);
     procedure dblFornecedorExit(Sender: TObject);
     procedure dblFantasiaExit(Sender: TObject);
+    procedure dblFiltroFornKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dblFiltroFantasiaKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     cOperacao: Char;
@@ -794,6 +798,12 @@ begin
    PreencherCampos;
 end;
 
+procedure TFormCadIQF.dblFiltroFantasiaKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   dblFiltroFornCloseUp(Self);
+end;
+
 procedure TFormCadIQF.dblFiltroFornCloseUp(Sender: TObject);
 begin
    if rbRazao.Checked then begin
@@ -814,10 +824,16 @@ begin
    end;
 end;
 
+procedure TFormCadIQF.dblFiltroFornKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   dblFiltroFornCloseUp(Self);
+end;
+
 procedure TFormCadIQF.dblFantasiaCloseUp(Sender: TObject);
 begin
    dblFornecedor.KeyValue:= dblFantasia.KeyValue;
-   edtAvaliacao.Value    := cdsForn.FieldByName('forn_avaliacao').AsFloat;
+   edtAvaliacao.Value    := BuscarUltimaAvaliacaoForn(dblFornecedor.KeyValue);
 end;
 
 procedure TFormCadIQF.dblFantasiaExit(Sender: TObject);
@@ -828,7 +844,7 @@ end;
 procedure TFormCadIQF.dblFornecedorCloseUp(Sender: TObject);
 begin
    dblFantasia.KeyValue:= dblFornecedor.KeyValue;
-   edtAvaliacao.Value  := cdsForn.FieldByName('forn_avaliacao').AsFloat;
+   edtAvaliacao.Value  := BuscarUltimaAvaliacaoForn(dblFantasia.KeyValue);
 end;
 
 procedure TFormCadIQF.dblFornecedorExit(Sender: TObject);

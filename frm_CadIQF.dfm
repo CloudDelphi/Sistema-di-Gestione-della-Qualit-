@@ -23,7 +23,7 @@ object FormCadIQF: TFormCadIQF
     Width = 1022
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -1507,7 +1507,7 @@ object FormCadIQF: TFormCadIQF
     Top = 0
     Width = 1022
     Height = 412
-    ActivePage = tsCadastro
+    ActivePage = tsPesquisa
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1640,7 +1640,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'valo_com'
         ListSource = dsPontual
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
       end
       object dblResponsavel: TDBLookupComboBox
         Left = 371
@@ -1656,7 +1656,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'nome_col'
         ListSource = dsResponsavel
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 8
       end
       object dtData: TDateEdit
         Left = 84
@@ -1670,7 +1670,7 @@ object FormCadIQF: TFormCadIQF
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object dblFornecedor: TDBLookupComboBox
         Left = 195
@@ -1686,7 +1686,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_nome'
         ListSource = dsForn
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         OnCloseUp = dblFornecedorCloseUp
         OnExit = dblFornecedorExit
       end
@@ -1702,7 +1702,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 7
       end
       object edtAvaliacao: TCurrencyEdit
         Tag = 20
@@ -1722,7 +1722,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
       end
       object dblConforme: TDBLookupComboBox
         Left = 932
@@ -1738,7 +1738,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'valo_com'
         ListSource = dsConforme
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 6
       end
       object mmoObs: TMemo
         Left = 10
@@ -1754,7 +1754,7 @@ object FormCadIQF: TFormCadIQF
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 7
+        TabOrder = 10
         OnKeyPress = mmoObsKeyPress
       end
       object edtCodigo: TEdit
@@ -1771,7 +1771,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 0
       end
       object dblFantasia: TDBLookupComboBox
         Left = 515
@@ -1787,7 +1787,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_fantasia'
         ListSource = dsFantasia
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 3
         OnCloseUp = dblFantasiaCloseUp
         OnExit = dblFantasiaExit
       end
@@ -1803,7 +1803,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 9
       end
     end
     object tsDocs: TTabSheet
@@ -2125,7 +2125,7 @@ object FormCadIQF: TFormCadIQF
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 6
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2158,7 +2158,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 4
       end
       object edtCaminhoDoc: TEdit
         Left = 11
@@ -2174,7 +2174,7 @@ object FormCadIQF: TFormCadIQF
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 5
       end
       object dtDataDoc: TDateEdit
         Tag = 30
@@ -2190,7 +2190,7 @@ object FormCadIQF: TFormCadIQF
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 1
       end
       object dblRazaoDoc: TDBLookupComboBox
         Tag = 30
@@ -2208,7 +2208,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_nome'
         ListSource = dsForn
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 2
         OnCloseUp = dblFornecedorCloseUp
       end
       object edtCodigoDoc: TEdit
@@ -2225,7 +2225,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 0
       end
       object dblFantasiaDoc: TDBLookupComboBox
         Tag = 30
@@ -2243,7 +2243,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_fantasia'
         ListSource = dsFantasia
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 3
         OnCloseUp = dblFantasiaCloseUp
       end
     end
@@ -2287,7 +2287,7 @@ object FormCadIQF: TFormCadIQF
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 4
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2370,7 +2370,7 @@ object FormCadIQF: TFormCadIQF
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 2
         OnChange = edtValorChange
       end
       object cbCampo: TComboBox
@@ -2386,7 +2386,7 @@ object FormCadIQF: TFormCadIQF
         Font.Style = []
         ItemIndex = 0
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 3
         Text = 'N.F./Lote'
         Items.Strings = (
           'N.F./Lote')
@@ -2396,7 +2396,7 @@ object FormCadIQF: TFormCadIQF
         Top = 3
         Width = 1008
         Height = 44
-        TabOrder = 3
+        TabOrder = 0
         object lbl13: TLabel
           Left = 31
           Top = -2
@@ -2420,7 +2420,7 @@ object FormCadIQF: TFormCadIQF
           Caption = 'TODOS'
           Checked = True
           State = cbChecked
-          TabOrder = 0
+          TabOrder = 4
           OnClick = chkFiltroFornClick
         end
         object dblFiltroFantasia: TDBLookupComboBox
@@ -2438,8 +2438,9 @@ object FormCadIQF: TFormCadIQF
           ListField = 'forn_fantasia'
           ListSource = dsFiltroFantasia
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 1
           OnCloseUp = dblFiltroFornCloseUp
+          OnKeyUp = dblFiltroFantasiaKeyUp
         end
         object dblFiltroForn: TDBLookupComboBox
           Left = 31
@@ -2456,8 +2457,9 @@ object FormCadIQF: TFormCadIQF
           ListField = 'forn_nome'
           ListSource = dsFiltroForn
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 0
           OnCloseUp = dblFiltroFornCloseUp
+          OnKeyUp = dblFiltroFornKeyUp
         end
         object rbRazao: TRadioButton
           Tag = 30
@@ -2465,7 +2467,7 @@ object FormCadIQF: TFormCadIQF
           Top = 16
           Width = 14
           Height = 17
-          TabOrder = 3
+          TabOrder = 2
           OnClick = rbRazaoClick
         end
         object rbFantasia: TRadioButton
@@ -2474,7 +2476,7 @@ object FormCadIQF: TFormCadIQF
           Top = 16
           Width = 14
           Height = 17
-          TabOrder = 4
+          TabOrder = 3
           OnClick = rbFantasiaClick
         end
       end
@@ -2491,7 +2493,7 @@ object FormCadIQF: TFormCadIQF
           'Data'
           'Raz'#227'o Social'
           'Nome Fantasia')
-        TabOrder = 4
+        TabOrder = 1
         OnClick = rgOrdemClick
       end
     end
@@ -2501,14 +2503,14 @@ object FormCadIQF: TFormCadIQF
     Top = 36
     Width = 409
     Height = 413
-    TabOrder = 2
+    TabOrder = 1
     object pnl2: TPanel
       Left = 1
       Top = 340
       Width = 407
       Height = 72
       Align = alBottom
-      TabOrder = 2
+      TabOrder = 7
       object btnVideo: TBitBtn
         Left = 1
         Top = 1
@@ -2941,7 +2943,7 @@ object FormCadIQF: TFormCadIQF
         'Raz'#227'o Social'
         'Nome Fantasia'
         'IQF')
-      TabOrder = 1
+      TabOrder = 6
     end
     object rgTipoRel: TRadioGroup
       Tag = 30
@@ -2956,7 +2958,7 @@ object FormCadIQF: TFormCadIQF
         'IQF'
         'Apoio'
         #205'ndice Mensal')
-      TabOrder = 3
+      TabOrder = 1
       OnClick = rgTipoRelClick
     end
     object pnl4: TPanel
@@ -2964,7 +2966,7 @@ object FormCadIQF: TFormCadIQF
       Top = 142
       Width = 241
       Height = 51
-      TabOrder = 4
+      TabOrder = 3
       object lblDataFinal: TLabel
         Left = 118
         Top = 3
@@ -3033,7 +3035,7 @@ object FormCadIQF: TFormCadIQF
       Top = 142
       Width = 147
       Height = 51
-      TabOrder = 5
+      TabOrder = 4
       object chkTipoProd: TCheckBox
         Tag = 30
         Left = 16
@@ -3050,7 +3052,7 @@ object FormCadIQF: TFormCadIQF
       Top = 101
       Width = 389
       Height = 34
-      TabOrder = 6
+      TabOrder = 2
       object chkObs: TCheckBox
         Tag = 30
         Left = 12
@@ -3067,7 +3069,7 @@ object FormCadIQF: TFormCadIQF
       Top = 199
       Width = 389
       Height = 85
-      TabOrder = 7
+      TabOrder = 5
       object lbl12: TLabel
         Left = 11
         Top = -2
@@ -3089,7 +3091,7 @@ object FormCadIQF: TFormCadIQF
         Width = 55
         Height = 17
         Caption = 'TODOS'
-        TabOrder = 0
+        TabOrder = 2
         OnClick = chkTodosFornClick
       end
       object dblFornImp: TDBLookupComboBox
@@ -3107,7 +3109,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_nome'
         ListSource = dsFornImp
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnCloseUp = dblFornImpCloseUp
       end
       object dblFantasiaImp: TDBLookupComboBox
@@ -3125,7 +3127,7 @@ object FormCadIQF: TFormCadIQF
         ListField = 'forn_fantasia'
         ListSource = dsFantasiaImp
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         OnCloseUp = dblFantasiaImpCloseUp
       end
     end

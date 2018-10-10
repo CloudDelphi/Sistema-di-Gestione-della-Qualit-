@@ -1482,20 +1482,6 @@ object dm: Tdm
     Left = 388
     Top = 8
   end
-  object dspAux2: TDataSetProvider
-    DataSet = zqryAux2
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 492
-    Top = 8
-  end
-  object cdsAux2: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspAux2'
-    Left = 532
-    Top = 8
-  end
   object dspAux3: TDataSetProvider
     DataSet = zqryAux3
     Options = [poAutoRefresh, poAllowCommandText]
@@ -1541,12 +1527,6 @@ object dm: Tdm
     Connection = Conexao
     Params = <>
     Left = 156
-    Top = 8
-  end
-  object zqryAux2: TZQuery
-    Connection = Conexao
-    Params = <>
-    Left = 452
     Top = 8
   end
   object zqryAux: TZQuery
@@ -1943,7 +1923,7 @@ object dm: Tdm
     Properties.Strings = (
       'codepage=UTF8'
       'client_encoding=UTF8')
-    HostName = 'www.destraconsultoria.com.br'
+    HostName = 'br566.hostgator.com.br'
     Port = 3306
     Database = 'destr347_interno'
     User = 'destr347_destra1'
@@ -2090,7 +2070,7 @@ object dm: Tdm
         Width = 1046.929810000000000000
         object Picture1: TfrxPictureView
           Left = 1001.575450000000000000
-          Top = 9.338590000000012000
+          Top = 9.338590000000010000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -2926,7 +2906,7 @@ object dm: Tdm
           VAlign = vaBottom
         end
         object Memo21: TfrxMemoView
-          Top = 56.692950000000000000
+          Top = 56.692949999999990000
           Width = 833.385826770000000000
           Height = 68.031527800000010000
           ShowHint = False
@@ -2947,7 +2927,7 @@ object dm: Tdm
         end
         object Memo22: TfrxMemoView
           Left = 833.276130000000000000
-          Top = 56.692950000000000000
+          Top = 56.692949999999990000
           Width = 105.826703310000000000
           Height = 68.031527800000010000
           ShowHint = False
@@ -2970,7 +2950,7 @@ object dm: Tdm
         end
         object Memo23: TfrxMemoView
           Left = 939.102970000000000000
-          Top = 56.692950000000000000
+          Top = 56.692949999999990000
           Width = 105.826703310000000000
           Height = 68.031527800000010000
           ShowHint = False
@@ -3053,5 +3033,25 @@ object dm: Tdm
     Params = <>
     Left = 764
     Top = 56
+  end
+  object dspAux2: TDataSetProvider
+    DataSet = zqryAux2
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 492
+    Top = 8
+  end
+  object cdsAux2: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspAux2'
+    Left = 532
+    Top = 8
+  end
+  object zqryAux2: TZQuery
+    Connection = Conexao
+    Params = <>
+    Left = 452
+    Top = 8
   end
 end

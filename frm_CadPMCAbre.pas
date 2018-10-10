@@ -200,6 +200,8 @@ type
     lbl18: TLabel;
     dblMotivos: TDBLookupComboBox;
     cdsPMCpmc_motivo: TIntegerField;
+    cdsProdutospro_identificacao: TWideStringField;
+    dblProdutoDesc: TDBLookupComboBox;
 
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
@@ -241,6 +243,12 @@ type
     procedure PreencherDadosRisco();
     procedure PreencherDadosIndicadores();
     procedure PreencherDadosFechaPMC();
+    procedure dblProdutoCloseUp(Sender: TObject);
+    procedure dblProdutoDescCloseUp(Sender: TObject);
+    procedure dblProdutoDescKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dblProdutoKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     cOperacao: Char;
@@ -266,7 +274,7 @@ procedure TFormCadPMCAbre.AtualizarDados;
 begin
    with cdsProdutos do begin
       Active:= False;
-      CommandText:= ' SELECT pro_codigo, pro_descricao' +
+      CommandText:= ' SELECT pro_codigo, pro_descricao, pro_identificacao' +
                     ' FROM produtos' +
                     ' ORDER BY pro_descricao';
       Active:= True;
@@ -739,6 +747,28 @@ begin
    PreencherCampos;
 end;
 
+procedure TFormCadPMCAbre.dblProdutoCloseUp(Sender: TObject);
+begin
+   dblProdutoDesc.KeyValue:= dblProduto.KeyValue;
+end;
+
+procedure TFormCadPMCAbre.dblProdutoDescCloseUp(Sender: TObject);
+begin
+   dblProduto.KeyValue:= dblProdutoDesc.KeyValue;
+end;
+
+procedure TFormCadPMCAbre.dblProdutoDescKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   dblProduto.KeyValue:= dblProdutoDesc.KeyValue;
+end;
+
+procedure TFormCadPMCAbre.dblProdutoKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   dblProdutoDesc.KeyValue:= dblProduto.KeyValue;
+end;
+
 procedure TFormCadPMCAbre.edtValorChange(Sender: TObject);
 begin
 //   case cbCampo.ItemIndex of
@@ -803,7 +833,7 @@ begin
    dblOrigem.KeyValue     := FormCadPMCFecha.dblOrigem.KeyValue;
    dblCliente.KeyValue    := FormCadPMCFecha.dblClientes.KeyValue;
    dblFornecedor.KeyValue := FormCadPMCFecha.dblForn.KeyValue;
-   dblProduto.KeyValue    := FormCadPMCFecha.dblProduto.KeyValue;
+   dblProduto.KeyValue    := FormCadPMCFecha.cdsPMC.FieldByName('pmc_produto').AsString;
    dblMotivos.KeyValue    := FormCadPMCFecha.dblMotivo.KeyValue;
    dblProcede.KeyValue    := FormCadPMCFecha.dblProcede.KeyValue;
    dblResponsavel.KeyValue:= FormCadPMCFecha.dblResponsavel.KeyValue;
@@ -888,6 +918,7 @@ begin
       dblCliente.KeyValue    := FieldByName('pmc_cliente').AsInteger;
       dblFornecedor.KeyValue := FieldByName('pmc_fornecedor').AsString;
       dblProduto.KeyValue    := FieldByName('pmc_produto').AsString;
+      dblProdutoDesc.KeyValue:= FieldByName('pmc_produto').AsString;
       dblMotivos.KeyValue    := FieldByName('pmc_motivo').AsString;
 
       // Campos obrigatórios
@@ -907,9 +938,9 @@ begin
          dblOrigem.KeyValue:= FieldByName('orig_pmc').AsString;
       end;
 
-      if FieldByName('prcs_pmc').AsString <> EmptyStr then begin
-         dblProcesso.KeyValue:= FieldByName('prcs_pmc').AsString;
-      end;
+//      if FieldByName('prcs_pmc').AsString <> EmptyStr then begin
+//         dblProcesso.KeyValue:= FieldByName('prcs_pmc').AsString;
+//      end;
 
       if FieldByName('resp_pmc').AsString <> EmptyStr then begin
          dblResponsavel.KeyValue:= FieldByName('resp_pmc').AsString;

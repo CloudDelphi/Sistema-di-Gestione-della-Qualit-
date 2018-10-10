@@ -4,7 +4,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Abertura de PMC'
-  ClientHeight = 533
+  ClientHeight = 571
   ClientWidth = 757
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
     Left = 0
     Top = 0
     Width = 757
-    Height = 461
+    Height = 499
     ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -60,11 +60,13 @@ object FormCadPMCAbre: TFormCadPMCAbre
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitHeight = 461
     object tsCadastro: TTabSheet
       Caption = 'Cadastro PMC'
+      ExplicitHeight = 433
       object lbl4: TLabel
         Left = 7
-        Top = 203
+        Top = 241
         Width = 89
         Height = 13
         Caption = 'N'#227'o Conformidade'
@@ -106,7 +108,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object lbl3: TLabel
         Left = 81
-        Top = 340
+        Top = 378
         Width = 61
         Height = 13
         Caption = 'Respons'#225'vel'
@@ -141,21 +143,21 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object lbl8: TLabel
         Left = 7
-        Top = 340
+        Top = 378
         Width = 47
         Height = 13
         Caption = 'Procede ?'
       end
       object lbl14: TLabel
         Left = 7
-        Top = 388
+        Top = 426
         Width = 100
         Height = 13
         Caption = 'Arquivo de Evid'#234'ncia'
       end
       object sbArquivo: TSpeedButton
         Left = 668
-        Top = 399
+        Top = 437
         Width = 32
         Height = 31
         Hint = 'Clique para escolher o arquivo do documento'
@@ -277,7 +279,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object sbVisualizar: TSpeedButton
         Left = 707
-        Top = 399
+        Top = 426
         Width = 32
         Height = 31
         Hint = 'Clique para visualizar o arquivo'
@@ -400,14 +402,14 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object lblCEA: TLabel
         Left = 597
-        Top = 340
+        Top = 378
         Width = 83
         Height = 13
         Caption = 'Libera para C&&A?'
       end
       object lbl24: TLabel
         Left = 468
-        Top = 341
+        Top = 379
         Width = 28
         Height = 13
         Caption = 'Custo'
@@ -429,15 +431,15 @@ object FormCadPMCAbre: TFormCadPMCAbre
         Caption = 'Produto'
       end
       object lbl18: TLabel
-        Left = 378
-        Top = 156
+        Left = 9
+        Top = 199
         Width = 32
         Height = 13
         Caption = 'Motivo'
       end
       object edtCusto: TCurrencyEdit
         Left = 468
-        Top = 356
+        Top = 394
         Width = 122
         Height = 26
         Hint = 'Custo'
@@ -501,7 +503,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object dblResponsavel: TDBLookupComboBox
         Left = 81
-        Top = 356
+        Top = 394
         Width = 381
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -578,7 +580,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object mmoNaoConformidade: TMemo
         Left = 7
-        Top = 219
+        Top = 257
         Width = 732
         Height = 118
         Font.Charset = DEFAULT_CHARSET
@@ -627,7 +629,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object dblProcede: TDBLookupComboBox
         Left = 7
-        Top = 356
+        Top = 394
         Width = 68
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -643,7 +645,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object edtCaminho: TEdit
         Left = 7
-        Top = 404
+        Top = 442
         Width = 652
         Height = 24
         Font.Charset = DEFAULT_CHARSET
@@ -656,7 +658,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object dblCEA: TDBLookupComboBox
         Left = 597
-        Top = 356
+        Top = 394
         Width = 83
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -672,7 +674,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object pnlImprimir: TPanel
         Left = 724
-        Top = 79
+        Top = 106
         Width = 365
         Height = 188
         TabOrder = 10
@@ -1119,7 +1121,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       end
       object pnlEmail: TPanel
         Left = 651
-        Top = 244
+        Top = 282
         Width = 578
         Height = 188
         TabOrder = 16
@@ -1455,7 +1457,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       object dblProduto: TDBLookupComboBox
         Left = 7
         Top = 171
-        Width = 363
+        Width = 259
         Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1463,14 +1465,17 @@ object FormCadPMCAbre: TFormCadPMCAbre
         Font.Name = 'Tahoma'
         Font.Style = []
         KeyField = 'pro_codigo'
-        ListField = 'pro_descricao'
+        ListField = 'pro_identificacao'
+        ListFieldIndex = 1
         ListSource = dsProdutos
         ParentFont = False
         TabOrder = 17
+        OnCloseUp = dblProdutoCloseUp
+        OnKeyUp = dblProdutoKeyUp
       end
       object dblMotivos: TDBLookupComboBox
-        Left = 376
-        Top = 171
+        Left = 7
+        Top = 214
         Width = 363
         Height = 26
         Font.Charset = DEFAULT_CHARSET
@@ -1484,6 +1489,25 @@ object FormCadPMCAbre: TFormCadPMCAbre
         ParentFont = False
         TabOrder = 18
       end
+      object dblProdutoDesc: TDBLookupComboBox
+        Left = 272
+        Top = 171
+        Width = 467
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'pro_codigo'
+        ListField = 'pro_descricao'
+        ListFieldIndex = 1
+        ListSource = dsProdutos
+        ParentFont = False
+        TabOrder = 19
+        OnCloseUp = dblProdutoDescCloseUp
+        OnKeyUp = dblProdutoDescKeyUp
+      end
     end
     object tsPesquisa: TTabSheet
       Caption = 'Pesquisa'
@@ -1494,6 +1518,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitHeight = 433
       object lbl9: TLabel
         Left = 3
         Top = 13
@@ -1623,11 +1648,12 @@ object FormCadPMCAbre: TFormCadPMCAbre
   end
   object pnl1: TPanel
     Left = 0
-    Top = 461
+    Top = 499
     Width = 757
     Height = 72
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 461
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -4867,7 +4893,7 @@ object FormCadPMCAbre: TFormCadPMCAbre
   object zqryProdutos: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT pro_codigo, pro_descricao'
+      'SELECT pro_codigo, pro_descricao, pro_identificacao'
       'FROM produtos')
     Params = <>
     Left = 128
@@ -4893,6 +4919,9 @@ object FormCadPMCAbre: TFormCadPMCAbre
     object cdsProdutospro_descricao: TWideStringField
       FieldName = 'pro_descricao'
       Size = 200
+    end
+    object cdsProdutospro_identificacao: TWideStringField
+      FieldName = 'pro_identificacao'
     end
   end
   object dsProdutos: TDataSource

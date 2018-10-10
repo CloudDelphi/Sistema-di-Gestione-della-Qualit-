@@ -71,11 +71,11 @@ type
     dtData: TDateEdit;
     dblEmitido: TDBLookupComboBox;
     lbl7: TLabel;
-    edtReqNorma: TEdit;
+    edtSetor: TEdit;
     lbl11: TLabel;
     dblOrigem: TDBLookupComboBox;
     mmoNaoConformidade: TMemo;
-    lbl4: TLabel;
+    lblNaoConformidade: TLabel;
     cdsEmitidocodi_col: TLargeintField;
     cdsEmitidonome_col: TWideStringField;
     zqryResponsavel: TZQuery;
@@ -725,6 +725,7 @@ begin
          with cdsRNC do begin
             edtIdentificacao.Text    := FieldByName('rnc_identificacao').AsString;
             dtData.Date              := FieldByName('rnc_data').AsDateTime;
+            edtSetor.Text            := FieldByName('rnc_setor').AsString;
             edtIdentificacaoHist.Text:= FieldByName('rnc_identificacao').AsString;
             dtDataHist.Date          := FieldByName('rnc_data').AsDateTime;
             mmoNaoConformidade.Text  := FieldByName('rnc_nconformidade').AsString;
@@ -821,9 +822,9 @@ end;
 procedure TFormCadRNCFecha.sbVisualizarNCClick(Sender: TObject);
 begin
    mmoTexto.Text   := mmoNaoConformidade.Text;
-   pnlTexto.Left   := mmoNaoConformidade.Left - 1;
-   pnlTexto.Top    := mmoNaoConformidade.Top - 1;
-   lblTituloTexto.Caption:= '';
+   pnlTexto.Left   := mmoNaoConformidade.Left - 3;
+   pnlTexto.Top    := lblNaoConformidade.Top;
+   lblTituloTexto.Caption:= 'Não Conformidade';
    pnlTexto.Visible:= True;
 end;
 

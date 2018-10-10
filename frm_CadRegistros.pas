@@ -347,6 +347,7 @@ begin
       end;
 
       Botoes(False);
+      btnInserirTodos.Enabled:= False;
    end;
 end;
 
@@ -614,7 +615,8 @@ begin
    if VerificarDados() = True then begin
       with dm.cdsAux do begin
          Active:= False;
-         CommandText:= ' SELECT codi_pro FROM processos' +
+         CommandText:= ' SELECT codi_pro ' +
+                       ' FROM processos' +
                        ' WHERE pro_exibelista = ' + QuotedStr('S');
          Active:= True;
          First;
@@ -633,9 +635,10 @@ begin
                   with cdsLocais do begin
                      try
                         Active:= False;
-                        CommandText:= ' INSERT INTO formularios_locais (for_codProcesso, for_codForm,' +
+                        CommandText:= ' INSERT INTO formularios_locais (for_codigo, for_codProcesso, for_codForm,' +
                                       ' for_disposicao, for_retencao, for_recuperacao, for_tipo_protecao)' +
                                       ' VALUES(' +
+                                      BuscarNovoCodigo('formularios_locais', 'for_codigo') + ',' +
                                       dm.cdsAux.FieldByName('codi_pro').AsString + ',' +
                                       cdsRegistrocodi_for.AsString + ',' +
                                       IntToStr(dblDisposicao.KeyValue) + ',' +
@@ -658,6 +661,7 @@ begin
       end;
 
       Botoes(True);
+      HabilitarCampos(False, False);
       AtualizarDadosAcessorios();
    end;
 end;

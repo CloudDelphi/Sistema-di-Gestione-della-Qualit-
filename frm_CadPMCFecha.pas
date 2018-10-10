@@ -372,7 +372,6 @@ type
     lbl39: TLabel;
     cdsPMCpmc_brainstorm: TWideMemoField;
     lbl40: TLabel;
-    dblProduto: TDBLookupComboBox;
     dblMotivo: TDBLookupComboBox;
     lbl41: TLabel;
     zqryMotivos: TZQuery;
@@ -389,6 +388,10 @@ type
     zqryProdutos: TZQuery;
     cdsPMCpmc_produto: TIntegerField;
     cdsPMCpmc_motivo: TIntegerField;
+    cdsProdutospro_identificacao: TWideStringField;
+    edtProduto: TEdit;
+    cdsPMCpro_identificacao: TWideStringField;
+    cdsPMCpro_descricao: TWideStringField;
     procedure FormShow(Sender: TObject);
     procedure AtualizarDados;
     procedure PreencherCampos;
@@ -607,7 +610,7 @@ begin
 
    with cdsProdutos do begin
       Active:= False;
-      CommandText:= ' SELECT pro_codigo, pro_descricao' +
+      CommandText:= ' SELECT pro_codigo, pro_descricao, pro_identificacao' +
                     ' FROM produtos' +
                     ' ORDER BY pro_descricao';
       Active:= True;
@@ -634,8 +637,9 @@ begin
                     ' imed_pmc, caus_pmc, vefi_pmc, efic_pmc, pmc_dataFecha, pmc_cliente, ' +
                     ' pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_preveficacia,' +
                     ' pmc_usuario_eficacia, pmc_custo, pmc_brainstorm, pmc_produto,' +
-                    ' pmc_motivo' +
+                    ' pmc_motivo, P.pro_identificacao, P.pro_descricao' +
                     ' FROM pmc' +
+                    ' LEFT JOIN produtos P ON P.pro_codigo = pmc_produto' +
                     ' WHERE codi_pmc = ' + sCodigoPMC;
       Active:= True;
 
@@ -760,29 +764,30 @@ end;
 procedure TFormCadPMCFecha.btnCancelarClick(Sender: TObject);
 begin
    case pctFechaPMC.TabIndex of
-      0: begin
+      0: begin // Cadastro
          AtualizarDados();
          PreencherCampos();
          Botoes(True);
          HabilitarCampos(False, False);
       end;
-      2: begin
+      1: begin // Ishikawa
+         PreencherCampos();
+         Botoes(True);
+         HabilitarCampos(False, False);
+         AtualizarIshikawa();
+      end;
+      2: begin // Brainstorm
          AtualizarDados();
          PreencherCampos();
          Botoes(True);
          mmoBrainstorm.Enabled:= False;
       end;
-      3: begin
+      3: begin // Ações
          AtualizarDados();
          PreencherCampos();
          Botoes(True);
          HabilitarCampos(False, False);
-      end;
-      1: begin
-         PreencherCampos();
-         Botoes(True);
-         HabilitarCampos(False, False);
-         AtualizarIshikawa();
+         AtualizarAcoes();
       end;
    end;
 end;
@@ -1601,10 +1606,6 @@ begin
                dblOrigem.KeyValue:= FieldByName('orig_pmc').AsString;
             end;
 
-            if FieldByName('prcs_pmc').AsString <> EmptyStr then begin
-               dblProcesso.KeyValue:= FieldByName('prcs_pmc').AsString;
-            end;
-
             if FieldByName('resp_pmc').AsString <> EmptyStr then begin
                dblResponsavel.KeyValue:= FieldByName('resp_pmc').AsString;
             end;
@@ -1626,7 +1627,9 @@ begin
             end;
 
             if FieldByName('pmc_produto').AsString <> EmptyStr then begin
-               dblProcesso.KeyValue:= FieldByName('pmc_produto').AsString;
+//               dblProduto.KeyValue:= FieldByName('pmc_produto').AsString;
+               edtProduto.Text:= FieldByName('pro_identificacao').AsString + ' - ' +
+                                 FieldByName('pro_descricao').AsString;
             end;
 
             if FieldByName('pmc_motivo').AsString <> EmptyStr then begin
@@ -1999,7 +2002,8 @@ end;
 
 procedure TFormCadPMCFecha.VerificarFasePMC;
 begin
-   pctFechaPMC.Pages[2].TabVisible:= True;
+   pctFechaPMC.Pages[3].TabVisible:= True; // Ações
+
    with dm.cdsAuxiliar do begin
       Active:= False;
       CommandText:= ' SELECT COUNT(*) as Qtd' +
@@ -2034,12 +2038,12 @@ begin
 
    if mmoCausa.Text = EmptyStr then begin
       dblFase.KeyValue:= 2;
-      pctFechaPMC.Pages[2].TabVisible:= False;
+      pctFechaPMC.Pages[3].TabVisible:= False; // Ações
    end;
 
    if mmoAcaoContencao.Text = EmptyStr then begin
       dblFase.KeyValue:= 1;
-      pctFechaPMC.Pages[2].TabVisible:= False;
+      pctFechaPMC.Pages[3].TabVisible:= False; // Ações
    end;
 end;
 
@@ -2068,11 +2072,7 @@ begin
             Exit;
          end;
 
-         Imprimir('rel_PMC', frxReport1, tipoImp, 'fase', QuotedStr(dblFase.Text));
-
-//         frxReport1.LoadFromFile(ExtractFilePath(Application.ExeName) + '\Relatórios\rel_PMC.fr3');
-//         frxReport1.Variables['fase']:= QuotedStr(dblFase.Text);
-//         Auditoria('PMC',dm.cdsPMCnume_pmc.AsString,'R', '');
+         Imprimir('rel_PMC', frxReport1, tipoImp, 'fase', dblFase.Text);
       end;
       1: begin// Ishikawa
          with cdsIshikawaImp do begin
