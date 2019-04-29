@@ -970,7 +970,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
     Top = 0
     Width = 872
     Height = 422
-    ActivePage = tsCadastro
+    ActivePage = tsAcoes
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1365,6 +1365,7 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitTop = 23
       object lbl8: TLabel
         Left = 127
         Top = 6
@@ -2317,10 +2318,35 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42325.603831377320000000
+    ReportOptions.LastChange = 43304.571105509300000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      '      mConfidencialCabec.Visible:= True;'
+      '      mConf1.Visible:= True;          '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      '      mConfidencialRodape.Visible:= True;'
+      '      mRod1.Visible:= True;          '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -2346,6 +2372,22 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
       end
       item
         Name = 'Periodo'
+        Value = Null
+      end
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
         Value = Null
       end>
     Style = <>
@@ -2598,9 +2640,24 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Memo.UTF8W = (
             '[frxdbEmpresa."ende_emp"]')
         end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object PageFooter3: TfrxPageFooter
-        Height = 56.692950000000010000
+        Height = 56.692950000000000000
         Top = 714.331170000000000000
         Width = 1046.929810000000000000
         object Picture3: TfrxPictureView
@@ -3061,6 +3118,22 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Frame.Typ = [ftTop]
         end
       end
+      object mConfidencialRodape: TfrxMemoView
+        Left = 3.779530000000000000
+        Top = 710.551640000000000000
+        Width = 982.677800000000000000
+        Height = 18.897650000000000000
+        OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+        ShowHint = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Memo.UTF8W = (
+          '[TextoConf]')
+        ParentFont = False
+      end
     end
     object Page2: TfrxReportPage
       Font.Charset = DEFAULT_CHARSET
@@ -3125,6 +3198,21 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           HAlign = haCenter
           Memo.UTF8W = (
             'RELAT'#211'RIO DE AUDITORIA INTERNA')
+          ParentFont = False
+        end
+        object mConf1: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
           ParentFont = False
         end
       end
@@ -3635,6 +3723,22 @@ object FormRelatorioAuditoria: TFormRelatorioAuditoria
           Width = 990.236860000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
+        end
+        object mRod1: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999990000
+          Width = 982.677800000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
     end

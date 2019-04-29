@@ -202,7 +202,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Width = 490
           Height = 72
           Align = alBottom
-          TabOrder = 1
+          TabOrder = 9
           object btnSairImp: TBitBtn
             Left = 416
             Top = 1
@@ -653,7 +653,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           ListField = 'nome_col'
           ListSource = dsRespImp
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 4
         end
         object dtInicial: TDateEdit
           Left = 10
@@ -667,7 +667,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Font.Style = []
           NumGlyphs = 2
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 6
         end
         object dtFinal: TDateEdit
           Left = 134
@@ -681,7 +681,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Font.Style = []
           NumGlyphs = 2
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 7
         end
         object chkResponsavel: TCheckBox
           Left = 257
@@ -697,7 +697,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 5
           OnClick = chkResponsavelClick
         end
         object chkProcessos: TCheckBox
@@ -714,7 +714,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 3
           OnClick = chkProcessosClick
         end
         object rgParecerImp: TRadioGroup
@@ -741,7 +741,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 8
+          TabOrder = 1
         end
         object chkData: TCheckBox
           Left = 257
@@ -757,7 +757,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
           Font.Style = []
           ParentColor = False
           ParentFont = False
-          TabOrder = 9
+          TabOrder = 8
           OnClick = chkDataClick
         end
       end
@@ -1209,7 +1209,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnGravarClick
     end
     object btnCancelar: TBitBtn
@@ -1343,7 +1343,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnCancelarClick
     end
     object btnImprimir: TBitBtn
@@ -2013,7 +2013,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 4
       OnClick = btnExcluirClick
     end
     object pnlNavegacao: TPanel
@@ -2719,10 +2719,37 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42292.471733831020000000
+    ReportOptions.LastChange = 43301.662154918980000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -2741,6 +2768,18 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
       item
         Name = 'FiltroData'
         Value = Null
+      end
+      item
+        Name = ' Confidencial'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = ''
+      end
+      item
+        Name = 'CondRod'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -2801,6 +2840,21 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
             '[FiltroData]')
           ParentFont = False
           VAlign = vaCenter
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'CONFIDENCIAL')
+          ParentFont = False
         end
       end
       object Detalhe: TfrxMasterData
@@ -2890,7 +2944,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
         end
         object Memo1: TfrxMemoView
           Left = 324.039580000000000000
-          Top = 60.472480000000030000
+          Top = 60.472480000000010000
           Width = 623.622450000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -2909,7 +2963,7 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
         end
         object Memo2: TfrxMemoView
           Left = 324.039580000000000000
-          Top = 79.370130000000030000
+          Top = 79.370130000000010000
           Width = 623.622386540000000000
           Height = 49.133807010000000000
           ShowHint = False
@@ -3384,9 +3438,25 @@ object FormCadAnaliseCritica: TFormCadAnaliseCritica
         object Line1: TfrxLineView
           Left = 3.779530000000000000
           Top = 26.456709999999990000
-          Width = 982.677800000000300000
+          Width = 982.677800000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
+        end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999988000
+          Width = 113.385900000000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'CONFIDENCIAL')
+          ParentFont = False
         end
       end
       object GroupHeader1: TfrxGroupHeader

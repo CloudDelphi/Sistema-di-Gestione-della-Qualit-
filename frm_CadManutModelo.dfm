@@ -23,13 +23,13 @@ object FormCadManutModelo: TFormCadManutModelo
     Width = 778
     Height = 72
     Align = alBottom
-    TabOrder = 0
+    TabOrder = 2
     object pnlNavegacao: TPanel
       Left = 501
       Top = 20
       Width = 161
       Height = 40
-      TabOrder = 0
+      TabOrder = 7
       object btnPrimeiro: TBitBtn
         Left = 1
         Top = 1
@@ -694,7 +694,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 6
       OnClick = btnSairClick
     end
     object btnImprimir: TBitBtn
@@ -828,7 +828,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 5
       OnClick = btnImprimirClick
     end
     object btnCancelar: TBitBtn
@@ -962,7 +962,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 4
       OnClick = btnCancelarClick
     end
     object btnGravar: TBitBtn
@@ -1096,7 +1096,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnGravarClick
     end
     object btnExcluir: TBitBtn
@@ -1230,7 +1230,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 2
       OnClick = btnExcluirClick
     end
     object btnAlterar: TBitBtn
@@ -1364,7 +1364,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 6
+      TabOrder = 1
       OnClick = btnAlterarClick
     end
     object btnNovo: TBitBtn
@@ -1498,7 +1498,7 @@ object FormCadManutModelo: TFormCadManutModelo
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 7
+      TabOrder = 0
       OnClick = btnNovoClick
     end
   end
@@ -1509,7 +1509,7 @@ object FormCadManutModelo: TFormCadManutModelo
     Height = 437
     ActivePage = tsCadastro
     Align = alClient
-    TabOrder = 1
+    TabOrder = 0
     OnChange = pgcManutChange
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
@@ -1691,7 +1691,7 @@ object FormCadManutModelo: TFormCadManutModelo
         Font.Style = []
         MaxLength = 30
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object edtDescItens: TEdit
         Left = 175
@@ -1706,7 +1706,7 @@ object FormCadManutModelo: TFormCadManutModelo
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object edtItem: TEdit
         Tag = 30
@@ -1721,7 +1721,7 @@ object FormCadManutModelo: TFormCadManutModelo
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 5
       end
       object btnInserirProcesso: TBitBtn
         Left = 597
@@ -2006,7 +2006,7 @@ object FormCadManutModelo: TFormCadManutModelo
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 6
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2043,7 +2043,7 @@ object FormCadManutModelo: TFormCadManutModelo
         Font.Style = []
         MaxLength = 30
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 0
       end
     end
     object tsPesquisa: TTabSheet
@@ -2170,7 +2170,7 @@ object FormCadManutModelo: TFormCadManutModelo
     Top = 244
     Width = 365
     Height = 188
-    TabOrder = 2
+    TabOrder = 1
     object pnl2: TPanel
       Left = 1
       Top = 115

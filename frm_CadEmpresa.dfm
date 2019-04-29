@@ -697,7 +697,7 @@ object FormCadEmpresa: TFormCadEmpresa
       OnClick = btnNovoClick
     end
   end
-  object pctLira: TJvgPageControl
+  object pctEmpresa: TJvgPageControl
     Left = 0
     Top = 0
     Width = 904

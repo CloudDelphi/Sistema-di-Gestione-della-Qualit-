@@ -673,7 +673,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'desc_fun'
         ListSource = dsResp
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 5
       end
       object dblProcesso: TDBLookupComboBox
         Left = 289
@@ -689,7 +689,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'nome_pro'
         ListSource = dsProcessos
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 4
       end
       object edtDescricao: TEdit
         Left = 64
@@ -719,7 +719,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsPeriodo
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 3
       end
       object edtMeta: TCurrencyEdit
         Left = 434
@@ -736,7 +736,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 12
         Visible = False
         ZeroEmpty = False
       end
@@ -754,7 +754,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsMeta
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 11
         Visible = False
       end
       object edtCodigo: TEdit
@@ -785,7 +785,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Style = []
         MaxLength = 120
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 2
       end
       object edtUnidade: TEdit
         Left = 501
@@ -801,7 +801,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Style = []
         MaxLength = 20
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 13
         Visible = False
       end
       object edtCaminho: TEdit
@@ -815,7 +815,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 9
       end
       object mmoMetodologia: TMemo
         Left = 6
@@ -829,7 +829,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 12
+        TabOrder = 14
         OnExit = mmoMetodologiaExit
         OnKeyPress = mmoMetodologiaKeyPress
       end
@@ -847,14 +847,14 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsCEA
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object pnlImprimir: TPanel
         Left = 535
         Top = 290
         Width = 365
         Height = 188
-        TabOrder = 11
+        TabOrder = 15
         object pnl2: TPanel
           Left = 1
           Top = 115
@@ -1310,7 +1310,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 13
+        TabOrder = 6
       end
       object dblStatus: TDBLookupComboBox
         Left = 728
@@ -1326,7 +1326,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsStatus
         ParentFont = False
-        TabOrder = 14
+        TabOrder = 10
       end
       object dblMonitoramento: TDBLookupComboBox
         Left = 644
@@ -1342,7 +1342,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsMonitoramento
         ParentFont = False
-        TabOrder = 15
+        TabOrder = 7
       end
     end
     object tsMetas: TTabSheet
@@ -1411,7 +1411,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ListField = 'valo_com'
         ListSource = dsMeta
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
       end
       object edtValorMeta: TCurrencyEdit
         Left = 439
@@ -1428,7 +1428,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
         ZeroEmpty = False
       end
       object edtUnidadeMeta: TEdit
@@ -1445,7 +1445,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Style = []
         MaxLength = 20
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 6
       end
       object dbgMetas: TDBGrid
         Left = 3
@@ -1464,7 +1464,7 @@ object FormCadIndicadores: TFormCadIndicadores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 7
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -1548,7 +1548,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Style = []
         MaxLength = 4
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 3
       end
       object edtCodMeta: TEdit
         Tag = 30
@@ -1564,7 +1564,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 0
       end
       object edtDescMeta: TEdit
         Tag = 30
@@ -1580,7 +1580,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 1
       end
       object cbbPeriodo: TComboBox
         Left = 6
@@ -1594,7 +1594,7 @@ object FormCadIndicadores: TFormCadIndicadores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 2
         Items.Strings = (
           'JANEIRO'
           'FEVEREIRO'
@@ -1622,7 +1622,7 @@ object FormCadIndicadores: TFormCadIndicadores
           Width = 401
           Height = 72
           Align = alBottom
-          TabOrder = 2
+          TabOrder = 3
           object btnSairImpMetas: TBitBtn
             Left = 327
             Top = 1
@@ -2071,7 +2071,7 @@ object FormCadIndicadores: TFormCadIndicadores
             #218'ltimos 6 meses'
             #218'ltimos 12 meses'
             #218'ltimos 24 meses')
-          TabOrder = 3
+          TabOrder = 2
         end
       end
     end
@@ -3022,7 +3022,7 @@ object FormCadIndicadores: TFormCadIndicadores
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 6
+      TabOrder = 7
       OnClick = btnSairClick
     end
     object btnAlterar: TBitBtn
@@ -3164,7 +3164,7 @@ object FormCadIndicadores: TFormCadIndicadores
       Top = 20
       Width = 161
       Height = 40
-      TabOrder = 7
+      TabOrder = 8
       object btnPrimeiro: TBitBtn
         Left = 1
         Top = 1
@@ -3829,7 +3829,7 @@ object FormCadIndicadores: TFormCadIndicadores
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 8
+      TabOrder = 6
       OnClick = btnPDCAClick
     end
   end
@@ -4738,8 +4738,6 @@ object FormCadIndicadores: TFormCadIndicadores
           Height = 18.897650000000000000
           ShowHint = False
           Color = cl3DLight
-          DataSet = FormCadRegistros.frxDBRegistros
-          DataSetName = 'frxDBRegistros'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12

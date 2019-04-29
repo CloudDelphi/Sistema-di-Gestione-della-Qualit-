@@ -22,7 +22,7 @@ object FormCadRiscoVarInternas: TFormCadRiscoVarInternas
     Top = 0
     Width = 658
     Height = 329
-    ActivePage = tsPesquisa
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

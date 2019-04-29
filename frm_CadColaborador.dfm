@@ -22,7 +22,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Top = 0
     Width = 784
     Height = 412
-    ActivePage = tsTreinamentos
+    ActivePage = tsEducacao
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -452,7 +452,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Style = []
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 11
+        TabOrder = 12
         OnExit = mmoObsExit
         OnKeyPress = mmoObsKeyPress
       end
@@ -470,7 +470,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'valo_com'
         ListSource = dsExperiencia
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object edtCodigo: TEdit
         Left = 7
@@ -500,7 +500,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'desc_fun'
         ListSource = dsFuncoes
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object dblProcesso: TDBLookupComboBox
         Left = 101
@@ -516,7 +516,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'nome_pro'
         ListSource = dsProcessos
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object dblSituacao: TDBLookupComboBox
         Left = 7
@@ -532,7 +532,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'valo_com'
         ListSource = dsSituacao
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
       end
       object dblUsuario: TDBLookupComboBox
         Left = 544
@@ -548,7 +548,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'nome_usu'
         ListSource = dsUsuarios
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object edtEmail: TEdit
         Left = 7
@@ -563,7 +563,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Style = []
         MaxLength = 80
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 9
       end
       object edtArquivo1: TEdit
         Left = 7
@@ -579,7 +579,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
+        TabOrder = 11
       end
       object dtAdmissao: TDateEdit
         Left = 544
@@ -593,7 +593,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 10
       end
       object chkValidacao: TCheckBox
         Left = 164
@@ -601,17 +601,13 @@ object FormCadColaboradores: TFormCadColaboradores
         Width = 183
         Height = 27
         Caption = 'Educa'#231#227'o e Experi'#234'ncia validadas sem atender a exig'#234'ncia m'#237'nima'
-        TabOrder = 12
+        TabOrder = 3
         WordWrap = True
       end
     end
     object tsDadosPessoais: TTabSheet
       Caption = 'Dados Pessoais'
       ImageIndex = 7
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl44: TLabel
         Left = 7
         Top = 12
@@ -945,10 +941,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Curr'#237'culo'
       ImageIndex = 2
       OnShow = tsCurriculoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl1: TLabel
         Left = 7
         Top = 12
@@ -1169,10 +1161,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Educa'#231#227'o'
       ImageIndex = 4
       OnShow = tsCurriculoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl20: TLabel
         Left = 7
         Top = 12
@@ -1703,10 +1691,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Caption = 'Documentos Diversos'
       ImageIndex = 6
       OnShow = tsDocShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl38: TLabel
         Left = 7
         Top = 12
@@ -2039,7 +2023,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 4
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2073,7 +2057,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
       object edtCaminhoDoc: TEdit
         Left = 7
@@ -2089,7 +2073,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 3
       end
     end
     object tsTreinamentos: TTabSheet
@@ -2403,8 +2387,8 @@ object FormCadColaboradores: TFormCadColaboradores
         OnClick = sbVisualizaTreCertificadoClick
       end
       object lbllb3: TLabel
-        Left = 547
-        Top = 12
+        Left = 8
+        Top = 141
         Width = 32
         Height = 13
         Caption = 'Tempo'
@@ -2419,8 +2403,8 @@ object FormCadColaboradores: TFormCadColaboradores
         Transparent = True
       end
       object lbl63: TLabel
-        Left = 655
-        Top = 12
+        Left = 69
+        Top = 141
         Width = 28
         Height = 13
         Caption = 'Custo'
@@ -2433,6 +2417,13 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentColor = False
         ParentFont = False
         Transparent = True
+      end
+      object lbl64: TLabel
+        Left = 182
+        Top = 143
+        Width = 78
+        Height = 13
+        Caption = 'Interno/Externo'
       end
       object edtCodigoTre: TEdit
         Left = 7
@@ -2481,10 +2472,10 @@ object FormCadColaboradores: TFormCadColaboradores
         TabOrder = 4
       end
       object dbgTreinamentos: TDBGrid
-        Left = 3
-        Top = 147
+        Left = 8
+        Top = 187
         Width = 762
-        Height = 235
+        Height = 195
         Hint = 'Duplo clique para abrir a avalia'#231#227'o de efic'#225'cia do treinamento'
         TabStop = False
         DataSource = dsTreinamentosCol
@@ -2497,7 +2488,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 9
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2517,7 +2508,7 @@ object FormCadColaboradores: TFormCadColaboradores
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 350
+            Width = 280
             Visible = True
           end
           item
@@ -2579,6 +2570,18 @@ object FormCadColaboradores: TFormCadColaboradores
             Title.Font.Style = [fsBold]
             Width = 85
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'intext'
+            Title.Caption = 'Int/Ext'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 80
+            Visible = True
           end>
       end
       object dtDataPrevista: TDateEdit
@@ -2626,25 +2629,9 @@ object FormCadColaboradores: TFormCadColaboradores
           'M - MANDAT'#211'RIO'
           'D - DESEJ'#193'VEL')
       end
-      object edtTreCertificado: TEdit
-        Left = 7
-        Top = 116
-        Width = 682
-        Height = 26
-        Hint = 'Digite o local do documento ou o link'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 9
-      end
       object medtTempoTrein: TMaskEdit
-        Left = 547
-        Top = 28
+        Left = 8
+        Top = 157
         Width = 54
         Height = 26
         EditMask = '99:99;1;_'
@@ -2659,8 +2646,8 @@ object FormCadColaboradores: TFormCadColaboradores
         Text = '  :  '
       end
       object edtCustoTrein: TCurrencyEdit
-        Left = 655
-        Top = 28
+        Left = 69
+        Top = 157
         Width = 107
         Height = 26
         Margins.Left = 5
@@ -2675,15 +2662,43 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         TabOrder = 3
       end
+      object edtTreComprovacao: TEdit
+        Left = 7
+        Top = 115
+        Width = 683
+        Height = 26
+        Hint = 'Digite o local do documento ou o link'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 8
+      end
+      object dblInternoExterno: TDBLookupComboBox
+        Left = 182
+        Top = 157
+        Width = 139
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_com'
+        ListField = 'valo_com'
+        ListSource = dsIntExt
+        ParentFont = False
+        TabOrder = 10
+      end
     end
     object tsHabilidades: TTabSheet
       Caption = 'Habilidades'
       ImageIndex = 5
       OnShow = tsCurriculoShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl22: TLabel
         Left = 75
         Top = 12
@@ -2750,7 +2765,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object edtCodigoHab: TEdit
         Left = 7
@@ -2765,7 +2780,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object dblHabilidades: TDBLookupComboBox
         Left = 7
@@ -2781,7 +2796,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ListField = 'desc_hab'
         ListSource = dsHabilidades
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
       end
       object dbg1: TDBGrid
         Left = 7
@@ -2800,7 +2815,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 7
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -2861,7 +2876,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 5
       end
       object edtAno: TEdit
         Left = 423
@@ -2876,7 +2891,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Font.Style = []
         MaxLength = 4
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 6
       end
       object btnInserirTodos: TBitBtn
         Left = 543
@@ -3008,7 +3023,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 0
         OnClick = btnInserirTodosClick
       end
       object pnlCopiarHab: TPanel
@@ -3016,7 +3031,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Top = 146
         Width = 260
         Height = 223
-        TabOrder = 7
+        TabOrder = 8
         Visible = False
         object pnl7: TPanel
           Left = 1
@@ -3486,7 +3501,7 @@ object FormCadColaboradores: TFormCadColaboradores
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 3
         OnClick = btnCopiaHabFuncaoClick
       end
       object pnlCopiarHabFuncao: TPanel
@@ -3837,10 +3852,6 @@ object FormCadColaboradores: TFormCadColaboradores
     object tsFuncao: TTabSheet
       Caption = 'Aut./Resp. da Fun'#231#227'o'
       ImageIndex = 8
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl59: TLabel
         Left = 7
         Top = 12
@@ -3950,10 +3961,6 @@ object FormCadColaboradores: TFormCadColaboradores
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13
@@ -4077,6 +4084,20 @@ object FormCadColaboradores: TFormCadColaboradores
           'Nome do Colaborador'
           'Fun'#231#227'o')
       end
+      object rgStatus: TRadioGroup
+        Left = 531
+        Top = 3
+        Width = 242
+        Height = 51
+        Caption = 'Status'
+        Columns = 3
+        Items.Strings = (
+          'TODOS'
+          'Ativos'
+          'Inativos')
+        TabOrder = 3
+        OnClick = rgStatusClick
+      end
     end
   end
   object pnl1: TPanel
@@ -4085,7 +4106,7 @@ object FormCadColaboradores: TFormCadColaboradores
     Width = 784
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -4887,7 +4908,7 @@ object FormCadColaboradores: TFormCadColaboradores
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 6
+      TabOrder = 7
       OnClick = btnSairClick
     end
     object btnAlterar: TBitBtn
@@ -5029,7 +5050,7 @@ object FormCadColaboradores: TFormCadColaboradores
       Top = 18
       Width = 161
       Height = 40
-      TabOrder = 7
+      TabOrder = 8
       object btnPrimeiro: TBitBtn
         Left = 1
         Top = 1
@@ -5694,16 +5715,16 @@ object FormCadColaboradores: TFormCadColaboradores
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 8
+      TabOrder = 6
       OnClick = btnAvaliadorClick
     end
   end
   object pnlImprimir: TPanel
-    Left = 640
-    Top = 197
+    Left = 629
+    Top = 128
     Width = 731
     Height = 377
-    TabOrder = 2
+    TabOrder = 1
     object pnl2: TPanel
       Left = 1
       Top = 304
@@ -6176,7 +6197,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Width = 353
         Height = 77
         Caption = 'Processo'
-        TabOrder = 1
+        TabOrder = 2
         object dblFiltroProcesso: TDBLookupComboBox
           Left = 4
           Top = 18
@@ -6209,7 +6230,7 @@ object FormCadColaboradores: TFormCadColaboradores
         Width = 353
         Height = 77
         Caption = 'Fun'#231#227'o'
-        TabOrder = 2
+        TabOrder = 1
         object dblFiltroFuncao: TDBLookupComboBox
           Left = 4
           Top = 18
@@ -6238,8 +6259,8 @@ object FormCadColaboradores: TFormCadColaboradores
       end
     end
     object pnl5: TPanel
-      Left = 2
-      Top = 44
+      Left = 4
+      Top = 43
       Width = 360
       Height = 252
       TabOrder = 1
@@ -6363,9 +6384,9 @@ object FormCadColaboradores: TFormCadColaboradores
         '_com as Educacao,'
       'expe_col, TC1.valo_com as Experiencia,'
       
-        'esco_col, conc_col, obs_col, proc_col, P.nome_pro, IF(col_status' +
-        ' = 1,"ATIVO","INATIVO") as Status,'
-      'col_email'
+        'esco_col, conc_col, obs_col, proc_col, P.nome_pro, TC2.valo_com ' +
+        'as Status,'
+      'col_email, F.fun_cbo'
       'FROM colaboradores'
       
         'INNER JOIN tabela_combos TC ON TC.codi_com = educ_col and TC.tip' +
@@ -6374,7 +6395,10 @@ object FormCadColaboradores: TFormCadColaboradores
         'INNER JOIN tabela_combos TC1 ON TC1.codi_com = expe_col and TC1.' +
         'tipo_com = 7'
       'INNER JOIN funcoes F ON F.codi_fun = func_col'
-      'INNER JOIN processos P ON P.codi_pro = proc_col')
+      'INNER JOIN processos P ON P.codi_pro = proc_col'
+      
+        'INNER JOIN tabela_combos TC2 ON TC2.codi_com = col_status and TC' +
+        '2.tipo_com = 15')
     Params = <>
     Left = 376
     Top = 24
@@ -6449,6 +6473,10 @@ object FormCadColaboradores: TFormCadColaboradores
     object cdsImprimircol_email: TWideStringField
       FieldName = 'col_email'
       Size = 80
+    end
+    object cdsImprimirfun_cbo: TWideStringField
+      FieldName = 'fun_cbo'
+      Size = 10
     end
   end
   object zqryColaboradores: TZQuery
@@ -6629,10 +6657,37 @@ object FormCadColaboradores: TFormCadColaboradores
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42975.509358935180000000
+    ReportOptions.LastChange = 43531.677993020840000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
       'var'
       
@@ -6672,6 +6727,22 @@ object FormCadColaboradores: TFormCadColaboradores
       end
       item
         Name = 'sNovaPagina'
+        Value = Null
+      end
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
         Value = Null
       end>
     Style = <>
@@ -6715,6 +6786,21 @@ object FormCadColaboradores: TFormCadColaboradores
           Width = 1046.929810000000000000
           ShowHint = False
           Diagonal = True
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
       object Detalhe: TfrxMasterData
@@ -6833,7 +6919,7 @@ object FormCadColaboradores: TFormCadColaboradores
         end
         object Memo26: TfrxMemoView
           Left = 736.008350000000000000
-          Width = 94.488193860000030000
+          Width = 94.488193860000000000
           Height = 22.677180000000000000
           ShowHint = False
           DataField = 'tre_custo'
@@ -6851,6 +6937,29 @@ object FormCadColaboradores: TFormCadColaboradores
           HAlign = haRight
           Memo.UTF8W = (
             '[frxDBDSColabTre."tre_custo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo27: TfrxMemoView
+          Left = 830.496600000000000000
+          Width = 94.488193860000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          DataField = 'intext'
+          DataSet = frxDBDSColabTre
+          DataSetName = 'frxDBDSColabTre'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSColabTre."intext"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -7316,6 +7425,22 @@ object FormCadColaboradores: TFormCadColaboradores
           ShowHint = False
           Frame.Typ = [ftTop]
         end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 11.338590000000010000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object GrupoColaborador: TfrxGroupHeader
         Height = 79.370130000000000000
@@ -7665,7 +7790,7 @@ object FormCadColaboradores: TFormCadColaboradores
         object Memo24: TfrxMemoView
           Left = 736.008350000000000000
           Top = 60.472479999999990000
-          Width = 94.488193860000030000
+          Width = 94.488193860000000000
           Height = 18.897650000000000000
           ShowHint = False
           Color = cl3DLight
@@ -7679,6 +7804,26 @@ object FormCadColaboradores: TFormCadColaboradores
           HAlign = haCenter
           Memo.UTF8W = (
             'Custo')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo28: TfrxMemoView
+          Left = 830.496600000000000000
+          Top = 60.472479999999990000
+          Width = 94.488193860000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Int./Ext.')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -7703,7 +7848,8 @@ object FormCadColaboradores: TFormCadColaboradores
       'proc_col=proc_col'
       'nome_pro=nome_pro'
       'Status=Status'
-      'col_email=col_email')
+      'col_email=col_email'
+      'fun_cbo=fun_cbo')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 304
@@ -7990,9 +8136,14 @@ object FormCadColaboradores: TFormCadColaboradores
       
         'SELECT C.codi_col, C.codi_tre, C.dtpr_tre, C.dtre_tre, C.codi_pl' +
         'a, C.tipo_tre, T.desc_tre, '
-      'C.tre_certificado, C.tre_custo, C.tre_tempo'
+      
+        'C.tre_certificado, C.tre_custo, C.tre_tempo, tre_int_ext, TC.val' +
+        'o_com as IntExt'
       'FROM colab_treinamentos C'
-      'INNER JOIN treinamentos T ON T.codi_tre = C.codi_tre')
+      'INNER JOIN treinamentos T ON T.codi_tre = C.codi_tre'
+      
+        'INNER JOIN tabela_combos TC ON TC.tipo_com = 16 AND codi_com = C' +
+        'AST(C.tre_int_ext as integer)')
     Params = <>
     Left = 72
     Top = 312
@@ -8049,6 +8200,15 @@ object FormCadColaboradores: TFormCadColaboradores
     object cdsTreinamentosColtre_tempo: TWideStringField
       FieldName = 'tre_tempo'
       Size = 5
+    end
+    object cdsTreinamentosColintext: TWideStringField
+      FieldName = 'intext'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsTreinamentosColtre_int_ext: TWideStringField
+      FieldName = 'tre_int_ext'
+      Size = 1
     end
   end
   object dsTreinamentosCol: TDataSource
@@ -8250,7 +8410,8 @@ object FormCadColaboradores: TFormCadColaboradores
       'dtre_tre=dtre_tre'
       'tipo_tre=tipo_tre'
       'tre_custo=tre_custo'
-      'tre_tempo=tre_tempo')
+      'tre_tempo=tre_tempo'
+      'intext=intext')
     DataSet = cdsImprimirTre
     BCDToCurrency = False
     Left = 304
@@ -8448,6 +8609,11 @@ object FormCadColaboradores: TFormCadColaboradores
       FieldName = 'tre_tempo'
       Size = 5
     end
+    object cdsImprimirTreintext: TWideStringField
+      FieldName = 'intext'
+      ReadOnly = True
+      Size = 50
+    end
   end
   object dspImprimirTre: TDataSetProvider
     DataSet = zqryImprimirTre
@@ -8467,7 +8633,7 @@ object FormCadColaboradores: TFormCadColaboradores
       
         'C.col_email, CT.codi_tre, T.desc_tre, CT.dtpr_tre, CT.dtre_tre, ' +
         'CT.tipo_tre,'
-      'CT.tre_custo, CT.tre_tempo'
+      'CT.tre_custo, CT.tre_tempo, TC3.valo_com as IntExt'
       'FROM colaboradores C'
       
         'INNER JOIN tabela_combos TC ON TC.codi_com = educ_col and TC.tip' +
@@ -8481,7 +8647,10 @@ object FormCadColaboradores: TFormCadColaboradores
       'INNER JOIN funcoes F ON F.codi_fun = func_col'
       'INNER JOIN processos P ON P.codi_pro = proc_col'
       'INNER JOIN colab_treinamentos CT ON CT.codi_col = C.codi_col'
-      'INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre')
+      'INNER JOIN treinamentos T ON T.codi_tre = CT.codi_tre'
+      
+        'LEFT JOIN tabela_combos TC3 ON TC3.tipo_com = 16 AND TC3.codi_co' +
+        'm = CAST(CT.tre_int_ext as Integer)')
     Params = <>
     Left = 376
     Top = 112
@@ -8661,5 +8830,30 @@ object FormCadColaboradores: TFormCadColaboradores
     Params = <>
     Left = 72
     Top = 360
+  end
+  object zqryIntExt: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 72
+    Top = 408
+  end
+  object dspIntExt: TDataSetProvider
+    DataSet = zqryIntExt
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 112
+    Top = 408
+  end
+  object cdsIntExt: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspIntExt'
+    Left = 152
+    Top = 408
+  end
+  object dsIntExt: TDataSource
+    DataSet = cdsIntExt
+    Left = 192
+    Top = 408
   end
 end

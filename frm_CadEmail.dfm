@@ -1,11 +1,11 @@
-object FormAlteraSenha: TFormAlteraSenha
+object FormCadEmail: TFormCadEmail
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
-  Caption = 'Altera'#231#227'o de Senha de Usu'#225'rio'
-  ClientHeight = 280
-  ClientWidth = 255
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Cadastro de E-mail'
+  ClientHeight = 180
+  ClientWidth = 566
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,83 +13,72 @@ object FormAlteraSenha: TFormAlteraSenha
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
-  OnCloseQuery = FormCloseQuery
-  OnShow = FormShow
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object lbl1: TLabel
+  object lbl17: TLabel
     Left = 16
-    Top = 8
-    Width = 36
-    Height = 13
-    Caption = 'Usu'#225'rio'
+    Top = 9
+    Width = 87
+    Height = 18
+    Caption = 'Colaborador: '
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
+    Font.Color = clWindowText
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    Transparent = True
   end
-  object lbl2: TLabel
+  object lblNomeCol: TLabel
+    Left = 104
+    Top = 9
+    Width = 39
+    Height = 18
+    Caption = 'Nome'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbl15: TLabel
+    Left = 16
+    Top = 37
+    Width = 28
+    Height = 13
+    Caption = 'E-mail'
+  end
+  object edtEmail: TEdit
     Left = 16
     Top = 54
-    Width = 58
-    Height = 13
-    Caption = 'Senha Atual'
+    Width = 531
+    Height = 26
+    CharCase = ecLowerCase
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
+    Font.Color = clWindowText
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    Transparent = True
+    TabOrder = 0
   end
-  object lbl3: TLabel
-    Left = 16
-    Top = 102
-    Width = 58
-    Height = 13
-    Caption = 'Nova Senha'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    Transparent = True
-  end
-  object lbl4: TLabel
-    Left = 16
-    Top = 150
-    Width = 108
-    Height = 13
-    Caption = 'Confirmar Nova Senha'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    Transparent = True
-  end
-  object pnl11: TPanel
+  object pnl5: TPanel
     Left = 0
-    Top = 208
-    Width = 255
+    Top = 108
+    Width = 566
     Height = 72
     Align = alBottom
-    TabOrder = 0
-    object sbSair: TSpeedButton
-      Left = 181
+    TabOrder = 1
+    object btnSairEmail: TBitBtn
+      Left = 492
       Top = 1
       Width = 73
       Height = 70
-      Hint = 'Clique para fechar'
+      Hint = 'Clique para sair'
       Align = alRight
-      Caption = '&Sair'
-      Flat = True
+      Caption = 'Sair'
+      DoubleBuffered = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -11
@@ -208,22 +197,20 @@ object FormAlteraSenha: TFormAlteraSenha
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
       NumGlyphs = 2
+      ParentDoubleBuffered = False
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      OnClick = sbSairClick
-      ExplicitLeft = 909
-      ExplicitTop = 6
-      ExplicitHeight = 55
+      TabOrder = 0
     end
-    object btnOk: TBitBtn
+    object btnGravarEmail: TBitBtn
       Left = 1
       Top = 1
       Width = 73
       Height = 70
-      Hint = 'Clique para entrar no sistema'
+      Hint = 'Clique para gravar o e-mail do colaborador'
       Align = alLeft
-      Caption = '&Ok'
+      Caption = '&Gravar'
       DoubleBuffered = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -347,96 +334,8 @@ object FormAlteraSenha: TFormAlteraSenha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
-      OnClick = btnOkClick
+      TabOrder = 1
+      OnClick = btnGravarEmailClick
     end
-  end
-  object edtUsuario: TEdit
-    Left = 16
-    Top = 24
-    Width = 218
-    Height = 26
-    CharCase = ecUpperCase
-    Enabled = False
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-  end
-  object edtSenhaAtual: TEdit
-    Left = 16
-    Top = 70
-    Width = 218
-    Height = 26
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    MaxLength = 20
-    ParentFont = False
-    PasswordChar = '*'
-    TabOrder = 2
-  end
-  object edtNovaSenha: TEdit
-    Left = 16
-    Top = 118
-    Width = 218
-    Height = 26
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    MaxLength = 20
-    ParentFont = False
-    PasswordChar = '*'
-    TabOrder = 3
-    OnExit = edtNovaSenhaExit
-  end
-  object edtConfSenha: TEdit
-    Left = 16
-    Top = 165
-    Width = 218
-    Height = 26
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    MaxLength = 20
-    ParentFont = False
-    PasswordChar = '*'
-    TabOrder = 4
-  end
-  object zqryGravar: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      '')
-    Params = <>
-    Left = 56
-    Top = 192
-  end
-  object dspGravar: TDataSetProvider
-    DataSet = zqryGravar
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 96
-    Top = 192
-  end
-  object cdsGravar: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspGravar'
-    Left = 136
-    Top = 192
-  end
-  object dsGravar: TDataSource
-    DataSet = cdsGravar
-    Left = 176
-    Top = 192
   end
 end

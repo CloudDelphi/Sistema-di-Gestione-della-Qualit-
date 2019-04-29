@@ -22,7 +22,7 @@ object FormCadClientes: TFormCadClientes
     Top = 0
     Width = 762
     Height = 444
-    ActivePage = tsPesquisa
+    ActivePage = tsObs
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -2874,8 +2874,8 @@ object FormCadClientes: TFormCadClientes
     end
   end
   object pnlImpObs: TPanel
-    Left = 220
-    Top = 153
+    Left = 101
+    Top = 269
     Width = 382
     Height = 258
     TabOrder = 3

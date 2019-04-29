@@ -828,7 +828,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
     Width = 528
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -960,7 +960,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnClick = btnNovoClick
     end
     object btnGravar: TBitBtn
@@ -1094,7 +1094,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btnGravarClick
     end
     object btnExcluir: TBitBtn
@@ -1228,7 +1228,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnExcluirClick
     end
     object btnCancelar: TBitBtn
@@ -1764,7 +1764,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btnAlterarClick
     end
   end
@@ -1773,7 +1773,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
     Top = 50
     Width = 365
     Height = 219
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
     object pnl2: TPanel
       Left = 1
@@ -1781,7 +1781,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       Width = 363
       Height = 72
       Align = alBottom
-      TabOrder = 2
+      TabOrder = 3
       object btnSairImp: TBitBtn
         Left = 289
         Top = 1
@@ -2221,7 +2221,7 @@ object FormCadTreinamentos: TFormCadTreinamentos
       Top = 102
       Width = 338
       Height = 39
-      TabOrder = 3
+      TabOrder = 2
       object chkConteudo: TCheckBox
         Tag = 30
         Left = 8

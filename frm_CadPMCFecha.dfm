@@ -14,6 +14,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +23,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 0
     Width = 750
     Height = 602
-    ActivePage = tsCadastro
+    ActivePage = tsAcoes
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -30,7 +31,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     TabStop = False
     OnChange = pctFechaPMCChange
     TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
@@ -64,7 +65,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Caption = 'Cadastro PMC'
       object lbl38: TLabel
         Left = 553
-        Top = 243
+        Top = 213
         Width = 28
         Height = 13
         Caption = 'Custo'
@@ -122,63 +123,63 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object lbl16: TLabel
         Left = 7
-        Top = 60
+        Top = 53
         Width = 43
         Height = 13
         Caption = 'Processo'
       end
       object lbl3: TLabel
         Left = 81
-        Top = 242
+        Top = 213
         Width = 61
         Height = 13
         Caption = 'Respons'#225'vel'
       end
       object lbl8: TLabel
         Left = 7
-        Top = 242
+        Top = 213
         Width = 47
         Height = 13
         Caption = 'Procede ?'
       end
       object lbl7: TLabel
         Left = 304
-        Top = 60
+        Top = 53
         Width = 93
         Height = 13
         Caption = 'Requisito da Norma'
       end
       object lbl11: TLabel
         Left = 559
-        Top = 61
+        Top = 53
         Width = 34
         Height = 13
         Caption = 'Origem'
       end
       object lbl4: TLabel
         Left = 7
-        Top = 154
+        Top = 134
         Width = 89
         Height = 13
         Caption = 'N'#227'o Conformidade'
       end
       object lbl12: TLabel
         Left = 7
-        Top = 291
+        Top = 293
         Width = 139
         Height = 13
         Caption = 'A'#231#227'o de Conten'#231#227'o Imediata'
       end
       object lbl13: TLabel
         Left = 373
-        Top = 291
+        Top = 293
         Width = 110
         Height = 13
         Caption = 'Identifica'#231#227'o da Causa'
       end
       object lbl14: TLabel
         Left = 7
-        Top = 435
+        Top = 437
         Width = 106
         Height = 13
         Caption = 'Verifica'#231#227'o da Efic'#225'cia'
@@ -192,14 +193,14 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object lbl17: TLabel
         Left = 373
-        Top = 435
+        Top = 437
         Width = 28
         Height = 13
         Caption = 'Eficaz'
       end
       object lbl23: TLabel
         Left = 7
-        Top = 107
+        Top = 91
         Width = 33
         Height = 13
         Caption = 'Cliente'
@@ -215,7 +216,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object lbl24: TLabel
         Left = 377
-        Top = 107
+        Top = 91
         Width = 55
         Height = 13
         Caption = 'Fornecedor'
@@ -231,14 +232,14 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object lbl27: TLabel
         Left = 7
-        Top = 198
+        Top = 175
         Width = 100
         Height = 13
         Caption = 'Arquivo de Evid'#234'ncia'
       end
       object sbVisualizar: TSpeedButton
         Left = 707
-        Top = 209
+        Top = 184
         Width = 32
         Height = 31
         Hint = 'Clique para visualizar o arquivo'
@@ -368,7 +369,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object sbVisualizarNC: TSpeedButton
         Left = 712
-        Top = 170
+        Top = 148
         Width = 25
         Height = 26
         Hint = 'Clique para exibir/ocultar o texto da N'#227'o Conformidade'
@@ -416,10 +417,56 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ShowHint = True
         OnClick = sbVisualizaCausaClick
       end
+      object lbl40: TLabel
+        Left = 7
+        Top = 252
+        Width = 38
+        Height = 13
+        Caption = 'Produto'
+      end
+      object lbl41: TLabel
+        Left = 486
+        Top = 252
+        Width = 32
+        Height = 13
+        Caption = 'Motivo'
+      end
+      object edtProduto: TEdit
+        Left = 7
+        Top = 266
+        Width = 472
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 15
+      end
+      object dblMotivo: TDBLookupComboBox
+        Left = 485
+        Top = 267
+        Width = 254
+        Height = 26
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_com'
+        ListField = 'valo_com'
+        ListSource = dsMotivos
+        ParentFont = False
+        TabOrder = 16
+      end
       object edtCusto: TCurrencyEdit
         Tag = 30
         Left = 553
-        Top = 258
+        Top = 227
         Width = 122
         Height = 26
         Hint = 'Custo'
@@ -434,7 +481,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 25
+        TabOrder = 13
       end
       object edtColabEficacia: TEdit
         Left = 519
@@ -449,10 +496,10 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 24
+        TabOrder = 27
       end
       object edtUsuarioEficacia: TEdit
-        Left = 370
+        Left = 373
         Top = 545
         Width = 143
         Height = 26
@@ -464,7 +511,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 23
+        TabOrder = 26
       end
       object dtPrevEficacia: TDateEdit
         Left = 507
@@ -495,7 +542,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'valo_com'
         ListSource = dsFasePMC
         ParentFont = False
-        TabOrder = 22
+        TabOrder = 24
       end
       object dblTipo: TDBLookupComboBox
         Left = 514
@@ -512,7 +559,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'valo_com'
         ListSource = dsTipo
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object edtIdentificacao: TEdit
         Left = 7
@@ -527,11 +574,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 0
+        TabOrder = 1
       end
       object dblProcesso: TDBLookupComboBox
         Left = 7
-        Top = 76
+        Top = 67
         Width = 291
         Height = 26
         Enabled = False
@@ -544,11 +591,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'nome_pro'
         ListSource = dsProcessos
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object dblResponsavel: TDBLookupComboBox
         Left = 81
-        Top = 259
+        Top = 228
         Width = 464
         Height = 26
         Enabled = False
@@ -561,11 +608,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'nome_col'
         ListSource = dsResponsavel
         ParentFont = False
-        TabOrder = 10
+        TabOrder = 14
       end
       object dblProcede: TDBLookupComboBox
         Left = 7
-        Top = 258
+        Top = 227
         Width = 68
         Height = 26
         Enabled = False
@@ -578,7 +625,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'valo_com'
         ListSource = dsProcede
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 12
       end
       object dtData: TDateEdit
         Left = 107
@@ -593,7 +640,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object dblEmitido: TDBLookupComboBox
         Left = 217
@@ -610,11 +657,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'nome_col'
         ListSource = dsEmitido
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 3
       end
       object edtReqNorma: TEdit
         Left = 304
-        Top = 76
+        Top = 67
         Width = 249
         Height = 26
         CharCase = ecUpperCase
@@ -625,11 +672,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
       end
       object dblOrigem: TDBLookupComboBox
         Left = 559
-        Top = 76
+        Top = 67
         Width = 180
         Height = 26
         Enabled = False
@@ -642,11 +689,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'valo_com'
         ListSource = dsOrigem
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object mmoNaoConformidade: TMemo
         Left = 7
-        Top = 170
+        Top = 148
         Width = 701
         Height = 26
         Enabled = False
@@ -659,7 +706,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 7
+        TabOrder = 10
         OnKeyPress = mmoNaoConformidadeKeyPress
       end
       object mmoAcaoContencao: TMemo
@@ -676,7 +723,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 11
+        TabOrder = 17
         OnKeyPress = mmoNaoConformidadeKeyPress
       end
       object mmoCausa: TMemo
@@ -693,7 +740,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 12
+        TabOrder = 18
         OnKeyPress = mmoNaoConformidadeKeyPress
       end
       object mmoEficacia: TMemo
@@ -710,7 +757,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           '')
         ParentFont = False
         ScrollBars = ssVertical
-        TabOrder = 13
+        TabOrder = 19
         OnEnter = mmoEficaciaEnter
         OnKeyPress = mmoNaoConformidadeKeyPress
       end
@@ -726,7 +773,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 15
+        TabOrder = 22
       end
       object dblEficaz: TDBLookupComboBox
         Left = 373
@@ -742,11 +789,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'valo_com'
         ListSource = dsEficaz
         ParentFont = False
-        TabOrder = 14
+        TabOrder = 20
       end
       object dblClientes: TDBLookupComboBox
         Left = 7
-        Top = 122
+        Top = 106
         Width = 362
         Height = 26
         Enabled = False
@@ -759,11 +806,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'cli_nome'
         ListSource = dsClientes
         ParentFont = False
-        TabOrder = 17
+        TabOrder = 9
       end
       object dblForn: TDBLookupComboBox
         Left = 377
-        Top = 122
+        Top = 105
         Width = 362
         Height = 26
         Enabled = False
@@ -776,11 +823,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ListField = 'forn_nome'
         ListSource = dsForn
         ParentFont = False
-        TabOrder = 18
+        TabOrder = 8
       end
       object edtCaminho: TEdit
         Left = 7
-        Top = 214
+        Top = 189
         Width = 694
         Height = 24
         Enabled = False
@@ -790,7 +837,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 11
       end
       object edtPMCSubs: TEdit
         Left = 373
@@ -805,14 +852,14 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 16
+        TabOrder = 23
       end
       object pnlEmail: TPanel
-        Left = 634
-        Top = -4
+        Left = 622
+        Top = 47
         Width = 578
         Height = 188
-        TabOrder = 20
+        TabOrder = 0
         object lbl29: TLabel
           Left = 16
           Top = 61
@@ -840,7 +887,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Width = 576
           Height = 72
           Align = alBottom
-          TabOrder = 1
+          TabOrder = 2
           object btnSairEmail: TBitBtn
             Left = 502
             Top = 1
@@ -972,7 +1019,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 0
+            TabOrder = 1
             OnClick = btnSairEmailClick
           end
           object btnGravarEmail: TBitBtn
@@ -1106,7 +1153,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 0
             OnClick = btnGravarEmailClick
           end
         end
@@ -1139,7 +1186,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 1
         end
       end
       object pnlNaoConformidade: TPanel
@@ -1148,14 +1195,14 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Width = 732
         Height = 401
         Caption = 'pnlNaoConformidade'
-        TabOrder = 19
+        TabOrder = 25
         object pnl12: TPanel
           Left = 1
           Top = 328
           Width = 730
           Height = 72
           Align = alBottom
-          TabOrder = 0
+          TabOrder = 1
           object btnFechar: TBitBtn
             Left = 656
             Top = 1
@@ -1306,7 +1353,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             '')
           ParentFont = False
           ScrollBars = ssVertical
-          TabOrder = 1
+          TabOrder = 0
           OnKeyPress = mmoNaoConformidadeBigKeyPress
         end
       end
@@ -10696,7 +10743,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 4
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object mmoMaquina: TMemo
@@ -10714,7 +10761,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 5
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object mmoMetodo: TMemo
@@ -10732,7 +10779,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 6
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object mmoMedicao: TMemo
@@ -10750,7 +10797,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 13
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object mmoMaoObra: TMemo
@@ -10768,7 +10815,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 14
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object mmoMateriaPrima: TMemo
@@ -10786,7 +10833,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 5
+        TabOrder = 15
         OnKeyPress = mmoDescricaoAcaoKeyPress
       end
       object pnl4: TPanel
@@ -10796,7 +10843,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Height = 20
         BevelOuter = bvLowered
         Caption = 'MEIO AMBIENTE'
-        TabOrder = 6
+        TabOrder = 0
       end
       object pnl5: TPanel
         Left = 199
@@ -10805,7 +10852,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Height = 20
         BevelOuter = bvLowered
         Caption = 'M'#193'QUINA'
-        TabOrder = 7
+        TabOrder = 1
       end
       object pnl6: TPanel
         Left = 387
@@ -10814,7 +10861,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Height = 20
         BevelOuter = bvLowered
         Caption = 'M'#201'TODO'
-        TabOrder = 8
+        TabOrder = 2
       end
       object mmoProblema: TMemo
         Left = 573
@@ -10874,7 +10921,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 13
+        TabOrder = 3
       end
       object dtIshikawa: TDateEdit
         Left = 573
@@ -10889,7 +10936,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Font.Style = []
         NumGlyphs = 2
         ParentFont = False
-        TabOrder = 14
+        TabOrder = 7
       end
       object pnl10: TPanel
         Left = 573
@@ -10898,7 +10945,36 @@ object FormCadPMCFecha: TFormCadPMCFecha
         Height = 20
         BevelOuter = bvLowered
         Caption = 'EFEITO (PROBLEMA)'
-        TabOrder = 15
+        TabOrder = 8
+      end
+    end
+    object tsBrainstorm: TTabSheet
+      Caption = 'Brainstorm'
+      ImageIndex = 3
+      object lbl39: TLabel
+        Left = 11
+        Top = 8
+        Width = 153
+        Height = 13
+        Caption = 'Digite o resultado do Brainstorm'
+      end
+      object mmoBrainstorm: TMemo
+        Left = 11
+        Top = 25
+        Width = 724
+        Height = 546
+        Hint = 'Digite o resultado do Brainstorm'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        ParentShowHint = False
+        ScrollBars = ssVertical
+        ShowHint = True
+        TabOrder = 0
+        OnKeyPress = mmoDescricaoAcaoKeyPress
       end
     end
     object tsAcoes: TTabSheet
@@ -10958,9 +11034,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       object dbgAcoesPMC: TDBGrid
         Left = 9
-        Top = 335
+        Top = 370
         Width = 730
-        Height = 236
+        Height = 201
         Hint = 'Selecione o registro para alterar'
         TabStop = False
         DataSource = dsPMC_Acoes
@@ -10973,7 +11049,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 3
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -10991,7 +11067,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 350
+            Width = 260
             Visible = True
           end
           item
@@ -11017,20 +11093,32 @@ object FormCadPMCFecha: TFormCadPMCFecha
             Title.Font.Style = [fsBold]
             Width = 90
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'aco_data_implementacao'
+            Title.Caption = 'Data Implem.'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 90
+            Visible = True
           end>
       end
       object pctAcoes: TJvgPageControl
         Left = 7
         Top = 56
         Width = 732
-        Height = 270
+        Height = 308
         ActivePage = tsAcaoDados
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
-        TabOrder = 3
+        TabOrder = 2
         TabStop = False
         OnChange = pctAcoesChange
         TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
@@ -11126,26 +11214,176 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ParentFont = False
             Transparent = True
           end
+          object lbl42: TLabel
+            Left = 602
+            Top = 237
+            Width = 114
+            Height = 13
+            Caption = 'Data da Implementa'#231#227'o'
+            Color = clBackground
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            Transparent = True
+          end
           object sbAcao: TSpeedButton
-            Left = 315
-            Top = 212
-            Width = 25
+            Left = 313
+            Top = 251
+            Width = 35
             Height = 26
             Hint = 'Clique para visualizar o texto em uma caixa maior'
-            Caption = '...'
-            NumGlyphs = 2
+            Glyph.Data = {
+              6A080000424D6A0800000000000036000000280000001B000000190000000100
+              18000000000034080000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F000
+              0000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F8
+              1DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09C
+              DFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89C
+              DFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7
+              F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0DAF3FE8EDBFCB2E6FDF0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0B1E6FD8BDAFBD7F2FEF0F0F000
+              0000F0FAFF2ABBF81DB7F81DB7F886D9FBF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F086D9FB1DB7F81DB7F828BAF8EDF9FE000000CCEFFD1DB7F81DB7F81D
+              B7F81DB7F886D9FBF0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F8
+              1DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F086D9FB1DB7F81DB7F81DB7
+              F81DB7F8CBEEFD000000F7FCFF3AC0F91DB7F81DB7F81DB7F81DB7F886D9FBF0
+              F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0
+              F0F0F0F0F0F086D9FB1DB7F81DB7F81DB7F81DB7F838BFF9F5FCFF000000F0F0
+              F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F886D9FBF0F0F0F0F0F0F0F0F09C
+              DFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F086D9FB1DB7F81DB7F8
+              1DB7F81DB7F835BFF9DFF5FEF0F0F0000000F0F0F0F0F0F0DFF5FE35BFF91DB7
+              F81DB7F81DB7F81DB7F886D9FBF0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89C
+              DFFCF0F0F0F0F0F086D9FB1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7
+              F886D9FBF0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F086D9FB1DB7F81D
+              B7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F886D9FB9CDFFC1DB7
+              F81DB7F81DB7F89CDFFC86D9FB1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0
+              F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE
+              35BFF91DB7F81DB7F81DB7F81DB7F83CC1F91DB7F81DB7F81DB7F83CC1F91DB7
+              F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F000
+              0000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F8
+              1DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F835BFF9DFF5
+              FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F81DB7F8
+              1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F835BFF9
+              DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91D
+              B7F81DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F835
+              BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0DFF5FE3DC1F91DB7F83CC1F9DFF5FEF0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0FBFE
+              FFDDF4FEFBFEFFF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0000000}
             ParentShowHint = False
             ShowHint = True
-            OnClick = sbAcaoClick
+            OnClick = sbVisualizarEntradasClick
           end
           object sbVerifImpl: TSpeedButton
-            Left = 693
+            Left = 691
             Top = 212
-            Width = 25
+            Width = 35
             Height = 26
             Hint = 'Clique para visualizar o texto em uma caixa maior'
-            Caption = '...'
-            NumGlyphs = 2
+            Glyph.Data = {
+              6A080000424D6A0800000000000036000000280000001B000000190000000100
+              18000000000034080000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFF000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F000
+              0000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F8
+              1DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09C
+              DFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89C
+              DFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7
+              F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0DAF3FE8EDBFCB2E6FDF0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0B1E6FD8BDAFBD7F2FEF0F0F000
+              0000F0FAFF2ABBF81DB7F81DB7F886D9FBF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F086D9FB1DB7F81DB7F828BAF8EDF9FE000000CCEFFD1DB7F81DB7F81D
+              B7F81DB7F886D9FBF0F0F0F0F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F8
+              1DB7F89CDFFCF0F0F0F0F0F0F0F0F0F0F0F0F0F0F086D9FB1DB7F81DB7F81DB7
+              F81DB7F8CBEEFD000000F7FCFF3AC0F91DB7F81DB7F81DB7F81DB7F886D9FBF0
+              F0F0F0F0F0F0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0
+              F0F0F0F0F0F086D9FB1DB7F81DB7F81DB7F81DB7F838BFF9F5FCFF000000F0F0
+              F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F886D9FBF0F0F0F0F0F0F0F0F09C
+              DFFC1DB7F81DB7F81DB7F89CDFFCF0F0F0F0F0F0F0F0F086D9FB1DB7F81DB7F8
+              1DB7F81DB7F835BFF9DFF5FEF0F0F0000000F0F0F0F0F0F0DFF5FE35BFF91DB7
+              F81DB7F81DB7F81DB7F886D9FBF0F0F0F0F0F09CDFFC1DB7F81DB7F81DB7F89C
+              DFFCF0F0F0F0F0F086D9FB1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7
+              F886D9FBF0F0F09CDFFC1DB7F81DB7F81DB7F89CDFFCF0F0F086D9FB1DB7F81D
+              B7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F886D9FB9CDFFC1DB7
+              F81DB7F81DB7F89CDFFC86D9FB1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0
+              F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE
+              35BFF91DB7F81DB7F81DB7F81DB7F83CC1F91DB7F81DB7F81DB7F83CC1F91DB7
+              F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F000
+              0000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F8
+              1DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F835BFF9DFF5
+              FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F81DB7F8
+              1DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0DFF5FE35BFF91DB7F81DB7F81DB7F81DB7F81DB7F81DB7F81DB7F835BFF9
+              DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91D
+              B7F81DB7F81DB7F81DB7F81DB7F835BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0DFF5FE35BFF91DB7F81DB7F81DB7F835
+              BFF9DFF5FEF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0000000F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0DFF5FE3DC1F91DB7F83CC1F9DFF5FEF0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0000000F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0FBFE
+              FFDDF4FEFBFEFFF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0
+              F0F0F0F0F0F0F0F0F0F0F0000000}
             ParentShowHint = False
             ShowHint = True
             OnClick = sbVerifImplClick
@@ -11154,7 +11392,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             Left = 0
             Top = 24
             Width = 316
-            Height = 214
+            Height = 253
             Hint = 'Digite a descri'#231#227'o da a'#231#227'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -11202,7 +11440,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             Left = 348
             Top = 70
             Width = 345
-            Height = 171
+            Height = 169
             Hint = 'Digite a verifica'#231#227'o da implanta'#231#227'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -11215,6 +11453,20 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ShowHint = True
             TabOrder = 3
             OnKeyPress = mmoVerificacaoAcaoKeyPress
+          end
+          object dtDataImplementacao: TDateEdit
+            Left = 602
+            Top = 251
+            Width = 114
+            Height = 26
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            NumGlyphs = 2
+            ParentFont = False
+            TabOrder = 4
           end
         end
         object tsEvidencia: TTabSheet
@@ -11498,7 +11750,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 0
+            TabOrder = 3
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
@@ -11783,7 +12035,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 0
             OnClick = btnInserirEvidenciaClick
           end
           object mmoArquivo: TMemo
@@ -11793,7 +12045,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
             Height = 47
             Lines.Strings = (
               'mmoArquivo')
-            TabOrder = 3
+            TabOrder = 2
           end
         end
       end
@@ -11805,9 +12057,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Width = 750
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 8
     object btnGravar: TBitBtn
-      Left = 220
+      Left = 147
       Top = 1
       Width = 73
       Height = 70
@@ -11937,11 +12189,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnGravarClick
     end
     object btnCancelar: TBitBtn
-      Left = 293
+      Left = 220
       Top = 1
       Width = 73
       Height = 70
@@ -12071,7 +12323,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnCancelarClick
     end
     object btnImprimir: TBitBtn
@@ -12339,7 +12591,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 7
+      TabOrder = 9
       OnClick = btnSairClick
     end
     object btnAlterar: TBitBtn
@@ -12612,7 +12864,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       OnClick = btnNovoClick
     end
     object btnExcluir: TBitBtn
-      Left = 147
+      Left = 293
       Top = 1
       Width = 73
       Height = 70
@@ -12742,7 +12994,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 4
       OnClick = btnExcluirClick
     end
     object btnEmail: TBitBtn
@@ -13010,7 +13262,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btnPDCAClick
     end
     object btnRiscos: TBitBtn
@@ -13144,16 +13396,16 @@ object FormCadPMCFecha: TFormCadPMCFecha
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 9
+      TabOrder = 8
       OnClick = btnRiscosClick
     end
   end
   object pnlImprimir: TPanel
-    Left = 711
-    Top = 358
+    Left = 74
+    Top = 44
     Width = 365
     Height = 188
-    TabOrder = 2
+    TabOrder = 7
     object pnl2: TPanel
       Left = 1
       Top = 115
@@ -13583,11 +13835,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
     end
   end
   object pnlDataPrevEficacia: TPanel
-    Left = 676
-    Top = -72
+    Left = 176
+    Top = 409
     Width = 253
     Height = 188
-    TabOrder = 3
+    TabOrder = 0
     object lbl33: TLabel
       Left = 16
       Top = 42
@@ -13601,7 +13853,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Width = 251
       Height = 72
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 2
       object btnSairVerEfic: TBitBtn
         Left = 177
         Top = 1
@@ -13733,7 +13985,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 1
         Visible = False
       end
       object btnGravarVerEfic: TBitBtn
@@ -13867,7 +14119,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnGravarVerEficClick
       end
     end
@@ -13901,12 +14153,12 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Font.Style = []
       NumGlyphs = 2
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object pnlEmailAcoes: TPanel
-    Left = 296
-    Top = 314
+    Left = 606
+    Top = -54
     Width = 365
     Height = 282
     TabOrder = 4
@@ -13943,7 +14195,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Width = 363
       Height = 72
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 3
       object btnSairEmailAcoes: TBitBtn
         Left = 289
         Top = 1
@@ -14075,7 +14327,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 1
         OnClick = btnSairEmailAcoesClick
       end
       object btnEnviarEmail: TBitBtn
@@ -14209,7 +14461,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnEnviarEmailClick
       end
     end
@@ -14239,7 +14491,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Items.Strings = (
         'A'#231#245'es sem Verifica'#231#227'o da Implanta'#231#227'o'
         'Todas as A'#231#245'es')
-      TabOrder = 2
+      TabOrder = 1
     end
     object rgEnvioAcao: TRadioGroup
       Left = 12
@@ -14250,12 +14502,12 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Items.Strings = (
         'Selecionada'
         'Todas as A'#231#245'es')
-      TabOrder = 3
+      TabOrder = 2
     end
   end
   object mmoTexto: TMemo
-    Left = 665
-    Top = 306
+    Left = 553
+    Top = 272
     Width = 315
     Height = 343
     Font.Charset = DEFAULT_CHARSET
@@ -14268,13 +14520,13 @@ object FormCadPMCFecha: TFormCadPMCFecha
     ReadOnly = True
     ScrollBars = ssVertical
     ShowHint = True
-    TabOrder = 5
+    TabOrder = 3
     Visible = False
     OnKeyPress = mmoDescricaoAcaoKeyPress
   end
   object btnFecharTexto: TBitBtn
-    Left = 493
-    Top = 338
+    Left = 405
+    Top = 382
     Width = 73
     Height = 70
     Hint = 'Clique para fechar'
@@ -14407,11 +14659,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
     OnClick = btnFecharTextoClick
   end
   object pnlRiscos: TPanel
-    Left = 99
-    Top = 301
+    Left = 706
+    Top = 33
     Width = 272
     Height = 175
-    TabOrder = 7
+    TabOrder = 5
     Visible = False
     object pnl19: TPanel
       Left = 1
@@ -14419,7 +14671,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Width = 270
       Height = 72
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 2
       object btnFecharRiscos: TBitBtn
         Left = 196
         Top = 1
@@ -14551,7 +14803,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
+        TabOrder = 1
         OnClick = btnFecharRiscosClick
       end
       object btnAbrirRiscos: TBitBtn
@@ -14685,7 +14937,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnAbrirRiscosClick
       end
     end
@@ -14715,15 +14967,15 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Items.Strings = (
         'An'#225'lise de Riscos Internos'
         'An'#225'lise de Riscos de Macroambiente Externo')
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object pnlCadEmail: TPanel
-    Left = 256
-    Top = -48
+    Left = 155
+    Top = 80
     Width = 578
     Height = 188
-    TabOrder = 8
+    TabOrder = 2
     Visible = False
     object lbl36: TLabel
       Left = 16
@@ -14752,8 +15004,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Width = 576
       Height = 72
       Align = alBottom
-      TabOrder = 1
-      object btn1: TBitBtn
+      TabOrder = 2
+      object btnSairCadEmail: TBitBtn
         Left = 502
         Top = 1
         Width = 73
@@ -14884,8 +15136,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 0
-        OnClick = btnSairEmailClick
+        TabOrder = 1
+        OnClick = btnSairCadEmailClick
       end
       object btn2: TBitBtn
         Left = 1
@@ -15018,7 +15270,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnGravarEmailClick
       end
     end
@@ -15051,7 +15303,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object zqryGravar: TZQuery
@@ -15080,7 +15332,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
       
         'SELECT P.*, A.codi_aco, A.desc_aco, A.resp_aco, A.aco_prazo, A.v' +
         'imp_aco,'
-      'tc.valo_com as DescEficaz, C.cli_nome, F.forn_nome, PR.nome_pro'
+      
+        'tc.valo_com as DescEficaz, C.cli_nome, F.forn_nome, PR.nome_pro,' +
+        ' A.aco_data_implementacao'
       'FROM pmc P'
       'LEFT JOIN pmc_acoes A ON P.codi_pmc = A.codi_pmc'
       
@@ -15101,6 +15355,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 152
   end
   object cdsImprimir: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -15286,6 +15541,35 @@ object FormCadPMCFecha: TFormCadPMCFecha
     object cdsImprimirpmc_preveficacia: TDateTimeField
       FieldName = 'pmc_preveficacia'
     end
+    object cdsImprimirpmc_codrisco: TIntegerField
+      FieldName = 'pmc_codrisco'
+    end
+    object cdsImprimirpmc_tiporisco: TIntegerField
+      FieldName = 'pmc_tiporisco'
+    end
+    object cdsImprimirpmc_fase: TIntegerField
+      FieldName = 'pmc_fase'
+    end
+    object cdsImprimirpmc_usuario_eficacia: TWideStringField
+      FieldName = 'pmc_usuario_eficacia'
+      Size = 30
+    end
+    object cdsImprimirpmc_custo: TFloatField
+      FieldName = 'pmc_custo'
+    end
+    object cdsImprimirpmc_brainstorm: TWideMemoField
+      FieldName = 'pmc_brainstorm'
+      BlobType = ftWideMemo
+    end
+    object cdsImprimirpmc_produto: TIntegerField
+      FieldName = 'pmc_produto'
+    end
+    object cdsImprimirpmc_motivo: TIntegerField
+      FieldName = 'pmc_motivo'
+    end
+    object cdsImprimiraco_data_implementacao: TDateTimeField
+      FieldName = 'aco_data_implementacao'
+    end
   end
   object zqryPMC: TZQuery
     Connection = dm.Conexao
@@ -15298,8 +15582,12 @@ object FormCadPMCFecha: TFormCadPMCFecha
         '_pmc, pmc_dataFecha, pmc_cliente, '
       
         'pmc_fornecedor, pmc_arq_evidencia, pmc_substituto, pmc_prevefica' +
-        'cia, pmc_usuario_eficacia, pmc_custo'
+        'cia, pmc_usuario_eficacia, pmc_custo,'
+      
+        'pmc_brainstorm, pmc_produto,  pmc_motivo, P.pro_identificacao, P' +
+        '.pro_descricao'
       'FROM pmc'
+      'LEFT JOIN produtos P ON P.pro_codigo = pmc_produto'
       'ORDER BY nume_pmc')
     Params = <>
     Left = 128
@@ -15426,6 +15714,23 @@ object FormCadPMCFecha: TFormCadPMCFecha
     object cdsPMCpmc_custo: TFloatField
       FieldName = 'pmc_custo'
     end
+    object cdsPMCpmc_brainstorm: TWideMemoField
+      FieldName = 'pmc_brainstorm'
+      BlobType = ftWideMemo
+    end
+    object cdsPMCpmc_produto: TIntegerField
+      FieldName = 'pmc_produto'
+    end
+    object cdsPMCpmc_motivo: TIntegerField
+      FieldName = 'pmc_motivo'
+    end
+    object cdsPMCpro_identificacao: TWideStringField
+      FieldName = 'pro_identificacao'
+    end
+    object cdsPMCpro_descricao: TWideStringField
+      FieldName = 'pro_descricao'
+      Size = 200
+    end
   end
   object dsPMC: TDataSource
     DataSet = cdsPMC
@@ -15433,6 +15738,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 176
   end
   object cdsTipo: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspTipo'
@@ -15470,8 +15776,8 @@ object FormCadPMCFecha: TFormCadPMCFecha
   object opd1: TOpenDialog
     Filter = 'Todos os arquivos|*.*'
     Title = 'Selecionar Arquivo'
-    Left = 608
-    Top = 368
+    Left = 560
+    Top = 344
   end
   object zqryProcessos: TZQuery
     Connection = dm.Conexao
@@ -15517,6 +15823,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 320
   end
   object cdsEmitido: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEmitido'
@@ -15556,6 +15863,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 368
   end
   object cdsProcede: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcede'
@@ -15591,6 +15899,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 232
   end
   object cdsOrigem: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOrigem'
@@ -15628,6 +15937,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     Top = 328
   end
   object cdsResponsavel: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspResponsavel'
@@ -15656,7 +15966,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
     SQL.Strings = (
       
         'SELECT arqu_aco, desc_aco, codi_aco, codi_pmc, resp_aco, vimp_ac' +
-        'o, aco_prazo'
+        'o, aco_prazo, aco_data_implementacao'
       'FROM pmc_acoes')
     Params = <>
     Left = 128
@@ -15716,6 +16026,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
     end
     object cdsPMC_Acoesaco_prazo: TDateTimeField
       FieldName = 'aco_prazo'
+    end
+    object cdsPMC_Acoesaco_data_implementacao: TDateTimeField
+      FieldName = 'aco_data_implementacao'
     end
   end
   object dsPMC_Acoes: TDataSource
@@ -15804,14 +16117,41 @@ object FormCadPMCFecha: TFormCadPMCFecha
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42957.739771076400000000
+    ReportOptions.LastChange = 43578.440373692100000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
-    Left = 280
+    Left = 296
     Top = 112
     Datasets = <
       item
@@ -15825,6 +16165,22 @@ object FormCadPMCFecha: TFormCadPMCFecha
       end
       item
         Name = 'fase'
+        Value = Null
+      end
+      item
+        Name = ' Texro Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = Null
+      end
+      item
+        Name = 'ConfRod'
+        Value = Null
+      end
+      item
+        Name = 'TextoConf'
         Value = Null
       end>
     Style = <>
@@ -15841,7 +16197,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
-        Height = 460.268068030000000000
+        Height = 230.535560000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         Stretched = True
@@ -15895,7 +16251,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = 'dd/mm/yyyy'
@@ -15939,7 +16294,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -15981,7 +16335,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 30.236240000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16022,7 +16375,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 30.236240000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16056,48 +16408,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           ParentFont = False
           VAlign = vaBottom
         end
-        object Memo3: TfrxMemoView
-          Left = 7.936954170000000000
-          Top = 250.637910000000000000
-          Width = 702.992516540000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          StretchMode = smActualHeight
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."ncon_pmc"]')
-          ParentFont = False
-        end
-        object Memo6: TfrxMemoView
-          Left = 8.559060000000000000
-          Top = 231.960730000000000000
-          Width = 702.992580000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Descri'#231#227'o da N'#227'o Conformidade')
-          ParentFont = False
-          VAlign = vaBottom
-        end
         object Memo7: TfrxMemoView
           Left = 10.330894170000000000
           Top = 207.637910000000000000
@@ -16105,7 +16415,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16147,7 +16456,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16182,91 +16490,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           ParentFont = False
           VAlign = vaBottom
         end
-        object Memo19: TfrxMemoView
-          Left = 8.692913390000000000
-          Top = 304.141930000000000000
-          Width = 702.992125980000000000
-          Height = 34.015748030000000000
-          ShowHint = False
-          StretchMode = smMaxHeight
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."imed_pmc"]')
-          ParentFont = False
-        end
-        object Memo20: TfrxMemoView
-          Left = 8.692913390000000000
-          Top = 285.464750000000000000
-          Width = 702.992580000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'A'#231#227'o de Conten'#231#227'o Imediata')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo21: TfrxMemoView
-          Left = 8.692913390000000000
-          Top = 358.220780000000000000
-          Width = 702.992125980000000000
-          Height = 34.015748030000000000
-          ShowHint = False
-          StretchMode = smActualHeight
-          BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
-          DataSetName = 'frxDBPMC'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = clWhite
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haBlock
-          Memo.UTF8W = (
-            '[frxdbPMCFecha."caus_pmc"]')
-          ParentFont = False
-        end
-        object Memo22: TfrxMemoView
-          Left = 8.692913385826770000
-          Top = 339.543600000000000000
-          Width = 702.992125980000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Identifica'#231#227'o da Causa')
-          ParagraphGap = 0.230000000000000000
-          ParentFont = False
-          VAlign = vaBottom
-        end
         object Memo35: TfrxMemoView
           Left = 7.559060000000000000
           Top = 166.299320000000000000
@@ -16274,7 +16497,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16316,7 +16538,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16358,7 +16579,6 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -16409,10 +16629,24 @@ object FormCadPMCFecha: TFormCadPMCFecha
             'Fase: [fase]')
           ParentFont = False
         end
+        object mConfidencialCabec: TfrxMemoView
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object Detalhe: TfrxMasterData
         Height = 107.653680000000000000
-        Top = 540.472790000000000000
+        Top = 627.401980000000000000
         Width = 718.110700000000000000
         AllowSplit = True
         DataSet = frxDBPMCFecha
@@ -16444,7 +16678,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo24: TfrxMemoView
           Left = 30.236220470000000000
-          Top = 73.700787401574760000
+          Top = 73.700787401574640000
           Width = 147.401670000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -16464,7 +16698,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         object Memo25: TfrxMemoView
           Left = 177.637795280000000000
           Top = 73.637910000000040000
-          Width = 336.378106540000000000
+          Width = 241.889856540000000000
           Height = 34.015770000000000000
           ShowHint = False
           DataField = 'NomeRespAcao'
@@ -16484,9 +16718,9 @@ object FormCadPMCFecha: TFormCadPMCFecha
           VAlign = vaCenter
         end
         object Memo26: TfrxMemoView
-          Left = 513.764070000000000000
+          Left = 547.323130000000000000
           Top = 73.637910000000040000
-          Width = 60.472480000000000000
+          Width = 53.669291338582700000
           Height = 34.015770000000000000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
@@ -16498,17 +16732,17 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Prazo:')
+            'Data Implem.:')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo2: TfrxMemoView
-          Left = 574.488560000000000000
+          Left = 600.945270000000000000
           Top = 73.637910000000040000
-          Width = 109.606306540000000000
+          Width = 83.149596540000000000
           Height = 34.015770000000000000
           ShowHint = False
-          DataField = 'aco_prazo'
+          DataField = 'aco_data_implementacao'
           DataSet = frxDBPMCFecha
           DataSetName = 'frxDBPMCFecha'
           DisplayFormat.DecimalSeparator = ','
@@ -16522,7 +16756,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBPMCFecha."aco_prazo"]')
+            '[frxDBPMCFecha."aco_data_implementacao"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -16549,7 +16783,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo31: TfrxMemoView
           Left = 30.236220470000000000
-          Top = 39.590599999999990000
+          Top = 39.590600000000220000
           Width = 653.858626540000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -16569,10 +16803,53 @@ object FormCadPMCFecha: TFormCadPMCFecha
             '[frxDBPMCFecha."vimp_aco"]')
           ParentFont = False
         end
+        object Memo3: TfrxMemoView
+          Left = 418.850650000000000000
+          Top = 73.700787401574760000
+          Width = 45.354360000000000000
+          Height = 34.015770000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Prazo:')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo6: TfrxMemoView
+          Left = 464.457020000000000000
+          Top = 73.700787401574760000
+          Width = 83.149606300000000000
+          Height = 34.015770000000000000
+          ShowHint = False
+          DataField = 'aco_prazo'
+          DataSet = frxDBPMCFecha
+          DataSetName = 'frxDBPMCFecha'
+          DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = 'dd/mm/yyyy'
+          DisplayFormat.Kind = fkDateTime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBPMCFecha."aco_prazo"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
       end
       object PageFooter1: TfrxPageFooter
         Height = 57.031540000000000000
-        Top = 876.850960000000000000
+        Top = 963.780150000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
           Left = 925.945270000000000000
@@ -16587,7 +16864,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo34: TfrxMemoView
           Left = 3.779530000000000000
-          Top = 34.015769999999970000
+          Top = 34.015770000000200000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -16602,16 +16879,16 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Line1: TfrxLineView
           Left = 3.779530000000000000
-          Top = 30.236239999999720000
-          Width = 604.724409448818900000
+          Top = 30.236240000000410000
+          Width = 650.078769450000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
         object Picture2: TfrxPictureView
-          Left = 663.622450000000000000
-          Top = 3.779529999999908000
+          Left = 671.181510000000000000
+          Top = 7.559060000000159000
           Width = 37.795300000000000000
-          Height = 52.913420000000000000
+          Height = 37.795300000000000000
           ShowHint = False
           Picture.Data = {
             0A544A504547496D616765B2340000FFD8FFE105034578696600004D4D002A00
@@ -17042,19 +17319,33 @@ object FormCadPMCFecha: TFormCadPMCFecha
           Transparent = False
           TransparentColor = clWhite
         end
+        object mConfidencialRodape: TfrxMemoView
+          Top = 11.338589999999950000
+          Width = 982.677165350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
       end
       object ReportSummary1: TfrxReportSummary
         Height = 143.181200000000000000
-        Top = 710.551640000000000000
+        Top = 797.480830000000000000
         Width = 718.110700000000000000
         object Memo27: TfrxMemoView
           Left = 30.236220470000000000
-          Top = 22.236239999999610000
+          Top = 22.236239999999390000
           Width = 559.370376540001000000
           Height = 117.165430000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17071,7 +17362,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo28: TfrxMemoView
           Left = 30.236220470000000000
-          Top = 3.559060000000045000
+          Top = 3.559060000000159000
           Width = 559.370440000001000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -17090,12 +17381,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo29: TfrxMemoView
           Left = 594.819144170000000000
-          Top = 22.236239999999610000
+          Top = 22.236239999999390000
           Width = 90.708656540000000000
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17113,7 +17403,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo30: TfrxMemoView
           Left = 594.441250000000000000
-          Top = 3.559060000000045000
+          Top = 3.559060000000159000
           Width = 90.708720000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -17132,12 +17422,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo32: TfrxMemoView
           Left = 593.834914170000000000
-          Top = 67.133889999999620000
+          Top = 67.133890000000060000
           Width = 90.708656540000000000
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17155,7 +17444,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo33: TfrxMemoView
           Left = 593.457020000000000000
-          Top = 48.456709999999810000
+          Top = 48.456710000000270000
           Width = 90.708720000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -17174,12 +17463,11 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo41: TfrxMemoView
           Left = 593.764104170000000000
-          Top = 116.944959999999000000
+          Top = 116.944960000000000000
           Width = 90.708656540000000000
           Height = 18.897650000000000000
           ShowHint = False
           BrushStyle = bsClear
-          DataSet = FormCadPMCAbre.frxDBPMC
           DataSetName = 'frxDBPMC'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -17197,7 +17485,7 @@ object FormCadPMCFecha: TFormCadPMCFecha
         end
         object Memo42: TfrxMemoView
           Left = 593.386210000000000000
-          Top = 98.267779999999100000
+          Top = 98.267779999999900000
           Width = 90.708720000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -17211,6 +17499,150 @@ object FormCadPMCFecha: TFormCadPMCFecha
           HAlign = haCenter
           Memo.UTF8W = (
             'Data Efic'#225'cia')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        Height = 79.149660000000000000
+        Top = 309.921460000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBPMCFecha."nume_pmc"'
+        Stretched = True
+        object Memo43: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 18.677180000000020000
+          Width = 702.992516540000000000
+          Height = 60.472480000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          BrushStyle = bsClear
+          DataSetName = 'frxDBPMC'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Color = clWhite
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haBlock
+          Memo.UTF8W = (
+            '[frxdbPMCFecha."ncon_pmc"]')
+          ParentFont = False
+        end
+        object Memo44: TfrxMemoView
+          Left = 4.401635830000000000
+          Width = 702.992580000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Descri'#231#227'o da N'#227'o Conformidade')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object GroupHeader2: TfrxGroupHeader
+        Height = 98.047288030000000000
+        Top = 411.968770000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBPMCFecha."nume_pmc"'
+        Stretched = True
+        object Memo19: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 26.236240000000010000
+          Width = 702.992125980000000000
+          Height = 71.811048030000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          BrushStyle = bsClear
+          DataSetName = 'frxDBPMC'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Color = clWhite
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haBlock
+          Memo.UTF8W = (
+            '[frxdbPMCFecha."imed_pmc"]')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 7.559059999999988000
+          Width = 702.992580000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'A'#231#227'o de Conten'#231#227'o Imediata')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object GroupHeader3: TfrxGroupHeader
+        Height = 71.590578030000000000
+        Top = 532.913730000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBPMCFecha."nume_pmc"'
+        Stretched = True
+        object Memo21: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 22.456710000000040000
+          Width = 702.992125980000000000
+          Height = 49.133868030000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          BrushStyle = bsClear
+          DataSetName = 'frxDBPMC'
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Color = clWhite
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haBlock
+          Memo.UTF8W = (
+            '[frxdbPMCFecha."caus_pmc"]')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 3.779530000000022000
+          Width = 702.992125980000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Identifica'#231#227'o da Causa')
+          ParagraphGap = 0.230000000000000000
           ParentFont = False
           VAlign = vaBottom
         end
@@ -17258,7 +17690,16 @@ object FormCadPMCFecha: TFormCadPMCFecha
       'pmc_fornecedor=pmc_fornecedor'
       'nome_pro=nome_pro'
       'aco_prazo=aco_prazo'
-      'pmc_preveficacia=pmc_preveficacia')
+      'pmc_preveficacia=pmc_preveficacia'
+      'pmc_codrisco=pmc_codrisco'
+      'pmc_tiporisco=pmc_tiporisco'
+      'pmc_fase=pmc_fase'
+      'pmc_usuario_eficacia=pmc_usuario_eficacia'
+      'pmc_custo=pmc_custo'
+      'pmc_brainstorm=pmc_brainstorm'
+      'pmc_produto=pmc_produto'
+      'pmc_motivo=pmc_motivo'
+      'aco_data_implementacao=aco_data_implementacao')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 368
@@ -17556,5 +17997,79 @@ object FormCadPMCFecha: TFormCadPMCFecha
     DataSet = cdsAcoes_Evidencias
     Left = 248
     Top = 272
+  end
+  object zqryMotivos: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT codi_com, valo_com FROM tabela_combos')
+    Params = <>
+    Left = 128
+    Top = 79
+  end
+  object dspMotivos: TDataSetProvider
+    DataSet = zqryMotivos
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 168
+    Top = 79
+  end
+  object cdsMotivos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMotivos'
+    Left = 208
+    Top = 79
+    object cdsMotivoscodi_com: TLargeintField
+      FieldName = 'codi_com'
+      Required = True
+    end
+    object cdsMotivosvalo_com: TWideStringField
+      FieldName = 'valo_com'
+      Size = 50
+    end
+  end
+  object dsMotivos: TDataSource
+    DataSet = cdsMotivos
+    Left = 248
+    Top = 79
+  end
+  object dsProdutos: TDataSource
+    DataSet = cdsProdutos
+    Left = 248
+    Top = 127
+  end
+  object cdsProdutos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProdutos'
+    Left = 208
+    Top = 127
+    object cdsProdutospro_codigo: TIntegerField
+      FieldName = 'pro_codigo'
+      Required = True
+    end
+    object cdsProdutospro_descricao: TWideStringField
+      FieldName = 'pro_descricao'
+      Size = 200
+    end
+    object cdsProdutospro_identificacao: TWideStringField
+      FieldName = 'pro_identificacao'
+    end
+  end
+  object dspProdutos: TDataSetProvider
+    DataSet = zqryProdutos
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 168
+    Top = 127
+  end
+  object zqryProdutos: TZQuery
+    Connection = dm.Conexao
+    SQL.Strings = (
+      'SELECT pro_codigo, pro_descricao, pro_identificacao'
+      'FROM produtos')
+    Params = <>
+    Left = 128
+    Top = 127
   end
 end

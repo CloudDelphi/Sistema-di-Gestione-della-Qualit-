@@ -685,6 +685,10 @@
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13
@@ -792,7 +796,7 @@
     Width = 528
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -924,10 +928,8 @@
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnClick = btnNovoClick
-      ExplicitLeft = -5
-      ExplicitTop = 2
     end
     object btnGravar: TBitBtn
       Left = 220
@@ -1060,7 +1062,7 @@
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btnGravarClick
     end
     object btnExcluir: TBitBtn
@@ -1194,7 +1196,7 @@
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnExcluirClick
     end
     object btnCancelar: TBitBtn
@@ -1730,7 +1732,7 @@
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btnAlterarClick
     end
   end
@@ -1739,7 +1741,7 @@
     Top = 132
     Width = 365
     Height = 174
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
     object pnl2: TPanel
       Left = 1

@@ -70,11 +70,18 @@ object FormCadProdutos: TFormCadProdutos
         Caption = 'C'#243'digo'
       end
       object Label1: TLabel
-        Left = 14
+        Left = 15
         Top = 63
         Width = 102
         Height = 13
         Caption = 'Descri'#231#227'o do Produto'
+      end
+      object lbl2: TLabel
+        Left = 73
+        Top = 9
+        Width = 62
+        Height = 13
+        Caption = 'Identifica'#231#227'o'
       end
       object edtCodigo: TEdit
         Tag = 30
@@ -97,7 +104,7 @@ object FormCadProdutos: TFormCadProdutos
         Top = 250
         Width = 161
         Height = 40
-        TabOrder = 2
+        TabOrder = 3
         object btnPrimeiro: TBitBtn
           Left = 1
           Top = 1
@@ -643,8 +650,23 @@ object FormCadProdutos: TFormCadProdutos
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 2
         OnExit = edtTreinamentoExit
+      end
+      object edtIdentificacao: TEdit
+        Left = 73
+        Top = 24
+        Width = 184
+        Height = 26
+        CharCase = ecUpperCase
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
       end
     end
     object tsPesquisa: TTabSheet
@@ -703,7 +725,8 @@ object FormCadProdutos: TFormCadProdutos
         TabOrder = 1
         Text = 'Produto'
         Items.Strings = (
-          'Produto')
+          'Produto'
+          'Identifica'#231#227'o')
       end
       object dbgTreinamentos: TDBGrid
         Left = 5
@@ -744,6 +767,18 @@ object FormCadProdutos: TFormCadProdutos
           end
           item
             Expanded = False
+            FieldName = 'pro_identificacao'
+            Title.Caption = 'Identifica'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 120
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'pro_descricao'
             Title.Caption = 'Produto'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -751,7 +786,7 @@ object FormCadProdutos: TFormCadProdutos
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 420
+            Width = 300
             Visible = True
           end>
       end
@@ -763,7 +798,7 @@ object FormCadProdutos: TFormCadProdutos
     Width = 528
     Height = 72
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -895,7 +930,7 @@ object FormCadProdutos: TFormCadProdutos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnClick = btnNovoClick
     end
     object btnGravar: TBitBtn
@@ -1029,7 +1064,7 @@ object FormCadProdutos: TFormCadProdutos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btnGravarClick
     end
     object btnExcluir: TBitBtn
@@ -1163,7 +1198,7 @@ object FormCadProdutos: TFormCadProdutos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnExcluirClick
     end
     object btnCancelar: TBitBtn
@@ -1699,16 +1734,16 @@ object FormCadProdutos: TFormCadProdutos
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btnAlterarClick
     end
   end
   object pnlImprimir: TPanel
-    Left = 155
-    Top = 102
+    Left = 195
+    Top = 154
     Width = 365
     Height = 175
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
     object pnl2: TPanel
       Left = 1
@@ -2144,17 +2179,18 @@ object FormCadProdutos: TFormCadProdutos
       Width = 337
       Height = 59
       Caption = 'Ordem de Impress'#227'o'
-      Columns = 2
+      Columns = 3
       Items.Strings = (
         'C'#243'digo'
-        'Alfab'#233'tica')
+        'Identifica'#231#227'o'
+        'Produto')
       TabOrder = 1
     end
   end
   object zqryProdutos: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT pro_codigo, pro_descricao'
+      'SELECT pro_codigo, pro_descricao, pro_identificacao'
       '  FROM produtos')
     Params = <>
     Left = 64
@@ -2180,6 +2216,9 @@ object FormCadProdutos: TFormCadProdutos
     object cdsProdutospro_descricao: TWideStringField
       FieldName = 'pro_descricao'
       Size = 200
+    end
+    object cdsProdutospro_identificacao: TWideStringField
+      FieldName = 'pro_identificacao'
     end
   end
   object dsProdutos: TDataSource
@@ -2210,7 +2249,7 @@ object FormCadProdutos: TFormCadProdutos
   object zqryImprimir: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT pro_codigo, pro_descricao'
+      'SELECT pro_codigo, pro_descricao, pro_identificacao'
       '  FROM produtos')
     Params = <>
     Left = 360
@@ -2224,7 +2263,6 @@ object FormCadProdutos: TFormCadProdutos
     Top = 216
   end
   object cdsImprimir: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
@@ -2237,6 +2275,9 @@ object FormCadProdutos: TFormCadProdutos
     object cdsImprimirpro_descricao: TWideStringField
       FieldName = 'pro_descricao'
       Size = 200
+    end
+    object cdsImprimirpro_identificacao: TWideStringField
+      FieldName = 'pro_identificacao'
     end
   end
   object zqryAuxiliar: TZQuery
@@ -2268,10 +2309,37 @@ object FormCadProdutos: TFormCadProdutos
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 42355.661663263890000000
+    ReportOptions.LastChange = 43334.412806053240000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      
+        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
+        ';'
+      'begin'
+      '   if <ConfCabec> = 1 then begin'
+      
+        '      mConfidencialCabec.Visible:= True;                        ' +
+        '               '
+      '   end'
+      '   else begin'
+      '      mConfidencialCabec.Visible:= False;  '
+      '   end;  '
+      'end;'
       ''
+      
+        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
+        ');'
+      'begin'
+      '   if <ConfRod> = 1 then begin'
+      
+        '      mConfidencialRodape.Visible:= True;                       ' +
+        '                '
+      '   end'
+      '   else begin'
+      '      mConfidencialRodape.Visible:= False;  '
+      '   end;       '
+      'end;'
+      '  '
       'begin'
       ''
       'end.')
@@ -2279,7 +2347,8 @@ object FormCadProdutos: TFormCadProdutos
     Top = 168
     Datasets = <
       item
-        DataSetName = 'frxDBDSOrigemDefeito'
+        DataSet = frxDBDSProdutos
+        DataSetName = 'frxDBDSProdutos'
       end>
     Variables = <
       item
@@ -2289,6 +2358,22 @@ object FormCadProdutos: TFormCadProdutos
       item
         Name = 'vlMedia'
         Value = Null
+      end
+      item
+        Name = ' Texto Relat'#243'rio'
+        Value = Null
+      end
+      item
+        Name = 'ConfCabec'
+        Value = ''
+      end
+      item
+        Name = 'ConfRod'
+        Value = ''
+      end
+      item
+        Name = 'TextoConf'
+        Value = ''
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -2304,7 +2389,7 @@ object FormCadProdutos: TFormCadProdutos
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object Titulo: TfrxReportTitle
-        Height = 122.000012200000000000
+        Height = 121.944960000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
         StartNewPage = True
@@ -2323,7 +2408,7 @@ object FormCadProdutos: TFormCadProdutos
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'LISTAGEM DE ORIGEM DE DEFEITOS')
+            'LISTAGEM DE PRODUTOS')
           ParentFont = False
         end
         object Line2: TfrxLineView
@@ -2332,11 +2417,12 @@ object FormCadProdutos: TFormCadProdutos
           Diagonal = True
         end
         object Memo6: TfrxMemoView
-          Left = 7.559055118110240000
+          Left = 12.559055120000000000
           Top = 102.913420000000000000
-          Width = 52.913385826771700000
+          Width = 52.913385830000000000
           Height = 18.897650000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2351,11 +2437,12 @@ object FormCadProdutos: TFormCadProdutos
           VAlign = vaCenter
         end
         object Memo1: TfrxMemoView
-          Left = 60.094766460000000000
+          Left = 182.260196460000000000
           Top = 103.047310000000000000
-          Width = 638.740570000000000000
+          Width = 521.575140000000000000
           Height = 18.897650000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2365,24 +2452,61 @@ object FormCadProdutos: TFormCadProdutos
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Origem do Defeito')
+            'Produto')
           ParentFont = False
           VAlign = vaCenter
+        end
+        object Memo3: TfrxMemoView
+          Left = 65.472479999999990000
+          Top = 103.047310000000000000
+          Width = 117.165395830000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Identifica'#231#227'o')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 7.937007874015748000
+          Width = 668.976382830000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
       object Detalhe: TfrxMasterData
         Height = 18.897650000000000000
         Top = 200.315090000000000000
         Width = 718.110700000000000000
-        DataSetName = 'frxDBDSOrigemDefeito'
+        DataSet = frxDBDSProdutos
+        DataSetName = 'frxDBDSProdutos'
         RowCount = 0
         object mCodigo: TfrxMemoView
-          Left = 7.614192760000000000
+          Left = 12.614192760000000000
           Width = 52.535413540000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'ori_codigo'
-          DataSetName = 'frxDBDSOrigemDefeito'
+          DataField = 'pro_codigo'
+          DataSet = frxDBDSProdutos
+          DataSetName = 'frxDBDSProdutos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -2391,17 +2515,18 @@ object FormCadProdutos: TFormCadProdutos
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBDSOrigemDefeito."ori_codigo"]')
+            '[frxDBDSProdutos."pro_codigo"]')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo2: TfrxMemoView
-          Left = 59.937230000000000000
-          Width = 639.118110236220400000
+          Left = 182.102660000000000000
+          Width = 521.952680240000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'ori_descricao'
-          DataSetName = 'frxDBDSOrigemDefeito'
+          DataField = 'pro_descricao'
+          DataSet = frxDBDSProdutos
+          DataSetName = 'frxDBDSProdutos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -2409,7 +2534,28 @@ object FormCadProdutos: TFormCadProdutos
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBDSOrigemDefeito."ori_descricao"]')
+            '[frxDBDSProdutos."pro_descricao"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo5: TfrxMemoView
+          Left = 65.527617640000000000
+          Top = 0.133890000000008100
+          Width = 116.787423540000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'pro_identificacao'
+          DataSet = frxDBDSProdutos
+          DataSetName = 'frxDBDSProdutos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSProdutos."pro_identificacao"]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -2419,7 +2565,7 @@ object FormCadProdutos: TFormCadProdutos
         Top = 279.685220000000000000
         Width = 718.110700000000000000
         object Picture1: TfrxPictureView
-          Left = 668.976810000000000000
+          Left = 680.315400000000000000
           Top = 7.559059999999988000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
@@ -2871,9 +3017,25 @@ object FormCadProdutos: TFormCadProdutos
         object Line1: TfrxLineView
           Left = 7.559060000000000000
           Top = 22.677180000000020000
-          Width = 631.181510000000000000
+          Width = 661.417750000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
+        end
+        object mConfidencialRodape: TfrxMemoView
+          Left = 8.000000000000000000
+          Top = 1.779505589999985000
+          Width = 665.196852830000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
         end
       end
     end
@@ -2883,7 +3045,8 @@ object FormCadProdutos: TFormCadProdutos
     CloseDataSource = False
     FieldAliases.Strings = (
       'pro_codigo=pro_codigo'
-      'pro_descricao=pro_descricao')
+      'pro_descricao=pro_descricao'
+      'pro_identificacao=pro_identificacao')
     DataSet = cdsImprimir
     BCDToCurrency = False
     Left = 304

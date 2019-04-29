@@ -1,11 +1,11 @@
-object FormCadCalibracao: TFormCadCalibracao
+object FormCadDefeitos: TFormCadDefeitos
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Tabela de Calibra'#231#227'o'
-  ClientHeight = 484
-  ClientWidth = 750
+  Caption = 'Cadastro de Defeitos'
+  ClientHeight = 375
+  ClientWidth = 544
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,15 +13,15 @@ object FormCadCalibracao: TFormCadCalibracao
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object pctCalibracao: TJvgPageControl
+  object pctInspecao: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 750
-    Height = 412
+    Width = 544
+    Height = 303
     ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -32,7 +32,7 @@ object FormCadCalibracao: TFormCadCalibracao
     ParentFont = False
     TabOrder = 0
     TabStop = False
-    OnChange = pctCalibracaoChange
+    OnChange = pctInspecaoChange
     TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
     TabStyle.BevelInner = bvNone
     TabStyle.BevelOuter = bvNone
@@ -60,797 +60,54 @@ object FormCadCalibracao: TFormCadCalibracao
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitWidth = 542
+    ExplicitHeight = 301
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
-      object lbl5: TLabel
-        Left = 447
-        Top = 80
-        Width = 62
-        Height = 13
-        Caption = 'Identifica'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl6: TLabel
-        Left = 87
-        Top = 80
-        Width = 125
-        Height = 13
-        Caption = 'Equipamento/Instrumento'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
+      ExplicitLeft = 7
+      ExplicitTop = 22
+      ExplicitWidth = 857
+      ExplicitHeight = 375
       object lbl1: TLabel
-        Left = 21
-        Top = 123
-        Width = 49
+        Left = 15
+        Top = 9
+        Width = 33
         Height = 13
-        Caption = 'Resolu'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl2: TLabel
-        Left = 126
-        Top = 123
-        Width = 54
-        Height = 13
-        Caption = 'Localiza'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl3: TLabel
-        Left = 570
-        Top = 123
-        Width = 53
-        Height = 13
-        Caption = 'Frequ'#234'ncia'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
+        Caption = 'C'#243'digo'
       end
       object lbl4: TLabel
-        Left = 21
-        Top = 169
-        Width = 89
+        Left = 15
+        Top = 61
+        Width = 35
         Height = 13
-        Caption = 'Faixa de Utiliza'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl7: TLabel
-        Left = 213
-        Top = 169
-        Width = 56
-        Height = 13
-        Caption = 'Capacidade'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl8: TLabel
-        Left = 405
-        Top = 169
-        Width = 100
-        Height = 13
-        Caption = 'Crit'#233'rio de Aceita'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
+        Caption = 'Defeito'
       end
       object lbl13: TLabel
-        Left = 565
-        Top = 169
-        Width = 67
+        Left = 15
+        Top = 106
+        Width = 82
         Height = 13
-        Caption = 'Certificado N'#186
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl14: TLabel
-        Left = 20
-        Top = 213
-        Width = 91
-        Height = 13
-        Caption = 'Data da Calibra'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl11: TLabel
-        Left = 132
-        Top = 213
-        Width = 91
-        Height = 13
-        Caption = 'Pr'#243'xima Calibra'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl12: TLabel
-        Left = 20
-        Top = 256
-        Width = 107
-        Height = 13
-        Caption = 'Arquivo do Certificado'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object sbArquivo: TSpeedButton
-        Left = 639
-        Top = 265
-        Width = 32
-        Height = 31
-        Hint = 'Clique para escolher o arquivo do documento'
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFA4C1F7256AEB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB3F7CEEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF42369EB
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBABC6F7FFFFFFFFFFFFFF
-          FFFFFFFFFFC5C3C3726F6E716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8381
-          80F9F9F9FFFFFFFFFFFFCADBFA2369EB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB588DF0FFFFFFFFFFFFFFFFFFFFFFFFB2B0AF716E6D716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6DC9C8C7FFFFFFFFFFFFFBFCFF3777ED
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBDFE9FCFFFFFFFF
-          FFFFFFFFFFDDDCDC716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D939190FFFFFFFFFFFFC5D8FA7CA6F32369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB8BB0F4FFFFFFFFFFFFFFFFFFFCFCFC7E7B7A716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6DEAEAEAFFFFFF7FA8F3C3D6FA
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3978EDFCFDFFFF
-          FFFFFFFFFFDAD9D9AAA9A8716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6DB4B3B2FFFFFF3978EDF9FBFE3273EC2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EBC0D4F9FFFFFFFFFFFFADABAAD9D8D7716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D7F7D7CFDFDFD2369EBCFDEFB
-          74A0F22369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB6B9AF2FF
-          FFFFFFFFFF7F7C7BFBFBFB7A7877716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6DD6D5D52369EB85ACF4BDD2F92369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EB286DEBFFFFFFFFFFFF716E6DE0DFDFA5A3A3716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D9F9D9D2369EB3B79ED
-          F4F7FE76A1F3598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598E
-          F0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF08DB1F5FF
-          FFFFFFFFFF716E6DB0AFAED4D3D3716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6D7471702369EB2369EB6093F1CCDCFAE3ECFCE3ECFCF7FAFEFF
-          FFFFE6EEFDE3ECFCE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          F0F5FEE3ECFCF0F5FEFFFFFFFFFFFFFFFFFFFFFFFF716E6D817E7DF8F8F8A6A5
-          A494929194929194929194929194929194929194929194929194929194929194
-          9291949291949291949291949291949291949291949291B5B4B32369EB2369EB
-          2369EB2369EB2369EB81A9F4F1F6FE75A1F22369EB3C7AEDCADBFAFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC2C6FEC3F7CEEF0F5FEFFFFFFFF
-          FFFFFFFFFF716E6D716E6D999696DEDDDDEDEDEDEDEDEDFAFAFAFFFFFFEFEFEE
-          EDEDEDEFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F5EDED
-          EDF6F5F5FFFFFFFFFFFF2369EB2369EB2369EB2369EB417EEEFDFEFF5B8FF023
-          69EB6B9AF2F0F5FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFAFC8F82369EB729FF2FFFFFFFFFFFFFFFFFF716E6D716E6D716E6D716E
-          6D716E6DAEACABF6F6F6A6A4A3716E6D817E7EDDDCDCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE9E8E877747383807FF6F5F5FFFFFF246AEB2369EB
-          2369EB2369EB6596F1FFFFFF246AEB5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAFE3F7CEE3475EDFFFFFFFF
-          FFFFFFFFFF716E6D716E6D716E6D716E6D848281FEFEFE959392716E6DA09E9D
-          F6F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCBCA
-          CA716E6DA4A2A2FFFFFFA6C2F775A1F275A1F275A1F286ADF4FFFFFF729FF223
-          69EBACC7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          D7E4FB4681EE2369EB83AAF4FFFFFFFFFFFFFFFFFF726F6E716E6D716E6D716E
-          6D9C9A99FFFFFF726F6E8F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA8381807C7978FFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFF2F6FE407DEE2C6FECDAE6FCFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFEFEFFA1BFF6296DEC296DECA2BFF7FEFEFFFFFFFFFF
-          FFFFFFFFFFC6C4C4A6A4A3A6A4A3A6A4A3B1AFAFFFFFFFA4A2A1716E6DCAC8C8
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E58885
-          84716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
-          E1FB276CEB4782EEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFEEF3FD6495F12369EB
-          4681EED7E4FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF7F6F6848180777473E7E7E6FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFEFEFEC2C1C1757271757271C3C2C1FEFEFEFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9EBDF62369EB77A2F3FFFFFFFFFF
-          FFFFFFFFC4D7FA3978ED2369EB7CA6F3F7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2747170
-          888685F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFF4F4F49B9998716E6D888584E5E5
-          E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFF6898F12369EBB0C9F8FBFCFF89AEF4246AEB3273ECB9CFF9FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFC1BFBF716E6DA7A5A5FFFFFFFFFFFFFFFFFFD9
-          D8D87F7C7B716E6DAAA9A8FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F5FE3F7CEE2C6FEC4C85
-          EF2369EB598EF0E7EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE
-          9E9B9B716E6DCCCBCAFCFCFCB3B1B1726F6E7A7877D2D1D1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFD4E2FB3E7BED2C6FEC97B8F6FCFDFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F583807F7774738C8988716E6D94
-          9291EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFE3E3E282807F777473BCBABAFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        NumGlyphs = 2
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = sbArquivoClick
-      end
-      object sbVisualizar: TSpeedButton
-        Left = 677
-        Top = 265
-        Width = 32
-        Height = 31
-        Hint = 'Clique para visualizar o arquivo'
-        Enabled = False
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF73A0F2286DEB3E7BEDC8
-          D9FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCA5A3
-          A274717082807FDBDBDAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FAFBFF6596F12369EB2369EB2369EB3E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D82807FFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB28
-          6DEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E
-          6D716E6D716E6D747170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F1
-          2369EB2369EB2369EB2369EB2369EB73A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFCFCFC9C9A99716E6D716E6D716E6D716E6D716E6DA5A3A2FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB2369EB6596F1FA
-          FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D716E
-          6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB
-          2369EB2369EB2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C
-          9A99716E6D716E6D716E6D716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFDFEFFB9CFF9719EF23978ED2369EB2369EB3978ED719EF2B9CF
-          F9FDFEFFE6EEFD4C85EF2369EB2369EB2369EB2369EB6596F1FAFBFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFED2D1D1A3A1A17F7C7B716E6D716E6D
-          7F7C7BA3A1A1D2D1D1FEFEFEEFEFEE8C8988716E6D716E6D716E6D716E6D9C9A
-          99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB4B84EF2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB4B84EFD3E1FBF6F9FE5F92F02369EB
-          2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E28B88
-          87716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8B8887E3E2E2F9
-          F9F9979595716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          BCD1F92A6EEC2369EB2369EB4D86EF94B6F5B4CCF8B4CCF894B6F54D86EF2369
-          EB2369EB2A6EECBCD1F9F6F9FE4C85EF6596F1FAFBFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFD4D3D2757372716E6D716E6D8C8A89BAB8B8CFCECDCFCECD
-          BAB8B88C8A89716E6D716E6D757372D4D3D2F9F9F98C89889C9A99FCFCFCFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB2A6EEC2369EB3374ECB9CFF9FFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF93374EC2369EB2A6EECD3E1FBE6EEFD
-          FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2757372716E6D7B78
-          77D2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D17B7877716E6D75
-          7372E3E2E2EFEFEEFCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF
-          2369EB3374ECDEE9FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFDEE9FC3374EC2369EB4B84EFFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFE8B8887716E6D7B7877EAE9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFEAE9E97B7877716E6D8B8887FEFEFEFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D171
-          6E6D716E6DD2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF719EF22369EB
-          4D86EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFF4D86EF2369EB719EF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFA3A1A1716E6D8C8A89FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C8A89716E6DA3A1A1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF3978ED2369EB94B6F5FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF94B6F52369EB3978ED
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7C7B716E6DBAB8B8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBA
-          B8B8716E6D7F7C7BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2369EB2369EB
-          B4CCF8FBFCFFF1F6FEFBFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFB4CCF82369EB2369EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFF716E6D716E6DCFCECDFCFCFCF6F6F6FCFCFCFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCECD716E6D716E6DFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF2369EB2369EBB4CCF8CCDCFA2369EBB2CBF8FFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4CCF82369EB2369EB
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF716E6D716E6DCFCECDDEDDDD716E
-          6DCDCCCCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCF
-          CECD716E6D716E6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3978ED2369EB
-          94B6F5F0F5FE266BEB729FF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFF94B6F52369EB3978EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFF7F7C7B716E6DBAB8B8F6F5F573706FA4A2A2FFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBAB8B8716E6D7F7C7BFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF719EF22369EB4D86EFFFFFFF729FF2256AEBB8CFF9FF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D86EF2369EB719EF2
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA3A1A1716E6D8C8A89FFFFFFA4A2
-          A2726F6ED1D0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C
-          8A89716E6DA3A1A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB
-          2369EBB9CFF9EFF4FE437FEE256AEB729FF2B2CBF8FBFCFFFFFFFFFFFFFFFFFF
-          FFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFD2D1D1716E6D716E6DD2D1D1F4F4F4868382726F6EA4A2A2CDCCCCFCFCFC
-          FFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF2369EB3374ECDEE9FCEFF4FE729FF226
-          6BEB2369EBF1F6FEFFFFFFFFFFFFFFFFFFDEE9FC3374EC2369EB4B84EFFDFEFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE8B8887716E6D7B7877EAE9
-          E9F4F4F4A4A2A273706F716E6DF6F6F6FFFFFFFFFFFFFFFFFFEAE9E97B787771
-          6E6D8B8887FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB
-          2A6EEC2369EB3374ECB9CFF9FFFFFFF0F5FECDDDFAFBFCFFFFFFFFFFFFFFB9CF
-          F93374EC2369EB2A6EECD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFE3E2E2757372716E6D7B7877D2D1D1FFFFFFF6F5F5DFDEDEFCFCFC
-          FFFFFFFFFFFFD2D1D17B7877716E6D757372E3E2E2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBCD1F92A6EEC2369EB2369EB4D86EF94
-          B6F5B4CCF8B4CCF894B6F54D86EF2369EB2369EB2A6EECBCD1F9FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4D3D2757372716E
-          6D716E6D8C8A89BAB8B8CFCECDCFCECDBAB8B88C8A89716E6D716E6D757372D4
-          D3D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFD3E1FB4B84EF2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB4B84EFD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE3E2E28B8887716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D8B8887E3E2E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFFB9CFF9719EF239
-          78ED2369EB2369EB3978ED719EF2B9CFF9FDFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFE
-          FED2D1D1A3A1A17F7C7B716E6D716E6D7F7C7BA3A1A1D2D1D1FEFEFEFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        NumGlyphs = 2
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = sbVisualizarClick
-      end
-      object lbl16: TLabel
-        Left = 20
-        Top = 80
-        Width = 33
-        Height = 13
-        Caption = 'C'#243'digo'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl17: TLabel
-        Left = 243
-        Top = 213
-        Width = 20
-        Height = 13
-        Caption = 'Erro'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl18: TLabel
-        Left = 374
-        Top = 213
-        Width = 46
-        Height = 13
-        Caption = 'Incerteza'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl19: TLabel
-        Left = 505
-        Top = 213
-        Width = 47
-        Height = 13
-        Caption = 'Erro Total'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl20: TLabel
-        Left = 20
-        Top = 301
-        Width = 55
-        Height = 13
-        Caption = 'Aprovado ?'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl21: TLabel
-        Left = 103
-        Top = 301
-        Width = 63
-        Height = 13
-        Caption = 'Observa'#231#245'es'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl22: TLabel
-        Left = 583
-        Top = 80
-        Width = 39
-        Height = 13
-        Caption = 'Unidade'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object edtCapacidade: TEdit
-        Left = 213
-        Top = 183
-        Width = 186
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 30
-        ParentFont = False
-        TabOrder = 9
-      end
-      object edtCriterio: TEdit
-        Left = 405
-        Top = 183
-        Width = 154
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 30
-        ParentFont = False
-        TabOrder = 10
-        OnExit = edtCriterioExit
-      end
-      object edtCertificado: TEdit
-        Left = 565
-        Top = 183
-        Width = 144
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 30
-        ParentFont = False
-        TabOrder = 11
-      end
-      object dtCalibracao: TDateEdit
-        Left = 20
-        Top = 227
-        Width = 103
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        NumGlyphs = 2
-        ParentFont = False
-        TabOrder = 12
-        OnExit = dtCalibracaoExit
-      end
-      object dtProxima: TDateEdit
-        Left = 132
-        Top = 227
-        Width = 105
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        NumGlyphs = 2
-        ParentFont = False
-        TabOrder = 13
-      end
-      object edtIdent: TEdit
-        Left = 447
-        Top = 94
-        Width = 130
-        Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 3
-      end
-      object edtResolucao: TEdit
-        Left = 21
-        Top = 137
-        Width = 102
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 30
-        ParentFont = False
-        TabOrder = 5
-      end
-      object edtLocalizacao: TEdit
-        Left = 126
-        Top = 137
-        Width = 439
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 50
-        ParentFont = False
-        TabOrder = 6
-      end
-      object edtFaixa: TEdit
-        Left = 21
-        Top = 183
-        Width = 186
-        Height = 26
-        Hint = 'Digite a frequ'#234'ncia'
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 30
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 8
-      end
-      object edtCaminho: TEdit
-        Left = 21
-        Top = 270
-        Width = 611
-        Height = 26
-        Hint = 'Escolha o local do certificado'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 17
-      end
-      object dblEquipamentos: TDBLookupComboBox
-        Left = 87
-        Top = 94
-        Width = 354
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_inf'
-        ListField = 'iden_inf;desc_inf'
-        ListFieldIndex = 1
-        ListSource = dsEquip
-        ParentFont = False
-        TabOrder = 2
-        OnCloseUp = dblEquipamentosCloseUp
-      end
-      object dblFreq: TDBLookupComboBox
-        Left = 570
-        Top = 137
-        Width = 139
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListFieldIndex = 1
-        ListSource = dsFreq
-        ParentFont = False
-        TabOrder = 7
-        OnCloseUp = dblFreqCloseUp
+        Caption = 'Tipo de Inspe'#231#227'o'
       end
       object edtCodigo: TEdit
-        Left = 20
-        Top = 94
-        Width = 63
+        Left = 15
+        Top = 24
+        Width = 52
         Height = 26
-        Hint = 'C'#243'digo interno'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 1
-      end
-      object edtErro: TEdit
-        Left = 243
-        Top = 227
-        Width = 125
-        Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
         CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
-        MaxLength = 30
         ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 14
-        OnExit = edtErroExit
+        TabOrder = 0
       end
-      object edtIncerteza: TEdit
-        Left = 374
-        Top = 227
-        Width = 125
+      object edtDescricao: TEdit
+        Left = 15
+        Top = 76
+        Width = 410
         Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
         CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -859,652 +116,562 @@ object FormCadCalibracao: TFormCadCalibracao
         Font.Style = []
         MaxLength = 50
         ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 15
-        OnExit = edtIncertezaExit
-      end
-      object edtErroTotal: TEdit
-        Left = 505
-        Top = 227
-        Width = 125
-        Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 50
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 16
-      end
-      object dblAprovado: TDBLookupComboBox
-        Left = 20
-        Top = 315
-        Width = 77
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListFieldIndex = 1
-        ListSource = dsAprovado
-        ParentFont = False
-        TabOrder = 18
-        OnCloseUp = dblFreqCloseUp
-      end
-      object mmoObs: TMemo
-        Left = 103
-        Top = 315
-        Width = 606
-        Height = 69
-        Hint = 'Observa'#231#245'es'
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 19
-      end
-      object edtUnidade: TEdit
-        Left = 583
-        Top = 94
-        Width = 126
-        Height = 26
-        Hint = 'Unidade de calibra'#231#227'o'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 14
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 4
-      end
-      object pnlProcesso: TPanel
-        Left = 0
-        Top = 0
-        Width = 742
-        Height = 70
-        Align = alTop
-        TabOrder = 0
-        object lbl15: TLabel
-          Left = 21
-          Top = 9
-          Width = 43
-          Height = 13
-          Caption = 'Processo'
-          Color = clBackground
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          Transparent = True
-        end
-        object dblProcessos: TDBLookupComboBox
-          Tag = 30
-          Left = 21
-          Top = 26
-          Width = 354
-          Height = 26
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          KeyField = 'codi_pro'
-          ListField = 'nome_pro'
-          ListSource = dsProcessos
-          ParentFont = False
-          TabOrder = 0
-          OnCloseUp = dblProcessosCloseUp
-        end
-        object chkNaoCadastrados: TCheckBox
-          Left = 384
-          Top = 35
-          Width = 355
-          Height = 17
-          Caption = 'Mostrar somente equipamentos sem nenhuma calibra'#231#227'o cadastrada'
-          TabOrder = 1
-          OnClick = chkNaoCadastradosClick
-        end
-      end
-    end
-    object tsDocumentos: TTabSheet
-      Caption = 'Documentos'
-      ImageIndex = 2
-      object lbl23: TLabel
-        Left = 447
-        Top = 76
-        Width = 62
-        Height = 13
-        Caption = 'Identifica'#231#227'o'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl24: TLabel
-        Left = 87
-        Top = 76
-        Width = 125
-        Height = 13
-        Caption = 'Equipamento/Instrumento'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl25: TLabel
-        Left = 20
-        Top = 76
-        Width = 33
-        Height = 13
-        Caption = 'C'#243'digo'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl27: TLabel
-        Left = 21
-        Top = 170
-        Width = 96
-        Height = 13
-        Caption = 'Caminho do Arquivo'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object sbArquivoDoc: TSpeedButton
-        Left = 643
-        Top = 180
-        Width = 32
-        Height = 31
-        Hint = 'Clique para escolher o arquivo do documento'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFA4C1F7256AEB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB3F7CEEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF42369EB
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBABC6F7FFFFFFFFFFFFFF
-          FFFFFFFFFFC5C3C3726F6E716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8381
-          80F9F9F9FFFFFFFFFFFFCADBFA2369EB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB588DF0FFFFFFFFFFFFFFFFFFFFFFFFB2B0AF716E6D716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6DC9C8C7FFFFFFFFFFFFFBFCFF3777ED
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBDFE9FCFFFFFFFF
-          FFFFFFFFFFDDDCDC716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D939190FFFFFFFFFFFFC5D8FA7CA6F32369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB8BB0F4FFFFFFFFFFFFFFFFFFFCFCFC7E7B7A716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6DEAEAEAFFFFFF7FA8F3C3D6FA
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3978EDFCFDFFFF
-          FFFFFFFFFFDAD9D9AAA9A8716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6DB4B3B2FFFFFF3978EDF9FBFE3273EC2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EBC0D4F9FFFFFFFFFFFFADABAAD9D8D7716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D7F7D7CFDFDFD2369EBCFDEFB
-          74A0F22369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB6B9AF2FF
-          FFFFFFFFFF7F7C7BFBFBFB7A7877716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6DD6D5D52369EB85ACF4BDD2F92369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EB286DEBFFFFFFFFFFFF716E6DE0DFDFA5A3A3716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D9F9D9D2369EB3B79ED
-          F4F7FE76A1F3598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598E
-          F0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF08DB1F5FF
-          FFFFFFFFFF716E6DB0AFAED4D3D3716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6D7471702369EB2369EB6093F1CCDCFAE3ECFCE3ECFCF7FAFEFF
-          FFFFE6EEFDE3ECFCE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          F0F5FEE3ECFCF0F5FEFFFFFFFFFFFFFFFFFFFFFFFF716E6D817E7DF8F8F8A6A5
-          A494929194929194929194929194929194929194929194929194929194929194
-          9291949291949291949291949291949291949291949291B5B4B32369EB2369EB
-          2369EB2369EB2369EB81A9F4F1F6FE75A1F22369EB3C7AEDCADBFAFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC2C6FEC3F7CEEF0F5FEFFFFFFFF
-          FFFFFFFFFF716E6D716E6D999696DEDDDDEDEDEDEDEDEDFAFAFAFFFFFFEFEFEE
-          EDEDEDEFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F5EDED
-          EDF6F5F5FFFFFFFFFFFF2369EB2369EB2369EB2369EB417EEEFDFEFF5B8FF023
-          69EB6B9AF2F0F5FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFAFC8F82369EB729FF2FFFFFFFFFFFFFFFFFF716E6D716E6D716E6D716E
-          6D716E6DAEACABF6F6F6A6A4A3716E6D817E7EDDDCDCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE9E8E877747383807FF6F5F5FFFFFF246AEB2369EB
-          2369EB2369EB6596F1FFFFFF246AEB5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAFE3F7CEE3475EDFFFFFFFF
-          FFFFFFFFFF716E6D716E6D716E6D716E6D848281FEFEFE959392716E6DA09E9D
-          F6F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCBCA
-          CA716E6DA4A2A2FFFFFFA6C2F775A1F275A1F275A1F286ADF4FFFFFF729FF223
-          69EBACC7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          D7E4FB4681EE2369EB83AAF4FFFFFFFFFFFFFFFFFF726F6E716E6D716E6D716E
-          6D9C9A99FFFFFF726F6E8F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA8381807C7978FFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFF2F6FE407DEE2C6FECDAE6FCFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFEFEFFA1BFF6296DEC296DECA2BFF7FEFEFFFFFFFFFF
-          FFFFFFFFFFC6C4C4A6A4A3A6A4A3A6A4A3B1AFAFFFFFFFA4A2A1716E6DCAC8C8
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E58885
-          84716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
-          E1FB276CEB4782EEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFEEF3FD6495F12369EB
-          4681EED7E4FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF7F6F6848180777473E7E7E6FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFEFEFEC2C1C1757271757271C3C2C1FEFEFEFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9EBDF62369EB77A2F3FFFFFFFFFF
-          FFFFFFFFC4D7FA3978ED2369EB7CA6F3F7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2747170
-          888685F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFF4F4F49B9998716E6D888584E5E5
-          E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFF6898F12369EBB0C9F8FBFCFF89AEF4246AEB3273ECB9CFF9FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFC1BFBF716E6DA7A5A5FFFFFFFFFFFFFFFFFFD9
-          D8D87F7C7B716E6DAAA9A8FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F5FE3F7CEE2C6FEC4C85
-          EF2369EB598EF0E7EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE
-          9E9B9B716E6DCCCBCAFCFCFCB3B1B1726F6E7A7877D2D1D1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFD4E2FB3E7BED2C6FEC97B8F6FCFDFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F583807F7774738C8988716E6D94
-          9291EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFE3E3E282807F777473BCBABAFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = sbArquivoDocClick
-      end
-      object sbVisualizarDoc: TSpeedButton
-        Left = 679
-        Top = 180
-        Width = 32
-        Height = 31
-        Hint = 'Clique para visualizar o arquivo'
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF73A0F2286DEB3E7BEDC8
-          D9FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCA5A3
-          A274717082807FDBDBDAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FAFBFF6596F12369EB2369EB2369EB3E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D82807FFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB28
-          6DEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E
-          6D716E6D716E6D747170FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F1
-          2369EB2369EB2369EB2369EB2369EB73A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFCFCFC9C9A99716E6D716E6D716E6D716E6D716E6DA5A3A2FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB2369EB2369EB2369EB6596F1FA
-          FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C9A99716E6D716E6D716E6D716E
-          6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFBFF6596F12369EB2369EB
-          2369EB2369EB2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC9C
-          9A99716E6D716E6D716E6D716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFDFEFFB9CFF9719EF23978ED2369EB2369EB3978ED719EF2B9CF
-          F9FDFEFFE6EEFD4C85EF2369EB2369EB2369EB2369EB6596F1FAFBFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFED2D1D1A3A1A17F7C7B716E6D716E6D
-          7F7C7BA3A1A1D2D1D1FEFEFEEFEFEE8C8988716E6D716E6D716E6D716E6D9C9A
-          99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB4B84EF2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB4B84EFD3E1FBF6F9FE5F92F02369EB
-          2369EB6596F1FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E28B88
-          87716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8B8887E3E2E2F9
-          F9F9979595716E6D716E6D9C9A99FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          BCD1F92A6EEC2369EB2369EB4D86EF94B6F5B4CCF8B4CCF894B6F54D86EF2369
-          EB2369EB2A6EECBCD1F9F6F9FE4C85EF6596F1FAFBFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFD4D3D2757372716E6D716E6D8C8A89BAB8B8CFCECDCFCECD
-          BAB8B88C8A89716E6D716E6D757372D4D3D2F9F9F98C89889C9A99FCFCFCFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB2A6EEC2369EB3374ECB9CFF9FFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF93374EC2369EB2A6EECD3E1FBE6EEFD
-          FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2757372716E6D7B78
-          77D2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D17B7877716E6D75
-          7372E3E2E2EFEFEEFCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF
-          2369EB3374ECDEE9FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFDEE9FC3374EC2369EB4B84EFFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFE8B8887716E6D7B7877EAE9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFEAE9E97B7877716E6D8B8887FEFEFEFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB2369EBB9CFF9
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2D1D171
-          6E6D716E6DD2D1D1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF719EF22369EB
-          4D86EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFF4D86EF2369EB719EF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFA3A1A1716E6D8C8A89FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C8A89716E6DA3A1A1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF3978ED2369EB94B6F5FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF94B6F52369EB3978ED
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7C7B716E6DBAB8B8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBA
-          B8B8716E6D7F7C7BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2369EB2369EB
-          B4CCF8FBFCFFF1F6FEFBFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFB4CCF82369EB2369EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFF716E6D716E6DCFCECDFCFCFCF6F6F6FCFCFCFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCECD716E6D716E6DFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF2369EB2369EBB4CCF8CCDCFA2369EBB2CBF8FFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4CCF82369EB2369EB
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF716E6D716E6DCFCECDDEDDDD716E
-          6DCDCCCCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCF
-          CECD716E6D716E6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3978ED2369EB
-          94B6F5F0F5FE266BEB729FF2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFF94B6F52369EB3978EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFF7F7C7B716E6DBAB8B8F6F5F573706FA4A2A2FFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBAB8B8716E6D7F7C7BFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFF719EF22369EB4D86EFFFFFFF729FF2256AEBB8CFF9FF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D86EF2369EB719EF2
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA3A1A1716E6D8C8A89FFFFFFA4A2
-          A2726F6ED1D0D0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C
-          8A89716E6DA3A1A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB9CFF92369EB
-          2369EBB9CFF9EFF4FE437FEE256AEB729FF2B2CBF8FBFCFFFFFFFFFFFFFFFFFF
-          FFFFFFFFB9CFF92369EB2369EBB9CFF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFD2D1D1716E6D716E6DD2D1D1F4F4F4868382726F6EA4A2A2CDCCCCFCFCFC
-          FFFFFFFFFFFFFFFFFFFFFFFFD2D1D1716E6D716E6DD2D1D1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFDFEFF4B84EF2369EB3374ECDEE9FCEFF4FE729FF226
-          6BEB2369EBF1F6FEFFFFFFFFFFFFFFFFFFDEE9FC3374EC2369EB4B84EFFDFEFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE8B8887716E6D7B7877EAE9
-          E9F4F4F4A4A2A273706F716E6DF6F6F6FFFFFFFFFFFFFFFFFFEAE9E97B787771
-          6E6D8B8887FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3E1FB
-          2A6EEC2369EB3374ECB9CFF9FFFFFFF0F5FECDDDFAFBFCFFFFFFFFFFFFFFB9CF
-          F93374EC2369EB2A6EECD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFE3E2E2757372716E6D7B7877D2D1D1FFFFFFF6F5F5DFDEDEFCFCFC
-          FFFFFFFFFFFFD2D1D17B7877716E6D757372E3E2E2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBCD1F92A6EEC2369EB2369EB4D86EF94
-          B6F5B4CCF8B4CCF894B6F54D86EF2369EB2369EB2A6EECBCD1F9FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4D3D2757372716E
-          6D716E6D8C8A89BAB8B8CFCECDCFCECDBAB8B88C8A89716E6D716E6D757372D4
-          D3D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFD3E1FB4B84EF2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB4B84EFD3E1FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE3E2E28B8887716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D8B8887E3E2E2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFFB9CFF9719EF239
-          78ED2369EB2369EB3978ED719EF2B9CFF9FDFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFE
-          FED2D1D1A3A1A17F7C7B716E6D716E6D7F7C7BA3A1A1D2D1D1FEFEFEFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        NumGlyphs = 2
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = sbVisualizarDocClick
-      end
-      object lbl28: TLabel
-        Left = 21
-        Top = 128
-        Width = 118
-        Height = 13
-        Caption = 'Descri'#231#227'o do Documento'
-      end
-      object edtIdentExe: TEdit
-        Tag = 30
-        Left = 447
-        Top = 90
-        Width = 130
-        Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 3
-      end
-      object edtCodigoDoc: TEdit
-        Tag = 30
-        Left = 20
-        Top = 90
-        Width = 63
-        Height = 26
-        Hint = 'C'#243'digo interno'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 10
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
         TabOrder = 1
       end
-      object pnl5: TPanel
-        Left = 0
-        Top = 0
-        Width = 742
-        Height = 70
-        Align = alTop
-        TabOrder = 0
-        object lbl26: TLabel
-          Left = 21
-          Top = 9
-          Width = 43
-          Height = 13
-          Caption = 'Processo'
-          Color = clBackground
+      object pnlNavegacao: TPanel
+        Left = 369
+        Top = 230
+        Width = 161
+        Height = 40
+        TabOrder = 2
+        object btnPrimeiro: TBitBtn
+          Left = 1
+          Top = 1
+          Width = 40
+          Height = 38
+          Hint = 'Primeiro registro'
+          Align = alLeft
+          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentColor = False
-          ParentFont = False
-          Transparent = True
-        end
-        object edtProcessoExe: TEdit
-          Tag = 30
-          Left = 21
-          Top = 27
-          Width = 348
-          Height = 26
-          TabStop = False
-          CharCase = ecUpperCase
-          Enabled = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          MaxLength = 10
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            B60D0000424DB60D000000000000360000002800000030000000180000000100
+            180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
+            F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F099BAF6EAF1FDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BD
+            BCBBF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFF5F8FE83AAF4276CEB2369EB2369EB2369EB2369EB2369
+            EB2369EB2369EB2369EB276CEB85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFADAD747170716E6D716E6D
+            716E6D716E6D716E6D716E6D716E6D716E6D747170B0AFAEF8F8F8FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC407DEE2369EB23
+            69EB2C6FEC74A0F2A5C2F7C4D7FABFD3F9A6C2F773A0F23072EC2369EB2369EB
+            417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7
+            E7848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C4C4A5A3A279
+            7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFDBE6FC3475ED2369EB266BEB90B3F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDBE6FCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D73706FB7B6B5F8F8F8FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E7
+            E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
+            2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
+            6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
+            85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA266BEB2369EB83AAF4FFFFFFFF
+            FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD73706F716E
+            6DAFADADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFCFDFF4A
+            83EF5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFFFFFFFF
+            FFFFFF90B3F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
+            B5FFFFFFFDFDFD8A88878F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFEFEFEFFFFFFFFFFFFB7B6B5716E6D747170F2F2F2FFFFFFFFFFFF99BAF6
+            2369EB3072ECF5F8FEFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFFFFF
+            FFFFFFFFECF2FD7AA4F32C6FECF8FAFEFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
+            FFFFFFFFFFBDBCBB716E6D797776F8F8F8FFFFFFF6F6F6716E6D716E6DF6F6F6
+            FFFFFFFFFFFFFFFFFFFFFFFFF3F2F2A9A7A7777473FBFAFAFFFFFFF8F8F87774
+            73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFF1F6FE23
+            69EB2369EBF1F6FEFFFFFFFFFFFFFAFBFF9CBBF62F71EC2369EB2369EBF1F6FE
+            FFFFFFFFFFFF73A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
+            FFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFFCFCFCBFBEBD79767571
+            6E6D716E6DF6F6F6FFFFFFFFFFFFA5A3A2716E6D969493FFFFFFFFFFFF3374EC
+            2369EBA7C3F7FFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFBED3F9437F
+            EE2369EB2369EB2369EB2369EBF1F6FEFFFFFFFFFFFFA5C2F72369EB3475EDFF
+            FFFFFFFFFF7C7978716E6DC6C5C5FFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6
+            FFFFFFD5D4D4868382716E6D716E6D716E6D716E6DF6F6F6FFFFFFFFFFFFC5C4
+            C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBC0D4F9FFFFFFFFFFFFF1F6FE23
+            69EB2369EBEFF4FE6495F12369EB2369EB2369EB2369EB2369EB2369EBF1F6FE
+            FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
+            FFFFFFFFF6F6F6716E6D716E6DF4F4F49B9998716E6D716E6D716E6D716E6D71
+            6E6D716E6DF6F6F6FFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
+            2369EBC4D7FAFFFFFFFFFFFFF1F6FE2369EB2369EBEFF4FE719EF22369EB2369
+            EB2369EB2369EB2369EB2369EBF1F6FEFFFFFFFFFFFFBFD3F92369EB2369EBFF
+            FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFF6F6F6716E6D716E6DF5F5F5
+            A3A1A1716E6D716E6D716E6D716E6D716E6D716E6DF6F6F6FFFFFFFFFFFFD6D5
+            D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFF1F6FE23
+            69EB2369EBF1F6FEFFFFFFC9DAFA4B84EF2369EB2369EB2369EB2369EBF1F6FE
+            FFFFFFFFFFFFA6C2F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
+            FFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFDCDBDB8B8887716E6D716E6D71
+            6E6D716E6DF6F6F6FFFFFFFFFFFFC6C4C4716E6D7C7978FFFFFFFFFFFF5D90F0
+            2369EB74A0F2FFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFFCFD
+            FFA4C1F73374EC2369EB2369EBF1F6FEFFFFFFFFFFFF73A0F22369EB5C90F0FF
+            FFFFFFFFFF969493716E6DA5A3A3FFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6
+            FFFFFFFFFFFFFDFDFDC5C3C37B7877716E6D716E6DF6F6F6FFFFFFFFFFFFA5A3
+            A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFF1F6FE23
+            69EB2369EBF1F6FEFFFFFFFFFFFFFFFFFFFFFFFFEFF4FE7FA8F32C6FECF6F9FE
+            FFFFFFF5F8FE3072EC2369EB9ABAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
+            F8FFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFFFFFFFFFFFFFF5F5F5AD
+            ABAA777473F9F9F9FFFFFFF8F8F8797776716E6DBEBCBCFFFFFFFFFFFFEBF1FD
+            276CEB2369EB91B4F5FFFFFFFCFDFF4A83EF5188EFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFDFEFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
+            FFFFFFFFFFF2F2F2747170716E6DB8B6B6FFFFFFFDFDFD8A88878F8C8BFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFFFFFFFFFFB7B5B5716E
+            6D747170F2F1F1FFFFFFFFFFFFFFFFFF84ABF42369EB276CEBCCDCFAFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFAEAD716E6D7471
+            70DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
+            F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
+            FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
+            81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC3475ED2369EB276CEB8F
+            B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE91B4F5276CEB
+            2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8E87C79
+            78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+            F8F8B8B6B6747170716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A7C3F7C0D4F9C4D7
+            FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDCE7FCFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
+            C6C5C5D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E8E8FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF429
+            6DEC2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB84ABF4
+            F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFF8F8F8B0AFAE757271716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+            6E6D747170AFAEADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD9ABAF65C90F03374EC2369EB2369
+            EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BEBCBC969493
+            7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentDoubleBuffered = False
           ParentFont = False
           ParentShowHint = False
-          ShowHint = False
+          ShowHint = True
           TabOrder = 0
+          OnClick = btnPrimeiroClick
+        end
+        object btnUltimo: TBitBtn
+          Left = 121
+          Top = 1
+          Width = 40
+          Height = 38
+          Hint = #218'ltimo registro'
+          Align = alLeft
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            B60D0000424DB60D000000000000360000002800000030000000180000000100
+            180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
+            F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F09ABAF6EAF1FDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BE
+            BCBCF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFF5F8FE84ABF4276CEB2369EB2369EB2369EB2369EB2369
+            EB2369EB2369EB2369EB296DEC85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFAEAD747170716E6D716E6D
+            716E6D716E6D716E6D716E6D716E6D716E6D757271B0AFAEF8F8F8FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC407DEE2369EB23
+            69EB2C6FEC74A0F2A5C2F7C4D7FAC0D4F9A7C3F773A0F23072EC2369EB2369EB
+            417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
+            E8848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C5C5A5A3A279
+            7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFDBE6FC3475ED2369EB276CEB91B4F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDCE7FCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D747170B8B6B6F8F8F8FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E8
+            E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
+            2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
+            6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
+            85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA276CEB2369EB84ABF4FFFFFFFF
+            FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD747170716E
+            6DAFAEADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFD
+            FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5188EF4A83EFFCFDFF
+            FFFFFF91B4F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
+            B5FFFFFFFFFFFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F
+            8C8B8A8887FDFDFDFFFFFFB8B6B6716E6D747170F2F2F2FFFFFFFFFFFF9ABAF6
+            2369EB3072ECF5F8FEFFFFFFF6F9FE2C6FEC7FA8F3EFF4FEFFFFFFFFFFFFFFFF
+            FFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
+            FFFFFFFFFFBEBCBC716E6D797776F8F8F8FFFFFFF9F9F9777473ADABAAF5F5F5
+            FFFFFFFFFFFFFFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFF8F8F87774
+            73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFF1F6FE23
+            69EB2369EB3374ECA4C1F7FCFDFFFFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FE
+            FFFFFFFFFFFF74A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
+            FFFFFFFFF6F6F6716E6D716E6D7B7877C5C3C3FDFDFDFFFFFFFFFFFFF6F6F671
+            6E6D716E6DF6F6F6FFFFFFFFFFFFA5A3A3716E6D969493FFFFFFFFFFFF3374EC
+            2369EBA6C2F7FFFFFFFFFFFFF1F6FE2369EB2369EB2369EB2369EB4B84EFC9DA
+            FAFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFA5C2F72369EB3475EDFF
+            FFFFFFFFFF7C7978716E6DC6C4C4FFFFFFFFFFFFF6F6F6716E6D716E6D716E6D
+            716E6D8B8887DCDBDBFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFC5C4
+            C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBBFD3F9FFFFFFFFFFFFF1F6FE23
+            69EB2369EB2369EB2369EB2369EB2369EB719EF2EFF4FE2369EB2369EBF1F6FE
+            FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
+            FFFFFFFFF6F6F6716E6D716E6D716E6D716E6D716E6D716E6DA3A1A1F5F5F571
+            6E6D716E6DF6F6F6FFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
+            2369EBC4D7FAFFFFFFFFFFFFF1F6FE2369EB2369EB2369EB2369EB2369EB2369
+            EB6495F1EFF4FE2369EB2369EBF1F6FEFFFFFFFFFFFFC0D4F92369EB2369EBFF
+            FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFF6F6F6716E6D716E6D716E6D
+            716E6D716E6D716E6D9B9998F4F4F4716E6D716E6DF6F6F6FFFFFFFFFFFFD6D5
+            D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFF1F6FE23
+            69EB2369EB2369EB2369EB437FEEBED3F9FFFFFFF1F6FE2369EB2369EBF1F6FE
+            FFFFFFFFFFFFA7C3F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
+            FFFFFFFFF6F6F6716E6D716E6D716E6D716E6D868382D5D4D4FFFFFFF6F6F671
+            6E6D716E6DF6F6F6FFFFFFFFFFFFC6C5C5716E6D7C7978FFFFFFFFFFFF5D90F0
+            2369EB73A0F2FFFFFFFFFFFFF1F6FE2369EB2369EB2F71EC9CBBF6FAFBFFFFFF
+            FFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFF73A0F22369EB5C90F0FF
+            FFFFFFFFFF969493716E6DA5A3A2FFFFFFFFFFFFF6F6F6716E6D716E6D797675
+            BFBEBDFCFCFCFFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFA5A3
+            A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFF8FAFE2C
+            6FEC7AA4F3ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FE
+            FFFFFFF5F8FE3072EC2369EB99BAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
+            F8FFFFFFFBFAFA777473A9A7A7F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFF6F6F671
+            6E6D716E6DF6F6F6FFFFFFF8F8F8797776716E6DBDBCBBFFFFFFFFFFFFEBF1FD
+            276CEB2369EB90B3F5FFFFFFFFFFFFFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFF5188EF4A83EFFCFDFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
+            FFFFFFFFFFF2F2F2747170716E6DB7B6B5FFFFFFFFFFFFFEFEFEFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8C8B8A8887FDFDFDFFFFFFB7B5B5716E
+            6D747170F2F1F1FFFFFFFFFFFFFFFFFF83AAF42369EB266BEBCCDCFAFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D7370
+            6FDEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
+            F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
+            FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
+            81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC3475ED2369EB276CEB8F
+            B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE90B3F5266BEB
+            2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E77C79
+            78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+            F8F8B7B6B573706F716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A6C2F7BFD3F9C4D7
+            FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDBE6FCFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
+            C6C4C4D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E7E7FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF427
+            6CEB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB83AAF4
+            F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFF8F8F8B0AFAE747170716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+            6E6D747170AFADADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD99BAF65C90F03374EC2369EB2369
+            EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BDBCBB969493
+            7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentDoubleBuffered = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnClick = btnUltimoClick
+        end
+        object btnProximo: TBitBtn
+          Left = 81
+          Top = 1
+          Width = 40
+          Height = 38
+          Hint = 'Pr'#243'ximo registro'
+          Align = alLeft
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            B60D0000424DB60D000000000000360000002800000030000000180000000100
+            180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
+            F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F09ABAF6EAF1FDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BE
+            BCBCF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFF5F8FE84ABF4276CEB2369EB2369EB2369EB2369EB2369
+            EB2369EB2369EB2369EB296DEC85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFAEAD747170716E6D716E6D
+            716E6D716E6D716E6D716E6D716E6D716E6D757271B0AFAEF8F8F8FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC407DEE2369EB23
+            69EB2C6FEC74A0F2A5C2F7C4D7FAC0D4F9A7C3F773A0F23072EC2369EB2369EB
+            417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
+            E8848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C5C5A5A3A279
+            7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFDBE6FC3475ED2369EB276CEB91B4F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDCE7FCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D747170B8B6B6F8F8F8FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E8
+            E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
+            2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
+            6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
+            85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA276CEB2369EB84ABF4FFFFFFFF
+            FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD747170716E
+            6DAFAEADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFF91B4F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
+            B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D747170F2F2F2FFFFFFFFFFFF9ABAF6
+            2369EB3072ECF5F8FEFFFFFFFFFFFFFFFFFF95B7F5548BEFCFDEFBFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
+            FFFFFFFFFFBEBCBC716E6D797776F8F8F8FFFFFFFFFFFFFFFFFFBBB9B9918E8E
+            E0DFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87774
+            73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFFFFFFFFF
+            FFFF83AAF42369EB2369EB74A0F2E9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFF74A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
+            FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6DA5A3A3F1F1F1FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A3A3716E6D969493FFFFFFFFFFFF3374EC
+            2369EBA6C2F7FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2D70
+            EC98B9F6FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5C2F72369EB3475EDFF
+            FFFFFFFFFF7C7978716E6DC6C4C4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
+            716E6D716E6D787574BDBBBBFCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C4
+            C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBBFD3F9FFFFFFFFFFFFFFFFFFFF
+            FFFF83AAF42369EB2369EB2369EB2369EB2369EB427EEED0DFFBFFFFFFFFFFFF
+            FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
+            FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D858282E1
+            E0E0FFFFFFFFFFFFFFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
+            2369EBC4D7FAFFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369
+            EB2369EB2A6EECB7CEF8FFFFFFFFFFFFFFFFFFFFFFFFC0D4F92369EB2369EBFF
+            FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
+            716E6D716E6D716E6D716E6D757372D0CFCFFFFFFFFFFFFFFFFFFFFFFFFFD6D5
+            D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFFFFFFFFF
+            FFFF83AAF42369EB2369EB2369EB2369EB6D9CF2E5EDFDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFA7C3F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
+            FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D716E6DA19F9EEEEEEEFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C5C5716E6D7C7978FFFFFFFFFFFF5D90F0
+            2369EB73A0F2FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB4D86EFCADB
+            FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF73A0F22369EB5C90F0FF
+            FFFFFFFFFF969493716E6DA5A3A2FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
+            716E6D8C8A89DCDCDCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A3
+            A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFFFFFFFFF
+            FFFF8DB1F53575EDA8C4F7FDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFF5F8FE3072EC2369EB99BAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
+            F8FFFFFFFFFFFFFFFFFFB5B4B37D7A79C7C6C5FEFEFEFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFF8F8F8797776716E6DBDBCBBFFFFFFFFFFFFEBF1FD
+            276CEB2369EB90B3F5FFFFFFFFFFFFFFFFFFFAFBFFF8FAFEFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
+            FFFFFFFFFFF2F2F2747170716E6DB7B6B5FFFFFFFFFFFFFFFFFFFCFCFCFBFAFA
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B5B5716E
+            6D747170F2F1F1FFFFFFFFFFFFFFFFFF83AAF42369EB266BEBCCDCFAFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D7370
+            6FDEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
+            F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
+            FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
+            81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC3475ED2369EB276CEB8F
+            B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE90B3F5266BEB
+            2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E77C79
+            78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+            F8F8B7B6B573706F716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A6C2F7BFD3F9C4D7
+            FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDBE6FCFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
+            C6C4C4D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E7E7FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF427
+            6CEB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB83AAF4
+            F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFF8F8F8B0AFAE747170716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+            6E6D747170AFADADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD99BAF65C90F03374EC2369EB2369
+            EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BDBCBB969493
+            7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentDoubleBuffered = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnClick = btnProximoClick
+        end
+        object btnAnterior: TBitBtn
+          Left = 41
+          Top = 1
+          Width = 40
+          Height = 38
+          Hint = 'Registro anterior'
+          Align = alLeft
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            B60D0000424DB60D000000000000360000002800000030000000180000000100
+            180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
+            F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F099BAF6EAF1FDFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BD
+            BCBBF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFF5F8FE83AAF4276CEB2369EB2369EB2369EB2369EB2369
+            EB2369EB2369EB2369EB276CEB85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFADAD747170716E6D716E6D
+            716E6D716E6D716E6D716E6D716E6D716E6D747170B0AFAEF8F8F8FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC407DEE2369EB23
+            69EB2C6FEC74A0F2A5C2F7C4D7FABFD3F9A6C2F773A0F23072EC2369EB2369EB
+            417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7
+            E7848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C4C4A5A3A279
+            7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFDBE6FC3475ED2369EB266BEB90B3F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDBE6FCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D73706FB7B6B5F8F8F8FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E7
+            E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
+            2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
+            6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
+            85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA266BEB2369EB83AAF4FFFFFFFF
+            FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD73706F716E
+            6DAFADADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEFAFBFFFFFFFFFFFFFF
+            FFFFFF90B3F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
+            B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFAFAFC
+            FCFCFFFFFFFFFFFFFFFFFFB7B6B5716E6D747170F2F2F2FFFFFFFFFFFF99BAF6
+            2369EB3072ECF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFE
+            FFA8C4F73575ED8DB1F5FFFFFFFFFFFFFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
+            FFFFFFFFFFBDBCBB716E6D797776F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFEFEFEC7C6C57D7A79B5B4B3FFFFFFFFFFFFFFFFFFF8F8F87774
+            73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFCADBFA4D86EF2369EB2369EB83AAF4FFFFFFFFFFFF
+            FFFFFFFFFFFF73A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDCDC8C8A89716E6D716E6DAF
+            ADADFFFFFFFFFFFFFFFFFFFFFFFFA5A3A2716E6D969493FFFFFFFFFFFF3374EC
+            2369EBA7C3F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5EDFD6D9CF22369EB2369
+            EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFA5C2F72369EB3475EDFF
+            FFFFFFFFFF7C7978716E6DC6C5C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEE
+            A19F9E716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFC5C4
+            C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBC0D4F9FFFFFFFFFFFFFFFFFFFF
+            FFFFB7CEF82A6EEC2369EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFF
+            FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
+            FFFFFFFFFFFFFFFFFFFFD0CFCF757372716E6D716E6D716E6D716E6D716E6DAF
+            ADADFFFFFFFFFFFFFFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
+            2369EBC4D7FAFFFFFFFFFFFFFFFFFFFFFFFFD0DFFB427EEE2369EB2369EB2369
+            EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFBFD3F92369EB2369EBFF
+            FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFFFFFFFFFFFFFE1E0E0858282
+            716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFD6D5
+            D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFAFBFF98B9F62D70EC2369EB2369EB2369EB83AAF4FFFFFFFFFFFF
+            FFFFFFFFFFFFA6C2F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCBDBBBB787574716E6D716E6D716E6DAF
+            ADADFFFFFFFFFFFFFFFFFFFFFFFFC6C4C4716E6D7C7978FFFFFFFFFFFF5D90F0
+            2369EB74A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9F0FD74A0
+            F22369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFF73A0F22369EB5C90F0FF
+            FFFFFFFFFF969493716E6DA5A3A3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFF1F1F1A5A3A3716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFA5A3
+            A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDEFB548BEF95B7F5FFFFFFFFFFFF
+            FFFFFFF5F8FE3072EC2369EB9ABAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
+            F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0DFDF918E8EBB
+            B9B9FFFFFFFFFFFFFFFFFFF8F8F8797776716E6DBEBCBCFFFFFFFFFFFFEBF1FD
+            276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
+            FFFFFFFFFFF2F2F2747170716E6DB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B5B5716E
+            6D747170F2F1F1FFFFFFFFFFFFFFFFFF84ABF42369EB276CEBCCDCFAFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFAEAD716E6D7471
+            70DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
+            F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
+            FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
+            81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC3475ED2369EB276CEB8F
+            B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE91B4F5276CEB
+            2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8E87C79
+            78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
+            F8F8B8B6B6747170716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A7C3F7C0D4F9C4D7
+            FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDCE7FCFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
+            C6C5C5D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E8E8FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF429
+            6DEC2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB84ABF4
+            F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFF8F8F8B0AFAE757271716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+            6E6D747170AFAEADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD9ABAF65C90F03374EC2369EB2369
+            EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BEBCBC969493
+            7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Layout = blGlyphTop
+          NumGlyphs = 2
+          ParentDoubleBuffered = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnClick = btnAnteriorClick
         end
       end
-      object pnl6: TPanel
-        Left = 0
-        Top = 123
-        Width = 713
-        Height = 1
-        TabOrder = 4
-      end
-      object dbgDocumentos: TDBGrid
-        Left = 20
-        Top = 216
-        Width = 693
-        Height = 165
-        Hint = 'Selecione o documento para excluir'
-        TabStop = False
-        DataSource = dsDocumentos
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 7
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        OnCellClick = dbgDocumentosCellClick
-        OnKeyUp = dbgCalibracaoKeyUp
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'doc_descricao'
-            Title.Caption = 'Documentos'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 600
-            Visible = True
-          end>
-      end
-      object edtEquipamentoExe: TEdit
-        Tag = 30
-        Left = 87
-        Top = 90
-        Width = 348
+      object dblTipoInspecao: TDBLookupComboBox
+        Left = 15
+        Top = 121
+        Width = 410
         Height = 26
-        Hint = 'Identifica'#231#227'o do Equipamento/Instrumento'
-        TabStop = False
-        CharCase = ecUpperCase
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
-        MaxLength = 10
+        KeyField = 'tip_codigo'
+        ListField = 'tip_descricao'
+        ListSource = dsTipoInsp
         ParentFont = False
-        ParentShowHint = False
-        ShowHint = False
-        TabOrder = 2
-      end
-      object edtCaminhoDoc: TEdit
-        Left = 21
-        Top = 185
-        Width = 616
-        Height = 26
-        Hint = 'Digite o local do documento ou o link'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 6
-      end
-      object edtDocumento: TEdit
-        Left = 21
-        Top = 145
-        Width = 691
-        Height = 26
-        Hint = 'Digite a entidade em que o colaborador estudou'
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        MaxLength = 50
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
+        TabOrder = 3
       end
     end
     object tsPesquisa: TTabSheet
@@ -1516,128 +683,26 @@ object FormCadCalibracao: TFormCadCalibracao
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitWidth = 534
+      ExplicitHeight = 273
       object lbl9: TLabel
-        Left = 21
-        Top = 61
+        Left = 3
+        Top = 13
         Width = 42
         Height = 13
         Caption = 'Pesquisa'
       end
       object lbl10: TLabel
-        Left = 345
-        Top = 61
+        Left = 327
+        Top = 13
         Width = 65
         Height = 13
         Caption = 'Pesquisar por'
       end
-      object lbl30: TLabel
-        Left = 21
-        Top = 12
-        Width = 125
-        Height = 13
-        Caption = 'Equipamento/Instrumento'
-        Color = clBackground
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object dbgCalibracao: TDBGrid
-        Left = 3
-        Top = 108
-        Width = 736
-        Height = 270
-        Hint = 'Selecione o registro para alterar'
-        TabStop = False
-        DataSource = dsCalibracao
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        OnCellClick = dbgCalibracaoCellClick
-        OnDblClick = dbgCalibracaoDblClick
-        OnKeyUp = dbgCalibracaoKeyUp
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'cali_codigo'
-            Title.Caption = 'C'#243'digo'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 45
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cali_numero'
-            Title.Caption = 'Identifica'#231#227'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 95
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'desc_inf'
-            Title.Caption = 'Equipamento/Instrumento'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 300
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cali_datacalibracao'
-            Title.Caption = 'Data Calibra'#231#227'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'cali_proxcalibracao'
-            Title.Caption = 'Pr'#243'xima Calibra'#231#227'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 120
-            Visible = True
-          end>
-      end
       object edtValor: TEdit
         Tag = 30
-        Left = 21
-        Top = 76
+        Left = 3
+        Top = 32
         Width = 318
         Height = 26
         CharCase = ecUpperCase
@@ -1647,14 +712,14 @@ object FormCadCalibracao: TFormCadCalibracao
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnChange = edtValorChange
       end
-      object cbCampo: TComboBox
+      object cbbCampo: TComboBox
         Tag = 30
-        Left = 345
-        Top = 76
-        Width = 186
+        Left = 327
+        Top = 32
+        Width = 178
         Height = 26
         Style = csDropDownList
         Font.Charset = DEFAULT_CHARSET
@@ -1664,39 +729,84 @@ object FormCadCalibracao: TFormCadCalibracao
         Font.Style = []
         ItemIndex = 0
         ParentFont = False
-        TabOrder = 2
-        Text = 'N'#250'mero Equip./Instrum.'
+        TabOrder = 1
+        Text = 'Defeito'
         Items.Strings = (
-          'N'#250'mero Equip./Instrum.')
+          'Defeito')
       end
-      object dblEquipamentosPesq: TDBLookupComboBox
-        Tag = 30
-        Left = 21
-        Top = 28
-        Width = 354
-        Height = 26
+      object dbgInspecao: TDBGrid
+        Left = 5
+        Top = 62
+        Width = 524
+        Height = 209
+        Hint = 'Selecione o registro para alterar'
+        DataSource = dsDefeitos
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -15
+        Font.Height = -13
         Font.Name = 'Tahoma'
         Font.Style = []
-        KeyField = 'codi_inf'
-        ListField = 'iden_inf;desc_inf'
-        ListFieldIndex = 1
-        ListSource = dsEquip
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 0
-        OnCloseUp = dblEquipamentosPesqCloseUp
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnCellClick = dbgInspecaoCellClick
+        OnDblClick = dbgInspecaoDblClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'def_codigo'
+            Title.Caption = 'C'#243'digo'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 50
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'def_descricao'
+            Title.Caption = 'Defeito'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 210
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TipoInsp'
+            Title.Caption = 'Tipo de Inspe'#231#227'o'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'Tahoma'
+            Title.Font.Style = [fsBold]
+            Width = 210
+            Visible = True
+          end>
       end
     end
   end
   object pnl1: TPanel
     Left = 0
-    Top = 412
-    Width = 750
+    Top = 303
+    Width = 544
     Height = 72
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 301
+    ExplicitWidth = 542
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -2368,7 +1478,7 @@ object FormCadCalibracao: TFormCadCalibracao
       OnClick = btnImprimirClick
     end
     object btnSair: TBitBtn
-      Left = 676
+      Left = 470
       Top = 1
       Width = 73
       Height = 70
@@ -2500,6 +1610,7 @@ object FormCadCalibracao: TFormCadCalibracao
       ShowHint = True
       TabOrder = 6
       OnClick = btnSairClick
+      ExplicitLeft = 468
     end
     object btnAlterar: TBitBtn
       Left = 74
@@ -2635,559 +1746,22 @@ object FormCadCalibracao: TFormCadCalibracao
       TabOrder = 1
       OnClick = btnAlterarClick
     end
-    object pnlNavegacao: TPanel
-      Left = 469
-      Top = 20
-      Width = 161
-      Height = 40
-      TabOrder = 7
-      object btnPrimeiro: TBitBtn
-        Left = 1
-        Top = 1
-        Width = 40
-        Height = 38
-        Hint = 'Primeiro registro'
-        Align = alLeft
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
-          F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F099BAF6EAF1FDFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BD
-          BCBBF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFF5F8FE83AAF4276CEB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB276CEB85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFADAD747170716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D747170B0AFAEF8F8F8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC407DEE2369EB23
-          69EB2C6FEC74A0F2A5C2F7C4D7FABFD3F9A6C2F773A0F23072EC2369EB2369EB
-          417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7
-          E7848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C4C4A5A3A279
-          7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFDBE6FC3475ED2369EB266BEB90B3F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDBE6FCFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D73706FB7B6B5F8F8F8FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E7
-          E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
-          2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
-          6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
-          85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA266BEB2369EB83AAF4FFFFFFFF
-          FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD73706F716E
-          6DAFADADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFCFDFF4A
-          83EF5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFFFFFFFF
-          FFFFFF90B3F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
-          B5FFFFFFFDFDFD8A88878F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFEFFFFFFFFFFFFB7B6B5716E6D747170F2F2F2FFFFFFFFFFFF99BAF6
-          2369EB3072ECF5F8FEFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFFFFF
-          FFFFFFFFECF2FD7AA4F32C6FECF8FAFEFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
-          FFFFFFFFFFBDBCBB716E6D797776F8F8F8FFFFFFF6F6F6716E6D716E6DF6F6F6
-          FFFFFFFFFFFFFFFFFFFFFFFFF3F2F2A9A7A7777473FBFAFAFFFFFFF8F8F87774
-          73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFF1F6FE23
-          69EB2369EBF1F6FEFFFFFFFFFFFFFAFBFF9CBBF62F71EC2369EB2369EBF1F6FE
-          FFFFFFFFFFFF73A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
-          FFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFFCFCFCBFBEBD79767571
-          6E6D716E6DF6F6F6FFFFFFFFFFFFA5A3A2716E6D969493FFFFFFFFFFFF3374EC
-          2369EBA7C3F7FFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFBED3F9437F
-          EE2369EB2369EB2369EB2369EBF1F6FEFFFFFFFFFFFFA5C2F72369EB3475EDFF
-          FFFFFFFFFF7C7978716E6DC6C5C5FFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6
-          FFFFFFD5D4D4868382716E6D716E6D716E6D716E6DF6F6F6FFFFFFFFFFFFC5C4
-          C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBC0D4F9FFFFFFFFFFFFF1F6FE23
-          69EB2369EBEFF4FE6495F12369EB2369EB2369EB2369EB2369EB2369EBF1F6FE
-          FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
-          FFFFFFFFF6F6F6716E6D716E6DF4F4F49B9998716E6D716E6D716E6D716E6D71
-          6E6D716E6DF6F6F6FFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
-          2369EBC4D7FAFFFFFFFFFFFFF1F6FE2369EB2369EBEFF4FE719EF22369EB2369
-          EB2369EB2369EB2369EB2369EBF1F6FEFFFFFFFFFFFFBFD3F92369EB2369EBFF
-          FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFF6F6F6716E6D716E6DF5F5F5
-          A3A1A1716E6D716E6D716E6D716E6D716E6D716E6DF6F6F6FFFFFFFFFFFFD6D5
-          D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFF1F6FE23
-          69EB2369EBF1F6FEFFFFFFC9DAFA4B84EF2369EB2369EB2369EB2369EBF1F6FE
-          FFFFFFFFFFFFA6C2F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
-          FFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFDCDBDB8B8887716E6D716E6D71
-          6E6D716E6DF6F6F6FFFFFFFFFFFFC6C4C4716E6D7C7978FFFFFFFFFFFF5D90F0
-          2369EB74A0F2FFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFFCFD
-          FFA4C1F73374EC2369EB2369EBF1F6FEFFFFFFFFFFFF73A0F22369EB5C90F0FF
-          FFFFFFFFFF969493716E6DA5A3A3FFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6
-          FFFFFFFFFFFFFDFDFDC5C3C37B7877716E6D716E6DF6F6F6FFFFFFFFFFFFA5A3
-          A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFF1F6FE23
-          69EB2369EBF1F6FEFFFFFFFFFFFFFFFFFFFFFFFFEFF4FE7FA8F32C6FECF6F9FE
-          FFFFFFF5F8FE3072EC2369EB9ABAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
-          F8FFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFFFFFFFFFFFFFF5F5F5AD
-          ABAA777473F9F9F9FFFFFFF8F8F8797776716E6DBEBCBCFFFFFFFFFFFFEBF1FD
-          276CEB2369EB91B4F5FFFFFFFCFDFF4A83EF5188EFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFDFEFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
-          FFFFFFFFFFF2F2F2747170716E6DB8B6B6FFFFFFFDFDFD8A88878F8C8BFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFFFFFFFFFFB7B5B5716E
-          6D747170F2F1F1FFFFFFFFFFFFFFFFFF84ABF42369EB276CEBCCDCFAFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFAEAD716E6D7471
-          70DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
-          F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
-          FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
-          81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC3475ED2369EB276CEB8F
-          B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE91B4F5276CEB
-          2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8E87C79
-          78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-          F8F8B8B6B6747170716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A7C3F7C0D4F9C4D7
-          FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDCE7FCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
-          C6C5C5D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E8E8FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF429
-          6DEC2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB84ABF4
-          F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFF8F8F8B0AFAE757271716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D747170AFAEADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD9ABAF65C90F03374EC2369EB2369
-          EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BEBCBC969493
-          7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 0
-        OnClick = btnPrimeiroClick
-      end
-      object btnUltimo: TBitBtn
-        Left = 121
-        Top = 1
-        Width = 40
-        Height = 38
-        Hint = #218'ltimo registro'
-        Align = alLeft
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
-          F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F09ABAF6EAF1FDFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BE
-          BCBCF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFF5F8FE84ABF4276CEB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB296DEC85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFAEAD747170716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D757271B0AFAEF8F8F8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC407DEE2369EB23
-          69EB2C6FEC74A0F2A5C2F7C4D7FAC0D4F9A7C3F773A0F23072EC2369EB2369EB
-          417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
-          E8848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C5C5A5A3A279
-          7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFDBE6FC3475ED2369EB276CEB91B4F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDCE7FCFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D747170B8B6B6F8F8F8FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E8
-          E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
-          2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
-          6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
-          85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA276CEB2369EB84ABF4FFFFFFFF
-          FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD747170716E
-          6DAFAEADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFD
-          FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5188EF4A83EFFCFDFF
-          FFFFFF91B4F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
-          B5FFFFFFFFFFFFFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F
-          8C8B8A8887FDFDFDFFFFFFB8B6B6716E6D747170F2F2F2FFFFFFFFFFFF9ABAF6
-          2369EB3072ECF5F8FEFFFFFFF6F9FE2C6FEC7FA8F3EFF4FEFFFFFFFFFFFFFFFF
-          FFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
-          FFFFFFFFFFBEBCBC716E6D797776F8F8F8FFFFFFF9F9F9777473ADABAAF5F5F5
-          FFFFFFFFFFFFFFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFF8F8F87774
-          73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFF1F6FE23
-          69EB2369EB3374ECA4C1F7FCFDFFFFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FE
-          FFFFFFFFFFFF74A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
-          FFFFFFFFF6F6F6716E6D716E6D7B7877C5C3C3FDFDFDFFFFFFFFFFFFF6F6F671
-          6E6D716E6DF6F6F6FFFFFFFFFFFFA5A3A3716E6D969493FFFFFFFFFFFF3374EC
-          2369EBA6C2F7FFFFFFFFFFFFF1F6FE2369EB2369EB2369EB2369EB4B84EFC9DA
-          FAFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFFA5C2F72369EB3475EDFF
-          FFFFFFFFFF7C7978716E6DC6C4C4FFFFFFFFFFFFF6F6F6716E6D716E6D716E6D
-          716E6D8B8887DCDBDBFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFC5C4
-          C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBBFD3F9FFFFFFFFFFFFF1F6FE23
-          69EB2369EB2369EB2369EB2369EB2369EB719EF2EFF4FE2369EB2369EBF1F6FE
-          FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
-          FFFFFFFFF6F6F6716E6D716E6D716E6D716E6D716E6D716E6DA3A1A1F5F5F571
-          6E6D716E6DF6F6F6FFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
-          2369EBC4D7FAFFFFFFFFFFFFF1F6FE2369EB2369EB2369EB2369EB2369EB2369
-          EB6495F1EFF4FE2369EB2369EBF1F6FEFFFFFFFFFFFFC0D4F92369EB2369EBFF
-          FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFF6F6F6716E6D716E6D716E6D
-          716E6D716E6D716E6D9B9998F4F4F4716E6D716E6DF6F6F6FFFFFFFFFFFFD6D5
-          D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFF1F6FE23
-          69EB2369EB2369EB2369EB437FEEBED3F9FFFFFFF1F6FE2369EB2369EBF1F6FE
-          FFFFFFFFFFFFA7C3F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
-          FFFFFFFFF6F6F6716E6D716E6D716E6D716E6D868382D5D4D4FFFFFFF6F6F671
-          6E6D716E6DF6F6F6FFFFFFFFFFFFC6C5C5716E6D7C7978FFFFFFFFFFFF5D90F0
-          2369EB73A0F2FFFFFFFFFFFFF1F6FE2369EB2369EB2F71EC9CBBF6FAFBFFFFFF
-          FFFFFFFFF1F6FE2369EB2369EBF1F6FEFFFFFFFFFFFF73A0F22369EB5C90F0FF
-          FFFFFFFFFF969493716E6DA5A3A2FFFFFFFFFFFFF6F6F6716E6D716E6D797675
-          BFBEBDFCFCFCFFFFFFFFFFFFF6F6F6716E6D716E6DF6F6F6FFFFFFFFFFFFA5A3
-          A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFF8FAFE2C
-          6FEC7AA4F3ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFF1F6FE2369EB2369EBF1F6FE
-          FFFFFFF5F8FE3072EC2369EB99BAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
-          F8FFFFFFFBFAFA777473A9A7A7F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFF6F6F671
-          6E6D716E6DF6F6F6FFFFFFF8F8F8797776716E6DBDBCBBFFFFFFFFFFFFEBF1FD
-          276CEB2369EB90B3F5FFFFFFFFFFFFFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFF5188EF4A83EFFCFDFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
-          FFFFFFFFFFF2F2F2747170716E6DB7B6B5FFFFFFFFFFFFFEFEFEFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8C8B8A8887FDFDFDFFFFFFB7B5B5716E
-          6D747170F2F1F1FFFFFFFFFFFFFFFFFF83AAF42369EB266BEBCCDCFAFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D7370
-          6FDEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
-          F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
-          FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
-          81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC3475ED2369EB276CEB8F
-          B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE90B3F5266BEB
-          2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E77C79
-          78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-          F8F8B7B6B573706F716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A6C2F7BFD3F9C4D7
-          FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDBE6FCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
-          C6C4C4D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E7E7FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF427
-          6CEB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB83AAF4
-          F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFF8F8F8B0AFAE747170716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D747170AFADADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD99BAF65C90F03374EC2369EB2369
-          EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BDBCBB969493
-          7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        OnClick = btnUltimoClick
-      end
-      object btnProximo: TBitBtn
-        Left = 81
-        Top = 1
-        Width = 40
-        Height = 38
-        Hint = 'Pr'#243'ximo registro'
-        Align = alLeft
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
-          F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F09ABAF6EAF1FDFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BE
-          BCBCF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFF5F8FE84ABF4276CEB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB296DEC85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFAEAD747170716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D757271B0AFAEF8F8F8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC407DEE2369EB23
-          69EB2C6FEC74A0F2A5C2F7C4D7FAC0D4F9A7C3F773A0F23072EC2369EB2369EB
-          417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
-          E8848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C5C5A5A3A279
-          7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFDBE6FC3475ED2369EB276CEB91B4F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDCE7FCFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D747170B8B6B6F8F8F8FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E8
-          E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
-          2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
-          6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
-          85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA276CEB2369EB84ABF4FFFFFFFF
-          FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD747170716E
-          6DAFAEADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFF91B4F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
-          B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D747170F2F2F2FFFFFFFFFFFF9ABAF6
-          2369EB3072ECF5F8FEFFFFFFFFFFFFFFFFFF95B7F5548BEFCFDEFBFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
-          FFFFFFFFFFBEBCBC716E6D797776F8F8F8FFFFFFFFFFFFFFFFFFBBB9B9918E8E
-          E0DFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87774
-          73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFFFFFFFFF
-          FFFF83AAF42369EB2369EB74A0F2E9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFF74A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
-          FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6DA5A3A3F1F1F1FFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A3A3716E6D969493FFFFFFFFFFFF3374EC
-          2369EBA6C2F7FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2D70
-          EC98B9F6FAFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5C2F72369EB3475EDFF
-          FFFFFFFFFF7C7978716E6DC6C4C4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
-          716E6D716E6D787574BDBBBBFCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C4
-          C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBBFD3F9FFFFFFFFFFFFFFFFFFFF
-          FFFF83AAF42369EB2369EB2369EB2369EB2369EB427EEED0DFFBFFFFFFFFFFFF
-          FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
-          FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D858282E1
-          E0E0FFFFFFFFFFFFFFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
-          2369EBC4D7FAFFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369
-          EB2369EB2A6EECB7CEF8FFFFFFFFFFFFFFFFFFFFFFFFC0D4F92369EB2369EBFF
-          FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
-          716E6D716E6D716E6D716E6D757372D0CFCFFFFFFFFFFFFFFFFFFFFFFFFFD6D5
-          D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFFFFFFFFF
-          FFFF83AAF42369EB2369EB2369EB2369EB6D9CF2E5EDFDFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFA7C3F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
-          FFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D716E6DA19F9EEEEEEEFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFC6C5C5716E6D7C7978FFFFFFFFFFFF5D90F0
-          2369EB73A0F2FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB4D86EFCADB
-          FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF73A0F22369EB5C90F0FF
-          FFFFFFFFFF969493716E6DA5A3A2FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D
-          716E6D8C8A89DCDCDCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A3
-          A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFFFFFFFFF
-          FFFF8DB1F53575EDA8C4F7FDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFF5F8FE3072EC2369EB99BAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
-          F8FFFFFFFFFFFFFFFFFFB5B4B37D7A79C7C6C5FEFEFEFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFF8F8F8797776716E6DBDBCBBFFFFFFFFFFFFEBF1FD
-          276CEB2369EB90B3F5FFFFFFFFFFFFFFFFFFFAFBFFF8FAFEFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
-          FFFFFFFFFFF2F2F2747170716E6DB7B6B5FFFFFFFFFFFFFFFFFFFCFCFCFBFAFA
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B5B5716E
-          6D747170F2F1F1FFFFFFFFFFFFFFFFFF83AAF42369EB266BEBCCDCFAFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D7370
-          6FDEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
-          F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
-          FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
-          81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC3475ED2369EB276CEB8F
-          B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE90B3F5266BEB
-          2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E77C79
-          78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-          F8F8B7B6B573706F716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A6C2F7BFD3F9C4D7
-          FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDBE6FCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
-          C6C4C4D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E7E7FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF427
-          6CEB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB83AAF4
-          F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFF8F8F8B0AFAE747170716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D747170AFADADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD99BAF65C90F03374EC2369EB2369
-          EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BDBCBB969493
-          7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 2
-        OnClick = btnProximoClick
-      end
-      object btnAnterior: TBitBtn
-        Left = 41
-        Top = 1
-        Width = 40
-        Height = 38
-        Hint = 'Registro anterior'
-        Align = alLeft
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEB
-          F1FD9BBBF65D90F03475ED2369EB2369EB3374EC5C90F099BAF6EAF1FDFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF2F2F2BEBDBD9694937C7978716E6D716E6D7C7978969493BD
-          BCBBF2F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFF5F8FE83AAF4276CEB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB276CEB85ACF4F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8AFADAD747170716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D747170B0AFAEF8F8F8FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC407DEE2369EB23
-          69EB2C6FEC74A0F2A5C2F7C4D7FABFD3F9A6C2F773A0F23072EC2369EB2369EB
-          417EEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7
-          E7848180716E6D716E6D777473A5A3A3C5C4C3D9D8D8D6D5D5C6C4C4A5A3A279
-          7776716E6D716E6D848281E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFDBE6FC3475ED2369EB266BEB90B3F5F4F7FEFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF5F8FE8FB3F5276CEB2369EB3475EDDBE6FCFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D73706FB7B6B5F8F8F8FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B7B5B5747170716E6D7C7978E8E7
-          E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE417EEE2369EB2F71ECCCDCFAFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA
-          2F71EC2369EB407DEEF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8848281716E
-          6D797675DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFDEDDDD797675716E6D848180F8F8F8FFFFFFFFFFFFFFFFFFFFFFFF
-          85ACF42369EB276CEBCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA266BEB2369EB83AAF4FFFFFFFF
-          FFFFFFFFFFFFFFFFB0AFAE716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD73706F716E
-          6DAFADADFFFFFFFFFFFFFFFFFFEAF1FD286DEB2369EB8FB3F5FFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEFAFBFFFFFFFFFFFFFF
-          FFFFFF90B3F52369EB276CEBEBF1FDFFFFFFFFFFFFF2F1F1747170716E6DB7B5
-          B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFAFAFC
-          FCFCFFFFFFFFFFFFFFFFFFB7B6B5716E6D747170F2F2F2FFFFFFFFFFFF99BAF6
-          2369EB3072ECF5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFE
-          FFA8C4F73575ED8DB1F5FFFFFFFFFFFFFFFFFFF4F7FE2C6FEC2369EB9BBBF6FF
-          FFFFFFFFFFBDBCBB716E6D797776F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFEFEFEC7C6C57D7A79B5B4B3FFFFFFFFFFFFFFFFFFF8F8F87774
-          73716E6DBEBDBDFFFFFFFFFFFF5C90F02369EB73A0F2FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFCADBFA4D86EF2369EB2369EB83AAF4FFFFFFFFFFFF
-          FFFFFFFFFFFF73A0F22369EB5D90F0FFFFFFFFFFFF969493716E6DA5A3A2FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDCDC8C8A89716E6D716E6DAF
-          ADADFFFFFFFFFFFFFFFFFFFFFFFFA5A3A2716E6D969493FFFFFFFFFFFF3374EC
-          2369EBA7C3F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5EDFD6D9CF22369EB2369
-          EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFA5C2F72369EB3475EDFF
-          FFFFFFFFFF7C7978716E6DC6C5C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEE
-          A19F9E716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFC5C4
-          C3716E6D7C7978FFFFFFFFFFFF2369EB2369EBC0D4F9FFFFFFFFFFFFFFFFFFFF
-          FFFFB7CEF82A6EEC2369EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFF
-          FFFFFFFFFFFFC4D7FA2369EB2369EBFFFFFFFFFFFF716E6D716E6DD6D5D5FFFF
-          FFFFFFFFFFFFFFFFFFFFD0CFCF757372716E6D716E6D716E6D716E6D716E6DAF
-          ADADFFFFFFFFFFFFFFFFFFFFFFFFD9D8D8716E6D716E6DFFFFFFFFFFFF2369EB
-          2369EBC4D7FAFFFFFFFFFFFFFFFFFFFFFFFFD0DFFB427EEE2369EB2369EB2369
-          EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFBFD3F92369EB2369EBFF
-          FFFFFFFFFF716E6D716E6DD9D8D8FFFFFFFFFFFFFFFFFFFFFFFFE1E0E0858282
-          716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFD6D5
-          D5716E6D716E6DFFFFFFFFFFFF3475ED2369EBA5C2F7FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFAFBFF98B9F62D70EC2369EB2369EB2369EB83AAF4FFFFFFFFFFFF
-          FFFFFFFFFFFFA6C2F72369EB3374ECFFFFFFFFFFFF7C7978716E6DC5C4C3FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCBDBBBB787574716E6D716E6D716E6DAF
-          ADADFFFFFFFFFFFFFFFFFFFFFFFFC6C4C4716E6D7C7978FFFFFFFFFFFF5D90F0
-          2369EB74A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9F0FD74A0
-          F22369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFF73A0F22369EB5C90F0FF
-          FFFFFFFFFF969493716E6DA5A3A3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFF1F1F1A5A3A3716E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFA5A3
-          A2716E6D969493FFFFFFFFFFFF9BBBF62369EB2C6FECF4F7FEFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDEFB548BEF95B7F5FFFFFFFFFFFF
-          FFFFFFF5F8FE3072EC2369EB9ABAF6FFFFFFFFFFFFBEBDBD716E6D777473F8F8
-          F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0DFDF918E8EBB
-          B9B9FFFFFFFFFFFFFFFFFFF8F8F8797776716E6DBEBCBCFFFFFFFFFFFFEBF1FD
-          276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FB3F52369EB286DEBEAF1FDFF
-          FFFFFFFFFFF2F2F2747170716E6DB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B5B5716E
-          6D747170F2F1F1FFFFFFFFFFFFFFFFFF84ABF42369EB276CEBCCDCFAFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          CCDCFA276CEB2369EB85ACF4FFFFFFFFFFFFFFFFFFFFFFFFAFAEAD716E6D7471
-          70DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB0AFAEFFFFFFFFFFFFFFFFFFFFFFFF
-          F5F8FE407DEE2369EB2F71ECCCDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFCCDCFA2F71EC2369EB417EEEF5F8FEFFFFFFFF
-          FFFFFFFFFFFFFFFFF8F8F8848180716E6D797675DEDDDDFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDDDD797675716E6D8482
-          81F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC3475ED2369EB276CEB8F
-          B3F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F7FE91B4F5276CEB
-          2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8E87C79
-          78716E6D747170B7B5B5F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-          F8F8B8B6B6747170716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFDBE6FC417EEE2369EB2369EB3072EC73A0F2A7C3F7C0D4F9C4D7
-          FAA5C2F774A0F22C6FEC2369EB2369EB407DEEDCE7FCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848281716E6D716E6D797776A5A3A2
-          C6C5C5D6D5D5D9D8D8C5C4C3A5A3A3777473716E6D716E6D848180E8E8E8FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE85ACF429
-          6DEC2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB84ABF4
-          F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFF8F8F8B0AFAE757271716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D747170AFAEADF8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEAF1FD9ABAF65C90F03374EC2369EB2369
-          EB3475ED5D90F09BBBF6EBF1FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1F1BEBCBC969493
-          7C7978716E6D716E6D7C7978969493BEBDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 1
-        OnClick = btnAnteriorClick
-      end
-    end
   end
   object pnlImprimir: TPanel
-    Left = 676
-    Top = 296
+    Left = 147
+    Top = 86
     Width = 365
-    Height = 188
+    Height = 203
     TabOrder = 1
+    Visible = False
     object pnl2: TPanel
       Left = 1
-      Top = 115
+      Top = 130
       Width = 363
       Height = 72
       Align = alBottom
       TabOrder = 2
+      ExplicitTop = 101
       object btnSairImp: TBitBtn
         Left = 289
         Top = 1
@@ -3598,7 +2172,7 @@ object FormCadCalibracao: TFormCadCalibracao
       Height = 29
       Align = alTop
       Alignment = taLeftJustify
-      Caption = ' Filtro de Impress'#227'o'
+      Caption = ' Op'#231#245'es de Impress'#227'o'
       Color = clGradientActiveCaption
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -3610,303 +2184,146 @@ object FormCadCalibracao: TFormCadCalibracao
     end
     object rgOrdemImpressao: TRadioGroup
       Tag = 30
-      Left = 6
-      Top = 45
-      Width = 355
+      Left = 15
+      Top = 37
+      Width = 337
       Height = 59
       Caption = 'Ordem de Impress'#227'o'
-      Columns = 3
+      Columns = 2
       Items.Strings = (
-        'Identifica'#231#227'o'
-        'Desc. Equipamento'
-        'Pr'#243'x. Calibra'#231#227'o')
+        'C'#243'digo'
+        'Alfab'#233'tica')
       TabOrder = 1
     end
+    object chkAgrupa: TCheckBox
+      Tag = 30
+      Left = 15
+      Top = 107
+      Width = 186
+      Height = 17
+      Caption = 'Agrupar por Tipo de Inspe'#231#227'o'
+      TabOrder = 3
+    end
+  end
+  object zqryDefeitos: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 64
+    Top = 183
+  end
+  object dspDefeitos: TDataSetProvider
+    DataSet = zqryDefeitos
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 104
+    Top = 183
+  end
+  object cdsDefeitos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspDefeitos'
+    Left = 144
+    Top = 183
+  end
+  object dsDefeitos: TDataSource
+    DataSet = cdsDefeitos
+    Left = 184
+    Top = 183
   end
   object zqryGravar: TZQuery
     Connection = dm.Conexao
     Params = <>
-    Left = 597
-    Top = 8
+    Left = 64
+    Top = 264
   end
   object dspGravar: TDataSetProvider
     DataSet = zqryGravar
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 637
-    Top = 8
+    Left = 104
+    Top = 263
   end
   object cdsGravar: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspGravar'
-    Left = 677
-    Top = 8
+    Left = 144
+    Top = 263
+  end
+  object frxDBDSDefeitos: TfrxDBDataset
+    UserName = 'frxDBDSDefeitos'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'def_codigo=def_codigo'
+      'def_descricao=def_descricao'
+      'def_tipo_inspecao=def_tipo_inspecao'
+      'tipoinsp=tipoinsp')
+    DataSet = cdsImprimir
+    BCDToCurrency = False
+    Left = 304
+    Top = 216
   end
   object zqryImprimir: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
-      'SELECT cali_capacidade, cali_codigo, cali_criterio, '
-      'cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, '
-      'cali_frequencia, cali_localizacao, cali_numero, cali_padroes, '
-      
-        'cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certific' +
-        'ado,'
-      
-        'cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cal' +
-        'i_aprovado, '
-      'I.codi_inf, I.desc_inf'
-      'FROM calibracao C'
-      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_codigo')
+      'SELECT def_codigo, def_descricao,'
+      'def_tipo_inspecao, T.tip_descricao as TipoInsp'
+      'FROM defeitos'
+      'INNER JOIN inspecao_tipo T ON T.tip_codigo = def_tipo_inspecao')
     Params = <>
-    Left = 597
-    Top = 56
+    Left = 360
+    Top = 216
   end
   object dspImprimir: TDataSetProvider
     DataSet = zqryImprimir
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 637
-    Top = 56
+    Left = 400
+    Top = 216
   end
   object cdsImprimir: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
-    Left = 677
-    Top = 56
-    object cdsImprimircali_capacidade: TWideStringField
-      FieldName = 'cali_capacidade'
-      Size = 30
-    end
-    object cdsImprimircali_codigo: TLargeintField
-      FieldName = 'cali_codigo'
+    Left = 440
+    Top = 216
+    object cdsImprimirdef_codigo: TIntegerField
+      FieldName = 'def_codigo'
       Required = True
     end
-    object cdsImprimircali_criterio: TWideStringField
-      FieldName = 'cali_criterio'
-      Size = 30
+    object cdsImprimirdef_descricao: TWideStringField
+      FieldName = 'def_descricao'
+      Size = 200
     end
-    object cdsImprimircali_dataCalibracao: TDateTimeField
-      FieldName = 'cali_dataCalibracao'
+    object cdsImprimirdef_tipo_inspecao: TIntegerField
+      FieldName = 'def_tipo_inspecao'
     end
-    object cdsImprimircali_erro: TWideStringField
-      FieldName = 'cali_erro'
-      Size = 30
-    end
-    object cdsImprimircali_faixa: TWideStringField
-      FieldName = 'cali_faixa'
-      Size = 30
-    end
-    object cdsImprimircali_frequencia: TWideStringField
-      FieldName = 'cali_frequencia'
-    end
-    object cdsImprimircali_localizacao: TWideStringField
-      FieldName = 'cali_localizacao'
-      Size = 50
-    end
-    object cdsImprimircali_numero: TWideStringField
-      FieldName = 'cali_numero'
-      Size = 10
-    end
-    object cdsImprimircali_padroes: TMemoField
-      FieldName = 'cali_padroes'
-      BlobType = ftMemo
-    end
-    object cdsImprimircali_parecer: TWideStringField
-      FieldName = 'cali_parecer'
-      Size = 1
-    end
-    object cdsImprimircali_proxCalibracao: TDateTimeField
-      FieldName = 'cali_proxCalibracao'
-    end
-    object cdsImprimircali_resolucao: TWideStringField
-      FieldName = 'cali_resolucao'
-      Size = 30
-    end
-    object cdsImprimircali_certificado: TWideStringField
-      FieldName = 'cali_certificado'
-      Size = 30
-    end
-    object cdsImprimircali_processo: TLargeintField
-      FieldName = 'cali_processo'
-    end
-    object cdsImprimircodi_inf: TLargeintField
-      FieldName = 'codi_inf'
-      Required = True
-    end
-    object cdsImprimirdesc_inf: TWideStringField
-      FieldName = 'desc_inf'
-      Size = 50
-    end
-    object cdsImprimirDescProcesso: TStringField
-      FieldKind = fkLookup
-      FieldName = 'DescProcesso'
-      LookupDataSet = cdsProcessos
-      LookupKeyFields = 'codi_pro'
-      LookupResultField = 'nome_pro'
-      KeyFields = 'cali_processo'
-      Size = 80
-      Lookup = True
-    end
-    object cdsImprimirDescEquip: TStringField
-      FieldKind = fkLookup
-      FieldName = 'DescEquip'
-      LookupDataSet = zqryEquip
-      LookupKeyFields = 'codi_inf'
-      LookupResultField = 'desc_inf'
-      KeyFields = 'cali_equip'
-      Size = 80
-      Lookup = True
-    end
-    object cdsImprimircali_incerteza: TWideStringField
-      FieldName = 'cali_incerteza'
-      Size = 50
-    end
-    object cdsImprimircali_erroTotal: TWideStringField
-      FieldName = 'cali_erroTotal'
-      Size = 50
-    end
-    object cdsImprimircali_aprovado: TIntegerField
-      FieldName = 'cali_aprovado'
-    end
-    object cdsImprimircali_equip: TLargeintField
-      FieldName = 'cali_equip'
-    end
-    object cdsImprimircali_arquivo: TWideMemoField
-      FieldName = 'cali_arquivo'
-      BlobType = ftWideMemo
+    object cdsImprimirtipoinsp: TWideStringField
+      FieldName = 'tipoinsp'
+      ReadOnly = True
+      Size = 100
     end
   end
-  object zqryCalibracao: TZQuery
+  object zqryAuxiliar: TZQuery
     Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT cali_capacidade, cali_codigo, cali_criterio, '
-      'cali_dataCalibracao, cali_equip, cali_erro, cali_faixa, '
-      'cali_frequencia, cali_localizacao, cali_numero, cali_padroes, '
-      
-        'cali_parecer, cali_proxCalibracao, cali_resolucao, cali_certific' +
-        'ado,'
-      
-        'cali_processo, cali_arquivo, cali_incerteza, cali_erroTotal, cal' +
-        'i_aprovado, '
-      'I.codi_inf, I.desc_inf, cali_obs, cali_unidade'
-      'FROM calibracao C'
-      'INNER JOIN infraestrutura I on I.codi_inf = C.cali_codigo'
-      'ORDER BY cali_codigo')
     Params = <>
-    Left = 352
-    Top = 240
+    Left = 232
+    Top = 271
   end
-  object dspCalibracao: TDataSetProvider
-    DataSet = zqryCalibracao
+  object dspAuxiliar: TDataSetProvider
+    DataSet = zqryAuxiliar
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 392
-    Top = 240
+    Left = 272
+    Top = 271
   end
-  object cdsCalibracao: TClientDataSet
+  object cdsAuxiliar: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'dspCalibracao'
-    Left = 432
-    Top = 240
-    object cdsCalibracaocali_capacidade: TWideStringField
-      FieldName = 'cali_capacidade'
-      Size = 30
-    end
-    object cdsCalibracaocali_codigo: TLargeintField
-      FieldName = 'cali_codigo'
-      Required = True
-    end
-    object cdsCalibracaocali_criterio: TWideStringField
-      FieldName = 'cali_criterio'
-      Size = 30
-    end
-    object cdsCalibracaocali_datacalibracao: TDateTimeField
-      FieldName = 'cali_datacalibracao'
-    end
-    object cdsCalibracaocali_equip: TLargeintField
-      FieldName = 'cali_equip'
-    end
-    object cdsCalibracaocali_erro: TWideStringField
-      FieldName = 'cali_erro'
-      Size = 30
-    end
-    object cdsCalibracaocali_faixa: TWideStringField
-      FieldName = 'cali_faixa'
-      Size = 30
-    end
-    object cdsCalibracaocali_frequencia: TWideStringField
-      FieldName = 'cali_frequencia'
-    end
-    object cdsCalibracaocali_localizacao: TWideStringField
-      FieldName = 'cali_localizacao'
-      Size = 50
-    end
-    object cdsCalibracaocali_numero: TWideStringField
-      FieldName = 'cali_numero'
-      Size = 40
-    end
-    object cdsCalibracaocali_padroes: TWideMemoField
-      FieldName = 'cali_padroes'
-      BlobType = ftWideMemo
-    end
-    object cdsCalibracaocali_parecer: TWideStringField
-      FieldName = 'cali_parecer'
-      Size = 1
-    end
-    object cdsCalibracaocali_proxcalibracao: TDateTimeField
-      FieldName = 'cali_proxcalibracao'
-    end
-    object cdsCalibracaocali_resolucao: TWideStringField
-      FieldName = 'cali_resolucao'
-      Size = 30
-    end
-    object cdsCalibracaocali_certificado: TWideStringField
-      FieldName = 'cali_certificado'
-      Size = 30
-    end
-    object cdsCalibracaocali_processo: TLargeintField
-      FieldName = 'cali_processo'
-    end
-    object cdsCalibracaocali_incerteza: TWideStringField
-      FieldName = 'cali_incerteza'
-      Size = 50
-    end
-    object cdsCalibracaocali_errototal: TWideStringField
-      FieldName = 'cali_errototal'
-      Size = 50
-    end
-    object cdsCalibracaocali_aprovado: TIntegerField
-      FieldName = 'cali_aprovado'
-    end
-    object cdsCalibracaocodi_inf: TLargeintField
-      FieldName = 'codi_inf'
-      Required = True
-    end
-    object cdsCalibracaodesc_inf: TWideStringField
-      FieldName = 'desc_inf'
-      Size = 50
-    end
-    object cdsCalibracaocali_obs: TWideMemoField
-      FieldName = 'cali_obs'
-      BlobType = ftWideMemo
-    end
-    object cdsCalibracaocali_unidade: TWideStringField
-      FieldName = 'cali_unidade'
-      ReadOnly = True
-      Size = 14
-    end
-    object cdsCalibracaocali_arquivo: TWideMemoField
-      FieldName = 'cali_arquivo'
-      BlobType = ftWideMemo
-    end
-  end
-  object dsCalibracao: TDataSource
-    DataSet = cdsCalibracao
-    Left = 472
-    Top = 240
+    ProviderName = 'dspAuxiliar'
+    Left = 312
+    Top = 271
   end
   object frxReport1: TfrxReport
     Version = '4.10.3'
@@ -3917,64 +2334,28 @@ object FormCadCalibracao: TFormCadCalibracao
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43304.809386319440000000
+    ReportOptions.LastChange = 43496.466791620400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
-      
-        'procedure mConfidencialCabecOnBeforePrint(Sender: TfrxComponent)' +
-        ';'
-      'begin'
-      '   if <ConfCabec> = 1 then begin'
-      
-        '      mConfidencialCabec.Visible:= True;                        ' +
-        '               '
-      '   end'
-      '   else begin'
-      '      mConfidencialCabec.Visible:= False;  '
-      '   end;  '
-      'end;'
-      ''
-      
-        'procedure mConfidencialRodapeOnBeforePrint(Sender: TfrxComponent' +
-        ');'
-      'begin'
-      '   if <ConfRod> = 1 then begin'
-      
-        '      mConfidencialRodape.Visible:= True;                       ' +
-        '                '
-      '   end'
-      '   else begin'
-      '      mConfidencialRodape.Visible:= False;  '
-      '   end;       '
-      'end;'
-      '  '
       ''
       'begin'
       ''
       'end.')
-    Left = 456
-    Top = 40
+    Left = 304
+    Top = 168
     Datasets = <
       item
-        DataSet = frxDBCalibracao
-        DataSetName = 'frxDBCalibracao'
+        DataSet = frxDBDSDefeitos
+        DataSetName = 'frxDBDSDefeitos'
       end>
     Variables = <
       item
-        Name = ' Texto Relat'#243'rio'
+        Name = ' New Category1'
         Value = Null
       end
       item
-        Name = 'ConfCabec'
-        Value = ''
-      end
-      item
-        Name = 'CondRod'
-        Value = ''
-      end
-      item
-        Name = 'TextoConf'
-        Value = ''
+        Name = 'vlMedia'
+        Value = Null
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -3982,21 +2363,21 @@ object FormCadCalibracao: TFormCadCalibracao
       Width = 1000.000000000000000000
     end
     object Page1: TfrxReportPage
-      Orientation = poLandscape
-      PaperWidth = 297.000000000000000000
-      PaperHeight = 210.000000000000000000
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
-      object ReportTitle1: TfrxReportTitle
-        Height = 80.692950000000000000
+      object Titulo: TfrxReportTitle
+        Height = 122.000012200000000000
         Top = 18.897650000000000000
-        Width = 1046.929810000000000000
+        Width = 718.110700000000000000
+        StartNewPage = True
         object Memo4: TfrxMemoView
           Top = 22.267780000000000000
-          Width = 1046.929810000000000000
+          Width = 718.110700000000000000
           Height = 34.015770000000000000
           ShowHint = False
           AutoWidth = True
@@ -4009,47 +2390,30 @@ object FormCadCalibracao: TFormCadCalibracao
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8W = (
-            'RELAT'#211'RIO DE CALIBRA'#199#195'O')
+            'LISTAGEM DE DEFEITOS')
           ParentFont = False
         end
         object Line2: TfrxLineView
-          Width = 1043.150280000000000000
+          Width = 1046.929810000000000000
           ShowHint = False
           Diagonal = True
-        end
-        object mConfidencialCabec: TfrxMemoView
-          Left = 3.779530000000000000
-          Width = 982.677165350000000000
-          Height = 18.897650000000000000
-          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8W = (
-            '[TextoConf]')
-          ParentFont = False
         end
       end
       object Detalhe: TfrxMasterData
         Height = 18.897650000000000000
-        Top = 222.992270000000000000
-        Width = 1046.929810000000000000
-        DataSet = frxDBCalibracao
-        DataSetName = 'frxDBCalibracao'
+        Top = 264.567100000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBDSDefeitos
+        DataSetName = 'frxDBDSDefeitos'
         RowCount = 0
-        object Memo3: TfrxMemoView
-          Left = 847.527559055118000000
-          Width = 98.267716540000000000
+        object mCodigo: TfrxMemoView
+          Left = 7.614192760000000000
+          Width = 52.535413540000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'cali_dataCalibracao'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
+          DataField = 'def_codigo'
+          DataSet = frxDBDSDefeitos
+          DataSetName = 'frxDBDSDefeitos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4058,58 +2422,18 @@ object FormCadCalibracao: TFormCadCalibracao
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBCalibracao."cali_dataCalibracao"]')
+            '[frxDBDSDefeitos."def_codigo"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo7: TfrxMemoView
-          Left = 945.827150000000000000
-          Width = 102.047246540000000000
+        object Memo2: TfrxMemoView
+          Left = 59.937230000000000000
+          Width = 646.299395670000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_proxCalibracao"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo6: TfrxMemoView
-          Width = 94.866141732283490000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'cali_numero'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_numero"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo10: TfrxMemoView
-          Left = 95.063006770000000000
-          Width = 420.283291260000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'desc_inf'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
+          DataField = 'def_descricao'
+          DataSet = frxDBDSDefeitos
+          DataSetName = 'frxDBDSDefeitos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4117,37 +2441,18 @@ object FormCadCalibracao: TFormCadCalibracao
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBCalibracao."desc_inf"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo13: TfrxMemoView
-          Left = 515.016080000000000000
-          Width = 332.220472440945000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'cali_localizacao'
-          DataSet = frxDBCalibracao
-          DataSetName = 'frxDBCalibracao'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBCalibracao."cali_localizacao"]')
+            '[frxDBDSDefeitos."def_descricao"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
-      object PageFooter1: TfrxPageFooter
-        Height = 56.692950000000000000
-        Top = 302.362400000000000000
-        Width = 1046.929810000000000000
+      object Rodape: TfrxPageFooter
+        Height = 52.913420000000000000
+        Top = 343.937230000000000000
+        Width = 718.110700000000000000
         object Picture1: TfrxPictureView
-          Left = 1005.937850000000000000
-          Top = 15.338590000000010000
+          Left = 668.976810000000000000
+          Top = 7.559059999999988000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4581,8 +2886,8 @@ object FormCadCalibracao: TFormCadCalibracao
           TransparentColor = clWhite
         end
         object Memo11: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 34.015769999999980000
+          Left = 7.559060000000000000
+          Top = 26.456709999999990000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -4596,43 +2901,25 @@ object FormCadCalibracao: TFormCadCalibracao
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Left = 3.779530000000000000
-          Top = 30.236240000000010000
-          Width = 990.236860000000000000
+          Left = 7.559060000000000000
+          Top = 22.677180000000020000
+          Width = 631.181510000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
-        object mConfidencialRodape: TfrxMemoView
-          Left = 3.779530000000000000
-          Top = 11.338590000000010000
-          Width = 982.677165350000000000
-          Height = 18.897650000000000000
-          OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8W = (
-            '[TextoConf]')
-          ParentFont = False
-        end
       end
       object GroupHeader1: TfrxGroupHeader
-        Height = 42.063067800000000000
-        Top = 158.740260000000000000
-        Width = 1046.929810000000000000
-        Condition = '<frxDBCalibracao."DescProcesso">'
-        object Memo8: TfrxMemoView
-          Top = 4.000000000000000000
-          Width = 1048.441159690000000000
-          Height = 19.275590550000000000
+        Height = 41.708720000000000000
+        Top = 200.315090000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxDBDSDefeitos."tipoinsp"'
+        object Memo3: TfrxMemoView
+          Left = 7.559055120000000000
+          Top = 3.559059999999988000
+          Width = 698.456692910000000000
+          Height = 18.897650000000000000
           ShowHint = False
-          Color = clScrollBar
-          DataSet = FormResumoInd.frxdbResumoIndicador
-          DataSetName = 'frxdbResumoIndicador'
-          DisplayFormat.DecimalSeparator = ','
+          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -4640,75 +2927,33 @@ object FormCadCalibracao: TFormCadCalibracao
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            ' Processo: [frxDBCalibracao."DescProcesso"]')
+            'Classe: [frxDBDSDefeitos."tipoinsp"]')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 22.677179999999990000
+          Width = 52.535408660000000000
+          Height = 19.275590551181100000
+          ShowHint = False
+          DisplayFormat.DecimalSeparator = ','
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'C'#243'digo')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo9: TfrxMemoView
-          Left = 95.063006770000000000
-          Top = 23.433070869999990000
-          Width = 420.283291260000000000
-          Height = 19.275590550000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Equipamento/Instrumento')
-          ParentFont = False
-          VAlign = vaBottom
-        end
         object Memo1: TfrxMemoView
-          Top = 23.433070869999990000
-          Width = 94.866141732283490000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Identif.')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo2: TfrxMemoView
-          Left = 847.527559060000000000
-          Top = 23.433070869999990000
-          Width = 98.267780000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = 'dd/mm/yyyy'
-          DisplayFormat.Kind = fkDateTime
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Data Calibra'#231#227'o')
-          ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo5: TfrxMemoView
-          Left = 945.827667480000000000
-          Top = 23.433070869999990000
-          Width = 102.047310000000000000
-          Height = 18.897650000000000000
+          Left = 59.858526460000000000
+          Top = 22.299212600000000000
+          Width = 646.299630000000000000
+          Height = 19.653543307086600000
           ShowHint = False
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -4719,313 +2964,36 @@ object FormCadCalibracao: TFormCadCalibracao
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Pr'#243'x. Calibra'#231#227'o')
+            'Defeito')
           ParentFont = False
-          VAlign = vaBottom
-        end
-        object Memo12: TfrxMemoView
-          Left = 515.016080000000000000
-          Top = 23.433070869999990000
-          Width = 332.220472440945000000
-          Height = 19.275590550000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Localiza'#231#227'o')
-          ParentFont = False
-          VAlign = vaBottom
+          VAlign = vaCenter
         end
       end
     end
   end
-  object frxDBCalibracao: TfrxDBDataset
-    UserName = 'frxDBCalibracao'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'cali_capacidade=cali_capacidade'
-      'cali_codigo=cali_codigo'
-      'cali_criterio=cali_criterio'
-      'cali_dataCalibracao=cali_dataCalibracao'
-      'cali_erro=cali_erro'
-      'cali_faixa=cali_faixa'
-      'cali_frequencia=cali_frequencia'
-      'cali_localizacao=cali_localizacao'
-      'cali_numero=cali_numero'
-      'cali_padroes=cali_padroes'
-      'cali_parecer=cali_parecer'
-      'cali_proxCalibracao=cali_proxCalibracao'
-      'cali_resolucao=cali_resolucao'
-      'cali_certificado=cali_certificado'
-      'cali_processo=cali_processo'
-      'cali_arquivo=cali_arquivo'
-      'codi_inf=codi_inf'
-      'desc_inf=desc_inf'
-      'DescProcesso=DescProcesso'
-      'DescEquip=DescEquip'
-      'cali_incerteza=cali_incerteza'
-      'cali_erroTotal=cali_erroTotal'
-      'cali_aprovado=cali_aprovado'
-      'cali_equip=cali_equip')
-    DataSet = cdsImprimir
-    BCDToCurrency = False
-    Left = 528
-    Top = 40
-  end
-  object opd1: TOpenDialog
-    Filter = 'Todos os arquivos|*.*'
-    Title = 'Selecionar Arquivo'
-    Left = 648
-    Top = 328
-  end
-  object zqryProcessos: TZQuery
+  object zqryTipoInsp: TZQuery
     Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_pro, nome_pro '
-      'FROM processos'
-      'ORDER BY nome_pro')
     Params = <>
-    Left = 328
-    Top = 368
+    Left = 192
+    Top = 55
   end
-  object dspProcessos: TDataSetProvider
-    DataSet = zqryProcessos
+  object dspTipoInsp: TDataSetProvider
+    DataSet = zqryTipoInsp
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 368
-    Top = 368
+    Left = 232
+    Top = 55
   end
-  object cdsProcessos: TClientDataSet
+  object cdsTipoInsp: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'dspProcessos'
-    Left = 408
-    Top = 368
-    object cdsProcessoscodi_pro: TLargeintField
-      FieldName = 'codi_pro'
-      Required = True
-    end
-    object cdsProcessosnome_pro: TWideStringField
-      FieldName = 'nome_pro'
-      Size = 45
-    end
+    ProviderName = 'dspTipoInsp'
+    Left = 272
+    Top = 55
   end
-  object dsProcessos: TDataSource
-    DataSet = cdsProcessos
-    Left = 448
-    Top = 368
-  end
-  object zqryFreq: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
-    Params = <>
-    Left = 128
-    Top = 368
-  end
-  object dspFreq: TDataSetProvider
-    DataSet = zqryFreq
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 368
-  end
-  object cdsFreq: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspFreq'
-    Left = 208
-    Top = 368
-    object LargeintField2: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object WideStringField2: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
-  end
-  object dsFreq: TDataSource
-    DataSet = cdsFreq
-    Left = 248
-    Top = 368
-  end
-  object zqryEquip: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT codi_inf, iden_inf, desc_inf, inf_capacidade, inf_resoluc' +
-        'ao, inf_unidade'
-      'FROM infraestrutura')
-    Params = <>
-    Left = 128
-    Top = 320
-  end
-  object dspEquip: TDataSetProvider
-    DataSet = zqryEquip
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 320
-  end
-  object cdsEquip: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspEquip'
-    Left = 208
-    Top = 320
-    object cdsEquipcodi_inf: TLargeintField
-      FieldName = 'codi_inf'
-      Required = True
-    end
-    object cdsEquipiden_inf: TWideStringField
-      FieldName = 'iden_inf'
-      Size = 15
-    end
-    object cdsEquipdesc_inf: TWideStringField
-      FieldName = 'desc_inf'
-      Size = 50
-    end
-    object cdsEquipinf_capacidade: TWideStringField
-      FieldName = 'inf_capacidade'
-      Size = 30
-    end
-    object cdsEquipinf_resolucao: TWideStringField
-      FieldName = 'inf_resolucao'
-      Size = 30
-    end
-    object cdsEquipinf_unidade: TWideStringField
-      FieldName = 'inf_unidade'
-      Size = 14
-    end
-  end
-  object dsEquip: TDataSource
-    DataSet = cdsEquip
-    Left = 248
-    Top = 320
-  end
-  object zqryAprovado: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
-    Params = <>
-    Left = 352
-    Top = 296
-  end
-  object dspAprovado: TDataSetProvider
-    DataSet = zqryAprovado
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 392
-    Top = 296
-  end
-  object cdsAprovado: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspAprovado'
-    Left = 432
-    Top = 296
-    object LargeintField1: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object WideStringField1: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
-  end
-  object dsAprovado: TDataSource
-    DataSet = cdsAprovado
-    Left = 472
-    Top = 296
-  end
-  object zqryColab: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_col, nome_col'
-      'FROM colaboradores'
-      'WHERE col_status = 1'
-      'ORDER BY nome_col')
-    Params = <>
-    Left = 128
-    Top = 272
-  end
-  object dspColab: TDataSetProvider
-    DataSet = zqryColab
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 272
-  end
-  object cdsColab: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspColab'
-    Left = 208
-    Top = 272
-    object cdsColabcodi_col: TLargeintField
-      FieldName = 'codi_col'
-      Required = True
-    end
-    object cdsColabnome_col: TWideStringField
-      FieldName = 'nome_col'
-      Size = 45
-    end
-  end
-  object dsColab: TDataSource
-    DataSet = cdsColab
-    Left = 248
-    Top = 272
-  end
-  object dsDocumentos: TDataSource
-    DataSet = cdsDocumentos
-    Left = 672
-    Top = 264
-  end
-  object cdsDocumentos: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspDocumentos'
-    Left = 632
-    Top = 264
-    object cdsDocumentosdoc_codigo: TIntegerField
-      FieldName = 'doc_codigo'
-      Required = True
-    end
-    object cdsDocumentoscal_codigo: TIntegerField
-      FieldName = 'cal_codigo'
-      Required = True
-    end
-    object cdsDocumentosdoc_descricao: TWideMemoField
-      FieldName = 'doc_descricao'
-      OnGetText = cdsDocumentosdoc_descricaoGetText
-      BlobType = ftWideMemo
-    end
-    object cdsDocumentosdoc_caminho: TWideMemoField
-      FieldName = 'doc_caminho'
-      BlobType = ftWideMemo
-    end
-  end
-  object dspDocumentos: TDataSetProvider
-    DataSet = zqryDocumentos
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 592
-    Top = 264
-  end
-  object zqryDocumentos: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT doc_codigo, cal_codigo, doc_descricao, doc_caminho'
-      'FROM calibracao_documentos')
-    Params = <>
-    Left = 552
-    Top = 264
+  object dsTipoInsp: TDataSource
+    DataSet = cdsTipoInsp
+    Left = 312
+    Top = 55
   end
 end

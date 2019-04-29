@@ -685,6 +685,10 @@ object FormCadDanos: TFormCadDanos
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 15
@@ -2165,8 +2169,6 @@ object FormCadDanos: TFormCadDanos
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 2
     end
     object rgOrdemImpressao: TRadioGroup
       Tag = 30

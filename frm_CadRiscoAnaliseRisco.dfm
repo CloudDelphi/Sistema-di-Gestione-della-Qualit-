@@ -24,7 +24,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
     Width = 1169
     Height = 72
     Align = alBottom
-    TabOrder = 0
+    TabOrder = 3
     object btnImprimir: TBitBtn
       Left = 220
       Top = 1
@@ -156,7 +156,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 3
       OnClick = btnImprimirClick
     end
     object btnSair: TBitBtn
@@ -290,7 +290,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 6
       OnClick = btnSairClick
     end
     object btnGraficos: TBitBtn
@@ -424,7 +424,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 0
       OnClick = btnGraficosClick
     end
     object grpLegenda: TGroupBox
@@ -433,7 +433,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       Width = 408
       Height = 68
       Caption = 'Legenda Grau do Risco'
-      TabOrder = 3
+      TabOrder = 4
       object lbl1: TLabel
         Left = 53
         Top = 20
@@ -482,7 +482,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 42
         Width = 39
         Height = 21
-        TabOrder = 1
+        TabOrder = 3
         OnClick = pnlMedioClick
       end
       object pnlAlto: TPanel
@@ -490,7 +490,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 17
         Width = 39
         Height = 21
-        TabOrder = 2
+        TabOrder = 1
         OnClick = pnlAltoClick
       end
       object pnlSevero: TPanel
@@ -498,7 +498,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 42
         Width = 39
         Height = 21
-        TabOrder = 3
+        TabOrder = 4
         OnClick = pnlSeveroClick
       end
       object pnlNenhum: TPanel
@@ -506,7 +506,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 30
         Width = 39
         Height = 21
-        TabOrder = 4
+        TabOrder = 2
         OnClick = pnlNenhumClick
       end
     end
@@ -641,7 +641,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 1
       Visible = False
       OnClick = btnSelecionarClick
     end
@@ -776,7 +776,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 2
       OnClick = btnPDCAClick
     end
     object grpLegenda1: TGroupBox
@@ -785,7 +785,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       Width = 408
       Height = 68
       Caption = 'Legenda Grau do Risco'
-      TabOrder = 6
+      TabOrder = 5
       object lbl6: TLabel
         Left = 53
         Top = 20
@@ -834,7 +834,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 42
         Width = 39
         Height = 21
-        TabOrder = 1
+        TabOrder = 3
         OnClick = pnlMedioClick
       end
       object pnlAlto1: TPanel
@@ -842,7 +842,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 17
         Width = 39
         Height = 21
-        TabOrder = 2
+        TabOrder = 1
         OnClick = pnlAltoClick
       end
       object pnlSevero1: TPanel
@@ -850,7 +850,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 42
         Width = 39
         Height = 21
-        TabOrder = 3
+        TabOrder = 4
         OnClick = pnlSeveroClick
       end
       object pnl6: TPanel
@@ -858,7 +858,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Top = 30
         Width = 39
         Height = 21
-        TabOrder = 4
+        TabOrder = 2
         OnClick = pnlNenhumClick
       end
     end
@@ -869,14 +869,14 @@ object FormAnaliseRisco: TFormAnaliseRisco
     Width = 1169
     Height = 97
     Align = alTop
-    TabOrder = 1
+    TabOrder = 0
     object grpProcesso: TGroupBox
-      Left = 545
+      Left = 791
       Top = 0
       Width = 409
       Height = 91
       Caption = 'PROCESSO'
-      TabOrder = 0
+      TabOrder = 4
       object dblProcesso: TDBLookupComboBox
         Left = 7
         Top = 23
@@ -916,7 +916,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         'COM PMC ABERTO'
         'SEM PMC ABERTO'
         'TODOS')
-      TabOrder = 1
+      TabOrder = 0
       OnClick = rgPMCClick
     end
     object rgTipo: TRadioGroup
@@ -930,7 +930,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         'INTERNA'
         'MACROAMBIENTE (EXTERNA)'
         'TODOS')
-      TabOrder = 2
+      TabOrder = 1
       OnClick = rgTipoClick
     end
     object grp1: TGroupBox
@@ -939,7 +939,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       Width = 248
       Height = 91
       Caption = 'TIPO'
-      TabOrder = 3
+      TabOrder = 2
       object chkAmeaca: TCheckBox
         Left = 8
         Top = 23
@@ -959,7 +959,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Caption = 'PONTO FRACO'
         Checked = True
         State = cbChecked
-        TabOrder = 1
+        TabOrder = 2
         OnClick = chkAmeacaClick
       end
       object chkOportunidade: TCheckBox
@@ -970,7 +970,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Caption = 'OPORTUNIDADE'
         Checked = True
         State = cbChecked
-        TabOrder = 2
+        TabOrder = 1
         OnClick = chkAmeacaClick
       end
       object chkPForte: TCheckBox
@@ -979,6 +979,58 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Width = 97
         Height = 17
         Caption = 'PONTO FORTE'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+        OnClick = chkAmeacaClick
+      end
+    end
+    object grp3: TGroupBox
+      Left = 544
+      Top = 0
+      Width = 248
+      Height = 91
+      Caption = ' GRAU DO RISCO'
+      TabOrder = 3
+      object chkBaixo: TCheckBox
+        Left = 8
+        Top = 23
+        Width = 97
+        Height = 17
+        Caption = 'BAIXO'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+        OnClick = chkAmeacaClick
+      end
+      object chkAlto: TCheckBox
+        Left = 8
+        Top = 59
+        Width = 97
+        Height = 17
+        Caption = 'ALTO'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+        OnClick = chkAmeacaClick
+      end
+      object chkMedio: TCheckBox
+        Left = 128
+        Top = 23
+        Width = 97
+        Height = 17
+        Caption = 'M'#201'DIO'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+        OnClick = chkAmeacaClick
+      end
+      object chkSevero: TCheckBox
+        Left = 128
+        Top = 59
+        Width = 97
+        Height = 17
+        Caption = 'SEVERO'
         Checked = True
         State = cbChecked
         TabOrder = 3
@@ -1003,7 +1055,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 2
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -1105,7 +1157,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 300
+        Width = 200
         Visible = True
       end
       item
@@ -1143,6 +1195,18 @@ object FormAnaliseRisco: TFormAnaliseRisco
         Title.Font.Style = [fsBold]
         Width = 60
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'mac_risco_assumido'
+        Title.Caption = 'Risco Assumido'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 93
+        Visible = True
       end>
   end
   object pnlImprimir: TPanel
@@ -1150,7 +1214,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
     Top = 174
     Width = 365
     Height = 188
-    TabOrder = 3
+    TabOrder = 2
     Visible = False
     object pnl8: TPanel
       Left = 1
@@ -1158,7 +1222,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       Width = 363
       Height = 72
       Align = alBottom
-      TabOrder = 1
+      TabOrder = 2
       object btnSairImp: TBitBtn
         Left = 289
         Top = 1
@@ -1584,7 +1648,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
       Top = 34
       Width = 350
       Height = 73
-      TabOrder = 2
+      TabOrder = 1
       object chkProcesso: TCheckBox
         Left = 16
         Top = 16
@@ -1609,7 +1673,8 @@ object FormAnaliseRisco: TFormAnaliseRisco
         'SE CAST('#39'OPORTUNIDADE'#39' as Character(12)) END as tipo,'
       
         'R.mac_probabilidade, R.mac_consequencia, R.mac_pdca, TC1.valo_co' +
-        'm as probabilidade, TC2.valo_com as consequencia'
+        'm as probabilidade, TC2.valo_com as consequencia,'
+      'mac_risco_assumido, mac_risco_assumido_obs'
       'FROM risco_macro R'
       'INNER JOIN processos P ON P.codi_pro = R.mac_processo'
       
@@ -1636,7 +1701,10 @@ object FormAnaliseRisco: TFormAnaliseRisco
         ')) ELSE CAST('#39'PONTO FORTE'#39' as Character(12)) END as tipo,'
       
         'R.int_probabilidade, R.int_consequencia, R.int_pdca, TC1.valo_co' +
-        'm as probabilidade, TC2.valo_com as consequencia'
+        'm as probabilidade, TC2.valo_com as consequencia,'
+      
+        'int_risco_assumido as mac_risco_assumido, int_risco_assumido_obs' +
+        ' as mac_risco_assumido_obs'
       'FROM risco_analiseint r'
       'INNER JOIN processos P ON P.codi_pro = R.int_processo'
       
@@ -1664,6 +1732,7 @@ object FormAnaliseRisco: TFormAnaliseRisco
     Top = 191
   end
   object cdsAnalise: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspAnalise'
@@ -1743,6 +1812,20 @@ object FormAnaliseRisco: TFormAnaliseRisco
       FieldName = 'consequencia'
       Size = 50
     end
+    object cdsAnalisemac_risco_assumido: TWideStringField
+      FieldName = 'mac_risco_assumido'
+      Size = 1
+    end
+    object cdsAnalisemac_risco_assumido_obs: TWideMemoField
+      FieldName = 'mac_risco_assumido_obs'
+      BlobType = ftWideMemo
+    end
+    object cdsAnaliseRiscoAssumido: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'RiscoAssumido'
+      Size = 3
+      Calculated = True
+    end
   end
   object dsAnalise: TDataSource
     DataSet = cdsAnalise
@@ -1806,10 +1889,156 @@ object FormAnaliseRisco: TFormAnaliseRisco
       'mac_texto=mac_texto'
       'mac_pdca=mac_pdca'
       'probabilidade=probabilidade'
-      'consequencia=consequencia')
+      'consequencia=consequencia'
+      'mac_risco_assumido=mac_risco_assumido'
+      'mac_risco_assumido_obs=mac_risco_assumido_obs'
+      'RiscoAssumido=RiscoAssumido')
     DataSet = cdsAnalise
     BCDToCurrency = False
     Left = 231
     Top = 189
+  end
+  object ImageList: TImageList
+    Left = 232
+    Top = 320
+    Bitmap = {
+      494C01010200B801E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000001000000001002000000000000010
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000EDFAF300000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000A8E7C40060D79800B5EACC000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00008BDBAD005DDE950082F2B6008EE6B8009DE0B90000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000FCFDFC006ECE
+      93002BD46E003AE27A0066EC9F0084F3B80077E2A6007ED19E00FEFEFE000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000F6FBF70051BE78000FC8
+      520001D147001BDA60003DE27C0050E78D004FE68B0044D87F0061C18300F8FC
+      F900000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000ECF6EE003AAE5E0002BC3F0000C2
+      3A0000CA41000BD34F001EDA60002ADD6B0022DB65000DD6530013CC550045B1
+      6600EFF7F1000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000060B7760000AC2D0013B93D003BCB
+      630052D67A0047D7740034D669004DDD7D0057DF84004FDC7D0034D3660011C2
+      4B002DA14D00E3F0E50000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000009EDAAA0034B64E0076D38B0077D7
+      8F0059D27A0073DB9100FBFEFC0083E3A00064DB880077DE960077DC94006ED7
+      8A001BBA48001C903400D3E6D500000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000AFE1B8006ECB810065CC
+      7C008FDCA2000000000000000000000000009FE5B20075D8900097E1AA0097DF
+      A80091DBA20030B54D0010801E00C0D8C0000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000BBE5C300AAE0
+      B4000000000000000000000000000000000000000000B8E9C40084D69600B8E6
+      C100B8E5C000B5E2BC0047B2560052A258000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000CDEDD3008ED3
+      9A00D9EFDC00D9EFDB0084C78900C0E2C3000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000DEF1
+      E00092CF98008AC88D00DBEEDD00000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000E8F4E900E8F4E90000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000040000000100000000100010000000000800000000000000000000000
+      000000000000000000000000FFFFFF00FFFFFFFF00000000FFFFFFFF00000000
+      FFFFFDFF00000000FFFFF8FF00000000FFFFF07F00000000FFFFC01F00000000
+      FFFF800F00000000FFFF000700000000FFFF000300000000FFFF000100000000
+      FFFF870000000000FFFFCF8000000000FFFFFFC000000000FFFFFFE100000000
+      FFFFFFF300000000FFFFFFFF0000000000000000000000000000000000000000
+      000000000000}
   end
 end

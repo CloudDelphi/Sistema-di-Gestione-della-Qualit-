@@ -1,11 +1,11 @@
-object FormCadFuncoes: TFormCadFuncoes
+object FormCadTestes: TFormCadTestes
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Cadastro de Fun'#231#245'es'
-  ClientHeight = 484
-  ClientWidth = 784
+  Caption = 'Cadastro de Testes'
+  ClientHeight = 471
+  ClientWidth = 831
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,16 +13,16 @@ object FormCadFuncoes: TFormCadFuncoes
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object pctFuncoes: TJvgPageControl
+  object pctTestes: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 784
-    Height = 412
-    ActivePage = tsTreinamentos
+    Width = 831
+    Height = 399
+    ActivePage = tsCadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -32,7 +32,7 @@ object FormCadFuncoes: TFormCadFuncoes
     ParentFont = False
     TabOrder = 0
     TabStop = False
-    OnChange = pctFuncoesChange
+    OnChange = pctTestesChange
     TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
     TabStyle.BevelInner = bvNone
     TabStyle.BevelOuter = bvNone
@@ -60,207 +60,55 @@ object FormCadFuncoes: TFormCadFuncoes
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitLeft = -8
+    ExplicitTop = 96
     object tsCadastro: TTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object lbl17: TLabel
-        Left = 335
-        Top = 103
-        Width = 33
-        Height = 13
-        Caption = 'C.B.O.'
-      end
-      object lbl4: TLabel
-        Left = 7
-        Top = 58
-        Width = 124
-        Height = 13
-        Caption = 'N'#237'vel de Educa'#231#227'o Exigido'
-      end
-      object lbl2: TLabel
-        Left = 63
-        Top = 12
-        Width = 99
-        Height = 13
-        Caption = 'Descri'#231#227'o da Fun'#231#227'o'
-      end
-      object lbl8: TLabel
-        Left = 7
-        Top = 147
-        Width = 158
-        Height = 13
-        Caption = 'Responsabilidades e Autoridades'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-      end
-      object lbl6: TLabel
-        Left = 7
-        Top = 103
-        Width = 92
-        Height = 13
-        Caption = 'Experi'#234'ncia Exigida'
-      end
-      object lbl5: TLabel
-        Left = 7
-        Top = 12
+      object lbl1: TLabel
+        Left = 15
+        Top = 9
         Width = 33
         Height = 13
         Caption = 'C'#243'digo'
       end
-      object lbl15: TLabel
-        Left = 492
+      object lbl4: TLabel
+        Left = 73
+        Top = 9
+        Width = 46
+        Height = 13
+        Caption = 'Descri'#231#227'o'
+      end
+      object lbl6: TLabel
+        Left = 15
         Top = 58
-        Width = 135
+        Width = 43
         Height = 13
-        Caption = 'N'#237'vel de Educa'#231#227'o Desejado'
+        Caption = 'Processo'
       end
-      object lbl16: TLabel
-        Left = 171
-        Top = 103
-        Width = 103
+      object lbl7: TLabel
+        Left = 731
+        Top = 9
+        Width = 31
         Height = 13
-        Caption = 'Experi'#234'ncia Desejada'
+        Caption = 'Status'
       end
-      object lbl18: TLabel
-        Left = 440
-        Top = 104
-        Width = 66
+      object lbl11: TLabel
+        Left = 344
+        Top = 58
+        Width = 35
         Height = 13
-        Caption = 'Organograma'
+        Caption = 'Crit'#233'rio'
       end
-      object sbArquivo: TSpeedButton
-        Left = 699
-        Top = 114
+      object lbl12: TLabel
+        Left = 557
+        Top = 58
         Width = 32
-        Height = 31
-        Hint = 'Clique para escolher o arquivo do documento'
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFA4C1F7256AEB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB3F7CEEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF42369EB
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBABC6F7FFFFFFFFFFFFFF
-          FFFFFFFFFFC5C3C3726F6E716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8381
-          80F9F9F9FFFFFFFFFFFFCADBFA2369EB2369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB588DF0FFFFFFFFFFFFFFFFFFFFFFFFB2B0AF716E6D716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6DC9C8C7FFFFFFFFFFFFFBFCFF3777ED
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBDFE9FCFFFFFFFF
-          FFFFFFFFFFDDDCDC716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D939190FFFFFFFFFFFFC5D8FA7CA6F32369EB2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB8BB0F4FFFFFFFFFFFFFFFFFFFCFCFC7E7B7A716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6DEAEAEAFFFFFF7FA8F3C3D6FA
-          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3978EDFCFDFFFF
-          FFFFFFFFFFDAD9D9AAA9A8716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6DB4B3B2FFFFFF3978EDF9FBFE3273EC2369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EBC0D4F9FFFFFFFFFFFFADABAAD9D8D7716E6D716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D7F7D7CFDFDFD2369EBCFDEFB
-          74A0F22369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB6B9AF2FF
-          FFFFFFFFFF7F7C7BFBFBFB7A7877716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6DD6D5D52369EB85ACF4BDD2F92369EB2369EB2369EB2369EB23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-          2369EB2369EB2369EB2369EB286DEBFFFFFFFFFFFF716E6DE0DFDFA5A3A3716E
-          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D9F9D9D2369EB3B79ED
-          F4F7FE76A1F3598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598E
-          F0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF08DB1F5FF
-          FFFFFFFFFF716E6DB0AFAED4D3D3716E6D716E6D716E6D716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-          6D716E6D716E6D7471702369EB2369EB6093F1CCDCFAE3ECFCE3ECFCF7FAFEFF
-          FFFFE6EEFDE3ECFCE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          F0F5FEE3ECFCF0F5FEFFFFFFFFFFFFFFFFFFFFFFFF716E6D817E7DF8F8F8A6A5
-          A494929194929194929194929194929194929194929194929194929194929194
-          9291949291949291949291949291949291949291949291B5B4B32369EB2369EB
-          2369EB2369EB2369EB81A9F4F1F6FE75A1F22369EB3C7AEDCADBFAFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC2C6FEC3F7CEEF0F5FEFFFFFFFF
-          FFFFFFFFFF716E6D716E6D999696DEDDDDEDEDEDEDEDEDFAFAFAFFFFFFEFEFEE
-          EDEDEDEFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F5EDED
-          EDF6F5F5FFFFFFFFFFFF2369EB2369EB2369EB2369EB417EEEFDFEFF5B8FF023
-          69EB6B9AF2F0F5FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFAFC8F82369EB729FF2FFFFFFFFFFFFFFFFFF716E6D716E6D716E6D716E
-          6D716E6DAEACABF6F6F6A6A4A3716E6D817E7EDDDCDCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE9E8E877747383807FF6F5F5FFFFFF246AEB2369EB
-          2369EB2369EB6596F1FFFFFF246AEB5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAFE3F7CEE3475EDFFFFFFFF
-          FFFFFFFFFF716E6D716E6D716E6D716E6D848281FEFEFE959392716E6DA09E9D
-          F6F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCBCA
-          CA716E6DA4A2A2FFFFFFA6C2F775A1F275A1F275A1F286ADF4FFFFFF729FF223
-          69EBACC7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          D7E4FB4681EE2369EB83AAF4FFFFFFFFFFFFFFFFFF726F6E716E6D716E6D716E
-          6D9C9A99FFFFFF726F6E8F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA8381807C7978FFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFF2F6FE407DEE2C6FECDAE6FCFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFEFEFFA1BFF6296DEC296DECA2BFF7FEFEFFFFFFFFFF
-          FFFFFFFFFFC6C4C4A6A4A3A6A4A3A6A4A3B1AFAFFFFFFFA4A2A1716E6DCAC8C8
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E58885
-          84716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
-          E1FB276CEB4782EEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFEEF3FD6495F12369EB
-          4681EED7E4FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF7F6F6848180777473E7E7E6FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFEFEFEC2C1C1757271757271C3C2C1FEFEFEFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9EBDF62369EB77A2F3FFFFFFFFFF
-          FFFFFFFFC4D7FA3978ED2369EB7CA6F3F7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2747170
-          888685F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFF4F4F49B9998716E6D888584E5E5
-          E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFEFEFF6898F12369EBB0C9F8FBFCFF89AEF4246AEB3273ECB9CFF9FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFC1BFBF716E6DA7A5A5FFFFFFFFFFFFFFFFFFD9
-          D8D87F7C7B716E6DAAA9A8FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F5FE3F7CEE2C6FEC4C85
-          EF2369EB598EF0E7EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE
-          9E9B9B716E6DCCCBCAFCFCFCB3B1B1726F6E7A7877D2D1D1FFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFD4E2FB3E7BED2C6FEC97B8F6FCFDFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F583807F7774738C8988716E6D94
-          9291EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFE3E3E282807F777473BCBABAFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        NumGlyphs = 2
-        ParentShowHint = False
-        ShowHint = True
-        OnClick = sbArquivoClick
+        Height = 13
+        Caption = 'Tabela'
       end
       object sbVisualizar: TSpeedButton
-        Left = 734
-        Top = 114
+        Left = 773
+        Top = 116
         Width = 32
         Height = 31
         Hint = 'Clique para visualizar o arquivo'
@@ -381,80 +229,152 @@ object FormCadFuncoes: TFormCadFuncoes
         ShowHint = True
         OnClick = sbVisualizarClick
       end
-      object lbl19: TLabel
-        Left = 284
-        Top = 58
-        Width = 87
+      object sbArquivo: TSpeedButton
+        Left = 736
+        Top = 116
+        Width = 32
+        Height = 31
+        Hint = 'Clique para escolher o arquivo do documento'
+        Glyph.Data = {
+          B60D0000424DB60D000000000000360000002800000030000000180000000100
+          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFA4C1F7256AEB2369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB3F7CEEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF87ADF42369EB
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBABC6F7FFFFFFFFFFFFFF
+          FFFFFFFFFFC5C3C3726F6E716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D8381
+          80F9F9F9FFFFFFFFFFFFCADBFA2369EB2369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB588DF0FFFFFFFFFFFFFFFFFFFFFFFFB2B0AF716E6D716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6DC9C8C7FFFFFFFFFFFFFBFCFF3777ED
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBDFE9FCFFFFFFFF
+          FFFFFFFFFFDDDCDC716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D939190FFFFFFFFFFFFC5D8FA7CA6F32369EB2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB8BB0F4FFFFFFFFFFFFFFFFFFFCFCFC7E7B7A716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6DEAEAEAFFFFFF7FA8F3C3D6FA
+          2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3978EDFCFDFFFF
+          FFFFFFFFFFDAD9D9AAA9A8716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6DB4B3B2FFFFFF3978EDF9FBFE3273EC2369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB2369EBC0D4F9FFFFFFFFFFFFADABAAD9D8D7716E6D716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6D7F7D7CFDFDFD2369EBCFDEFB
+          74A0F22369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+          EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB6B9AF2FF
+          FFFFFFFFFF7F7C7BFBFBFB7A7877716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6D716E6DD6D5D52369EB85ACF4BDD2F92369EB2369EB2369EB2369EB23
+          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+          2369EB2369EB2369EB2369EB286DEBFFFFFFFFFFFF716E6DE0DFDFA5A3A3716E
+          6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+          6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D9F9D9D2369EB3B79ED
+          F4F7FE76A1F3598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598E
+          F0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF0598EF08DB1F5FF
+          FFFFFFFFFF716E6DB0AFAED4D3D3716E6D716E6D716E6D716E6D716E6D716E6D
+          716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+          6D716E6D716E6D7471702369EB2369EB6093F1CCDCFAE3ECFCE3ECFCF7FAFEFF
+          FFFFE6EEFDE3ECFCE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          F0F5FEE3ECFCF0F5FEFFFFFFFFFFFFFFFFFFFFFFFF716E6D817E7DF8F8F8A6A5
+          A494929194929194929194929194929194929194929194929194929194929194
+          9291949291949291949291949291949291949291949291B5B4B32369EB2369EB
+          2369EB2369EB2369EB81A9F4F1F6FE75A1F22369EB3C7AEDCADBFAFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCE7FC2C6FEC3F7CEEF0F5FEFFFFFFFF
+          FFFFFFFFFF716E6D716E6D999696DEDDDDEDEDEDEDEDEDFAFAFAFFFFFFEFEFEE
+          EDEDEDEFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F5EDED
+          EDF6F5F5FFFFFFFFFFFF2369EB2369EB2369EB2369EB417EEEFDFEFF5B8FF023
+          69EB6B9AF2F0F5FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFAFC8F82369EB729FF2FFFFFFFFFFFFFFFFFF716E6D716E6D716E6D716E
+          6D716E6DAEACABF6F6F6A6A4A3716E6D817E7EDDDCDCFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFE9E8E877747383807FF6F5F5FFFFFF246AEB2369EB
+          2369EB2369EB6596F1FFFFFF246AEB5188EFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FAFE3F7CEE3475EDFFFFFFFF
+          FFFFFFFFFF716E6D716E6D716E6D716E6D848281FEFEFE959392716E6DA09E9D
+          F6F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCBCA
+          CA716E6DA4A2A2FFFFFFA6C2F775A1F275A1F275A1F286ADF4FFFFFF729FF223
+          69EBACC7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          D7E4FB4681EE2369EB83AAF4FFFFFFFFFFFFFFFFFF726F6E716E6D716E6D716E
+          6D9C9A99FFFFFF726F6E8F8C8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA8381807C7978FFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFF2F6FE407DEE2C6FECDAE6FCFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFEFEFFA1BFF6296DEC296DECA2BFF7FEFEFFFFFFFFFF
+          FFFFFFFFFFC6C4C4A6A4A3A6A4A3A6A4A3B1AFAFFFFFFFA4A2A1716E6DCAC8C8
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E58885
+          84716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
+          E1FB276CEB4782EEF6F9FEFFFFFFFFFFFFFFFFFFFFFFFFEEF3FD6495F12369EB
+          4681EED7E4FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFF7F6F6848180777473E7E7E6FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFEFEFEC2C1C1757271757271C3C2C1FEFEFEFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9EBDF62369EB77A2F3FFFFFFFFFF
+          FFFFFFFFC4D7FA3978ED2369EB7CA6F3F7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE3E2E2747170
+          888685F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFF4F4F49B9998716E6D888584E5E5
+          E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFEFEFF6898F12369EBB0C9F8FBFCFF89AEF4246AEB3273ECB9CFF9FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFC1BFBF716E6DA7A5A5FFFFFFFFFFFFFFFFFFD9
+          D8D87F7C7B716E6DAAA9A8FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F5FE3F7CEE2C6FEC4C85
+          EF2369EB598EF0E7EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE
+          9E9B9B716E6DCCCBCAFCFCFCB3B1B1726F6E7A7877D2D1D1FFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFD4E2FB3E7BED2C6FEC97B8F6FCFDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F5F583807F7774738C8988716E6D94
+          9291EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFE3E3E282807F777473BCBABAFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        NumGlyphs = 2
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = sbArquivoClick
+      end
+      object lbl8: TLabel
+        Left = 15
+        Top = 106
+        Width = 95
         Height = 13
-        Caption = #193'rea de Educa'#231#227'o'
+        Caption = 'Caminho do M'#233'todo'
       end
-      object dblEducacao: TDBLookupComboBox
-        Left = 7
-        Top = 74
-        Width = 275
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListSource = dsEducacao
-        ParentFont = False
-        TabOrder = 2
-        OnCloseUp = dblEducacaoCloseUp
+      object lbl13: TLabel
+        Left = 649
+        Top = 58
+        Width = 82
+        Height = 13
+        Caption = 'Tipo de Inspe'#231#227'o'
       end
-      object edtDescFuncao: TEdit
-        Left = 63
-        Top = 28
-        Width = 706
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-      end
-      object mmoResponsabilidades: TMemo
-        Left = 7
-        Top = 163
-        Width = 762
-        Height = 220
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 9
-        OnExit = mmoResponsabilidadesExit
-        OnKeyPress = mmoResponsabilidadesKeyPress
-      end
-      object dblExperiencia: TDBLookupComboBox
-        Left = 7
-        Top = 119
-        Width = 155
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListSource = dsExperiencia
-        ParentFont = False
-        TabOrder = 5
-        OnCloseUp = dblExperienciaCloseUp
+      object lbl2: TLabel
+        Left = 15
+        Top = 158
+        Width = 59
+        Height = 13
+        Caption = 'Colaborador'
       end
       object edtCodigo: TEdit
-        Left = 7
-        Top = 28
+        Left = 15
+        Top = 24
         Width = 52
         Height = 26
         CharCase = ecUpperCase
@@ -466,44 +386,92 @@ object FormCadFuncoes: TFormCadFuncoes
         ParentFont = False
         TabOrder = 0
       end
-      object dblEducDesejada: TDBLookupComboBox
-        Left = 492
-        Top = 74
-        Width = 275
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListSource = dsEducDesejada
-        ParentFont = False
-        TabOrder = 4
-      end
-      object dblExpDesejada: TDBLookupComboBox
-        Left = 171
-        Top = 119
-        Width = 155
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_com'
-        ListField = 'valo_com'
-        ListSource = dsExpDesejada
-        ParentFont = False
-        TabOrder = 6
-      end
-      object edtCBO: TEdit
-        Left = 335
-        Top = 119
-        Width = 99
+      object edtDescricao: TEdit
+        Left = 73
+        Top = 24
+        Width = 652
         Height = 26
         CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 100
+        ParentFont = False
+        TabOrder = 1
+      end
+      object dblProcesso: TDBLookupComboBox
+        Left = 15
+        Top = 73
+        Width = 325
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_pro'
+        ListField = 'nome_pro'
+        ListSource = dsProcessos
+        ParentFont = False
+        TabOrder = 3
+        OnCloseUp = dblProcessoCloseUp
+      end
+      object dblStatus: TDBLookupComboBox
+        Left = 731
+        Top = 24
+        Width = 86
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_com'
+        ListField = 'valo_com'
+        ListSource = dsStatus
+        ParentFont = False
+        TabOrder = 2
+      end
+      object dblCriterio: TDBLookupComboBox
+        Left = 344
+        Top = 73
+        Width = 211
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'codi_com'
+        ListField = 'valo_com'
+        ListSource = dsCriterio
+        ParentFont = False
+        TabOrder = 4
+        OnCloseUp = dblCriterioCloseUp
+      end
+      object dblTabela: TDBLookupComboBox
+        Left = 557
+        Top = 73
+        Width = 86
+        Height = 26
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        KeyField = 'amo_cod_tabela'
+        ListField = 'amo_tipo_tabela'
+        ListSource = dsTabela
+        ParentFont = False
+        TabOrder = 5
+      end
+      object edtCaminho: TEdit
+        Left = 15
+        Top = 121
+        Width = 715
+        Height = 26
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
@@ -512,108 +480,46 @@ object FormCadFuncoes: TFormCadFuncoes
         ParentFont = False
         TabOrder = 7
       end
-      object edtOrganograma: TEdit
-        Left = 440
-        Top = 119
-        Width = 255
+      object dblTipoInspecao: TDBLookupComboBox
+        Left = 649
+        Top = 73
+        Width = 168
         Height = 26
-        Hint = 'Digite o local do organograma ou o link'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
+        KeyField = 'tip_codigo'
+        ListField = 'tip_descricao'
+        ListSource = dsTipoInsp
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 6
       end
-      object edtArea: TEdit
-        Left = 284
-        Top = 74
-        Width = 204
+      object dblColaboradores: TDBLookupComboBox
+        Left = 15
+        Top = 173
+        Width = 347
         Height = 26
-        Hint = 'Digite a '#225'rea de educa'#231#227'o (Ex: Direito, Log'#237'stica, etc)'
-        CharCase = ecUpperCase
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -15
         Font.Name = 'Tahoma'
         Font.Style = []
-        MaxLength = 22
+        KeyField = 'codi_col'
+        ListField = 'nome_col'
+        ListSource = dsColab
         ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
+        TabOrder = 10
+        OnCloseUp = dblColaboradoresCloseUp
       end
-    end
-    object tsTreinamentos: TTabSheet
-      Caption = 'Treinamentos'
-      ImageIndex = 2
-      object lbl1: TLabel
-        Left = 7
-        Top = 12
-        Width = 33
-        Height = 13
-        Caption = 'C'#243'digo'
-      end
-      object lbl3: TLabel
-        Left = 63
-        Top = 12
-        Width = 99
-        Height = 13
-        Caption = 'Descri'#231#227'o da Fun'#231#227'o'
-      end
-      object lbl12: TLabel
-        Left = 3
-        Top = 60
-        Width = 60
-        Height = 13
-        Caption = 'Treinamento'
-      end
-      object lbl14: TLabel
-        Left = 361
-        Top = 59
-        Width = 20
-        Height = 13
-        Caption = 'Tipo'
-      end
-      object edtCodigoTre: TEdit
-        Left = 7
-        Top = 28
-        Width = 52
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-      object edtDescFuncaoTre: TEdit
-        Left = 63
-        Top = 28
-        Width = 706
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-      end
-      object dbgTreinamentos: TDBGrid
-        Left = 7
-        Top = 108
-        Width = 762
-        Height = 272
+      object dbgColab: TDBGrid
+        Left = 15
+        Top = 206
+        Width = 523
+        Height = 164
         Hint = 'Selecione o registro para excluir'
-        TabStop = False
-        DataSource = dsTreinamentosFun
+        DataSource = dsTesteColab
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -623,62 +529,44 @@ object FormCadFuncoes: TFormCadFuncoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 11
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
-        OnCellClick = dbgTreinamentosCellClick
-        OnKeyUp = dbgFuncoesKeyUp
         Columns = <
           item
             Expanded = False
-            FieldName = 'desc_tre'
-            Title.Caption = 'Treinamento'
+            FieldName = 'nome_col'
+            Title.Caption = 'Colaborador'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 650
+            Width = 350
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'tipo_tre'
-            Title.Caption = 'Tipo'
+            FieldName = 'col_usuario'
+            Title.Caption = 'Usu'#225'rio Relacionado'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 50
+            Width = 120
             Visible = True
           end>
       end
-      object dblTreinamentos: TDBLookupComboBox
-        Left = 7
-        Top = 76
-        Width = 352
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_tre'
-        ListField = 'desc_tre'
-        ListSource = dsTreinamentos
-        ParentFont = False
-        TabOrder = 4
-      end
-      object btnInserirTreinamento: TBitBtn
-        Left = 599
-        Top = 55
+      object btnInserirColab: TBitBtn
+        Left = 368
+        Top = 148
         Width = 82
         Height = 51
-        Hint = 'Isere os treinamentos para a fun'#231#227'o'
+        Hint = 'Insere o Colaborador na lista'
         Caption = 'Inserir'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
@@ -803,15 +691,15 @@ object FormCadFuncoes: TFormCadFuncoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
-        OnClick = btnInserirTreinamentoClick
+        TabOrder = 8
+        OnClick = btnInserirColabClick
       end
-      object btnExcluirTreinamento: TBitBtn
-        Left = 687
-        Top = 55
+      object btnExcluirColab: TBitBtn
+        Left = 456
+        Top = 148
         Width = 82
         Height = 51
-        Hint = 'Exclui o treinamento da fun'#231#227'o'
+        Hint = 'Exclui o Colaborador da lista'
         Caption = 'Excluir'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
@@ -936,407 +824,8 @@ object FormCadFuncoes: TFormCadFuncoes
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
-        OnClick = btnExcluirTreinamentoClick
-      end
-      object cbTipoTreinamento: TComboBox
-        Left = 362
-        Top = 76
-        Width = 151
-        Height = 26
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ItemIndex = 0
-        ParentFont = False
-        TabOrder = 5
-        Text = 'M - MANDAT'#211'RIO'
-        Items.Strings = (
-          'M - MANDAT'#211'RIO'
-          'D - DESEJ'#193'VEL')
-      end
-    end
-    object tsHabilidades: TTabSheet
-      Caption = 'Habilidades'
-      ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object lbl7: TLabel
-        Left = 7
-        Top = 12
-        Width = 33
-        Height = 13
-        Caption = 'C'#243'digo'
-      end
-      object lbl11: TLabel
-        Left = 63
-        Top = 12
-        Width = 99
-        Height = 13
-        Caption = 'Descri'#231#227'o da Fun'#231#227'o'
-      end
-      object lbl13: TLabel
-        Left = 7
-        Top = 60
-        Width = 49
-        Height = 13
-        Caption = 'Habilidade'
-      end
-      object edtCodigoHab: TEdit
-        Left = 7
-        Top = 28
-        Width = 52
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-      end
-      object edtDescFuncaoHab: TEdit
-        Left = 63
-        Top = 28
-        Width = 706
-        Height = 26
-        CharCase = ecUpperCase
-        Enabled = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-      end
-      object btnInserirHabilidade: TBitBtn
-        Left = 599
-        Top = 55
-        Width = 82
-        Height = 51
-        Hint = 'Isere a habilidade para a fun'#231#227'o'
-        Caption = 'Inserir'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9
-          F0FD99BAF65C90F03374EC2369EB2369EB3374EC5C90F099BAF6E9F0FDFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF1F1F1BDBCBB9694937B7877716E6D716E6D7B7877969493BD
-          BCBBF1F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFF3F7FE82AAF4276CEB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB276CEB82AAF4F3F7FEFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7AEADAC747170716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D747170AEADACF7F7F7FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC407DEE2369EB23
-          69EB4681EE90B3F5C7D9FADDE8FCDDE8FCC7D9FA90B3F54681EE2369EB2369EB
-          407DEEDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7
-          E7848180716E6D716E6D888584B7B6B5DBDADAE9E9E9E9E9E9DBDADAB7B6B588
-          8584716E6D716E6D848180E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFDBE6FC3475ED2369EB3374ECB3CBF8FEFEFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFEFEFFB3CBF83374EC2369EB3475EDDBE6FCFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFE8E7E77C7978716E6D7C7978CECDCDFEFEFEFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFECECDCD7C7978716E6D7C7978E8E7
-          E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F7FE407DEE2369EB447FEEE5EDFDFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5EDFD
-          427EEE2369EB407DEEF3F7FEFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7848180716E
-          6D868483EEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFEEEEEE858282716E6D848180F7F7F7FFFFFFFFFFFFFFFFFFFFFFFF
-          82AAF42369EB3374ECE5EDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5EDFD3374EC2369EB82AAF4FFFFFFFF
-          FFFFFFFFFFFFFFFFAEADAC716E6D7C7978EEEEEEFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEE7C7978716E
-          6DAEADACFFFFFFFFFFFFFFFFFFE9F0FD276CEB2369EBB3CBF8FFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFC8D9FAD1E0FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFB3CBF82369EB276CEBE9F0FDFFFFFFFFFFFFF1F1F1747170716E6DCECD
-          CDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBDBDAE1E1E1FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFCECDCD716E6D747170F1F1F1FFFFFFFFFFFF99BAF6
-          2369EB4681EEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFF97B8F62369EB2369EBA4C1
-          F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFF4681EE2369EB99BAF6FF
-          FFFFFFFFFFBDBCBB716E6D888584FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFBCBBBA
-          716E6D716E6DC5C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFE8885
-          84716E6DBDBCBBFFFFFFFFFFFF5C90F02369EB91B4F5FFFFFFFFFFFFFFFFFFFF
-          FFFF97B8F62369EB2369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFF90B3F52369EB5C90F0FFFFFFFFFFFF969493716E6DB8B6B6FFFF
-          FFFFFFFFFFFFFFFFFFFFBCBBBA716E6D716E6D716E6D716E6DC5C3C3FFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B6B5716E6D969493FFFFFFFFFFFF3374EC
-          2369EBC9DAFAFFFFFFFFFFFFFFFFFF97B8F62369EB2369EB266BEB2369EB2369
-          EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7D9FA2369EB3374ECFF
-          FFFFFFFFFF7B7877716E6DDCDBDBFFFFFFFFFFFFFFFFFFBCBBBA716E6D716E6D
-          73706F716E6D716E6D716E6DC5C3C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBDA
-          DA716E6D7B7877FFFFFFFFFFFF2369EB2369EBDEE9FCFFFFFFFFFFFF97B8F623
-          69EB2369EB276CEBBCD1F9A4C1F72369EB2369EB2369EBA4C1F7FFFFFFFFFFFF
-          FFFFFFFFFFFFDDE8FC2369EB2369EBFFFFFFFFFFFF716E6D716E6DEAE9E9FFFF
-          FFFFFFFFBCBBBA716E6D716E6D747170D4D3D2C5C3C3716E6D716E6D716E6DC5
-          C3C3FFFFFFFFFFFFFFFFFFFFFFFFE9E9E9716E6D716E6DFFFFFFFFFFFF2369EB
-          2369EBDEE9FCFFFFFFC7D9FA2369EB2369EB276CEBBCD1F9FFFFFFFFFFFFA4C1
-          F72369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFDDE8FC2369EB2369EBFF
-          FFFFFFFFFF716E6D716E6DEAE9E9FFFFFFDBDADA716E6D716E6D747170D4D3D2
-          FFFFFFFFFFFFC5C3C3716E6D716E6D716E6DC5C3C3FFFFFFFFFFFFFFFFFFE9E9
-          E9716E6D716E6DFFFFFFFFFFFF3374EC2369EBC9DAFAFFFFFFD6E3FB266BEB28
-          6DEBBCD1F9FFFFFFFFFFFFFFFFFFFFFFFFA4C1F72369EB2369EB2369EBA4C1F7
-          FFFFFFFFFFFFC7D9FA2369EB3374ECFFFFFFFFFFFF7B7877716E6DDCDBDBFFFF
-          FFE5E4E473706F747170D4D3D2FFFFFFFFFFFFFFFFFFFFFFFFC5C3C3716E6D71
-          6E6D716E6DC5C3C3FFFFFFFFFFFFDBDADA716E6D7B7877FFFFFFFFFFFF5C90F0
-          2369EB91B4F5FFFFFFFFFFFFE2EBFCE3ECFCFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFA4C1F72369EB2369EB2369EBD1E0FBFFFFFF90B3F52369EB5C90F0FF
-          FFFFFFFFFF969493716E6DB8B6B6FFFFFFFFFFFFECECECEDEDEDFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFC5C3C3716E6D716E6D716E6DE1E1E1FFFFFFB7B6
-          B5716E6D969493FFFFFFFFFFFF99BAF62369EB4681EEFEFEFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA4C1F72369EB2369EB
-          CEDDFBFEFEFF4681EE2369EB99BAF6FFFFFFFFFFFFBDBCBB716E6D888584FEFE
-          FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5
-          C3C3716E6D716E6DDFDFDEFEFEFE888584716E6DBDBCBBFFFFFFFFFFFFE9F0FD
-          276CEB2369EBB3CBF8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFD1E0FBCEDDFBFFFFFFB3CBF82369EB276CEBE9F0FDFF
-          FFFFFFFFFFF1F1F1747170716E6DCECDCDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1E1E1DFDFDEFFFFFFCECDCD716E
-          6D747170F1F1F1FFFFFFFFFFFFFFFFFF82AAF42369EB3475EDE6EEFDFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          E5EDFD3374EC2369EB82AAF4FFFFFFFFFFFFFFFFFFFFFFFFAEADAC716E6D7C79
-          78EFEFEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFEEEEEE7C7978716E6DAEADACFFFFFFFFFFFFFFFFFFFFFFFF
-          F3F7FE407DEE2369EB447FEEE6EEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFE5EDFD447FEE2369EB407DEEF3F7FEFFFFFFFF
-          FFFFFFFFFFFFFFFFF7F7F7848180716E6D868483EFEFEEFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEEEE868483716E6D8481
-          80F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDBE6FC3475ED2369EB3475EDB3
-          CBF8FEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFB3CBF83374EC
-          2369EB3475EDDBE6FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E77C79
-          78716E6D7C7978CECDCDFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE
-          FEFECECDCD7C7978716E6D7C7978E8E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFDBE6FC407DEE2369EB2369EB4681EE91B4F5C9DAFADEE9FCDEE9
-          FCC9DAFA91B4F54681EE2369EB2369EB407DEEDBE6FCFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E7E7848180716E6D716E6D888584B8B6B6
-          DCDBDBEAE9E9EAE9E9DCDBDBB8B6B6888584716E6D716E6D848180E8E7E7FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F7FE82AAF427
-          6CEB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB276CEB82AAF4
-          F3F7FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFF7F7F7AEADAC747170716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D747170AEADACF7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9F0FD99BAF65C90F03374EC2369EB2369
-          EB3374EC5C90F099BAF6E9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1F1BDBCBB969493
-          7B7877716E6D716E6D7B7877969493BDBCBBF1F1F1FFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 2
-        OnClick = btnInserirHabilidadeClick
-      end
-      object btnExcluirHabilidade: TBitBtn
-        Left = 687
-        Top = 55
-        Width = 82
-        Height = 51
-        Hint = 'Exclui a habilidade da fun'#231#227'o'
-        Caption = 'Excluir'
-        DoubleBuffered = True
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Glyph.Data = {
-          B60D0000424DB60D000000000000360000002800000030000000180000000100
-          180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8FAFEB3
-          CBF8719EF2417EEE266BEB2369EB266BEB417EEE719EF2B3CBF8F8FAFEFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFBFAFACECDCDA3A1A184828173706F716E6D73706F848281A3A1A1CE
-          CDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFCFDFFA2BFF73676ED2369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EB3676EDA2BFF7FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDC3C2C17D7B7A716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFECF2FD598EF02369EB2369EB31
-          72EC76A1F3B6CDF8D3E1FBE3ECFCD3E1FBB6CDF876A1F33072EC2369EB2369EB
-          598EF0ECF2FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F2F29492
-          91716E6D716E6D7A7776A6A5A4D0CFCEE3E2E2EDEDEDE3E2E2D0CFCEA6A5A479
-          7776716E6D716E6D949291F3F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          E9F0FD417EEE2369EB266BEB8CB1F5F5F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFF5F8FE8CB1F5266BEB2369EB417EEEE9F0FDFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFF1F0F0848281716E6D73706FB5B3B3F8F8F8FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8B5B3B373706F716E6D848281F1F0
-          F0FFFFFFFFFFFFFFFFFFFFFFFFF9FBFE5188EF2369EB2F71ECC9DAFAFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA
-          2F71EC2369EB5188EFF9FBFEFFFFFFFFFFFFFFFFFFFBFBFB8F8C8B716E6D7976
-          75DCDBDBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFDCDBDB797675716E6D8F8C8BFBFBFBFFFFFFFFFFFFFFFFFF91B4F5
-          2369EB276CEBCBDCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCADBFA276CEB2369EB91B4F5FFFFFFFF
-          FFFFFFFFFFB8B7B6716E6D747170DEDDDDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDCDC747170716E
-          6DB8B7B6FFFFFFFFFFFFEFF4FE2C6FEC2369EB92B5F5FFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFF91B4F52369EB2C6FECEFF4FEFFFFFFF4F4F4777473716E6DB9B7B7FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFB8B6B6716E6D777473F4F4F4FFFFFF9FBEF62369EB
-          3374ECF7FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE3374EC2369EB9FBEF6FF
-          FFFFC1C0BF716E6D7C7978FAFAFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F87B78
-          77716E6DC1C0BFFFFFFF5F92F02369EB7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFF7EA7F32369EB5F92F0FFFFFF979595716E6DADABAAFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFABAAA9716E6D979595FFFFFF3475ED2369EB
-          B5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBDD2F9ACC7F7ACC7F7ACC7F7ACC7F7ACC7
-          F7ACC7F7ACC7F7BDD2F9FDFEFFFFFFFFFFFFFFFFFFFFB4CCF82369EB3475EDFF
-          FFFF7C7978716E6DCFCECEFFFFFFFFFFFFFFFFFFFEFEFED4D3D3CAC8C8CAC8C8
-          CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8D4D3D3FEFEFEFFFFFFFFFFFFFFFFFFCFCE
-          CD716E6D7C7978FFFFFF2369EB2369EBD0DFFBFFFFFFFFFFFFFFFFFFA3C0F723
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBA4C1F7FFFFFF
-          FFFFFFFFFFFFCFDEFB2369EB2369EBFFFFFF716E6D716E6DE1E0E0FFFFFFFFFF
-          FFFFFFFFC3C2C2716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DFDF716E6D716E6DFFFFFF2369EB2369EB
-          D0DFFBFFFFFFFFFFFFFFFFFFA2BFF72369EB2369EB2369EB2369EB2369EB2369
-          EB2369EB2369EB2369EBA4C1F7FFFFFFFFFFFFFFFFFFCFDEFB2369EB2369EBFF
-          FFFF716E6D716E6DE1E0E0FFFFFFFFFFFFFFFFFFC3C2C1716E6D716E6D716E6D
-          716E6D716E6D716E6D716E6D716E6D716E6DC4C3C2FFFFFFFFFFFFFFFFFFE0DF
-          DF716E6D716E6DFFFFFF3475ED2369EBB5CCF8FFFFFFFFFFFFFFFFFFFDFEFFBA
-          D0F99EBDF69EBDF69EBDF69EBDF69EBDF69EBDF69EBDF6BBD1F9FDFEFFFFFFFF
-          FFFFFFFFFFFFB4CCF82369EB3475EDFFFFFF7C7978716E6DCFCECEFFFFFFFFFF
-          FFFFFFFFFEFEFED2D2D1C1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFC1BFBFD3
-          D2D2FEFEFEFFFFFFFFFFFFFFFFFFCFCECD716E6D7C7978FFFFFF5F92F02369EB
-          7FA8F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7EA7F32369EB5F92F0FF
-          FFFF979595716E6DADABAAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABAA
-          A9716E6D979595FFFFFF9FBEF62369EB3374ECF7FAFEFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFF5F8FE3374EC2369EB9FBEF6FFFFFFC1C0BF716E6D7C7978FAFAFAFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFF8F8F87B7877716E6DC1C0BFFFFFFFEFF4FE2C6FEC
-          2369EB92B5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F52369EB2C6FECEFF4FEFF
-          FFFFF4F4F4777473716E6DB9B7B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6716E
-          6D777473F4F4F4FFFFFFFFFFFF91B4F52369EB276CEBCBDCFAFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          CBDCFA276CEB2369EB91B4F5FFFFFFFFFFFFFFFFFFB8B7B6716E6D747170DEDD
-          DDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFDEDDDD747170716E6DB8B7B6FFFFFFFFFFFFFFFFFFF9FBFE
-          5188EF2369EB2F71ECCADBFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFC9DAFA2F71EC2369EB5188EFF9FBFEFFFFFFFF
-          FFFFFFFFFFFBFBFB8F8C8B716E6D797675DCDCDCFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDCDBDB797675716E6D8F8C
-          8BFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFE8EFFD417EEE2369EB266BEB8DB1F5F5
-          F8FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F8FE8DB1F5266BEB
-          2369EB417EEEE9F0FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0F0F0848281716E
-          6D73706FB5B4B3F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8
-          F8F8B5B4B373706F716E6D848281F1F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFECF2FD588DF02369EB2369EB3172EC77A2F3B7CEF8D4E2FBE3ECFCD4E2
-          FBB7CEF876A1F33172EC2369EB2369EB598EF0ECF2FDFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFF3F2F2949190716E6D716E6D7A7776A7A5A5D0CFCF
-          E3E3E2EDEDEDE3E3E2D0CFCFA6A5A47A7776716E6D716E6D949291F3F2F2FFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFFA2BFF73676ED23
-          69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB3676EDA2BFF7
-          FCFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFD
-          FDC3C2C17D7B7A716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-          6E6D7D7B7AC3C2C1FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFF7FAFEB3CBF8719EF2417EEE266BEB2369EB266B
-          EB417EEE719EF2B3CBF8F8FAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFACECDCDA3A1A1848281
-          73706F716E6D73706F848281A3A1A1CECDCDFBFAFAFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Layout = blGlyphTop
-        NumGlyphs = 2
-        ParentDoubleBuffered = False
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        OnClick = btnExcluirHabilidadeClick
-      end
-      object dblHabilidades: TDBLookupComboBox
-        Left = 7
-        Top = 76
-        Width = 352
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_hab'
-        ListField = 'desc_hab'
-        ListSource = dsHabilidades
-        ParentFont = False
-        TabOrder = 4
-      end
-      object dbgHabilidades: TDBGrid
-        Left = 7
-        Top = 108
-        Width = 762
-        Height = 272
-        Hint = 'Selecione o registro para excluir'
-        TabStop = False
-        DataSource = dsHabilidadesFun
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        OnCellClick = dbgHabilidadesCellClick
-        OnKeyUp = dbgFuncoesKeyUp
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'desc_hab'
-            Title.Caption = 'Habilidade'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = [fsBold]
-            Width = 700
-            Visible = True
-          end>
+        TabOrder = 9
+        OnClick = btnExcluirColabClick
       end
     end
     object tsPesquisa: TTabSheet
@@ -1348,10 +837,6 @@ object FormCadFuncoes: TFormCadFuncoes
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object lbl9: TLabel
         Left = 3
         Top = 13
@@ -1366,13 +851,49 @@ object FormCadFuncoes: TFormCadFuncoes
         Height = 13
         Caption = 'Pesquisar por'
       end
-      object dbgFuncoes: TDBGrid
+      object edtValor: TEdit
+        Tag = 30
         Left = 3
-        Top = 64
-        Width = 775
-        Height = 314
+        Top = 32
+        Width = 318
+        Height = 26
+        CharCase = ecUpperCase
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnChange = edtValorChange
+      end
+      object cbbCampo: TComboBox
+        Tag = 30
+        Left = 327
+        Top = 30
+        Width = 178
+        Height = 26
+        Style = csDropDownList
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemIndex = 0
+        ParentFont = False
+        TabOrder = 0
+        Text = 'C'#243'digo'
+        Items.Strings = (
+          'C'#243'digo'
+          'Descri'#231#227'o')
+      end
+      object dbgInspecao: TDBGrid
+        Left = 5
+        Top = 62
+        Width = 815
+        Height = 306
         Hint = 'Selecione o registro para alterar'
-        DataSource = dsFuncoes
+        DataSource = dsTestes
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -1388,114 +909,78 @@ object FormCadFuncoes: TFormCadFuncoes
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
-        OnCellClick = dbgFuncoesCellClick
-        OnDblClick = dbgFuncoesDblClick
-        OnKeyUp = dbgFuncoesKeyUp
+        OnDblClick = dbgInspecaoDblClick
         Columns = <
           item
             Expanded = False
-            FieldName = 'codi_fun'
+            FieldName = 'tes_codigo'
             Title.Caption = 'C'#243'digo'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 45
+            Width = 50
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'desc_fun'
-            Title.Caption = 'Descri'#231#227'o da Fun'#231#227'o'
+            FieldName = 'tes_descricao'
+            Title.Caption = 'Descri'#231#227'o'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 300
+            Width = 320
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'DescEducacao'
-            Title.Caption = 'Educa'#231#227'o Exigida'
+            FieldName = 'TipoInspecao'
+            Title.Caption = 'Tipo de Inspe'#231#227'o'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 200
+            Width = 150
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'DescExperiencia'
-            Title.Caption = 'Experi'#234'ncia Exigida'
+            FieldName = 'Criterio'
+            Title.Caption = 'Crit'#233'rio'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 120
+            Width = 160
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'fun_cbo'
-            Title.Caption = 'C.B.O.'
+            FieldName = 'nome_status'
+            Title.Caption = 'Status'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = [fsBold]
-            Width = 70
+            Width = 90
             Visible = True
           end>
-      end
-      object edtValor: TEdit
-        Left = 3
-        Top = 31
-        Width = 318
-        Height = 26
-        CharCase = ecUpperCase
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        OnChange = edtValorChange
-      end
-      object cbCampo: TComboBox
-        Left = 327
-        Top = 32
-        Width = 186
-        Height = 26
-        Style = csDropDownList
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ItemIndex = 0
-        ParentFont = False
-        TabOrder = 1
-        Text = 'Descri'#231#227'o da Fun'#231#227'o'
-        Items.Strings = (
-          'Descri'#231#227'o da Fun'#231#227'o'
-          'C.B.O.')
       end
     end
   end
   object pnl1: TPanel
     Left = 0
-    Top = 412
-    Width = 784
+    Top = 399
+    Width = 831
     Height = 72
     Align = alBottom
-    TabOrder = 2
+    TabOrder = 1
     object btnNovo: TBitBtn
       Left = 1
       Top = 1
@@ -2032,142 +1517,8 @@ object FormCadFuncoes: TFormCadFuncoes
       TabOrder = 4
       OnClick = btnCancelarClick
     end
-    object btnImprimir: TBitBtn
-      Left = 366
-      Top = 1
-      Width = 73
-      Height = 70
-      Hint = 'Clique para imprimir'
-      Align = alLeft
-      Caption = '&Imprimir'
-      DoubleBuffered = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Glyph.Data = {
-        B60D0000424DB60D000000000000360000002800000030000000180000000100
-        180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF433
-        74ECACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F73374EC83AAF4
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFAFADAD7C7978CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CA
-        C8C87C7978AFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFF83AAF43374ECACC7F7ACC7F7ACC7F7ACC7F7ACC7
-        F7ACC7F7ACC7F7ACC7F73374EC83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD7C7978CAC8C8CAC8C8
-        CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C87C7978AFADADFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFFF1F6FEFDFEFF83AAF423
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
-        FCFDFFF1F6FEFBFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCF6F6
-        F6FEFEFEAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6DAFADADFDFDFDF6F6F6FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFF2F6FE
-        6B9AF2256AEB2369EBE3ECFC83AAF43E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFF3E7BED83AAF4D6E3FB2369EB256AEB6B9AF2F2F6FEFF
-        FFFFFFFFFFF7F6F6A09E9D726F6E716E6DEDEDEDAFADAD82807FFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF82807FAFADADE4E4E4716E6D726F
-        6EA09E9DF7F6F6FFFFFFFFFFFF6797F12369EB2369EB2369EBE3ECFC83AAF42B
-        6EEC6797F16797F16797F16797F16797F16797F16797F16797F12B6EEC83AAF4
-        D6E3FB2369EB2369EB2369EB6797F1FFFFFFFFFFFF9D9B9A716E6D716E6D716E
-        6DEDEDEDAFADAD7673729D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D
-        9B9A767372AFADADE4E4E4716E6D716E6D716E6D9D9B9AFFFFFFFFFFFF246AEB
-        2369EB2369EB2369EBE3ECFCAAC5F76797F16797F16797F16797F16797F16797
-        F16797F16797F16797F16797F1AAC5F7D6E3FB2369EB2369EB2369EB246AEBFF
-        FFFFFFFFFF726F6E716E6D716E6D716E6DEDEDEDC8C7C69D9B9A9D9B9A9D9B9A
-        9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9AC8C7C6E4E4E4716E6D716E
-        6D716E6D726F6EFFFFFFFFFFFF2369EB2369EB2369EB2369EBE3ECFCFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        D6E3FB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
-        6DEDEDEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFE4E4E4716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
-        2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBFF
-        FFFFFFFFFF716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-        6D716E6D716E6DFFFFFFFFFFFF2369EB2369EB2369EB2369EB2369EB2369EB23
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-        2369EB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
-        6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
-        2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBFF
-        FFFFFFFFFF716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
-        6D716E6D716E6DFFFFFFFFFFFF2369EB2369EB2369EB2369EB2369EB2369EB23
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
-        2369EB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
-        6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
-        2369EB2369EB2369EBE3ECFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6E3FB2369EB2369EB2369EB2369EBFF
-        FFFFFFFFFF716E6D716E6D716E6D716E6DEDEDEDFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E4716E6D716E
-        6D716E6D716E6DFFFFFFFFFFFF246AEB2369EB2369EB2369EBE3ECFCAAC5F767
-        97F16797F16797F16797F16797F16797F16797F16797F16797F16797F1AAC5F7
-        D6E3FB2369EB2369EB2369EB246AEBFFFFFFFFFFFF726F6E716E6D716E6D716E
-        6DEDEDEDC8C7C69D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D
-        9B9A9D9B9AC8C7C6E4E4E4716E6D716E6D716E6D726F6EFFFFFFFFFFFF6797F1
-        2369EB2369EB2369EBE3ECFC83AAF42369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB83AAF4D6E3FB2369EB2369EB2369EB6797F1FF
-        FFFFFFFFFF9D9B9A716E6D716E6D716E6DEDEDEDAFADAD716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADE4E4E4716E6D716E
-        6D716E6D9D9B9AFFFFFFFFFFFFF2F6FE6B9AF2256AEB2369EBE3ECFC83AAF423
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
-        D6E3FB2369EB256AEB6B9AF2F2F6FEFFFFFFFFFFFFF7F6F6A09E9D726F6E716E
-        6DEDEDEDAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6DAFADADE4E4E4716E6D726F6EA09E9DF7F6F6FFFFFFFFFFFFFFFFFF
-        FFFFFFFBFCFFF1F6FEFDFEFF83AAF42369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB83AAF4FCFDFFF1F6FEFBFCFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFCFCFCF6F6F6FEFEFEAFADAD716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFDFDFDF6F6F6FCFC
-        FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF423
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369EB2369EB2369
-        EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D
-        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF423
-        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
-        6E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      Layout = blGlyphTop
-      NumGlyphs = 2
-      ParentDoubleBuffered = False
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 5
-      OnClick = btnImprimirClick
-    end
     object btnSair: TBitBtn
-      Left = 710
+      Left = 757
       Top = 1
       Width = 73
       Height = 70
@@ -2435,8 +1786,8 @@ object FormCadFuncoes: TFormCadFuncoes
       OnClick = btnAlterarClick
     end
     object pnlNavegacao: TPanel
-      Left = 488
-      Top = 18
+      Left = 541
+      Top = 27
       Width = 161
       Height = 40
       TabOrder = 7
@@ -2973,22 +2324,294 @@ object FormCadFuncoes: TFormCadFuncoes
         OnClick = btnAnteriorClick
       end
     end
+    object btnOrdenar: TBitBtn
+      Left = 439
+      Top = 1
+      Width = 73
+      Height = 70
+      Hint = 'Clique para definir a ordem dos testes'
+      Align = alLeft
+      Caption = '&Ordenar'
+      DoubleBuffered = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        B60D0000424DB60D000000000000360000002800000030000000180000000100
+        180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFF4E86EF6797F16797F16797F16797F16797F167
+        97F16797F16797F16797F16797F16797F16797F16797F16797F16797F16797F1
+        6797F16797F16797F16797F14E86EFFFFFFFFFFFFF8D8A8A9D9B9A9D9B9A9D9B
+        9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D
+        9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A8D8A8AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFFCDDDFAC4
+        D7FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDEFBD9E5FC
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFDFDEDED9D8D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFE0DFDFE6E6E6FFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFC6D8FA2B6EEC276CEBBCD1F9FFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFDAD9D9767372747170D4D3D2FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFC6D8FA3877ED709DF26B
+        9AF23978EDBCD1F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFDAD9
+        D97E7C7BA3A1A09F9D9D7F7D7CD4D3D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFC6D8FA3877EDD0DFFB9EBDF691B4F5D8E5FB3978EDBCD1F9FFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFDAD9D97E7C7BE0E0E0C1BFBFB8B6B6E6E5E57F7D7C
+        D4D3D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFF81A9F4D0DFFBFFFFFF9EBDF691
+        B4F5FFFFFFD8E5FB74A0F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFAEACABE0E0
+        E0FFFFFFC1BFBFB8B6B6FFFFFFE6E5E5A5A3A3FFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF91B4F59EBDF6FFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF91B4F59EBDF6
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFB8B6B6C1BFBFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FF73A0F2D8E5FBFFFFFF91B4F59EBDF6FFFFFFD0DFFB81A9F4FFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFA5A3A2E6E5E5FFFFFFB8B6B6C1BFBFFFFFFFE0E0E0AEAC
+        ABFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBCD1F93978EDD8E5FB91B4F59EBDF6
+        D0DFFB3877EDC6D8FAFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4D3D27F7D7CE6
+        E5E5B8B6B6C1BFBFE0E0E07E7C7BDAD9D9FFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFBCD1F93978ED6B9AF2709DF23877EDC6D8FAFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFD4D3D27F7D7C9F9D9DA3A1A07E7C7BDAD9D9FFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFF9EBDF691
+        B4F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBCD1F9276CEB2B6EEC
+        C6D8FAFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFC1BFBFB8B6B6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4
+        D3D2747170767372DAD9D9FFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF6797F1
+        FFFFFFFFFFFFFFFFFFFFFFFFD9E5FCCFDEFBFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFC4D7FACDDDFAFFFFFFFFFFFFFFFFFFFFFFFF6797F1FF
+        FFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFFFFFFFFFFE6E6E6E0DFDFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9D8D8DFDEDEFFFFFFFFFFFFFFFF
+        FFFFFFFF9D9B9AFFFFFFFFFFFF6797F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF6797F1FFFFFFFFFFFF9D9B9AFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9D9B9AFFFFFFFFFFFF4E86EF
+        6797F16797F16797F16797F16797F16797F16797F16797F16797F16797F16797
+        F16797F16797F16797F16797F16797F16797F16797F16797F16797F14E86EFFF
+        FFFFFFFFFF8D8A8A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A
+        9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B
+        9A9D9B9A8D8A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnClick = btnOrdenarClick
+      ExplicitLeft = 366
+    end
+    object btnImprimir: TBitBtn
+      Left = 366
+      Top = 1
+      Width = 73
+      Height = 70
+      Hint = 'Clique para imprimir'
+      Align = alLeft
+      Caption = '&Imprimir'
+      DoubleBuffered = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        B60D0000424DB60D000000000000360000002800000030000000180000000100
+        180000000000800D0000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF433
+        74ECACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F7ACC7F73374EC83AAF4
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFAFADAD7C7978CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CA
+        C8C87C7978AFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF83AAF43374ECACC7F7ACC7F7ACC7F7ACC7F7ACC7
+        F7ACC7F7ACC7F7ACC7F73374EC83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD7C7978CAC8C8CAC8C8
+        CAC8C8CAC8C8CAC8C8CAC8C8CAC8C8CAC8C87C7978AFADADFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFFF1F6FEFDFEFF83AAF423
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
+        FCFDFFF1F6FEFBFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCF6F6
+        F6FEFEFEAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6DAFADADFDFDFDF6F6F6FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFF2F6FE
+        6B9AF2256AEB2369EBE3ECFC83AAF43E7BEDFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFF3E7BED83AAF4D6E3FB2369EB256AEB6B9AF2F2F6FEFF
+        FFFFFFFFFFF7F6F6A09E9D726F6E716E6DEDEDEDAFADAD82807FFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF82807FAFADADE4E4E4716E6D726F
+        6EA09E9DF7F6F6FFFFFFFFFFFF6797F12369EB2369EB2369EBE3ECFC83AAF42B
+        6EEC6797F16797F16797F16797F16797F16797F16797F16797F12B6EEC83AAF4
+        D6E3FB2369EB2369EB2369EB6797F1FFFFFFFFFFFF9D9B9A716E6D716E6D716E
+        6DEDEDEDAFADAD7673729D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D
+        9B9A767372AFADADE4E4E4716E6D716E6D716E6D9D9B9AFFFFFFFFFFFF246AEB
+        2369EB2369EB2369EBE3ECFCAAC5F76797F16797F16797F16797F16797F16797
+        F16797F16797F16797F16797F1AAC5F7D6E3FB2369EB2369EB2369EB246AEBFF
+        FFFFFFFFFF726F6E716E6D716E6D716E6DEDEDEDC8C7C69D9B9A9D9B9A9D9B9A
+        9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9AC8C7C6E4E4E4716E6D716E
+        6D716E6D726F6EFFFFFFFFFFFF2369EB2369EB2369EB2369EBE3ECFCFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        D6E3FB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
+        6DEDEDEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFE4E4E4716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
+        2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBFF
+        FFFFFFFFFF716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+        6D716E6D716E6DFFFFFFFFFFFF2369EB2369EB2369EB2369EB2369EB2369EB23
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+        2369EB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
+        6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
+        2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EBFF
+        FFFFFFFFFF716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E
+        6D716E6D716E6DFFFFFFFFFFFF2369EB2369EB2369EB2369EB2369EB2369EB23
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB
+        2369EB2369EB2369EB2369EB2369EBFFFFFFFFFFFF716E6D716E6D716E6D716E
+        6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6DFFFFFFFFFFFF2369EB
+        2369EB2369EB2369EBE3ECFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD6E3FB2369EB2369EB2369EB2369EBFF
+        FFFFFFFFFF716E6D716E6D716E6D716E6DEDEDEDFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E4E4716E6D716E
+        6D716E6D716E6DFFFFFFFFFFFF246AEB2369EB2369EB2369EBE3ECFCAAC5F767
+        97F16797F16797F16797F16797F16797F16797F16797F16797F16797F1AAC5F7
+        D6E3FB2369EB2369EB2369EB246AEBFFFFFFFFFFFF726F6E716E6D716E6D716E
+        6DEDEDEDC8C7C69D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D9B9A9D
+        9B9A9D9B9AC8C7C6E4E4E4716E6D716E6D716E6D726F6EFFFFFFFFFFFF6797F1
+        2369EB2369EB2369EBE3ECFC83AAF42369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB83AAF4D6E3FB2369EB2369EB2369EB6797F1FF
+        FFFFFFFFFF9D9B9A716E6D716E6D716E6DEDEDEDAFADAD716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADE4E4E4716E6D716E
+        6D716E6D9D9B9AFFFFFFFFFFFFF2F6FE6B9AF2256AEB2369EBE3ECFC83AAF423
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
+        D6E3FB2369EB256AEB6B9AF2F2F6FEFFFFFFFFFFFFF7F6F6A09E9D726F6E716E
+        6DEDEDEDAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6DAFADADE4E4E4716E6D726F6EA09E9DF7F6F6FFFFFFFFFFFFFFFFFF
+        FFFFFFFBFCFFF1F6FEFDFEFF83AAF42369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB83AAF4FCFDFFF1F6FEFBFCFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFCFCFCF6F6F6FEFEFEAFADAD716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFDFDFDF6F6F6FCFC
+        FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF423
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF83AAF42369EB2369EB2369EB2369EB2369EB2369
+        EB2369EB2369EB2369EB2369EB83AAF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFADAD716E6D716E6D716E6D
+        716E6D716E6D716E6D716E6D716E6D716E6D716E6DAFADADFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF83AAF423
+        69EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB2369EB83AAF4
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFAFADAD716E6D716E6D716E6D716E6D716E6D716E6D716E6D716E6D71
+        6E6D716E6DAFADADFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      Layout = blGlyphTop
+      NumGlyphs = 2
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 8
+      OnClick = btnImprimirClick
+      ExplicitLeft = 401
+      ExplicitTop = 6
+    end
   end
   object pnlImprimir: TPanel
-    Left = 520
-    Top = 214
-    Width = 465
-    Height = 351
-    TabOrder = 1
+    Left = 318
+    Top = 143
+    Width = 365
+    Height = 209
+    TabOrder = 2
+    Visible = False
     object pnl2: TPanel
       Left = 1
-      Top = 278
-      Width = 463
+      Top = 136
+      Width = 363
       Height = 72
       Align = alBottom
-      TabOrder = 4
+      TabOrder = 1
       object btnSairImp: TBitBtn
-        Left = 389
+        Left = 289
         Top = 1
         Width = 73
         Height = 70
@@ -3393,11 +3016,11 @@ object FormCadFuncoes: TFormCadFuncoes
     object pnl3: TPanel
       Left = 1
       Top = 1
-      Width = 463
+      Width = 363
       Height = 29
       Align = alTop
       Alignment = taLeftJustify
-      Caption = ' Filtro de Impress'#227'o'
+      Caption = ' Op'#231#245'es de Impress'#227'o'
       Color = clGradientActiveCaption
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -3407,313 +3030,366 @@ object FormCadFuncoes: TFormCadFuncoes
       ParentFont = False
       TabOrder = 0
     end
-    object rgOrdemImpressao: TRadioGroup
-      Left = 15
-      Top = 216
-      Width = 442
-      Height = 59
-      Caption = 'Ordem de Impress'#227'o'
-      Columns = 2
-      Items.Strings = (
-        'C'#243'digo'
-        'Descri'#231#227'o da Fun'#231#227'o')
-      TabOrder = 3
-    end
-    object rgTipoRel: TRadioGroup
-      Left = 15
-      Top = 36
-      Width = 442
-      Height = 59
-      Caption = 'Tipo de Relat'#243'rio'
-      Columns = 3
-      Items.Strings = (
-        'Listagem'
-        'Resp. e Autor.'
-        'Com Habilidades'
-        'Com Treinamentos'
-        'Matriz de Fun'#231#227'o'
-        'Descri'#231#227'o de Fun'#231#227'o')
-      TabOrder = 1
-      OnClick = rgTipoRelClick
-    end
-    object grpMatrizfuncao: TGroupBox
-      Left = 15
-      Top = 96
-      Width = 442
-      Height = 117
-      Caption = 'Matriz de Fun'#231#227'o'
-      TabOrder = 2
-      object lblTituloMatrizFunc: TLabel
-        Left = 6
-        Top = 66
-        Width = 35
-        Height = 13
-        Caption = 'Fun'#231#227'o'
-      end
-      object dblMatrizFuncao: TDBLookupComboBox
-        Left = 6
-        Top = 83
-        Width = 347
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_fun'
-        ListField = 'desc_fun'
-        ListSource = dsMatrizFuncao
-        ParentFont = False
-        TabOrder = 2
-      end
-      object rgMatrizFuncao: TRadioGroup
-        Left = 6
-        Top = 14
-        Width = 431
-        Height = 49
-        Columns = 2
-        ItemIndex = 0
-        Items.Strings = (
-          'Por Fun'#231#227'o'
-          'Por Treinamento')
-        TabOrder = 0
-        OnClick = rgMatrizFuncaoClick
-      end
-      object dblMatrizTreinamento: TDBLookupComboBox
-        Left = 6
-        Top = 83
-        Width = 347
-        Height = 26
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -15
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        KeyField = 'codi_tre'
-        ListField = 'desc_tre'
-        ListSource = dsTreinamentos
-        ParentFont = False
-        TabOrder = 1
-      end
-      object chkTodosFuncao: TCheckBox
-        Left = 360
-        Top = 92
-        Width = 97
-        Height = 17
-        Caption = 'TODOS'
-        TabOrder = 3
-        OnClick = chkTodosFuncaoClick
-      end
-    end
   end
-  object zqryEducacao: TZQuery
+  object zqryTipoInsp: TZQuery
     Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
     Params = <>
-    Left = 40
-    Top = 208
+    Left = 184
+    Top = 343
   end
-  object dspEducacao: TDataSetProvider
-    DataSet = zqryEducacao
+  object dspTipoInsp: TDataSetProvider
+    DataSet = zqryTipoInsp
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 80
-    Top = 208
+    Left = 224
+    Top = 343
   end
-  object cdsEducacao: TClientDataSet
+  object cdsTipoInsp: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'dspEducacao'
-    Left = 120
-    Top = 208
-    object cdsEducacaocodi_com: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object cdsEducacaovalo_com: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
+    ProviderName = 'dspTipoInsp'
+    Left = 264
+    Top = 343
   end
-  object dsEducacao: TDataSource
-    DataSet = cdsEducacao
-    Left = 160
-    Top = 208
+  object dsTipoInsp: TDataSource
+    DataSet = cdsTipoInsp
+    Left = 304
+    Top = 343
   end
   object zqryGravar: TZQuery
     Connection = dm.Conexao
     Params = <>
-    Left = 664
-    Top = 32
+    Left = 392
+    Top = 264
   end
   object dspGravar: TDataSetProvider
     DataSet = zqryGravar
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 704
-    Top = 32
+    Left = 432
+    Top = 263
   end
   object cdsGravar: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspGravar'
-    Left = 744
-    Top = 32
+    Left = 472
+    Top = 263
+  end
+  object zqryAuxiliar: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 392
+    Top = 311
+  end
+  object dspAuxiliar: TDataSetProvider
+    DataSet = zqryAuxiliar
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 432
+    Top = 311
+  end
+  object cdsAuxiliar: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspAuxiliar'
+    Left = 472
+    Top = 311
+  end
+  object zqryTestes: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 295
+  end
+  object dspTestes: TDataSetProvider
+    DataSet = zqryTestes
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 295
+  end
+  object cdsTestes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTestes'
+    Left = 264
+    Top = 295
+  end
+  object dsTestes: TDataSource
+    DataSet = cdsTestes
+    Left = 304
+    Top = 295
+  end
+  object zqryStatus: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 247
+  end
+  object dspStatus: TDataSetProvider
+    DataSet = zqryStatus
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 247
+  end
+  object cdsStatus: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspStatus'
+    Left = 264
+    Top = 247
+  end
+  object dsStatus: TDataSource
+    DataSet = cdsStatus
+    Left = 304
+    Top = 247
+  end
+  object zqryCriterio: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 199
+  end
+  object dspCriterio: TDataSetProvider
+    DataSet = zqryCriterio
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 199
+  end
+  object cdsCriterio: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCriterio'
+    Left = 264
+    Top = 199
+  end
+  object dsCriterio: TDataSource
+    DataSet = cdsCriterio
+    Left = 304
+    Top = 199
+  end
+  object zqryTabela: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 159
+  end
+  object dspTabela: TDataSetProvider
+    DataSet = zqryTabela
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 159
+  end
+  object cdsTabela: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTabela'
+    Left = 264
+    Top = 159
+  end
+  object dsTabela: TDataSource
+    DataSet = cdsTabela
+    Left = 304
+    Top = 159
+  end
+  object zqryRegistro: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 111
+  end
+  object dspRegistro: TDataSetProvider
+    DataSet = zqryRegistro
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 111
+  end
+  object cdsRegistro: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspRegistro'
+    Left = 264
+    Top = 111
+  end
+  object dsRegistro: TDataSource
+    DataSet = cdsRegistro
+    Left = 304
+    Top = 111
+  end
+  object zqryColab: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 72
+  end
+  object dspColab: TDataSetProvider
+    DataSet = zqryColab
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 72
+  end
+  object cdsColab: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspColab'
+    Left = 264
+    Top = 72
+  end
+  object dsColab: TDataSource
+    DataSet = cdsColab
+    Left = 304
+    Top = 72
+  end
+  object zqryProcessos: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 184
+    Top = 24
+  end
+  object dspProcessos: TDataSetProvider
+    DataSet = zqryProcessos
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 224
+    Top = 24
+  end
+  object cdsProcessos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProcessos'
+    Left = 264
+    Top = 24
+  end
+  object dsProcessos: TDataSource
+    DataSet = cdsProcessos
+    Left = 304
+    Top = 24
+  end
+  object zqryTesteColab: TZQuery
+    Connection = dm.Conexao
+    Params = <>
+    Left = 568
+    Top = 232
+  end
+  object dspTesteColab: TDataSetProvider
+    DataSet = zqryTesteColab
+    Options = [poAutoRefresh, poAllowCommandText]
+    UpdateMode = upWhereKeyOnly
+    Left = 608
+    Top = 232
+  end
+  object cdsTesteColab: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTesteColab'
+    Left = 648
+    Top = 232
+  end
+  object dsTesteColab: TDataSource
+    DataSet = cdsTesteColab
+    Left = 688
+    Top = 232
+  end
+  object opd1: TOpenDialog
+    Left = 736
+    Top = 176
+  end
+  object frxDBDSOrdemTestes: TfrxDBDataset
+    UserName = 'frxDBDSOrdemTestes'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'seq=seq'
+      'tes_codigo=tes_codigo'
+      'tes_descricao=tes_descricao'
+      'tes_status=tes_status'
+      'tes_ordem=tes_ordem'
+      'nome_pro=nome_pro'
+      'tip_descricao=tip_descricao'
+      'criterio=criterio'
+      'tabela=tabela')
+    DataSet = cdsImprimir
+    BCDToCurrency = False
+    Left = 576
+    Top = 344
   end
   object zqryImprimir: TZQuery
     Connection = dm.Conexao
     SQL.Strings = (
+      'SELECT row_number() OVER (ORDER BY tes_ordem) as seq,'
+      'tes_codigo, tes_descricao, tes_status, '
+      'tes_ordem, P.nome_pro, tip_descricao, TC.valo_com as Criterio,'
+      '(SELECT amo_tipo_tabela'
+      #9'FROM inspecao_amostragem'
+      #9'GROUP BY amo_cod_tabela, amo_tipo_tabela'
+      #9'HAVING amo_cod_tabela = tes_tabela_amostragem) as Tabela'
+      'FROM inspecao_testes'
+      'INNER JOIN processos P ON P.codi_pro = tes_processo'
+      'INNER JOIN inspecao_tipo T ON T.tip_codigo = tes_tipo_inspecao'
       
-        'SELECT F.codi_fun, F.desc_fun, F.educ_fun, F.expe_fun, F.resp_fu' +
-        'n, '
-      
-        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
-        'un_area, F.fun_cbo'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6 '
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7')
+        'INNER JOIN tabela_combos TC ON TC.tipo_com = 38 AND TC.codi_com ' +
+        '= tes_criterio'
+      'WHERE tes_tipo_inspecao = 1'
+      'AND tes_status = 1')
     Params = <>
-    Left = 488
-    Top = 48
+    Left = 632
+    Top = 344
   end
   object dspImprimir: TDataSetProvider
     DataSet = zqryImprimir
     Options = [poAutoRefresh, poAllowCommandText]
     UpdateMode = upWhereKeyOnly
-    Left = 528
-    Top = 48
+    Left = 672
+    Top = 344
   end
   object cdsImprimir: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspImprimir'
-    Left = 568
-    Top = 48
-    object cdsImprimircodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsImprimirdesc_fun: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object cdsImprimireduc_fun: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object cdsImprimirexpe_fun: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object cdsImprimirresp_fun: TWideMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftWideMemo
-    end
-    object cdsImprimirDescEducacao: TWideStringField
-      FieldName = 'DescEducacao'
-      Size = 50
-    end
-    object cdsImprimirDescExperiencia: TWideStringField
-      FieldName = 'DescExperiencia'
-      Size = 50
-    end
-    object cdsImprimirfun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
-    end
-    object cdsImprimirfun_cbo: TWideStringField
-      FieldName = 'fun_cbo'
-      Size = 10
-    end
-  end
-  object zqryFuncoes: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT F.codi_fun, F.desc_fun, F.educ_fun, F.expe_fun, F.resp_fu' +
-        'n, T1.valo_com as DescEducacao, '
-      
-        'T2.valo_com as DescExperiencia, F.fun_edudesejada, F.fun_expdese' +
-        'jada, F.fun_cbo, F.fun_organograma,'
-      'F.fun_area'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6'
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7'
-      'ORDER BY desc_fun')
-    Params = <>
-    Left = 40
-    Top = 152
-  end
-  object dspFuncoes: TDataSetProvider
-    DataSet = zqryFuncoes
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 80
-    Top = 152
-  end
-  object cdsFuncoes: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspFuncoes'
-    Left = 120
-    Top = 152
-    object cdsFuncoescodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsFuncoesdesc_fun: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object cdsFuncoeseduc_fun: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object cdsFuncoesexpe_fun: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object cdsFuncoesresp_fun: TWideMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftWideMemo
-    end
-    object cdsFuncoesDescEducacao: TWideStringField
-      FieldName = 'DescEducacao'
-      Size = 50
-    end
-    object cdsFuncoesDescExperiencia: TWideStringField
-      FieldName = 'DescExperiencia'
-      Size = 50
-    end
-    object cdsFuncoesfun_edudesejada: TIntegerField
-      FieldName = 'fun_edudesejada'
-    end
-    object cdsFuncoesfun_expdesejada: TIntegerField
-      FieldName = 'fun_expdesejada'
-    end
-    object cdsFuncoesfun_cbo: TWideStringField
-      FieldName = 'fun_cbo'
-      Size = 10
-    end
-    object cdsFuncoesfun_organograma: TWideMemoField
-      FieldName = 'fun_organograma'
+    Left = 712
+    Top = 344
+    object cdsImprimirseq: TLargeintField
+      FieldName = 'seq'
       ReadOnly = True
-      BlobType = ftWideMemo
     end
-    object cdsFuncoesfun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
+    object cdsImprimirtes_codigo: TIntegerField
+      FieldName = 'tes_codigo'
+      Required = True
     end
-  end
-  object dsFuncoes: TDataSource
-    DataSet = cdsFuncoes
-    Left = 160
-    Top = 152
+    object cdsImprimirtes_descricao: TWideStringField
+      FieldName = 'tes_descricao'
+      Size = 100
+    end
+    object cdsImprimirtes_status: TIntegerField
+      FieldName = 'tes_status'
+    end
+    object cdsImprimirtes_ordem: TIntegerField
+      FieldName = 'tes_ordem'
+    end
+    object cdsImprimirnome_pro: TWideStringField
+      FieldName = 'nome_pro'
+      Size = 45
+    end
+    object cdsImprimirtip_descricao: TWideStringField
+      FieldName = 'tip_descricao'
+      Size = 100
+    end
+    object cdsImprimircriterio: TWideStringField
+      FieldName = 'criterio'
+      ReadOnly = True
+      Size = 50
+    end
+    object cdsImprimirtabela: TWideStringField
+      FieldName = 'tabela'
+      ReadOnly = True
+      Size = 10
+    end
   end
   object frxReport1: TfrxReport
     Version = '4.10.3'
@@ -3724,7 +3400,7 @@ object FormCadFuncoes: TFormCadFuncoes
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 40548.430550960600000000
-    ReportOptions.LastChange = 43558.715908599540000000
+    ReportOptions.LastChange = 43538.585958252290000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       
@@ -3758,30 +3434,14 @@ object FormCadFuncoes: TFormCadFuncoes
       'begin'
       ''
       'end.')
-    Left = 312
-    Top = 144
+    Left = 576
+    Top = 304
     Datasets = <
       item
-        DataSet = frxDBFuncoesHabTre
-        DataSetName = 'frxDBFuncoesHabTre'
-      end
-      item
-        DataSet = frxDBFuncoesHabTreHab
-        DataSetName = 'frxDBFuncoesHabTreHab'
+        DataSet = frxDBDSOrdemTestes
+        DataSetName = 'frxDBDSOrdemTestes'
       end>
     Variables = <
-      item
-        Name = ' New Category1'
-        Value = Null
-      end
-      item
-        Name = 'vlMedia'
-        Value = Null
-      end
-      item
-        Name = 'Titulo'
-        Value = Null
-      end
       item
         Name = ' Texto Relat'#243'rio'
         Value = Null
@@ -3811,352 +3471,167 @@ object FormCadFuncoes: TFormCadFuncoes
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
-      object DetalheTre: TfrxMasterData
-        Height = 18.897650000000000000
-        Top = 495.118430000000000000
+      object ReportTitle1: TfrxReportTitle
+        Height = 113.015770000000000000
+        Top = 18.897650000000000000
         Width = 718.110700000000000000
-        DataSet = frxDBFuncoesHabTre
-        DataSetName = 'frxDBFuncoesHabTre'
-        RowCount = 0
-        object Memo8: TfrxMemoView
-          Width = 551.810916220000000000
-          Height = 18.897650000000000000
+        object Memo4: TfrxMemoView
+          Top = 30.267780000000000000
+          Width = 718.110700000000000000
+          Height = 34.015770000000000000
           ShowHint = False
-          DataField = 'desc_tre'
-          DataSet = frxDBFuncoesHabTre
-          DataSetName = 'frxDBFuncoesHabTre'
+          AutoWidth = True
+          DataSetName = 'cdsParametroRelatorio'
+          DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'RELAT'#211'RIO DE TESTES DE INSPE'#199#195'O')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Width = 1046.929810000000000000
+          ShowHint = False
+          Diagonal = True
+        end
+        object mConfidencialCabec: TfrxMemoView
+          Left = 3.779530000000000000
+          Width = 714.330535350000000000
+          Height = 18.897650000000000000
+          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            '[TextoConf]')
+          ParentFont = False
+        end
+      end
+      object Detalhe: TfrxMasterData
+        Height = 18.897650000000000000
+        Top = 272.126160000000000000
+        Width = 718.110700000000000000
+        DataSet = frxDBDSOrdemTestes
+        DataSetName = 'frxDBDSOrdemTestes'
+        RowCount = 0
+        Stretched = True
+        object Memo10: TfrxMemoView
+          Left = 45.385826770000000000
+          Width = 230.551181102362000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'tes_descricao'
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."desc_tre"]')
+            '[frxDBDSOrdemTestes."tes_descricao"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo20: TfrxMemoView
-          Left = 551.811380000000000000
-          Width = 166.298856220000000000
+        object Memo6: TfrxMemoView
+          Width = 45.354286770000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'tipotreinamento'
-          DataSet = frxDBFuncoesHabTre
-          DataSetName = 'frxDBFuncoesHabTre'
+          StretchMode = smMaxHeight
+          DataField = 'seq'
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."tipotreinamento"]')
+            '[frxDBDSOrdemTestes."seq"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo14: TfrxMemoView
+          Left = 276.330708660000000000
+          Width = 211.653543307087000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'nome_pro'
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8W = (
+            '[frxDBDSOrdemTestes."nome_pro"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo18: TfrxMemoView
+          Left = 488.031496060000000000
+          Width = 154.582713780000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'criterio'
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSOrdemTestes."criterio"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Memo19: TfrxMemoView
+          Left = 642.354670000000000000
+          Width = 76.346061260000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          StretchMode = smMaxHeight
+          DataField = 'tabela'
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[frxDBDSOrdemTestes."tabela"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
-      object Rodape: TfrxPageFooter
-        Height = 52.913420000000000000
-        Top = 657.638220000000000000
+      object PageFooter1: TfrxPageFooter
+        Height = 56.692950000000000000
+        Top = 351.496290000000000000
         Width = 718.110700000000000000
-        object Picture2: TfrxPictureView
-          Left = 967.559680000000000000
-          Width = 56.692950000000000000
-          Height = 52.913420000000000000
-          ShowHint = False
-          Picture.Data = {
-            07544269746D617046230000424D462300000000000036000000280000003A00
-            0000330000000100180000000000102300000000000000000000000000000000
-            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFDFC
-            FCFBFBFBF8F8F8F5F5F5F1F1F1EEEEEEEBEBEBE8E8E8E5E5E5E2E2E1DEDEDEDA
-            DBDBD6D8D8D4D6D6D2D3D4D0D0CFD2D1D1A4B7D04279BE1F66C02367B83069AE
-            3462994063904D6A91677A937E8C9E8F9AA8A1A8B1A8AFB8A9B3C1AFB7C0B3B9
-            BEB4BBC2B4BAC5B4BAC5B9BFC7C3C9CDCED3D4DADBDBE6E5E5EDEDEDF2F2F2F5
-            F5F5F7F7F7FBFBFBFCFCFCFDFDFDFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFDFBFBFBF8F8F8F4F4F4
-            F0F0F0ECECECEAEAEAE6E6E6E4E4E4DFE1E1DBDDDDD8DADAD4D6D6D3D6D8B2C6
-            DF497EC11360C21364C90F63CA1163C7175FB816529F18498C244F8830578940
-            638F5370966982A28494AA97A4B5A9B2BDB1B6BCB0B4BDB5BBC9C1C7D0CDD2D6
-            D6DBDADDDEDDE1E1E1E4E4E4E8E8E8EBEBEBEDEDEDF1F1F1F4F4F4F8F8F8FAFA
-            FAFDFDFDFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFCFCFCFBFBFBF9F9F9F8F8F8F6F6F6F6F6F6F3
-            F4F4F0F2F2EEF0F0F1F2F0DEE8EF6294D01662C31966C62067C11967C51566C8
-            1867C81E66C31B5BAF134D9611488E154B8D184B8B214F89315688406390607C
-            A09DB0C5DBE2E9E9EBEEE9EBEDEBECEDEDEEEDEFEEEDEFEFEFF1F1F1F3F3F3F4
-            F4F4F5F5F5F6F6F6F7F7F7F9F9F9FAFAFAFBFBFBFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFFFFEFEFEFFFF98B9DD2465
-            BD1363CB1865C81765C81667C91968C71667CC1A67CE2068CC255FB81B50A016
-            4993184D93174D95124B94104A9117498A335C9391A8C6F2F8FAFFFFFFFFFFFE
-            FCFFFFFAFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFA
-            FEFDFCFEFCFFFFFEB0CFEC2A6FBF1165C41668C71967C71A65C81C65CB1B65CC
-            1965CC1864CB1665CB1369CA146DC01362A8144F961C4C98194F991650981751
-            98154D94194E8F6588B1D9E5EEFFFFFEFCFEFAF8FDFBFCFEFEFDFCFEFDFEFEFD
-            FEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFDFEFEFBFEFDFFFFFBD1E8F43679D01760C61468
-            C91568C81967C71A66C61865C81468C90F6FC90D78CC0F85D30593D4049ED510
-            A0D3147BB813549C1A4F971F519A1D529C15539C0E519E0E4B964671A5B9CBDD
-            FFFFFBFFFFF7FEFEFBF8FCFEF9FDFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFEFEFF
-            FEFEEBF0F55A90D1105FC21463CB1A64C9166AC90F72CC0B7CD00A88CF0A94CD
-            0A9FD307A7D406ACD506ABD501AED400AFD70BACDC0F8FC80F63A518529B2351
-            9F1E52A21B54A01954A1124E9B2D5D9B90ACCEEEF6FBFEFFFFF9FEFEFAFDFEFD
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFDFEFEFEFEFEFEFEFEFFFFFEF3F9FB79A7DB1366C50D75C60A82C50C8B
-            CB0D96D1099FD306A7D504ABD402ADD201ADD200AED200AED303AED301AED500
-            AED700AFD805B1DD0C9ED50D72B41555A21D53A61D55A51C56A41855A71551A0
-            1B519A6D90BCD7E6F1FFFFFEFFFFFBFCFDFEFDFDFEFEFEFEFDFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFCFEFCF9FDFEFDFCFDFDFFF8FDFFFF9A
-            CFE71E91C80797CF07A1D209A7D002ABD001ABD000ACCD00ADCD00ACD000ABD4
-            00ACD501ADD603ADD801AED700AFD701AFD800B0D800B1DA03B2E30EA9E00F80
-            C4145AA91855A81857AA1A57AB1558A91757A616539F4F7BAFC0D3E2FFFFFFFF
-            FFFCFEFDFEF9FEFEF8FEFDFDFDFEFEFDFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            F9FEFDFDFCFEFFFDFAFFFFFBB3E2EF21AACC02A8C900ADCD02AACF06A8CE00A9
-            CE00AACF02ABD004ACD101ACD400ABD600ADD701AED801AED801AED800AFD900
-            B1DA00B2DB00B2DC00B3DE01B6E40CB1E61391D00A66AE1357AB1A57B01359AF
-            165AAC1358AB1154A43367A59EB9D4F4FBFDFFFFFFFEFFFBFCFEFAFDFEFDFDFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFCFEFAFDFDFEFFFCBCE2F02DAED200
-            A8CB03AACD07A7CF04A7D102AAD200ACD301ACD402ADD502AED501AED600AFD8
-            01B0D900B0D902B0DA01B0DB00B1DC00B3DD00B5DF01B5DF03B6DF01B7E100B8
-            E305BAE70EA4DE0F70BF1659B81459B8155BB2165CB00F5BB80957B41C5CAA64
-            90C1C2D7E8FBFFFFFFFFFDFCFEFDFBFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FDFDFEFCFFFECEEEF53CB1D400A5CE04AACF07A8D006A8D202ABD400ACD600AD
-            D700ADD701AED801AED800AFD800B1DA01B2DB02B2DB03B3DC02B3DF02B4E101
-            B5E100B6E101B7E303B6E403B8E502B9E500BAE506BAED0C94DE1768CB175CC1
-            165CB7165FB8145EB9145DB90F5BB80C55B1346BB499BBDAF1FCFEFFFFFFFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFDFDFEF9FEFEFCFEFEFEFEFDFFFFFEE9FAFC5CC1DA02A3D100AAD001
-            ACD000ADD300AED401AED603AED701AFD800AED800AFD900B0DA00B1DB01B3DC
-            02B4DD04B4DE05B5DF05B3E303B4E601B4E701B4E600B7E600B8E701B9E901B9
-            E801BAE800BCEC09ABEF1177DA1D69D51563C5125FBD1961B91D62B61460BA0E
-            5DC10F59BB1F64B078A4CCE8F1F7FFFFFFFCFDFEFCFDFDFFFEFAFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFCFEFEFBFDFEFAFDFEF8FEFEFEFEFC
-            FAFBFD81CDDF08A6CE00A7D701ADD200AED300AED602B0D702B0D702B0D702B0
-            D801B0D900B0DB00B1DF01B2DF04B3E004B3E203B3E403B3E403B5E100B8E401
-            B8E903BAE800BAE501BAE801BAEB00BAEB00BBEC00BFEC07B9F5098BE6166FDD
-            176FDC1469CF1263C51463C21664C11965BF1B65BD0B60C40F5DBB598CC6C6DD
-            F1FCFFFFFDFEFAFBFDFCFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFAFEFEF9FDFEFFFCFDFCFDFDF8FEFFA3DDEA20A9CA02A9D502AAD801AFD300
-            AFD600AED802B0D902B1DA02B1DA01B3DB01B2DE01B3E001B3E201B5E100B6DF
-            00B6E300B7E600B7E803BAE704BBEA08B7EB08B4E504BAE801BAEB01BAED01BC
-            EE00BDEE00C0ED03BFF20DA6F30E76DE186FE21770E1136BD71365CB1864C51B
-            66C31966C31665C71163C90A5DC42F74C8A5C3E4FFFFFDF9FDFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFEF9FDFEF7FEFCFFFDFFBFE8F4
-            2CB4D200ABD400ADD901AED801B0D600B0D800B0DA01B1DA02B1DB02B3DD00B4
-            DE00B5E101B5E403B5E503B8E404BAE407B9E807B5EA06ADE70B9EE90893E709
-            86E00A81D910A5EE04BBF001BCEF00BDF000BEF101C0F000C1F10ABBF90C89E4
-            126EE0146FE61670E41A6FDD1868D01464CA1264CD1965C81D67C51B66C71160
-            C61B66C7C4D7ECFFFFFBFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFDFEFBFDFDFEFFFEE2F2F951B9DA00A9D501AED800B0D600B1D704B0D902
-            AFDA00B1DB00B2DC01B3DD01B5DF00B7E201B8E502B7E704B4E60BACE90F9FEA
-            0D91E30D83DF0E78DA0F71DB0E6DDC1669DD156ADC0D8CE705BCF400BEF200BD
-            F200BEF305BEF502C0F404C4F80FA3F00B74DF1571E71771E71971E51970E217
-            6AD81967CE1665CD1767CF1B67CC1967CB0D63D12A70C8ADC9E7FFFFFFFFFFFF
-            0000FCFEFEFBFEFEFDFEFEFDFDFEFDFDFEFEFDFDFFFEFDF1F9FE67C7DD05AAD2
-            03ACDB03AED801B1D900B2DB01B3DD01B5DC02B7DE03B6E303B5E603B0E708A8
-            E8099EE40B90DF0B82D90E76D90F6ED9126BD91669DB1968DD176CDE166DDF18
-            6CE0176DE00C79E008AFF401C2F606C0F105C0F502C1F806C3F304C5F40ABBFA
-            0D87E41471E21A71E51672E51572E91E72E71E6FD91569D61268D81268D71369
-            D6196AD1005ED54886D1FFFFFFFFFFFF0000FDFEFEFDFDFEFBFDFDF6FEFDF7FE
-            FDFDFEFCFBFDFD92D5E812ACD202AFD700B4D500B6D702B6DC05B7E006B5E206
-            AFE607A7E50A9CE20C90DE0A82DA0C76DB0E6FDA1369DA1B67DE1B6ADE176CDD
-            176DDD176DDD166DDD156EDF156EE0166FE1166FE1126FDE0B97EA04C2F904C4
-            F207C2F700C3FB09C3F606C6F404C7FC10A0ED1172E21B6FE71772E81273E91A
-            72E71B72E1156CDA146BD9146BD9126BDB156BD90764DB4B87D2FFFFFFFFFFFF
-            0000FEFEFEFBFDFEF7FDFDF7FEFAFDFDFBFFFFFFB3E5EE21B1D300ADDD06B1D9
-            06B4DB09AFE20BA6E10D99DE0C8DDA0D81DC0C76D9106FD8176AD81A69DB1A69
-            DE1969DE176BDD176EDF166EDF166EDF166EE0176FE0176FE0166FE1166FE117
-            70E21770E1186EDF107FE109B7F800C6F503C4F605C1FC08C2FA05C6F604C8F8
-            12BCF71181E91B6FE91971EA1273E71874E41C75E3166FDE156DDC156DDC146D
-            DE136CDF166AD48DB7E5FFFFFFFFFFFF0000FEFEFEF9FDFEF6FEFDFDFCFBFFFC
-            FED0EFF83CBADA00AFD900B0E101B2DF0995DA0C7DDA0B74D6116DD7156AD81C
-            69DA1C69DC196ADE176AE0156CDF146EDB126FDB1270DC1072DA126FDD156EE1
-            156EE1166FE2166FE2166FE1166FE1166FE1176FE1196FE31272E10DA2EF08C5
-            F904C4F708C3F907C4F908C6F70CC7F513C8F8159BEF1473E21B72E81774E71B
-            75E31B74E4166FE1156FE0166EE0126EE4126CDF6CA0DAE6F5FDFFFFFFFFFFFF
-            0000FEFEFEFBFDFEFAFDFCFFFEFBDBF5FC54C6E100ADDE01B3DF02B5DF06B3E5
-            0E92E11269D6156BDB166DDB186CDB136EDB116EDB126DDC136CDC126EDD126F
-            E0136FE1176EE2196DE3176EE3146EE3146EE3146EE3146EE2156FE1166FE117
-            70E21871E31770E5116EE3108BE414C1FA07C7F70BC7F709C7F70EC7F817C7F7
-            16C9F71BB4F5117DDE1B74E61D75E71F76E51872E51770E21871E41671E40F6F
-            E82072DADCEDF9FFFFFDFFFFFFFFFFFF0000FCFEFEFDFBFDFFFCFCF1FFF976CF
-            EA0BAEDB00B3E203B5E202B6E203B7E510AFE8117BDA156ADD1070D8166ED914
-            6DDD126EDC136EDD146FDD146FDE156EE2156EE2166EE2176EE3166FE3146FE3
-            146FE3146FE3146FE31570E31570E31671E41771E41571E4166FE6147BE515B8
-            F709CAF510C8F611C8F714C7F718C8F818C8F81FC1F7178AE61D73E61E76E61B
-            75E71973E62074E21A73E81472E81570E072A6E4FFFFFFFBFEFDFFFFFFFFFFFF
-            0000FCFEFCFFFFF9FDFFFCA0DCF319B4D700B4E102B4E302B6E401B7E400B9E4
-            05B9E90E93E5146CD8186DD8156DDA156DDE156EDE166FDF166FDF166FE01770
-            E31770E3166FE2166FE21670E31671E31671E31671E31671E41772E51772E518
-            73E61873E61773E61972E81477E413B3F50DCBF614C9F616CAF718C9F71BCAF8
-            1CCBF821C9F91E98EE1B75E71D79E71C77E61E77E42277E51874EC1772E55697
-            E3D9EEFCFEFEFCFAFEFEFFFFFFFFFFFF0000FFFFFDF8FCFACADCF2328ADB01AF
-            E100B7E502B6E702B7E701B8E700B9E800BBEB0AADED0F7BD81B6BDC146DDC13
-            6EDF156EE0166FE1166FE1166FE2166FE2166FE2166FE2166FE21670E31671E4
-            1671E41671E41671E41772E51772E51873E61873E61773E61971E81676E416B1
-            F415CBF81AC9F71ACAF71BCAF71FCAF81FCBF721CDF723A1F01C77E6207AE722
-            7AE6257BE42479E82176E8478CDFC5E1F7FFFFFEFBFDFDFCFEFDFFFFFFFFFFFF
-            0000FFFFFFA5C6E95992D50C69D30C98E803BAE502B8E803B9EB00B8EA00BAEB
-            01BBED06BBEC0C97E4156BDF166DDF146FE1166EE2166FE2166FE2166FE2176F
-            E2176FE21871E41871E41771E41671E41671E41672E41672E41873E51873E518
-            73E61873E61773E61B71E81A77E41CB3F51BCBF820C9F81ECAF620CAF623CAF7
-            23CBF625D0F42DAAF4267DE8297BE82B7BE9297DE7277AE73A81E0AFD0EFFCFF
-            FAFEFFFBFEFEFDFDFEFCFFFFFFFFFFFF0000E6F0F93981CF136CCD0F6CDA0A7F
-            DF05B5E802BBE801BBEB02BAEB02BBED04BCEE04BFED08AFEE0A7AE01B6CE216
-            6FE31371E21470E21570E31770E41771E41771E41871E41871E41771E51871E6
-            1871E61872E71872E71873E81873E71874E61A73E61A74E51A74E6177CE427B6
-            F921CAF822CBF524CCF627CBF828CCF827CFF52CC9F02A99EB2D7FE92F7FE831
-            7DEB2A7DEA307DE290BAEDF6FDFBFFFFF8FCFDFEFEFEFCFDFEFCFFFFFFFFFFFF
-            0000C7DBF4146BD80D67DB196ADD0F71D70C9EE704BDEA00BEEB04BCEE05BDEF
-            02BEEF00BFEF04BEF50999E9146EDE196EE41370E21571E31771E41771E41671
-            E41671E41671E41671E41972E71A71E91A71E91B72EA1A72E91874E81774E61A
-            74E61D74E71F74E71773E41990E72EC2FD25CBF625CCF428CCF626CDF72BCFF7
-            32CCF730A4EB327FEA3680EC3284E4347FEB317CE475A8E7E9F6FDFFFFFAFDFD
-            FCFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000C7DAF41369E10A67E2166BE11A6B
-            DD1180DF09B5EF00BFF102BEEF04BEF001BFF100C0F003C1F710B5FB0B88E416
-            6FE01D6EE61B6FE71771E41472E31671E41671E41772E51873E61973E71A72E8
-            1B73E81C74EA1C74E91A76E51B77E41D76E71D75E81F73EA1C77E524AEF225D0
-            F526CDF52FC8FB29CCF821D2F230CFF836AEF33384EA3F80EE3983E93385E836
-            7FEA629BE6DBEAF8FBFFFEFAFDFCFEFEFBFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000DFEFF9347ED2116CCF0B6DE0156CE30F71DB0D9EEB05BEF800BFF002BFF2
-            01C0F400C3F400C3F709C1FC0FB3F60D85E11071DF186FE61870E51672E31772
-            E51772E51873E61873E61A74E71B74E71B74E71B74E71B74E71C76E61D77E61D
-            78E51C77E51876E12596EC2FC7FA23D2F02ACDF431C9FA2CCCF72DCFF537BBF5
-            368FE73D87E73E8AE53789EB3483EE538EE8BDDBF7FEFFFBFEFEFAFBFDFEFEFD
-            FDFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FAFFFEAED0E96CA5DB176DDA0F68
-            E2146EDA1484E10CB7F900C2F402C2F603C2F703C3F602C3F701C5F606C6F813
-            B6F60C8DE60F73E2196FE51B71E51873E61873E61974E71A75E81C76E71D76E7
-            1D76E71C75E71D75E82073EB1F74EA1B77E41978DF2594E930C3F830CCF82FCD
-            F630CEF62DCFF232CFF63FC1FA3899E94389E8478AE9458CE84187EF508BE5AD
-            CCEEF9FFFBF8FDFDFDFEFAFDFDFBFBFDFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFFFDFFFFFFEBF9FF93BCEC2D77DA1169DD1470DE0CA2F404C7F501C5F4
-            04C2FA05C3F605C4F605C4F606C5F60EC7F915C0F912A4EC1584E21973E11871
-            E41972E61B73E71C73E91C74E91E76E91F75E92174E92173E9216FED1B73E817
-            83E324A4EE34C4FA2FCFF731CBF735CBFA33CDF92FD0F33FCBF745A1ED478BE8
-            498DE94D8DE7408AF04A8AE69FBDE5F5FCFBFFFFFBF9FDFEFDFEFDFDFDFCFDFD
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFDFFFFFAFFFFFAF9FFFFB0D2
-            F14988DD0C69DF0586E211BCF704C7F503C6F607C5F608C4F60BC4F70DC4F70B
-            C7F70ACBF512CAF71EBAF91E9FF01C8CEA1780E5177AE51875E61874E51A74E5
-            1A77E51B79E41F7FE6208DE627A0EC32BBF634CEF82FCFF431CEF532CDF533CE
-            F535CFF640CEFA44B1F04891E6518DEB4B91E94891EB438CE97BADE6E8F3FBFF
-            FEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFDFEFBFEFEF9FFFFF9FFFFFED3E8F869A1E2136FD80596EE0AC5FA
-            07C8F60BC6F70EC5F710C6F812C6F813C6F712C9F412CBF417CAF81FC9FC23C4
-            F922BBF623B1F422A7F223A2F022A1EE24A7F026AFF22BB9F630C5F833CCF933
-            CEF730CFF232CFF238CEF633D0F435D2F241D2F54ABBF54997E85392EB5691EB
-            4F94E94891EC6EA2E3D3E7F7FEFFFFFFFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FDFEFEFAFDFEFBFDFEFDFEFCFFFF
-            FCFFFFFDF1F9F98BB8E91E7BE20CA4F312C9F710C8F712C7F714C8F816C8F81C
-            C6F51EC8F41FCAF51FCBF41DCCF41BCFF31ECFF424CFF528CEF72BCEF82CCEF8
-            2BD0F62BD2F42AD2F32CCEF72FCDF932CEF834CEF738CDF73CCDF736D2F23FD2
-            F451C5F650A0E85594E85795E95896EA5596E9649CE2C3DAF1FDFFFDFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFDFEFDFDFEFDFCFEFEFEFEFEFCFEFDFEFFFCFEFFFCB2CCF03895DC
-            11B1EF11CAF914C9F81BC9F71AC9F717CAF51ACAF621C9F924CAF825CAF727C8
-            F829C9F72ACBF42CCBF32CCDF42DCEF430CEF433CEF534CEF634CDF736CEF738
-            CFF83ACFF73DCFF740D0F63AD3F54CCAF856A8ED5B98E75B98E85899E85B9AE9
-            6098E5ADCBF0FAFEFDFFFEFAFAFDFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFDFEFEFDFEFEFEFEFE
-            FEFCFEFEFAFEFDFFFFF8FEFFFDC6E0F35DAEDF19B8EE11C9FB26C8F821C9F51A
-            CBF81DCAF922CBF825CBF727CBF72ACCF82CCCF82DCBF72ECBF72FCCF630CDF5
-            34CEF737CEF839CEF83CCEF83ECFF73ECFF73DD0F740D1F643D2F345CEFA55B0
-            F05E9AE8619BEA6099ED5C99EE659AE197BBE8F0F8FFFFFFFEFEFEFDFDFEFEFD
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFCFEFEFAFDFEFCF9FDFDFAFFFF
-            E6EFF987C4E62EBDEE17C8FD22C9FB25CAFA25CBF927CCF729CDF72ACDF72DCE
-            F72FCEF730CEF731CDF733CDF634CFF537CFF73AD0F83CD0F840D0F742D0F742
-            D0F842D1F843D2F749D2F851BCF25E9FE7669EEA639EEB619BF05E99EC87B0E5
-            DFEEF9FFFFFFFFFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFCFEFEFAFBFDFEFAFDFEFEFEFAFFFFFAFAF8FEA2D7F239C4ED21C7F52C
-            CBFA2DCBF82DCCF72DCDF62ECDF531CEF533CFF635CFF637CEF638CEF639D0F5
-            3BD0F63ED0F640D1F742D1F643D1F646D1F749D2F84DD2FA54C4F761A7E971A0
-            EB6CA1EB68A2EC69A0EA7EABE5CFE5F8FEFFFBFFFEFBFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFEFDFDFDFDFEFDFDFEFDFDFDFDFD
-            FDFCFBFAFFFBF7FFFBCAE5F262C7E72DC5F231CCF832CDF730CFF631CEF434CF
-            F437D0F63AD0F63BCFF63CD0F63ED1F53FD0F542D0F644D2F744D3F745D2F649
-            D2F74ED4F852CCF662AEEC75A1EB72A3EE6DA5EC6BA1EB7BA6E1C6DAEFFBFFFE
-            FDFEFBFDFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFDFEFEFCFDFEFEFEFCFEFEFCFCFCFEFCFCFEFCFEFBFFFFF8FFFEFEDDEFF97D
-            C8EC3DB9EF32C9F738D2F737CFF738CFF637CFF93ACFF941D0F543D1F442D1F6
-            43D1F646D1F747D2F847D3F846D5F74CD4F858CFF85DB8E975A8E77DA4F170A3
-            F26FA4E98CB2E5C5D8F1F9FCFEFFFEFCFCFDFEFCFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFFFEFEFFFFFFF0F6FBA1CFEC40A7E52CB6F63FCDF943D3
-            F541D4F53ED4F43ED5F042D4F145D4F447D3F449D4F44BD4F44ED5F44DD7F358
-            D3F666BDEF72AAEA76A8EE78A6EC89AEE7B1CAEEE5EEF8FFFFFDFFFFFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFF
-            FFFCFFFFFAC0DCF2519DE12A93E332AEF045C3F64BCEF446D3F747D6F74CD7F7
-            4FD7F751D8F752D7F753D8F758D5F661C5F172AEEC80A5F080A9EDA2C4E9DAEA
-            F5FEFDFEFFFFFEFFFEFDFDFDFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFCFCFCFEFFFEFFE1EBF875AAE7297E
-            E22583E73294ED3FA2ED41AFEE3FB4EF42B5F145B6F045B5F043B3F053B4F06D
-            B4EB86AFE8A5BBEDD0DDF3F0FAFCFFFFFFFEFEFEFDFDFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFC
-            FDFCFCFCFAFCFBFBFEFFFFEEF9FDA0C1ED4184DF1C75EA277DEA2B82E42783E4
-            2984E42A84E62A83E63A85E169A0E996B8E5C3D6EBE8F4F9FDFFFDFFFEFEFEFC
-            FEFAFEFDFAFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFEFEFEFAFBFEFBFAFEFEFFFFFDFDFF
-            FDBBD8F45695E2287CE62B7FEB3182E92D81EC2A7FEC2D7EE86FA0E6B2CCF1E3
-            EDF9FCFFFFFDFFFEFCFEFDFEFDFEFEFDFEFDFEFDFDFEFDFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000FEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFFFEFEFBFDFEFBFEFEFFFFFCD9E9F675AAE73080E5217CED
-            237CEC3783DE74AAE6D0E6F7F6FDFCFFFFFBFFFEFAFDFEFDFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF
-            0000FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFDFDFCFCFD
-            FAFFFEF9FFFFFDE9F5FCA4C7ED6EA4E36CA3E5A0C6ECE6F3FAFFFFFDFFFFFAFE
-            FEF9FAFEFCF8FDFEFDFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE
-            FEFEFEFEFEFEFEFEFEFEFFFFFFFFFFFF0000}
-          HightQuality = False
-          Transparent = False
-          TransparentColor = clWhite
-        end
         object Picture1: TfrxPictureView
-          Left = 668.976810000000000000
-          Top = 15.118119999999980000
+          Left = 674.354980000000000000
+          Top = 1.779530000000022000
           Width = 34.015770000000000000
           Height = 34.015770000000000000
           ShowHint = False
@@ -4590,7 +4065,8 @@ object FormCadFuncoes: TFormCadFuncoes
           TransparentColor = clWhite
         end
         object Memo11: TfrxMemoView
-          Top = 35.236240000000060000
+          Left = 3.779530000000000000
+          Top = 34.015769999999970000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -4604,14 +4080,16 @@ object FormCadFuncoes: TFormCadFuncoes
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 31.456710000000040000
-          Width = 653.858690000000000000
+          Left = 3.779530000000000000
+          Top = 30.236240000000010000
+          Width = 650.079160000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
         object mConfidencialRodape: TfrxMemoView
-          Top = 11.338590000000070000
-          Width = 661.417310630000000000
+          Left = 3.779530000000000000
+          Top = 11.338590000000010000
+          Width = 650.078525350000000000
           Height = 18.897650000000000000
           OnBeforePrint = 'mConfidencialRodapeOnBeforePrint'
           ShowHint = False
@@ -4625,152 +4103,18 @@ object FormCadFuncoes: TFormCadFuncoes
           ParentFont = False
         end
       end
-      object PageHeader1: TfrxPageHeader
-        Height = 64.252010000000000000
-        Top = 18.897650000000000000
-        Width = 718.110700000000000000
-        object Memo4: TfrxMemoView
-          Top = 22.488250000000000000
-          Width = 718.110700000000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          AutoWidth = True
-          DataSetName = 'cdsParametroRelatorio'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -21
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'RELAT'#211'RIO DE DESCRI'#199#195'O DE FUN'#199#195'O')
-          ParentFont = False
-        end
-        object mConfidencialCabec: TfrxMemoView
-          Left = 0.015770000000000000
-          Width = 661.417310630000000000
-          Height = 18.897650000000000000
-          OnBeforePrint = 'mConfidencialCabecOnBeforePrint'
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8W = (
-            '[TextoConf]')
-          ParentFont = False
-        end
-      end
       object GroupHeader1: TfrxGroupHeader
-        Height = 328.819110000000000000
-        Top = 143.622140000000000000
+        Height = 56.031540000000000000
+        Top = 192.756030000000000000
         Width = 718.110700000000000000
-        Condition = '<frxDBFuncoesHabTre."desc_fun">'
-        StartNewPage = True
-        Stretched = True
-        object frxControleDATA: TfrxMemoView
-          Left = 49.133858270000000000
-          Top = 34.000000000000000000
-          Width = 267.590536540000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."desc_fun"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo10: TfrxMemoView
-          Left = 377.125984250000000000
-          Top = 34.000000000000000000
-          Width = 136.062992125984000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."DescEducacao"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo2: TfrxMemoView
-          Left = 611.834645670000000000
-          Top = 34.000000000000000000
-          Width = 106.582677170000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."DescExperiencia"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo5: TfrxMemoView
-          Top = 34.000000000000000000
-          Width = 48.755732200000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."codi_fun"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo6: TfrxMemoView
-          Left = 49.000000000000000000
-          Width = 267.968489290000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Descri'#231#227'o da Fun'#231#227'o')
-          ParentFont = False
-          VAlign = vaCenter
-        end
+        Condition = 'frxDBDSOrdemTestes."tip_descricao"'
         object Memo9: TfrxMemoView
-          Left = 377.260050000000000000
-          Width = 136.062992125984000000
-          Height = 34.015770000000000000
+          Left = 45.385826770000000000
+          Top = 22.015770000000000000
+          Width = 230.551181102362000000
+          Height = 34.015757800000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4780,16 +4124,19 @@ object FormCadFuncoes: TFormCadFuncoes
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Educa'#231#227'o Exigida')
+            'Descri'#231#227'o do Teste')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo1: TfrxMemoView
-          Left = 611.866420000000000000
-          Width = 106.582677165354000000
+          Top = 22.015770000000000000
+          Width = 45.354360000000000000
           Height = 34.015770000000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
+          DisplayFormat.FormatStr = 'dd/mm/yyyy'
+          DisplayFormat.Kind = fkDateTime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4798,14 +4145,17 @@ object FormCadFuncoes: TFormCadFuncoes
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'Experi'#234'ncia Exigida')
+            'Ordem')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo3: TfrxMemoView
-          Width = 48.755878660000000000
-          Height = 34.015770000000000000
+        object Memo8: TfrxMemoView
+          Left = 276.196970000000000000
+          Top = 22.015770000000000000
+          Width = 212.409141260000000000
+          Height = 34.015757800000000000
           ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4815,91 +4165,37 @@ object FormCadFuncoes: TFormCadFuncoes
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            'C'#243'digo')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo7: TfrxMemoView
-          Top = 63.913420000000000000
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clScrollBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Responsabilidades e Autoridades')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo14: TfrxMemoView
-          Top = 309.921460000000000000
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Color = clScrollBar
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'Treinamentos Exigidos')
+            'Processo')
           ParentFont = False
           VAlign = vaCenter
         end
         object Memo15: TfrxMemoView
-          Top = 83.149660000000010000
-          Width = 718.110236220000000000
-          Height = 222.992172360000000000
+          Left = 488.141930000000000000
+          Top = 22.015770000000000000
+          Width = 154.582713780000000000
+          Height = 34.015757800000000000
           ShowHint = False
-          StretchMode = smMaxHeight
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
+          Color = cl3DLight
+          DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -12
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
           Memo.UTF8W = (
-            '[frxDBFuncoesHabTreHab."resp_fun"]')
+            'Crit'#233'rio')
           ParentFont = False
+          VAlign = vaCenter
         end
         object Memo16: TfrxMemoView
-          Left = 512.897960000000000000
-          Top = 34.000000000000000000
-          Width = 99.023612280000000000
-          Height = 30.236240000000000000
+          Left = 642.354670000000000000
+          Top = 22.015770000000000000
+          Width = 76.346061260000000000
+          Height = 34.015757800000000000
           ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."fun_area"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo17: TfrxMemoView
-          Left = 513.032025750000000000
-          Width = 99.023612280000000000
-          Height = 34.015770000000000000
-          ShowHint = False
+          Color = cl3DLight
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4909,818 +4205,30 @@ object FormCadFuncoes: TFormCadFuncoes
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8W = (
-            #193'rea')
+            'Tabela de Amostragem')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo18: TfrxMemoView
-          Left = 317.614378270000000000
-          Top = 34.000000000000000000
-          Width = 59.716386540000000000
-          Height = 30.236240000000000000
-          ShowHint = False
-          DataSet = frxDBDSFuncoes
-          DataSetName = 'frxDBDSFuncoes'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTre."fun_cbo"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo19: TfrxMemoView
-          Left = 317.480520000000000000
-          Width = 60.094339290000000000
-          Height = 34.015770000000000000
-          ShowHint = False
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8W = (
-            'CBO')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-      end
-      object DetalheHab: TfrxMasterData
-        Height = 18.897650000000000000
-        Top = 578.268090000000000000
-        Width = 718.110700000000000000
-        DataSet = frxDBFuncoesHabTreHab
-        DataSetName = 'frxDBFuncoesHabTreHab'
-        RowCount = 0
-        object Memo12: TfrxMemoView
-          Width = 718.110236220000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'desc_hab'
-          DataSet = frxDBFuncoesHabTreHab
-          DataSetName = 'frxDBFuncoesHabTreHab'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          Memo.UTF8W = (
-            '[frxDBFuncoesHabTreHab."desc_hab"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-      end
-      object GroupFooter1: TfrxGroupFooter
-        Height = 18.897650000000000000
-        Top = 536.693260000000000000
-        Width = 718.110700000000000000
-        object Memo13: TfrxMemoView
-          Width = 718.110236220000000000
+        object Memo5: TfrxMemoView
+          Top = 3.779529999999994000
+          Width = 718.110236220471900000
           Height = 18.897650000000000000
           ShowHint = False
           Color = clScrollBar
-          DisplayFormat.DecimalSeparator = ','
+          DataSet = frxDBDSOrdemTestes
+          DataSetName = 'frxDBDSOrdemTestes'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
           Memo.UTF8W = (
-            'Habilidades Exigidas')
+            'Tipo de Inspe'#231#227'o: [frxDBDSOrdemTestes."tip_descricao"]')
           ParentFont = False
           VAlign = vaCenter
         end
       end
     end
-  end
-  object frxDBDSFuncoes: TfrxDBDataset
-    UserName = 'frxDBDSFuncoes'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'codi_fun=codi_fun'
-      'desc_fun=desc_fun'
-      'educ_fun=educ_fun'
-      'expe_fun=expe_fun'
-      'resp_fun=resp_fun'
-      'DescEducacao=DescEducacao'
-      'DescExperiencia=DescExperiencia'
-      'fun_area=fun_area'
-      'fun_cbo=fun_cbo')
-    DataSet = cdsImprimir
-    BCDToCurrency = False
-    Left = 400
-    Top = 48
-  end
-  object zqryExperiencia: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
-    Params = <>
-    Left = 608
-    Top = 320
-  end
-  object dspExperiencia: TDataSetProvider
-    DataSet = zqryExperiencia
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 648
-    Top = 320
-  end
-  object cdsExperiencia: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspExperiencia'
-    Left = 688
-    Top = 320
-    object cdsExperienciacodi_com: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object cdsExperienciavalo_com: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
-  end
-  object dsExperiencia: TDataSource
-    DataSet = cdsExperiencia
-    Left = 728
-    Top = 320
-  end
-  object zqryTreinamentos: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_tre, desc_tre'
-      'FROM treinamentos')
-    Params = <>
-    Left = 376
-    Top = 304
-  end
-  object dspTreinamentos: TDataSetProvider
-    DataSet = zqryTreinamentos
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 416
-    Top = 304
-  end
-  object cdsTreinamentos: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspTreinamentos'
-    Left = 456
-    Top = 304
-    object cdsTreinamentoscodi_tre: TLargeintField
-      FieldName = 'codi_tre'
-      Required = True
-    end
-    object cdsTreinamentosdesc_tre: TWideStringField
-      FieldName = 'desc_tre'
-      Required = True
-      Size = 70
-    end
-  end
-  object dsTreinamentos: TDataSource
-    DataSet = cdsTreinamentos
-    Left = 496
-    Top = 304
-  end
-  object zqryHabilidades: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_hab, desc_hab'
-      'FROM habilidades')
-    Params = <>
-    Left = 376
-    Top = 352
-  end
-  object dspHabilidades: TDataSetProvider
-    DataSet = zqryHabilidades
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 416
-    Top = 352
-  end
-  object cdsHabilidades: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspHabilidades'
-    Left = 456
-    Top = 352
-    object cdsHabilidadescodi_hab: TIntegerField
-      FieldName = 'codi_hab'
-      Required = True
-    end
-    object cdsHabilidadesdesc_hab: TWideStringField
-      FieldName = 'desc_hab'
-      Size = 50
-    end
-  end
-  object dsHabilidades: TDataSource
-    DataSet = cdsHabilidades
-    Left = 496
-    Top = 352
-  end
-  object zqryTreinamentosFun: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT F.codi_fun, F.codi_tre, F.tipo_tre, T.desc_tre'
-      'FROM funcoes_treinamentos F'
-      'INNER JOIN treinamentos T ON T.codi_tre = F.codi_tre')
-    Params = <>
-    Left = 96
-    Top = 304
-  end
-  object dspTreinamentosFun: TDataSetProvider
-    DataSet = zqryTreinamentosFun
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 136
-    Top = 304
-  end
-  object cdsTreinamentosFun: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspTreinamentosFun'
-    Left = 176
-    Top = 304
-    object cdsTreinamentosFuncodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsTreinamentosFuncodi_tre: TLargeintField
-      FieldName = 'codi_tre'
-      Required = True
-    end
-    object cdsTreinamentosFuntipo_tre: TWideStringField
-      FieldName = 'tipo_tre'
-      Required = True
-      Size = 1
-    end
-    object cdsTreinamentosFundesc_tre: TWideStringField
-      FieldName = 'desc_tre'
-      Required = True
-      Size = 70
-    end
-  end
-  object dsTreinamentosFun: TDataSource
-    DataSet = cdsTreinamentosFun
-    Left = 216
-    Top = 304
-  end
-  object zqryHabilidadesFun: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT F.codi_fun, F.codi_hab, H.desc_hab'
-      'FROM funcoes_habilidades F'
-      'INNER JOIN habilidades H ON H.codi_hab = F.codi_hab')
-    Params = <>
-    Left = 96
-    Top = 352
-  end
-  object dspHabilidadesFun: TDataSetProvider
-    DataSet = zqryHabilidadesFun
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 136
-    Top = 352
-  end
-  object cdsHabilidadesFun: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspHabilidadesFun'
-    Left = 176
-    Top = 352
-    object cdsHabilidadesFuncodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsHabilidadesFuncodi_hab: TLargeintField
-      FieldName = 'codi_hab'
-      Required = True
-    end
-    object cdsHabilidadesFundesc_hab: TWideStringField
-      FieldName = 'desc_hab'
-      Size = 50
-    end
-  end
-  object dsHabilidadesFun: TDataSource
-    DataSet = cdsHabilidadesFun
-    Left = 216
-    Top = 352
-  end
-  object frxDBDSFuncoesHab: TfrxDBDataset
-    UserName = 'frxDBDSFuncoesHab'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'codi_fun=codi_fun'
-      'desc_fun=desc_fun'
-      'educ_fun=educ_fun'
-      'expe_fun=expe_fun'
-      'resp_fun=resp_fun'
-      'DescEducacao=DescEducacao'
-      'DescExperiencia=DescExperiencia'
-      'codi_hab=codi_hab'
-      'desc_hab=desc_hab'
-      'fun_area=fun_area')
-    DataSet = cdsImprimirHab
-    BCDToCurrency = False
-    Left = 400
-    Top = 96
-  end
-  object zqryImprimirHab: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_f' +
-        'un, F.expe_fun, F.resp_fun,'
-      
-        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
-        'un_area'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6'
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7'
-      'INNER JOIN funcoes_habilidades FH ON FH.codi_fun = F.codi_fun'
-      'INNER JOIN habilidades H ON H.codi_hab = FH.codi_hab')
-    Params = <>
-    Left = 488
-    Top = 96
-  end
-  object dspImprimirHab: TDataSetProvider
-    DataSet = zqryImprimirHab
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 528
-    Top = 96
-  end
-  object cdsImprimirHab: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspImprimirHab'
-    Left = 568
-    Top = 96
-    object LargeintField1: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cds2: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object LargeintField2: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object LargeintField3: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object MemoField1: TMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftMemo
-    end
-    object cds3: TWideStringField
-      FieldName = 'DescEducacao'
-      Size = 50
-    end
-    object cds4: TWideStringField
-      FieldName = 'DescExperiencia'
-      Size = 50
-    end
-    object lrgntfldImprimirHabcodi_hab: TLargeintField
-      FieldName = 'codi_hab'
-      Required = True
-    end
-    object cdsImprimirHabdesc_hab: TWideStringField
-      FieldName = 'desc_hab'
-      Size = 50
-    end
-    object cdsImprimirHabfun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
-    end
-  end
-  object frxDBDSFuncoesTre: TfrxDBDataset
-    UserName = 'frxDBDSFuncoesTre'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'DescEducacao=DescEducacao'
-      'DescExperiencia=DescExperiencia'
-      'codi_tre=codi_tre'
-      'desc_tre=desc_tre'
-      'codi_fun=codi_fun'
-      'desc_fun=desc_fun'
-      'educ_fun=educ_fun'
-      'expe_fun=expe_fun'
-      'resp_fun=resp_fun'
-      'fun_area=fun_area')
-    DataSet = cdsImprimirTre
-    BCDToCurrency = False
-    Left = 400
-    Top = 144
-  end
-  object zqryImprimirTre: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_f' +
-        'un, F.expe_fun, F.resp_fun,'
-      
-        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
-        'un_area'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6'
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7'
-      'INNER JOIN funcoes_treinamentos FT ON FT.codi_fun = F.codi_fun'
-      'INNER JOIN treinamentos T ON T.codi_tre = FT.codi_tre')
-    Params = <>
-    Left = 488
-    Top = 144
-  end
-  object dspImprimirTre: TDataSetProvider
-    DataSet = zqryImprimirTre
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 528
-    Top = 144
-  end
-  object cdsImprimirTre: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspImprimirTre'
-    Left = 568
-    Top = 144
-    object cds6: TWideStringField
-      FieldName = 'DescEducacao'
-      Size = 50
-    end
-    object cds7: TWideStringField
-      FieldName = 'DescExperiencia'
-      Size = 50
-    end
-    object lrgntfldImprimirTrecodi_tre: TLargeintField
-      FieldName = 'codi_tre'
-      Required = True
-    end
-    object cdsImprimirTredesc_tre: TWideStringField
-      FieldName = 'desc_tre'
-      Required = True
-      Size = 70
-    end
-    object lrgntfldImprimirTrecodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsImprimirTredesc_fun: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object lrgntfldImprimirTreeduc_fun: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object lrgntfldImprimirTreexpe_fun: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object cdsImprimirTreresp_fun: TMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftMemo
-    end
-    object cdsImprimirTrefun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
-    end
-  end
-  object zqryEducDesejada: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
-    Params = <>
-    Left = 40
-    Top = 256
-  end
-  object dspEducDesejada: TDataSetProvider
-    DataSet = zqryEducDesejada
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 80
-    Top = 256
-  end
-  object cdsEducDesejada: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspEducDesejada'
-    Left = 120
-    Top = 256
-    object LargeintField4: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object WideStringField1: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
-  end
-  object dsEducDesejada: TDataSource
-    DataSet = cdsEducDesejada
-    Left = 160
-    Top = 256
-  end
-  object zqryExpDesejada: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_com, valo_com FROM tabela_combos')
-    Params = <>
-    Left = 608
-    Top = 376
-  end
-  object dspExpDesejada: TDataSetProvider
-    DataSet = zqryExpDesejada
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 648
-    Top = 376
-  end
-  object cdsExpDesejada: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspExpDesejada'
-    Left = 688
-    Top = 376
-    object LargeintField5: TLargeintField
-      FieldName = 'codi_com'
-      Required = True
-    end
-    object WideStringField2: TWideStringField
-      FieldName = 'valo_com'
-      Size = 50
-    end
-  end
-  object dsExpDesejada: TDataSource
-    DataSet = cdsExpDesejada
-    Left = 728
-    Top = 376
-  end
-  object zqryMatrizFuncao: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      'SELECT codi_fun, desc_fun FROM funcoes'
-      'ORDER BY desc_fun')
-    Params = <>
-    Left = 608
-    Top = 272
-  end
-  object dspMatrizFuncao: TDataSetProvider
-    DataSet = zqryMatrizFuncao
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 648
-    Top = 272
-  end
-  object cdsMatrizFuncao: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspMatrizFuncao'
-    Left = 688
-    Top = 272
-    object cdsMatrizFuncaocodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsMatrizFuncaodesc_fun: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-  end
-  object dsMatrizFuncao: TDataSource
-    DataSet = cdsMatrizFuncao
-    Left = 728
-    Top = 272
-  end
-  object zqryImprimirHabTre: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT FT.codi_tre, T.desc_tre, F.codi_fun, F.desc_fun, F.educ_f' +
-        'un, F.expe_fun, F.resp_fun,'
-      
-        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
-        'un_area, F.fun_cbo,'
-      'CASE '
-      '   WHEN FT.tipo_tre = '#39'M'#39' THEN '#39'MANDAT'#211'RIO'#39
-      '   WHEN FT.tipo_tre = '#39'D'#39' THEN '#39'DESEJ'#193'VEL'#39
-      'END as TipoTreinamento'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6'
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7'
-      'INNER JOIN funcoes_treinamentos FT ON FT.codi_fun = F.codi_fun'
-      'INNER JOIN treinamentos T ON T.codi_tre = FT.codi_tre')
-    Params = <>
-    Left = 488
-    Top = 184
-  end
-  object dspImprimirHabTre: TDataSetProvider
-    DataSet = zqryImprimirHabTre
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 528
-    Top = 184
-  end
-  object cdsImprimirHabTre: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspImprimirHabTre'
-    Left = 568
-    Top = 184
-    object cds5: TWideStringField
-      FieldName = 'DescEducacao'
-      Size = 50
-    end
-    object cds8: TWideStringField
-      FieldName = 'DescExperiencia'
-      Size = 50
-    end
-    object cds9: TLargeintField
-      FieldName = 'codi_tre'
-      Required = True
-    end
-    object cdsImprimirHabTre0: TWideStringField
-      FieldName = 'desc_tre'
-      Required = True
-      Size = 70
-    end
-    object cdsImprimirHabTre1: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsImprimirHabTre2: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object cdsImprimirHabTre3: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object cdsImprimirHabTre4: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object MemoField2: TMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftMemo
-    end
-    object cdsImprimirHabTrefun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
-    end
-    object cdsImprimirHabTrefun_cbo: TWideStringField
-      FieldName = 'fun_cbo'
-      Size = 10
-    end
-    object cdsImprimirHabTretipotreinamento: TWideMemoField
-      FieldName = 'tipotreinamento'
-      ReadOnly = True
-      BlobType = ftWideMemo
-    end
-  end
-  object frxDBFuncoesHabTre: TfrxDBDataset
-    UserName = 'frxDBFuncoesHabTre'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'DescEducacao=DescEducacao'
-      'DescExperiencia=DescExperiencia'
-      'codi_tre=codi_tre'
-      'desc_tre=desc_tre'
-      'codi_fun=codi_fun'
-      'desc_fun=desc_fun'
-      'educ_fun=educ_fun'
-      'expe_fun=expe_fun'
-      'resp_fun=resp_fun'
-      'fun_area=fun_area'
-      'fun_cbo=fun_cbo'
-      'tipotreinamento=tipotreinamento')
-    DataSet = cdsImprimirHabTre
-    BCDToCurrency = False
-    Left = 400
-    Top = 184
-  end
-  object zqryImprimirHabTreHab: TZQuery
-    Connection = dm.Conexao
-    SQL.Strings = (
-      
-        'SELECT FH.codi_hab, H.desc_hab, F.codi_fun, F.desc_fun, F.educ_f' +
-        'un, F.expe_fun, F.resp_fun,'
-      
-        'T1.valo_com as DescEducacao, T2.valo_com as DescExperiencia, F.f' +
-        'un_area'
-      'FROM funcoes F'
-      
-        'INNER JOIN tabela_combos T1 ON T1.codi_com = F.educ_fun and T1.t' +
-        'ipo_com = 6'
-      
-        'INNER JOIN tabela_combos T2 ON T2.codi_com = F.expe_fun and T2.t' +
-        'ipo_com = 7'
-      'INNER JOIN funcoes_habilidades FH ON FH.codi_fun = F.codi_fun'
-      'INNER JOIN habilidades H ON H.codi_hab = FH.codi_hab'
-      '')
-    Params = <>
-    Left = 488
-    Top = 232
-  end
-  object dspImprimirHabTreHab: TDataSetProvider
-    DataSet = zqryImprimirHabTreHab
-    Options = [poAutoRefresh, poAllowCommandText]
-    UpdateMode = upWhereKeyOnly
-    Left = 528
-    Top = 232
-  end
-  object cdsImprimirHabTreHab: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspImprimirHabTreHab'
-    Left = 568
-    Top = 232
-    object cdsImprimirHabTreHabcodi_hab: TLargeintField
-      FieldName = 'codi_hab'
-      Required = True
-    end
-    object cdsImprimirHabTreHabdesc_hab: TWideStringField
-      FieldName = 'desc_hab'
-      Size = 50
-    end
-    object cdsImprimirHabTreHabcodi_fun: TLargeintField
-      FieldName = 'codi_fun'
-      Required = True
-    end
-    object cdsImprimirHabTreHabdesc_fun: TWideStringField
-      FieldName = 'desc_fun'
-      Size = 50
-    end
-    object cdsImprimirHabTreHabeduc_fun: TLargeintField
-      FieldName = 'educ_fun'
-    end
-    object cdsImprimirHabTreHabexpe_fun: TLargeintField
-      FieldName = 'expe_fun'
-    end
-    object cdsImprimirHabTreHabresp_fun: TWideMemoField
-      FieldName = 'resp_fun'
-      BlobType = ftWideMemo
-    end
-    object cdsImprimirHabTreHabdesceducacao: TWideStringField
-      FieldName = 'desceducacao'
-      ReadOnly = True
-      Size = 50
-    end
-    object cdsImprimirHabTreHabdescexperiencia: TWideStringField
-      FieldName = 'descexperiencia'
-      ReadOnly = True
-      Size = 50
-    end
-    object cdsImprimirHabTreHabfun_area: TWideStringField
-      FieldName = 'fun_area'
-      Size = 22
-    end
-  end
-  object frxDBFuncoesHabTreHab: TfrxDBDataset
-    UserName = 'frxDBFuncoesHabTreHab'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'codi_hab=codi_hab'
-      'desc_hab=desc_hab'
-      'codi_fun=codi_fun'
-      'desc_fun=desc_fun'
-      'educ_fun=educ_fun'
-      'expe_fun=expe_fun'
-      'resp_fun=resp_fun'
-      'desceducacao=DescEducacao'
-      'descexperiencia=DescExperiencia'
-      'fun_area=fun_area')
-    DataSet = cdsImprimirHabTreHab
-    BCDToCurrency = False
-    Left = 400
-    Top = 232
-  end
-  object opd1: TOpenDialog
-    Filter = 'Todos os arquivos|*.*'
-    Title = 'Selecionar Arquivo'
-    Left = 720
-    Top = 96
   end
 end
